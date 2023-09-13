@@ -4,7 +4,9 @@ using System.Globalization;
 using System.IO;
 using System.Text;
 using CliWrap;
+using Newtonsoft.Json;
 using Serilog;
+using Serilog.Core;
 
 namespace HASS.Agent.Shared.Managers
 {
@@ -176,6 +178,57 @@ namespace HASS.Agent.Shared.Managers
 			}
 		}
 
+		
+		private static Encoding GetEncoding()
+		{
+			var currentCulture = CultureInfo.CurrentCulture.TextInfo;
+			var currentUICulture = CultureInfo.CurrentUICulture.TextInfo;
+			var currentInstalledUICulture = CultureInfo.InstalledUICulture.TextInfo;
+			var invariantCulture = CultureInfo.InvariantCulture.TextInfo;
+
+			Log.Error("ENCODING-TEST: currentCulture  {c}", JsonConvert.SerializeObject(currentCulture));
+			Log.Error("ENCODING-TEST: currentUICulture  {c}", JsonConvert.SerializeObject(currentUICulture));
+			Log.Error("ENCODING-TEST: currentInstalledUICulture  {c}", JsonConvert.SerializeObject(currentInstalledUICulture));
+			Log.Error("ENCODING-TEST: invariantCulture  {c}", JsonConvert.SerializeObject(currentInstalledUICulture));
+
+			var encoding = Encoding.Unicode;
+			try
+			{
+				encoding = Encoding.GetEncoding(currentCulture.OEMCodePage);
+			}
+			catch
+			{
+				Log.Error("ENCODING-TEST: first fail");
+				try
+				{
+					encoding = Encoding.GetEncoding(currentUICulture.OEMCodePage);
+				}
+				catch
+				{
+					Log.Error("ENCODING-TEST: second fail");
+					try
+					{
+						encoding = Encoding.GetEncoding(currentInstalledUICulture.OEMCodePage);
+					}
+					catch
+					{
+						Log.Error("ENCODING-TEST: third fail");
+						try
+						{
+							encoding = Encoding.GetEncoding(invariantCulture.OEMCodePage);
+						}
+						catch
+						{
+							Log.Error("ENCODING-TEST: fourth fail, Unicode returned");
+						}
+
+					}
+				}
+			}
+
+			return encoding;
+		}
+
 		/// <summary>
 		/// Executes the command or script, and returns the standard and error output
 		/// </summary>
@@ -207,9 +260,7 @@ namespace HASS.Agent.Shared.Managers
 				if (string.IsNullOrEmpty(psExec)) return false;
 
 				// attempt to set the right encoding
-				var encoding = CultureInfo.CurrentCulture.TextInfo.OEMCodePage == 1
-					? Encoding.UTF8
-					: Encoding.GetEncoding(CultureInfo.CurrentCulture.TextInfo.OEMCodePage);
+				var encoding = GetEncoding();
 
 				// prepare the executing process
 				var processInfo = new ProcessStartInfo
