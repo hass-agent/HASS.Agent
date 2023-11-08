@@ -40,6 +40,14 @@ name: .NET Core Desktop
 
 on:
   workflow_dispatch:
+    inputs:
+      releasetitle:
+        description: 'Name this Release/Tag'
+        required: true
+      #prerelease:
+      #  description: 'Is this a pre-release?'
+      #  required: true
+      #  default: 'true'
   push:
     branches: [ "main" ]
   pull_request:
@@ -121,7 +129,7 @@ jobs:
         name: HASS.Agent.Satellite.Service
         path: src/HASS.Agent.Staging/HASS.Agent.Satellite.Service/bin/Debug/net6.0-windows10.0.19041.0
 
-    - name: Upload build artifacts (HASS Agent Satellite Service)
+    - name: Upload build artifacts (HASS.Agent.Shared)
       uses: actions/upload-artifact@v3
       with:
         name: HASS.Agent.Shared
@@ -131,3 +139,21 @@ jobs:
     #  run: |
     #    Set-Location src\HASS.Agent.Staging
     #    Get-Childitem
+
+    #Download all of the build artifacts from GitHub to attach them to release
+    - name: Download Build Artifacts
+      uses: actions/download-artifact@v3.0.2
+
+    - name: Display structure of downloaded files
+      run: ls -R
+
+    #draft a release, https://github.com/actions/create-release
+    #- uses: "marvinpinto/action-automatic-releases@latest"
+    #  with:
+    #    repo_token: "${{ secrets.GITHUB_TOKEN }}"
+    #    automatic_release_tag: ${{ github.event.inputs.releasetitle }}
+    #    prerelease: true
+    #    title: ${{ github.event.inputs.releasetitle }}
+    #    files: |
+    #      LICENSE.txt
+    #      *.jar
