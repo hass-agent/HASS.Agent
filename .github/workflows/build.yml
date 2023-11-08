@@ -48,10 +48,12 @@ on:
       #  description: 'Is this a pre-release?'
       #  required: true
       #  default: 'true'
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+  #push:
+  #  branches: [ "main" ]
+  #  tags:
+  #  - '*'
+  #pull_request:
+  #  branches: [ "main" ]
 
 jobs:
   build:
@@ -129,7 +131,7 @@ jobs:
         name: HASS.Agent.Satellite.Service
         path: src/HASS.Agent.Staging/HASS.Agent.Satellite.Service/bin/Debug/net6.0-windows10.0.19041.0
 
-    - name: Upload build artifacts (HASS.Agent.Shared)
+    - name: Upload build artifacts (HASS Agent Shared)
       uses: actions/upload-artifact@v3
       with:
         name: HASS.Agent.Shared
@@ -138,22 +140,54 @@ jobs:
     #- name: Debugging artifact paths
     #  run: |
     #    Set-Location src\HASS.Agent.Staging
-    #    Get-Childitem
+    #    Get-Childitem       
 
-    #Download all of the build artifacts from GitHub to attach them to release
-    - name: Download Build Artifacts
+  #draft a release, https://github.com/actions/create-release  
+  publish:
+    runs-on: ubuntu-latest
+    needs: [build]
+    permissions:
+      contents: write
+    steps:
+    - name: Create directories for Build Artifacts to download
+      run: |
+        mkdir HASS.Agent
+        mkdir HASS.Agent.Satellite.Service
+        mkdir HASS.Agent.Shared
+    
+    - name: Download Build Artifacts (HASS Agent)
       uses: actions/download-artifact@v3.0.2
+      with:
+        name: HASS.Agent
+        path: HASS.Agent
 
-    - name: Display structure of downloaded files
-      run: ls -R
+    - name: Download Build Artifacts (HASS Agent Satellite Service)
+      uses: actions/download-artifact@v3.0.2
+      with:
+        name: HASS.Agent.Satellite.Service
+        path: HASS.Agent.Satellite.Service
 
-    #draft a release, https://github.com/actions/create-release
-    #- uses: "marvinpinto/action-automatic-releases@latest"
-    #  with:
-    #    repo_token: "${{ secrets.GITHUB_TOKEN }}"
-    #    automatic_release_tag: ${{ github.event.inputs.releasetitle }}
-    #    prerelease: true
-    #    title: ${{ github.event.inputs.releasetitle }}
-    #    files: |
-    #      LICENSE.txt
-    #      *.jar
+    - name: Download Build Artifacts (HASS Agent Shared)
+      uses: actions/download-artifact@v3.0.2
+      with:
+        name: HASS.Agent.Shared
+        path: HASS.Agent.Shared
+
+    - name: Compress HASS Agent directories
+      run: |
+        cd HASS.Agent
+        zip -r HASS.Agent.zip ./
+        cd ../
+        cd HASS.Agent.Satellite.Service
+        zip -r HASS.Agent.Satellite.Service.zip ./
+        cd ../
+        cd HASS.Agent.Shared
+        zip -r HASS.Agent.Shared.zip ./
+
+    - name: Create Draft Release and Upload Build Artifacts
+      uses: ncipollo/release-action@v1.10.0
+      with:
+        tag: ${{ github.event.inputs.releasetitle }}
+        draft: true
+        artifacts:
+          HASS.Agent/HASS.Agent.zip,HASS.Agent.Satellite.Service/HASS.Agent.Satellite.Service.zip,HASS.Agent.Shared/HASS.Agent.Shared.zip
