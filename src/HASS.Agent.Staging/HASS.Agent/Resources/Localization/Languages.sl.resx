@@ -3468,4 +3468,8 @@ Razpoložljivost senzorja je odvisna od naprave, v nekaterih primerih senzorji n
   <data name="CommandsManager_SwitchDesktopCommandDescription" xml:space="preserve">
     <value>Aktivira ponujeno navidezno namizje. ID namizja je mogoče pridobiti iz senzorja "ActiveDesktop".</value>
   </data>
+  <data name="CommandsMod_BtnStore_VirtualDesktop_Unavailable" xml:space="preserve">
+    <value>Upravljanje navideznega namizja na vašem računalniku ni na voljo.
+Običajno je to posledica tega, da knjižnica za upravljanje navideznega namizja ni posodobljena za podporo vaše različice sistema Windows.</value>
+  </data>
 </root>

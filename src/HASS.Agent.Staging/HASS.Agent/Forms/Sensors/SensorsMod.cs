@@ -12,6 +12,7 @@ using Serilog;
 using HASS.Agent.Shared.Functions;
 using HASS.Agent.Shared.HomeAssistant.Sensors.GeneralSensors.SingleValue;
 using HASS.Agent.Managers.DeviceSensors;
+using HASS.Agent.Managers;
 
 namespace HASS.Agent.Forms.Sensors
 {
@@ -789,7 +790,16 @@ namespace HASS.Agent.Forms.Sensors
 					}
 					Sensor.Query = windowprocess;
 					break;
-			}
+
+                case SensorType.ActiveDesktopSensor:
+                    if (!VirtualDesktopManager.Initialized)
+                    {
+                        MessageBoxAdv.Show(this, Languages.CommandsMod_BtnStore_VirtualDesktop_Unavailable, Variables.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        ActiveControl = TbSetting1;
+                        return;
+                    }
+                    break;
+            }
 
 			// set values
 			Sensor.Type = sensorCard.SensorType;

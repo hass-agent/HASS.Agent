@@ -488,6 +488,15 @@ namespace HASS.Agent.Forms.Commands
 						Command.Command = selectedItem.Key;
 					}
 					break;
+
+                case CommandType.SwitchDesktopCommand:
+                    if (!VirtualDesktopManager.Initialized)
+                    {
+                        MessageBoxAdv.Show(this, Languages.CommandsMod_BtnStore_VirtualDesktop_Unavailable, Variables.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        ActiveControl = TbSetting;
+                        return;
+                    }
+                    break;
 			}
 
 			Command.RunAsLowIntegrity = CbRunAsLowIntegrity.CheckState == CheckState.Checked;

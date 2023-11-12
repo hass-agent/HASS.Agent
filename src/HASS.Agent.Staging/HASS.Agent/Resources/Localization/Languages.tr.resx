@@ -2931,4 +2931,8 @@ Sensörün kullanılabilirliği cihaza bağlıdır; bazı durumlarda sensör bul
   <data name="CommandsManager_SwitchDesktopCommandDescription" xml:space="preserve">
     <value>Sağlanan Sanal Masaüstünü etkinleştirir. Masaüstü Kimliği "ActiveDesktop" sensöründen alınabilir.</value>
   </data>
+  <data name="CommandsMod_BtnStore_VirtualDesktop_Unavailable" xml:space="preserve">
+    <value>Makinenizde Sanal Masaüstü yönetimi mevcut değil.
+Bunun nedeni genellikle sanal masaüstü yönetim kitaplığının Windows sürümünüzü destekleyecek şekilde güncellenmemesidir.</value>
+  </data>
 </root>

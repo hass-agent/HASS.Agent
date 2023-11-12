@@ -3388,4 +3388,8 @@ Home Assistant.
   <data name="CommandsManager_SwitchDesktopCommandDescription" xml:space="preserve">
     <value>Активирует предоставленный виртуальный рабочий стол. Идентификатор рабочего стола можно получить с датчика ActiveDesktop.</value>
   </data>
+  <data name="CommandsMod_BtnStore_VirtualDesktop_Unavailable" xml:space="preserve">
+    <value>Управление виртуальным рабочим столом на вашем компьютере недоступно.
+Обычно это происходит из-за того, что библиотека управления виртуальными рабочими столами не обновляется для поддержки вашей версии Windows.</value>
+  </data>
 </root>

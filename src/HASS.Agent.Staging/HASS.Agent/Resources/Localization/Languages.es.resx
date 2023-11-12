@@ -3319,4 +3319,8 @@ La disponibilidad del sensor depende del dispositivo; en algunos casos, no habr�
   <data name="CommandsManager_SwitchDesktopCommandDescription" xml:space="preserve">
     <value>Activa el escritorio virtual proporcionado. Desktop ID se puede recuperar del sensor "ActiveDesktop".</value>
   </data>
+  <data name="CommandsMod_BtnStore_VirtualDesktop_Unavailable" xml:space="preserve">
+    <value>La administración de escritorio virtual no está disponible en su máquina.
+Por lo general, esto se debe a que la biblioteca de administración de escritorio virtual no se actualiza para admitir su versión de Windows.</value>
+  </data>
 </root>

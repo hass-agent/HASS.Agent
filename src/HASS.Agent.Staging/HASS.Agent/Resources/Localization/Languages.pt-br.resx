@@ -3366,4 +3366,8 @@ A disponibilidade do sensor depende do dispositivo; em alguns casos, nenhum sens
   <data name="CommandsManager_SwitchDesktopCommandDescription" xml:space="preserve">
     <value>Ativa a área de trabalho virtual fornecida. A ID da área de trabalho pode ser recuperada do sensor "ActiveDesktop".</value>
   </data>
+  <data name="CommandsMod_BtnStore_VirtualDesktop_Unavailable" xml:space="preserve">
+    <value>O gerenciamento da área de trabalho virtual não está disponível em sua máquina.
+Geralmente, isso ocorre porque a biblioteca de gerenciamento de desktop virtual não está sendo atualizada para oferecer suporte à sua versão do Windows.</value>
+  </data>
 </root>

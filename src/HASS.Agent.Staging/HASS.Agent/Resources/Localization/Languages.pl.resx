@@ -3429,4 +3429,8 @@ Dostępność czujnika zależy od urządzenia, w niektórych przypadkach czujnik
   <data name="CommandsManager_SwitchDesktopCommandDescription" xml:space="preserve">
     <value>Aktywuje podany pulpit wirtualny. Identyfikator pulpitu można pobrać z czujnika „ActiveDesktop”.</value>
   </data>
+  <data name="CommandsMod_BtnStore_VirtualDesktop_Unavailable" xml:space="preserve">
+    <value>Zarządzanie pulpitem wirtualnym jest niedostępne na Twoim komputerze.
+Zwykle jest to spowodowane brakiem aktualizacji biblioteki zarządzania pulpitem wirtualnym do obsługi Twojej wersji systemu Windows.</value>
+  </data>
 </root>

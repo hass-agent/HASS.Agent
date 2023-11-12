@@ -3332,4 +3332,8 @@ to match Home Assistant 2023.8 requirements</value>
   <data name="CommandsManager_SwitchDesktopCommandDescription" xml:space="preserve">
     <value>Activates provided Virtual Desktop. Desktop ID can be retrieved from the "ActiveDesktop" sensor.</value>
   </data>
+  <data name="CommandsMod_BtnStore_VirtualDesktop_Unavailable" xml:space="preserve">
+    <value>Virtual Desktop management is unavailable on your machine.
+Usually this is due to the virtual desktop management library not being updated to support your version of Windows.</value>
+  </data>
 </root>

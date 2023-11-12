@@ -623,7 +623,7 @@ namespace HASS.Agent.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Activates provided Virtual Desktop..
+        ///   Looks up a localized string similar to Activates provided Virtual Desktop. Desktop ID can be retrieved from the &quot;ActiveDesktop&quot; sensor..
         /// </summary>
         internal static string CommandsManager_SwitchDesktopCommandDescription {
             get {
@@ -786,6 +786,16 @@ namespace HASS.Agent.Resources.Localization {
         internal static string CommandsMod_BtnStore_MessageBox9 {
             get {
                 return ResourceManager.GetString("CommandsMod_BtnStore_MessageBox9", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Virtual Desktop management is unavailable on your machine.
+        ///Usually this is due to the virtual desktop management library not being updated to support your version of Windows..
+        /// </summary>
+        internal static string CommandsMod_BtnStore_VirtualDesktop_Unavailable {
+            get {
+                return ResourceManager.GetString("CommandsMod_BtnStore_VirtualDesktop_Unavailable", resourceCulture);
             }
         }
         

@@ -3320,4 +3320,8 @@ If no "mute" is provided, HASS.Agent will unmute the provided application.</valu
   <data name="CommandsMod_BtnStore_InvalidJson" xml:space="preserve">
     <value>Please enter a valid JSON string!</value>
   </data>
+  <data name="CommandsMod_BtnStore_VirtualDesktop_Unavailable" xml:space="preserve">
+    <value>Virtual Desktop management is unavailable on your machine.
+Usually this is due to the virtual desktop management library not being updated to support your version of Windows.</value>
+  </data>
 </root>

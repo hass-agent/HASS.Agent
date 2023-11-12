@@ -3444,4 +3444,8 @@ Die Verfügbarkeit des Sensors ist geräteabhängig, in manchen Fällen sind kei
   <data name="CommandsManager_SwitchDesktopCommandDescription" xml:space="preserve">
     <value>Aktiviert den bereitgestellten virtuellen Desktop. Die Desktop-ID kann vom „ActiveDesktop“-Sensor abgerufen werden.</value>
   </data>
+  <data name="CommandsMod_BtnStore_VirtualDesktop_Unavailable" xml:space="preserve">
+    <value>Die Verwaltung virtueller Desktops ist auf Ihrem Computer nicht verfügbar.
+Normalerweise liegt dies daran, dass die virtuelle Desktop-Verwaltungsbibliothek nicht aktualisiert wird, um Ihre Windows-Version zu unterstützen.</value>
+  </data>
 </root>

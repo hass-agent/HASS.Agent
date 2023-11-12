@@ -3340,4 +3340,8 @@ Beschikbaarheid van de sensor is afhankelijk van het apparaat, in sommige gevall
   <data name="CommandsManager_SwitchDesktopCommandDescription" xml:space="preserve">
     <value>Activeert het meegeleverde virtuele bureaublad. Desktop-ID kan worden opgehaald van de "ActiveDesktop"-sensor.</value>
   </data>
+  <data name="CommandsMod_BtnStore_VirtualDesktop_Unavailable" xml:space="preserve">
+    <value>Beheer van virtuele desktops is niet beschikbaar op uw machine.
+Meestal komt dit doordat de virtuele desktopbeheerbibliotheek niet wordt bijgewerkt om uw versie van Windows te ondersteunen.</value>
+  </data>
 </root>
