@@ -36,7 +36,7 @@ internal static class VirtualDesktopManager
 
     internal static void ActivateDesktop(string virtualDesktopId)
     {
-        if(!Initialized)
+        if (!Initialized)
         {
             Log.Warning("[VIRTDESKT] Cannot activate virtual desktop, manager not initialized");
         }
@@ -59,20 +59,27 @@ internal static class VirtualDesktopManager
             Log.Warning("[VIRTDESKT] Cannot activate virtual desktop, manager not initialized");
         }
 
-        var targetDesktop = VirtualDesktop.GetDesktops().FirstOrDefault(d => d.Id == virtualDesktopGuid);
-        if (targetDesktop == null)
+        try
         {
-            Log.Warning("[VIRTDESKT] Unable to find virtual desktop with id: {virtualDesktopId}", virtualDesktopGuid.ToString());
-            return;
-        }
+            var targetDesktop = VirtualDesktop.GetDesktops().FirstOrDefault(d => d.Id == virtualDesktopGuid);
+            if (targetDesktop == null)
+            {
+                Log.Warning("[VIRTDESKT] Unable to find virtual desktop with id: {virtualDesktopId}", virtualDesktopGuid.ToString());
+                return;
+            }
 
-        if (VirtualDesktop.Current == targetDesktop)
+            if (VirtualDesktop.Current == targetDesktop)
+            {
+                Log.Information("[VIRTDESKT] Target virtual desktop '{virtualDesktopId}' is already active", virtualDesktopGuid.ToString());
+                return;
+            }
+
+            targetDesktop.Switch();
+        }
+        catch (Exception ex)
         {
-            Log.Information("[VIRTDESKT] Target virtual desktop '{virtualDesktopId}' is already active", virtualDesktopGuid.ToString());
-            return;
+            Log.Error("[VIRTDESKT] Unhanded exception activating desktop: {ex}", ex.Message);
         }
-
-        targetDesktop.Switch();
     }
 
     internal static VirtualDesktop GetCurrentDesktop()
@@ -80,11 +87,18 @@ internal static class VirtualDesktopManager
         if (!Initialized)
         {
             Log.Warning("[VIRTDESKT] Cannot get current desktop, manager not initialized");
-            
             return null;
         }
 
-        return VirtualDesktop.Current;
+        try
+        {
+            return VirtualDesktop.Current;
+        }
+        catch (Exception ex)
+        {
+            Log.Error("[VIRTDESKT] Unhanded exception returning current desktop: {ex}", ex.Message);
+            return null;
+        }
     }
 
     private static string GetDesktopNameFromRegistry(string id)
@@ -96,10 +110,18 @@ internal static class VirtualDesktopManager
     internal static Dictionary<string, string> GetAllDesktopsInfo()
     {
         var desktops = new Dictionary<string, string>();
-        foreach (var desktop in VirtualDesktop.GetDesktops())
+
+        try
         {
-            var id = desktop.Id.ToString();
-            desktops[id] = string.IsNullOrWhiteSpace(desktop.Name) ? GetDesktopNameFromRegistry(id) : desktop.Name;
+            foreach (var desktop in VirtualDesktop.GetDesktops())
+            {
+                var id = desktop.Id.ToString();
+                desktops[id] = string.IsNullOrWhiteSpace(desktop.Name) ? GetDesktopNameFromRegistry(id) : desktop.Name;
+            }
+        }
+        catch (Exception ex)
+        {
+            Log.Error("[VIRTDESKT] Unhanded exception returning all desktops information: {ex}", ex.Message);
         }
 
         return desktops;

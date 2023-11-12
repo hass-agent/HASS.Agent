@@ -23,6 +23,7 @@ namespace HASS.Agent.Shared.HomeAssistant.Sensors.GeneralSensors.SingleValue
         private const string _defaultName = "activedesktop";
 
         private string _desktopId = string.Empty;
+        private string _desktopName = string.Empty;
         private string _attributes = string.Empty;
 
         public ActiveDesktopSensor(int? updateInterval = null, string name = _defaultName, string friendlyName = _defaultName, string id = default) : base(name ?? _defaultName, friendlyName ?? null, updateInterval ?? 15, id)
@@ -59,11 +60,12 @@ namespace HASS.Agent.Shared.HomeAssistant.Sensors.GeneralSensors.SingleValue
         public override string GetState()
         {
             var currentDesktop = VirtualDesktopManager.GetCurrentDesktop();
-            _desktopId = currentDesktop.Id.ToString();
+            _desktopId = currentDesktop == null ? string.Empty : currentDesktop.Id.ToString();
+            _desktopName = currentDesktop == null ? string.Empty : currentDesktop.Name;
 
             _attributes = JsonConvert.SerializeObject(new
             {
-                desktopName = currentDesktop.Name,
+                desktopName = _desktopName,
                 availableDesktops = VirtualDesktopManager.GetAllDesktopsInfo()
             }, Formatting.Indented);
 
@@ -71,7 +73,5 @@ namespace HASS.Agent.Shared.HomeAssistant.Sensors.GeneralSensors.SingleValue
         }
 
         public override string GetAttributes() => _attributes;
-
-
     }
 }
