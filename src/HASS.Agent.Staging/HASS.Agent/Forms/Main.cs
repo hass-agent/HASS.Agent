@@ -317,7 +317,7 @@ namespace HASS.Agent.Forms
         /// </summary>
         private void InitializeVirtualDesktopManager()
         {
-            VirtualDesktopManager.Initialized();
+            VirtualDesktopManager.Initialize();
         }
 
         /// <summary>
