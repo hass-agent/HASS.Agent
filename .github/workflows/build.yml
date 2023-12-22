@@ -36,18 +36,25 @@
 # For a complete CI/CD sample to get started with GitHub Action workflows for Desktop Applications,
 # refer to https://github.com/microsoft/github-actions-for-desktop-apps
 
-name: .NET Core Desktop
+name: Create Release Draft
 
 on:
   workflow_dispatch:
     inputs:
-      releasetitle:
-        description: 'Name this Release/Tag'
+      sourcebranch:
+        description: 'Source branch'
         required: true
-      #prerelease:
-      #  description: 'Is this a pre-release?'
-      #  required: true
-      #  default: 'true'
+        default: 'main'
+      releasetitle:
+        description: 'Release name'
+        required: true
+      releasetag:
+        description: "Release tag"
+        required: true
+      prerelease:
+        description: 'Is this a pre-release?'
+        required: true
+        default: 'true'
   #push:
   #  branches: [ "main" ]
   #  tags:
@@ -57,24 +64,26 @@ on:
 
 jobs:
   build:
+    environment: TestEnv
     strategy:
       matrix:
-        configuration: [Debug, Release]
+        #configuration: [Debug, Release]
+        configuration: [Release]
 
     runs-on: windows-latest  # For a list of available runner types, refer to
                              # https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idruns-on
 
     env:
-      Solution_Name: src/HASS.Agent.Staging.sln                  # Replace with your solution name, i.e. MyWpfApp.sln.
+      Solution_Name: src/HASS.Agent.sln                          # Replace with your solution name, i.e. MyWpfApp.sln.
       #Test_Project_Path: your-test-project-path                 # Replace with the path to your test project, i.e. MyWpfApp.Tests\MyWpfApp.Tests.csproj.
       #Wap_Project_Directory: your-wap-project-directory-name    # Replace with the Wap project directory relative to the solution, i.e. MyWpfApp.Package.
       #Wap_Project_Path: your-wap-project-path                   # Replace with the path to your Wap project, i.e. MyWpf.App.Package\MyWpfApp.Package.wapproj.
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       with:
-        fetch-depth: 0
+        ref: ${{ github.event.inputs.sourcebranch }}
 
     # Install the .NET Core workload
     - name: Install .NET Core
@@ -83,63 +92,79 @@ jobs:
         dotnet-version: 6.0.x
 
     # Add  MSBuild to the PATH: https://github.com/microsoft/setup-msbuild
-    - name: Setup MSBuild.exe
-      uses: microsoft/setup-msbuild@v1.3.1
-
+    #- name: Setup MSBuild.exe
+    #  uses: microsoft/setup-msbuild@v1.3.1
+    
     # Execute all unit tests in the solution
     #- name: Execute unit tests
     #  run: dotnet test
 
     # Restore the application to populate the obj folder with RuntimeIdentifiers
-    - name: Restore the Nuget Packages
-      run: |
-        nuget restore src/HASS.Agent.Staging.sln
-        msbuild src/HASS.Agent.Staging.sln #/t:Restore /p:Configuration=$env:Configuration
+    #- name: Restore the Nuget Packages
+    #  run: |
+    #    nuget restore src/HASS.Agent.sln
+    #    msbuild src/HASS.Agent.sln #/t:Restore /p:Configuration=$env:Configuration
       #env:
       #  Configuration: ${{ matrix.configuration }}       
 
-    # Decode the base 64 encoded pfx and save the Signing_Certificate
-    #- name: Decode the pfx
-    #  run: |
-    #    $pfx_cert_byte = [System.Convert]::FromBase64String("${{ secrets.Base64_Encoded_Pfx }}")
-    #    $certificatePath = Join-Path -Path $env:Wap_Project_Directory -ChildPath GitHubActionsWorkflow.pfx
-    #    [IO.File]::WriteAllBytes("$certificatePath", $pfx_cert_byte)
+    - name: Restore / Install dependencies
+      run: |
+        dotnet restore "src\\HASS.Agent\\HASS.Agent\\HASS.Agent.csproj"
+        dotnet restore "src\\HASS.Agent\\HASS.Agent.Satellite.Service\\HASS.Agent.Satellite.Service.csproj"
+    
+    - name: Build & Publish HASS.Agent
+      working-directory: "D:\\a\\HASS.Agent\\HASS.Agent\\src\\HASS.Agent\\HASS.Agent"
+      run: "dotnet publish -c Release -f net6.0-windows10.0.19041.0 -o bin\\Publish-x64\\Release\\ --no-self-contained -r win-x64 -p:Platform=x64"
+   
+    - name: Build & Publish HASS.Agent.Satellite.Service
+      working-directory: "D:\\a\\HASS.Agent\\HASS.Agent\\src\\HASS.Agent\\HASS.Agent.Satellite.Service"
+      run: "dotnet publish -c Release -f net6.0-windows10.0.19041.0 -o bin\\Publish-x64\\Release\\ --no-self-contained -r win-x64 -p:Platform=x64"
 
-    # Create the app package by building and packaging the Windows Application Packaging project
-    #- name: Create the app package
-    #  run: msbuild $env:Wap_Project_Path /p:Configuration=$env:Configuration /p:UapAppxPackageBuildMode=$env:Appx_Package_Build_Mode /p:AppxBundle=$env:Appx_Bundle /p:PackageCertificateKeyFile=GitHubActionsWorkflow.pfx /p:PackageCertificatePassword=${{ secrets.Pfx_Key }}
-    #  env:
-    #    Appx_Bundle: Always
-    #    Appx_Bundle_Platforms: x86|x64
-    #    Appx_Package_Build_Mode: StoreUpload
-    #    Configuration: ${{ matrix.configuration }}
+    - name: Compile InnoSetup Installer
+      working-directory: "D:\\a\\HASS.Agent\\HASS.Agent\\src\\HASS.Agent.Installer"
+      run: |
+        & "${Env:ProgramFiles(x86)}\\Inno Setup 6\\iscc.exe" InstallerScript.iss
 
-    # Remove the pfx
-    #- name: Remove the pfx
-    #  run: Remove-Item -path $env:Wap_Project_Directory\GitHubActionsWorkflow.pfx
+    - name: Decode the pfx
+      working-directory: "D:\\a\\HASS.Agent\\HASS.Agent\\src\\HASS.Agent.Installer"
+      run: |
+        $pfxBytes = [System.Convert]::FromBase64String("${{ secrets.BASE64_ENCODED_PFX }}")
+        $certificatePath = [IO.Path]::GetFullPath(".\\HASS.Agent.Installer.pfx")
+        [IO.File]::WriteAllBytes($certificatePath, $pfxBytes)
+
+    - name: Sign the installer
+      working-directory: "D:\\a\\HASS.Agent\\HASS.Agent\\src\\HASS.Agent.Installer"
+      run: |
+        $certificatePassword = ConvertTo-SecureString "${{ secrets.BASE64_ENCODED_PFX_PASSWORD }}" -AsPlainText -Force
+        $certificate = Get-PfxCertificate -FilePath ".\\HASS.Agent.Installer.pfx" -Password $certificatePassword
+        Set-AuthenticodeSignature -FilePath ".\\bin\\HASS.Agent.Installer.exe" -Certificate $certificate -HashAlgorithm SHA256 -TimestampServer http://timestamp.digicert.com
+    
+    - name: Remove the pfx
+      working-directory: "D:\\a\\HASS.Agent\\HASS.Agent\\src\\HASS.Agent.Installer"
+      run: Remove-Item -path ".\\HASS.Agent.Installer.pfx"
 
     #Upload project artifacts: https://github.com/marketplace/actions/upload-a-build-artifact
     - name: Upload build artifacts (HASS Agent)
       uses: actions/upload-artifact@v3
       with:
         name: HASS.Agent
-        path: src/HASS.Agent.Staging/HASS.Agent/bin/Debug/net6.0-windows10.0.19041.0
+        path: "src\\HASS.Agent\\HASS.Agent\\bin\\Publish-x64\\Release"
 
     - name: Upload build artifacts (HASS Agent Satellite Service)
       uses: actions/upload-artifact@v3
       with:
         name: HASS.Agent.Satellite.Service
-        path: src/HASS.Agent.Staging/HASS.Agent.Satellite.Service/bin/Debug/net6.0-windows10.0.19041.0
+        path: "src\\HASS.Agent\\HASS.Agent.Satellite.Service\\bin\\Publish-x64\\Release"
 
-    - name: Upload build artifacts (HASS Agent Shared)
+    - name: Upload build artifacts (HASS Agent Installer)
       uses: actions/upload-artifact@v3
       with:
-        name: HASS.Agent.Shared
-        path: src/HASS.Agent.Staging/HASS.Agent.Shared/bin/Debug/net6.0-windows10.0.19041.0
-
+        name: HASS.Agent.Installer
+        path: "src\\HASS.Agent.Installer\\bin\\HASS.Agent.Installer.exe"
+        
     #- name: Debugging artifact paths
     #  run: |
-    #    Set-Location src\HASS.Agent.Staging
+    #    Set-Location src\HASS.Agent
     #    Get-Childitem       
 
   #draft a release, https://github.com/actions/create-release  
@@ -153,7 +178,8 @@ jobs:
       run: |
         mkdir HASS.Agent
         mkdir HASS.Agent.Satellite.Service
-        mkdir HASS.Agent.Shared
+        mkdir HASS.Agent.Installer
+        ls -la
     
     - name: Download Build Artifacts (HASS Agent)
       uses: actions/download-artifact@v3.0.2
@@ -167,27 +193,29 @@ jobs:
         name: HASS.Agent.Satellite.Service
         path: HASS.Agent.Satellite.Service
 
-    - name: Download Build Artifacts (HASS Agent Shared)
+    - name: Download Build Artifacts (HASS Agent Installer)
       uses: actions/download-artifact@v3.0.2
       with:
-        name: HASS.Agent.Shared
-        path: HASS.Agent.Shared
+        name: HASS.Agent.Installer
+        path: HASS.Agent.Installer
 
-    - name: Compress HASS Agent directories
+
+    - name: Compress HASS Agent directories for manual install
       run: |
         cd HASS.Agent
+        ls -la
         zip -r HASS.Agent.zip ./
         cd ../
         cd HASS.Agent.Satellite.Service
+        ls -la
         zip -r HASS.Agent.Satellite.Service.zip ./
-        cd ../
-        cd HASS.Agent.Shared
-        zip -r HASS.Agent.Shared.zip ./
-
+        
     - name: Create Draft Release and Upload Build Artifacts
       uses: ncipollo/release-action@v1.10.0
       with:
-        tag: ${{ github.event.inputs.releasetitle }}
+        name: ${{ github.event.inputs.releasetitle }}
         draft: true
+        prerelease: ${{ github.event.inputs.prerelease }}
+        tag: ${{ github.event.inputs.releasetag }}
         artifacts:
-          HASS.Agent/HASS.Agent.zip,HASS.Agent.Satellite.Service/HASS.Agent.Satellite.Service.zip,HASS.Agent.Shared/HASS.Agent.Shared.zip
+          HASS.Agent/HASS.Agent.zip,HASS.Agent.Satellite.Service/HASS.Agent.Satellite.Service.zip,HASS.Agent.Installer/HASS.Agent.Installer.exe
