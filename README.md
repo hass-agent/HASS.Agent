@@ -31,9 +31,7 @@ HASS.Agent is **completely free**, and will always stay that way without restric
  * [Help and Documentation](#help-and-documentation)
  * [Articles](#articles)
  * [What it's not](#what-its-not)
- * [Issue Tracker](#issue-tracker)
  * [Helping Out](#helping-out)
- * [Wishlist](#wishlist)
  * [Credits and Licensing](#credits-and-licensing)
  * [Legacy](#legacy)
 
