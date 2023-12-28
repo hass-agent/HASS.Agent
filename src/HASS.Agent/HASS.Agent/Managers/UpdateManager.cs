@@ -15,8 +15,6 @@ internal static class UpdateManager
 {
     private static readonly DateTimeOffset s_releaseCutoff = new(2023, 11, 30, 23, 59, 59, TimeSpan.Zero);
 
-    //private static readonly Version CurrentVersion = Version.Parse(Variables.Version.Split('-').First());
-
     /// <summary>
     /// Initialize initial and periodic update checking
     /// </summary>
