@@ -10,9 +10,9 @@
     <Description>Shared functions and models for the HASS.Agent platform.</Description>
     <PackageProjectUrl>https://github.com/hass-agent/HASS.Agent</PackageProjectUrl>
     <RepositoryUrl>https://github.com/hass-agent/HASS.Agent</RepositoryUrl>
-    <AssemblyVersion></AssemblyVersion>
-    <FileVersion></FileVersion>
-    <Version>2.0.0</Version>
+    <AssemblyVersion>2.0.1</AssemblyVersion>
+    <FileVersion>2.0.1</FileVersion>
+    <Version>2.0.1</Version>
     <PackageIcon>logo_128.png</PackageIcon>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <ApplicationIcon>hassagent.ico</ApplicationIcon>
@@ -22,6 +22,7 @@
     <Nullable>disable</Nullable>
     <DebugType>full</DebugType>
     <SupportedOSPlatformVersion>10.0.17763.0</SupportedOSPlatformVersion>
+	<IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
   </PropertyGroup>
 
   <ItemGroup>
