@@ -38,7 +38,7 @@ namespace HASS.Agent.Media
                 Log.Information("[MEDIA] Disabled");
                 return;
             }
-            
+
             if (!Variables.AppSettings.LocalApiEnabled && !Variables.AppSettings.MqttEnabled)
             {
                 Log.Warning("[MEDIA] Both local API and MQTT are disabled, unable to receive media requests");
@@ -71,16 +71,21 @@ namespace HASS.Agent.Media
             }
             catch (Exception ex)
             {
-                Log.Fatal(ex, "[MEDIA] Unable to initialize: {err}" , ex.Message);
+                Log.Fatal(ex, "[MEDIA] Unable to initialize: {err}", ex.Message);
                 Variables.AppSettings.MediaPlayerEnabled = false;
 
                 Log.Warning("[MEDIA] Failed, disabled");
                 return;
             }
 
-            // start monitoring playing media
-            _ = Task.Run(MediaMonitor);
-            
+            // Select which monitor to use based on if the user has opted out of publishing what's playing information
+            Action mediaMonitor = Variables.AppSettings.MediaPlayerOptOutWhatsPlaying ? PrivateMediaMonitor : MediaMonitor;
+
+            Log.Information($"[MEDIA] What's playing {(Variables.AppSettings.MediaPlayerOptOutWhatsPlaying ? "dis" : "en")}abled");
+
+            // Start the media monitor or the TTS "shim"? Depending on opt-out status
+            _ = Task.Run(mediaMonitor);
+
             if (!Variables.AppSettings.MqttEnabled) Log.Warning("[MEDIA] MQTT is disabled, only basic media functionality will work");
             else
             {
@@ -90,6 +95,38 @@ namespace HASS.Agent.Media
 
             // ready
             Log.Information("[MEDIA] Ready");
+        }
+
+        private static async void PrivateMediaMonitor()
+        {
+            // Publish a blank thumbnail
+            await Variables.MqttManager.PublishAsync(new MqttApplicationMessageBuilder()
+                .WithTopic($"hass.agent/media_player/{Variables.DeviceConfig.Name}/thumbnail")
+                .WithRetainFlag().Build());
+
+            // set blank info
+            var message = new MqttMediaPlayerMessage()
+            {
+                State = MediaPlayerState.Idle,
+                Title = string.Empty,
+                Artist = string.Empty,
+                AlbumArtist = string.Empty,
+                AlbumTitle = string.Empty
+            };
+
+            // create our blank state message
+            var haMessage = new MqttApplicationMessageBuilder()
+                .WithTopic($"hass.agent/media_player/{Variables.DeviceConfig.Name}/state")
+                .WithPayload(JsonSerializer.Serialize(message, MqttManager.JsonSerializerOptions)).Build();
+
+            while (_monitoring)
+            {
+                // publish our blank state
+                await Variables.MqttManager.PublishAsync(haMessage);
+
+                // wait a bit -- do I have to wait 2 seconds, can it be longer?
+                await Task.Delay(TimeSpan.FromSeconds(2));
+            }
         }
 
         private static async void MediaMonitor()
@@ -192,7 +229,7 @@ namespace HASS.Agent.Media
                     message.AlbumArtist = mediaProperties.AlbumArtist;
                     message.AlbumTitle = mediaProperties.AlbumTitle;
                     message.Volume = MediaManagerRequests.GetVolume();
-                    
+
                     // get timeline info
                     var timeline = session.GetTimelineProperties();
                     if (timeline != null)
@@ -244,9 +281,9 @@ namespace HASS.Agent.Media
             // if none are playing: pick the first
 
             if (sessions.Count == 1) return sessions[0];
-            
-            return sessions.Any(x => x.GetPlaybackInfo().PlaybackStatus == GlobalSystemMediaTransportControlsSessionPlaybackStatus.Playing) 
-                ? sessions.First(x => x.GetPlaybackInfo().PlaybackStatus == GlobalSystemMediaTransportControlsSessionPlaybackStatus.Playing) 
+
+            return sessions.Any(x => x.GetPlaybackInfo().PlaybackStatus == GlobalSystemMediaTransportControlsSessionPlaybackStatus.Playing)
+                ? sessions.First(x => x.GetPlaybackInfo().PlaybackStatus == GlobalSystemMediaTransportControlsSessionPlaybackStatus.Playing)
                 : sessions[0];
         }
 
@@ -332,7 +369,8 @@ namespace HASS.Agent.Media
 
                     case MediaPlayerCommand.Play:
                         if (Variables.ExtendedLogging) Log.Information("[MEDIA] Command received: Play");
-                        if (State == MediaPlayerState.Playing) {
+                        if (State == MediaPlayerState.Playing)
+                        {
                             if (Variables.ExtendedLogging) Log.Warning("[MEDIA] Media already playing");
                             break;
                         }
@@ -341,7 +379,8 @@ namespace HASS.Agent.Media
 
                     case MediaPlayerCommand.Pause:
                         if (Variables.ExtendedLogging) Log.Information("[MEDIA] Command received: Pause");
-                        if (State == MediaPlayerState.Paused) {
+                        if (State == MediaPlayerState.Paused)
+                        {
                             if (Variables.ExtendedLogging) Log.Warning("[MEDIA] Media already paused");
                             break;
                         }
