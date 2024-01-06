@@ -349,6 +349,7 @@ namespace HASS.Agent.Forms
 
             // mediaplayer
             _mediaPlayer.CbEnableMediaPlayer.CheckState = Variables.AppSettings.MediaPlayerEnabled ? CheckState.Checked : CheckState.Unchecked;
+            _mediaPlayer.CbOptOutWhatsPlaying.CheckState = Variables.AppSettings.MediaPlayerOptOutWhatsPlaying ?  CheckState.Checked: CheckState.Unchecked;
 
             // tray icon
             _trayIcon.CbDefaultMenu.CheckState = Variables.AppSettings.TrayIconShowDefaultMenu ? CheckState.Checked : CheckState.Unchecked;
@@ -454,6 +455,7 @@ namespace HASS.Agent.Forms
 
             // mediaplayer
             Variables.AppSettings.MediaPlayerEnabled = _mediaPlayer.CbEnableMediaPlayer.CheckState == CheckState.Checked;
+            Variables.AppSettings.MediaPlayerOptOutWhatsPlaying = _mediaPlayer.CbOptOutWhatsPlaying.CheckState == CheckState.Checked;
 
             // tray icon
             Variables.AppSettings.TrayIconShowDefaultMenu = _trayIcon.CbDefaultMenu.CheckState == CheckState.Checked;

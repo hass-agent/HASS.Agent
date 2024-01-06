@@ -31,110 +31,125 @@ namespace HASS.Agent.Controls.Configuration
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ConfigMediaPlayer));
-            this.LblInfo2 = new System.Windows.Forms.Label();
-            this.LblInfo1 = new System.Windows.Forms.Label();
-            this.BtnMediaPlayerReadme = new Syncfusion.WinForms.Controls.SfButton();
-            this.CbEnableMediaPlayer = new System.Windows.Forms.CheckBox();
-            this.LblConnectivityDisabled = new System.Windows.Forms.Label();
-            this.SuspendLayout();
+            LblInfo2 = new Label();
+            LblInfo1 = new Label();
+            BtnMediaPlayerReadme = new Syncfusion.WinForms.Controls.SfButton();
+            CbEnableMediaPlayer = new CheckBox();
+            LblConnectivityDisabled = new Label();
+            CbOptOutWhatsPlaying = new CheckBox();
+            SuspendLayout();
             // 
             // LblInfo2
             // 
-            this.LblInfo2.AccessibleDescription = "Debugging info in case the media player doesn\'t work.";
-            this.LblInfo2.AccessibleName = "Debugging info";
-            this.LblInfo2.AccessibleRole = System.Windows.Forms.AccessibleRole.StaticText;
-            this.LblInfo2.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.LblInfo2.Location = new System.Drawing.Point(37, 336);
-            this.LblInfo2.Name = "LblInfo2";
-            this.LblInfo2.Size = new System.Drawing.Size(643, 192);
-            this.LblInfo2.TabIndex = 37;
-            this.LblInfo2.Text = Languages.ConfigMediaPlayer_LblInfo2;
+            LblInfo2.AccessibleDescription = "Debugging info in case the media player doesn't work.";
+            LblInfo2.AccessibleName = "Debugging info";
+            LblInfo2.AccessibleRole = AccessibleRole.StaticText;
+            LblInfo2.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            LblInfo2.Location = new Point(37, 336);
+            LblInfo2.Name = "LblInfo2";
+            LblInfo2.Size = new Size(643, 192);
+            LblInfo2.TabIndex = 37;
+            LblInfo2.Text = resources.GetString("LblInfo2.Text");
             // 
             // LblInfo1
             // 
-            this.LblInfo1.AccessibleDescription = "Media player information.";
-            this.LblInfo1.AccessibleName = "Information";
-            this.LblInfo1.AccessibleRole = System.Windows.Forms.AccessibleRole.StaticText;
-            this.LblInfo1.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.LblInfo1.Location = new System.Drawing.Point(70, 36);
-            this.LblInfo1.Name = "LblInfo1";
-            this.LblInfo1.Size = new System.Drawing.Size(575, 104);
-            this.LblInfo1.TabIndex = 36;
-            this.LblInfo1.Text = Languages.ConfigMediaPlayer_LblInfo1;
+            LblInfo1.AccessibleDescription = "Media player information.";
+            LblInfo1.AccessibleName = "Information";
+            LblInfo1.AccessibleRole = AccessibleRole.StaticText;
+            LblInfo1.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            LblInfo1.Location = new Point(70, 36);
+            LblInfo1.Name = "LblInfo1";
+            LblInfo1.Size = new Size(575, 104);
+            LblInfo1.TabIndex = 36;
+            LblInfo1.Text = resources.GetString("LblInfo1.Text");
             // 
             // BtnMediaPlayerReadme
             // 
-            this.BtnMediaPlayerReadme.AccessibleDescription = "Launches the media player documentation webpage.";
-            this.BtnMediaPlayerReadme.AccessibleName = "Open documentation";
-            this.BtnMediaPlayerReadme.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.BtnMediaPlayerReadme.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(63)))), ((int)(((byte)(70)))));
-            this.BtnMediaPlayerReadme.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.BtnMediaPlayerReadme.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
-            this.BtnMediaPlayerReadme.Location = new System.Drawing.Point(452, 497);
-            this.BtnMediaPlayerReadme.Name = "BtnMediaPlayerReadme";
-            this.BtnMediaPlayerReadme.Size = new System.Drawing.Size(228, 31);
-            this.BtnMediaPlayerReadme.Style.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(63)))), ((int)(((byte)(70)))));
-            this.BtnMediaPlayerReadme.Style.FocusedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(63)))), ((int)(((byte)(70)))));
-            this.BtnMediaPlayerReadme.Style.FocusedForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
-            this.BtnMediaPlayerReadme.Style.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
-            this.BtnMediaPlayerReadme.Style.HoverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(63)))), ((int)(((byte)(70)))));
-            this.BtnMediaPlayerReadme.Style.HoverForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
-            this.BtnMediaPlayerReadme.Style.PressedForeColor = System.Drawing.Color.Black;
-            this.BtnMediaPlayerReadme.TabIndex = 1;
-            this.BtnMediaPlayerReadme.Text = Languages.ConfigMediaPlayer_BtnMediaPlayerReadme;
-            this.BtnMediaPlayerReadme.UseVisualStyleBackColor = false;
-            this.BtnMediaPlayerReadme.Click += new System.EventHandler(this.BtnNotificationsReadme_Click);
+            BtnMediaPlayerReadme.AccessibleDescription = "Launches the media player documentation webpage.";
+            BtnMediaPlayerReadme.AccessibleName = "Open documentation";
+            BtnMediaPlayerReadme.AccessibleRole = AccessibleRole.PushButton;
+            BtnMediaPlayerReadme.BackColor = Color.FromArgb(63, 63, 70);
+            BtnMediaPlayerReadme.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            BtnMediaPlayerReadme.ForeColor = Color.FromArgb(241, 241, 241);
+            BtnMediaPlayerReadme.Location = new Point(452, 497);
+            BtnMediaPlayerReadme.Name = "BtnMediaPlayerReadme";
+            BtnMediaPlayerReadme.Size = new Size(228, 31);
+            BtnMediaPlayerReadme.Style.BackColor = Color.FromArgb(63, 63, 70);
+            BtnMediaPlayerReadme.Style.FocusedBackColor = Color.FromArgb(63, 63, 70);
+            BtnMediaPlayerReadme.Style.FocusedForeColor = Color.FromArgb(241, 241, 241);
+            BtnMediaPlayerReadme.Style.ForeColor = Color.FromArgb(241, 241, 241);
+            BtnMediaPlayerReadme.Style.HoverBackColor = Color.FromArgb(63, 63, 70);
+            BtnMediaPlayerReadme.Style.HoverForeColor = Color.FromArgb(241, 241, 241);
+            BtnMediaPlayerReadme.Style.PressedForeColor = Color.Black;
+            BtnMediaPlayerReadme.TabIndex = 1;
+            BtnMediaPlayerReadme.Text = Languages.ConfigMediaPlayer_BtnMediaPlayerReadme;
+            BtnMediaPlayerReadme.UseVisualStyleBackColor = false;
+            BtnMediaPlayerReadme.Click += BtnNotificationsReadme_Click;
             // 
             // CbEnableMediaPlayer
             // 
-            this.CbEnableMediaPlayer.AccessibleDescription = "Enable the MediaPlayer functionality.";
-            this.CbEnableMediaPlayer.AccessibleName = "Enable MediaPlayer";
-            this.CbEnableMediaPlayer.AccessibleRole = System.Windows.Forms.AccessibleRole.CheckButton;
-            this.CbEnableMediaPlayer.AutoSize = true;
-            this.CbEnableMediaPlayer.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.CbEnableMediaPlayer.Location = new System.Drawing.Point(232, 174);
-            this.CbEnableMediaPlayer.Name = "CbEnableMediaPlayer";
-            this.CbEnableMediaPlayer.Size = new System.Drawing.Size(229, 23);
-            this.CbEnableMediaPlayer.TabIndex = 0;
-            this.CbEnableMediaPlayer.Text = Languages.ConfigMediaPlayer_CbEnableMediaPlayer;
-            this.CbEnableMediaPlayer.UseVisualStyleBackColor = true;
+            CbEnableMediaPlayer.AccessibleDescription = "Enable the MediaPlayer functionality.";
+            CbEnableMediaPlayer.AccessibleName = "Enable MediaPlayer";
+            CbEnableMediaPlayer.AccessibleRole = AccessibleRole.CheckButton;
+            CbEnableMediaPlayer.AutoSize = true;
+            CbEnableMediaPlayer.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            CbEnableMediaPlayer.Location = new Point(232, 174);
+            CbEnableMediaPlayer.Name = "CbEnableMediaPlayer";
+            CbEnableMediaPlayer.Size = new Size(233, 23);
+            CbEnableMediaPlayer.TabIndex = 0;
+            CbEnableMediaPlayer.Text = Languages.ConfigMediaPlayer_CbEnableMediaPlayer;
+            CbEnableMediaPlayer.UseVisualStyleBackColor = true;
             // 
             // LblConnectivityDisabled
             // 
-            this.LblConnectivityDisabled.AccessibleDescription = "Warns that the local api or mqtt needs to be enabled for this to work.";
-            this.LblConnectivityDisabled.AccessibleName = "Connectivity warning";
-            this.LblConnectivityDisabled.AccessibleRole = System.Windows.Forms.AccessibleRole.StaticText;
-            this.LblConnectivityDisabled.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.LblConnectivityDisabled.ForeColor = System.Drawing.Color.OrangeRed;
-            this.LblConnectivityDisabled.Location = new System.Drawing.Point(17, 263);
-            this.LblConnectivityDisabled.Name = "LblConnectivityDisabled";
-            this.LblConnectivityDisabled.Size = new System.Drawing.Size(663, 54);
-            this.LblConnectivityDisabled.TabIndex = 62;
-            this.LblConnectivityDisabled.Text = Languages.ConfigMediaPlayer_LblConnectivityDisabled;
-            this.LblConnectivityDisabled.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.LblConnectivityDisabled.Visible = false;
+            LblConnectivityDisabled.AccessibleDescription = "Warns that the local api or mqtt needs to be enabled for this to work.";
+            LblConnectivityDisabled.AccessibleName = "Connectivity warning";
+            LblConnectivityDisabled.AccessibleRole = AccessibleRole.StaticText;
+            LblConnectivityDisabled.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            LblConnectivityDisabled.ForeColor = Color.OrangeRed;
+            LblConnectivityDisabled.Location = new Point(17, 263);
+            LblConnectivityDisabled.Name = "LblConnectivityDisabled";
+            LblConnectivityDisabled.Size = new Size(663, 54);
+            LblConnectivityDisabled.TabIndex = 62;
+            LblConnectivityDisabled.Text = "both the local API and MQTT are disabled, but the integration needs at least one for it to work";
+            LblConnectivityDisabled.TextAlign = ContentAlignment.TopCenter;
+            LblConnectivityDisabled.Visible = false;
+            // 
+            // CbOptOutWhatsPlaying
+            // 
+            CbOptOutWhatsPlaying.AccessibleDescription = "Enable the MediaPlayer functionality.";
+            CbOptOutWhatsPlaying.AccessibleName = "Enable MediaPlayer";
+            CbOptOutWhatsPlaying.AccessibleRole = AccessibleRole.CheckButton;
+            CbOptOutWhatsPlaying.AutoSize = true;
+            CbOptOutWhatsPlaying.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            CbOptOutWhatsPlaying.Location = new Point(232, 217);
+            CbOptOutWhatsPlaying.Name = "CbOptOutWhatsPlaying";
+            CbOptOutWhatsPlaying.Size = new Size(242, 23);
+            CbOptOutWhatsPlaying.TabIndex = 0;
+            CbOptOutWhatsPlaying.Text = "&Opt-Out of What's Playing Feature";
+            CbOptOutWhatsPlaying.UseVisualStyleBackColor = true;
             // 
             // ConfigMediaPlayer
             // 
-            this.AccessibleDescription = "Panel containing the media player integration\'s configuration.";
-            this.AccessibleName = "Media player";
-            this.AccessibleRole = System.Windows.Forms.AccessibleRole.Pane;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
-            this.Controls.Add(this.LblConnectivityDisabled);
-            this.Controls.Add(this.LblInfo1);
-            this.Controls.Add(this.BtnMediaPlayerReadme);
-            this.Controls.Add(this.CbEnableMediaPlayer);
-            this.Controls.Add(this.LblInfo2);
-            this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
-            this.Margin = new System.Windows.Forms.Padding(4);
-            this.Name = "ConfigMediaPlayer";
-            this.Size = new System.Drawing.Size(700, 544);
-            this.Load += new System.EventHandler(this.ConfigMediaPlayer_Load);
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AccessibleDescription = "Panel containing the media player integration's configuration.";
+            AccessibleName = "Media player";
+            AccessibleRole = AccessibleRole.Pane;
+            AutoScaleDimensions = new SizeF(96F, 96F);
+            AutoScaleMode = AutoScaleMode.Dpi;
+            BackColor = Color.FromArgb(45, 45, 48);
+            Controls.Add(LblConnectivityDisabled);
+            Controls.Add(LblInfo1);
+            Controls.Add(BtnMediaPlayerReadme);
+            Controls.Add(CbOptOutWhatsPlaying);
+            Controls.Add(CbEnableMediaPlayer);
+            Controls.Add(LblInfo2);
+            ForeColor = Color.FromArgb(241, 241, 241);
+            Margin = new Padding(4);
+            Name = "ConfigMediaPlayer";
+            Size = new Size(700, 544);
+            Load += ConfigMediaPlayer_Load;
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -144,5 +159,6 @@ namespace HASS.Agent.Controls.Configuration
         internal Syncfusion.WinForms.Controls.SfButton BtnMediaPlayerReadme;
         internal System.Windows.Forms.CheckBox CbEnableMediaPlayer;
         private Label LblConnectivityDisabled;
+        internal CheckBox CbOptOutWhatsPlaying;
     }
 }
