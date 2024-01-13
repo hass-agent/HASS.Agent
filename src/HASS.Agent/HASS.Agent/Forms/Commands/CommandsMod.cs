@@ -815,10 +815,10 @@ namespace HASS.Agent.Forms.Commands
 			{
 				SetEmptyGui();
 
-				LblSetting.Text = "volume (between 0 and 100)";
-				LblSetting.Visible = true;
+				LblSetting.Text = Languages.CommandsMod_LblSetting_VolumeRange;
+                LblSetting.Visible = true;
 
-				TbSetting.Text = string.Empty;
+                TbSetting.Text = string.Empty;
 				TbSetting.Visible = true;
 			}));
 		}
@@ -832,7 +832,7 @@ namespace HASS.Agent.Forms.Commands
             {
                 SetEmptyGui();
 
-                LblSetting.Text = "JSON Command Payload";
+                LblSetting.Text = Languages.CommandsMod_LblSetting_JsonPayload;
                 LblSetting.Visible = true;
 
                 TbSetting.Text = string.Empty;
@@ -849,7 +849,7 @@ namespace HASS.Agent.Forms.Commands
             {
                 SetEmptyGui();
 
-                LblSetting.Text = "Audio Device Name";
+                LblSetting.Text = Languages.CommandsMod_LblSetting_AudioDeviceName;
                 LblSetting.Visible = true;
 
                 TbSetting.Text = string.Empty;

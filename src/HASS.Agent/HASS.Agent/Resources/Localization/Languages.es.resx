@@ -3344,4 +3344,13 @@ HASS.Agent de la versión original</value>
     <value>Establece la salida de audio predeterminada para el sistema.
 Requiere el nombre del dispositivo de audio como carga útil.</value>
   </data>
+  <data name="CommandsMod_LblSetting_VolumeRange" xml:space="preserve">
+    <value>Volumen (entre 0 y 100)</value>
+  </data>
+  <data name="CommandsMod_LblSetting_JsonPayload" xml:space="preserve">
+    <value>Carga útil del comando JSON</value>
+  </data>
+  <data name="CommandsMod_LblSetting_AudioDeviceName" xml:space="preserve">
+    <value>Nombre del dispositivo de audio</value>
+  </data>
 </root>

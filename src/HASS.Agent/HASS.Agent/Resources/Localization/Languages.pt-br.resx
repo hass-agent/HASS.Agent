@@ -3390,4 +3390,13 @@ HASS.Agent da versão original</value>
     <value>Define a saída de áudio padrão para o sistema.
 Requer o nome do dispositivo de áudio como carga útil.</value>
   </data>
+  <data name="CommandsMod_LblSetting_AudioDeviceName" xml:space="preserve">
+    <value>Nome do dispositivo de áudio</value>
+  </data>
+  <data name="CommandsMod_LblSetting_JsonPayload" xml:space="preserve">
+    <value>Carga útil do comando JSON</value>
+  </data>
+  <data name="CommandsMod_LblSetting_VolumeRange" xml:space="preserve">
+    <value>Volume (entre 0 e 100)</value>
+  </data>
 </root>

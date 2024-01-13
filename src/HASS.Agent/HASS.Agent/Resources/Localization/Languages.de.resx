@@ -3468,4 +3468,13 @@ aus der Originalversion</value>
     <value>Legt die Standard-Audioausgabe für das System fest.
 Erfordert den Namen des Audiogeräts als Nutzlast.</value>
   </data>
+  <data name="CommandsMod_LblSetting_AudioDeviceName" xml:space="preserve">
+    <value>Name des Audiogeräts</value>
+  </data>
+  <data name="CommandsMod_LblSetting_JsonPayload" xml:space="preserve">
+    <value>JSON-Befehlsnutzlast</value>
+  </data>
+  <data name="CommandsMod_LblSetting_VolumeRange" xml:space="preserve">
+    <value>Lautstärke (zwischen 0 und 100)</value>
+  </data>
 </root>

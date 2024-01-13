@@ -2956,4 +2956,13 @@ taşınması orijinal versiyondan</value>
     <value>Sistem için varsayılan ses çıkışını ayarlar.
 Yük olarak ses cihazı adını gerektirir.</value>
   </data>
+  <data name="CommandsMod_LblSetting_AudioDeviceName" xml:space="preserve">
+    <value>Ses Cihazı Adı</value>
+  </data>
+  <data name="CommandsMod_LblSetting_JsonPayload" xml:space="preserve">
+    <value>JSON Komut Yükü</value>
+  </data>
+  <data name="CommandsMod_LblSetting_VolumeRange" xml:space="preserve">
+    <value>Hacim (0 ile 100 arasında)</value>
+  </data>
 </root>

@@ -3413,4 +3413,13 @@ Home Assistant.
     <value>Устанавливает аудиовыход по умолчанию для системы.
 В качестве полезной нагрузки требуется имя аудиоустройства.</value>
   </data>
+  <data name="CommandsMod_LblSetting_VolumeRange" xml:space="preserve">
+    <value>Громкость (от 0 до 100)</value>
+  </data>
+  <data name="CommandsMod_LblSetting_JsonPayload" xml:space="preserve">
+    <value>Полезная нагрузка команды JSON</value>
+  </data>
+  <data name="CommandsMod_LblSetting_AudioDeviceName" xml:space="preserve">
+    <value>Имя аудиоустройства</value>
+  </data>
 </root>

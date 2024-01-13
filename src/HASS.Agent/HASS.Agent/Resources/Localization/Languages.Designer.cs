@@ -1049,6 +1049,15 @@ namespace HASS.Agent.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Audio Device Name.
+        /// </summary>
+        internal static string CommandsMod_LblSetting_AudioDeviceName {
+            get {
+                return ResourceManager.GetString("CommandsMod_LblSetting_AudioDeviceName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Command.
         /// </summary>
         internal static string CommandsMod_LblSetting_Command {
@@ -1063,6 +1072,15 @@ namespace HASS.Agent.Resources.Localization {
         internal static string CommandsMod_LblSetting_CommandScript {
             get {
                 return ResourceManager.GetString("CommandsMod_LblSetting_CommandScript", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to JSON Command Payload.
+        /// </summary>
+        internal static string CommandsMod_LblSetting_JsonPayload {
+            get {
+                return ResourceManager.GetString("CommandsMod_LblSetting_JsonPayload", resourceCulture);
             }
         }
         
@@ -1099,6 +1117,15 @@ namespace HASS.Agent.Resources.Localization {
         internal static string CommandsMod_LblSetting_Url {
             get {
                 return ResourceManager.GetString("CommandsMod_LblSetting_Url", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Volume (between 0 and 100).
+        /// </summary>
+        internal static string CommandsMod_LblSetting_VolumeRange {
+            get {
+                return ResourceManager.GetString("CommandsMod_LblSetting_VolumeRange", resourceCulture);
             }
         }
         

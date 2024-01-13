@@ -3493,4 +3493,13 @@ iz izvirne različice</value>
     <value>Nastavi privzeti zvočni izhod za sistem.
 Zahteva ime zvočne naprave kot tovor.</value>
   </data>
+  <data name="CommandsMod_LblSetting_AudioDeviceName" xml:space="preserve">
+    <value>Ime zvočne naprave</value>
+  </data>
+  <data name="CommandsMod_LblSetting_JsonPayload" xml:space="preserve">
+    <value>Tovor ukazov JSON</value>
+  </data>
+  <data name="CommandsMod_LblSetting_VolumeRange" xml:space="preserve">
+    <value>Glasnost (med 0 in 100)</value>
+  </data>
 </root>
