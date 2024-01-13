@@ -12,7 +12,7 @@
     <PlatformTarget>x64</PlatformTarget>
     <Platforms>x64;x86</Platforms>
     <DebugType>full</DebugType>
-    <Version>2.0.2-beta</Version>
+    <Version>2.0.2-beta1</Version>
     <Company>HASS.Agent Team</Company>
     <Authors>HASS.Agent Team</Authors>
     <Description>Windows-based client for Home Assistant. Provides notifications, quick actions, commands, sensors and more. </Description>

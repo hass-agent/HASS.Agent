@@ -8,7 +8,7 @@
     <UserSecretsId>dotnet-HASSAgentSatelliteService-6E4FA50A-3AC9-4E66-8671-9FAB92372154</UserSecretsId>
     <PlatformTarget>x64</PlatformTarget>
     <Platforms>x64;x86</Platforms>
-    <Version>2.0.2-beta</Version>
+    <Version>2.0.2-beta1</Version>
     <Company>HASS.Agent Team</Company>
     <Product>HASS.Agent Satellite Service</Product>
     <AssemblyName>HASS.Agent.Satellite.Service</AssemblyName>
