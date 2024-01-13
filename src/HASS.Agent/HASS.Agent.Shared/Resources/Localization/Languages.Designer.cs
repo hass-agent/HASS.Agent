@@ -1285,6 +1285,15 @@ namespace HASS.Agent.Shared.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to SetAudioOutputCommand.
+        /// </summary>
+        internal static string CommandType_SetAudioOutputCommand {
+            get {
+                return ResourceManager.GetString("CommandType_SetAudioOutputCommand", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to SetVolume.
         /// </summary>
         internal static string CommandType_SetVolumeCommand {

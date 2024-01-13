@@ -3228,4 +3228,10 @@ Oculta, Maximizada, Minimizada, Normal y Desconocida.</value>
   <data name="SensorType_ActiveDesktopSensor" xml:space="preserve">
     <value>EscritorioActivo</value>
   </data>
+  <data name="CommandType_SetApplicationVolumeCommand" xml:space="preserve">
+    <value>Establecer volumen de aplicación</value>
+  </data>
+  <data name="CommandType_SetAudioOutputCommand" xml:space="preserve">
+    <value>Establecer comando de salida de audio</value>
+  </data>
 </root>

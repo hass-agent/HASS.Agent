@@ -3231,4 +3231,10 @@ Do you want to download the runtime installer?</value>
   <data name="SensorType_ActiveDesktopSensor" xml:space="preserve">
     <value>ActiveDesktop</value>
   </data>
+  <data name="CommandType_SetApplicationVolumeCommand" xml:space="preserve">
+    <value>SetApplicationVolume</value>
+  </data>
+  <data name="CommandType_SetAudioOutputCommand" xml:space="preserve">
+    <value>SetAudioOutputCommand</value>
+  </data>
 </root>

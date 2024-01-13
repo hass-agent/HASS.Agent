@@ -455,13 +455,29 @@ namespace HASS.Agent.Commands
                 Languages.CommandsManager_SwitchDesktopCommandDescription,
                 true, false, true);
 
-            // =================================
-
             CommandInfoCards.Add(commandInfoCard.CommandType, commandInfoCard);
+
+            // =================================
 
             commandInfoCard = new CommandInfoCard(CommandType.SetVolumeCommand,
                 Languages.CommandsManager_SetVolumeCommandDescription,
                 true, true, true);
+
+            CommandInfoCards.Add(commandInfoCard.CommandType, commandInfoCard);
+
+            // =================================
+
+            commandInfoCard = new CommandInfoCard(CommandType.SetApplicationVolumeCommand,
+                Languages.CommandsManager_SetApplicationVolumeCommandDescription,
+                true, false, true);
+
+            CommandInfoCards.Add(commandInfoCard.CommandType, commandInfoCard);
+
+            // =================================
+
+            commandInfoCard = new CommandInfoCard(CommandType.SetAudioOutputCommand,
+                Languages.CommandsManager_SetAudioOutputCommandDescription,
+                true, false, true);
 
             CommandInfoCards.Add(commandInfoCard.CommandType, commandInfoCard);
 

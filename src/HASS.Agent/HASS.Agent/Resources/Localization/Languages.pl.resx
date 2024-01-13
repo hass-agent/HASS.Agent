@@ -3093,7 +3093,7 @@ Uwaga: wyłączyłeś czyszczenie nazw, więc upewnij się, że nazwa Twojego ur
     <value>Stara się wybudzić wszystkie monitory poprzez symulowanie wciśnięcia przycisku "do góry".</value>
   </data>
   <data name="CommandsManager_SetVolumeCommandDescription" xml:space="preserve">
-    <value>Ustawia poziom głośności domyślnego urządzenia na podaną wartość. </value>
+    <value>Ustawia poziom głośności domyślnego urządzenia na podaną wartość.</value>
   </data>
   <data name="CommandsMod_BtnStore_MessageBox10" xml:space="preserve">
     <value>Wprowadź wartość pomiędzy 0-100 jako nowy poziom głośności!</value>
@@ -3449,5 +3449,9 @@ z oryginalnej wersji</value>
   </data>
   <data name="Compat_NameTask_Error_ServiceStart" xml:space="preserve">
     <value>Błąd podczas uruchamiania usługi satelity!</value>
+  </data>
+  <data name="CommandsManager_SetAudioOutputCommandDescription" xml:space="preserve">
+    <value>Ustawia domyślne wyjście audio dla systemu.
+Wymaga nazwy urządzenia audio jako ładunku.</value>
   </data>
 </root>

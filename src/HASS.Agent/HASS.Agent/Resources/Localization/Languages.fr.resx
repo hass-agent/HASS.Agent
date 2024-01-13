@@ -3373,4 +3373,8 @@ HASS.Agent de la version originale</value>
   <data name="Compat_NameTask_Error_ServiceStart" xml:space="preserve">
     <value>Erreur lors du démarrage du service satellite !</value>
   </data>
+  <data name="CommandsManager_SetAudioOutputCommandDescription" xml:space="preserve">
+    <value>Définit la sortie audio par défaut du système.
+Nécessite le nom du périphérique audio comme charge utile.</value>
+  </data>
 </root>

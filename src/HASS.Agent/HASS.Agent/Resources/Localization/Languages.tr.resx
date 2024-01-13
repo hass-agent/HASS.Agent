@@ -2952,4 +2952,8 @@ taşınması orijinal versiyondan</value>
   <data name="Compat_NameTask_Error_ServiceStart" xml:space="preserve">
     <value>Uydu hizmeti başlatılırken hata oluştu!</value>
   </data>
+  <data name="CommandsManager_SetAudioOutputCommandDescription" xml:space="preserve">
+    <value>Sistem için varsayılan ses çıkışını ayarlar.
+Yük olarak ses cihazı adını gerektirir.</value>
+  </data>
 </root>

@@ -3489,4 +3489,8 @@ iz izvirne različice</value>
   <data name="Compat_NameTask_Error_ServiceStart" xml:space="preserve">
     <value>Napaka pri zagonu satelitske storitve!</value>
   </data>
+  <data name="CommandsManager_SetAudioOutputCommandDescription" xml:space="preserve">
+    <value>Nastavi privzeti zvočni izhod za sistem.
+Zahteva ime zvočne naprave kot tovor.</value>
+  </data>
 </root>

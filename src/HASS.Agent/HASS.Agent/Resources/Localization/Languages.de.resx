@@ -3464,4 +3464,8 @@ aus der Originalversion</value>
   <data name="Compat_NameTask_Error_ServiceStart" xml:space="preserve">
     <value>Fehler beim Starten des Satellitendienstes!</value>
   </data>
+  <data name="CommandsManager_SetAudioOutputCommandDescription" xml:space="preserve">
+    <value>Legt die Standard-Audioausgabe für das System fest.
+Erfordert den Namen des Audiogeräts als Nutzlast.</value>
+  </data>
 </root>

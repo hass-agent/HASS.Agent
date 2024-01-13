@@ -3361,4 +3361,8 @@ van de originele versie</value>
   <data name="Compat_NameTask_Error_ServiceStart" xml:space="preserve">
     <value>Fout bij starten satellietservice!</value>
   </data>
+  <data name="CommandsManager_SetAudioOutputCommandDescription" xml:space="preserve">
+    <value>Stelt de standaard audio-uitvoer voor het systeem in.
+Vereist de naam van het audioapparaat als payload.</value>
+  </data>
 </root>

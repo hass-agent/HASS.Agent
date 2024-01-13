@@ -3409,4 +3409,8 @@ Home Assistant.
   <data name="Compat_NameTask_Error_ServiceStart" xml:space="preserve">
     <value>Ошибка при запуске спутниковой службы!</value>
   </data>
+  <data name="CommandsManager_SetAudioOutputCommandDescription" xml:space="preserve">
+    <value>Устанавливает аудиовыход по умолчанию для системы.
+В качестве полезной нагрузки требуется имя аудиоустройства.</value>
+  </data>
 </root>
