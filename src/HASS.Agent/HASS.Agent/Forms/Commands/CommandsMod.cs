@@ -205,6 +205,7 @@ namespace HASS.Agent.Forms.Commands
 
                 case CommandType.SetVolumeCommand:
                 case CommandType.SetApplicationVolumeCommand:
+                case CommandType.SetAudioOutputCommand:
                     TbSetting.Text = Command.Command;
                     break;
             }
@@ -455,6 +456,21 @@ namespace HASS.Agent.Forms.Commands
                     }
                     break;
 
+                case CommandType.SetAudioOutputCommand:
+                    var audioDeviceName = TbSetting.Text.Trim();
+                    if (string.IsNullOrEmpty(audioDeviceName))
+                    {
+                        var q = MessageBoxAdv.Show(this, Languages.CommandsMod_BtnStore_MessageBox8, Variables.MessageBoxTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                        if (q != DialogResult.Yes)
+                        {
+                            ActiveControl = BtnConfigureCommand;
+                            return;
+                        }
+                    }
+                    Command.Command = audioDeviceName;
+                    break;
+
+
                 case CommandType.WebViewCommand:
                     var webview = TbSetting.Text.Trim();
                     if (string.IsNullOrEmpty(webview))
@@ -612,6 +628,10 @@ namespace HASS.Agent.Forms.Commands
 				case CommandType.SetApplicationVolumeCommand:
 					SetApplicationVolumeUi();
 					break;
+
+                case CommandType.SetAudioOutputCommand:
+                    SetAudioOutputUi();
+                    break;
 
 				case CommandType.RadioCommand:
 					CbConfigDropdown.DataSource = new BindingSource(_radioDevices, null);
@@ -813,6 +833,23 @@ namespace HASS.Agent.Forms.Commands
                 SetEmptyGui();
 
                 LblSetting.Text = "JSON Command Payload";
+                LblSetting.Visible = true;
+
+                TbSetting.Text = string.Empty;
+                TbSetting.Visible = true;
+            }));
+        }
+
+        /// <summary>
+        /// Change the UI to a 'setaudiooutput' type
+        /// </summary>
+        private void SetAudioOutputUi()
+        {
+            Invoke(new MethodInvoker(delegate
+            {
+                SetEmptyGui();
+
+                LblSetting.Text = "Audio Device Name";
                 LblSetting.Visible = true;
 
                 TbSetting.Text = string.Empty;
