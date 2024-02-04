@@ -3463,4 +3463,8 @@ Wymaga nazwy urządzenia audio jako ładunku.</value>
   <data name="CommandsMod_LblSetting_AudioDeviceName" xml:space="preserve">
     <value>Nazwa urządzenia audio</value>
   </data>
+  <data name="CommandsManager_SetAudioInputCommandDescription" xml:space="preserve">
+    <value>Ustawia domyślne wejście audio dla systemu (w tym domyślne urządzenie komunikacyjne).
+Wymaga nazwy urządzenia audio jako ładunku.</value>
+  </data>
 </root>

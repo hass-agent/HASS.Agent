@@ -3374,4 +3374,8 @@ Vereist de naam van het audioapparaat als payload.</value>
   <data name="CommandsMod_LblSetting_VolumeRange" xml:space="preserve">
     <value>Volume (tussen 0 en 100)</value>
   </data>
+  <data name="CommandsManager_SetAudioInputCommandDescription" xml:space="preserve">
+    <value>Stelt de standaardaudio-invoer in voor het systeem (inclusief het standaardcommunicatieapparaat).
+U hebt de naam van het audioapparaat nodig als payload.</value>
+  </data>
 </root>

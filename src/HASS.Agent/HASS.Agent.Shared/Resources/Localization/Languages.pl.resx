@@ -3344,4 +3344,7 @@ Czy chcesz pobrać plik instalacyjny?</value>
   <data name="CommandType_SetAudioOutputCommand" xml:space="preserve">
     <value>Ustaw wyjście audio</value>
   </data>
+  <data name="CommandType_SetAudioInputCommand" xml:space="preserve">
+    <value>Ustaw wejście audio</value>
+  </data>
 </root>

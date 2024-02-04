@@ -483,6 +483,14 @@ namespace HASS.Agent.Commands
 
             // =================================
 
+            commandInfoCard = new CommandInfoCard(CommandType.SetAudioInputCommand,
+                Languages.CommandsManager_SetAudioInputCommandDescription,
+                true, false, true);
+
+            CommandInfoCards.Add(commandInfoCard.CommandType, commandInfoCard);
+
+            // =================================
+
             commandInfoCard = new CommandInfoCard(CommandType.ShutdownCommand,
                 Languages.CommandsManager_ShutdownCommandDescription,
                 true, true, false);

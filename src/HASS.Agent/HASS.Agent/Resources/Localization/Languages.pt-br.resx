@@ -3399,4 +3399,8 @@ Requer o nome do dispositivo de áudio como carga útil.</value>
   <data name="CommandsMod_LblSetting_VolumeRange" xml:space="preserve">
     <value>Volume (entre 0 e 100)</value>
   </data>
+  <data name="CommandsManager_SetAudioInputCommandDescription" xml:space="preserve">
+    <value>Define a entrada de áudio padrão para o sistema (incluindo o dispositivo de comunicação padrão).
+Você precisa do nome do dispositivo de áudio como carga útil.</value>
+  </data>
 </root>

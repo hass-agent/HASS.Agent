@@ -3358,4 +3358,7 @@ Willst Du den Runtime Installer herunterladen?</value>
   <data name="CommandType_SetAudioOutputCommand" xml:space="preserve">
     <value>Legen Sie den Audioausgabebefehl fest</value>
   </data>
+  <data name="CommandType_SetAudioInputCommand" xml:space="preserve">
+    <value>Legen Sie den Audioeingabebefehl fest</value>
+  </data>
 </root>

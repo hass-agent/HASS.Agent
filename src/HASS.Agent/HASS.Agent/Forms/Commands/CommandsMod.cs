@@ -206,6 +206,7 @@ namespace HASS.Agent.Forms.Commands
                 case CommandType.SetVolumeCommand:
                 case CommandType.SetApplicationVolumeCommand:
                 case CommandType.SetAudioOutputCommand:
+                case CommandType.SetAudioInputCommand:
                     TbSetting.Text = Command.Command;
                     break;
             }
@@ -457,6 +458,7 @@ namespace HASS.Agent.Forms.Commands
                     break;
 
                 case CommandType.SetAudioOutputCommand:
+                case CommandType.SetAudioInputCommand:
                     var audioDeviceName = TbSetting.Text.Trim();
                     if (string.IsNullOrEmpty(audioDeviceName))
                     {
@@ -630,6 +632,7 @@ namespace HASS.Agent.Forms.Commands
 					break;
 
                 case CommandType.SetAudioOutputCommand:
+                case CommandType.SetAudioInputCommand:
                     SetAudioOutputUi();
                     break;
 

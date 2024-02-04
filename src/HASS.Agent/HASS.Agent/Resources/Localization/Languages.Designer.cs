@@ -609,6 +609,16 @@ namespace HASS.Agent.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Sets the default audio input for the system (including default communication device).
+        ///Requires audio device name as a payload..
+        /// </summary>
+        internal static string CommandsManager_SetAudioInputCommandDescription {
+            get {
+                return ResourceManager.GetString("CommandsManager_SetAudioInputCommandDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sets the default audio output for the system.
         ///Requires audio device name as a payload..
         /// </summary>

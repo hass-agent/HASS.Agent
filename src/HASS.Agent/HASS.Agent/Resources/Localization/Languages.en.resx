@@ -3354,4 +3354,8 @@ Requires audio device name as a payload.</value>
   <data name="CommandsMod_LblSetting_VolumeRange" xml:space="preserve">
     <value>Volume (between 0 and 100)</value>
   </data>
+  <data name="CommandsManager_SetAudioInputCommandDescription" xml:space="preserve">
+    <value>Sets the default audio input for the system (including default communication device).
+Requires audio device name as a payload.</value>
+  </data>
 </root>

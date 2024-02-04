@@ -3477,4 +3477,8 @@ Erfordert den Namen des Audiogeräts als Nutzlast.</value>
   <data name="CommandsMod_LblSetting_VolumeRange" xml:space="preserve">
     <value>Lautstärke (zwischen 0 und 100)</value>
   </data>
+  <data name="CommandsManager_SetAudioInputCommandDescription" xml:space="preserve">
+    <value>Legt den Standard-Audioeingang für das System fest (einschließlich des Standard-Kommunikationsgeräts).
+Als Payload benötigen Sie den Namen des Audiogeräts.</value>
+  </data>
 </root>

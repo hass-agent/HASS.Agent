@@ -2965,4 +2965,8 @@ Yük olarak ses cihazı adını gerektirir.</value>
   <data name="CommandsMod_LblSetting_VolumeRange" xml:space="preserve">
     <value>Hacim (0 ile 100 arasında)</value>
   </data>
+  <data name="CommandsManager_SetAudioInputCommandDescription" xml:space="preserve">
+    <value>Sistem için varsayılan ses girişini ayarlar (varsayılan iletişim cihazı dahil).
+Yük olarak ses cihazı adına ihtiyacınız vardır.</value>
+  </data>
 </root>

@@ -3502,4 +3502,8 @@ Zahteva ime zvočne naprave kot tovor.</value>
   <data name="CommandsMod_LblSetting_VolumeRange" xml:space="preserve">
     <value>Glasnost (med 0 in 100)</value>
   </data>
+  <data name="CommandsManager_SetAudioInputCommandDescription" xml:space="preserve">
+    <value>Nastavi privzeti zvočni vhod za sistem (vključno s privzeto komunikacijsko napravo).
+Ime zvočne naprave potrebujete kot obremenitev.</value>
+  </data>
 </root>

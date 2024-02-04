@@ -105,6 +105,10 @@ namespace HASS.Agent.Shared.Enums
         [EnumMember(Value = "SetAudioOutputCommand")]
         SetAudioOutputCommand,
 
+        [LocalizedDescription("CommandType_SetAudioInputCommand", typeof(Languages))]
+        [EnumMember(Value = "SetAudioInputCommand")]
+        SetAudioInputCommand,
+
         [LocalizedDescription("CommandType_ShutdownCommand", typeof(Languages))]
         [EnumMember(Value = "ShutdownCommand")]
         ShutdownCommand,
