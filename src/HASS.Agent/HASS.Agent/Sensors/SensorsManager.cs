@@ -664,7 +664,7 @@ namespace HASS.Agent.Sensors
 
             sensorInfoCard = new SensorInfoCard(SensorType.ScreenshotSensor,
             Languages.SensorsManager_ScreenshotSensorDescription,
-            10, false, true, true);
+            10, false, true, false);
 
             SensorInfoCards.Add(sensorInfoCard.SensorType, sensorInfoCard);
 
