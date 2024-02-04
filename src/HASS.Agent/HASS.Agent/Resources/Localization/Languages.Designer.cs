@@ -6096,6 +6096,15 @@ namespace HASS.Agent.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Provides a screenshot sensor in form of a camera entity..
+        /// </summary>
+        internal static string SensorsManager_ScreenshotSensorDescription {
+            get {
+                return ResourceManager.GetString("SensorsManager_ScreenshotSensorDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Returns the state of the provided service: NotFound, Stopped, StartPending, StopPending, Running, ContinuePending, PausePending or Paused.
         ///
         ///Make sure to provide the &apos;Service name&apos;, not the &apos;Display name&apos;..
@@ -6517,6 +6526,15 @@ namespace HASS.Agent.Resources.Localization {
         internal static string SensorsMod_LblSetting1_Process {
             get {
                 return ResourceManager.GetString("SensorsMod_LblSetting1_Process", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Screen number.
+        /// </summary>
+        internal static string SensorsMod_LblSetting1_ScreenNumber {
+            get {
+                return ResourceManager.GetString("SensorsMod_LblSetting1_ScreenNumber", resourceCulture);
             }
         }
         

@@ -144,6 +144,13 @@ namespace HASS.Agent.Shared.Models.HomeAssistant
     }
 
     [SuppressMessage("ReSharper", "InconsistentNaming")]
+    public class CameraSensorDiscoveryConfigModel : SensorDiscoveryConfigModel
+    {
+        public string Topic { get; set; }
+        public string Image_encoding { get; set; }
+    }
+
+    [SuppressMessage("ReSharper", "InconsistentNaming")]
     public class CommandDiscoveryConfigModel : DiscoveryConfigModel
     {
         /// <summary>

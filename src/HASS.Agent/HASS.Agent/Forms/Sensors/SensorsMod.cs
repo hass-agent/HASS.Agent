@@ -228,7 +228,11 @@ namespace HASS.Agent.Forms.Sensors
 					CbApplyRounding.Checked = Sensor.ApplyRounding;
 					NumRound.Text = Sensor.Round?.ToString() ?? LastActiveSensor.DefaultTimeWindow.ToString(); ;
 					break;
-			}
+
+                case SensorType.ScreenshotSensor:
+                    TbSetting1.Text = Sensor.Query;
+                    break;
+            }
 		}
 
 		/// <summary>
@@ -326,6 +330,10 @@ namespace HASS.Agent.Forms.Sensors
 				case SensorType.LastActiveSensor:
 					SetLastActiveGui();
 					break;
+
+                case SensorType.ScreenshotSensor:
+                    SetScreenshotGui();
+                    break;
 
 				default:
 					SetEmptyGui();
@@ -528,10 +536,24 @@ namespace HASS.Agent.Forms.Sensors
 			}));
 		}
 
-		/// <summary>
-		/// Change the UI to a general type
-		/// </summary>
-		private void SetEmptyGui()
+        private void SetScreenshotGui()
+        {
+            Invoke(new MethodInvoker(delegate
+            {
+                SetEmptyGui();
+
+                LblSetting1.Text = Languages.SensorsMod_LblSetting1_ScreenNumber;
+                LblSetting1.Visible = true;
+                TbSetting1.Visible = true;
+
+                BtnTest.Visible = false;
+            }));
+        }
+
+        /// <summary>
+        /// Change the UI to a general type
+        /// </summary>
+        private void SetEmptyGui()
 		{
 			Invoke(new MethodInvoker(delegate
 			{
@@ -798,6 +820,17 @@ namespace HASS.Agent.Forms.Sensors
                         ActiveControl = TbSetting1;
                         return;
                     }
+                    break;
+
+                case SensorType.ScreenshotSensor:
+                    var screenIndex = TbSetting1.Text.Trim();
+                    if (string.IsNullOrEmpty(screenIndex))
+                    {
+                        MessageBoxAdv.Show(this, Languages.SensorsMod_BtnStore_MessageBox10, Variables.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        ActiveControl = TbSetting1;
+                        return;
+                    }
+                    Sensor.Query = screenIndex;
                     break;
             }
 
