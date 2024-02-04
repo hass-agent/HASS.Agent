@@ -6096,7 +6096,8 @@ namespace HASS.Agent.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Provides a screenshot sensor in form of a camera entity..
+        ///   Looks up a localized string similar to Provides a screenshot sensor in form of a camera entity.
+        ///Screen number depends on system configuration - starts at 0..
         /// </summary>
         internal static string SensorsManager_ScreenshotSensorDescription {
             get {

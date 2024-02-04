@@ -2841,4 +2841,7 @@ Lütfen aracınız için credentialları sağlayın, HA Mosquitto eklentisini ku
   <data name="CommandType_SetAudioOutputCommand" xml:space="preserve">
     <value>Ses Çıkışı Komutunu Ayarla</value>
   </data>
+  <data name="SensorType_ScreenshotSensor" xml:space="preserve">
+    <value>Ekran görüntüsü</value>
+  </data>
 </root>

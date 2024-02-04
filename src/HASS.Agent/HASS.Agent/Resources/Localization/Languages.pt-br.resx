@@ -3399,4 +3399,11 @@ Requer o nome do dispositivo de áudio como carga útil.</value>
   <data name="CommandsMod_LblSetting_VolumeRange" xml:space="preserve">
     <value>Volume (entre 0 e 100)</value>
   </data>
+  <data name="SensorsManager_ScreenshotSensorDescription" xml:space="preserve">
+    <value>Você fornece um sensor de captura de tela na forma de uma entidade de câmera.
+O número da tela depende da configuração do sistema – começa em 0.</value>
+  </data>
+  <data name="SensorsMod_LblSetting1_ScreenNumber" xml:space="preserve">
+    <value>Número da tela</value>
+  </data>
 </root>

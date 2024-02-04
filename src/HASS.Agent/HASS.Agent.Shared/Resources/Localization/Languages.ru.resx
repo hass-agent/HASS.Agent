@@ -3302,4 +3302,7 @@ Home Assistant.
   <data name="CommandType_SetAudioOutputCommand" xml:space="preserve">
     <value>Установить команду вывода звука</value>
   </data>
+  <data name="SensorType_ScreenshotSensor" xml:space="preserve">
+    <value>Скриншот</value>
+  </data>
 </root>

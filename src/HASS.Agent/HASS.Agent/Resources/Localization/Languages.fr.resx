@@ -3386,4 +3386,11 @@ Nécessite le nom du périphérique audio comme charge utile.</value>
   <data name="CommandsMod_LblSetting_AudioDeviceName" xml:space="preserve">
     <value>Nom du périphérique audio</value>
   </data>
+  <data name="SensorsManager_ScreenshotSensorDescription" xml:space="preserve">
+    <value>Vous fournissez un capteur de capture d’écran sous la forme d’une entité caméra.
+Le numéro d'écran dépend de la configuration du système - commence à 0.</value>
+  </data>
+  <data name="SensorsMod_LblSetting1_ScreenNumber" xml:space="preserve">
+    <value>Numéro d'écran</value>
+  </data>
 </root>

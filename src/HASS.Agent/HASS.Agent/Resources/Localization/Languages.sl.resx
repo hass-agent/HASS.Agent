@@ -3502,4 +3502,11 @@ Zahteva ime zvočne naprave kot tovor.</value>
   <data name="CommandsMod_LblSetting_VolumeRange" xml:space="preserve">
     <value>Glasnost (med 0 in 100)</value>
   </data>
+  <data name="SensorsManager_ScreenshotSensorDescription" xml:space="preserve">
+    <value>Zagotovite senzor posnetka zaslona v obliki entitete kamere.
+Številka zaslona je odvisna od konfiguracije sistema - začne se pri 0.</value>
+  </data>
+  <data name="SensorsMod_LblSetting1_ScreenNumber" xml:space="preserve">
+    <value>Številka zaslona</value>
+  </data>
 </root>
