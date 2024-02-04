@@ -29,10 +29,12 @@ public class ScreenshotSensor : AbstractSingleValueSensor
 
     public override DiscoveryConfigModel GetAutoDiscoveryConfig()
     {
-        if (Variables.MqttManager == null) return null;
+        if (Variables.MqttManager == null)
+            return null;
 
         var deviceConfig = Variables.MqttManager.GetDeviceConfigModel();
-        if (deviceConfig == null) return null;
+        if (deviceConfig == null)
+            return null;
 
         return AutoDiscoveryConfigModel ?? SetAutoDiscoveryConfigModel(new CameraSensorDiscoveryConfigModel()
         {
@@ -41,6 +43,7 @@ public class ScreenshotSensor : AbstractSingleValueSensor
             Unique_id = Id,
             Device = deviceConfig,
             Image_encoding = "b64",
+            Icon = "mdi:camera",
             State_topic = $"{Variables.MqttManager.MqttDiscoveryPrefix()}/{Domain}/{deviceConfig.Name}/{ObjectId}/state",
             Topic = $"{Variables.MqttManager.MqttDiscoveryPrefix()}/{Domain}/{deviceConfig.Name}/{ObjectId}/state",
             Availability_topic = $"{Variables.MqttManager.MqttDiscoveryPrefix()}/sensor/{deviceConfig.Name}/availability"
@@ -52,7 +55,7 @@ public class ScreenshotSensor : AbstractSingleValueSensor
         var screenCount = Screen.AllScreens.Length;
         if (ScreenIndex >= screenCount || ScreenIndex < 0)
         {
-            Log.Warning("[SCREENSHOT] Error capturing screen {index} - returning image for screen 0", ScreenIndex);
+            Log.Warning("[SCREENSHOT] Wrong index '{index}' - returning image for screen 0", ScreenIndex);
             ScreenIndex = 0;
         }
 
@@ -68,7 +71,7 @@ public class ScreenshotSensor : AbstractSingleValueSensor
         }
         catch (Exception ex)
         {
-            Log.Warning(ex, "[SCREENSHOT] Internal Error capturing screen {index}, {ex}", ex.Message);
+            Log.Error(ex, "[SCREENSHOT] Internal Error capturing screen {index}, {ex}", ex.Message);
             return Array.Empty<byte>();
         }
     }
