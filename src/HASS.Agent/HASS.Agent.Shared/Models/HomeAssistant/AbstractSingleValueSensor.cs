@@ -53,12 +53,14 @@ public abstract class AbstractSingleValueSensor : AbstractDiscoverable
     {
         try
         {
-            if (Variables.MqttManager == null) return;
+            if (Variables.MqttManager == null)
+                return;
 
             // are we asked to check elapsed time?
             if (respectChecks)
             {
-                if (LastUpdated.HasValue && LastUpdated.Value.AddSeconds(UpdateIntervalSeconds) > DateTime.Now) return;
+                if (LastUpdated.HasValue && LastUpdated.Value.AddSeconds(UpdateIntervalSeconds) > DateTime.Now)
+                    return;
             }
 
             // get the current state/attributes
@@ -71,7 +73,8 @@ public abstract class AbstractSingleValueSensor : AbstractDiscoverable
             // are we asked to check state changes?
             if (respectChecks)
             {
-                if (PreviousPublishedState == state && PreviousPublishedAttributes == attributes) {
+                if (PreviousPublishedState == state && PreviousPublishedAttributes == attributes)
+                {
                     LastUpdated = DateTime.Now;
                     return;
                 }
@@ -79,7 +82,8 @@ public abstract class AbstractSingleValueSensor : AbstractDiscoverable
 
             // fetch the autodiscovery config
             var autoDiscoConfig = (SensorDiscoveryConfigModel)GetAutoDiscoveryConfig();
-            if (autoDiscoConfig == null) return;
+            if (autoDiscoConfig == null)
+                return;
 
             // prepare the state message
             var message = new MqttApplicationMessageBuilder()
@@ -91,7 +95,7 @@ public abstract class AbstractSingleValueSensor : AbstractDiscoverable
             // send it
             var published = await Variables.MqttManager.PublishAsync(message);
             if (!published)
-                return; // failed, don't store the state
+                return;
 
             // optionally prepare and send attributes
             if (UseAttributes && attributes != null)
@@ -104,7 +108,7 @@ public abstract class AbstractSingleValueSensor : AbstractDiscoverable
 
                 published = await Variables.MqttManager.PublishAsync(message);
                 if (!published)
-                    return; // failed, don't store the state
+                    return;
             }
 
             // only store the values if the checks are respected
@@ -126,13 +130,17 @@ public abstract class AbstractSingleValueSensor : AbstractDiscoverable
 
     public async Task PublishAutoDiscoveryConfigAsync()
     {
-        if (Variables.MqttManager == null) return;
+        if (Variables.MqttManager == null)
+            return;
+
         await Variables.MqttManager.AnnounceAutoDiscoveryConfigAsync(this, Domain);
     }
 
     public async Task UnPublishAutoDiscoveryConfigAsync()
     {
-        if (Variables.MqttManager == null) return;
+        if (Variables.MqttManager == null)
+            return;
+
         await Variables.MqttManager.AnnounceAutoDiscoveryConfigAsync(this, Domain, true);
     }
 }
