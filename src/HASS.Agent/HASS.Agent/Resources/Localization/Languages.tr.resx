@@ -2965,6 +2965,13 @@ Yük olarak ses cihazı adını gerektirir.</value>
   <data name="CommandsMod_LblSetting_VolumeRange" xml:space="preserve">
     <value>Hacim (0 ile 100 arasında)</value>
   </data>
+  <data name="SensorsManager_ScreenshotSensorDescription" xml:space="preserve">
+    <value>Bir kamera varlığı biçiminde bir ekran görüntüsü sensörü sağlarsınız.
+Ekran numarası sistem konfigürasyonuna bağlıdır - 0'dan başlar.</value>
+  </data>
+  <data name="SensorsMod_LblSetting1_ScreenNumber" xml:space="preserve">
+    <value>Ekran numarası</value>
+  </data>
   <data name="CommandsManager_SetAudioInputCommandDescription" xml:space="preserve">
     <value>Sistem için varsayılan ses girişini ayarlar (varsayılan iletişim cihazı dahil).
 Yük olarak ses cihazı adına ihtiyacınız vardır.</value>

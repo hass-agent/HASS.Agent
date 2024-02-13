@@ -10,9 +10,9 @@
     <Description>Shared functions and models for the HASS.Agent platform.</Description>
     <PackageProjectUrl>https://github.com/hass-agent/HASS.Agent</PackageProjectUrl>
     <RepositoryUrl>https://github.com/hass-agent/HASS.Agent</RepositoryUrl>
-    <AssemblyVersion>2.0.2</AssemblyVersion>
-    <FileVersion>2.0.2</FileVersion>
-    <Version>2.0.2-beta3</Version>
+    <AssemblyVersion>2.1.0</AssemblyVersion>
+    <FileVersion>2.1.0</FileVersion>
+    <Version>2.1.0-beta1</Version>
     <PackageIcon>logo_128.png</PackageIcon>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <ApplicationIcon>hassagent.ico</ApplicationIcon>
@@ -42,6 +42,7 @@
     <PackageReference Include="Serilog" Version="3.1.1" />
     <PackageReference Include="System.Diagnostics.PerformanceCounter" Version="8.0.0" />
     <PackageReference Include="System.DirectoryServices.AccountManagement" Version="8.0.0" />
+    <PackageReference Include="System.Drawing.Common" Version="8.0.1" />
     <PackageReference Include="System.Management" Version="8.0.0" />
     <PackageReference Include="System.ServiceProcess.ServiceController" Version="8.0.0" />
     <PackageReference Include="System.Text.Encoding.CodePages" Version="8.0.0" />

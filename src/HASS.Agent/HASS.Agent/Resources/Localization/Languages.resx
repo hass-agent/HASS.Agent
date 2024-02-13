@@ -3366,6 +3366,13 @@ Requires audio device name as a payload.</value>
   <data name="CommandsMod_LblSetting_VolumeRange" xml:space="preserve">
     <value>Volume (between 0 and 100)</value>
   </data>
+  <data name="SensorsMod_LblSetting1_ScreenNumber" xml:space="preserve">
+    <value>Screen number</value>
+  </data>
+  <data name="SensorsManager_ScreenshotSensorDescription" xml:space="preserve">
+    <value>Provides a screenshot sensor in form of a camera entity.
+Screen number depends on system configuration - starts at 0.</value>
+  </data>
   <data name="CommandsManager_SetAudioInputCommandDescription" xml:space="preserve">
     <value>Sets the default audio input for the system (including default communication device).
 Requires audio device name as a payload.</value>

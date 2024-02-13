@@ -3234,6 +3234,9 @@ Oculta, Maximizada, Minimizada, Normal y Desconocida.</value>
   <data name="CommandType_SetAudioOutputCommand" xml:space="preserve">
     <value>Establecer comando de salida de audio</value>
   </data>
+  <data name="SensorType_ScreenshotSensor" xml:space="preserve">
+    <value>Captura de pantalla</value>
+  </data>
   <data name="CommandType_SetAudioInputCommand" xml:space="preserve">
     <value>Establecer comando de entrada de audio</value>
   </data>

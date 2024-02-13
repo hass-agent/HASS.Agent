@@ -3422,6 +3422,13 @@ Home Assistant.
   <data name="CommandsMod_LblSetting_AudioDeviceName" xml:space="preserve">
     <value>Имя аудиоустройства</value>
   </data>
+  <data name="SensorsManager_ScreenshotSensorDescription" xml:space="preserve">
+    <value>Вы предоставляете датчик скриншота в виде объекта камеры.
+Номер экрана зависит от конфигурации системы — начинается с 0.</value>
+  </data>
+  <data name="SensorsMod_LblSetting1_ScreenNumber" xml:space="preserve">
+    <value>Номер экрана</value>
+  </data>
   <data name="CommandsManager_SetAudioInputCommandDescription" xml:space="preserve">
     <value>Устанавливает аудиовход по умолчанию для системы (включая устройство связи по умолчанию).
 В качестве полезной нагрузки требуется имя аудиоустройства.</value>

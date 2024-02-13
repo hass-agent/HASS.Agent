@@ -6745,6 +6745,15 @@ namespace HASS.Agent.Shared.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Screenshot.
+        /// </summary>
+        internal static string SensorType_ScreenshotSensor {
+            get {
+                return ResourceManager.GetString("SensorType_ScreenshotSensor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ServiceState.
         /// </summary>
         internal static string SensorType_ServiceStateSensor {

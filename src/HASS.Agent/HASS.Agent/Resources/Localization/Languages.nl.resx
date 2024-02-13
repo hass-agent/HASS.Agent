@@ -3374,6 +3374,13 @@ Vereist de naam van het audioapparaat als payload.</value>
   <data name="CommandsMod_LblSetting_VolumeRange" xml:space="preserve">
     <value>Volume (tussen 0 en 100)</value>
   </data>
+  <data name="SensorsManager_ScreenshotSensorDescription" xml:space="preserve">
+    <value>U levert een screenshot-sensor in de vorm van een camera-entiteit.
+Schermnummer is afhankelijk van de systeemconfiguratie - begint bij 0.</value>
+  </data>
+  <data name="SensorsMod_LblSetting1_ScreenNumber" xml:space="preserve">
+    <value>Schermnummer</value>
+  </data>
   <data name="CommandsManager_SetAudioInputCommandDescription" xml:space="preserve">
     <value>Stelt de standaardaudio-invoer in voor het systeem (inclusief het standaardcommunicatieapparaat).
 U hebt de naam van het audioapparaat nodig als payload.</value>
