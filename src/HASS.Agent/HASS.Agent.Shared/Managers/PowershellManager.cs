@@ -38,19 +38,9 @@ namespace HASS.Agent.Shared.Managers
         {
             if (isScript)
             {
-                var splitParameters = _parameterRegex.Matches(parameters);
-
-                var processedParameters = "";
-                foreach (Match param in splitParameters.Cast<Match>())
-                {
-                    processedParameters += " ";
-                    var safeParam = (param.Value.StartsWith("\"") && param.Value.EndsWith("\"")) ? param.Value.Replace("\"", "") : param.Value;
-                    processedParameters += safeParam;
-                }
-
                 return string.IsNullOrWhiteSpace(parameters)
                     ? $"-File \"{command}\""
-                    : $"-File \"{command}\"{splitParameters}";
+                    : $"-File \"{command}\" {parameters}";
             }
             else
             {
