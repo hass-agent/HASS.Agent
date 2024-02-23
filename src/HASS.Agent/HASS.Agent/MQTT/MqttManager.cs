@@ -14,6 +14,7 @@ using HASS.Agent.Models.HomeAssistant;
 using HASS.Agent.Resources.Localization;
 using HASS.Agent.Settings;
 using HASS.Agent.Shared.Enums;
+using HASS.Agent.Shared.Managers;
 using HASS.Agent.Shared.Models.HomeAssistant;
 using HASS.Agent.Shared.Mqtt;
 using MQTTnet;
@@ -130,9 +131,18 @@ namespace HASS.Agent.MQTT
 
             Variables.MainForm?.SetMqttStatus(ComponentStatus.Connecting);
 
+            var gracePeriod = Variables.AppSettings.DisconnectedGracePeriodSeconds;
+
+            if (SharedSystemStateManager.LastEventOccurrence.TryGetValue(SystemStateEvent.Resume, out var lastResumeEventDate)
+                && lastResumeEventDate.AddSeconds(gracePeriod) < DateTime.Now)
+            {
+                Log.Information("[MQTT] System resumed less than {gracePeriod} seconds ago, ignoring disconnected grace period");
+                gracePeriod = 0;
+            }
+
             // give the connection the grace period to recover
             var runningTimer = Stopwatch.StartNew();
-            while (runningTimer.Elapsed.TotalSeconds < Variables.AppSettings.DisconnectedGracePeriodSeconds)
+            while (runningTimer.Elapsed.TotalSeconds < gracePeriod)
             {
                 if (IsConnected())
                 {
