@@ -43,7 +43,7 @@ namespace HASS.Agent.Shared.HomeAssistant.Sensors.GeneralSensors.SingleValue
         [DllImport("user32.dll")]
         private static extern IntPtr GetForegroundWindow();
 
-        [DllImport("user32.dll")]
+        [DllImport("user32.dll", CharSet = CharSet.Auto)]
         private static extern int GetWindowText(IntPtr hWnd, StringBuilder text, int count);
 
         private static string GetActiveWindowTitle()
@@ -52,7 +52,9 @@ namespace HASS.Agent.Shared.HomeAssistant.Sensors.GeneralSensors.SingleValue
             var buff = new StringBuilder(nChars);
             var handle = GetForegroundWindow();
 
-            return GetWindowText(handle, buff, nChars) > 0 ? buff.ToString() : string.Empty;
+            var windowTitle = GetWindowText(handle, buff, nChars) > 0 ? buff.ToString() : string.Empty;
+
+            return windowTitle;
         }
     }
 }
