@@ -53,7 +53,6 @@ namespace HASS.Agent.Shared.HomeAssistant.Sensors.GeneralSensors.SingleValue
 
         private static string GetActiveWindowTitle()
         {
-            //const int nChars = 255;
             var windowHandle = GetForegroundWindow();
             var titleLength = GetWindowTextLength(windowHandle) + 1;
             var builder = new StringBuilder(titleLength);
