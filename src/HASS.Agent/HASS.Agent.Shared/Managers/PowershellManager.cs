@@ -41,7 +41,9 @@ public static class PowershellManager
         }
         else
         {
-            return $@"& {{{command}}}"; //NOTE: place to fix any potential future issues with "command part of the command"
+            //return $@"& {{{command}}}"; //NOTE: place to fix any potential future issues with "command part of the command"
+            var encodedCommand = Convert.ToBase64String(Encoding.Unicode.GetBytes(command));
+            return $"-EncodedCommand {encodedCommand}";
         }
     }
 
