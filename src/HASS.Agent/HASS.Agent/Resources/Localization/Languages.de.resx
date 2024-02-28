@@ -3488,4 +3488,7 @@ Die Bildschirmnummer hängt von der Systemkonfiguration ab – beginnt bei 0.</v
     <value>Legt den Standard-Audioeingang für das System fest (einschließlich des Standard-Kommunikationsgeräts).
 Als Payload benötigen Sie den Namen des Audiogeräts.</value>
   </data>
+  <data name="ConfigMqtt_CbIgnoreGracePeriod" xml:space="preserve">
+    <value>Ignorieren Sie die Schonfrist nach dem Aufwachen aus dem Ruhezustand</value>
+  </data>
 </root>

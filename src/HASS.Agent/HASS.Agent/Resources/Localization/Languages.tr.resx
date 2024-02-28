@@ -2976,4 +2976,7 @@ Ekran numarası sistem konfigürasyonuna bağlıdır - 0'dan başlar.</value>
     <value>Sistem için varsayılan ses girişini ayarlar (varsayılan iletişim cihazı dahil).
 Yük olarak ses cihazı adına ihtiyacınız vardır.</value>
   </data>
+  <data name="ConfigMqtt_CbIgnoreGracePeriod" xml:space="preserve">
+    <value>Hazırda bekletme modundan uyandıktan sonra ek süreyi göz ardı et</value>
+  </data>
 </root>

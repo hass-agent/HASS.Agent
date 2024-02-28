@@ -3364,4 +3364,7 @@ El número de pantalla depende de la configuración del sistema: comienza en 0.<
     <value>Establece la entrada de audio predeterminada para el sistema (incluido el dispositivo de comunicación predeterminado).
 Necesita el nombre del dispositivo de audio como carga útil.</value>
   </data>
+  <data name="ConfigMqtt_CbIgnoreGracePeriod" xml:space="preserve">
+    <value>Ignorar el período de gracia después de despertar de la hibernación</value>
+  </data>
 </root>

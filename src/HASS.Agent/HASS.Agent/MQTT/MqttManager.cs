@@ -153,11 +153,14 @@ namespace HASS.Agent.MQTT
                     return;
                 }
 
-                var lastResumed = SystemStateManager.LastEventOccurrence.TryGetValue(SystemStateEvent.Resume, out var lastResumeEventDate);
-                if (lastResumed && DateTime.Now < lastResumeEventDate.AddSeconds(gracePeriod))
+                if (Variables.AppSettings.MqttIgnoreGracePeriod)
                 {
-                    Log.Information("[MQTT] System resumed less than {gracePeriod} seconds ago, ignoring grace period on disconnection");
-                    break;
+                    var lastResumed = SystemStateManager.LastEventOccurrence.TryGetValue(SystemStateEvent.Resume, out var lastResumeEventDate);
+                    if (lastResumed && DateTime.Now < lastResumeEventDate.AddSeconds(gracePeriod))
+                    {
+                        Log.Information("[MQTT] System resumed less than {gracePeriod} seconds ago, ignoring grace period on disconnection");
+                        break;
+                    }
                 }
             }
 
@@ -203,11 +206,14 @@ namespace HASS.Agent.MQTT
                     return;
                 }
 
-                var lastResumed = SystemStateManager.LastEventOccurrence.TryGetValue(SystemStateEvent.Resume, out var lastResumeEventDate);
-                if (lastResumed && DateTime.Now < lastResumeEventDate.AddSeconds(gracePeriod))
+                if (Variables.AppSettings.MqttIgnoreGracePeriod)
                 {
-                    Log.Information("[MQTT] System resumed more than {gracePeriod} seconds ago, ignoring grace period on connection failed");
-                    break;
+                    var lastResumed = SystemStateManager.LastEventOccurrence.TryGetValue(SystemStateEvent.Resume, out var lastResumeEventDate);
+                    if (lastResumed && DateTime.Now < lastResumeEventDate.AddSeconds(gracePeriod))
+                    {
+                        Log.Information("[MQTT] System resumed more than {gracePeriod} seconds ago, ignoring grace period on connection failed");
+                        break;
+                    }
                 }
             }
 

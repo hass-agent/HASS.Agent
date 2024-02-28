@@ -2363,6 +2363,15 @@ namespace HASS.Agent.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ignore grace period after waking up from hibernation.
+        /// </summary>
+        internal static string ConfigMqtt_CbIgnoreGracePeriod {
+            get {
+                return ResourceManager.GetString("ConfigMqtt_CbIgnoreGracePeriod", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &amp;TLS.
         /// </summary>
         internal static string ConfigMqtt_CbMqttTls {
