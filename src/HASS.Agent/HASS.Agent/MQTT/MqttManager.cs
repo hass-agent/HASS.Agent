@@ -299,15 +299,6 @@ namespace HASS.Agent.MQTT
             {
                 await _mqttClient.StartAsync(options);
                 InitialRegistration();
-
-                Task.Run(() =>
-                {
-                    while (true)
-                    {
-                        Debug.WriteLine($"connected: {_mqttClient.IsConnected}");
-                        Task.Delay(500);
-                    }
-                }).Start();
             }
             catch (MqttConnectingFailedException ex)
             {
