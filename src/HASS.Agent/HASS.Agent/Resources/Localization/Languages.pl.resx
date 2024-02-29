@@ -3474,4 +3474,7 @@ Numer ekranu zależy od konfiguracji systemu – zaczyna się od 0.</value>
     <value>Ustawia domyślne wejście audio dla systemu (w tym domyślne urządzenie komunikacyjne).
 Wymaga nazwy urządzenia audio jako ładunku.</value>
   </data>
+  <data name="ConfigTrayIcon_CbUseModernIcon" xml:space="preserve">
+    <value>Użyj nowoczesnej ikony w zasobniku</value>
+  </data>
 </root>

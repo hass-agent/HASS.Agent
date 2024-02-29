@@ -3397,4 +3397,7 @@ Le numéro d'écran dépend de la configuration du système - commence à 0.</va
     <value>Définit l'entrée audio par défaut du système (y compris le périphérique de communication par défaut).
 Vous avez besoin du nom du périphérique audio comme charge utile.</value>
   </data>
+  <data name="ConfigTrayIcon_CbUseModernIcon" xml:space="preserve">
+    <value>Utiliser l'icône de la barre d'état moderne</value>
+  </data>
 </root>

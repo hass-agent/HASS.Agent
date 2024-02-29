@@ -3433,4 +3433,7 @@ Home Assistant.
     <value>Устанавливает аудиовход по умолчанию для системы (включая устройство связи по умолчанию).
 В качестве полезной нагрузки требуется имя аудиоустройства.</value>
   </data>
+  <data name="ConfigTrayIcon_CbUseModernIcon" xml:space="preserve">
+    <value>Использовать современный значок в трее</value>
+  </data>
 </root>

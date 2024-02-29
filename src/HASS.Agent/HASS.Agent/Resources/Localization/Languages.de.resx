@@ -3488,4 +3488,7 @@ Die Bildschirmnummer hängt von der Systemkonfiguration ab – beginnt bei 0.</v
     <value>Legt den Standard-Audioeingang für das System fest (einschließlich des Standard-Kommunikationsgeräts).
 Als Payload benötigen Sie den Namen des Audiogeräts.</value>
   </data>
+  <data name="ConfigTrayIcon_CbUseModernIcon" xml:space="preserve">
+    <value>Verwenden Sie ein modernes Taskleistensymbol</value>
+  </data>
 </root>
