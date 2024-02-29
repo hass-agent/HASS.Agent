@@ -37,6 +37,7 @@ namespace HASS.Agent.Models.Config
         public string TrayIconWebViewUrl { get; set; } = string.Empty;
         public bool TrayIconWebViewBackgroundLoading { get; set; } = false;
         public bool TrayIconWebViewShowMenuOnLeftClick { get; set; } = false;
+        public bool TrayIconUseModern { get; set; } = false;
 
         public string ServiceAuthId { get; set; } = string.Empty;
 
