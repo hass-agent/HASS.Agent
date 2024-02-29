@@ -20,6 +20,8 @@ namespace HASS.Agent.Sensors
         private static bool _active = true;
         private static bool _pause;
 
+        private static bool _discoveryPublished = false;
+
         private static DateTime _lastAutoDiscoPublish = DateTime.MinValue;
 
         /// <summary>
@@ -96,13 +98,8 @@ namespace HASS.Agent.Sensors
                     // optionally flag as the first real run
                     if (!firstRunDone) firstRunDone = true;
 
-                    // publish availability & sensor autodisco's every 30 sec
-                    if ((DateTime.Now - _lastAutoDiscoPublish).TotalSeconds > 30)
+                    if (!_discoveryPublished)
                     {
-                        // let hass know we're still here
-                        await Variables.MqttManager.AnnounceAvailabilityAsync();
-
-                        // publish the autodisco's
                         if (SingleValueSensorsPresent())
                         {
                             foreach (var sensor in Variables.SingleValueSensors.TakeWhile(_ => !_pause).TakeWhile(_ => _active))
@@ -120,6 +117,15 @@ namespace HASS.Agent.Sensors
                                 await sensor.PublishAutoDiscoveryConfigAsync();
                             }
                         }
+
+                        _discoveryPublished = true;
+                    }
+
+                    // publish availability every 30 sec
+                    if ((DateTime.Now - _lastAutoDiscoPublish).TotalSeconds > 30)
+                    {
+                        // let hass know we're still here
+                        await Variables.MqttManager.AnnounceAvailabilityAsync();
 
                         // log moment
                         _lastAutoDiscoPublish = DateTime.Now;

@@ -17,6 +17,8 @@ namespace HASS.Agent.Commands
         private static bool _active = true;
         private static bool _pause;
 
+        private static bool _discoveryPublished = false;
+
         private static DateTime _lastAutoDiscoPublish = DateTime.MinValue;
 
         /// <summary>
@@ -66,6 +68,8 @@ namespace HASS.Agent.Commands
                 await command.UnPublishAutoDiscoveryConfigAsync();
                 await Variables.MqttManager.UnsubscribeAsync(command);
             }
+
+            _discoveryPublished = false;
         }
 
         /// <summary>
@@ -107,14 +111,19 @@ namespace HASS.Agent.Commands
                     {
                         await Variables.MqttManager.AnnounceAvailabilityAsync();
 
-                        foreach (var command in Variables.Commands
-                            .TakeWhile(_ => !_pause)
-                            .TakeWhile(_ => _active))
+                        if (!_discoveryPublished)
                         {
-                            if (_pause || Variables.MqttManager.GetStatus() != MqttStatus.Connected)
-                                continue;
+                            foreach (var command in Variables.Commands
+                                .TakeWhile(_ => !_pause)
+                                .TakeWhile(_ => _active))
+                            {
+                                if (_pause || Variables.MqttManager.GetStatus() != MqttStatus.Connected)
+                                    continue;
 
-                            await command.PublishAutoDiscoveryConfigAsync();
+                                await command.PublishAutoDiscoveryConfigAsync();
+                            }
+
+                            _discoveryPublished = true;
                         }
 
                         if (!subscribed)
