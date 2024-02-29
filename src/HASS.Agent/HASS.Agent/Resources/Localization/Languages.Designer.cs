@@ -3047,6 +3047,15 @@ namespace HASS.Agent.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Use modern tray icon.
+        /// </summary>
+        internal static string ConfigTrayIcon_CbUseModernIcon {
+            get {
+                return ResourceManager.GetString("ConfigTrayIcon_CbUseModernIcon", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &amp;Keep page loaded in the background.
         /// </summary>
         internal static string ConfigTrayIcon_CbWebViewKeepLoaded {
