@@ -107,6 +107,7 @@ namespace HASS.Agent.Commands
 
                     firstRun = false;
 
+                    // publish availability & autodiscovery every 30 sec
                     if ((DateTime.Now - _lastAutoDiscoPublish).TotalSeconds > 30)
                     {
                         await Variables.MqttManager.AnnounceAvailabilityAsync();
