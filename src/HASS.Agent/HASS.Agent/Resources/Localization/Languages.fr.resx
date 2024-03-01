@@ -3163,11 +3163,6 @@ Assurez-vous que les services de localisation de Windows sont activés !
 
 Selon votre version de Windows, cela peut être trouvé dans le nouveau panneau de configuration -&gt; 'confidentialité et sécurité' -&gt; 'emplacement'.</value>
   </data>
-  <data name="SensorsManager_MicrophoneProcessSensorDescription" xml:space="preserve">
-    <value>Provides the name of the process that's currently using the microphone.
-
-Note: if used in the satellite service, it won't detect userspace applications.</value>
-  </data>
   <data name="SensorsManager_MonitorPowerStateSensorDescription" xml:space="preserve">
     <value>Provides the last monitor power state change:
 
@@ -3402,5 +3397,10 @@ Vous avez besoin du nom du périphérique audio comme charge utile.</value>
   </data>
   <data name="ConfigTrayIcon_CbUseModernIcon" xml:space="preserve">
     <value>Utiliser l'icône de la barre d'état moderne</value>
+  </data>
+  <data name="SensorsManager_MicrophoneProcessSensorDescription" xml:space="preserve">
+    <value>Fournit le nombre de processus qui utilisent actuellement le microphone - fournit en outre le nom des processus dans les attributs du capteur.
+
+Remarque : s'il est utilisé dans le service satellite, il ne détectera pas les applications de l'espace utilisateur.</value>
   </data>
 </root>

@@ -2764,9 +2764,6 @@ Daha fazla tuşa ve/veya CTRL gibi değiştiricilere ihtiyacınız varsa, Multip
   <data name="SensorsManager_GeoLocationSensorDescription" xml:space="preserve">
     <value>Geçerli enlem, boylam ve yüksekliğinizi virgülle ayrılmış bir değer olarak döndürür. Windows'un konum hizmetlerinin etkinleştirildiğinden emin olun! Windows sürümünüze bağlı olarak bu, yeni kontrol panelinde -&gt; 'gizlilik ve güvenlik' -&gt; 'konum'da bulunabilir.</value>
   </data>
-  <data name="SensorsManager_MicrophoneProcessSensorDescription" xml:space="preserve">
-    <value>Şu anda mikrofonu kullanan işlemin adını sağlar. Not: uydu hizmetinde kullanılırsa, kullanıcı alanı uygulamalarını algılamaz.</value>
-  </data>
   <data name="SensorsManager_MonitorPowerStateSensorDescription" xml:space="preserve">
     <value>Son monitör güç durumu değişikliğini sağlar: Soluk, Güç Kapalı, Güç Açık ve Bilinmiyor.</value>
   </data>
@@ -2981,5 +2978,10 @@ Yük olarak ses cihazı adına ihtiyacınız vardır.</value>
   </data>
   <data name="ConfigTrayIcon_CbUseModernIcon" xml:space="preserve">
     <value>Modern tepsi simgesini kullan</value>
+  </data>
+  <data name="SensorsManager_MicrophoneProcessSensorDescription" xml:space="preserve">
+    <value>Halihazırda mikrofonu kullanan işlemlerin sayısını sağlar; ayrıca sensörün özniteliklerinde süreçlerin adını da sağlar.
+
+Not: Uydu hizmetinde kullanılırsa kullanıcı alanı uygulamalarını algılamaz.</value>
   </data>
 </root>

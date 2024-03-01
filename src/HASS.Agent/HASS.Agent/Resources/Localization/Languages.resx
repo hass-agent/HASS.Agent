@@ -2951,7 +2951,7 @@ Hidden, Maximized, Minimized, Normal and Unknown.</value>
 Note: if used in the satellite service, it won't detect userspace applications.</value>
   </data>
   <data name="SensorsManager_MicrophoneProcessSensorDescription" xml:space="preserve">
-    <value>Provides the name of the process that's currently using the microphone.
+    <value>Provides the number of the processes that currently use the microphone - additionally provides name of the processes in the sensor's attributes.
 
 Note: if used in the satellite service, it won't detect userspace applications.</value>
   </data>

@@ -3131,11 +3131,6 @@ Make sure Windows' location services are enabled!
 
 Depending on your Windows version, this can be found in the new control panel -&gt; 'privacy and security' -&gt; 'location'.</value>
   </data>
-  <data name="SensorsManager_MicrophoneProcessSensorDescription" xml:space="preserve">
-	  <value>Provides the name of the process that's currently using the microphone.
-
-Note: if used in the satellite service, it won't detect userspace applications.</value>
-  </data>
   <data name="SensorsManager_MonitorPowerStateSensorDescription" xml:space="preserve">
 	  <value>Provides the last monitor power state change:
 
@@ -3370,5 +3365,10 @@ Requires audio device name as a payload.</value>
   </data>
   <data name="ConfigTrayIcon_CbUseModernIcon" xml:space="preserve">
     <value>Use modern tray icon</value>
+  </data>
+  <data name="SensorsManager_MicrophoneProcessSensorDescription" xml:space="preserve">
+    <value>Provides the number of the processes that currently use the microphone - additionally provides name of the processes in the sensor's attributes.
+
+Note: if used in the satellite service, it won't detect userspace applications.</value>
   </data>
 </root>

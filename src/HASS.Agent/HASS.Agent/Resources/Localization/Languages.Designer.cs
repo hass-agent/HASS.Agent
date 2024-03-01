@@ -6034,7 +6034,7 @@ namespace HASS.Agent.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Provides the name of the process that&apos;s currently using the microphone.
+        ///   Looks up a localized string similar to Provides the number of the processes that currently use the microphone - additionally provides name of the processes in the sensor&apos;s attributes.
         ///
         ///Note: if used in the satellite service, it won&apos;t detect userspace applications..
         /// </summary>

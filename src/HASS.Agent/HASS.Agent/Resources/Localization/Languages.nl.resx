@@ -3152,11 +3152,6 @@ Verzeker dat Windows' localisatieservices ingeschakeld zijn!
 
 Afhankelijk van je Windows versie, kan dit gevonden worden in het nieuwe configuratiescherm -&gt; 'privacy en beveiliging' -&gt; 'locatie'.</value>
   </data>
-  <data name="SensorsManager_MicrophoneProcessSensorDescription" xml:space="preserve">
-    <value>Geeft de naam van het proces dat momenteel de microfoon gebruikt.
-
-Notitie: als hij in de satellietservice gebruikt wordt, zal hij geen gebruikerapplicaties detecteren.</value>
-  </data>
   <data name="SensorsManager_MonitorPowerStateSensorDescription" xml:space="preserve">
     <value>Geeft de laatste beeldscherm energiemodus status verandering:
 
@@ -3390,5 +3385,10 @@ U hebt de naam van het audioapparaat nodig als payload.</value>
   </data>
   <data name="ConfigTrayIcon_CbUseModernIcon" xml:space="preserve">
     <value>Gebruik het moderne ladepictogram</value>
+  </data>
+  <data name="SensorsManager_MicrophoneProcessSensorDescription" xml:space="preserve">
+    <value>Geeft het aantal processen weer die momenteel de microfoon gebruiken - geeft bovendien de naam van de processen in de attributen van de sensor.
+
+Opmerking: indien gebruikt in de satellietdienst, zal het geen gebruikersruimtetoepassingen detecteren.</value>
   </data>
 </root>

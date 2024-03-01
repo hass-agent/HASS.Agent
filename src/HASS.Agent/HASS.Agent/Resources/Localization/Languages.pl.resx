@@ -3240,11 +3240,6 @@ Upewnij się że lokalizacja jest włączona w systemie Windows!
 
 W zalezności od Twojej wersji Windows'a opcje te możesz znaleźć w Ustawienia -&gt; Prywatność i Zabezpieczenia -&gt; Lokalizacja</value>
   </data>
-  <data name="SensorsManager_MicrophoneProcessSensorDescription" xml:space="preserve">
-    <value>Zwraca nazwę procesu który obecnie używa mikrofonu. 
-
-Wskazówka: jeżeli korzystasz z usługi Satellite, nie będziesz miał informacji o aplikacji w przestrzeni użytkownika.</value>
-  </data>
   <data name="SensorsManager_MonitorPowerStateSensorDescription" xml:space="preserve">
     <value>Zwraca ostatnią zmianę stanu ekranu: 
 
@@ -3479,5 +3474,10 @@ Wymaga nazwy urządzenia audio jako ładunku.</value>
   </data>
   <data name="ConfigTrayIcon_CbUseModernIcon" xml:space="preserve">
     <value>Użyj nowoczesnej ikony w zasobniku</value>
+  </data>
+  <data name="SensorsManager_MicrophoneProcessSensorDescription" xml:space="preserve">
+    <value>Podaje liczbę procesów aktualnie korzystających z mikrofonu - dodatkowo podaje nazwę procesów w atrybutach czujnika.
+
+Uwaga: jeśli jest używany w usłudze satelitarnej, nie wykryje aplikacji przestrzeni użytkownika.</value>
   </data>
 </root>

@@ -2328,11 +2328,6 @@ HassAgentStarted, Odjava, SystemShutdown, Resume, Suspend, ConsoleConnect, Conso
     <value>Zagotavlja bool vrednost glede na to, ali se mikrofon trenutno uporablja.</value>
     <comment>Fuzzy</comment>
   </data>
-  <data name="SensorsManager_MicrophoneProcessSensorDescription" xml:space="preserve">
-    <value>Vrne ime procesa, ki trenutno uporablja mikrofon.
-
-Opomba: če se uporablja v satelitski storitvi</value>
-  </data>
   <data name="SensorsManager_MonitorPowerStateSensorDescription" xml:space="preserve">
     <value>Vrne zadnjo spremembo načina monitorja:
 
@@ -3518,5 +3513,10 @@ Ime zvočne naprave potrebujete kot obremenitev.</value>
   </data>
   <data name="ConfigTrayIcon_CbUseModernIcon" xml:space="preserve">
     <value>Uporabi sodobno ikono pladnja</value>
+  </data>
+  <data name="SensorsManager_MicrophoneProcessSensorDescription" xml:space="preserve">
+    <value>Zagotavlja število procesov, ki trenutno uporabljajo mikrofon - dodatno podaja ime procesov v atributih senzorja.
+
+Opomba: če se uporablja v satelitski storitvi, ne bo zaznal aplikacij uporabniškega prostora.</value>
   </data>
 </root>

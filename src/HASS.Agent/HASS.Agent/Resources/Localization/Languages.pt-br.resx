@@ -2250,11 +2250,6 @@ HassAgentStarted, Logoff, SystemShutdown, Resume, Suspend, ConsoleConnect, Conso
     <value>Fornece um valor bool com base em se o microfone está sendo usado no momento.</value>
     <comment>Fuzzy</comment>
   </data>
-  <data name="SensorsManager_MicrophoneProcessSensorDescription" xml:space="preserve">
-    <value>Fornece o nome do processo que está usando o microfone no momento.
-
-Observação: se usado no serviço satélite, ele não detectará aplicativos de espaço de usuário.</value>
-  </data>
   <data name="SensorsManager_MonitorPowerStateSensorDescription" xml:space="preserve">
     <value>Fornece a última alteração do estado de energia do monitor:
 
@@ -3415,5 +3410,10 @@ Você precisa do nome do dispositivo de áudio como carga útil.</value>
   </data>
   <data name="ConfigTrayIcon_CbUseModernIcon" xml:space="preserve">
     <value>Use o ícone moderno da bandeja</value>
+  </data>
+  <data name="SensorsManager_MicrophoneProcessSensorDescription" xml:space="preserve">
+    <value>Fornece o número de processos que utilizam atualmente o microfone - fornece adicionalmente o nome dos processos nos atributos do sensor.
+
+Nota: se usado no serviço de satélite, não detectará aplicações no espaço do usuário.</value>
   </data>
 </root>

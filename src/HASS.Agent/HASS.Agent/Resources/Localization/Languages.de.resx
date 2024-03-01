@@ -3253,11 +3253,6 @@ Stelle sicher, dass die Ortungsdienste von Windows aktiviert sind!
 
 Je nach Windows-Version finden Sie diese in der neuen Systemsteuerung -&gt; „Datenschutz und Sicherheit“ -&gt; „Standort“.</value>
   </data>
-  <data name="SensorsManager_MicrophoneProcessSensorDescription" xml:space="preserve">
-    <value>Stellt den Namen des Prozesses bereit, der das Mikrofon derzeit verwendet.
-
-Hinweis: Bei Verwendung im Satellitenservice werden keine Userspace-Anwendungen erkannt.</value>
-  </data>
   <data name="SensorsManager_MonitorPowerStateSensorDescription" xml:space="preserve">
     <value>Zeigt die letzte Änderung des Monitor-Energiezustands:
 
@@ -3493,5 +3488,10 @@ Als Payload benötigen Sie den Namen des Audiogeräts.</value>
   </data>
   <data name="ConfigTrayIcon_CbUseModernIcon" xml:space="preserve">
     <value>Verwenden Sie ein modernes Taskleistensymbol</value>
+  </data>
+  <data name="SensorsManager_MicrophoneProcessSensorDescription" xml:space="preserve">
+    <value>Gibt die Anzahl der Prozesse an, die derzeit das Mikrofon verwenden. Zusätzlich werden die Namen der Prozesse in den Attributen des Sensors angegeben.
+
+Hinweis: Bei Verwendung im Satellitendienst werden keine Userspace-Anwendungen erkannt.</value>
   </data>
 </root>

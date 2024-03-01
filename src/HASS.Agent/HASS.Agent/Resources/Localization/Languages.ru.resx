@@ -3198,11 +3198,6 @@ Home Assistant.
 
 В зависимости от вашей версии Windows, это можно найти в новой панели управления -&gt; 'конфиденциальность и безопасность' -&gt; 'местоположение'.</value>
   </data>
-  <data name="SensorsManager_MicrophoneProcessSensorDescription" xml:space="preserve">
-    <value>Указывает имя процесса, который в данный момент использует микрофон.
-
-Примечание: если он используется в спутниковой службе, он не будет обнаруживать приложения пользовательского пространства.</value>
-  </data>
   <data name="SensorsManager_MonitorPowerStateSensorDescription" xml:space="preserve">
     <value>Обеспечивает последнее изменение состояния питания монитора:
 
@@ -3438,5 +3433,10 @@ Home Assistant.
   </data>
   <data name="ConfigTrayIcon_CbUseModernIcon" xml:space="preserve">
     <value>Использовать современный значок в трее</value>
+  </data>
+  <data name="SensorsManager_MicrophoneProcessSensorDescription" xml:space="preserve">
+    <value>Предоставляет количество процессов, которые в данный момент используют микрофон. Дополнительно указывается имя процесса в атрибутах датчика.
+
+Примечание. При использовании в спутниковой службе он не обнаружит приложения пользовательского пространства.</value>
   </data>
 </root>
