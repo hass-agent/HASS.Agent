@@ -6094,6 +6094,7 @@ namespace HASS.Agent.Resources.Localization {
         
         /// <summary>
         ///   Looks up a localized string similar to Returns the result of the provided Powershell command or script.
+        ///Note: please keep in mind that Home Assistant accepts payload up to 255 characters.
         ///
         ///Converts the outcome to text..
         /// </summary>

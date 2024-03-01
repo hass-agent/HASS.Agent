@@ -3204,7 +3204,8 @@ Home Assistant.
 Затемненный, Выключенный, Включенный и Неизвестный.</value>
   </data>
   <data name="SensorsManager_PowershellSensorDescription" xml:space="preserve">
-    <value>Возвращает результат предоставленной команды Powershell или сценария.
+    <value>Возвращает результат предоставленной команды или сценария Powershell.
+Примечание. Имейте в виду, что Home Assistant принимает полезную нагрузку длиной до 255 символов.
 
 Преобразует результат в текст.</value>
   </data>

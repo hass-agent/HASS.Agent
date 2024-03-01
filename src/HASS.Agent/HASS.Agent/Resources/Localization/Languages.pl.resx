@@ -3246,9 +3246,10 @@ W zalezności od Twojej wersji Windows'a opcje te możesz znaleźć w Ustawienia
 Przyciemnienie, Wyłączenie, Włączenie, Nieznany</value>
   </data>
   <data name="SensorsManager_PowershellSensorDescription" xml:space="preserve">
-    <value>Zwraca wynik poprzedniej komendy Powershell lub skryptu.
+    <value>Zwraca wynik podanego polecenia lub skryptu programu PowerShell.
+Uwaga: pamiętaj, że Home Assistant akceptuje ładunek o długości do 255 znaków.
 
-Konwertuje wynik do tekstu.</value>
+Konwertuje wynik na tekst.</value>
   </data>
   <data name="SensorsManager_PrintersSensorsDescription" xml:space="preserve">
     <value>Zwraca informacje na temat wszystkich zainstalowanych drukarek i ich kolejek.</value>

@@ -3137,6 +3137,7 @@ Atenuado, Apagado, Encendido y Desconocido.</value>
   </data>
   <data name="SensorsManager_PowershellSensorDescription" xml:space="preserve">
     <value>Devuelve el resultado del comando o script de Powershell proporcionado.
+Nota: tenga en cuenta que Home Assistant acepta una carga útil de hasta 255 caracteres.
 
 Convierte el resultado en texto.</value>
   </data>

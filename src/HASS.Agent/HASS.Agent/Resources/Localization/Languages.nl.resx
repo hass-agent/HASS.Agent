@@ -3158,9 +3158,10 @@ Afhankelijk van je Windows versie, kan dit gevonden worden in het nieuwe configu
 Gedimmed, Uitgeschakeld, Ingeschakeld en Onbekend</value>
   </data>
   <data name="SensorsManager_PowershellSensorDescription" xml:space="preserve">
-    <value>Geeft het resultaat van het opgegeven Powershell commando of script.
+    <value>Retourneert het resultaat van de opgegeven Powershell-opdracht of -script.
+Opmerking: houd er rekening mee dat Home Assistant een payload van maximaal 255 tekens accepteert.
 
-Converteert de uitkomst naar text.</value>
+Converteert de uitkomst naar tekst.</value>
   </data>
   <data name="SensorsManager_PrintersSensorsDescription" xml:space="preserve">
     <value>Geeft informatie over alle geïnstalleerde printers en hun wachtrijen.</value>

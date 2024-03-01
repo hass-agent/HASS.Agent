@@ -2925,6 +2925,7 @@ Dimmed, PowerOff, PowerOn and Unkown.</value>
   </data>
   <data name="SensorsManager_PowershellSensorDescription" xml:space="preserve">
     <value>Returns the result of the provided Powershell command or script.
+Note: please keep in mind that Home Assistant accepts payload up to 255 characters.
 
 Converts the outcome to text.</value>
   </data>

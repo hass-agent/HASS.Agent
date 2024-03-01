@@ -2353,9 +2353,10 @@ Primer: _Skupaj
 Številke lahko raziščete z orodjem Windows 'perfmon.exe'.</value>
   </data>
   <data name="SensorsManager_PowershellSensorDescription" xml:space="preserve">
-    <value>Vrne rezultat Powershell ukaza ali skripta.
+    <value>Vrne rezultat podanega ukaza ali skripta Powershell.
+Opomba: ne pozabite, da Home Assistant sprejme vsebino do 255 znakov.
 
-Pretvori rezultat v tekst.</value>
+Pretvori rezultat v besedilo.</value>
   </data>
   <data name="SensorsManager_PrintersSensorsDescription" xml:space="preserve">
     <value>Vrne informacijo o nameščenih tiskalnikih in čakalni vrsti za njih.</value>

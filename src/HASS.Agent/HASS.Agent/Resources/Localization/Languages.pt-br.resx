@@ -2276,6 +2276,7 @@ Você pode explorar os contadores através da ferramenta 'perfmon.exe' do Window
   </data>
   <data name="SensorsManager_PowershellSensorDescription" xml:space="preserve">
     <value>Retorna o resultado do comando ou script do Powershell fornecido.
+Observação: lembre-se de que o Home Assistant aceita carga útil de até 255 caracteres.
 
 Converte o resultado em texto.</value>
   </data>

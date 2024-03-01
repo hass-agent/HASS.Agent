@@ -3169,9 +3169,10 @@ Selon votre version de Windows, cela peut être trouvé dans le nouveau panneau 
 Dimmed, PowerOff, PowerOn and Unkown.</value>
   </data>
   <data name="SensorsManager_PowershellSensorDescription" xml:space="preserve">
-    <value>Returns the result of the provided Powershell command or script.
+    <value>Renvoie le résultat de la commande ou du script Powershell fourni.
+Remarque : veuillez garder à l'esprit que Home Assistant accepte des charges utiles allant jusqu'à 255 caractères.
 
-Converts the outcome to text.</value>
+Convertit le résultat en texte.</value>
   </data>
   <data name="SensorsManager_PrintersSensorsDescription" xml:space="preserve">
     <value>Fournit des informations sur toutes les imprimantes installées et leurs files d'attente.</value>
