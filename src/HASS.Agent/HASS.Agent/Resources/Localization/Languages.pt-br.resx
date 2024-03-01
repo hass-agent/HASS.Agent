@@ -3410,6 +3410,9 @@ O número da tela depende da configuração do sistema – começa em 0.</value>
     <value>Define a entrada de áudio padrão para o sistema (incluindo o dispositivo de comunicação padrão).
 Você precisa do nome do dispositivo de áudio como carga útil.</value>
   </data>
+  <data name="ConfigMqtt_CbIgnoreGracePeriod" xml:space="preserve">
+    <value>Ignorar o período de carência após sair da hibernação</value>
+  </data>
   <data name="ConfigTrayIcon_CbUseModernIcon" xml:space="preserve">
     <value>Use o ícone moderno da bandeja</value>
   </data>

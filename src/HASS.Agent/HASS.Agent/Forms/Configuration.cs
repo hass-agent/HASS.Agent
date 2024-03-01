@@ -323,6 +323,7 @@ namespace HASS.Agent.Forms
             _mqtt.TbMqttClientCertificate.Text = Variables.AppSettings.MqttClientCertificate;
             _mqtt.CbAllowUntrustedCertificates.CheckState = Variables.AppSettings.MqttAllowUntrustedCertificates ? CheckState.Checked : CheckState.Unchecked;
             _mqtt.CbUseRetainFlag.CheckState = Variables.AppSettings.MqttUseRetainFlag ? CheckState.Checked : CheckState.Unchecked;
+            _mqtt.CbIgnoreGracePeriod.CheckState = Variables.AppSettings.MqttIgnoreGracePeriod ? CheckState.Checked : CheckState.Unchecked;
 
             // updates
             _updates.CbUpdates.CheckState = Variables.AppSettings.CheckForUpdates ? CheckState.Checked : CheckState.Unchecked;
@@ -426,6 +427,7 @@ namespace HASS.Agent.Forms
             Variables.AppSettings.MqttClientCertificate = _mqtt.TbMqttClientCertificate.Text;
             Variables.AppSettings.MqttAllowUntrustedCertificates = _mqtt.CbAllowUntrustedCertificates.CheckState == CheckState.Checked;
             Variables.AppSettings.MqttUseRetainFlag = _mqtt.CbUseRetainFlag.CheckState == CheckState.Checked;
+            Variables.AppSettings.MqttIgnoreGracePeriod = _mqtt.CbIgnoreGracePeriod.CheckState == CheckState.Checked;
 
             // mqtt -> service
             await SettingsManager.SendMqttSettingsToServiceAsync();

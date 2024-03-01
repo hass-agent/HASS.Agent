@@ -3385,6 +3385,9 @@ Schermnummer is afhankelijk van de systeemconfiguratie - begint bij 0.</value>
     <value>Stelt de standaardaudio-invoer in voor het systeem (inclusief het standaardcommunicatieapparaat).
 U hebt de naam van het audioapparaat nodig als payload.</value>
   </data>
+  <data name="ConfigMqtt_CbIgnoreGracePeriod" xml:space="preserve">
+    <value>Negeer de respijtperiode na het ontwaken uit de winterslaap</value>
+  </data>
   <data name="ConfigTrayIcon_CbUseModernIcon" xml:space="preserve">
     <value>Gebruik het moderne ladepictogram</value>
   </data>

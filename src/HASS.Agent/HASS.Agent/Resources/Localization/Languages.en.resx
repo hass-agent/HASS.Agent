@@ -3365,6 +3365,9 @@ Screen number depends on system configuration - starts at 0.</value>
     <value>Sets the default audio input for the system (including default communication device).
 Requires audio device name as a payload.</value>
   </data>
+  <data name="ConfigMqtt_CbIgnoreGracePeriod" xml:space="preserve">
+    <value>Ignore grace period after waking up from hibernation</value>
+  </data>
   <data name="ConfigTrayIcon_CbUseModernIcon" xml:space="preserve">
     <value>Use modern tray icon</value>
   </data>
