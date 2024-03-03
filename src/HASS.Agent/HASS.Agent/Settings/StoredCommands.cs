@@ -178,6 +178,9 @@ namespace HASS.Agent.Settings
                 case CommandType.SetAudioOutputCommand:
                     abstractCommand = new SetAudioOutputCommand(command.EntityName, command.Name, command.Command, command.EntityType, command.Id.ToString());
                     break;
+                case CommandType.SetAudioInputCommand:
+                    abstractCommand = new SetAudioInputCommand(command.EntityName, command.Name, command.Command, command.EntityType, command.Id.ToString());
+                    break;
                 default:
                     Log.Error("[SETTINGS_COMMANDS] [{name}] Unknown configured command type: {type}", command.EntityName, command.Type.ToString());
                     break;

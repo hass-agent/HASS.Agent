@@ -323,6 +323,7 @@ namespace HASS.Agent.Forms
             _mqtt.TbMqttClientCertificate.Text = Variables.AppSettings.MqttClientCertificate;
             _mqtt.CbAllowUntrustedCertificates.CheckState = Variables.AppSettings.MqttAllowUntrustedCertificates ? CheckState.Checked : CheckState.Unchecked;
             _mqtt.CbUseRetainFlag.CheckState = Variables.AppSettings.MqttUseRetainFlag ? CheckState.Checked : CheckState.Unchecked;
+            _mqtt.CbIgnoreGracePeriod.CheckState = Variables.AppSettings.MqttIgnoreGracePeriod ? CheckState.Checked : CheckState.Unchecked;
 
             // updates
             _updates.CbUpdates.CheckState = Variables.AppSettings.CheckForUpdates ? CheckState.Checked : CheckState.Unchecked;
@@ -351,6 +352,7 @@ namespace HASS.Agent.Forms
             _mediaPlayer.CbEnableMediaPlayer.CheckState = Variables.AppSettings.MediaPlayerEnabled ? CheckState.Checked : CheckState.Unchecked;
 
             // tray icon
+            _trayIcon.CbUseModernIcon.CheckState = Variables.AppSettings.TrayIconUseModern ? CheckState.Checked : CheckState.Unchecked;
             _trayIcon.CbDefaultMenu.CheckState = Variables.AppSettings.TrayIconShowDefaultMenu ? CheckState.Checked : CheckState.Unchecked;
             _trayIcon.CbShowWebView.CheckState = Variables.AppSettings.TrayIconShowWebView ? CheckState.Checked : CheckState.Unchecked;
             _trayIcon.NumWebViewWidth.Value = Variables.AppSettings.TrayIconWebViewWidth;
@@ -425,6 +427,7 @@ namespace HASS.Agent.Forms
             Variables.AppSettings.MqttClientCertificate = _mqtt.TbMqttClientCertificate.Text;
             Variables.AppSettings.MqttAllowUntrustedCertificates = _mqtt.CbAllowUntrustedCertificates.CheckState == CheckState.Checked;
             Variables.AppSettings.MqttUseRetainFlag = _mqtt.CbUseRetainFlag.CheckState == CheckState.Checked;
+            Variables.AppSettings.MqttIgnoreGracePeriod = _mqtt.CbIgnoreGracePeriod.CheckState == CheckState.Checked;
 
             // mqtt -> service
             await SettingsManager.SendMqttSettingsToServiceAsync();
@@ -456,6 +459,7 @@ namespace HASS.Agent.Forms
             Variables.AppSettings.MediaPlayerEnabled = _mediaPlayer.CbEnableMediaPlayer.CheckState == CheckState.Checked;
 
             // tray icon
+            Variables.AppSettings.TrayIconUseModern = _trayIcon.CbUseModernIcon.CheckState == CheckState.Checked;
             Variables.AppSettings.TrayIconShowDefaultMenu = _trayIcon.CbDefaultMenu.CheckState == CheckState.Checked;
             Variables.AppSettings.TrayIconShowWebView = _trayIcon.CbShowWebView.CheckState == CheckState.Checked;
             Variables.AppSettings.TrayIconWebViewWidth = (int)_trayIcon.NumWebViewWidth.Value;

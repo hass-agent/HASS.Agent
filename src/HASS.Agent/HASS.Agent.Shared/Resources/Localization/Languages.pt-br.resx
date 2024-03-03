@@ -3281,4 +3281,10 @@ Deseja baixar o Microsoft WebView2 runtime?</value>
   <data name="CommandType_SetAudioOutputCommand" xml:space="preserve">
     <value>Definir comando de saída de áudio</value>
   </data>
+  <data name="SensorType_ScreenshotSensor" xml:space="preserve">
+    <value>Captura de tela</value>
+  </data>
+  <data name="CommandType_SetAudioInputCommand" xml:space="preserve">
+    <value>Definir comando de entrada de áudio</value>
+  </data>
 </root>

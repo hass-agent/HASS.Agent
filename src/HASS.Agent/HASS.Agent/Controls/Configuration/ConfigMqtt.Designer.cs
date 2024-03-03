@@ -56,6 +56,7 @@ namespace HASS.Agent.Controls.Configuration
             this.LblClientId = new System.Windows.Forms.Label();
             this.NumMqttPort = new Syncfusion.Windows.Forms.Tools.NumericUpDownExt();
             this.PbShow = new System.Windows.Forms.PictureBox();
+            this.CbIgnoreGracePeriod = new System.Windows.Forms.CheckBox();
             this.CbEnableMqtt = new System.Windows.Forms.CheckBox();
             this.LblMqttDisabledWarning = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.NumMqttPort)).BeginInit();
@@ -460,51 +461,68 @@ namespace HASS.Agent.Controls.Configuration
             this.LblMqttDisabledWarning.Text = Languages.ConfigMqtt_LblMqttDisabledWarning;
             this.LblMqttDisabledWarning.Visible = false;
             // 
+            // CbIgnoreGracePeriod
+            // 
+            this.CbIgnoreGracePeriod.AccessibleDescription = "Ignore grace period after waking up from hibernation.";
+            this.CbIgnoreGracePeriod.AccessibleName = "Ignore grace period";
+            this.CbIgnoreGracePeriod.AccessibleRole = AccessibleRole.CheckButton;
+            this.CbIgnoreGracePeriod.AutoSize = true;
+            this.CbIgnoreGracePeriod.Checked = false;
+            this.CbIgnoreGracePeriod.CheckState = CheckState.Unchecked;
+            this.CbIgnoreGracePeriod.Font = new Font("Segoe UI", 10F);
+            this.CbIgnoreGracePeriod.Location = new Point(59, 612);
+            this.CbIgnoreGracePeriod.Name = "CbIgnoreGracePeriod";
+            this.CbIgnoreGracePeriod.Size = new Size(354, 23);
+            this.CbIgnoreGracePeriod.TabIndex = 103;
+            this.CbIgnoreGracePeriod.Text = Languages.ConfigMqtt_CbIgnoreGracePeriod;
+            this.CbIgnoreGracePeriod.UseVisualStyleBackColor = true;
+            this.CbIgnoreGracePeriod.CheckedChanged += new System.EventHandler(this.CbIgnoreGracePeriod_CheckedChanged);
+            // 
             // ConfigMqtt
             // 
             this.AccessibleDescription = "Panel containing the MQTT client configuration.";
             this.AccessibleName = "MQTT";
-            this.AccessibleRole = System.Windows.Forms.AccessibleRole.Pane;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
-            this.Controls.Add(this.LblMqttDisabledWarning);
-            this.Controls.Add(this.CbEnableMqtt);
-            this.Controls.Add(this.PbShow);
-            this.Controls.Add(this.NumMqttPort);
-            this.Controls.Add(this.LblTip2);
-            this.Controls.Add(this.TbMqttClientId);
-            this.Controls.Add(this.LblClientId);
-            this.Controls.Add(this.LblTip3);
-            this.Controls.Add(this.TbMqttClientCertificate);
-            this.Controls.Add(this.LblClientCert);
-            this.Controls.Add(this.TbMqttRootCertificate);
-            this.Controls.Add(this.LblRootCert);
-            this.Controls.Add(this.CbUseRetainFlag);
-            this.Controls.Add(this.CbAllowUntrustedCertificates);
-            this.Controls.Add(this.BtnMqttClearConfig);
-            this.Controls.Add(this.LblTip1);
-            this.Controls.Add(this.LblInfo1);
-            this.Controls.Add(this.TbMqttDiscoveryPrefix);
-            this.Controls.Add(this.LblDiscoPrefix);
-            this.Controls.Add(this.TbMqttPassword);
-            this.Controls.Add(this.TbMqttUsername);
-            this.Controls.Add(this.TbMqttAddress);
-            this.Controls.Add(this.CbMqttTls);
-            this.Controls.Add(this.LblBrokerPassword);
-            this.Controls.Add(this.LblBrokerUsername);
-            this.Controls.Add(this.LblBrokerPort);
-            this.Controls.Add(this.LblBrokerIp);
-            this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
-            this.Margin = new System.Windows.Forms.Padding(4);
+            this.AccessibleRole = AccessibleRole.Pane;
+            this.AutoScaleDimensions = new SizeF(96F, 96F);
+            this.AutoScaleMode = AutoScaleMode.Dpi;
+            this.BackColor = Color.FromArgb(45, 45, 48);
+            this.Controls.Add(CbIgnoreGracePeriod);
+            this.Controls.Add(LblMqttDisabledWarning);
+            this.Controls.Add(CbEnableMqtt);
+            this.Controls.Add(PbShow);
+            this.Controls.Add(NumMqttPort);
+            this.Controls.Add(LblTip2);
+            this.Controls.Add(TbMqttClientId);
+            this.Controls.Add(LblClientId);
+            this.Controls.Add(LblTip3);
+            this.Controls.Add(TbMqttClientCertificate);
+            this.Controls.Add(LblClientCert);
+            this.Controls.Add(TbMqttRootCertificate);
+            this.Controls.Add(LblRootCert);
+            this.Controls.Add(CbUseRetainFlag);
+            this.Controls.Add(CbAllowUntrustedCertificates);
+            this.Controls.Add(BtnMqttClearConfig);
+            this.Controls.Add(LblTip1);
+            this.Controls.Add(LblInfo1);
+            this.Controls.Add(TbMqttDiscoveryPrefix);
+            this.Controls.Add(LblDiscoPrefix);
+            this.Controls.Add(TbMqttPassword);
+            this.Controls.Add(TbMqttUsername);
+            this.Controls.Add(TbMqttAddress);
+            this.Controls.Add(CbMqttTls);
+            this.Controls.Add(LblBrokerPassword);
+            this.Controls.Add(LblBrokerUsername);
+            this.Controls.Add(LblBrokerPort);
+            this.Controls.Add(LblBrokerIp);
+            this.ForeColor = Color.FromArgb(241, 241, 241);
+            this.Margin = new Padding(4);
             this.Name = "ConfigMqtt";
-            this.Size = new System.Drawing.Size(700, 614);
-            this.Load += new System.EventHandler(this.ConfigMqtt_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.NumMqttPort)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PbShow)).EndInit();
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            this.Size = new Size(700, 658);
+            this.Load += ConfigMqtt_Load;
+            ((System.ComponentModel.ISupportInitialize)NumMqttPort).EndInit();
+            ((System.ComponentModel.ISupportInitialize)PbShow).EndInit();
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -536,5 +554,6 @@ namespace HASS.Agent.Controls.Configuration
         private PictureBox PbShow;
         internal CheckBox CbEnableMqtt;
         private Label LblMqttDisabledWarning;
+        internal CheckBox CbIgnoreGracePeriod;
     }
 }

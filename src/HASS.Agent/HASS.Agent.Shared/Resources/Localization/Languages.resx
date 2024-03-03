@@ -3217,4 +3217,10 @@ Do you want to download the runtime installer?</value>
   <data name="CommandType_SetAudioOutputCommand" xml:space="preserve">
     <value>SetAudioOutputCommand</value>
   </data>
+  <data name="SensorType_ScreenshotSensor" xml:space="preserve">
+    <value>Screenshot</value>
+  </data>
+  <data name="CommandType_SetAudioInputCommand" xml:space="preserve">
+    <value>SetAudioInputCommand</value>
+  </data>
 </root>

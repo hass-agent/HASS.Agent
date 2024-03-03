@@ -2764,14 +2764,14 @@ Daha fazla tuşa ve/veya CTRL gibi değiştiricilere ihtiyacınız varsa, Multip
   <data name="SensorsManager_GeoLocationSensorDescription" xml:space="preserve">
     <value>Geçerli enlem, boylam ve yüksekliğinizi virgülle ayrılmış bir değer olarak döndürür. Windows'un konum hizmetlerinin etkinleştirildiğinden emin olun! Windows sürümünüze bağlı olarak bu, yeni kontrol panelinde -&gt; 'gizlilik ve güvenlik' -&gt; 'konum'da bulunabilir.</value>
   </data>
-  <data name="SensorsManager_MicrophoneProcessSensorDescription" xml:space="preserve">
-    <value>Şu anda mikrofonu kullanan işlemin adını sağlar. Not: uydu hizmetinde kullanılırsa, kullanıcı alanı uygulamalarını algılamaz.</value>
-  </data>
   <data name="SensorsManager_MonitorPowerStateSensorDescription" xml:space="preserve">
     <value>Son monitör güç durumu değişikliğini sağlar: Soluk, Güç Kapalı, Güç Açık ve Bilinmiyor.</value>
   </data>
   <data name="SensorsManager_PowershellSensorDescription" xml:space="preserve">
-    <value>Sağlanan Powershell komutunun veya komut dosyasının sonucunu döndürür. Sonucu metne dönüştürür.</value>
+    <value>Sağlanan Powershell komutunun veya betiğinin sonucunu döndürür.
+Not: Home Assistant'ın 255 karaktere kadar yükü kabul ettiğini lütfen unutmayın.
+
+Sonucu metne dönüştürür.</value>
   </data>
   <data name="SensorsManager_PrintersSensorsDescription" xml:space="preserve">
     <value>Yüklü tüm yazıcılar ve sıraları hakkında bilgi sağlar.</value>
@@ -2964,5 +2964,27 @@ Yük olarak ses cihazı adını gerektirir.</value>
   </data>
   <data name="CommandsMod_LblSetting_VolumeRange" xml:space="preserve">
     <value>Hacim (0 ile 100 arasında)</value>
+  </data>
+  <data name="SensorsManager_ScreenshotSensorDescription" xml:space="preserve">
+    <value>Bir kamera varlığı biçiminde bir ekran görüntüsü sensörü sağlarsınız.
+Ekran numarası sistem konfigürasyonuna bağlıdır - 0'dan başlar.</value>
+  </data>
+  <data name="SensorsMod_LblSetting1_ScreenNumber" xml:space="preserve">
+    <value>Ekran numarası</value>
+  </data>
+  <data name="CommandsManager_SetAudioInputCommandDescription" xml:space="preserve">
+    <value>Sistem için varsayılan ses girişini ayarlar (varsayılan iletişim cihazı dahil).
+Yük olarak ses cihazı adına ihtiyacınız vardır.</value>
+  </data>
+  <data name="ConfigMqtt_CbIgnoreGracePeriod" xml:space="preserve">
+    <value>Hazırda bekletme modundan uyandıktan sonra ek süreyi göz ardı et</value>
+  </data>
+  <data name="ConfigTrayIcon_CbUseModernIcon" xml:space="preserve">
+    <value>Modern tepsi simgesini kullan</value>
+  </data>
+  <data name="SensorsManager_MicrophoneProcessSensorDescription" xml:space="preserve">
+    <value>Halihazırda mikrofonu kullanan işlemlerin sayısını sağlar; ayrıca sensörün özniteliklerinde süreçlerin adını da sağlar.
+
+Not: Uydu hizmetinde kullanılırsa kullanıcı alanı uygulamalarını algılamaz.</value>
   </data>
 </root>

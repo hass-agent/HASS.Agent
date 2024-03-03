@@ -3383,4 +3383,10 @@ Ali želite prenesti runtime installer?</value>
   <data name="CommandType_SetAudioOutputCommand" xml:space="preserve">
     <value>Nastavite ukaz za avdio izhod</value>
   </data>
+  <data name="SensorType_ScreenshotSensor" xml:space="preserve">
+    <value>Posnetek zaslona</value>
+  </data>
+  <data name="CommandType_SetAudioInputCommand" xml:space="preserve">
+    <value>Nastavite ukaz za zvočni vhod</value>
+  </data>
 </root>

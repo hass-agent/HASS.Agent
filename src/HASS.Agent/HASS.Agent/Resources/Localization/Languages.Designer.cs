@@ -609,6 +609,16 @@ namespace HASS.Agent.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Sets the default audio input for the system (including default communication device).
+        ///Requires audio device name as a payload..
+        /// </summary>
+        internal static string CommandsManager_SetAudioInputCommandDescription {
+            get {
+                return ResourceManager.GetString("CommandsManager_SetAudioInputCommandDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sets the default audio output for the system.
         ///Requires audio device name as a payload..
         /// </summary>
@@ -2353,6 +2363,15 @@ namespace HASS.Agent.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ignore grace period after waking up from hibernation.
+        /// </summary>
+        internal static string ConfigMqtt_CbIgnoreGracePeriod {
+            get {
+                return ResourceManager.GetString("ConfigMqtt_CbIgnoreGracePeriod", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &amp;TLS.
         /// </summary>
         internal static string ConfigMqtt_CbMqttTls {
@@ -3033,6 +3052,15 @@ namespace HASS.Agent.Resources.Localization {
         internal static string ConfigTrayIcon_CbShowWebView {
             get {
                 return ResourceManager.GetString("ConfigTrayIcon_CbShowWebView", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Use modern tray icon.
+        /// </summary>
+        internal static string ConfigTrayIcon_CbUseModernIcon {
+            get {
+                return ResourceManager.GetString("ConfigTrayIcon_CbUseModernIcon", resourceCulture);
             }
         }
         
@@ -6006,7 +6034,7 @@ namespace HASS.Agent.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Provides the name of the process that&apos;s currently using the microphone.
+        ///   Looks up a localized string similar to Provides the number of the processes that currently use the microphone - additionally provides name of the processes in the sensor&apos;s attributes.
         ///
         ///Note: if used in the satellite service, it won&apos;t detect userspace applications..
         /// </summary>
@@ -6066,6 +6094,7 @@ namespace HASS.Agent.Resources.Localization {
         
         /// <summary>
         ///   Looks up a localized string similar to Returns the result of the provided Powershell command or script.
+        ///Note: please keep in mind that Home Assistant accepts payload up to 255 characters.
         ///
         ///Converts the outcome to text..
         /// </summary>
@@ -6092,6 +6121,16 @@ namespace HASS.Agent.Resources.Localization {
         internal static string SensorsManager_ProcessActiveSensorDescription {
             get {
                 return ResourceManager.GetString("SensorsManager_ProcessActiveSensorDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Provides a screenshot sensor in form of a camera entity.
+        ///Screen number depends on system configuration - starts at 0..
+        /// </summary>
+        internal static string SensorsManager_ScreenshotSensorDescription {
+            get {
+                return ResourceManager.GetString("SensorsManager_ScreenshotSensorDescription", resourceCulture);
             }
         }
         
@@ -6517,6 +6556,15 @@ namespace HASS.Agent.Resources.Localization {
         internal static string SensorsMod_LblSetting1_Process {
             get {
                 return ResourceManager.GetString("SensorsMod_LblSetting1_Process", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Screen number.
+        /// </summary>
+        internal static string SensorsMod_LblSetting1_ScreenNumber {
+            get {
+                return ResourceManager.GetString("SensorsMod_LblSetting1_ScreenNumber", resourceCulture);
             }
         }
         

@@ -2328,11 +2328,6 @@ HassAgentStarted, Odjava, SystemShutdown, Resume, Suspend, ConsoleConnect, Conso
     <value>Zagotavlja bool vrednost glede na to, ali se mikrofon trenutno uporablja.</value>
     <comment>Fuzzy</comment>
   </data>
-  <data name="SensorsManager_MicrophoneProcessSensorDescription" xml:space="preserve">
-    <value>Vrne ime procesa, ki trenutno uporablja mikrofon.
-
-Opomba: če se uporablja v satelitski storitvi</value>
-  </data>
   <data name="SensorsManager_MonitorPowerStateSensorDescription" xml:space="preserve">
     <value>Vrne zadnjo spremembo načina monitorja:
 
@@ -2358,9 +2353,10 @@ Primer: _Skupaj
 Številke lahko raziščete z orodjem Windows 'perfmon.exe'.</value>
   </data>
   <data name="SensorsManager_PowershellSensorDescription" xml:space="preserve">
-    <value>Vrne rezultat Powershell ukaza ali skripta.
+    <value>Vrne rezultat podanega ukaza ali skripta Powershell.
+Opomba: ne pozabite, da Home Assistant sprejme vsebino do 255 znakov.
 
-Pretvori rezultat v tekst.</value>
+Pretvori rezultat v besedilo.</value>
   </data>
   <data name="SensorsManager_PrintersSensorsDescription" xml:space="preserve">
     <value>Vrne informacijo o nameščenih tiskalnikih in čakalni vrsti za njih.</value>
@@ -3501,5 +3497,27 @@ Zahteva ime zvočne naprave kot tovor.</value>
   </data>
   <data name="CommandsMod_LblSetting_VolumeRange" xml:space="preserve">
     <value>Glasnost (med 0 in 100)</value>
+  </data>
+  <data name="SensorsManager_ScreenshotSensorDescription" xml:space="preserve">
+    <value>Zagotovite senzor posnetka zaslona v obliki entitete kamere.
+Številka zaslona je odvisna od konfiguracije sistema - začne se pri 0.</value>
+  </data>
+  <data name="SensorsMod_LblSetting1_ScreenNumber" xml:space="preserve">
+    <value>Številka zaslona</value>
+  </data>
+  <data name="CommandsManager_SetAudioInputCommandDescription" xml:space="preserve">
+    <value>Nastavi privzeti zvočni vhod za sistem (vključno s privzeto komunikacijsko napravo).
+Ime zvočne naprave potrebujete kot obremenitev.</value>
+  </data>
+  <data name="ConfigMqtt_CbIgnoreGracePeriod" xml:space="preserve">
+    <value>Po prebujanju iz mirovanja prezrite obdobje odloga</value>
+  </data>
+  <data name="ConfigTrayIcon_CbUseModernIcon" xml:space="preserve">
+    <value>Uporabi sodobno ikono pladnja</value>
+  </data>
+  <data name="SensorsManager_MicrophoneProcessSensorDescription" xml:space="preserve">
+    <value>Zagotavlja število procesov, ki trenutno uporabljajo mikrofon - dodatno podaja ime procesov v atributih senzorja.
+
+Opomba: če se uporablja v satelitski storitvi, ne bo zaznal aplikacij uporabniškega prostora.</value>
   </data>
 </root>

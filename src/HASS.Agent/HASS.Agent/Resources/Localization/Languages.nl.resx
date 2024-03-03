@@ -3152,20 +3152,16 @@ Verzeker dat Windows' localisatieservices ingeschakeld zijn!
 
 Afhankelijk van je Windows versie, kan dit gevonden worden in het nieuwe configuratiescherm -&gt; 'privacy en beveiliging' -&gt; 'locatie'.</value>
   </data>
-  <data name="SensorsManager_MicrophoneProcessSensorDescription" xml:space="preserve">
-    <value>Geeft de naam van het proces dat momenteel de microfoon gebruikt.
-
-Notitie: als hij in de satellietservice gebruikt wordt, zal hij geen gebruikerapplicaties detecteren.</value>
-  </data>
   <data name="SensorsManager_MonitorPowerStateSensorDescription" xml:space="preserve">
     <value>Geeft de laatste beeldscherm energiemodus status verandering:
 
 Gedimmed, Uitgeschakeld, Ingeschakeld en Onbekend</value>
   </data>
   <data name="SensorsManager_PowershellSensorDescription" xml:space="preserve">
-    <value>Geeft het resultaat van het opgegeven Powershell commando of script.
+    <value>Retourneert het resultaat van de opgegeven Powershell-opdracht of -script.
+Opmerking: houd er rekening mee dat Home Assistant een payload van maximaal 255 tekens accepteert.
 
-Converteert de uitkomst naar text.</value>
+Converteert de uitkomst naar tekst.</value>
   </data>
   <data name="SensorsManager_PrintersSensorsDescription" xml:space="preserve">
     <value>Geeft informatie over alle geïnstalleerde printers en hun wachtrijen.</value>
@@ -3373,5 +3369,27 @@ Vereist de naam van het audioapparaat als payload.</value>
   </data>
   <data name="CommandsMod_LblSetting_VolumeRange" xml:space="preserve">
     <value>Volume (tussen 0 en 100)</value>
+  </data>
+  <data name="SensorsManager_ScreenshotSensorDescription" xml:space="preserve">
+    <value>U levert een screenshot-sensor in de vorm van een camera-entiteit.
+Schermnummer is afhankelijk van de systeemconfiguratie - begint bij 0.</value>
+  </data>
+  <data name="SensorsMod_LblSetting1_ScreenNumber" xml:space="preserve">
+    <value>Schermnummer</value>
+  </data>
+  <data name="CommandsManager_SetAudioInputCommandDescription" xml:space="preserve">
+    <value>Stelt de standaardaudio-invoer in voor het systeem (inclusief het standaardcommunicatieapparaat).
+U hebt de naam van het audioapparaat nodig als payload.</value>
+  </data>
+  <data name="ConfigMqtt_CbIgnoreGracePeriod" xml:space="preserve">
+    <value>Negeer de respijtperiode na het ontwaken uit de winterslaap</value>
+  </data>
+  <data name="ConfigTrayIcon_CbUseModernIcon" xml:space="preserve">
+    <value>Gebruik het moderne ladepictogram</value>
+  </data>
+  <data name="SensorsManager_MicrophoneProcessSensorDescription" xml:space="preserve">
+    <value>Geeft het aantal processen weer die momenteel de microfoon gebruiken - geeft bovendien de naam van de processen in de attributen van de sensor.
+
+Opmerking: indien gebruikt in de satellietdienst, zal het geen gebruikersruimtetoepassingen detecteren.</value>
   </data>
 </root>

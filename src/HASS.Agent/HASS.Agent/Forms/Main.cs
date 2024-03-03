@@ -89,11 +89,11 @@ namespace HASS.Agent.Forms
                 // core components initialization - required for loading the entities
                 await RadioManager.Initialize();
                 await InternalDeviceSensorsManager.Initialize();
-				InitializeHardwareManager();
-				InitializeVirtualDesktopManager();
+                InitializeHardwareManager();
+                InitializeVirtualDesktopManager();
 
-				// load entities
-				var loaded = await SettingsManager.LoadEntitiesAsync();
+                // load entities
+                var loaded = await SettingsManager.LoadEntitiesAsync();
                 if (!loaded)
                 {
                     MessageBoxAdv.Show(this, Languages.Main_Load_MessageBox1, Variables.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -245,8 +245,15 @@ namespace HASS.Agent.Forms
             MessageBoxAdv.Show(this, Languages.Main_CheckDpiScalingFactor_MessageBox1, Variables.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
         }
 
-        private static void ProcessTrayIcon()
+        private void ProcessTrayIcon()
         {
+            if (Variables.AppSettings.TrayIconUseModern)
+            {
+                var icon = (Icon)new System.Resources.ResourceManager(typeof(Main)).GetObject("ModernNotifyIcon");
+                if (icon != null)
+                    NotifyIcon.Icon = icon;
+            }
+
             // are we set to show the webview and keep it loaded?
             if (!Variables.AppSettings.TrayIconShowWebView)
                 return;

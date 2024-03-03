@@ -1285,6 +1285,15 @@ namespace HASS.Agent.Shared.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to SetAudioInputCommand.
+        /// </summary>
+        internal static string CommandType_SetAudioInputCommand {
+            get {
+                return ResourceManager.GetString("CommandType_SetAudioInputCommand", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to SetAudioOutputCommand.
         /// </summary>
         internal static string CommandType_SetAudioOutputCommand {
@@ -6732,6 +6741,15 @@ namespace HASS.Agent.Shared.Resources.Localization {
         internal static string SensorType_ProcessActiveSensor {
             get {
                 return ResourceManager.GetString("SensorType_ProcessActiveSensor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Screenshot.
+        /// </summary>
+        internal static string SensorType_ScreenshotSensor {
+            get {
+                return ResourceManager.GetString("SensorType_ScreenshotSensor", resourceCulture);
             }
         }
         

@@ -3256,4 +3256,10 @@ Wil je de runtime installatie downloaden?</value>
   <data name="CommandType_SetAudioOutputCommand" xml:space="preserve">
     <value>Stel het audio-uitvoercommando in</value>
   </data>
+  <data name="SensorType_ScreenshotSensor" xml:space="preserve">
+    <value>Schermafbeelding</value>
+  </data>
+  <data name="CommandType_SetAudioInputCommand" xml:space="preserve">
+    <value>Stel het audio-invoercommando in</value>
+  </data>
 </root>

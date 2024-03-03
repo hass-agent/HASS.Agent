@@ -3240,20 +3240,16 @@ Upewnij się że lokalizacja jest włączona w systemie Windows!
 
 W zalezności od Twojej wersji Windows'a opcje te możesz znaleźć w Ustawienia -&gt; Prywatność i Zabezpieczenia -&gt; Lokalizacja</value>
   </data>
-  <data name="SensorsManager_MicrophoneProcessSensorDescription" xml:space="preserve">
-    <value>Zwraca nazwę procesu który obecnie używa mikrofonu. 
-
-Wskazówka: jeżeli korzystasz z usługi Satellite, nie będziesz miał informacji o aplikacji w przestrzeni użytkownika.</value>
-  </data>
   <data name="SensorsManager_MonitorPowerStateSensorDescription" xml:space="preserve">
     <value>Zwraca ostatnią zmianę stanu ekranu: 
 
 Przyciemnienie, Wyłączenie, Włączenie, Nieznany</value>
   </data>
   <data name="SensorsManager_PowershellSensorDescription" xml:space="preserve">
-    <value>Zwraca wynik poprzedniej komendy Powershell lub skryptu.
+    <value>Zwraca wynik podanego polecenia lub skryptu programu PowerShell.
+Uwaga: pamiętaj, że Home Assistant akceptuje ładunek o długości do 255 znaków.
 
-Konwertuje wynik do tekstu.</value>
+Konwertuje wynik na tekst.</value>
   </data>
   <data name="SensorsManager_PrintersSensorsDescription" xml:space="preserve">
     <value>Zwraca informacje na temat wszystkich zainstalowanych drukarek i ich kolejek.</value>
@@ -3462,5 +3458,27 @@ Wymaga nazwy urządzenia audio jako ładunku.</value>
   </data>
   <data name="CommandsMod_LblSetting_AudioDeviceName" xml:space="preserve">
     <value>Nazwa urządzenia audio</value>
+  </data>
+  <data name="SensorsManager_ScreenshotSensorDescription" xml:space="preserve">
+    <value>Czujnik zrzutu ekranu w postaci kamery.
+Numer ekranu zależy od konfiguracji systemu – zaczyna się od 0.</value>
+  </data>
+  <data name="SensorsMod_LblSetting1_ScreenNumber" xml:space="preserve">
+    <value>Numer ekranu</value>
+  </data>
+  <data name="CommandsManager_SetAudioInputCommandDescription" xml:space="preserve">
+    <value>Ustawia domyślne wejście audio dla systemu (w tym domyślne urządzenie komunikacyjne).
+Wymaga nazwy urządzenia audio jako ładunku.</value>
+  </data>
+  <data name="ConfigMqtt_CbIgnoreGracePeriod" xml:space="preserve">
+    <value>Ignoruj okres karencji po przebudzeniu ze stanu hibernacji</value>
+  </data>
+  <data name="ConfigTrayIcon_CbUseModernIcon" xml:space="preserve">
+    <value>Użyj nowoczesnej ikony w zasobniku</value>
+  </data>
+  <data name="SensorsManager_MicrophoneProcessSensorDescription" xml:space="preserve">
+    <value>Podaje liczbę procesów aktualnie korzystających z mikrofonu - dodatkowo podaje nazwę procesów w atrybutach czujnika.
+
+Uwaga: jeśli jest używany w usłudze satelitarnej, nie wykryje aplikacji przestrzeni użytkownika.</value>
   </data>
 </root>
