@@ -3253,11 +3253,6 @@ Stelle sicher, dass die Ortungsdienste von Windows aktiviert sind!
 
 Je nach Windows-Version finden Sie diese in der neuen Systemsteuerung -&gt; „Datenschutz und Sicherheit“ -&gt; „Standort“.</value>
   </data>
-  <data name="SensorsManager_MicrophoneProcessSensorDescription" xml:space="preserve">
-    <value>Stellt den Namen des Prozesses bereit, der das Mikrofon derzeit verwendet.
-
-Hinweis: Bei Verwendung im Satellitenservice werden keine Userspace-Anwendungen erkannt.</value>
-  </data>
   <data name="SensorsManager_MonitorPowerStateSensorDescription" xml:space="preserve">
     <value>Zeigt die letzte Änderung des Monitor-Energiezustands:
 
@@ -3265,6 +3260,7 @@ Gedimmt, PowerOff, PowerOn und Unbekannt.</value>
   </data>
   <data name="SensorsManager_PowershellSensorDescription" xml:space="preserve">
     <value>Gibt das Ergebnis des bereitgestellten Powershell-Befehls oder -Skripts zurück.
+Hinweis: Bitte beachten Sie, dass Home Assistant Nutzdaten von bis zu 255 Zeichen akzeptiert.
 
 Konvertiert das Ergebnis in Text.</value>
   </data>
@@ -3463,5 +3459,40 @@ aus der Originalversion</value>
   </data>
   <data name="Compat_NameTask_Error_ServiceStart" xml:space="preserve">
     <value>Fehler beim Starten des Satellitendienstes!</value>
+  </data>
+  <data name="CommandsManager_SetAudioOutputCommandDescription" xml:space="preserve">
+    <value>Legt die Standard-Audioausgabe für das System fest.
+Erfordert den Namen des Audiogeräts als Nutzlast.</value>
+  </data>
+  <data name="CommandsMod_LblSetting_AudioDeviceName" xml:space="preserve">
+    <value>Name des Audiogeräts</value>
+  </data>
+  <data name="CommandsMod_LblSetting_JsonPayload" xml:space="preserve">
+    <value>JSON-Befehlsnutzlast</value>
+  </data>
+  <data name="CommandsMod_LblSetting_VolumeRange" xml:space="preserve">
+    <value>Lautstärke (zwischen 0 und 100)</value>
+  </data>
+  <data name="SensorsManager_ScreenshotSensorDescription" xml:space="preserve">
+    <value>Sie stellen einen Screenshot-Sensor in Form einer Kameraeinheit bereit.
+Die Bildschirmnummer hängt von der Systemkonfiguration ab – beginnt bei 0.</value>
+  </data>
+  <data name="SensorsMod_LblSetting1_ScreenNumber" xml:space="preserve">
+    <value>Bildschirmnummer</value>
+  </data>
+  <data name="CommandsManager_SetAudioInputCommandDescription" xml:space="preserve">
+    <value>Legt den Standard-Audioeingang für das System fest (einschließlich des Standard-Kommunikationsgeräts).
+Als Payload benötigen Sie den Namen des Audiogeräts.</value>
+  </data>
+  <data name="ConfigMqtt_CbIgnoreGracePeriod" xml:space="preserve">
+    <value>Ignorieren Sie die Schonfrist nach dem Aufwachen aus dem Ruhezustand</value>
+  </data>
+  <data name="ConfigTrayIcon_CbUseModernIcon" xml:space="preserve">
+    <value>Verwenden Sie ein modernes Taskleistensymbol</value>
+  </data>
+  <data name="SensorsManager_MicrophoneProcessSensorDescription" xml:space="preserve">
+    <value>Gibt die Anzahl der Prozesse an, die derzeit das Mikrofon verwenden. Zusätzlich werden die Namen der Prozesse in den Attributen des Sensors angegeben.
+
+Hinweis: Bei Verwendung im Satellitendienst werden keine Userspace-Anwendungen erkannt.</value>
   </data>
 </root>

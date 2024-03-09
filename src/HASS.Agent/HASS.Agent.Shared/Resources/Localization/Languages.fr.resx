@@ -3261,4 +3261,16 @@ Do you want to download the runtime installer?</value>
   <data name="SensorType_ActiveDesktopSensor" xml:space="preserve">
     <value>ActiveDesktop</value>
   </data>
+  <data name="CommandType_SetApplicationVolumeCommand" xml:space="preserve">
+    <value>Définir le volume d'application</value>
+  </data>
+  <data name="CommandType_SetAudioOutputCommand" xml:space="preserve">
+    <value>Définir la commande de sortie audio</value>
+  </data>
+  <data name="SensorType_ScreenshotSensor" xml:space="preserve">
+    <value>Capture d'écran</value>
+  </data>
+  <data name="CommandType_SetAudioInputCommand" xml:space="preserve">
+    <value>Définir la commande d'entrée audio</value>
+  </data>
 </root>

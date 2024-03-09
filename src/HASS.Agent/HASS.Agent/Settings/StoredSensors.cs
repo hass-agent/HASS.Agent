@@ -3,6 +3,7 @@ using HASS.Agent.Enums;
 using HASS.Agent.Extensions;
 using HASS.Agent.HomeAssistant.Sensors.GeneralSensors.MultiValue;
 using HASS.Agent.HomeAssistant.Sensors.GeneralSensors.SingleValue;
+using HASS.Agent.Managers.DeviceSensors;
 using HASS.Agent.Resources.Localization;
 using HASS.Agent.Shared.Enums;
 using HASS.Agent.Shared.Extensions;
@@ -196,7 +197,10 @@ namespace HASS.Agent.Settings
                     abstractSensor = new BluetoothLeDevicesSensor(sensor.UpdateInterval, sensor.EntityName, sensor.Name, sensor.Id.ToString());
                     break;
                 case SensorType.InternalDeviceSensor:
-                    abstractSensor = new InternalDeviceSensor(sensor.Query, sensor.UpdateInterval, sensor.EntityName, sensor.Name, sensor.Id.ToString());
+                    abstractSensor = new HomeAssistant.Sensors.GeneralSensors.SingleValue.InternalDeviceSensor(sensor.Query, sensor.UpdateInterval, sensor.EntityName, sensor.Name, sensor.Id.ToString());
+                    break;
+                case SensorType.ScreenshotSensor:
+                    abstractSensor = new ScreenshotSensor(sensor.Query, sensor.UpdateInterval, sensor.EntityName, sensor.Name, sensor.Id.ToString());
                     break;
                 default:
                     Log.Error("[SETTINGS_SENSORS] [{name}] Unknown configured single-value sensor type: {type}", sensor.EntityName, sensor.Type.ToString());
@@ -389,7 +393,7 @@ namespace HASS.Agent.Settings
                     };
                 }
 
-                case InternalDeviceSensor internalDeviceSensor:
+                case HomeAssistant.Sensors.GeneralSensors.SingleValue.InternalDeviceSensor internalDeviceSensor:
                     {
                         _ = Enum.TryParse<SensorType>(internalDeviceSensor.GetType().Name, out var type);
                         return new ConfiguredSensor
@@ -401,6 +405,21 @@ namespace HASS.Agent.Settings
                             UpdateInterval = internalDeviceSensor.UpdateIntervalSeconds,
 							IgnoreAvailability = internalDeviceSensor.IgnoreAvailability,
 							Query = internalDeviceSensor.SensorType.ToString()
+                        };
+                    }
+
+                case ScreenshotSensor screenshotSensor:
+                    {
+                        _ = Enum.TryParse<SensorType>(screenshotSensor.GetType().Name, out var type);
+                        return new ConfiguredSensor
+                        {
+                            Id = Guid.Parse(screenshotSensor.Id),
+                            EntityName = screenshotSensor.EntityName,
+                            Name = screenshotSensor.Name,
+                            Type = type,
+                            UpdateInterval = screenshotSensor.UpdateIntervalSeconds,
+                            IgnoreAvailability = screenshotSensor.IgnoreAvailability,
+                            Query = screenshotSensor.ScreenIndex.ToString()
                         };
                     }
 

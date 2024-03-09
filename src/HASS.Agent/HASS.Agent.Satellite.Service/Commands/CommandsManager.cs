@@ -15,6 +15,8 @@ namespace HASS.Agent.Satellite.Service.Commands
         private static bool _active = true;
         private static bool _pause;
 
+        private static bool _discoveryPublished = false;
+
         private static DateTime _lastAutoDiscoPublish = DateTime.MinValue;
 
         /// <summary>
@@ -122,20 +124,22 @@ namespace HASS.Agent.Satellite.Service.Commands
                     // do we have commands?
                     if (!CommandsPresent()) continue;
 
-                    // publish availability & sensor autodisco's every 30 sec
+                    // publish availability & autodiscovery every 30 sec
                     if ((DateTime.Now - _lastAutoDiscoPublish).TotalSeconds > 30)
                     {
-                        // let hass know we're still here
                         await Variables.MqttManager.AnnounceAvailabilityAsync();
 
-                        // publish command autodisco's
-                        foreach (var command in Variables.Commands.TakeWhile(_ => !_pause).TakeWhile(_ => _active))
+                        if (!_discoveryPublished)
                         {
-                            if (_pause || Variables.MqttManager.GetStatus() != MqttStatus.Connected) continue;
-                            await command.PublishAutoDiscoveryConfigAsync();
+                            foreach (var command in Variables.Commands.TakeWhile(_ => !_pause).TakeWhile(_ => _active))
+                            {
+                                if (_pause || Variables.MqttManager.GetStatus() != MqttStatus.Connected) continue;
+                                await command.PublishAutoDiscoveryConfigAsync();
+                            }
+
+                            _discoveryPublished = true;
                         }
 
-                        // are we subscribed?
                         if (!_subscribed)
                         {
                             foreach (var command in Variables.Commands.TakeWhile(_ => !_pause).TakeWhile(_ => _active))
@@ -146,7 +150,6 @@ namespace HASS.Agent.Satellite.Service.Commands
                             _subscribed = true;
                         }
 
-                        // log moment
                         _lastAutoDiscoPublish = DateTime.Now;
                     }
 
