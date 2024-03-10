@@ -3404,4 +3404,7 @@ Vous avez besoin du nom du périphérique audio comme charge utile.</value>
 
 Remarque : s'il est utilisé dans le service satellite, il ne détectera pas les applications de l'espace utilisateur.</value>
   </data>
+  <data name="Configuration_NFC" xml:space="preserve">
+    <value>NFC</value>
+  </data>
 </root>

@@ -20,8 +20,8 @@ namespace HASS.Agent.Managers
         public static List<Radio> AvailableRadio { get; private set; } = new();
         public static List<string> AvailableRadioNames => AvailableRadio.Select(r => r.Name).ToList();
 
-        public static List<ProximityDevice> AvailableNFCReader { get; private set; } = new();
-        public static List<string> AvailableNFCReaderNames => AvailableRadioNames.Select(n => n.Normalize()).ToList();
+        public static Dictionary<string, ProximityDevice> AvailableNFCReader { get; private set; } = new();
+        public static List<string> AvailableNFCReaderNames => AvailableNFCReader.Keys.ToList();
 
         private static long s_subscriptionId = -1;
         private static ProximityDevice s_selectedNFCReader = null;
@@ -38,8 +38,8 @@ namespace HASS.Agent.Managers
                     s_selectedNFCReader.StopSubscribingForMessage(s_subscriptionId);
                 }
 
-                s_subscriptionId = s_selectedNFCReader.SubscribeForMessage("NDEF", MessageReceivedHandler);
                 s_selectedNFCReader = value;
+                s_subscriptionId = s_selectedNFCReader.SubscribeForMessage("NDEF", MessageReceivedHandler);
             }
         }
 
@@ -69,7 +69,7 @@ namespace HASS.Agent.Managers
                 foreach (var device in proximityDevices)
                 {
                     var proximityReader = ProximityDevice.FromId(device.Id);
-                    AvailableNFCReader.Add(proximityReader);
+                    AvailableNFCReader.Add(device.Name, proximityReader);
                 }
             }
             catch
@@ -77,11 +77,27 @@ namespace HASS.Agent.Managers
                 Log.Fatal("[RADIOMGR] Error initializing proximity/NFC devices");
             }
 
+            if (!string.IsNullOrEmpty(Variables.AppSettings.NfcSelectedScanner))
+            {
+                if (AvailableNFCReader.TryGetValue(Variables.AppSettings.NfcSelectedScanner, out var selectedScanner))
+                {
+                    Log.Debug("[RADIOMGR] Selected NFC reader: '{nfcScanner}'", Variables.AppSettings.NfcSelectedScanner);
+                    SelectedNFCReader = selectedScanner;
+                }
+                else
+                {
+                    Log.Warning("[RADIOMGR] Selected NFC reader: '{nfcScanner}' not available", Variables.AppSettings.NfcSelectedScanner);
+                }
+            }
+
             Log.Information("[RADIOMGR] Ready");
         }
 
         private static void MessageReceivedHandler(ProximityDevice sender, ProximityMessage message)
         {
+            if(!Variables.AppSettings.NfcScanningEnabled)
+                return;
+
             try
             {
                 var rawMsg = message.Data.ToArray();

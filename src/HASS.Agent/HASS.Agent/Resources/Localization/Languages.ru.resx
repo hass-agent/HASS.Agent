@@ -3440,4 +3440,7 @@ Home Assistant.
 
 Примечание. При использовании в спутниковой службе он не обнаружит приложения пользовательского пространства.</value>
   </data>
+  <data name="Configuration_NFC" xml:space="preserve">
+    <value>NFC</value>
+  </data>
 </root>

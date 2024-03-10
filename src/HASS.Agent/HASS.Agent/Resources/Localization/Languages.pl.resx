@@ -3481,4 +3481,7 @@ Wymaga nazwy urządzenia audio jako ładunku.</value>
 
 Uwaga: jeśli jest używany w usłudze satelitarnej, nie wykryje aplikacji przestrzeni użytkownika.</value>
   </data>
+  <data name="Configuration_NFC" xml:space="preserve">
+    <value>NFC</value>
+  </data>
 </root>

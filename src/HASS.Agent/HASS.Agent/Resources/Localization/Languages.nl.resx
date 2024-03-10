@@ -3392,4 +3392,7 @@ U hebt de naam van het audioapparaat nodig als payload.</value>
 
 Opmerking: indien gebruikt in de satellietdienst, zal het geen gebruikersruimtetoepassingen detecteren.</value>
   </data>
+  <data name="Configuration_NFC" xml:space="preserve">
+    <value>NFC</value>
+  </data>
 </root>

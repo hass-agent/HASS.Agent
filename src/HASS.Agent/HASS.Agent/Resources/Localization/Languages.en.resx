@@ -3372,4 +3372,7 @@ Requires audio device name as a payload.</value>
 
 Note: if used in the satellite service, it won't detect userspace applications.</value>
   </data>
+  <data name="Configuration_NFC" xml:space="preserve">
+    <value>NFC</value>
+  </data>
 </root>

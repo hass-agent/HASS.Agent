@@ -92,6 +92,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Controls\Configuration\ConfigNFC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Update="Controls\Configuration\ConfigLocalApi.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -169,6 +172,36 @@
     </EmbeddedResource>
     <EmbeddedResource Update="Controls\Configuration\ConfigExternalTools.tr.resx">
       <DependentUpon>ConfigExternalTools.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Controls\Configuration\ConfigGeneral - Copy.de.resx">
+      <DependentUpon>ConfigGeneral.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Controls\Configuration\ConfigGeneral - Copy.en.resx">
+      <DependentUpon>ConfigGeneral.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Controls\Configuration\ConfigGeneral - Copy.es.resx">
+      <DependentUpon>ConfigGeneral.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Controls\Configuration\ConfigGeneral - Copy.fr.resx">
+      <DependentUpon>ConfigGeneral.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Controls\Configuration\ConfigGeneral - Copy.nl.resx">
+      <DependentUpon>ConfigGeneral.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Controls\Configuration\ConfigGeneral - Copy.pl.resx">
+      <DependentUpon>ConfigGeneral.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Controls\Configuration\ConfigGeneral - Copy.pt-br.resx">
+      <DependentUpon>ConfigGeneral.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Controls\Configuration\ConfigGeneral - Copy.ru.resx">
+      <DependentUpon>ConfigGeneral.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Controls\Configuration\ConfigGeneral - Copy.sl.resx">
+      <DependentUpon>ConfigGeneral.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Controls\Configuration\ConfigGeneral - Copy.tr.resx">
+      <DependentUpon>ConfigGeneral.resx</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Update="Controls\Configuration\ConfigGeneral.de.resx">
       <DependentUpon>ConfigGeneral.resx</DependentUpon>

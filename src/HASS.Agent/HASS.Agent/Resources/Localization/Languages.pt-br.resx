@@ -3417,4 +3417,7 @@ Você precisa do nome do dispositivo de áudio como carga útil.</value>
 
 Nota: se usado no serviço de satélite, não detectará aplicações no espaço do usuário.</value>
   </data>
+  <data name="Configuration_NFC" xml:space="preserve">
+    <value>NFC</value>
+  </data>
 </root>

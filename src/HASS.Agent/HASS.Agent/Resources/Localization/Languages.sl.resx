@@ -3520,4 +3520,7 @@ Ime zvočne naprave potrebujete kot obremenitev.</value>
 
 Opomba: če se uporablja v satelitski storitvi, ne bo zaznal aplikacij uporabniškega prostora.</value>
   </data>
+  <data name="Configuration_NFC" xml:space="preserve">
+    <value>NFC</value>
+  </data>
 </root>

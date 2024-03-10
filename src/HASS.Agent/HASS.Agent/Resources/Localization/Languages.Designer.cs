@@ -3258,6 +3258,15 @@ namespace HASS.Agent.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to NFC.
+        /// </summary>
+        internal static string Configuration_NFC {
+            get {
+                return ResourceManager.GetString("Configuration_NFC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You&apos;ve changed your device&apos;s name.
         ///
         ///All your sensors and commands will now be unpublished, and HASS.Agent will restart afterwards to republish them.

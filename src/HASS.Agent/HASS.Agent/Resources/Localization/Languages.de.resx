@@ -3495,4 +3495,7 @@ Als Payload benötigen Sie den Namen des Audiogeräts.</value>
 
 Hinweis: Bei Verwendung im Satellitendienst werden keine Userspace-Anwendungen erkannt.</value>
   </data>
+  <data name="Configuration_NFC" xml:space="preserve">
+    <value>NFC</value>
+  </data>
 </root>

@@ -2987,4 +2987,7 @@ Yük olarak ses cihazı adına ihtiyacınız vardır.</value>
 
 Not: Uydu hizmetinde kullanılırsa kullanıcı alanı uygulamalarını algılamaz.</value>
   </data>
+  <data name="Configuration_NFC" xml:space="preserve">
+    <value>NFC</value>
+  </data>
 </root>

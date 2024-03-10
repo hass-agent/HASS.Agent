@@ -3384,4 +3384,7 @@ Requires audio device name as a payload.</value>
   <data name="ConfigTrayIcon_CbUseModernIcon" xml:space="preserve">
     <value>Use modern tray icon</value>
   </data>
+  <data name="Configuration_NFC" xml:space="preserve">
+    <value>NFC</value>
+  </data>
 </root>
