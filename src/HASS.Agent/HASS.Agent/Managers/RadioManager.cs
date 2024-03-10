@@ -59,7 +59,7 @@ namespace HASS.Agent.Managers
             }
             else
             {
-                Log.Fatal("[RADIOMGR] No permission granted for radio management");
+                Log.Fatal("[RADIOMGR] No permission granted for radio management - privacy settings may be restricting the access");
             }
 
             Log.Debug("[RADIOMGR] Enumerating proximity/NFC devices");
