@@ -1,4 +1,7 @@
-﻿using Serilog;
+﻿using MQTTnet;
+using NdefLibrary.Ndef;
+using Newtonsoft.Json;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -42,6 +45,8 @@ namespace HASS.Agent.Managers
 
         public static async Task Initialize()
         {
+            Log.Debug("[RADIOMGR] Initialization started");
+
             var accessStatus = await Radio.RequestAccessAsync();
             if (accessStatus == RadioAccessStatus.Allowed)
             {
@@ -50,13 +55,14 @@ namespace HASS.Agent.Managers
                     AvailableRadio.Add(radio);
                 }
 
-                Log.Information("[RADIOMGR] Ready");
+                Log.Information("[RADIOMGR] Radio management permission granted");
             }
             else
             {
-                Log.Fatal("[RADIOMGR] No permission granted for Bluetooth radio management");
+                Log.Fatal("[RADIOMGR] No permission granted for radio management");
             }
 
+            Log.Debug("[RADIOMGR] Enumerating proximity/NFC devices");
             try
             {
                 var proximityDevices = await DeviceInformation.FindAllAsync(ProximityDevice.GetDeviceSelector());
@@ -68,28 +74,46 @@ namespace HASS.Agent.Managers
             }
             catch
             {
-                Log.Fatal("[RADIOMGR] Error initializing NFC devices");
+                Log.Fatal("[RADIOMGR] Error initializing proximity/NFC devices");
             }
+
+            Log.Information("[RADIOMGR] Ready");
         }
 
         private static void MessageReceivedHandler(ProximityDevice sender, ProximityMessage message)
         {
             try
             {
-/*                var rawMsg = message.Data.ToArray();
+                var rawMsg = message.Data.ToArray();
                 var ndefMessage = NdefMessage.FromByteArray(rawMsg);
 
-                // Loop over all records contained in the NDEF message
-                foreach (NdefRecord record in ndefMessage)
+                foreach (var record in ndefMessage)
                 {
-                    Console.WriteLine("Record type: " + Encoding.UTF8.GetString(record.Type, 0, record.Type.Length));
-                    // Go through each record, check if it's a Smart Poster
+                    Log.Debug("Record type: " + Encoding.UTF8.GetString(record.Type, 0, record.Type.Length));
                     if (record.CheckSpecializedType(false) == typeof(NdefUriRecord))
                     {
-                        var spRecord = new NdefUriRecord(record);
-                        Console.WriteLine($"URI: {spRecord.Uri}");
+                        var uriRecord = new NdefUriRecord(record);
+                        Log.Debug($"URI: {uriRecord.Uri}");
+
+                        if (uriRecord.Uri.StartsWith("https://www.home-assistant.io/tag/"))
+                        {
+                            var tagId = uriRecord.Uri.Split('/').LastOrDefault();
+                            if(string.IsNullOrWhiteSpace(tagId))
+                                return;
+
+                            var tagScannedMessage = new MqttApplicationMessageBuilder()
+                                .WithTopic($"hass.agent/devices/{Variables.DeviceConfig.Name}/tag_scanned")
+                                .WithPayload(JsonConvert.SerializeObject(new
+                                {
+                                    Time = DateTime.UtcNow.ToString("s"),
+                                    UID = tagId
+                                }))
+                                .Build();
+
+                            Variables.MqttManager.PublishAsync(tagScannedMessage);
+                        }
                     }
-                }*/
+                }
 
             }
             catch (Exception ex)
