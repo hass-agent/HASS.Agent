@@ -1,5 +1,8 @@
-﻿using CoreAudio;
+﻿using AudioSwitcher.AudioApi;
+using AudioSwitcher.AudioApi.CoreAudio;
+using AudioSwitcher.AudioApi.Session;
 using HASS.Agent.Shared.Enums;
+using HidSharp;
 using Newtonsoft.Json;
 using Serilog;
 using System;
@@ -33,17 +36,20 @@ namespace HASS.Agent.Shared.HomeAssistant.Commands.InternalCommands
             TurnOnWithAction(CommandConfig);
         }
 
-        private MMDevice GetAudioDeviceOrDefault(string playbackDeviceName)
+        private CoreAudioDevice GetAudioDeviceOrDefault(string playbackDeviceName)
         {
-            var devices = Variables.AudioDeviceEnumerator.EnumerateAudioEndPoints(DataFlow.Render, DeviceState.Active);
-            var playbackDevice = devices.Where(d => d.DeviceFriendlyName == playbackDeviceName).FirstOrDefault();
+            var devices = Variables.AudioDeviceController.GetDevices(DeviceType.Playback, DeviceState.Active);
+            var playbackDevice = devices.Where(d => d.FullName == playbackDeviceName).FirstOrDefault();
 
-            return playbackDevice ?? Variables.AudioDeviceEnumerator.GetDefaultAudioEndpoint(DataFlow.Render, Role.Multimedia);
+            return playbackDevice ?? Variables.AudioDeviceController.GetDefaultDevice(DeviceType.Playback, Role.Multimedia);
         }
 
-        private string GetSessionDisplayName(AudioSessionControl2 session)
+        private string GetSessionDisplayName(IAudioSession session)
         {
-            var procId = (int)session.ProcessID;
+            if (string.IsNullOrWhiteSpace(session.DisplayName))
+                return session.DisplayName;
+
+            var procId = (int)session.ProcessId;
 
             if (procId <= 0)
                 return session.DisplayName;
@@ -55,6 +61,27 @@ namespace HASS.Agent.Shared.HomeAssistant.Commands.InternalCommands
             ApplicationNames.Add(procId, p.ProcessName);
 
             return p.ProcessName;
+        }
+
+        private IAudioSession GetSessionForApplication(IEnumerable<IAudioSession> sessions, string applicationName)
+        {
+            return sessions.Where(s =>
+                    s != null &&
+                    applicationName == GetSessionDisplayName(s)
+                ).FirstOrDefault();
+        }
+
+        private IAudioSession GetApplicationAudioSession(IAudioSessionController controller, string applicationName)
+        {
+            var session = GetSessionForApplication(controller.ActiveSessions(), applicationName);
+            if(session != null)
+                return session;
+
+            session = GetSessionForApplication(controller.InactiveSessions(), applicationName);
+            if (session != null)
+                return session;
+
+            return GetSessionForApplication(controller.ExpiredSessions(), applicationName);
         }
 
         public override void TurnOnWithAction(string action)
@@ -72,11 +99,9 @@ namespace HASS.Agent.Shared.HomeAssistant.Commands.InternalCommands
                     return;
                 }
 
-                using var audioDevice = GetAudioDeviceOrDefault(actionData.PlaybackDevice);
-                using var session = audioDevice.AudioSessionManager2?.Sessions?.Where(s =>
-                    s != null &&
-                    actionData.ApplicationName == GetSessionDisplayName(s)
-                ).FirstOrDefault();
+                var audioDevice = GetAudioDeviceOrDefault(actionData.PlaybackDevice);
+                var audioSessionController = audioDevice.GetCapability<IAudioSessionController>(); //TODO: null
+                var session = GetApplicationAudioSession(audioSessionController, actionData.ApplicationName);
 
                 if (session == null)
                 {
@@ -85,7 +110,7 @@ namespace HASS.Agent.Shared.HomeAssistant.Commands.InternalCommands
                     return;
                 }
 
-                session.SimpleAudioVolume.Mute = actionData.Mute;
+                session.SetMuteAsync(actionData.Mute);
                 if (actionData.Volume == -1)
                 {
                     Log.Debug("[SETAPPVOLUME] No volume value provided, only mute has been set for {app}", actionData.ApplicationName);
@@ -93,8 +118,8 @@ namespace HASS.Agent.Shared.HomeAssistant.Commands.InternalCommands
                     return;
                 }
 
-                var volume = Math.Clamp(actionData.Volume, 0, 100) / 100.0f;
-                session.SimpleAudioVolume.MasterVolume = volume;
+                var volume = Math.Clamp(actionData.Volume, 0, 100);
+                session.SetVolumeAsync(volume);
             }
             catch (Exception ex)
             {

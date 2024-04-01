@@ -3,7 +3,7 @@ using System.Data.SqlTypes;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
-using CoreAudio;
+using AudioSwitcher.AudioApi;
 using HASS.Agent.Shared.Enums;
 using HASS.Agent.Shared.Functions;
 using Serilog;
@@ -51,15 +51,9 @@ namespace HASS.Agent.Shared.HomeAssistant.Commands.InternalCommands
                 }
 
                 // get the current default endpoint
-                using var audioDevice = Variables.AudioDeviceEnumerator?.GetDefaultAudioEndpoint(DataFlow.Render, Role.Multimedia);
-                if (audioDevice?.AudioEndpointVolume == null)
-                {
-                    Log.Warning("[SETVOLUME] [{name}] Unable to trigger command, no default audio endpoint found", EntityName);
-                    
-                    return;
-                }
+                var audioDevice = Variables.AudioDeviceController.GetDefaultDevice(DeviceType.Playback, Role.Multimedia);
 
-                audioDevice.AudioEndpointVolume.MasterVolumeLevelScalar = _volume;
+                audioDevice.SetVolumeAsync(_volume);
             }
             catch (Exception ex)
             {
@@ -86,15 +80,9 @@ namespace HASS.Agent.Shared.HomeAssistant.Commands.InternalCommands
                 }
 
                 // get the current default endpoint
-                using var audioDevice = Variables.AudioDeviceEnumerator?.GetDefaultAudioEndpoint(DataFlow.Render, Role.Multimedia);
-                if (audioDevice?.AudioEndpointVolume == null)
-                {
-                    Log.Warning("[SETVOLUME] [{name}] Unable to trigger action for command, no default audio endpoint found", EntityName);
-                    
-                    return;
-                }
+                var audioDevice = Variables.AudioDeviceController.GetDefaultDevice(DeviceType.Playback, Role.Multimedia);
 
-                audioDevice.AudioEndpointVolume.MasterVolumeLevelScalar = volumeInt / 100.0f; ;
+                audioDevice.SetVolumeAsync(volumeInt);
             }
             catch (Exception ex)
             {

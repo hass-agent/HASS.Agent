@@ -1,4 +1,5 @@
-﻿using CoreAudio;
+﻿using AudioSwitcher.AudioApi;
+using AudioSwitcher.AudioApi.CoreAudio;
 using HASS.Agent.Shared.Enums;
 using Newtonsoft.Json;
 using Serilog;
@@ -35,12 +36,12 @@ namespace HASS.Agent.Shared.HomeAssistant.Commands.InternalCommands
             TurnOnWithAction(OutputDevice);
         }
 
-        private MMDevice GetAudioDeviceOrDefault(string playbackDeviceName)
+        private CoreAudioDevice GetAudioDeviceOrDefault(string playbackDeviceName)
         {
-            var devices = Variables.AudioDeviceEnumerator.EnumerateAudioEndPoints(DataFlow.Render, DeviceState.Active);
-            var playbackDevice = devices.Where(d => d.DeviceFriendlyName == playbackDeviceName).FirstOrDefault();
+            var devices = Variables.AudioDeviceController.GetDevices(DeviceType.Playback, DeviceState.Active);
+            var playbackDevice = devices.Where(d => d.FullName == playbackDeviceName).FirstOrDefault();
 
-            return playbackDevice ?? Variables.AudioDeviceEnumerator.GetDefaultAudioEndpoint(DataFlow.Render, Role.Multimedia);
+            return playbackDevice ?? Variables.AudioDeviceController.GetDefaultDevice(DeviceType.Playback, Role.Multimedia);
         }
 
         public override void TurnOnWithAction(string action)
@@ -50,10 +51,10 @@ namespace HASS.Agent.Shared.HomeAssistant.Commands.InternalCommands
             try
             {
                 var outputDevice = GetAudioDeviceOrDefault(action);
-                if (outputDevice == Variables.AudioDeviceEnumerator.GetDefaultAudioEndpoint(DataFlow.Render, Role.Multimedia))
+                if (outputDevice == Variables.AudioDeviceController.GetDefaultDevice(DeviceType.Playback, Role.Multimedia))
                     return;
 
-                outputDevice.Selected = true;
+                outputDevice.SetAsDefault();
             }
             catch (Exception ex)
             {

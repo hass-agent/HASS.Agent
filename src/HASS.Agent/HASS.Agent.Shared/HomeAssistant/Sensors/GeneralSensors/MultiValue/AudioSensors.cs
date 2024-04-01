@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
-using CoreAudio;
+using AudioSwitcher.AudioApi;
+using AudioSwitcher.AudioApi.Session;
 using HASS.Agent.Shared.Functions;
 using HASS.Agent.Shared.HomeAssistant.Sensors.GeneralSensors.MultiValue.DataTypes;
 using HASS.Agent.Shared.Models.HomeAssistant;
@@ -42,29 +43,28 @@ public class AudioSensors : AbstractMultiValueSensor
             Sensors[sensorId] = sensor;
     }
 
-    private List<string> GetAudioDevices(DataFlow type)
+    private List<string> GetAudioDevices(DeviceType type)
     {
         var audioDevices = new List<string>();
-        foreach (var device in Variables.AudioDeviceEnumerator.EnumerateAudioEndPoints(type, DeviceState.Active))
+        foreach (var device in Variables.AudioDeviceController.GetDevices(type))
         {
-            audioDevices.Add(device.DeviceFriendlyName);
-            device.Dispose();
+            audioDevices.Add(device.FullName);
         }
 
         return audioDevices;
     }
 
-    private List<string> GetAudioOutputDevices() => GetAudioDevices(DataFlow.Render);
-    private List<string> GetAudioInputDevices() => GetAudioDevices(DataFlow.Capture);
+    private List<string> GetAudioOutputDevices() => GetAudioDevices(DeviceType.Playback);
+    private List<string> GetAudioInputDevices() => GetAudioDevices(DeviceType.Capture);
 
     private void HandleAudioOutputSensors(string parentSensorSafeName, string deviceName)
     {
-        using var audioDevice = Variables.AudioDeviceEnumerator.GetDefaultAudioEndpoint(DataFlow.Render, Role.Multimedia);
+        var audioDevice = Variables.AudioDeviceController.GetDefaultDevice(DeviceType.Playback, Role.Multimedia);
 
         var defaultDeviceEntityName = $"{parentSensorSafeName}_default_device";
         var defaultDeviceId = $"{Id}_default_device";
         var defaultDeviceSensor = new DataTypeStringSensor(_updateInterval, defaultDeviceEntityName, $"Default Device", defaultDeviceId, string.Empty, "mdi:speaker", string.Empty, EntityName);
-        defaultDeviceSensor.SetState(audioDevice.DeviceFriendlyName);
+        defaultDeviceSensor.SetState(audioDevice.FullName);
         AddUpdateSensor(defaultDeviceId, defaultDeviceSensor);
 
         var defaultDeviceStateEntityName = $"{parentSensorSafeName}_default_device_state";
@@ -73,14 +73,14 @@ public class AudioSensors : AbstractMultiValueSensor
         defaultDeviceStateSensor.SetState(GetReadableState(audioDevice.State));
         AddUpdateSensor(defaultDeviceStateId, defaultDeviceStateSensor);
 
-        var masterVolume = Convert.ToInt32(Math.Round(audioDevice.AudioEndpointVolume?.MasterVolumeLevelScalar * 100 ?? 0, 0));
+        var masterVolume = (int)audioDevice.Volume;
         var defaultDeviceVolumeEntityName = $"{parentSensorSafeName}_default_device_volume";
         var defaultDeviceVolumeId = $"{Id}_default_device_volume";
         var defaultDeviceVolumeSensor = new DataTypeIntSensor(_updateInterval, defaultDeviceVolumeEntityName, $"Default Device Volume", defaultDeviceVolumeId, string.Empty, "mdi:speaker", string.Empty, EntityName);
         defaultDeviceVolumeSensor.SetState(masterVolume);
         AddUpdateSensor(defaultDeviceVolumeId, defaultDeviceVolumeSensor);
 
-        var defaultDeviceIsMuted = audioDevice.AudioEndpointVolume?.Mute ?? false;
+        var defaultDeviceIsMuted = audioDevice.IsMuted;
         var defaultDeviceIsMutedEntityName = $"{parentSensorSafeName}_default_device_muted";
         var defaultDeviceIsMutedId = $"{Id}_default_device_muted";
         var defaultDeviceIsMutedSensor = new DataTypeBoolSensor(_updateInterval, defaultDeviceIsMutedEntityName, $"Default Device Muted", defaultDeviceIsMutedId, string.Empty, "mdi:speaker", EntityName);
@@ -124,12 +124,12 @@ public class AudioSensors : AbstractMultiValueSensor
 
     private void HandleAudioInputSensors(string parentSensorSafeName, string deviceName)
     {
-        using var inputDevice = Variables.AudioDeviceEnumerator.GetDefaultAudioEndpoint(DataFlow.Capture, Role.Communications);
+        var inputDevice = Variables.AudioDeviceController.GetDefaultDevice(DeviceType.Capture, Role.Communications);
 
         var defaultInputDeviceEntityName = $"{parentSensorSafeName}_default_input_device";
         var defaultInputDeviceId = $"{Id}_default_input_device";
         var defaultInputDeviceSensor = new DataTypeStringSensor(_updateInterval, defaultInputDeviceEntityName, $"Default Input Device", defaultInputDeviceId, string.Empty, "mdi:microphone", string.Empty, EntityName);
-        defaultInputDeviceSensor.SetState(inputDevice.DeviceFriendlyName);
+        defaultInputDeviceSensor.SetState(inputDevice.FullName);
         AddUpdateSensor(defaultInputDeviceId, defaultInputDeviceSensor);
 
         var defaultInputDeviceStateEntityName = $"{parentSensorSafeName}_default_input_device_state";
@@ -138,14 +138,15 @@ public class AudioSensors : AbstractMultiValueSensor
         defaultInputDeviceStateSensor.SetState(GetReadableState(inputDevice.State));
         AddUpdateSensor(defaultInputDeviceStateId, defaultInputDeviceStateSensor);
 
-        var defaultInputDeviceIsMuted = inputDevice.AudioEndpointVolume?.Mute ?? false;
+        var defaultInputDeviceIsMuted = inputDevice.IsMuted;
         var defaultInputDeviceIsMutedEntityName = $"{parentSensorSafeName}_default_input_device_muted";
         var defaultInputDeviceIsMutedId = $"{Id}_default_input_device_muted";
         var defaultInputDeviceIsMutedSensor = new DataTypeBoolSensor(_updateInterval, defaultInputDeviceIsMutedEntityName, $"Default Input Device Muted", defaultInputDeviceIsMutedId, string.Empty, "mdi:microphone", EntityName);
         defaultInputDeviceIsMutedSensor.SetState(defaultInputDeviceIsMuted);
         AddUpdateSensor(defaultInputDeviceIsMutedId, defaultInputDeviceIsMutedSensor);
 
-        var inputVolume = (int)GetDefaultInputDevicePeakVolume(inputDevice);
+        //var inputVolume = (int)GetDefaultInputDevicePeakVolume(inputDevice);
+        var inputVolume = 0;
         var defaultInputDeviceVolumeEntityName = $"{parentSensorSafeName}_default_input_device_volume";
         var defaultInputDeviceVolumeId = $"{Id}_default_input_device_volume";
         var defaultInputDeviceVolumeSensor = new DataTypeIntSensor(_updateInterval, defaultInputDeviceVolumeEntityName, $"Default Input Device Volume", defaultInputDeviceVolumeId, string.Empty, "mdi:microphone", string.Empty, EntityName);
@@ -190,9 +191,9 @@ public class AudioSensors : AbstractMultiValueSensor
         }
     }
 
-    private string GetSessionDisplayName(AudioSessionControl2 session)
+    private string GetSessionDisplayName(IAudioSession session)
     {
-        var procId = (int)session.ProcessID;
+        var procId = (int)session.ProcessId;
 
         if (procId <= 0)
             return session.DisplayName;
@@ -216,54 +217,49 @@ public class AudioSensors : AbstractMultiValueSensor
         {
             var errors = false;
 
-            foreach (var device in Variables.AudioDeviceEnumerator.EnumerateAudioEndPoints(DataFlow.Render, DeviceState.Active))
+            foreach (var device in Variables.AudioDeviceController.GetDevices(DeviceType.Playback, DeviceState.Active))
             {
-                using (device)
+                var audioSessionController = device.GetCapability<IAudioSessionController>(); //TODO(Amadeo): null?
+                var sessions = audioSessionController.ActiveSessions();
+                foreach (var session in sessions)
                 {
-                    foreach (var session in device.AudioSessionManager2?.Sessions.Where(x => x != null))
+                    if (session.ProcessId == 0)
+                        continue;
+
+                    try
                     {
-                        if (session.ProcessID == 0)
+                        var displayName = session.DisplayName ?? GetSessionDisplayName(session);
+                        if (displayName == "audiodg")
                             continue;
 
-                        try
+                        if (displayName.Length > 30)
+                            displayName = $"{displayName[..30]}..";
+
+                        var sessionInfo = new AudioSessionInfo
                         {
-                            var displayName = GetSessionDisplayName(session);
+                            Application = displayName,
+                            PlaybackDevice = device.FullName,
+                            Muted = session.IsMuted,
+                            Active = session.SessionState == AudioSessionState.Active,
+                            MasterVolume = (float)session.Volume,
+                            PeakVolume = 0 //TODO(Amadeo): braking change
+                        };
 
-                            if (displayName == "audiodg")
-                                continue;
+                        // new max?
+                        if (sessionInfo.PeakVolume > peakVolume)
+                            peakVolume = sessionInfo.PeakVolume;
 
-                            if (displayName.Length > 30)
-                                displayName = $"{displayName[..30]}..";
+                        sessionInfos.Add(sessionInfo);
+                    }
+                    catch (Exception ex)
+                    {
+                        if (!_errorPrinted)
+                            Log.Fatal(ex, "[AUDIO] [{name}] [{app}] Exception while retrieving info: {err}", EntityName, session.DisplayName, ex.Message);
 
-                            var sessionInfo = new AudioSessionInfo
-                            {
-                                Application = displayName,
-                                PlaybackDevice = device.DeviceFriendlyName,
-                                Muted = session.SimpleAudioVolume?.Mute ?? false,
-                                Active = session.State == AudioSessionState.AudioSessionStateActive,
-                                MasterVolume = session.SimpleAudioVolume?.MasterVolume * 100 ?? 0f,
-                                PeakVolume = session.AudioMeterInformation?.MasterPeakValue * 100 ?? 0f
-                            };
-
-                            // new max?
-                            if (sessionInfo.PeakVolume > peakVolume)
-                                peakVolume = sessionInfo.PeakVolume;
-
-                            sessionInfos.Add(sessionInfo);
-                        }
-                        catch (Exception ex)
-                        {
-                            if (!_errorPrinted)
-                                Log.Fatal(ex, "[AUDIO] [{name}] [{app}] Exception while retrieving info: {err}", EntityName, session.DisplayName, ex.Message);
-
-                            errors = true;
-                        }
-                        finally
-                        {
-                            session?.Dispose();
-                        }
+                        errors = true;
                     }
                 }
+
             }
 
             // only print errors once
@@ -292,7 +288,7 @@ public class AudioSensors : AbstractMultiValueSensor
         return sessionInfos;
     }
 
-    private float GetDefaultInputDevicePeakVolume(MMDevice inputDevice)
+/*    private float GetDefaultInputDevicePeakVolume(MMDevice inputDevice)
     {
         if (inputDevice == null)
             return 0f;
@@ -356,7 +352,7 @@ public class AudioSensors : AbstractMultiValueSensor
         }
 
         return peakVolume;
-    }
+    }*/
 
     /// <summary>
     /// Converts the audio device's state to a better readable form
@@ -371,7 +367,7 @@ public class AudioSensors : AbstractMultiValueSensor
             DeviceState.Disabled => "DISABLED",
             DeviceState.NotPresent => "NOT PRESENT",
             DeviceState.Unplugged => "UNPLUGGED",
-            DeviceState.MaskAll => "STATEMASK_ALL",
+            DeviceState.All => "STATEMASK_ALL",
             _ => "UNKNOWN"
         };
     }

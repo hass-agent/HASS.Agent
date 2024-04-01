@@ -1,4 +1,5 @@
-﻿using CoreAudio;
+﻿using AudioSwitcher.AudioApi;
+using AudioSwitcher.AudioApi.CoreAudio;
 using HASS.Agent.Shared.Enums;
 using Newtonsoft.Json;
 using Serilog;
@@ -35,12 +36,12 @@ public class SetAudioInputCommand : InternalCommand
         TurnOnWithAction(InputDevice);
     }
 
-    private MMDevice GetAudioDeviceOrDefault(string playbackDeviceName)
+    private CoreAudioDevice GetAudioDeviceOrDefault(string playbackDeviceName)
     {
-        var devices = Variables.AudioDeviceEnumerator.EnumerateAudioEndPoints(DataFlow.Capture, DeviceState.Active);
-        var playbackDevice = devices.Where(d => d.DeviceFriendlyName == playbackDeviceName).FirstOrDefault();
+        var devices = Variables.AudioDeviceController.GetDevices(DeviceType.Capture, DeviceState.Active);
+        var playbackDevice = devices.Where(d => d.FullName == playbackDeviceName).FirstOrDefault();
 
-        return playbackDevice ?? Variables.AudioDeviceEnumerator.GetDefaultAudioEndpoint(DataFlow.Capture, Role.Communications);
+        return playbackDevice ?? Variables.AudioDeviceController.GetDefaultDevice(DeviceType.Capture, Role.Communications);
     }
 
     public override void TurnOnWithAction(string action)
@@ -49,11 +50,12 @@ public class SetAudioInputCommand : InternalCommand
 
         try
         {
-            var outputDevice = GetAudioDeviceOrDefault(action);
-            if (outputDevice == Variables.AudioDeviceEnumerator.GetDefaultAudioEndpoint(DataFlow.Capture, Role.Communications))
+            var inputDevice = GetAudioDeviceOrDefault(action);
+            if (inputDevice == Variables.AudioDeviceController.GetDefaultDevice(DeviceType.Capture, Role.Communications))
                 return;
 
-            outputDevice.Selected = true;
+            inputDevice.SetAsDefault();
+            inputDevice.SetAsDefaultCommunications();
         }
         catch (Exception ex)
         {

@@ -5,7 +5,6 @@ using System.IO;
 using System.Net.Http;
 using System.Reflection;
 using Windows.Media.Playback;
-using CoreAudio;
 using Grapevine;
 using HASS.Agent.Forms;
 using HASS.Agent.Functions;
@@ -25,6 +24,7 @@ using Microsoft.Win32;
 using MQTTnet;
 using WK.Libraries.HotkeyListenerNS;
 using Serilog.Core;
+using AudioSwitcher.AudioApi.CoreAudio;
 
 namespace HASS.Agent
 {
@@ -123,7 +123,7 @@ namespace HASS.Agent
         /// <summary>
         /// Media
         /// </summary>
-        internal static MMDeviceEnumerator AudioDeviceEnumerator { get; set; }
+        internal static CoreAudioController AudioDeviceController { get; set; }
         internal static MediaPlayer MediaPlayer { get; set; }
 
         /// <summary>

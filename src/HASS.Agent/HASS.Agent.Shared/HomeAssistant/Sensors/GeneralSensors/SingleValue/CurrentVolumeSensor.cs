@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Globalization;
-using CoreAudio;
+using AudioSwitcher.AudioApi;
 using HASS.Agent.Shared.Models.HomeAssistant;
 
 namespace HASS.Agent.Shared.HomeAssistant.Sensors.GeneralSensors.SingleValue
@@ -36,13 +36,13 @@ namespace HASS.Agent.Shared.HomeAssistant.Sensors.GeneralSensors.SingleValue
 
         public override string GetState()
         {
-            using var audioDevice = Variables.AudioDeviceEnumerator?.GetDefaultAudioEndpoint(DataFlow.Render, Role.Multimedia);
+            var audioDevice = Variables.AudioDeviceController.GetDefaultDevice(DeviceType.Playback, Role.Multimedia);
             // check for null & mute
-            if (audioDevice?.AudioEndpointVolume == null) return "0";
-            if (audioDevice.AudioEndpointVolume.Mute) return "0";
+            if (audioDevice.IsMuted)
+                return "0";
 
             // return as percentage
-            return Math.Round(audioDevice.AudioEndpointVolume.MasterVolumeLevelScalar * 100, 0).ToString(CultureInfo.InvariantCulture);
+            return audioDevice.Volume.ToString(CultureInfo.InvariantCulture);
         }
 
         public override string GetAttributes() => string.Empty;

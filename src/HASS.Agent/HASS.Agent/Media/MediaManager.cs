@@ -2,7 +2,6 @@
 using System.Text.Json;
 using Windows.Media.Control;
 using Windows.Media.Playback;
-using CoreAudio;
 using HASS.Agent.Enums;
 using HASS.Agent.Extensions;
 using HASS.Agent.Managers;
@@ -13,6 +12,7 @@ using MQTTnet;
 using Serilog;
 using MediaPlayerState = HASS.Agent.Enums.MediaPlayerState;
 using Octokit;
+using AudioSwitcher.AudioApi.CoreAudio;
 
 namespace HASS.Agent.Media
 {
@@ -50,7 +50,7 @@ namespace HASS.Agent.Media
             try
             {
                 // create the objects
-                Variables.AudioDeviceEnumerator = new MMDeviceEnumerator(Guid.NewGuid());
+                Variables.AudioDeviceController = new CoreAudioController();
                 Variables.MediaPlayer = new MediaPlayer();
 
                 _sessionManager = await GlobalSystemMediaTransportControlsSessionManager.RequestAsync();
