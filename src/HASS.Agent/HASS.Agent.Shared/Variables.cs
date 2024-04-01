@@ -14,7 +14,6 @@ namespace HASS.Agent.Shared
         /// <summary>
         /// public references
         /// </summary>
-        internal static CoreAudioController AudioDeviceController { get; } = new CoreAudioController();
         internal static Random Rnd { get; } = new Random();
 
         /// <summary>

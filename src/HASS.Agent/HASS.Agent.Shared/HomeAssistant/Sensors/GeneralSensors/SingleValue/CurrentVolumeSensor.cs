@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using AudioSwitcher.AudioApi;
+using HASS.Agent.Shared.Managers;
 using HASS.Agent.Shared.Models.HomeAssistant;
 
 namespace HASS.Agent.Shared.HomeAssistant.Sensors.GeneralSensors.SingleValue
@@ -36,7 +37,7 @@ namespace HASS.Agent.Shared.HomeAssistant.Sensors.GeneralSensors.SingleValue
 
         public override string GetState()
         {
-            var audioDevice = Variables.AudioDeviceController.GetDefaultDevice(DeviceType.Playback, Role.Multimedia);
+            var audioDevice = AudioManager.GetDefaultDevice(DeviceType.Playback, Role.Multimedia);
             // check for null & mute
             if (audioDevice.IsMuted)
                 return "0";

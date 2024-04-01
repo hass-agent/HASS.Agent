@@ -2,6 +2,7 @@
 using AudioSwitcher.AudioApi.CoreAudio;
 using AudioSwitcher.AudioApi.Session;
 using HASS.Agent.Shared.Enums;
+using HASS.Agent.Shared.Managers;
 using HidSharp;
 using Newtonsoft.Json;
 using Serilog;
@@ -38,10 +39,9 @@ namespace HASS.Agent.Shared.HomeAssistant.Commands.InternalCommands
 
         private CoreAudioDevice GetAudioDeviceOrDefault(string playbackDeviceName)
         {
-            var devices = Variables.AudioDeviceController.GetDevices(DeviceType.Playback, DeviceState.Active);
-            var playbackDevice = devices.Where(d => d.FullName == playbackDeviceName).FirstOrDefault();
+            var playbackDevice = AudioManager.GetPlaybackDevices().Where(d => d.FullName == playbackDeviceName).FirstOrDefault();
 
-            return playbackDevice ?? Variables.AudioDeviceController.GetDefaultDevice(DeviceType.Playback, Role.Multimedia);
+            return playbackDevice ?? AudioManager.GetDefaultDevice(DeviceType.Playback, Role.Multimedia);
         }
 
         private string GetSessionDisplayName(IAudioSession session)
@@ -100,7 +100,13 @@ namespace HASS.Agent.Shared.HomeAssistant.Commands.InternalCommands
                 }
 
                 var audioDevice = GetAudioDeviceOrDefault(actionData.PlaybackDevice);
-                var audioSessionController = audioDevice.GetCapability<IAudioSessionController>(); //TODO: null
+                var audioSessionController = audioDevice.GetCapability<IAudioSessionController>();
+                if(audioSessionController == null)
+                {
+                    Log.Error("[SETAPPVOLUME] Error, no audio session controller of {device} can be found", actionData.PlaybackDevice);
+
+                    return;
+                }
                 var session = GetApplicationAudioSession(audioSessionController, actionData.ApplicationName);
 
                 if (session == null)

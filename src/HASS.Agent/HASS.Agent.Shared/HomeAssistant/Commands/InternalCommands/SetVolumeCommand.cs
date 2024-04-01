@@ -6,6 +6,7 @@ using System.IO;
 using AudioSwitcher.AudioApi;
 using HASS.Agent.Shared.Enums;
 using HASS.Agent.Shared.Functions;
+using HASS.Agent.Shared.Managers;
 using Serilog;
 
 namespace HASS.Agent.Shared.HomeAssistant.Commands.InternalCommands
@@ -51,7 +52,7 @@ namespace HASS.Agent.Shared.HomeAssistant.Commands.InternalCommands
                 }
 
                 // get the current default endpoint
-                var audioDevice = Variables.AudioDeviceController.GetDefaultDevice(DeviceType.Playback, Role.Multimedia);
+                var audioDevice = AudioManager.GetDefaultDevice(DeviceType.Playback, Role.Multimedia);
 
                 audioDevice.SetVolumeAsync(_volume);
             }
@@ -80,7 +81,7 @@ namespace HASS.Agent.Shared.HomeAssistant.Commands.InternalCommands
                 }
 
                 // get the current default endpoint
-                var audioDevice = Variables.AudioDeviceController.GetDefaultDevice(DeviceType.Playback, Role.Multimedia);
+                var audioDevice = AudioManager.GetDefaultDevice(DeviceType.Playback, Role.Multimedia);
 
                 audioDevice.SetVolumeAsync(volumeInt);
             }

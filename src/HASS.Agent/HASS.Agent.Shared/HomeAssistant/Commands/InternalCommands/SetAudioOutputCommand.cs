@@ -1,6 +1,7 @@
 ﻿using AudioSwitcher.AudioApi;
 using AudioSwitcher.AudioApi.CoreAudio;
 using HASS.Agent.Shared.Enums;
+using HASS.Agent.Shared.Managers;
 using Newtonsoft.Json;
 using Serilog;
 using System;
@@ -38,10 +39,9 @@ namespace HASS.Agent.Shared.HomeAssistant.Commands.InternalCommands
 
         private CoreAudioDevice GetAudioDeviceOrDefault(string playbackDeviceName)
         {
-            var devices = Variables.AudioDeviceController.GetDevices(DeviceType.Playback, DeviceState.Active);
-            var playbackDevice = devices.Where(d => d.FullName == playbackDeviceName).FirstOrDefault();
+            var playbackDevice = AudioManager.GetPlaybackDevices().Where(d => d.FullName == playbackDeviceName).FirstOrDefault();
 
-            return playbackDevice ?? Variables.AudioDeviceController.GetDefaultDevice(DeviceType.Playback, Role.Multimedia);
+            return playbackDevice ?? AudioManager.GetDefaultDevice(DeviceType.Playback, Role.Multimedia);
         }
 
         public override void TurnOnWithAction(string action)
@@ -51,7 +51,7 @@ namespace HASS.Agent.Shared.HomeAssistant.Commands.InternalCommands
             try
             {
                 var outputDevice = GetAudioDeviceOrDefault(action);
-                if (outputDevice == Variables.AudioDeviceController.GetDefaultDevice(DeviceType.Playback, Role.Multimedia))
+                if (outputDevice == AudioManager.GetDefaultDevice(DeviceType.Playback, Role.Multimedia))
                     return;
 
                 outputDevice.SetAsDefault();

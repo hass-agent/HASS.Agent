@@ -123,7 +123,6 @@ namespace HASS.Agent
         /// <summary>
         /// Media
         /// </summary>
-        internal static CoreAudioController AudioDeviceController { get; set; }
         internal static MediaPlayer MediaPlayer { get; set; }
 
         /// <summary>

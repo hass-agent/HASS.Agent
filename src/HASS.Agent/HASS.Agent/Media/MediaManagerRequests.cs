@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AudioSwitcher.AudioApi;
+using HASS.Agent.Shared.Managers;
 using Serilog;
 
 namespace HASS.Agent.Media
@@ -19,7 +20,7 @@ namespace HASS.Agent.Media
             try
             {
                 // get the default audio device
-                var audioDevice = Variables.AudioDeviceController.GetDefaultDevice(DeviceType.Playback, Role.Multimedia);
+                var audioDevice = AudioManager.GetDefaultDevice(DeviceType.Playback, Role.Multimedia);
 
                 // Log.Debug("[MEDIA] Current volume: {vol}", volume);
 
@@ -42,7 +43,7 @@ namespace HASS.Agent.Media
             try
             {
                 // get the default audio device
-                var audioDevice = Variables.AudioDeviceController.GetDefaultDevice(DeviceType.Playback, Role.Multimedia);
+                var audioDevice = AudioManager.GetDefaultDevice(DeviceType.Playback, Role.Multimedia);
 
                 // Log.Debug("[MEDIA] Muted: {mute}", muted);
 

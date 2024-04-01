@@ -1,6 +1,7 @@
 ﻿using AudioSwitcher.AudioApi;
 using AudioSwitcher.AudioApi.CoreAudio;
 using HASS.Agent.Shared.Enums;
+using HASS.Agent.Shared.Managers;
 using Newtonsoft.Json;
 using Serilog;
 using System;
@@ -38,10 +39,9 @@ public class SetAudioInputCommand : InternalCommand
 
     private CoreAudioDevice GetAudioDeviceOrDefault(string playbackDeviceName)
     {
-        var devices = Variables.AudioDeviceController.GetDevices(DeviceType.Capture, DeviceState.Active);
-        var playbackDevice = devices.Where(d => d.FullName == playbackDeviceName).FirstOrDefault();
+        var playbackDevice = AudioManager.GetCaptureDevices().Where(d => d.FullName == playbackDeviceName).FirstOrDefault();
 
-        return playbackDevice ?? Variables.AudioDeviceController.GetDefaultDevice(DeviceType.Capture, Role.Communications);
+        return playbackDevice ?? AudioManager.GetDefaultDevice(DeviceType.Capture, Role.Communications);
     }
 
     public override void TurnOnWithAction(string action)
@@ -51,7 +51,7 @@ public class SetAudioInputCommand : InternalCommand
         try
         {
             var inputDevice = GetAudioDeviceOrDefault(action);
-            if (inputDevice == Variables.AudioDeviceController.GetDefaultDevice(DeviceType.Capture, Role.Communications))
+            if (inputDevice == AudioManager.GetDefaultDevice(DeviceType.Capture, Role.Communications))
                 return;
 
             inputDevice.SetAsDefault();

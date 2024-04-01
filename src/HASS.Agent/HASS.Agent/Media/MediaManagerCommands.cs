@@ -12,6 +12,7 @@ using static HASS.Agent.Shared.Functions.Inputs;
 using static System.Runtime.CompilerServices.RuntimeHelpers;
 using HASS.Agent.Shared.Functions;
 using AudioSwitcher.AudioApi;
+using HASS.Agent.Shared.Managers;
 
 namespace HASS.Agent.Media
 {
@@ -71,7 +72,7 @@ namespace HASS.Agent.Media
                 if (volume > 100) volume = 100;
 
                 // get the current default endpoint
-                var audioDevice = Variables.AudioDeviceController.GetDefaultDevice(DeviceType.Playback, Role.Multimedia);
+                var audioDevice = AudioManager.GetDefaultDevice(DeviceType.Playback, Role.Multimedia);
 
                 // all good, set the volume
                 audioDevice.SetVolumeAsync(volume);

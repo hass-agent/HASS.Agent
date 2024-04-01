@@ -49,8 +49,7 @@ namespace HASS.Agent.Media
             // todo: optional, but add an OS check - not all OSs support this
             try
             {
-                // create the objects
-                Variables.AudioDeviceController = new CoreAudioController();
+                // create the object
                 Variables.MediaPlayer = new MediaPlayer();
 
                 _sessionManager = await GlobalSystemMediaTransportControlsSessionManager.RequestAsync();
