@@ -6252,6 +6252,15 @@ namespace HASS.Agent.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ad&amp;vanced settings.
+        /// </summary>
+        internal static string SensorsMod_BtnAdvancedSettings {
+            get {
+                return ResourceManager.GetString("SensorsMod_BtnAdvancedSettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &amp;Store Sensor.
         /// </summary>
         internal static string SensorsMod_BtnStore {
@@ -8965,6 +8974,51 @@ namespace HASS.Agent.Resources.Localization {
         internal static string WindowState_Unknown {
             get {
                 return ResourceManager.GetString("WindowState_Unknown", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Device class.
+        /// </summary>
+        internal static string WMISensorConfig_LblDeviceClass {
+            get {
+                return ResourceManager.GetString("WMISensorConfig_LblDeviceClass", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to State class.
+        /// </summary>
+        internal static string WMISensorConfig_LblStateClass {
+            get {
+                return ResourceManager.GetString("WMISensorConfig_LblStateClass", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unit of measurement.
+        /// </summary>
+        internal static string WMISensorConfig_LblUnitOfMeasurement {
+            get {
+                return ResourceManager.GetString("WMISensorConfig_LblUnitOfMeasurement", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to WMI Advanced Settings.
+        /// </summary>
+        internal static string WMISensorConfig_Title {
+            get {
+                return ResourceManager.GetString("WMISensorConfig_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Warning, adding following settings may break the WMI sensor, use with caution!.
+        /// </summary>
+        internal static string WMISensorConfig_Warning {
+            get {
+                return ResourceManager.GetString("WMISensorConfig_Warning", resourceCulture);
             }
         }
     }

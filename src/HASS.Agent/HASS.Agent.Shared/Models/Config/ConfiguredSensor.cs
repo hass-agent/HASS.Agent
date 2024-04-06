@@ -26,6 +26,7 @@ namespace HASS.Agent.Shared.Models.Config
         public bool IgnoreAvailability { get; set; } = false;
         public bool ApplyRounding { get; set; } = false;
         public int? Round { get; set; }
+        public string AdvancedSettings { get; set; } = string.Empty;
 
         public static ConfiguredSensor FromLAB02(ConfiguredSensorLAB02 oldConfig)
         {

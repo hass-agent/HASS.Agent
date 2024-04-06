@@ -3387,4 +3387,22 @@ Requires audio device name as a payload.</value>
   <data name="Configuration_NFC" xml:space="preserve">
     <value>NFC</value>
   </data>
+  <data name="SensorsMod_BtnAdvancedSettings" xml:space="preserve">
+    <value>Ad&amp;vanced settings</value>
+  </data>
+  <data name="WMISensorConfig_Warning" xml:space="preserve">
+    <value>Warning, adding following settings may break the WMI sensor, use with caution!</value>
+  </data>
+  <data name="WMISensorConfig_LblDeviceClass" xml:space="preserve">
+    <value>Device class</value>
+  </data>
+  <data name="WMISensorConfig_LblUnitOfMeasurement" xml:space="preserve">
+    <value>Unit of measurement</value>
+  </data>
+  <data name="WMISensorConfig_LblStateClass" xml:space="preserve">
+    <value>State class</value>
+  </data>
+  <data name="WMISensorConfig_Title" xml:space="preserve">
+    <value>WMI Advanced Settings</value>
+  </data>
 </root>
