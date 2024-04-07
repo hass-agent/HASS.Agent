@@ -155,7 +155,7 @@ namespace HASS.Agent.Settings
                     abstractSensor = new GpuTemperatureSensor(sensor.UpdateInterval, sensor.EntityName, sensor.Name, sensor.Id.ToString());
                     break;
                 case SensorType.WmiQuerySensor:
-                    abstractSensor = new WmiQuerySensor(sensor.Query, sensor.Scope, sensor.ApplyRounding, sensor.Round, sensor.UpdateInterval, sensor.EntityName, sensor.Name, sensor.Id.ToString());
+                    abstractSensor = new WmiQuerySensor(sensor.Query, sensor.Scope, sensor.ApplyRounding, sensor.Round, sensor.UpdateInterval, sensor.EntityName, sensor.Name, sensor.Id.ToString(), sensor.AdvancedSettings);
                     break;
                 case SensorType.PerformanceCounterSensor:
                     abstractSensor = new PerformanceCounterSensor(sensor.Category, sensor.Counter, sensor.Instance, sensor.ApplyRounding, sensor.Round, sensor.UpdateInterval, sensor.EntityName, sensor.Name, sensor.Id.ToString());
@@ -277,7 +277,8 @@ namespace HASS.Agent.Settings
                         Scope = wmiSensor.Scope,
                         Query = wmiSensor.Query,
                         ApplyRounding = wmiSensor.ApplyRounding,
-                        Round= wmiSensor.Round
+                        Round= wmiSensor.Round,
+                        AdvancedSettings = wmiSensor.AdvancedSettings
                     };
                 }
 

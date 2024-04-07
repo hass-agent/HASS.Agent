@@ -2,6 +2,8 @@
 using System.Globalization;
 using System.Management;
 using HASS.Agent.Shared.Models.HomeAssistant;
+using HASS.Agent.Shared.Models.Internal;
+using Newtonsoft.Json;
 
 namespace HASS.Agent.Shared.HomeAssistant.Sensors
 {
@@ -12,43 +14,55 @@ namespace HASS.Agent.Shared.HomeAssistant.Sensors
     {
         private const string DefaultName = "wmiquerysensor";
 
+        private WMIAdvancedInfo _advancedInfo;
+
         public string Query { get; private set; }
         public string Scope { get; private set; }
         public bool ApplyRounding { get; private set; }
         public int? Round { get; private set; }
 
+        public string AdvancedSettings { get; private set; }
+
         protected readonly ObjectQuery ObjectQuery;
         protected readonly ManagementObjectSearcher Searcher;
 
-        public WmiQuerySensor(string query, string scope = "", bool applyRounding = false, int? round = null, int? updateInterval = null, string entityName = DefaultName, string name = DefaultName, string id = default) : base(entityName ?? DefaultName, name ?? null, updateInterval ?? 10, id)
+        public WmiQuerySensor(string query, string scope = "", bool applyRounding = false, int? round = null, int? updateInterval = null, string entityName = DefaultName, string name = DefaultName, string id = default, string advancedSettings = default) : base(entityName ?? DefaultName, name ?? null, updateInterval ?? 10, id)
         {
             Query = query;
             Scope = scope;
             ApplyRounding = applyRounding;
             Round = round;
+            AdvancedSettings = advancedSettings;
+
+            if (!string.IsNullOrWhiteSpace(advancedSettings))
+            {
+                _advancedInfo = JsonConvert.DeserializeObject<WMIAdvancedInfo>(advancedSettings);
+            }
 
             // prepare query
             ObjectQuery = new ObjectQuery(Query);
 
             // use either default or provided scope
-            var managementscope = !string.IsNullOrWhiteSpace(scope) 
-                ? new ManagementScope(scope) 
+            var managementscope = !string.IsNullOrWhiteSpace(scope)
+                ? new ManagementScope(scope)
                 : new ManagementScope(@"\\localhost\");
 
             // prepare searcher
             Searcher = new ManagementObjectSearcher(managementscope, ObjectQuery);
         }
-        
+
         public void Dispose() => Searcher?.Dispose();
 
         public override DiscoveryConfigModel GetAutoDiscoveryConfig()
         {
-            if (Variables.MqttManager == null) return null;
+            if (Variables.MqttManager == null)
+                return null;
 
             var deviceConfig = Variables.MqttManager.GetDeviceConfigModel();
-            if (deviceConfig == null) return null;
+            if (deviceConfig == null)
+                return null;
 
-            return AutoDiscoveryConfigModel ?? SetAutoDiscoveryConfigModel(new SensorDiscoveryConfigModel()
+            var sensorDiscoveryConfigModel = new SensorDiscoveryConfigModel()
             {
                 EntityName = EntityName,
                 Name = Name,
@@ -56,9 +70,21 @@ namespace HASS.Agent.Shared.HomeAssistant.Sensors
                 Device = deviceConfig,
                 State_topic = $"{Variables.MqttManager.MqttDiscoveryPrefix()}/{Domain}/{deviceConfig.Name}/{EntityName}/state",
                 Availability_topic = $"{Variables.MqttManager.MqttDiscoveryPrefix()}/{Domain}/{deviceConfig.Name}/availability"
-            });
+            };
+
+            if (_advancedInfo != null)
+            {
+                if (!string.IsNullOrWhiteSpace(_advancedInfo.DeviceClass))
+                    sensorDiscoveryConfigModel.Device_class = _advancedInfo.DeviceClass;
+                if (!string.IsNullOrWhiteSpace(_advancedInfo.UnitOfMeasurement))
+                    sensorDiscoveryConfigModel.Unit_of_measurement = _advancedInfo.UnitOfMeasurement;
+                if (!string.IsNullOrWhiteSpace(_advancedInfo.StateClass))
+                    sensorDiscoveryConfigModel.State_class = _advancedInfo.StateClass;
+            }
+
+            return AutoDiscoveryConfigModel ?? SetAutoDiscoveryConfigModel(sensorDiscoveryConfigModel);
         }
-        
+
         public override string GetState()
         {
             using var collection = Searcher.Get();
