@@ -525,7 +525,7 @@ namespace HASS.Agent.Forms.Sensors
             // 
             // BtnAdvSettings
             // 
-            BtnAdvSettings.AccessibleDescription = "Shows popup with advanced WMI sensor settings.";
+            BtnAdvSettings.AccessibleDescription = "Shows popup with advanced sensor settings.";
             BtnAdvSettings.AccessibleName = "Advanced settings";
             BtnAdvSettings.AccessibleRole = AccessibleRole.PushButton;
             BtnAdvSettings.BackColor = Color.FromArgb(63, 63, 70);

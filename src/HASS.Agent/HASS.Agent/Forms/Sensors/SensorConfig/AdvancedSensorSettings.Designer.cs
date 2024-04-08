@@ -3,7 +3,7 @@ using HASS.Agent.Resources.Localization;
 
 namespace HASS.Agent.Forms.Commands.CommandConfig
 {
-    partial class WMISensorConfig
+    partial class AdvancedSensorSettings
     {
         /// <summary>
         /// Required designer variable.
@@ -31,7 +31,7 @@ namespace HASS.Agent.Forms.Commands.CommandConfig
         /// </summary>
         private void InitializeComponent()
         {
-            var resources = new System.ComponentModel.ComponentResourceManager(typeof(WMISensorConfig));
+            var resources = new System.ComponentModel.ComponentResourceManager(typeof(AdvancedSensorSettings));
             BtnSave = new Syncfusion.WinForms.Controls.SfButton();
             LblInfo1 = new Label();
             LblDeviceClass = new Label();
@@ -76,7 +76,7 @@ namespace HASS.Agent.Forms.Commands.CommandConfig
             LblInfo1.Name = "LblInfo1";
             LblInfo1.Size = new Size(325, 45);
             LblInfo1.TabIndex = 3;
-            LblInfo1.Text = Languages.WMISensorConfig_Warning;
+            LblInfo1.Text = Languages.AdvancedSensorConfig_Warning;
             LblInfo1.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // LblDeviceClass
@@ -90,11 +90,11 @@ namespace HASS.Agent.Forms.Commands.CommandConfig
             LblDeviceClass.Name = "LblDeviceClass";
             LblDeviceClass.Size = new Size(81, 19);
             LblDeviceClass.TabIndex = 5;
-            LblDeviceClass.Text = Languages.WMISensorConfig_LblDeviceClass;
+            LblDeviceClass.Text = Languages.AdvancedSensorConfig_LblDeviceClass;
             // 
             // TbDeviceClass
             // 
-            TbDeviceClass.AccessibleDescription = "Device class of the WMI sensor";
+            TbDeviceClass.AccessibleDescription = "Device class of the sensor";
             TbDeviceClass.AccessibleName = "URL";
             TbDeviceClass.AccessibleRole = AccessibleRole.Text;
             TbDeviceClass.BackColor = Color.FromArgb(63, 63, 70);
@@ -117,11 +117,11 @@ namespace HASS.Agent.Forms.Commands.CommandConfig
             LblUnitOfMeasurement.Name = "LblUnitOfMeasurement";
             LblUnitOfMeasurement.Size = new Size(139, 19);
             LblUnitOfMeasurement.TabIndex = 10;
-            LblUnitOfMeasurement.Text = Languages.WMISensorConfig_LblUnitOfMeasurement;
+            LblUnitOfMeasurement.Text = Languages.AdvancedSensorConfig_LblUnitOfMeasurement;
             // 
             // TbUnitOfMeasurement
             // 
-            TbUnitOfMeasurement.AccessibleDescription = "Device class of the WMI sensor";
+            TbUnitOfMeasurement.AccessibleDescription = "Device class of the sensor";
             TbUnitOfMeasurement.AccessibleName = "URL";
             TbUnitOfMeasurement.AccessibleRole = AccessibleRole.Text;
             TbUnitOfMeasurement.BackColor = Color.FromArgb(63, 63, 70);
@@ -144,11 +144,11 @@ namespace HASS.Agent.Forms.Commands.CommandConfig
             LblStateClass.Name = "LblStateClass";
             LblStateClass.Size = new Size(72, 19);
             LblStateClass.TabIndex = 12;
-            LblStateClass.Text = Languages.WMISensorConfig_LblStateClass;
+            LblStateClass.Text = Languages.AdvancedSensorConfig_LblStateClass;
             // 
             // TbStateClass
             // 
-            TbStateClass.AccessibleDescription = "State class of the WMI sensor";
+            TbStateClass.AccessibleDescription = "State class of the sensor";
             TbStateClass.AccessibleName = "URL";
             TbStateClass.AccessibleRole = AccessibleRole.Text;
             TbStateClass.BackColor = Color.FromArgb(63, 63, 70);
@@ -160,7 +160,7 @@ namespace HASS.Agent.Forms.Commands.CommandConfig
             TbStateClass.Size = new Size(282, 25);
             TbStateClass.TabIndex = 11;
             // 
-            // WMISensorConfig
+            // AdvancedSensorConfig
             // 
             AccessibleDescription = "Configuration for the webview command, like position and url.";
             AccessibleName = "Webview configuration";
@@ -185,12 +185,12 @@ namespace HASS.Agent.Forms.Commands.CommandConfig
             Icon = (Icon)resources.GetObject("$this.Icon");
             MaximizeBox = false;
             MetroColor = Color.FromArgb(63, 63, 70);
-            Name = "WMISensorConfig";
+            Name = "AdvancedSensorConfig";
             ShowMaximizeBox = false;
             ShowMinimizeBox = false;
             StartPosition = FormStartPosition.CenterScreen;
-            Text = Languages.WMISensorConfig_Title;
-            Load += WMISensorConfig_Load;
+            Text = Languages.AdvancedSensorConfig_Title;
+            Load += AdvancedSensorConfig_Load;
             ResumeLayout(false);
             PerformLayout();
         }

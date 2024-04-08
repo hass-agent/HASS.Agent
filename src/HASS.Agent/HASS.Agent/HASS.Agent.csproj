@@ -128,7 +128,7 @@
     <Compile Update="Forms\ChildApplications\ServiceReinstall.cs" />
     <Compile Update="Forms\Commands\CommandConfig\WebViewCommandConfig.cs" />
     <Compile Update="Forms\Commands\CommandConfig\CommandMqttTopic.cs" />
-    <Compile Update="Forms\Sensors\SensorConfig\WMISensorConfig.cs">
+    <Compile Update="Forms\Sensors\SensorConfig\AdvancedSensorSettings.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Forms\WebView.cs" />
@@ -1616,23 +1616,23 @@
     <EmbeddedResource Update="Forms\QuickActions\QuickActionsMod.tr.resx">
       <DependentUpon>QuickActionsMod.resx</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Update="Forms\Sensors\SensorConfig\WMISensorConfig.de.resx">
-      <DependentUpon>WMISensorConfig.resx</DependentUpon>
+    <EmbeddedResource Update="Forms\Sensors\SensorConfig\AdvancedSensorSettings.de.resx">
+      <DependentUpon>AdvancedSensorSettings.resx</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Update="Forms\Sensors\SensorConfig\WMISensorConfig.es.resx">
-      <DependentUpon>WMISensorConfig.resx</DependentUpon>
+    <EmbeddedResource Update="Forms\Sensors\SensorConfig\AdvancedSensorSettings.es.resx">
+      <DependentUpon>AdvancedSensorSettings.resx</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Update="Forms\Sensors\SensorConfig\WMISensorConfig.fr.resx">
-      <DependentUpon>WMISensorConfig.resx</DependentUpon>
+    <EmbeddedResource Update="Forms\Sensors\SensorConfig\AdvancedSensorSettings.fr.resx">
+      <DependentUpon>AdvancedSensorSettings.resx</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Update="Forms\Sensors\SensorConfig\WMISensorConfig.nl.resx">
-      <DependentUpon>WMISensorConfig.resx</DependentUpon>
+    <EmbeddedResource Update="Forms\Sensors\SensorConfig\AdvancedSensorSettings.nl.resx">
+      <DependentUpon>AdvancedSensorSettings.resx</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Update="Forms\Sensors\SensorConfig\WMISensorConfig.ru.resx">
-      <DependentUpon>WMISensorConfig.resx</DependentUpon>
+    <EmbeddedResource Update="Forms\Sensors\SensorConfig\AdvancedSensorSettings.ru.resx">
+      <DependentUpon>AdvancedSensorSettings.resx</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Update="Forms\Sensors\SensorConfig\WMISensorConfig.tr.resx">
-      <DependentUpon>WMISensorConfig.resx</DependentUpon>
+    <EmbeddedResource Update="Forms\Sensors\SensorConfig\AdvancedSensorSettings.tr.resx">
+      <DependentUpon>AdvancedSensorSettings.resx</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Update="Forms\Sensors\SensorsConfig.de.resx">
       <DependentUpon>SensorsConfig.resx</DependentUpon>

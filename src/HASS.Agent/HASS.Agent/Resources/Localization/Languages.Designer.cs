@@ -164,6 +164,51 @@ namespace HASS.Agent.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Device class.
+        /// </summary>
+        internal static string AdvancedSensorConfig_LblDeviceClass {
+            get {
+                return ResourceManager.GetString("AdvancedSensorConfig_LblDeviceClass", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to State class.
+        /// </summary>
+        internal static string AdvancedSensorConfig_LblStateClass {
+            get {
+                return ResourceManager.GetString("AdvancedSensorConfig_LblStateClass", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unit of measurement.
+        /// </summary>
+        internal static string AdvancedSensorConfig_LblUnitOfMeasurement {
+            get {
+                return ResourceManager.GetString("AdvancedSensorConfig_LblUnitOfMeasurement", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to WMI Advanced Settings.
+        /// </summary>
+        internal static string AdvancedSensorConfig_Title {
+            get {
+                return ResourceManager.GetString("AdvancedSensorConfig_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Warning, adding following settings may break the WMI sensor, use with caution!.
+        /// </summary>
+        internal static string AdvancedSensorConfig_Warning {
+            get {
+                return ResourceManager.GetString("AdvancedSensorConfig_Warning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Button.
         /// </summary>
         internal static string CommandEntityType_Button {
@@ -8974,51 +9019,6 @@ namespace HASS.Agent.Resources.Localization {
         internal static string WindowState_Unknown {
             get {
                 return ResourceManager.GetString("WindowState_Unknown", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Device class.
-        /// </summary>
-        internal static string WMISensorConfig_LblDeviceClass {
-            get {
-                return ResourceManager.GetString("WMISensorConfig_LblDeviceClass", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to State class.
-        /// </summary>
-        internal static string WMISensorConfig_LblStateClass {
-            get {
-                return ResourceManager.GetString("WMISensorConfig_LblStateClass", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Unit of measurement.
-        /// </summary>
-        internal static string WMISensorConfig_LblUnitOfMeasurement {
-            get {
-                return ResourceManager.GetString("WMISensorConfig_LblUnitOfMeasurement", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to WMI Advanced Settings.
-        /// </summary>
-        internal static string WMISensorConfig_Title {
-            get {
-                return ResourceManager.GetString("WMISensorConfig_Title", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Warning, adding following settings may break the WMI sensor, use with caution!.
-        /// </summary>
-        internal static string WMISensorConfig_Warning {
-            get {
-                return ResourceManager.GetString("WMISensorConfig_Warning", resourceCulture);
             }
         }
     }

@@ -383,8 +383,6 @@ namespace HASS.Agent.Forms.Sensors
                 BtnTest.Text = Languages.SensorsMod_BtnTest_Wmi;
                 BtnTest.Visible = true;
 
-                BtnAdvSettings.Visible = true;
-
                 CbApplyRounding.Visible = true;
                 if (CbApplyRounding.Checked)
                 {
@@ -584,7 +582,7 @@ namespace HASS.Agent.Forms.Sensors
                 LblDigits.Visible = false;
 
                 BtnTest.Visible = false;
-                BtnAdvSettings.Visible = false;
+                BtnAdvSettings.Visible = true;
             }));
         }
 
@@ -859,21 +857,14 @@ namespace HASS.Agent.Forms.Sensors
         /// <param name="e"></param>
         private void BtnAdvSettings_Click(object sender, EventArgs e)
         {
-            switch (_selectedSensorType)
-            {
-                case SensorType.WmiQuerySensor:
-                    using (var wmiAdvancedConfig = new WMISensorConfig(Sensor.AdvancedSettings))
-                    {
-                        wmiAdvancedConfig.Opacity = 0;
+            using var advancedSensorSettingsDialog = new AdvancedSensorSettings(Sensor.AdvancedSettings);
+            advancedSensorSettingsDialog.Opacity = 0;
 
-                        var ret = wmiAdvancedConfig.ShowDialog();
-                        if (ret != DialogResult.OK)
-                            return;
+            var ret = advancedSensorSettingsDialog.ShowDialog();
+            if (ret != DialogResult.OK)
+                return;
 
-                        Sensor.AdvancedSettings = JsonConvert.SerializeObject(wmiAdvancedConfig.WMIAdvancedInfo);
-                    }
-                    break;
-            }
+            Sensor.AdvancedSettings = JsonConvert.SerializeObject(advancedSensorSettingsDialog.AdvancedSettings);
         }
 
         private void TbDescription_LinkClicked(object sender, LinkClickedEventArgs e)

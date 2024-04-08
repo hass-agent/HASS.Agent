@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HASS.Agent.Models.Internal;
-public class WMIAdvancedInfo
+namespace HASS.Agent.Shared.Models.Internal;
+public class SensorAdvancedSettings
 {
     public string DeviceClass { get; set; }
     public string UnitOfMeasurement { get; set; }
