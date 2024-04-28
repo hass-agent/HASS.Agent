@@ -15,7 +15,6 @@ internal class InternalAudioSession : IDisposable, IAudioSessionEvents
 
     public string DisplayName { get; private set; }
     public int ProcessId { get; private set; }
-
     public bool Expired { get; private set; } = false;
 
     public InternalAudioSession(AudioSessionControl audioSessionControl)

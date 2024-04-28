@@ -6,7 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CSCore.CoreAudioAPI;
+using HASS.Agent.Shared.Managers.Audio.Exceptions;
 using HASS.Agent.Shared.Managers.Audio.Internal;
+using Serilog;
 
 namespace HASS.Agent.Shared.Managers.Audio;
 public static class AudioManager
@@ -23,6 +25,8 @@ public static class AudioManager
 
     public static void Initialize()
     {
+        Log.Debug("[AUDIOMGR] Audio Manager initializing");
+
         foreach (var device in _enumerator.EnumAudioEndpoints(DataFlow.All, DeviceState.Active))
             _devices[device.DeviceID] = new InternalAudioDevice(device);
 
@@ -62,6 +66,8 @@ public static class AudioManager
                     break;
             }
         };
+
+        Log.Information("[AUDIOMGR] Audio Manager initialized");
     }
 
     private static void CheckInitialization()
@@ -89,7 +95,7 @@ public static class AudioManager
         if (procId <= 0)
             return session.DisplayName;
 
-        if (_applicationNameCache.TryGetValue(procId, out string? cachedName))
+        if (_applicationNameCache.TryGetValue(procId, out var cachedName))
             return cachedName;
 
         using var process = Process.GetProcessById(procId);
@@ -103,7 +109,7 @@ public static class AudioManager
         var audioSessions = new List<AudioSession>();
 
         internalAudioDevice.Manager.RemoveDisconnectedSessions();
-        foreach (var session in internalAudioDevice.Manager.Sessions.Values)
+        foreach (var (sessionId, session) in internalAudioDevice.Manager.Sessions)
         {
             try
             {
@@ -116,10 +122,11 @@ public static class AudioManager
 
                 var audioSession = new AudioSession
                 {
+                    Id = sessionId,
                     Application = displayName,
                     PlaybackDevice = internalAudioDevice.FriendlyName,
                     Muted = session.Volume.IsMuted,
-                    Active = true, //TODO
+                    Active = session.Control.SessionState == AudioSessionState.AudioSessionStateActive,
                     MasterVolume = Convert.ToInt32(session.Volume.MasterVolume * 100),
                     PeakVolume = Convert.ToInt32(session.MeterInformation.PeakValue * 100)
                 };
@@ -128,7 +135,7 @@ public static class AudioManager
             }
             catch (Exception ex)
             {
-                Debugger.Break();
+                throw new AudioSessionException($"error retrieving session information for {internalAudioDevice.FriendlyName}", ex);
             }
         }
 
@@ -158,7 +165,7 @@ public static class AudioManager
         using var defaultOutputDevice = _enumerator.GetDefaultAudioEndpoint(DataFlow.Render, Role.Multimedia);
 
         var defaultInputDeviceId = defaultInputDevice.DeviceID;
-        var defaultOutputDeviceId = defaultInputDevice.DeviceID;
+        var defaultOutputDeviceId = defaultOutputDevice.DeviceID;
 
         foreach (var device in _devices.Values.Where(d => d.MMDevice.DeviceState == DeviceState.Active))
         {
@@ -184,6 +191,16 @@ public static class AudioManager
         return audioDevices;
     }
 
+    public static string GetDefaultDeviceId(DeviceType deviceType, DeviceRole deviceRole)
+    {
+        var dataFlow = deviceType == DeviceType.Input ? DataFlow.Capture : DataFlow.Render;
+        var role = (Role)deviceRole;
+
+        using var defaultDevice = _enumerator.GetDefaultAudioEndpoint(dataFlow, role);
+
+        return defaultDevice.DeviceID;
+    }
+
     public static void Activate(AudioDevice audioDevice)
     {
         if (!_devices.TryGetValue(audioDevice.Id, out var device))
@@ -192,5 +209,62 @@ public static class AudioManager
         device.Activate();
     }
 
-    //TODO(Amadeo): release resources on application exit
+    public static void SetVolume(AudioDevice audioDevice, int volume)
+    {
+        if (!_devices.TryGetValue(audioDevice.Id, out var device))
+            return;
+
+        var volumeScalar = volume / 100f;
+        device.AudioEndpointVolume.SetMasterVolumeLevelScalar(volumeScalar, Guid.Empty);
+    }
+
+    public static void SetVolume(AudioSession audioSession, int volume)
+    {
+        var device = _devices.Values.Where(d => d.FriendlyName == audioSession.PlaybackDevice).FirstOrDefault();
+        if (device == null)
+            return;
+
+        if (!device.Manager.Sessions.TryGetValue(audioSession.Id, out var session))
+            return;
+
+        var volumeScalar = volume / 100f;
+        session.Volume.MasterVolume = volumeScalar;
+    }
+
+    public static void SetMute(AudioDevice audioDevice, bool mute)
+    {
+        if (!_devices.TryGetValue(audioDevice.Id, out var device))
+            return;
+
+        device.AudioEndpointVolume.SetMute(mute, Guid.Empty);
+    }
+
+    public static void SetMute(AudioSession audioSession, bool mute)
+    {
+        var device = _devices.Values.Where(d => d.FriendlyName == audioSession.PlaybackDevice).FirstOrDefault();
+        if (device == null)
+            return;
+
+        if (!device.Manager.Sessions.TryGetValue(audioSession.Id, out var session))
+            return;
+
+        session.Volume.IsMuted = mute;
+    }
+
+    public static void Shutdown()
+    {
+        Log.Debug("[AUDIOMGR] Audio Manager shutting down");
+        try
+        {
+            foreach(var device in _devices.Values)
+                device.Dispose();
+
+            _enumerator.Dispose();
+        }
+        catch (Exception ex)
+        {
+            Log.Fatal(ex, "[AUDIOMGR] Audio Manager shutdown fatal error: {ex}", ex.Message);
+        }
+        Log.Debug("[AUDIOMGR] Audio Manager shutdown completed");
+    }
 }

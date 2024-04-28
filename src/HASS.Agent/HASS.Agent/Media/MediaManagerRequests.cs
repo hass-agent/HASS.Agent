@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using CoreAudio;
 using HASS.Agent.Shared.Managers;
+using HASS.Agent.Shared.Managers.Audio;
 using Serilog;
 
 namespace HASS.Agent.Media
@@ -19,14 +19,12 @@ namespace HASS.Agent.Media
         {
             try
             {
-                // get the default audio device
-                var audioDevice = AudioManager.GetDefaultDevice(DataFlow.Render, Role.Multimedia);
+                var defaultDeviceId = AudioManager.GetDefaultDeviceId(DeviceType.Output, DeviceRole.Multimedia);
+                var audioDevice = AudioManager.GetDevices().Where(d => d.Id == defaultDeviceId).FirstOrDefault();
+                if (audioDevice == null)
+                    return 0;
 
-                var volume = Convert.ToInt32(Math.Round(audioDevice.AudioEndpointVolume?.MasterVolumeLevelScalar * 100 ?? 0, 0));
-
-                // Log.Debug("[MEDIA] Current volume: {vol}", volume);
-
-                return volume;
+                return audioDevice.Volume;
             }
             catch (Exception ex)
             {
@@ -43,12 +41,12 @@ namespace HASS.Agent.Media
         {
             try
             {
-                // get the default audio device
-                var audioDevice = AudioManager.GetDefaultDevice(DataFlow.Render, Role.Multimedia);
+                var defaultDeviceId = AudioManager.GetDefaultDeviceId(DeviceType.Output, DeviceRole.Multimedia);
+                var audioDevice = AudioManager.GetDevices().Where(d => d.Id == defaultDeviceId).FirstOrDefault();
+                if (audioDevice == null)
+                    return false;
 
-                // Log.Debug("[MEDIA] Muted: {mute}", muted);
-
-                return audioDevice.AudioEndpointVolume?.Mute ?? false;
+                return audioDevice.Muted;
             }
             catch (Exception ex)
             {

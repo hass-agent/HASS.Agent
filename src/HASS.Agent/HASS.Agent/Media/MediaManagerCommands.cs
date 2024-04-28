@@ -12,7 +12,7 @@ using static HASS.Agent.Shared.Functions.Inputs;
 using static System.Runtime.CompilerServices.RuntimeHelpers;
 using HASS.Agent.Shared.Functions;
 using HASS.Agent.Shared.Managers;
-using CoreAudio;
+using HASS.Agent.Shared.Managers.Audio;
 
 namespace HASS.Agent.Media
 {
@@ -71,19 +71,12 @@ namespace HASS.Agent.Media
                 if (volume < 0) volume = 0;
                 if (volume > 100) volume = 100;
 
-                var fVolume = volume / 100.0f;
-
-                // get the current default endpoint
-                var audioDevice = AudioManager.GetDefaultDevice(DataFlow.Render, Role.Multimedia);
-
-                if (audioDevice?.AudioEndpointVolume == null)
-                {
-                    Log.Warning("[MEDIA] Unable to set volume, no default audio endpoint found");
+                var defaultDeviceId = AudioManager.GetDefaultDeviceId(DeviceType.Output, DeviceRole.Multimedia | DeviceRole.Console);
+                var audioDevice = AudioManager.GetDevices().Where(d => d.Id == defaultDeviceId).FirstOrDefault();
+                if (audioDevice == null)
                     return;
-                }
 
-                // all good, set the volume
-                audioDevice.AudioEndpointVolume.MasterVolumeLevelScalar = fVolume;
+                AudioManager.SetVolume(audioDevice, volume);
             }
             catch (Exception ex)
             {

@@ -20,6 +20,7 @@ using HASS.Agent.Shared.Enums;
 using HASS.Agent.Shared.Extensions;
 using HASS.Agent.Shared.Functions;
 using HASS.Agent.Shared.Managers;
+using HASS.Agent.Shared.Managers.Audio;
 using Serilog;
 using Syncfusion.Windows.Forms;
 using WindowsDesktop;
