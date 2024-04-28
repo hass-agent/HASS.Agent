@@ -3,7 +3,7 @@ using System.Data.SqlTypes;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
-using AudioSwitcher.AudioApi;
+using CoreAudio;
 using HASS.Agent.Shared.Enums;
 using HASS.Agent.Shared.Functions;
 using HASS.Agent.Shared.Managers;
@@ -52,9 +52,9 @@ namespace HASS.Agent.Shared.HomeAssistant.Commands.InternalCommands
                 }
 
                 // get the current default endpoint
-                var audioDevice = AudioManager.GetDefaultDevice(DeviceType.Playback, Role.Multimedia);
+                var audioDevice = AudioManager.GetDefaultDevice(DataFlow.Render, Role.Multimedia);
 
-                audioDevice.SetVolumeAsync(_volume);
+                audioDevice.AudioEndpointVolume.MasterVolumeLevelScalar = _volume;
             }
             catch (Exception ex)
             {
@@ -81,9 +81,9 @@ namespace HASS.Agent.Shared.HomeAssistant.Commands.InternalCommands
                 }
 
                 // get the current default endpoint
-                var audioDevice = AudioManager.GetDefaultDevice(DeviceType.Playback, Role.Multimedia);
+                var audioDevice = AudioManager.GetDefaultDevice(DataFlow.Render, Role.Multimedia);
 
-                audioDevice.SetVolumeAsync(volumeInt);
+                audioDevice.AudioEndpointVolume.MasterVolumeLevelScalar = volumeInt / 100.0f;
             }
             catch (Exception ex)
             {

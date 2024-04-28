@@ -1,7 +1,6 @@
-﻿using AudioSwitcher.AudioApi;
-using AudioSwitcher.AudioApi.CoreAudio;
-using HASS.Agent.Shared.Enums;
+﻿using HASS.Agent.Shared.Enums;
 using HASS.Agent.Shared.Managers;
+using HASS.Agent.Shared.Managers.Audio;
 using Newtonsoft.Json;
 using Serilog;
 using System;
@@ -37,25 +36,28 @@ public class SetAudioInputCommand : InternalCommand
         TurnOnWithAction(InputDevice);
     }
 
-    private CoreAudioDevice GetAudioDeviceOrDefault(string playbackDeviceName)
-    {
-        var playbackDevice = AudioManager.GetCaptureDevices().Where(d => d.FullName == playbackDeviceName).FirstOrDefault();
-
-        return playbackDevice ?? AudioManager.GetDefaultDevice(DeviceType.Capture, Role.Communications);
-    }
-
     public override void TurnOnWithAction(string action)
     {
         State = "ON";
 
         try
         {
-            var inputDevice = GetAudioDeviceOrDefault(action);
-            if (inputDevice == AudioManager.GetDefaultDevice(DeviceType.Capture, Role.Communications))
+            var audioDevices = AudioManager.GetDevices();
+            var inputDevice = audioDevices
+                .Where(d => d.Type == DeviceType.Input)
+                .Where(d => d.FriendlyName == action)
+                .FirstOrDefault();
+
+            if (inputDevice == null)
+            {
+                Log.Warning("[SETAUDIOIN] No input device {device} found", action);
+                return;
+            }
+
+            if(inputDevice.Default)
                 return;
 
-            inputDevice.SetAsDefault();
-            inputDevice.SetAsDefaultCommunications();
+            AudioManager.Activate(inputDevice);
         }
         catch (Exception ex)
         {

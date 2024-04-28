@@ -91,7 +91,7 @@ namespace HASS.Agent.Forms
                 await InternalDeviceSensorsManager.Initialize();
                 InitializeHardwareManager();
                 InitializeVirtualDesktopManager();
-                InitializeAudioManager();
+                await Task.Run(InitializeAudioManager);
 
                 // load entities
                 var loaded = await SettingsManager.LoadEntitiesAsync();

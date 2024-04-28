@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using AudioSwitcher.AudioApi;
+using CoreAudio;
 using HASS.Agent.Shared.Managers;
 using Serilog;
 
@@ -20,12 +20,13 @@ namespace HASS.Agent.Media
             try
             {
                 // get the default audio device
-                var audioDevice = AudioManager.GetDefaultDevice(DeviceType.Playback, Role.Multimedia);
+                var audioDevice = AudioManager.GetDefaultDevice(DataFlow.Render, Role.Multimedia);
+
+                var volume = Convert.ToInt32(Math.Round(audioDevice.AudioEndpointVolume?.MasterVolumeLevelScalar * 100 ?? 0, 0));
 
                 // Log.Debug("[MEDIA] Current volume: {vol}", volume);
 
-                // return it
-                return (int)audioDevice.Volume;
+                return volume;
             }
             catch (Exception ex)
             {
@@ -43,12 +44,11 @@ namespace HASS.Agent.Media
             try
             {
                 // get the default audio device
-                var audioDevice = AudioManager.GetDefaultDevice(DeviceType.Playback, Role.Multimedia);
+                var audioDevice = AudioManager.GetDefaultDevice(DataFlow.Render, Role.Multimedia);
 
                 // Log.Debug("[MEDIA] Muted: {mute}", muted);
 
-                // return it
-                return audioDevice.IsMuted;
+                return audioDevice.AudioEndpointVolume?.Mute ?? false;
             }
             catch (Exception ex)
             {

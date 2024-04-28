@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
-using AudioSwitcher.AudioApi;
-using AudioSwitcher.AudioApi.Session;
+using CoreAudio;
 using HASS.Agent.Shared.Functions;
 using HASS.Agent.Shared.HomeAssistant.Sensors.GeneralSensors.MultiValue.DataTypes;
 using HASS.Agent.Shared.Managers;
+using HASS.Agent.Shared.Managers.Audio;
 using HASS.Agent.Shared.Models.HomeAssistant;
 using HASS.Agent.Shared.Models.Internal;
 using HidSharp;
@@ -44,23 +44,14 @@ public class AudioSensors : AbstractMultiValueSensor
             Sensors[sensorId] = sensor;
     }
 
-    private List<string> GetAudioOutputDevices()
+    private void HandleAudioOutputSensors(IEnumerable<AudioDevice> outputDevices, string parentSensorSafeName, string deviceName)
     {
-        return AudioManager.GetPlaybackDevices().Select(d=> d.FullName).ToList();
-    }
-    private List<string> GetAudioInputDevices()
-    {
-        return AudioManager.GetCaptureDevices().Select(d => d.FullName).ToList();
-    }
-
-    private void HandleAudioOutputSensors(string parentSensorSafeName, string deviceName)
-    {
-        var audioDevice = AudioManager.GetDefaultDevice(DeviceType.Playback, Role.Multimedia);
+        var audioDevice = AudioManager.GetDefaultDevice(DataFlow.Render, Role.Multimedia);
 
         var defaultDeviceEntityName = $"{parentSensorSafeName}_default_device";
         var defaultDeviceId = $"{Id}_default_device";
         var defaultDeviceSensor = new DataTypeStringSensor(_updateInterval, defaultDeviceEntityName, $"Default Device", defaultDeviceId, string.Empty, "mdi:speaker", string.Empty, EntityName);
-        defaultDeviceSensor.SetState(audioDevice.FullName);
+        defaultDeviceSensor.SetState(audioDevice.DeviceFriendlyName);
         AddUpdateSensor(defaultDeviceId, defaultDeviceSensor);
 
         var defaultDeviceStateEntityName = $"{parentSensorSafeName}_default_device_state";
@@ -69,19 +60,20 @@ public class AudioSensors : AbstractMultiValueSensor
         defaultDeviceStateSensor.SetState(GetReadableState(audioDevice.State));
         AddUpdateSensor(defaultDeviceStateId, defaultDeviceStateSensor);
 
+        var masterVolume = Convert.ToInt32(Math.Round(audioDevice.AudioEndpointVolume?.MasterVolumeLevelScalar * 100 ?? 0, 0));
         var defaultDeviceVolumeEntityName = $"{parentSensorSafeName}_default_device_volume";
         var defaultDeviceVolumeId = $"{Id}_default_device_volume";
         var defaultDeviceVolumeSensor = new DataTypeIntSensor(_updateInterval, defaultDeviceVolumeEntityName, $"Default Device Volume", defaultDeviceVolumeId, string.Empty, "mdi:speaker", string.Empty, EntityName);
-        defaultDeviceVolumeSensor.SetState((int)audioDevice.Volume);
+        defaultDeviceVolumeSensor.SetState(masterVolume);
         AddUpdateSensor(defaultDeviceVolumeId, defaultDeviceVolumeSensor);
 
         var defaultDeviceIsMutedEntityName = $"{parentSensorSafeName}_default_device_muted";
         var defaultDeviceIsMutedId = $"{Id}_default_device_muted";
         var defaultDeviceIsMutedSensor = new DataTypeBoolSensor(_updateInterval, defaultDeviceIsMutedEntityName, $"Default Device Muted", defaultDeviceIsMutedId, string.Empty, "mdi:speaker", EntityName);
-        defaultDeviceIsMutedSensor.SetState(audioDevice.IsMuted);
+        defaultDeviceIsMutedSensor.SetState(audioDevice.AudioEndpointVolume?.Mute ?? false);
         AddUpdateSensor(defaultDeviceIsMutedId, defaultDeviceIsMutedSensor);
 
-        var peakVolume = AudioManager.GetDevicePeakVolume(audioDevice.FullName);
+        var peakVolume = AudioManager.GetDevicePeakVolume(audioDevice.DeviceFriendlyName);
         var peakVolumeEntityName = $"{parentSensorSafeName}_peak_volume";
         var peakVolumeId = $"{Id}_peak_volume";
         var peakVolumeSensor = new DataTypeStringSensor(_updateInterval, peakVolumeEntityName, $"Peak Volume", peakVolumeId, string.Empty, "mdi:volume-high", string.Empty, EntityName);
@@ -115,14 +107,14 @@ public class AudioSensors : AbstractMultiValueSensor
         AddUpdateSensor(audioOutputDevicesId, audioOutputDevicesSensor);
     }
 
-    private void HandleAudioInputSensors(string parentSensorSafeName, string deviceName)
+    private void HandleAudioInputSensors(IEnumerable<AudioDevice> inputDevices, string parentSensorSafeName, string deviceName)
     {
-        var inputDevice = AudioManager.GetDefaultDevice(DeviceType.Capture, Role.Communications);
+        var inputDevice = AudioManager.GetDefaultDevice(DataFlow.Capture, Role.Communications);
 
         var defaultInputDeviceEntityName = $"{parentSensorSafeName}_default_input_device";
         var defaultInputDeviceId = $"{Id}_default_input_device";
         var defaultInputDeviceSensor = new DataTypeStringSensor(_updateInterval, defaultInputDeviceEntityName, $"Default Input Device", defaultInputDeviceId, string.Empty, "mdi:microphone", string.Empty, EntityName);
-        defaultInputDeviceSensor.SetState(inputDevice.FullName);
+        defaultInputDeviceSensor.SetState(inputDevice.DeviceFriendlyName);
         AddUpdateSensor(defaultInputDeviceId, defaultInputDeviceSensor);
 
         var defaultInputDeviceStateEntityName = $"{parentSensorSafeName}_default_input_device_state";
@@ -131,18 +123,17 @@ public class AudioSensors : AbstractMultiValueSensor
         defaultInputDeviceStateSensor.SetState(GetReadableState(inputDevice.State));
         AddUpdateSensor(defaultInputDeviceStateId, defaultInputDeviceStateSensor);
 
-        var defaultInputDeviceIsMuted = inputDevice.IsMuted;
         var defaultInputDeviceIsMutedEntityName = $"{parentSensorSafeName}_default_input_device_muted";
         var defaultInputDeviceIsMutedId = $"{Id}_default_input_device_muted";
         var defaultInputDeviceIsMutedSensor = new DataTypeBoolSensor(_updateInterval, defaultInputDeviceIsMutedEntityName, $"Default Input Device Muted", defaultInputDeviceIsMutedId, string.Empty, "mdi:microphone", EntityName);
-        defaultInputDeviceIsMutedSensor.SetState(defaultInputDeviceIsMuted);
+        defaultInputDeviceIsMutedSensor.SetState(inputDevice.AudioEndpointVolume?.Mute ?? false);
         AddUpdateSensor(defaultInputDeviceIsMutedId, defaultInputDeviceIsMutedSensor);
 
-        var inputVolume = AudioManager.GetDevicePeakVolume(inputDevice.FullName);
+        var inputVolume = AudioManager.GetDevicePeakVolume(inputDevice.DeviceFriendlyName);
         var defaultInputDeviceVolumeEntityName = $"{parentSensorSafeName}_default_input_device_volume";
         var defaultInputDeviceVolumeId = $"{Id}_default_input_device_volume";
         var defaultInputDeviceVolumeSensor = new DataTypeIntSensor(_updateInterval, defaultInputDeviceVolumeEntityName, $"Default Input Device Volume", defaultInputDeviceVolumeId, string.Empty, "mdi:microphone", string.Empty, EntityName);
-        defaultInputDeviceVolumeSensor.SetState(inputVolume);
+        defaultInputDeviceVolumeSensor.SetState((int)inputVolume);
         AddUpdateSensor(defaultInputDeviceVolumeId, defaultInputDeviceVolumeSensor);
 
         var audioInputDevices = GetAudioInputDevices();
@@ -163,11 +154,15 @@ public class AudioSensors : AbstractMultiValueSensor
     {
         try
         {
+            var audioDevices = AudioManager.GetDevices();
+            var outputDevices = audioDevices.Where(d=>d.Type == DeviceType.Output);
+            var inputDevices = audioDevices.Where(d=>d.Type == DeviceType.Input);
+
             var parentSensorSafeName = SharedHelperFunctions.GetSafeValue(EntityName);
             var deviceSafeName = SharedHelperFunctions.GetSafeDeviceName();
 
-            HandleAudioOutputSensors(parentSensorSafeName, deviceSafeName);
-            HandleAudioInputSensors(parentSensorSafeName, deviceSafeName);
+            HandleAudioOutputSensors(outputDevices, parentSensorSafeName, deviceSafeName);
+            HandleAudioInputSensors(inputDevices, parentSensorSafeName, deviceSafeName);
 
             if (_errorPrinted)
                 _errorPrinted = false;
@@ -181,24 +176,6 @@ public class AudioSensors : AbstractMultiValueSensor
 
             Log.Fatal(ex, "[AUDIO] [{name}] Error while fetching audio info: {err}", EntityName, ex.Message);
         }
-    }
-
-    /// <summary>
-    /// Converts the audio device's state to a better readable form
-    /// </summary>
-    /// <param name="state"></param>
-    /// <returns></returns>
-    private static string GetReadableState(DeviceState state)
-    {
-        return state switch
-        {
-            DeviceState.Active => "ACTIVE",
-            DeviceState.Disabled => "DISABLED",
-            DeviceState.NotPresent => "NOT PRESENT",
-            DeviceState.Unplugged => "UNPLUGGED",
-            DeviceState.All => "STATEMASK_ALL",
-            _ => "UNKNOWN"
-        };
     }
 
     public override DiscoveryConfigModel GetAutoDiscoveryConfig() => null;

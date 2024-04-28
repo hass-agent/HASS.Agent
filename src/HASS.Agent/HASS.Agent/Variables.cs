@@ -24,7 +24,6 @@ using Microsoft.Win32;
 using MQTTnet;
 using WK.Libraries.HotkeyListenerNS;
 using Serilog.Core;
-using AudioSwitcher.AudioApi.CoreAudio;
 
 namespace HASS.Agent
 {

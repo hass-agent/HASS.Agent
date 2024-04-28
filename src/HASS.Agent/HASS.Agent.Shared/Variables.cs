@@ -1,5 +1,4 @@
 ﻿using System;
-using AudioSwitcher.AudioApi.CoreAudio;
 using HASS.Agent.Shared.Mqtt;
 
 namespace HASS.Agent.Shared

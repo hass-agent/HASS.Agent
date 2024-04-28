@@ -12,7 +12,6 @@ using MQTTnet;
 using Serilog;
 using MediaPlayerState = HASS.Agent.Enums.MediaPlayerState;
 using Octokit;
-using AudioSwitcher.AudioApi.CoreAudio;
 
 namespace HASS.Agent.Media
 {
