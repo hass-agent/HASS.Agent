@@ -3313,7 +3313,15 @@ Commando/payload moet in JSON-indeling zijn. Voorbeeld van alle mogelijke opties
 }
 Als er geen "playbackDevice" is opgegeven, zal HASS.Agent het standaardapparaat gebruiken.
 Als er geen "volume" is opgegeven, zal HASS.Agent alleen de mute-status instellen.
-Als er geen "mute" is opgegeven, zal HASS.Agent het dempen van de opgegeven applicatie opheffen.</value>
+Als er geen "mute" is opgegeven, zal HASS.Agent het dempen van de opgegeven applicatie opheffen.
+
+Geavanceerde optie: er kan een extra "sessionId" worden opgegeven om het volume alleen in te stellen voor een specifieke sessie van de applicatie. De sessie-ID kan worden verkregen via de sensor "Audio Sessions":
+{
+   "playbackDevice":"Speakers (THX SpatialAudio)",
+   "applicationName":"Discord",
+   "volume":50,
+   "sessionid":"&lt;LONG SESSION ID FROM SENSOR&gt;"
+}</value>
   </data>
   <data name="CommandsMod_BtnStore_InvalidJson" xml:space="preserve">
     <value>Voer een geldige JSON-string in!</value>

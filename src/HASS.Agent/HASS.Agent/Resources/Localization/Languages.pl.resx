@@ -3402,7 +3402,15 @@ Polecenie/ładunek musi być w formacie JSON. Przykład wszystkich możliwych op
 
 Jeśli nie podano „playbackDevice”, HASS.Agent użyje urządzenia domyślnego.
 Jeśli nie zostanie podany „volume”, HASS.Agent ustawi jedynie stan wyciszenia.
-Jeśli nie podano opcji „mute”, HASS.Agent wyłączy wyciszenie dostarczonej aplikacji.</value>
+Jeśli nie podano opcji „mute”, HASS.Agent wyłączy wyciszenie dostarczonej aplikacji.
+
+Opcja zaawansowana: można udostępnić dodatkowy parametr „sessionId”, aby ustawić głośność tylko dla konkretnej sesji aplikacji, identyfikator sesji można uzyskać z czujnika „Audio Sessions”:
+{
+   "playbackDevice":"Speakers (THX SpatialAudio)",
+   "applicationName":"Discord",
+   "volume":50,
+   "sessionid":"&lt;LONG SESSION ID FROM SENSOR&gt;"
+}</value>
   </data>
   <data name="CommandsMod_BtnStore_InvalidJson" xml:space="preserve">
     <value>Proszę wprowadzić prawidłowy ciąg JSON!</value>

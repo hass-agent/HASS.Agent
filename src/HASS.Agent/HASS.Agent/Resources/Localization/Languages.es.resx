@@ -3292,7 +3292,15 @@ El comando/carga útil debe estar en formato JSON. Ejemplo de todas las opciones
 
 Si no se proporciona ningún "playbackDevice", HASS.Agent utilizará el predeterminado.
 Si no se proporciona ningún "volume", HASS.Agent establecerá sólo el estado de silencio.
-Si no se proporciona ningún "mute", HASS.Agent reactivará el silencio de la aplicación proporcionada.</value>
+Si no se proporciona ningún "mute", HASS.Agent reactivará el silencio de la aplicación proporcionada.
+
+Opción avanzada: se puede proporcionar un "sessionId" adicional para configurar el volumen solo para una sesión específica de la aplicación; el id de sesión se puede obtener del sensor "Sesiones de audio":
+{
+   "playbackDevice":"Speakers (THX SpatialAudio)",
+   "applicationName":"Discord",
+   "volume":50,
+   "sessionid":"&lt;LONG SESSION ID FROM SENSOR&gt;"
+}</value>
   </data>
   <data name="CommandsMod_BtnStore_InvalidJson" xml:space="preserve">
     <value>¡Ingrese una cadena JSON válida!</value>

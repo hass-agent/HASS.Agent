@@ -3416,7 +3416,15 @@ Befehl/Nutzlast muss im JSON-Format vorliegen. Beispiel aller möglichen Optione
 
 Wenn kein „playbackDevice“ angegeben ist, verwendet HASS.Agent das Standardgerät.
 Wenn keine „volume“ angegeben ist, stellt HASS.Agent nur den Stummschaltungsstatus ein.
-Wenn keine „mute“ bereitgestellt wird, hebt HASS.Agent die Stummschaltung der bereitgestellten Anwendung auf.</value>
+Wenn keine „mute“ bereitgestellt wird, hebt HASS.Agent die Stummschaltung der bereitgestellten Anwendung auf.
+
+Erweiterte Option: Zusätzliche „sessionId“ kann bereitgestellt werden, um die Lautstärke nur für eine bestimmte Sitzung der Anwendung festzulegen. Die Sitzungs-ID kann vom Sensor „Audio Sessions“ abgerufen werden:
+{
+   "playbackDevice":"Speakers (THX SpatialAudio)",
+   "applicationName":"Discord",
+   "volume":50,
+   "sessionid":"&lt;LONG SESSION ID FROM SENSOR&gt;"
+}</value>
   </data>
   <data name="CommandsMod_BtnStore_InvalidJson" xml:space="preserve">
     <value>Bitte geben Sie einen gültigen JSON-String ein!</value>

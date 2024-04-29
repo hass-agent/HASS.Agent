@@ -3361,7 +3361,15 @@ Home Assistant.
 
 Если «playbackDevice» не указано, HASS.Agent будет использовать устройство по умолчанию.
 Если «громкость» не указана, HASS.Agent установит только статус отключения звука.
-Если «отключение звука» не указано, HASS.Agent включит звук предоставленного приложения.</value>
+Если «отключение звука» не указано, HASS.Agent включит звук предоставленного приложения.
+
+Расширенный вариант: можно указать дополнительный «sessionId» для установки громкости только для определенного сеанса приложения, идентификатор сеанса можно получить из датчика «Аудио сеансы»:
+{
+   "playbackDevice":"Speakers (THX SpatialAudio)",
+   "applicationName":"Discord",
+   "volume":50,
+   "sessionid":"&lt;LONG SESSION ID FROM SENSOR&gt;"
+}</value>
   </data>
   <data name="CommandsMod_BtnStore_InvalidJson" xml:space="preserve">
     <value>Пожалуйста, введите действительную строку JSON!</value>

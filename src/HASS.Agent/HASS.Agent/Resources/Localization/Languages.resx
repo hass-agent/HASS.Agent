@@ -3267,7 +3267,15 @@ Command / payload needs to be in JSON format. Example of all possible options:
 
 If no "playbackDevice" is provided, HASS.Agent will use the default one.
 If no "volume" is provided, HASS.Agent will set only mute status.
-If no "mute" is provided, HASS.Agent will unmute the provided application.</value>
+If no "mute" is provided, HASS.Agent will unmute the provided application.
+
+Advanced option: additional "sessionId" can be provided to set volume only for specific session of the application, session id can be obtained from "Audio Sessions" sensor:
+{
+   "playbackDevice":"Speakers (THX SpatialAudio)",
+   "applicationName":"Discord",
+   "volume":50,
+   "sessionid":"&lt;LONG SESSION ID FROM SENSOR&gt;"
+}</value>
   </data>
   <data name="CommandsMod_BtnStore_InvalidJson" xml:space="preserve">
     <value>Please enter a valid JSON string!</value>

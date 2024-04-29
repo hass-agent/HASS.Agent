@@ -2908,7 +2908,15 @@ Komut/yükün JSON formatında olması gerekir. Tüm olası seçeneklere örnek:
 
 Hiçbir "playbackDevice" sağlanmazsa, HASS.Agent varsayılan olanı kullanacaktır.
 Hiçbir "volume" sağlanmazsa, HASS.Agent yalnızca sessiz durumunu ayarlayacaktır.
-Eğer "mute" sağlanmadıysa, HASS.Agent sağlanan uygulamanın sesini açacaktır.</value>
+Eğer "mute" sağlanmadıysa, HASS.Agent sağlanan uygulamanın sesini açacaktır.
+
+Gelişmiş seçenek: yalnızca uygulamanın belirli bir oturumu için ses seviyesini ayarlamak üzere ek "sessionId" sağlanabilir, oturum kimliği "Sesli Oturumlar" sensöründen alınabilir:
+{
+   "playbackDevice":"Speakers (THX SpatialAudio)",
+   "applicationName":"Discord",
+   "volume":50,
+   "sessionid":"&lt;LONG SESSION ID FROM SENSOR&gt;"
+}</value>
   </data>
   <data name="CommandsMod_BtnStore_InvalidJson" xml:space="preserve">
     <value>Lütfen geçerli bir JSON dizesi girin!</value>

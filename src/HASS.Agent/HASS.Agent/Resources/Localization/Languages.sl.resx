@@ -3441,7 +3441,15 @@ Ukaz/tovor mora biti v formatu JSON. Primer vseh možnih možnosti:
 
 Če ni na voljo "playbackDevice", bo HASS.Agent uporabil privzeto.
 Če ni na voljo nobena "volume", bo HASS.Agent nastavil samo stanje utišanja.
-Če ni na voljo možnost "mute", bo HASS.Agent znova vključil zvok navedene aplikacije.</value>
+Če ni na voljo možnost "mute", bo HASS.Agent znova vključil zvok navedene aplikacije.
+
+Napredna možnost: dodatni "sessionId" je mogoče zagotoviti za nastavitev glasnosti samo za določeno sejo aplikacije, ID seje je mogoče pridobiti iz senzorja "Audio Sessions":
+{
+   "playbackDevice":"Speakers (THX SpatialAudio)",
+   "applicationName":"Discord",
+   "volume":50,
+   "sessionid":"&lt;LONG SESSION ID FROM SENSOR&gt;"
+}</value>
   </data>
   <data name="CommandsMod_BtnStore_InvalidJson" xml:space="preserve">
     <value>Vnesite veljaven niz JSON!</value>
