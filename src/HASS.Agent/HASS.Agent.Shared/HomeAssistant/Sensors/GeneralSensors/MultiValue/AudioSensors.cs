@@ -131,7 +131,7 @@ public class AudioSensors : AbstractMultiValueSensor
         var defaultInputDeviceVolumeEntityName = $"{parentSensorSafeName}_default_input_device_volume";
         var defaultInputDeviceVolumeId = $"{Id}_default_input_device_volume";
         var defaultInputDeviceVolumeSensor = new DataTypeIntSensor(_updateInterval, defaultInputDeviceVolumeEntityName, $"Default Input Device Volume", defaultInputDeviceVolumeId, string.Empty, "mdi:microphone", string.Empty, EntityName);
-        defaultInputDeviceVolumeSensor.SetState(inputDevice.Volume);
+        defaultInputDeviceVolumeSensor.SetState(inputDevice.PeakVolume);
         AddUpdateSensor(defaultInputDeviceVolumeId, defaultInputDeviceVolumeSensor);
 
         var audioInputDevices = inputDevices.Select(d => d.FriendlyName).ToList();
