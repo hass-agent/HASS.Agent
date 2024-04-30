@@ -41,7 +41,19 @@ public abstract class AbstractSingleValueSensor : AbstractDiscoverable
     protected SensorDiscoveryConfigModel SetAutoDiscoveryConfigModel(SensorDiscoveryConfigModel config)
     {
         AutoDiscoveryConfigModel = config;
-        return config;
+
+        // overwrite with advanced settings
+        if (_advancedInfo != null)
+        {
+            if (!string.IsNullOrWhiteSpace(_advancedInfo.DeviceClass))
+                AutoDiscoveryConfigModel.Device_class = _advancedInfo.DeviceClass;
+            if (!string.IsNullOrWhiteSpace(_advancedInfo.UnitOfMeasurement))
+                AutoDiscoveryConfigModel.Unit_of_measurement = _advancedInfo.UnitOfMeasurement;
+            if (!string.IsNullOrWhiteSpace(_advancedInfo.StateClass))
+                AutoDiscoveryConfigModel.State_class = _advancedInfo.StateClass;
+        }
+
+        return AutoDiscoveryConfigModel;
     }
 
     public override void ClearAutoDiscoveryConfig() => AutoDiscoveryConfigModel = null;
@@ -95,17 +107,6 @@ public abstract class AbstractSingleValueSensor : AbstractDiscoverable
             var autoDiscoConfig = (SensorDiscoveryConfigModel)GetAutoDiscoveryConfig();
             if (autoDiscoConfig == null)
                 return;
-
-            // overwrite with advanced settings
-            if (_advancedInfo != null)
-            {
-                if (!string.IsNullOrWhiteSpace(_advancedInfo.DeviceClass))
-                    autoDiscoConfig.Device_class = _advancedInfo.DeviceClass;
-                if (!string.IsNullOrWhiteSpace(_advancedInfo.UnitOfMeasurement))
-                    autoDiscoConfig.Unit_of_measurement = _advancedInfo.UnitOfMeasurement;
-                if (!string.IsNullOrWhiteSpace(_advancedInfo.StateClass))
-                    autoDiscoConfig.State_class = _advancedInfo.StateClass;
-            }
 
             // prepare the state message
             var message = new MqttApplicationMessageBuilder()
