@@ -562,11 +562,38 @@ namespace HASS.Agent.MQTT
                 {
                     if (string.IsNullOrEmpty(Variables.AppSettings.MqttDiscoveryPrefix))
                         Variables.AppSettings.MqttDiscoveryPrefix = "homeassistant";
-
                     var messageBuilder = new MqttApplicationMessageBuilder()
                         .WithTopic($"{Variables.AppSettings.MqttDiscoveryPrefix}/sensor/{Variables.DeviceConfig.Name}/availability")
                         .WithPayload(Array.Empty<byte>())
-                        .WithRetainFlag(Variables.AppSettings.MqttUseRetainFlag);
+                        .WithRetainFlag(false);
+
+                    await _mqttClient.InternalClient.PublishAsync(messageBuilder.Build());
+
+                    messageBuilder = new MqttApplicationMessageBuilder()
+                        .WithTopic($"hass.agent/devices/{Variables.DeviceConfig.Name}")
+                        .WithPayload(Array.Empty<byte>())
+                        .WithRetainFlag(false);
+
+                    await _mqttClient.InternalClient.PublishAsync(messageBuilder.Build());
+
+                    messageBuilder = new MqttApplicationMessageBuilder()
+                        .WithTopic($"hass.agent/media_player/{Variables.DeviceConfig.Name}")
+                        .WithPayload(Array.Empty<byte>())
+                        .WithRetainFlag(false);
+
+                    await _mqttClient.InternalClient.PublishAsync(messageBuilder.Build());
+
+                    messageBuilder = new MqttApplicationMessageBuilder()
+                        .WithTopic($"hass.agent/media_player/{Variables.DeviceConfig.Name}/thumbnail")
+                        .WithPayload(Array.Empty<byte>())
+                        .WithRetainFlag(false);
+
+                    await _mqttClient.InternalClient.PublishAsync(messageBuilder.Build());
+
+                    messageBuilder = new MqttApplicationMessageBuilder()
+                        .WithTopic($"hass.agent/media_player/{Variables.DeviceConfig.Name}/state")
+                        .WithPayload(Array.Empty<byte>())
+                        .WithRetainFlag(false);
 
                     await _mqttClient.InternalClient.PublishAsync(messageBuilder.Build());
                 }

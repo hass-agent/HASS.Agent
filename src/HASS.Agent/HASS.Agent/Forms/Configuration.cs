@@ -476,7 +476,7 @@ namespace HASS.Agent.Forms
 
             // nfc
             Variables.AppSettings.NfcScanningEnabled = _nfc.CbEnableNfc.CheckState == CheckState.Checked;
-            Variables.AppSettings.NfcSelectedScanner = _nfc.CbNfcScanner.SelectedItem.ToString();
+            Variables.AppSettings.NfcSelectedScanner = _nfc.CbNfcScanner.SelectedItem == null ? string.Empty : _nfc.CbNfcScanner.SelectedItem.ToString();
 
             // save to file
             SettingsManager.StoreAppSettings();
