@@ -191,7 +191,7 @@ namespace HASS.Agent.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to WMI Advanced Settings.
+        ///   Looks up a localized string similar to Advanced Settings.
         /// </summary>
         internal static string AdvancedSensorConfig_Title {
             get {
@@ -200,7 +200,7 @@ namespace HASS.Agent.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Warning, adding following settings may break the WMI sensor, use with caution!.
+        ///   Looks up a localized string similar to Warning, adding following settings may break the sensor, use with caution!.
         /// </summary>
         internal static string AdvancedSensorConfig_Warning {
             get {
@@ -6297,7 +6297,7 @@ namespace HASS.Agent.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Ad&amp;vanced settings.
+        ///   Looks up a localized string similar to Ad&amp;vanced Settings.
         /// </summary>
         internal static string SensorsMod_BtnAdvancedSettings {
             get {

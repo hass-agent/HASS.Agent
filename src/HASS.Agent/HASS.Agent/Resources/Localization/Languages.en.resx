@@ -3376,10 +3376,10 @@ Note: if used in the satellite service, it won't detect userspace applications.<
     <value>NFC</value>
   </data>
   <data name="SensorsMod_BtnAdvancedSettings" xml:space="preserve">
-    <value>Ad&amp;vanced settings</value>
+    <value>Ad&amp;vanced Settings</value>
   </data>
   <data name="AdvancedSensorConfig_Warning" xml:space="preserve">
-    <value>Warning, adding following settings may break the WMI sensor, use with caution!</value>
+    <value>Warning, adding following settings may break the sensor, use with caution!</value>
   </data>
   <data name="AdvancedSensorConfig_LblDeviceClass" xml:space="preserve">
     <value>Device class</value>
@@ -3391,6 +3391,6 @@ Note: if used in the satellite service, it won't detect userspace applications.<
     <value>State class</value>
   </data>
   <data name="AdvancedSensorConfig_Title" xml:space="preserve">
-    <value>WMI Advanced Settings</value>
+    <value>Advanced Settings</value>
   </data>
 </root>
