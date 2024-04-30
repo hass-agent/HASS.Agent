@@ -200,7 +200,7 @@ namespace HASS.Agent.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Warning, adding following settings may break the sensor, use with caution!.
+        ///   Looks up a localized string similar to Warning, adding following settings (overrides) may break the sensor, use with caution!.
         /// </summary>
         internal static string AdvancedSensorConfig_Warning {
             get {

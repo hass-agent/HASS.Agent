@@ -3523,4 +3523,13 @@ Opomba: Äe se uporablja v satelitski storitvi, ne bo zaznal aplikacij uporabniÅ
   <data name="Configuration_NFC" xml:space="preserve">
     <value>NFC</value>
   </data>
+  <data name="AdvancedSensorConfig_Title" xml:space="preserve">
+    <value>Napredne nastavitve</value>
+  </data>
+  <data name="SensorsMod_BtnAdvancedSettings" xml:space="preserve">
+    <value>Napredne nasta&amp;vitve</value>
+  </data>
+  <data name="AdvancedSensorConfig_Warning" xml:space="preserve">
+    <value>Opozorilo, dodajanje naslednjih nastavitev (preglasitev) lahko pokvari senzor, uporabljajte previdno!</value>
+  </data>
 </root>
