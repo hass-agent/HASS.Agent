@@ -45,7 +45,7 @@ namespace HASS.Agent.Shared.HomeAssistant.Sensors.GeneralSensors.SingleValue
             var windowHandle = GetForegroundWindow();
 
             GetWindowThreadProcessId(windowHandle, out var processId);
-            var process = Process.GetProcessById(Convert.ToInt32(processId));
+            using var process = Process.GetProcessById(Convert.ToInt32(processId));
             _processName = process.ProcessName ?? string.Empty;
 
             return GetWindowTitle(windowHandle);
