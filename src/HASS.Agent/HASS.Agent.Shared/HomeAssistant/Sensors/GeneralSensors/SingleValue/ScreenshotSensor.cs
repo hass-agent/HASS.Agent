@@ -21,7 +21,7 @@ public class ScreenshotSensor : AbstractSingleValueSensor
 
     public int ScreenIndex;
 
-    public ScreenshotSensor(string screenIndex = "0", int? updateInterval = null, string entityName = DefaultName, string name = DefaultName, string id = default) : base(entityName ?? DefaultName, name ?? null, updateInterval ?? 15, id)
+    public ScreenshotSensor(string screenIndex = "0", int? updateInterval = null, string entityName = DefaultName, string name = DefaultName, string id = default, string advancedSettings = default) : base(entityName ?? DefaultName, name ?? null, updateInterval ?? 15, id, advancedSettings: advancedSettings)
     {
         ScreenIndex = int.TryParse(screenIndex, out var parsedScreenIndex) ? parsedScreenIndex : 0;
         Domain = "camera";

@@ -22,7 +22,7 @@ namespace HASS.Agent.Shared.HomeAssistant.Sensors
         public bool ApplyRounding { get; private set; }
         public int? Round { get; private set; }
 
-        public PerformanceCounterSensor(string categoryName, string counterName, string instanceName, bool applyRounding = false, int? round = null, int? updateInterval = null, string entityName = DefaultName, string name = DefaultName, string id = default) : base(entityName ?? DefaultName, name ?? null, updateInterval ?? 10, id)
+        public PerformanceCounterSensor(string categoryName, string counterName, string instanceName, bool applyRounding = false, int? round = null, int? updateInterval = null, string entityName = DefaultName, string name = DefaultName, string id = default, string advancedSettings = default) : base(entityName ?? DefaultName, name ?? null, updateInterval ?? 10, id, advancedSettings: advancedSettings)
         {
             CategoryName = categoryName;
             CounterName = counterName;

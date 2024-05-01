@@ -104,103 +104,103 @@ namespace HASS.Agent.Settings
             switch (sensor.Type)
             {
                 case SensorType.UserNotificationStateSensor:
-                    abstractSensor = new UserNotificationStateSensor(sensor.UpdateInterval, sensor.EntityName, sensor.Name, sensor.Id.ToString());
+                    abstractSensor = new UserNotificationStateSensor(sensor.UpdateInterval, sensor.EntityName, sensor.Name, sensor.Id.ToString(), sensor.AdvancedSettings);
                     break;
                 case SensorType.DummySensor:
-                    abstractSensor = new DummySensor(sensor.UpdateInterval, sensor.EntityName, sensor.Name, sensor.Id.ToString());
+                    abstractSensor = new DummySensor(sensor.UpdateInterval, sensor.EntityName, sensor.Name, sensor.Id.ToString(), sensor.AdvancedSettings);
                     break;
                 case SensorType.CurrentClockSpeedSensor:
-                    abstractSensor = new CurrentClockSpeedSensor(sensor.UpdateInterval, sensor.EntityName, sensor.Name, sensor.Id.ToString());
+                    abstractSensor = new CurrentClockSpeedSensor(sensor.UpdateInterval, sensor.EntityName, sensor.Name, sensor.Id.ToString(), sensor.ApplyRounding, sensor.Round, sensor.AdvancedSettings);
                     break;
                 case SensorType.CpuLoadSensor:
-                    abstractSensor = new CpuLoadSensor(sensor.UpdateInterval, sensor.EntityName, sensor.Name, sensor.Id.ToString());
+                    abstractSensor = new CpuLoadSensor(sensor.UpdateInterval, sensor.EntityName, sensor.Name, sensor.Id.ToString(), sensor.ApplyRounding, sensor.Round, sensor.AdvancedSettings);
                     break;
                 case SensorType.MemoryUsageSensor:
-                    abstractSensor = new MemoryUsageSensor(sensor.UpdateInterval, sensor.EntityName, sensor.Name, sensor.Id.ToString());
+                    abstractSensor = new MemoryUsageSensor(sensor.UpdateInterval, sensor.EntityName, sensor.Name, sensor.Id.ToString(), sensor.ApplyRounding, sensor.Round, sensor.AdvancedSettings);
                     break;
                 case SensorType.ActiveWindowSensor:
-                    abstractSensor = new ActiveWindowSensor(sensor.UpdateInterval, sensor.EntityName, sensor.Name, sensor.Id.ToString());
+                    abstractSensor = new ActiveWindowSensor(sensor.UpdateInterval, sensor.EntityName, sensor.Name, sensor.Id.ToString(), sensor.AdvancedSettings);
                     break;
                 case SensorType.ActiveDesktopSensor:
-                    abstractSensor = new ActiveDesktopSensor(sensor.UpdateInterval, sensor.EntityName, sensor.Name, sensor.Id.ToString());
+                    abstractSensor = new ActiveDesktopSensor(sensor.UpdateInterval, sensor.EntityName, sensor.Name, sensor.Id.ToString(), sensor.AdvancedSettings);
                     break;
                 case SensorType.NamedWindowSensor:
-                    abstractSensor = new NamedWindowSensor(sensor.WindowName, sensor.EntityName, sensor.Name, sensor.UpdateInterval, sensor.Id.ToString());
+                    abstractSensor = new NamedWindowSensor(sensor.WindowName, sensor.EntityName, sensor.Name, sensor.UpdateInterval, sensor.Id.ToString(), sensor.AdvancedSettings);
                     break;
 				case SensorType.LastActiveSensor:
-					abstractSensor = new LastActiveSensor(sensor.ApplyRounding, sensor.Round, sensor.UpdateInterval, sensor.EntityName, sensor.Name, sensor.Id.ToString());
+					abstractSensor = new LastActiveSensor(sensor.ApplyRounding, sensor.Round, sensor.UpdateInterval, sensor.EntityName, sensor.Name, sensor.Id.ToString(), sensor.AdvancedSettings);
 					break;
 				case SensorType.LastSystemStateChangeSensor:
-                    abstractSensor = new LastSystemStateChangeSensor(sensor.UpdateInterval, sensor.EntityName, sensor.Name, sensor.Id.ToString());
+                    abstractSensor = new LastSystemStateChangeSensor(sensor.UpdateInterval, sensor.EntityName, sensor.Name, sensor.Id.ToString(), sensor.AdvancedSettings);
                     break;
                 case SensorType.LastBootSensor:
-                    abstractSensor = new LastBootSensor(sensor.UpdateInterval, sensor.EntityName, sensor.Name, sensor.Id.ToString());
+                    abstractSensor = new LastBootSensor(sensor.UpdateInterval, sensor.EntityName, sensor.Name, sensor.Id.ToString(), sensor.AdvancedSettings);
                     break;
                 case SensorType.WebcamActiveSensor:
-                    abstractSensor = new WebcamActiveSensor(sensor.UpdateInterval, sensor.EntityName, sensor.Name, sensor.Id.ToString());
+                    abstractSensor = new WebcamActiveSensor(sensor.UpdateInterval, sensor.EntityName, sensor.Name, sensor.Id.ToString(), sensor.AdvancedSettings);
                     break;
                 case SensorType.MicrophoneActiveSensor:
-                    abstractSensor = new MicrophoneActiveSensor(sensor.UpdateInterval, sensor.EntityName, sensor.Name, sensor.Id.ToString());
+                    abstractSensor = new MicrophoneActiveSensor(sensor.UpdateInterval, sensor.EntityName, sensor.Name, sensor.Id.ToString(), sensor.AdvancedSettings);
                     break;
                 case SensorType.SessionStateSensor:
-                    abstractSensor = new SessionStateSensor(sensor.UpdateInterval, sensor.EntityName, sensor.Name, sensor.Id.ToString());
+                    abstractSensor = new SessionStateSensor(sensor.UpdateInterval, sensor.EntityName, sensor.Name, sensor.Id.ToString(), sensor.AdvancedSettings);
                     break;
                 case SensorType.CurrentVolumeSensor:
-                    abstractSensor = new CurrentVolumeSensor(sensor.UpdateInterval, sensor.EntityName, sensor.Name, sensor.Id.ToString());
+                    abstractSensor = new CurrentVolumeSensor(sensor.UpdateInterval, sensor.EntityName, sensor.Name, sensor.Id.ToString(), sensor.AdvancedSettings);
                     break;
                 case SensorType.GpuLoadSensor:
-                    abstractSensor = new GpuLoadSensor(sensor.UpdateInterval, sensor.EntityName, sensor.Name, sensor.Id.ToString());
+                    abstractSensor = new GpuLoadSensor(sensor.UpdateInterval, sensor.EntityName, sensor.Name, sensor.Id.ToString(), sensor.AdvancedSettings);
                     break;
                 case SensorType.GpuTemperatureSensor:
-                    abstractSensor = new GpuTemperatureSensor(sensor.UpdateInterval, sensor.EntityName, sensor.Name, sensor.Id.ToString());
+                    abstractSensor = new GpuTemperatureSensor(sensor.UpdateInterval, sensor.EntityName, sensor.Name, sensor.Id.ToString(), sensor.AdvancedSettings);
                     break;
                 case SensorType.WmiQuerySensor:
                     abstractSensor = new WmiQuerySensor(sensor.Query, sensor.Scope, sensor.ApplyRounding, sensor.Round, sensor.UpdateInterval, sensor.EntityName, sensor.Name, sensor.Id.ToString(), sensor.AdvancedSettings);
                     break;
                 case SensorType.PerformanceCounterSensor:
-                    abstractSensor = new PerformanceCounterSensor(sensor.Category, sensor.Counter, sensor.Instance, sensor.ApplyRounding, sensor.Round, sensor.UpdateInterval, sensor.EntityName, sensor.Name, sensor.Id.ToString());
+                    abstractSensor = new PerformanceCounterSensor(sensor.Category, sensor.Counter, sensor.Instance, sensor.ApplyRounding, sensor.Round, sensor.UpdateInterval, sensor.EntityName, sensor.Name, sensor.Id.ToString(), sensor.AdvancedSettings);
                     break;
                 case SensorType.ProcessActiveSensor:
-                    abstractSensor = new ProcessActiveSensor(sensor.Query, sensor.UpdateInterval, sensor.EntityName, sensor.Name, sensor.Id.ToString());
+                    abstractSensor = new ProcessActiveSensor(sensor.Query, sensor.UpdateInterval, sensor.EntityName, sensor.Name, sensor.Id.ToString(), sensor.AdvancedSettings);
                     break;
                 case SensorType.ServiceStateSensor:
-                    abstractSensor = new ServiceStateSensor(sensor.Query, sensor.UpdateInterval, sensor.EntityName, sensor.Name, sensor.Id.ToString());
+                    abstractSensor = new ServiceStateSensor(sensor.Query, sensor.UpdateInterval, sensor.EntityName, sensor.Name, sensor.Id.ToString(), sensor.AdvancedSettings);
                     break;
                 case SensorType.LoggedUsersSensor:
-                    abstractSensor = new LoggedUsersSensor(sensor.UpdateInterval, sensor.EntityName, sensor.Name, sensor.Id.ToString());
+                    abstractSensor = new LoggedUsersSensor(sensor.UpdateInterval, sensor.EntityName, sensor.Name, sensor.Id.ToString(), sensor.AdvancedSettings);
                     break;
                 case SensorType.LoggedUserSensor:
-                    abstractSensor = new LoggedUserSensor(sensor.UpdateInterval, sensor.EntityName, sensor.Name, sensor.Id.ToString());
+                    abstractSensor = new LoggedUserSensor(sensor.UpdateInterval, sensor.EntityName, sensor.Name, sensor.Id.ToString(), sensor.AdvancedSettings);
                     break;
                 case SensorType.GeoLocationSensor:
-                    abstractSensor = new GeoLocationSensor(sensor.UpdateInterval, sensor.EntityName, sensor.Name, sensor.Id.ToString());
+                    abstractSensor = new GeoLocationSensor(sensor.UpdateInterval, sensor.EntityName, sensor.Name, sensor.Id.ToString(), sensor.AdvancedSettings);
                     break;
                 case SensorType.MonitorPowerStateSensor:
-                    abstractSensor = new MonitorPowerStateSensor(sensor.UpdateInterval, sensor.EntityName, sensor.Name, sensor.Id.ToString());
+                    abstractSensor = new MonitorPowerStateSensor(sensor.UpdateInterval, sensor.EntityName, sensor.Name, sensor.Id.ToString(), sensor.AdvancedSettings);
                     break;
                 case SensorType.PowershellSensor:
-                    abstractSensor = new PowershellSensor(sensor.Query, sensor.ApplyRounding, sensor.Round, sensor.UpdateInterval, sensor.EntityName, sensor.Name, sensor.Id.ToString());
+                    abstractSensor = new PowershellSensor(sensor.Query, sensor.ApplyRounding, sensor.Round, sensor.UpdateInterval, sensor.EntityName, sensor.Name, sensor.Id.ToString(), sensor.AdvancedSettings);
                     break;
                 case SensorType.WindowStateSensor:
-                    abstractSensor = new WindowStateSensor(sensor.Query, sensor.EntityName, sensor.Name, sensor.UpdateInterval, sensor.Id.ToString());
+                    abstractSensor = new WindowStateSensor(sensor.Query, sensor.EntityName, sensor.Name, sensor.UpdateInterval, sensor.Id.ToString(), sensor.AdvancedSettings);
                     break;
                 case SensorType.MicrophoneProcessSensor:
-                    abstractSensor = new MicrophoneProcessSensor(sensor.UpdateInterval, sensor.EntityName, sensor.Name, sensor.Id.ToString());
+                    abstractSensor = new MicrophoneProcessSensor(sensor.UpdateInterval, sensor.EntityName, sensor.Name, sensor.Id.ToString(), sensor.AdvancedSettings);
                     break;
                 case SensorType.WebcamProcessSensor:
-                    abstractSensor = new WebcamProcessSensor(sensor.UpdateInterval, sensor.EntityName, sensor.Name, sensor.Id.ToString());
+                    abstractSensor = new WebcamProcessSensor(sensor.UpdateInterval, sensor.EntityName, sensor.Name, sensor.Id.ToString(), sensor.AdvancedSettings);
                     break;
                 case SensorType.BluetoothDevicesSensor:
-                    abstractSensor = new BluetoothDevicesSensor(sensor.UpdateInterval, sensor.EntityName, sensor.Name, sensor.Id.ToString());
+                    abstractSensor = new BluetoothDevicesSensor(sensor.UpdateInterval, sensor.EntityName, sensor.Name, sensor.Id.ToString(), sensor.AdvancedSettings);
                     break;
                 case SensorType.BluetoothLeDevicesSensor:
-                    abstractSensor = new BluetoothLeDevicesSensor(sensor.UpdateInterval, sensor.EntityName, sensor.Name, sensor.Id.ToString());
+                    abstractSensor = new BluetoothLeDevicesSensor(sensor.UpdateInterval, sensor.EntityName, sensor.Name, sensor.Id.ToString(), sensor.AdvancedSettings);
                     break;
                 case SensorType.InternalDeviceSensor:
-                    abstractSensor = new HomeAssistant.Sensors.GeneralSensors.SingleValue.InternalDeviceSensor(sensor.Query, sensor.UpdateInterval, sensor.EntityName, sensor.Name, sensor.Id.ToString());
+                    abstractSensor = new HomeAssistant.Sensors.GeneralSensors.SingleValue.InternalDeviceSensor(sensor.Query, sensor.UpdateInterval, sensor.EntityName, sensor.Name, sensor.Id.ToString(), sensor.AdvancedSettings);
                     break;
                 case SensorType.ScreenshotSensor:
-                    abstractSensor = new ScreenshotSensor(sensor.Query, sensor.UpdateInterval, sensor.EntityName, sensor.Name, sensor.Id.ToString());
+                    abstractSensor = new ScreenshotSensor(sensor.Query, sensor.UpdateInterval, sensor.EntityName, sensor.Name, sensor.Id.ToString(), sensor.AdvancedSettings);
                     break;
                 default:
                     Log.Error("[SETTINGS_SENSORS] [{name}] Unknown configured single-value sensor type: {type}", sensor.EntityName, sensor.Type.ToString());
@@ -293,7 +293,8 @@ namespace HASS.Agent.Settings
                         Type = type,
                         UpdateInterval = namedWindowSensor.UpdateIntervalSeconds,
                         IgnoreAvailability = namedWindowSensor.IgnoreAvailability,
-                        WindowName = namedWindowSensor.WindowName
+                        WindowName = namedWindowSensor.WindowName,
+                        AdvancedSettings = namedWindowSensor.AdvancedSettings
                     };
                 }
 
@@ -312,7 +313,8 @@ namespace HASS.Agent.Settings
                         Counter = performanceCounterSensor.CounterName,
                         Instance = performanceCounterSensor.InstanceName,
                         ApplyRounding = performanceCounterSensor.ApplyRounding,
-                        Round = performanceCounterSensor.Round
+                        Round = performanceCounterSensor.Round,
+                        AdvancedSettings = performanceCounterSensor.AdvancedSettings
                     };
                 }
 
@@ -327,7 +329,8 @@ namespace HASS.Agent.Settings
                         Type = type,
                         UpdateInterval = processActiveSensor.UpdateIntervalSeconds,
                         IgnoreAvailability = processActiveSensor.IgnoreAvailability,
-                        Query = processActiveSensor.ProcessName
+                        Query = processActiveSensor.ProcessName,
+                        AdvancedSettings = processActiveSensor.AdvancedSettings
                     };
                 }
 
@@ -342,7 +345,8 @@ namespace HASS.Agent.Settings
                         Type = type,
                         UpdateInterval = serviceStateSensor.UpdateIntervalSeconds,
                         IgnoreAvailability = serviceStateSensor.IgnoreAvailability,
-                        Query = serviceStateSensor.ServiceName
+                        Query = serviceStateSensor.ServiceName,
+                        AdvancedSettings = serviceStateSensor.AdvancedSettings
                     };
                 }
 
@@ -359,7 +363,8 @@ namespace HASS.Agent.Settings
                         IgnoreAvailability = powershellSensor.IgnoreAvailability,
                         Query = powershellSensor.Command,
                         ApplyRounding = powershellSensor.ApplyRounding,
-                        Round = powershellSensor.Round
+                        Round = powershellSensor.Round,
+                        AdvancedSettings = powershellSensor.AdvancedSettings
                     };
                 }
 
@@ -375,8 +380,9 @@ namespace HASS.Agent.Settings
 							UpdateInterval = lastActiveSensor.UpdateIntervalSeconds,
 							IgnoreAvailability = lastActiveSensor.IgnoreAvailability,
 							ApplyRounding = lastActiveSensor.ApplyRounding,
-							Round = lastActiveSensor.Round
-						};
+							Round = lastActiveSensor.Round,
+                            AdvancedSettings = lastActiveSensor.AdvancedSettings
+                        };
 					}
 
 				case WindowStateSensor windowStateSensor:
@@ -390,7 +396,8 @@ namespace HASS.Agent.Settings
                         Type = type,
                         UpdateInterval = windowStateSensor.UpdateIntervalSeconds,
                         IgnoreAvailability = windowStateSensor.IgnoreAvailability,
-                        Query = windowStateSensor.ProcessName
+                        Query = windowStateSensor.ProcessName,
+                        AdvancedSettings = windowStateSensor.AdvancedSettings
                     };
                 }
 
@@ -405,7 +412,8 @@ namespace HASS.Agent.Settings
                             Type = type,
                             UpdateInterval = internalDeviceSensor.UpdateIntervalSeconds,
 							IgnoreAvailability = internalDeviceSensor.IgnoreAvailability,
-							Query = internalDeviceSensor.SensorType.ToString()
+							Query = internalDeviceSensor.SensorType.ToString(),
+                            AdvancedSettings = internalDeviceSensor.AdvancedSettings
                         };
                     }
 
@@ -420,7 +428,8 @@ namespace HASS.Agent.Settings
                             Type = type,
                             UpdateInterval = screenshotSensor.UpdateIntervalSeconds,
                             IgnoreAvailability = screenshotSensor.IgnoreAvailability,
-                            Query = screenshotSensor.ScreenIndex.ToString()
+                            Query = screenshotSensor.ScreenIndex.ToString(),
+                            AdvancedSettings = screenshotSensor.AdvancedSettings
                         };
                     }
 
@@ -434,7 +443,8 @@ namespace HASS.Agent.Settings
                         Name = sensor.Name,
                         Type = type, 
                         UpdateInterval = sensor.UpdateIntervalSeconds,
-                        IgnoreAvailability = sensor.IgnoreAvailability
+                        IgnoreAvailability = sensor.IgnoreAvailability,
+                        AdvancedSettings = sensor.AdvancedSettings
                     };
                 }
             }

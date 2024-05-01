@@ -17,7 +17,7 @@ namespace HASS.Agent.HomeAssistant.Sensors.GeneralSensors.SingleValue
 
         private readonly IInternalDeviceSensor _internalDeviceSensor;
 
-        public InternalDeviceSensor(string sensorType, int? updateInterval = 10, string entityName = DefaultName, string name = DefaultName, string id = default) : base(entityName ?? DefaultName, name ?? null, updateInterval ?? 30, id)
+        public InternalDeviceSensor(string sensorType, int? updateInterval = 10, string entityName = DefaultName, string name = DefaultName, string id = default, string advancedSettings = default) : base(entityName ?? DefaultName, name ?? null, updateInterval ?? 30, id, advancedSettings: advancedSettings)
         {
             SensorType = Enum.Parse<InternalDeviceSensorType>(sensorType);
             _internalDeviceSensor = InternalDeviceSensorsManager.AvailableSensors.First(s => s.Type == SensorType);

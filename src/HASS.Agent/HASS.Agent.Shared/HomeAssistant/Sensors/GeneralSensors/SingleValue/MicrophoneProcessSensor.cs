@@ -15,7 +15,7 @@ public class MicrophoneProcessSensor : AbstractSingleValueSensor
     private const string DefaultName = "microphoneprocess";
     
     private const string LastUsedTimeStop = "LastUsedTimeStop";
-    public MicrophoneProcessSensor(int? updateInterval = null, string entityName = DefaultName, string name = DefaultName, string id = default, bool useAttributes = true) : base(entityName ?? DefaultName, name ?? null, updateInterval ?? 10, id, useAttributes)
+    public MicrophoneProcessSensor(int? updateInterval = null, string entityName = DefaultName, string name = DefaultName, string id = default, string advancedSettings = default) : base(entityName ?? DefaultName, name ?? null, updateInterval ?? 10, id, true, advancedSettings: advancedSettings)
     {
         //
     }

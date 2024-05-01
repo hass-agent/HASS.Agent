@@ -11,7 +11,7 @@ namespace HASS.Agent.Shared.HomeAssistant.Sensors.WmiSensors.SingleValue
     {
         private const string DefaultName = "memoryusage";
 
-        public MemoryUsageSensor(int? updateInterval = null, string entityName = DefaultName, string name = DefaultName, string id = default, bool applyRounding = false, int? round = null) : base("SELECT FreePhysicalMemory,TotalVisibleMemorySize FROM Win32_OperatingSystem", string.Empty, applyRounding, round, updateInterval ?? 30, entityName ?? DefaultName, name ?? null, id) { }
+        public MemoryUsageSensor(int? updateInterval = null, string entityName = DefaultName, string name = DefaultName, string id = default, bool applyRounding = false, int? round = null, string advancedSettings = default) : base("SELECT FreePhysicalMemory,TotalVisibleMemorySize FROM Win32_OperatingSystem", string.Empty, applyRounding, round, updateInterval ?? 30, entityName ?? DefaultName, name ?? null, id, advancedSettings: advancedSettings) { }
 
         public override DiscoveryConfigModel GetAutoDiscoveryConfig()
         {
