@@ -76,7 +76,7 @@ public class AudioSensors : AbstractMultiValueSensor
         var masterVolume = Convert.ToInt32(Math.Round(audioDevice.AudioEndpointVolume?.MasterVolumeLevelScalar * 100 ?? 0, 0));
         var defaultDeviceVolumeEntityName = $"{parentSensorSafeName}_default_device_volume";
         var defaultDeviceVolumeId = $"{Id}_default_device_volume";
-        var defaultDeviceVolumeSensor = new DataTypeIntSensor(_updateInterval, defaultDeviceVolumeEntityName, $"Default Device Volume", defaultDeviceVolumeId, string.Empty, "mdi:speaker", string.Empty, EntityName);
+        var defaultDeviceVolumeSensor = new DataTypeIntSensor(_updateInterval, defaultDeviceVolumeEntityName, $"Default Device Volume", defaultDeviceVolumeId, string.Empty, "measurement", "mdi:speaker", string.Empty, EntityName);
         defaultDeviceVolumeSensor.SetState(masterVolume);
         AddUpdateSensor(defaultDeviceVolumeId, defaultDeviceVolumeSensor);
 
@@ -98,7 +98,7 @@ public class AudioSensors : AbstractMultiValueSensor
 
         var sessionsEntityName = $"{parentSensorSafeName}_sessions";
         var sessionsId = $"{Id}_sessions";
-        var sessionsSensor = new DataTypeIntSensor(_updateInterval, sessionsEntityName, $"Audio Sessions", sessionsId, string.Empty, "mdi:music-box-multiple-outline", string.Empty, EntityName, true);
+        var sessionsSensor = new DataTypeIntSensor(_updateInterval, sessionsEntityName, $"Audio Sessions", sessionsId, string.Empty, "measurement", "mdi:music-box-multiple-outline", string.Empty, EntityName, true);
         sessionsSensor.SetState(sessionInfos.Count);
         sessionsSensor.SetAttributes(
             JsonConvert.SerializeObject(new
@@ -111,7 +111,7 @@ public class AudioSensors : AbstractMultiValueSensor
         var audioOutputDevices = GetAudioOutputDevices();
         var audioOutputDevicesEntityName = $"{parentSensorSafeName}_output_devices";
         var audioOutputDevicesId = $"{Id}_output_devices";
-        var audioOutputDevicesSensor = new DataTypeIntSensor(_updateInterval, audioOutputDevicesEntityName, $"Audio Output Devices", audioOutputDevicesId, string.Empty, "mdi:music-box-multiple-outline", string.Empty, EntityName, true);
+        var audioOutputDevicesSensor = new DataTypeIntSensor(_updateInterval, audioOutputDevicesEntityName, $"Audio Output Devices", audioOutputDevicesId, string.Empty, "measurement", "mdi:music-box-multiple-outline", string.Empty, EntityName, true);
         audioOutputDevicesSensor.SetState(audioOutputDevices.Count);
         audioOutputDevicesSensor.SetAttributes(
             JsonConvert.SerializeObject(new
@@ -148,14 +148,14 @@ public class AudioSensors : AbstractMultiValueSensor
         var inputVolume = (int)GetDefaultInputDevicePeakVolume(inputDevice);
         var defaultInputDeviceVolumeEntityName = $"{parentSensorSafeName}_default_input_device_volume";
         var defaultInputDeviceVolumeId = $"{Id}_default_input_device_volume";
-        var defaultInputDeviceVolumeSensor = new DataTypeIntSensor(_updateInterval, defaultInputDeviceVolumeEntityName, $"Default Input Device Volume", defaultInputDeviceVolumeId, string.Empty, "mdi:microphone", string.Empty, EntityName);
+        var defaultInputDeviceVolumeSensor = new DataTypeIntSensor(_updateInterval, defaultInputDeviceVolumeEntityName, $"Default Input Device Volume", defaultInputDeviceVolumeId, string.Empty, "measurement", "mdi:microphone", string.Empty, EntityName);
         defaultInputDeviceVolumeSensor.SetState(inputVolume);
         AddUpdateSensor(defaultInputDeviceVolumeId, defaultInputDeviceVolumeSensor);
 
         var audioInputDevices = GetAudioInputDevices();
         var audioInputDevicesEntityName = $"{parentSensorSafeName}_input_devices";
         var audioInputDevicesId = $"{Id}_input_devices";
-        var audioInputDevicesSensor = new DataTypeIntSensor(_updateInterval, audioInputDevicesEntityName, $"Audio Input Devices", audioInputDevicesId, string.Empty, "mdi:microphone", string.Empty, EntityName, true);
+        var audioInputDevicesSensor = new DataTypeIntSensor(_updateInterval, audioInputDevicesEntityName, $"Audio Input Devices", audioInputDevicesId, string.Empty, "measurement", "mdi:microphone", string.Empty, EntityName, true);
         audioInputDevicesSensor.SetState(audioInputDevices.Count);
         audioInputDevicesSensor.SetAttributes(
             JsonConvert.SerializeObject(new
