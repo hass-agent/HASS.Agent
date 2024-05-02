@@ -31,14 +31,14 @@ namespace HASS.Agent.Shared.HomeAssistant.Sensors
             ObjectQuery = new ObjectQuery(Query);
 
             // use either default or provided scope
-            var managementscope = !string.IsNullOrWhiteSpace(scope) 
-                ? new ManagementScope(scope) 
+            var managementscope = !string.IsNullOrWhiteSpace(scope)
+                ? new ManagementScope(scope)
                 : new ManagementScope(@"\\localhost\");
 
             // prepare searcher
             Searcher = new ManagementObjectSearcher(managementscope, ObjectQuery);
         }
-        
+
         public void Dispose() => Searcher?.Dispose();
 
         public override DiscoveryConfigModel GetAutoDiscoveryConfig()
@@ -58,7 +58,7 @@ namespace HASS.Agent.Shared.HomeAssistant.Sensors
                 Availability_topic = $"{Variables.MqttManager.MqttDiscoveryPrefix()}/{Domain}/{deviceConfig.Name}/availability"
             });
         }
-        
+
         public override string GetState()
         {
             using var collection = Searcher.Get();
@@ -68,12 +68,13 @@ namespace HASS.Agent.Shared.HomeAssistant.Sensors
             {
                 try
                 {
-                    if (!string.IsNullOrEmpty(retValue)) continue;
+                    if (!string.IsNullOrEmpty(retValue))
+                        continue;
 
                     using var managementObject = (ManagementObject)managementBaseObject;
                     foreach (var property in managementObject.Properties)
                     {
-                        retValue = property.Value.ToString();
+                        retValue = property?.Value?.ToString() ?? string.Empty;
                         break;
                     }
                 }
@@ -84,7 +85,10 @@ namespace HASS.Agent.Shared.HomeAssistant.Sensors
             }
 
             // optionally apply rounding
-            if (ApplyRounding && Round != null && double.TryParse(retValue, out var dblValue)) { retValue = Math.Round(dblValue, (int)Round).ToString(CultureInfo.CurrentCulture); }
+            if (ApplyRounding && Round != null && double.TryParse(retValue, out var dblValue))
+            {
+                retValue = Math.Round(dblValue, (int)Round).ToString(CultureInfo.CurrentCulture);
+            }
 
             // done
             return retValue;
