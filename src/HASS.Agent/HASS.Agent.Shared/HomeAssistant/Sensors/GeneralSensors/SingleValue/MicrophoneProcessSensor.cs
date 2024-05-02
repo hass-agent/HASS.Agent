@@ -13,20 +13,15 @@ namespace HASS.Agent.Shared.HomeAssistant.Sensors.GeneralSensors.SingleValue;
 public class MicrophoneProcessSensor : AbstractSingleValueSensor
 {
     private const string DefaultName = "microphoneprocess";
-    
-    private const string LastUsedTimeStop = "LastUsedTimeStop";
-    public MicrophoneProcessSensor(int? updateInterval = null, string entityName = DefaultName, string name = DefaultName, string id = default, bool useAttributes = true) : base(entityName ?? DefaultName, name ?? null, updateInterval ?? 10, id, useAttributes)
-    {
-        //
-    }
+
+    private const string _lastUsedTimeStop = "LastUsedTimeStop";
+    private const string _regKey = @"SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\microphone";
+
+    public MicrophoneProcessSensor(int? updateInterval = null, string entityName = DefaultName, string name = DefaultName, string id = default) : base(entityName ?? DefaultName, name ?? null, updateInterval ?? 10, id, true) { }
 
     private readonly Dictionary<string, string> _processes = new();
 
     private string _attributes = string.Empty;
-
-    public override string GetState() => MicrophoneProcess();
-    public void SetAttributes(string value) => _attributes = string.IsNullOrWhiteSpace(value) ? "{}" : value;
-    public override string GetAttributes() => _attributes;
 
     public override DiscoveryConfigModel GetAutoDiscoveryConfig()
     {
@@ -49,40 +44,31 @@ public class MicrophoneProcessSensor : AbstractSingleValueSensor
             Device = deviceConfig,
             State_topic = $"{Variables.MqttManager.MqttDiscoveryPrefix()}/{Domain}/{deviceConfig.Name}/{ObjectId}/state",
             Availability_topic = $"{Variables.MqttManager.MqttDiscoveryPrefix()}/sensor/{deviceConfig.Name}/availability",
-            Icon = "mdi:microphone"
+            Icon = "mdi:microphone",
+            Json_attributes_topic = $"{Variables.MqttManager.MqttDiscoveryPrefix()}/{Domain}/{deviceConfig.Name}/{ObjectId}/attributes"
         };
-
-        if (UseAttributes)
-        {
-            model.Json_attributes_topic = $"{Variables.MqttManager.MqttDiscoveryPrefix()}/{Domain}/{deviceConfig.Name}/{ObjectId}/attributes";
-        }
 
         return AutoDiscoveryConfigModel ?? SetAutoDiscoveryConfigModel(model);
     }
 
     private string MicrophoneProcess()
     {
-        const string regKey = @"SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\microphone";
-
         _processes.Clear();
 
         // first local machine
-        using (var key = Registry.LocalMachine.OpenSubKey(regKey))
+        using (var key = Registry.LocalMachine.OpenSubKey(_regKey))
         {
             CheckRegForMicrophoneInUse(key);
         }
 
         // then current user
-        using (var key = Registry.CurrentUser.OpenSubKey(regKey))
+        using (var key = Registry.CurrentUser.OpenSubKey(_regKey))
         {
             CheckRegForMicrophoneInUse(key);
         }
 
         // add processes as attributes
-        if (_processes.Count > 0)
-        {
-            _attributes = JsonConvert.SerializeObject(_processes, Formatting.Indented);
-        }
+        _attributes = _processes.Count > 0 ? JsonConvert.SerializeObject(_processes, Formatting.Indented) : "{}";
 
         // return the count
         return _processes.Count.ToString();
@@ -109,13 +95,13 @@ public class MicrophoneProcessSensor : AbstractSingleValueSensor
                 foreach (var nonpackagedSubKeyName in nonpackagedkey.GetSubKeyNames())
                 {
                     using var subKey = nonpackagedkey.OpenSubKey(nonpackagedSubKeyName);
-                    if (subKey == null || !subKey.GetValueNames().Contains(LastUsedTimeStop))
+                    if (subKey == null || !subKey.GetValueNames().Contains(_lastUsedTimeStop))
                     {
                         continue;
                     }
 
-                    var endTime = subKey.GetValue(LastUsedTimeStop) is long
-                        ? (long)(subKey.GetValue(LastUsedTimeStop) ?? -1)
+                    var endTime = subKey.GetValue(_lastUsedTimeStop) is long
+                        ? (long)(subKey.GetValue(_lastUsedTimeStop) ?? -1)
                         : -1;
 
                     if (endTime <= 0)
@@ -127,12 +113,12 @@ public class MicrophoneProcessSensor : AbstractSingleValueSensor
             else
             {
                 using var subKey = key.OpenSubKey(subKeyName);
-                if (subKey == null || !subKey.GetValueNames().Contains(LastUsedTimeStop))
+                if (subKey == null || !subKey.GetValueNames().Contains(_lastUsedTimeStop))
                 {
                     continue;
                 }
 
-                var endTime = subKey.GetValue(LastUsedTimeStop) is long ? (long)(subKey.GetValue(LastUsedTimeStop) ?? -1) : -1;
+                var endTime = subKey.GetValue(_lastUsedTimeStop) is long ? (long)(subKey.GetValue(_lastUsedTimeStop) ?? -1) : -1;
                 if (endTime <= 0)
                 {
                     _processes[SharedHelperFunctions.ParseRegWebcamMicApplicationName(subKey.Name)] = "on";
@@ -140,4 +126,7 @@ public class MicrophoneProcessSensor : AbstractSingleValueSensor
             }
         }
     }
+
+    public override string GetState() => MicrophoneProcess();
+    public override string GetAttributes() => _attributes;
 }
