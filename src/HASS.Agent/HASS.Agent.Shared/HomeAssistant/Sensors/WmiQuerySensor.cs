@@ -75,12 +75,13 @@ namespace HASS.Agent.Shared.HomeAssistant.Sensors
             {
                 try
                 {
-                    if (!string.IsNullOrEmpty(retValue)) continue;
+                    if (!string.IsNullOrEmpty(retValue))
+                        continue;
 
                     using var managementObject = (ManagementObject)managementBaseObject;
                     foreach (var property in managementObject.Properties)
                     {
-                        retValue = property.Value.ToString();
+                        retValue = property?.Value?.ToString() ?? string.Empty;
                         break;
                     }
                 }
@@ -91,7 +92,10 @@ namespace HASS.Agent.Shared.HomeAssistant.Sensors
             }
 
             // optionally apply rounding
-            if (ApplyRounding && Round != null && double.TryParse(retValue, out var dblValue)) { retValue = Math.Round(dblValue, (int)Round).ToString(CultureInfo.CurrentCulture); }
+            if (ApplyRounding && Round != null && double.TryParse(retValue, out var dblValue))
+            {
+                retValue = Math.Round(dblValue, (int)Round).ToString(CultureInfo.CurrentCulture);
+            }
 
             // done
             return retValue;
