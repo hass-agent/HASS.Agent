@@ -44,16 +44,19 @@ namespace HASS.Agent.Shared.HomeAssistant.Sensors.GeneralSensors.SingleValue
         {
             var windowHandle = GetForegroundWindow();
 
-            GetWindowThreadProcessId(windowHandle, out var processId);
-            using var process = Process.GetProcessById(Convert.ToInt32(processId));
-            _processName = process.ProcessName ?? string.Empty;
+            var returnValue = GetWindowThreadProcessId(windowHandle, out var processId);
+            if (returnValue != 0 && processId != 0)
+            {
+                using var process = Process.GetProcessById(Convert.ToInt32(processId));
+                _processName = process.ProcessName ?? string.Empty;
+            }
 
             return GetWindowTitle(windowHandle);
         }
 
         public override string GetAttributes() => JsonConvert.SerializeObject(new
         {
-           processName = _processName
+            processName = _processName
         });
 
         [DllImport("user32.dll")]
@@ -74,7 +77,7 @@ namespace HASS.Agent.Shared.HomeAssistant.Sensors.GeneralSensors.SingleValue
             var builder = new StringBuilder(titleLength);
             var windowTitle = GetWindowText(windowHandle, builder, titleLength) > 0 ? builder.ToString() : string.Empty;
 
-            return windowTitle.Length > 255 ? windowTitle[..255]: windowTitle; //Note(Amadeo): to make sure we don't exceed HA limitation of 255 payload length
+            return windowTitle.Length > 255 ? windowTitle[..255] : windowTitle; //Note(Amadeo): to make sure we don't exceed HA limitation of 255 payload length
         }
     }
 }
