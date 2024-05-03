@@ -34,6 +34,8 @@ namespace HASS.Agent.Shared.HomeAssistant.Sensors.WmiSensors.SingleValue
                 Unique_id = Id,
                 Device = deviceConfig,
                 State_topic = $"{Variables.MqttManager.MqttDiscoveryPrefix()}/{Domain}/{deviceConfig.Name}/{ObjectId}/state",
+                State_class = "measurement",
+                Device_class = "frequency",
                 Icon = "mdi:speedometer",
                 Unit_of_measurement = "MHz",
                 Availability_topic = $"{Variables.MqttManager.MqttDiscoveryPrefix()}/{Domain}/{deviceConfig.Name}/availability"

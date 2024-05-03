@@ -27,6 +27,7 @@ namespace HASS.Agent.Shared.HomeAssistant.Sensors.PerfCounterSensors.SingleValue
                 Unique_id = Id,
                 Device = deviceConfig,
                 State_topic = $"{Variables.MqttManager.MqttDiscoveryPrefix()}/{Domain}/{deviceConfig.Name}/{ObjectId}/state",
+                State_class = "measurement",
                 Icon = "mdi:chart-areaspline",
                 Unit_of_measurement = "%",
                 Availability_topic = $"{Variables.MqttManager.MqttDiscoveryPrefix()}/{Domain}/{deviceConfig.Name}/availability"
