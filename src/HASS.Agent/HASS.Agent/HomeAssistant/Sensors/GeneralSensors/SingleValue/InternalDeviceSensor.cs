@@ -48,6 +48,13 @@ namespace HASS.Agent.HomeAssistant.Sensors.GeneralSensors.SingleValue
             if (UseAttributes)
                 sensorDiscoveryConfigModel.Json_attributes_topic = $"{Variables.MqttManager.MqttDiscoveryPrefix()}/{Domain}/{deviceConfig.Name}/{ObjectId}/attributes";
 
+            if (!string.IsNullOrWhiteSpace(_internalDeviceSensor.MeasurementType))
+                sensorDiscoveryConfigModel.Device_class = _internalDeviceSensor.MeasurementType;
+            if (!string.IsNullOrWhiteSpace(_internalDeviceSensor.UnitOfMeasurement))
+                sensorDiscoveryConfigModel.Unit_of_measurement = _internalDeviceSensor.UnitOfMeasurement;
+            if (_internalDeviceSensor.IsNumeric)
+                sensorDiscoveryConfigModel.State_class = "measurement";
+
             return AutoDiscoveryConfigModel ?? SetAutoDiscoveryConfigModel(sensorDiscoveryConfigModel);
         }
 

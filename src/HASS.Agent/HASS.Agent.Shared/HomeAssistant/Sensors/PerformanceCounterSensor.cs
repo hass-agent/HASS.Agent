@@ -54,6 +54,7 @@ namespace HASS.Agent.Shared.HomeAssistant.Sensors
                 Unique_id = Id,
                 Device = deviceConfig,
                 State_topic = $"{Variables.MqttManager.MqttDiscoveryPrefix()}/{Domain}/{deviceConfig.Name}/{EntityName}/state",
+                State_class = "measurement",
                 Availability_topic = $"{Variables.MqttManager.MqttDiscoveryPrefix()}/{Domain}/{deviceConfig.Name}/availability"
             });
         }

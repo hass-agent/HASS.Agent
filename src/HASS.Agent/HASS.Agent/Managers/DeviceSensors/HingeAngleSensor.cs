@@ -11,6 +11,9 @@ namespace HASS.Agent.Managers.DeviceSensors
     {
         private readonly Windows.Devices.Sensors.HingeAngleSensor _hingeAngelSensor;
 
+        public string MeasurementType { get; } = string.Empty;
+        public string UnitOfMeasurement { get; } = string.Empty;
+
         public bool Available => _hingeAngelSensor != null;
         public InternalDeviceSensorType Type => InternalDeviceSensorType.HingeAngleSensor;
         public string Measurement
@@ -24,6 +27,8 @@ namespace HASS.Agent.Managers.DeviceSensors
                 return Math.Round((decimal)sensorReading, 2).ToString();
             }
         }
+
+        public bool IsNumeric { get; } = true;
 
         public Dictionary<string, string> Attributes => InternalDeviceSensor.NoAttributes;
 

@@ -15,6 +15,9 @@ namespace HASS.Agent.Managers.DeviceSensors
 
         private readonly Windows.Devices.Sensors.OrientationSensor _orientationSensor;
 
+        public string MeasurementType { get; } = string.Empty;
+        public string UnitOfMeasurement { get; } = string.Empty;
+
         public bool Available => _orientationSensor != null;
         public InternalDeviceSensorType Type => InternalDeviceSensorType.OrientationSensor;
         public string Measurement
@@ -31,6 +34,8 @@ namespace HASS.Agent.Managers.DeviceSensors
                 return JsonConvert.SerializeObject(sensorReading.Quaternion);
             }
         }
+
+        public bool IsNumeric { get; } = false;
 
         private readonly Dictionary<string, string> _attributes = new();
         public Dictionary<string, string> Attributes => _attributes;

@@ -17,6 +17,9 @@ namespace HASS.Agent.Managers.DeviceSensors
 
         private readonly Inclinometer _inclinometer;
 
+        public string MeasurementType { get; } = string.Empty;
+        public string UnitOfMeasurement { get; } = string.Empty;
+
         public bool Available => _inclinometer != null;
         public InternalDeviceSensorType Type => InternalDeviceSensorType.Inclinometer;
         public string Measurement
@@ -36,6 +39,8 @@ namespace HASS.Agent.Managers.DeviceSensors
                 return sensorReading.Timestamp.ToLocalTime().ToString();
             }
         }
+
+        public bool IsNumeric { get; } = false;
 
         private readonly Dictionary<string, string> _attributes = new();
         public Dictionary<string, string> Attributes => _attributes;

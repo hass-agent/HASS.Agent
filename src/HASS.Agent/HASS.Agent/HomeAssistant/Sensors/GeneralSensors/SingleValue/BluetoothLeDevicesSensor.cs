@@ -36,6 +36,7 @@ namespace HASS.Agent.HomeAssistant.Sensors.GeneralSensors.SingleValue
                 Unique_id = Id,
                 Device = deviceConfig,
                 State_topic = $"{Variables.MqttManager.MqttDiscoveryPrefix()}/{Domain}/{deviceConfig.Name}/{ObjectId}/state",
+                State_class = "measurement",
                 Icon = "mdi:bluetooth",
                 Availability_topic = $"{Variables.MqttManager.MqttDiscoveryPrefix()}/{Domain}/{deviceConfig.Name}/availability",
                 Json_attributes_topic = $"{Variables.MqttManager.MqttDiscoveryPrefix()}/{Domain}/{deviceConfig.Name}/{ObjectId}/attributes"

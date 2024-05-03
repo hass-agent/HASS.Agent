@@ -40,7 +40,8 @@ public class GpuLoadSensor : AbstractSingleValueSensor
 			Device = deviceConfig,
 			State_topic = $"{Variables.MqttManager.MqttDiscoveryPrefix()}/{Domain}/{deviceConfig.Name}/{ObjectId}/state",
 			Unit_of_measurement = "%",
-			Availability_topic = $"{Variables.MqttManager.MqttDiscoveryPrefix()}/{Domain}/{deviceConfig.Name}/availability"
+            State_class = "measurement",
+            Availability_topic = $"{Variables.MqttManager.MqttDiscoveryPrefix()}/{Domain}/{deviceConfig.Name}/availability"
 		});
 	}
 
