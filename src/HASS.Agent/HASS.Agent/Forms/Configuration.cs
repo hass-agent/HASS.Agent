@@ -36,6 +36,7 @@ namespace HASS.Agent.Forms
         private readonly ConfigLocalApi _localApi = new();
         private readonly ConfigMediaPlayer _mediaPlayer = new();
         private readonly ConfigTrayIcon _trayIcon = new();
+        private readonly ConfigNFC _nfc = new();
 
         private bool _initializing = true;
 
@@ -67,6 +68,8 @@ namespace HASS.Agent.Forms
             TablLocalApi.Controls.Add(_localApi);
             TabMediaPlayer.Controls.Add(_mediaPlayer);
             TabTrayIcon.Controls.Add(_trayIcon);
+            TabNFC.Controls.Add(_nfc);
+
 
             // bind events
             BindEvents();
@@ -103,6 +106,7 @@ namespace HASS.Agent.Forms
             _localApi.Dispose();
             _mediaPlayer.Dispose();
             _trayIcon.Dispose();
+            _nfc.Dispose();
         }
 
         private void BindEvents()
@@ -361,6 +365,8 @@ namespace HASS.Agent.Forms
             _trayIcon.CbWebViewKeepLoaded.CheckState = Variables.AppSettings.TrayIconWebViewBackgroundLoading ? CheckState.Checked : CheckState.Unchecked;
             _trayIcon.CbWebViewShowMenuOnLeftClick.CheckState = Variables.AppSettings.TrayIconWebViewShowMenuOnLeftClick ? CheckState.Checked : CheckState.Unchecked;
 
+            _nfc.CbEnableNfc.CheckState = Variables.AppSettings.NfcScanningEnabled ? CheckState.Checked : CheckState.Unchecked;
+
             // done
             _initializing = false;
         }
@@ -467,6 +473,10 @@ namespace HASS.Agent.Forms
             Variables.AppSettings.TrayIconWebViewUrl = _trayIcon.TbWebViewUrl.Text;
             Variables.AppSettings.TrayIconWebViewBackgroundLoading = _trayIcon.CbWebViewKeepLoaded.CheckState == CheckState.Checked;
             Variables.AppSettings.TrayIconWebViewShowMenuOnLeftClick = _trayIcon.CbWebViewShowMenuOnLeftClick.CheckState == CheckState.Checked;
+
+            // nfc
+            Variables.AppSettings.NfcScanningEnabled = _nfc.CbEnableNfc.CheckState == CheckState.Checked;
+            Variables.AppSettings.NfcSelectedScanner = _nfc.CbNfcScanner.SelectedItem == null ? string.Empty : _nfc.CbNfcScanner.SelectedItem.ToString();
 
             // save to file
             SettingsManager.StoreAppSettings();

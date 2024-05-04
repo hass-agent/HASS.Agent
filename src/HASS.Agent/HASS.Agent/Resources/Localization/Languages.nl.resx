@@ -3400,4 +3400,16 @@ U hebt de naam van het audioapparaat nodig als payload.</value>
 
 Opmerking: indien gebruikt in de satellietdienst, zal het geen gebruikersruimtetoepassingen detecteren.</value>
   </data>
+  <data name="Configuration_NFC" xml:space="preserve">
+    <value>NFC</value>
+  </data>
+  <data name="AdvancedSensorConfig_Title" xml:space="preserve">
+    <value>Geavanceerde instellingen</value>
+  </data>
+  <data name="SensorsMod_BtnAdvancedSettings" xml:space="preserve">
+    <value>Gea&amp;vanceerde instellingen</value>
+  </data>
+  <data name="AdvancedSensorConfig_Warning" xml:space="preserve">
+    <value>Waarschuwing: het toevoegen van de volgende instellingen (overschrijvingen) kan de sensor kapot maken, wees voorzichtig!</value>
+  </data>
 </root>

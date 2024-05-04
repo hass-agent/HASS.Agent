@@ -3448,4 +3448,16 @@ Home Assistant.
 
 Примечание. При использовании в спутниковой службе он не обнаружит приложения пользовательского пространства.</value>
   </data>
+  <data name="Configuration_NFC" xml:space="preserve">
+    <value>NFC</value>
+  </data>
+  <data name="AdvancedSensorConfig_Title" xml:space="preserve">
+    <value>Расширенные настройки</value>
+  </data>
+  <data name="SensorsMod_BtnAdvancedSettings" xml:space="preserve">
+    <value>Рас&amp;ширенные настройки</value>
+  </data>
+  <data name="AdvancedSensorConfig_Warning" xml:space="preserve">
+    <value>Внимание! Добавление следующих настроек (переопределений) может привести к поломке датчика, используйте с осторожностью!</value>
+  </data>
 </root>

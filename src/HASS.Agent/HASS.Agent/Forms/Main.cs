@@ -355,7 +355,19 @@ namespace HASS.Agent.Forms
             if (_isClosing)
                 return;
 
-            Invoke(new MethodInvoker(Hide));
+            Invoke(() =>
+            {
+                HelperFunctions.GetForm("QuickActions")?.Close();
+                HelperFunctions.GetForm("Configuration")?.Close();
+                HelperFunctions.GetForm("QuickActionsConfig")?.Close();
+                HelperFunctions.GetForm("SensorsConfig")?.Close();
+                HelperFunctions.GetForm("ServiceConfig")?.Close();
+                HelperFunctions.GetForm("CommandsConfig")?.Close();
+                HelperFunctions.GetForm("Help")?.Close();
+                HelperFunctions.GetForm("Donate")?.Close();
+
+                new MethodInvoker(Hide).Invoke();
+            });
 
             if (!Variables.ShuttingDown)
             {

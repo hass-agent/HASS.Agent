@@ -164,6 +164,51 @@ namespace HASS.Agent.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Device class.
+        /// </summary>
+        internal static string AdvancedSensorConfig_LblDeviceClass {
+            get {
+                return ResourceManager.GetString("AdvancedSensorConfig_LblDeviceClass", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to State class.
+        /// </summary>
+        internal static string AdvancedSensorConfig_LblStateClass {
+            get {
+                return ResourceManager.GetString("AdvancedSensorConfig_LblStateClass", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unit of measurement.
+        /// </summary>
+        internal static string AdvancedSensorConfig_LblUnitOfMeasurement {
+            get {
+                return ResourceManager.GetString("AdvancedSensorConfig_LblUnitOfMeasurement", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Advanced Settings.
+        /// </summary>
+        internal static string AdvancedSensorConfig_Title {
+            get {
+                return ResourceManager.GetString("AdvancedSensorConfig_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Warning, adding following settings (overrides) may break the sensor, use with caution!.
+        /// </summary>
+        internal static string AdvancedSensorConfig_Warning {
+            get {
+                return ResourceManager.GetString("AdvancedSensorConfig_Warning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Button.
         /// </summary>
         internal static string CommandEntityType_Button {
@@ -3258,6 +3303,15 @@ namespace HASS.Agent.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to NFC.
+        /// </summary>
+        internal static string Configuration_NFC {
+            get {
+                return ResourceManager.GetString("Configuration_NFC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You&apos;ve changed your device&apos;s name.
         ///
         ///All your sensors and commands will now be unpublished, and HASS.Agent will restart afterwards to republish them.
@@ -6239,6 +6293,15 @@ namespace HASS.Agent.Resources.Localization {
         internal static string SensorsMod_All {
             get {
                 return ResourceManager.GetString("SensorsMod_All", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ad&amp;vanced Settings.
+        /// </summary>
+        internal static string SensorsMod_BtnAdvancedSettings {
+            get {
+                return ResourceManager.GetString("SensorsMod_BtnAdvancedSettings", resourceCulture);
             }
         }
         

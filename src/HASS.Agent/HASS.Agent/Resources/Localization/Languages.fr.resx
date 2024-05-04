@@ -3412,4 +3412,16 @@ Vous avez besoin du nom du périphérique audio comme charge utile.</value>
 
 Remarque : s'il est utilisé dans le service satellite, il ne détectera pas les applications de l'espace utilisateur.</value>
   </data>
+  <data name="Configuration_NFC" xml:space="preserve">
+    <value>NFC</value>
+  </data>
+  <data name="AdvancedSensorConfig_Title" xml:space="preserve">
+    <value>Réglages avancés</value>
+  </data>
+  <data name="SensorsMod_BtnAdvancedSettings" xml:space="preserve">
+    <value>Réglages a&amp;vancés</value>
+  </data>
+  <data name="AdvancedSensorConfig_Warning" xml:space="preserve">
+    <value>Attention, l'ajout des paramètres suivants (remplacements) peut casser le capteur, à utiliser avec prudence !</value>
+  </data>
 </root>

@@ -2,6 +2,8 @@
 using System.Globalization;
 using System.Management;
 using HASS.Agent.Shared.Models.HomeAssistant;
+using HASS.Agent.Shared.Models.Internal;
+using Newtonsoft.Json;
 
 namespace HASS.Agent.Shared.HomeAssistant.Sensors
 {
@@ -17,36 +19,41 @@ namespace HASS.Agent.Shared.HomeAssistant.Sensors
         public bool ApplyRounding { get; private set; }
         public int? Round { get; private set; }
 
+        public string AdvancedSettings { get; private set; }
+
         protected readonly ObjectQuery ObjectQuery;
         protected readonly ManagementObjectSearcher Searcher;
 
-        public WmiQuerySensor(string query, string scope = "", bool applyRounding = false, int? round = null, int? updateInterval = null, string entityName = DefaultName, string name = DefaultName, string id = default) : base(entityName ?? DefaultName, name ?? null, updateInterval ?? 10, id)
+        public WmiQuerySensor(string query, string scope = "", bool applyRounding = false, int? round = null, int? updateInterval = null, string entityName = DefaultName, string name = DefaultName, string id = default, string advancedSettings = default) : base(entityName ?? DefaultName, name ?? null, updateInterval ?? 10, id, false, advancedSettings)
         {
             Query = query;
             Scope = scope;
             ApplyRounding = applyRounding;
             Round = round;
+            AdvancedSettings = advancedSettings;
 
             // prepare query
             ObjectQuery = new ObjectQuery(Query);
 
             // use either default or provided scope
-            var managementscope = !string.IsNullOrWhiteSpace(scope) 
-                ? new ManagementScope(scope) 
+            var managementscope = !string.IsNullOrWhiteSpace(scope)
+                ? new ManagementScope(scope)
                 : new ManagementScope(@"\\localhost\");
 
             // prepare searcher
             Searcher = new ManagementObjectSearcher(managementscope, ObjectQuery);
         }
-        
+
         public void Dispose() => Searcher?.Dispose();
 
         public override DiscoveryConfigModel GetAutoDiscoveryConfig()
         {
-            if (Variables.MqttManager == null) return null;
+            if (Variables.MqttManager == null)
+                return null;
 
             var deviceConfig = Variables.MqttManager.GetDeviceConfigModel();
-            if (deviceConfig == null) return null;
+            if (deviceConfig == null)
+                return null;
 
             return AutoDiscoveryConfigModel ?? SetAutoDiscoveryConfigModel(new SensorDiscoveryConfigModel()
             {
@@ -58,7 +65,7 @@ namespace HASS.Agent.Shared.HomeAssistant.Sensors
                 Availability_topic = $"{Variables.MqttManager.MqttDiscoveryPrefix()}/{Domain}/{deviceConfig.Name}/availability"
             });
         }
-        
+
         public override string GetState()
         {
             using var collection = Searcher.Get();
@@ -68,12 +75,13 @@ namespace HASS.Agent.Shared.HomeAssistant.Sensors
             {
                 try
                 {
-                    if (!string.IsNullOrEmpty(retValue)) continue;
+                    if (!string.IsNullOrEmpty(retValue))
+                        continue;
 
                     using var managementObject = (ManagementObject)managementBaseObject;
                     foreach (var property in managementObject.Properties)
                     {
-                        retValue = property.Value.ToString();
+                        retValue = property?.Value?.ToString() ?? string.Empty;
                         break;
                     }
                 }
@@ -84,7 +92,10 @@ namespace HASS.Agent.Shared.HomeAssistant.Sensors
             }
 
             // optionally apply rounding
-            if (ApplyRounding && Round != null && double.TryParse(retValue, out var dblValue)) { retValue = Math.Round(dblValue, (int)Round).ToString(CultureInfo.CurrentCulture); }
+            if (ApplyRounding && Round != null && double.TryParse(retValue, out var dblValue))
+            {
+                retValue = Math.Round(dblValue, (int)Round).ToString(CultureInfo.CurrentCulture);
+            }
 
             // done
             return retValue;

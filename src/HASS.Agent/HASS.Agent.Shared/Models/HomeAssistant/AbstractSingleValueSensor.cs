@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
+using HASS.Agent.Shared.Models.Internal;
 using MQTTnet;
+using Newtonsoft.Json;
 using Serilog;
 
 namespace HASS.Agent.Shared.Models.HomeAssistant;
@@ -10,13 +12,17 @@ namespace HASS.Agent.Shared.Models.HomeAssistant;
 /// </summary>
 public abstract class AbstractSingleValueSensor : AbstractDiscoverable
 {
+    private SensorAdvancedSettings _advancedInfo;
+
     public int UpdateIntervalSeconds { get; protected set; }
     public DateTime? LastUpdated { get; protected set; }
 
     public string PreviousPublishedState { get; protected set; } = string.Empty;
     public string PreviousPublishedAttributes { get; protected set; } = string.Empty;
 
-    protected AbstractSingleValueSensor(string entityName, string name, int updateIntervalSeconds = 10, string id = default, bool useAttributes = false)
+    public string AdvancedSettings { get; private set; }
+
+    protected AbstractSingleValueSensor(string entityName, string name, int updateIntervalSeconds = 10, string id = default, bool useAttributes = false, string advancedSettings = default)
     {
         Id = id == null || id == Guid.Empty.ToString() ? Guid.NewGuid().ToString() : id;
         EntityName = entityName;
@@ -24,13 +30,30 @@ public abstract class AbstractSingleValueSensor : AbstractDiscoverable
         UpdateIntervalSeconds = updateIntervalSeconds;
         Domain = "sensor";
         UseAttributes = useAttributes;
+
+        if (!string.IsNullOrWhiteSpace(advancedSettings))
+        {
+            _advancedInfo = JsonConvert.DeserializeObject<SensorAdvancedSettings>(advancedSettings);
+        }
     }
 
     protected SensorDiscoveryConfigModel AutoDiscoveryConfigModel;
     protected SensorDiscoveryConfigModel SetAutoDiscoveryConfigModel(SensorDiscoveryConfigModel config)
     {
         AutoDiscoveryConfigModel = config;
-        return config;
+
+        // overwrite with advanced settings
+        if (_advancedInfo != null)
+        {
+            if (!string.IsNullOrWhiteSpace(_advancedInfo.DeviceClass))
+                AutoDiscoveryConfigModel.Device_class = _advancedInfo.DeviceClass;
+            if (!string.IsNullOrWhiteSpace(_advancedInfo.UnitOfMeasurement))
+                AutoDiscoveryConfigModel.Unit_of_measurement = _advancedInfo.UnitOfMeasurement;
+            if (!string.IsNullOrWhiteSpace(_advancedInfo.StateClass))
+                AutoDiscoveryConfigModel.State_class = _advancedInfo.StateClass;
+        }
+
+        return AutoDiscoveryConfigModel;
     }
 
     public override void ClearAutoDiscoveryConfig() => AutoDiscoveryConfigModel = null;

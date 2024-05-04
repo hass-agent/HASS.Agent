@@ -11,6 +11,9 @@ namespace HASS.Agent.Managers.DeviceSensors
     {
         private readonly Barometer _barometer;
 
+        public string MeasurementType { get; } = "pressure";
+        public string UnitOfMeasurement { get; } = "hPa";
+
         public bool Available => _barometer != null;
         public InternalDeviceSensorType Type => InternalDeviceSensorType.Barometer;
         public string Measurement
@@ -23,6 +26,8 @@ namespace HASS.Agent.Managers.DeviceSensors
                 return _barometer.GetCurrentReading().StationPressureInHectopascals.ToString();
             }
         }
+
+        public bool IsNumeric { get; } = true;
 
         public Dictionary<string, string> Attributes => InternalDeviceSensor.NoAttributes;
 

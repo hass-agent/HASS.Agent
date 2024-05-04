@@ -53,6 +53,12 @@ namespace HASS.Agent.Shared.Models.HomeAssistant
         public string Device_class { get; set; }
 
         /// <summary>
+        /// (Optional) The state class of the sensor. See https://developers.home-assistant.io/docs/core/entity/sensor/#available-state-classes for options.
+        /// </summary>
+        /// <value></value>
+        public string State_class { get; set; }
+
+        /// <summary>
         /// (Optional) Defines the number of seconds after the sensor’s state expires, if it’s not updated. After expiry, the sensor’s state becomes unavailable. Defaults to 0 in hass.
         /// </summary>
         /// <value></value>

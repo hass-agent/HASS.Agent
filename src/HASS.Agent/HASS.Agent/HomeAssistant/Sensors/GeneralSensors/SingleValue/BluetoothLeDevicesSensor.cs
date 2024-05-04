@@ -14,7 +14,7 @@ namespace HASS.Agent.HomeAssistant.Sensors.GeneralSensors.SingleValue
         private const string DefaultName = "bluetoothledevices";
         private string _attributes = "{}";
 
-        public BluetoothLeDevicesSensor(int? updateInterval = 30, string entityName = DefaultName, string name = DefaultName, string id = default) : base(entityName ?? DefaultName, name ?? null, updateInterval ?? 30, id) 
+        public BluetoothLeDevicesSensor(int? updateInterval = 30, string entityName = DefaultName, string name = DefaultName, string id = default, string advancedSettings = default) : base(entityName ?? DefaultName, name ?? null, updateInterval ?? 30, id, advancedSettings: advancedSettings) 
         {
             UseAttributes = true;
 
@@ -36,6 +36,7 @@ namespace HASS.Agent.HomeAssistant.Sensors.GeneralSensors.SingleValue
                 Unique_id = Id,
                 Device = deviceConfig,
                 State_topic = $"{Variables.MqttManager.MqttDiscoveryPrefix()}/{Domain}/{deviceConfig.Name}/{ObjectId}/state",
+                State_class = "measurement",
                 Icon = "mdi:bluetooth",
                 Availability_topic = $"{Variables.MqttManager.MqttDiscoveryPrefix()}/{Domain}/{deviceConfig.Name}/availability",
                 Json_attributes_topic = $"{Variables.MqttManager.MqttDiscoveryPrefix()}/{Domain}/{deviceConfig.Name}/{ObjectId}/attributes"

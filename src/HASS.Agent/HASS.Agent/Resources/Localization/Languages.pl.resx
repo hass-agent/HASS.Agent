@@ -3489,4 +3489,16 @@ Wymaga nazwy urządzenia audio jako ładunku.</value>
 
 Uwaga: jeśli jest używany w usłudze satelitarnej, nie wykryje aplikacji przestrzeni użytkownika.</value>
   </data>
+  <data name="Configuration_NFC" xml:space="preserve">
+    <value>NFC</value>
+  </data>
+  <data name="AdvancedSensorConfig_Title" xml:space="preserve">
+    <value>Ustawienia zaawansowane</value>
+  </data>
+  <data name="SensorsMod_BtnAdvancedSettings" xml:space="preserve">
+    <value>Ustaw&amp;ienia zaawansowane</value>
+  </data>
+  <data name="AdvancedSensorConfig_Warning" xml:space="preserve">
+    <value>Uwaga, dodanie następujących ustawień (nadpisań) może spowodować uszkodzenie czujnika, zachowaj ostrożność!</value>
+  </data>
 </root>

@@ -15,6 +15,9 @@ namespace HASS.Agent.Managers.DeviceSensors
 
         private readonly Magnetometer _magnetometer;
 
+        public string MeasurementType { get; } = string.Empty;
+        public string UnitOfMeasurement { get; } = string.Empty;
+
         public bool Available => _magnetometer != null;
         public InternalDeviceSensorType Type => InternalDeviceSensorType.Magnetometer;
         public string Measurement
@@ -40,6 +43,8 @@ namespace HASS.Agent.Managers.DeviceSensors
                 ).ToString();
             }
         }
+
+        public bool IsNumeric { get; } = true;
 
         private readonly Dictionary<string, string> _attributes = new();
         public Dictionary<string, string> Attributes => _attributes;

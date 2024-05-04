@@ -2995,4 +2995,16 @@ Yük olarak ses cihazı adına ihtiyacınız vardır.</value>
 
 Not: Uydu hizmetinde kullanılırsa kullanıcı alanı uygulamalarını algılamaz.</value>
   </data>
+  <data name="Configuration_NFC" xml:space="preserve">
+    <value>NFC</value>
+  </data>
+  <data name="AdvancedSensorConfig_Title" xml:space="preserve">
+    <value>Gelişmiş Ayarlar</value>
+  </data>
+  <data name="SensorsMod_BtnAdvancedSettings" xml:space="preserve">
+    <value>Ge&amp;lişmiş Ayarlar</value>
+  </data>
+  <data name="AdvancedSensorConfig_Warning" xml:space="preserve">
+    <value>Uyarı, aşağıdaki ayarların (geçersiz kılmaların) eklenmesi sensörü bozabilir, dikkatli kullanın!</value>
+  </data>
 </root>

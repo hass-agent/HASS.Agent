@@ -11,6 +11,9 @@ namespace HASS.Agent.Managers.DeviceSensors
     {
         private readonly Altimeter _altimeter;
 
+        public string MeasurementType { get; } = "distance";
+        public string UnitOfMeasurement { get; } = "m";
+
         public bool Available => _altimeter != null;
         public InternalDeviceSensorType Type => InternalDeviceSensorType.Altimeter;
         public string Measurement
@@ -23,6 +26,8 @@ namespace HASS.Agent.Managers.DeviceSensors
                 return _altimeter.GetCurrentReading().AltitudeChangeInMeters.ToString();
             }
         }
+
+        public bool IsNumeric { get; } = true;
 
         public Dictionary<string, string> Attributes => InternalDeviceSensor.NoAttributes;
 

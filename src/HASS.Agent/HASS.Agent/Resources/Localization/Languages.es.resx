@@ -3379,4 +3379,16 @@ Necesita el nombre del dispositivo de audio como carga útil.</value>
 
 Nota: si se usa en el servicio satelital, no detectará aplicaciones del espacio de usuario.</value>
   </data>
+  <data name="Configuration_NFC" xml:space="preserve">
+    <value>NFC</value>
+  </data>
+  <data name="AdvancedSensorConfig_Title" xml:space="preserve">
+    <value>Ajustes avanzados</value>
+  </data>
+  <data name="SensorsMod_BtnAdvancedSettings" xml:space="preserve">
+    <value>A&amp;justes avanzados</value>
+  </data>
+  <data name="AdvancedSensorConfig_Warning" xml:space="preserve">
+    <value>Advertencia, agregar las siguientes configuraciones (anulaciones) puede dañar el sensor, ¡úselo con precaución!</value>
+  </data>
 </root>

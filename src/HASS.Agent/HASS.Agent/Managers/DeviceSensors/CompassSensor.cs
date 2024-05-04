@@ -13,6 +13,9 @@ namespace HASS.Agent.Managers.DeviceSensors
 
         private readonly Compass _compass;
 
+        public string MeasurementType { get; } = string.Empty;
+        public string UnitOfMeasurement { get; } = string.Empty;
+
         public bool Available => _compass != null;
         public InternalDeviceSensorType Type => InternalDeviceSensorType.Compass;
         public string Measurement
@@ -27,6 +30,8 @@ namespace HASS.Agent.Managers.DeviceSensors
                 return Math.Round((decimal)sensorReading.HeadingTrueNorth, 2).ToString();
             }
         }
+
+        public bool IsNumeric { get; } = true;
 
         private readonly Dictionary<string, string> _attributes = new();
         public Dictionary<string, string> Attributes => _attributes;

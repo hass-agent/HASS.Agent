@@ -12,6 +12,9 @@ namespace HASS.Agent.Managers.DeviceSensors
         public const string AttributeConfidence = "Confidence";
         public const string AttributeTimestamp = "Timestamp";
 
+        public string MeasurementType { get; } = string.Empty;
+        public string UnitOfMeasurement { get; } = string.Empty;
+
         private readonly Windows.Devices.Sensors.ActivitySensor _activitySensor;
 
         public bool Available => _activitySensor != null;
@@ -30,6 +33,8 @@ namespace HASS.Agent.Managers.DeviceSensors
                 return sensorReading.Activity.ToString();
             }
         }
+
+        public bool IsNumeric { get; } = false;
 
         private readonly Dictionary<string, string> _attributes = new();
         public Dictionary<string, string> Attributes => _attributes;

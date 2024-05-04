@@ -3399,4 +3399,25 @@ Requires audio device name as a payload.</value>
 
 Note: if used in the satellite service, it won't detect userspace applications.</value>
   </data>
+  <data name="Configuration_NFC" xml:space="preserve">
+    <value>NFC</value>
+  </data>
+  <data name="SensorsMod_BtnAdvancedSettings" xml:space="preserve">
+    <value>Ad&amp;vanced Settings</value>
+  </data>
+  <data name="AdvancedSensorConfig_Warning" xml:space="preserve">
+    <value>Warning, adding following settings (overrides) may break the sensor, use with caution!</value>
+  </data>
+  <data name="AdvancedSensorConfig_LblDeviceClass" xml:space="preserve">
+    <value>Device class</value>
+  </data>
+  <data name="AdvancedSensorConfig_LblUnitOfMeasurement" xml:space="preserve">
+    <value>Unit of measurement</value>
+  </data>
+  <data name="AdvancedSensorConfig_LblStateClass" xml:space="preserve">
+    <value>State class</value>
+  </data>
+  <data name="AdvancedSensorConfig_Title" xml:space="preserve">
+    <value>Advanced Settings</value>
+  </data>
 </root>

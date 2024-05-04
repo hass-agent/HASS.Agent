@@ -93,7 +93,7 @@ public class AudioSensors : AbstractMultiValueSensor
         var audioOutputDevices = outputDevices.Select(d => d.FriendlyName).ToList();
         var audioOutputDevicesEntityName = $"{parentSensorSafeName}_output_devices";
         var audioOutputDevicesId = $"{Id}_output_devices";
-        var audioOutputDevicesSensor = new DataTypeIntSensor(_updateInterval, audioOutputDevicesEntityName, $"Audio Output Devices", audioOutputDevicesId, string.Empty, "mdi:music-box-multiple-outline", string.Empty, EntityName, true);
+        var audioOutputDevicesSensor = new DataTypeIntSensor(_updateInterval, audioOutputDevicesEntityName, $"Audio Output Devices", audioOutputDevicesId, string.Empty, "measurement", "mdi:music-box-multiple-outline", string.Empty, EntityName, true);
         audioOutputDevicesSensor.SetState(audioOutputDevices.Count);
         audioOutputDevicesSensor.SetAttributes(
             JsonConvert.SerializeObject(new
@@ -137,7 +137,7 @@ public class AudioSensors : AbstractMultiValueSensor
         var audioInputDevices = inputDevices.Select(d => d.FriendlyName).ToList();
         var audioInputDevicesEntityName = $"{parentSensorSafeName}_input_devices";
         var audioInputDevicesId = $"{Id}_input_devices";
-        var audioInputDevicesSensor = new DataTypeIntSensor(_updateInterval, audioInputDevicesEntityName, $"Audio Input Devices", audioInputDevicesId, string.Empty, "mdi:microphone", string.Empty, EntityName, true);
+        var audioInputDevicesSensor = new DataTypeIntSensor(_updateInterval, audioInputDevicesEntityName, $"Audio Input Devices", audioInputDevicesId, string.Empty, "measurement", "mdi:microphone", string.Empty, EntityName, true);
         audioInputDevicesSensor.SetState(audioInputDevices.Count);
         audioInputDevicesSensor.SetAttributes(
             JsonConvert.SerializeObject(new

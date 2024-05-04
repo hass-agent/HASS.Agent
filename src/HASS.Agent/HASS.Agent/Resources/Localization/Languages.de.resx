@@ -3503,4 +3503,16 @@ Als Payload benötigen Sie den Namen des Audiogeräts.</value>
 
 Hinweis: Bei Verwendung im Satellitendienst werden keine Userspace-Anwendungen erkannt.</value>
   </data>
+  <data name="Configuration_NFC" xml:space="preserve">
+    <value>NFC</value>
+  </data>
+  <data name="AdvancedSensorConfig_Title" xml:space="preserve">
+    <value>Erweiterte Einstellungen</value>
+  </data>
+  <data name="SensorsMod_BtnAdvancedSettings" xml:space="preserve">
+    <value>Erwe&amp;iterte Einstellungen</value>
+  </data>
+  <data name="AdvancedSensorConfig_Warning" xml:space="preserve">
+    <value>Achtung: Das Hinzufügen der folgenden Einstellungen (Überschreibungen) kann zur Beschädigung des Sensors führen. Gehen Sie daher vorsichtig vor!</value>
+  </data>
 </root>
