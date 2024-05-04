@@ -62,7 +62,7 @@ public class AudioSensors : AbstractMultiValueSensor
 
         var defaultDeviceVolumeEntityName = $"{parentSensorSafeName}_default_device_volume";
         var defaultDeviceVolumeId = $"{Id}_default_device_volume";
-        var defaultDeviceVolumeSensor = new DataTypeIntSensor(_updateInterval, defaultDeviceVolumeEntityName, $"Default Device Volume", defaultDeviceVolumeId, string.Empty, "mdi:speaker", string.Empty, EntityName);
+        var defaultDeviceVolumeSensor = new DataTypeIntSensor(_updateInterval, defaultDeviceVolumeEntityName, $"Default Device Volume", defaultDeviceVolumeId, string.Empty, "measurement", "mdi:speaker", string.Empty, EntityName);
         defaultDeviceVolumeSensor.SetState(outputDevice.Volume);
         AddUpdateSensor(defaultDeviceVolumeId, defaultDeviceVolumeSensor);
 
@@ -80,7 +80,7 @@ public class AudioSensors : AbstractMultiValueSensor
 
         var sessionsEntityName = $"{parentSensorSafeName}_sessions";
         var sessionsId = $"{Id}_sessions";
-        var sessionsSensor = new DataTypeIntSensor(_updateInterval, sessionsEntityName, $"Audio Sessions", sessionsId, string.Empty, "mdi:music-box-multiple-outline", string.Empty, EntityName, true);
+        var sessionsSensor = new DataTypeIntSensor(_updateInterval, sessionsEntityName, $"Audio Sessions", sessionsId, string.Empty, "measurement", "mdi:music-box-multiple-outline", string.Empty, EntityName, true);
         sessionsSensor.SetState(outputDevice.Sessions.Count);
         sessionsSensor.SetAttributes(
             JsonConvert.SerializeObject(new
@@ -130,7 +130,7 @@ public class AudioSensors : AbstractMultiValueSensor
 
         var defaultInputDeviceVolumeEntityName = $"{parentSensorSafeName}_default_input_device_volume";
         var defaultInputDeviceVolumeId = $"{Id}_default_input_device_volume";
-        var defaultInputDeviceVolumeSensor = new DataTypeIntSensor(_updateInterval, defaultInputDeviceVolumeEntityName, $"Default Input Device Volume", defaultInputDeviceVolumeId, string.Empty, "mdi:microphone", string.Empty, EntityName);
+        var defaultInputDeviceVolumeSensor = new DataTypeIntSensor(_updateInterval, defaultInputDeviceVolumeEntityName, $"Default Input Device Volume", defaultInputDeviceVolumeId, string.Empty, "measurement", "mdi:microphone", string.Empty, EntityName);
         defaultInputDeviceVolumeSensor.SetState(inputDevice.PeakVolume);
         AddUpdateSensor(defaultInputDeviceVolumeId, defaultInputDeviceVolumeSensor);
 
