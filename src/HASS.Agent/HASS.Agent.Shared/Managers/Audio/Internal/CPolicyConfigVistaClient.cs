@@ -8,6 +8,9 @@ using CSCore.CoreAudioAPI;
 
 namespace HASS.Agent.Shared.Managers.Audio.Internal;
 
+// https://github.com/morphx666/CoreAudio
+// https://github.com/File-New-Project/EarTrumpet
+
 internal class CPolicyConfigVistaClient : IDisposable
 {
     private IPolicyConfigVista policyConfigVistaClient;
