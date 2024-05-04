@@ -128,7 +128,7 @@ public static class AudioManager
                     Muted = session.Volume.IsMuted,
                     Active = session.Control.SessionState == AudioSessionState.AudioSessionStateActive,
                     MasterVolume = Convert.ToInt32(session.Volume.MasterVolume * 100),
-                    PeakVolume = Convert.ToInt32(session.MeterInformation.PeakValue * 100)
+                    PeakVolume = Convert.ToDouble(session.MeterInformation.PeakValue * 100)
                 };
 
                 audioSessions.Add(audioSession);

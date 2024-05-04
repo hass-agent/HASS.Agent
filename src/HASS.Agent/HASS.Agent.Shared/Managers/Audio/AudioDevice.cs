@@ -12,7 +12,7 @@ public class AudioDevice
     public string Id { get; set; } = string.Empty;
     public string FriendlyName { get; set; } = string.Empty;
     public int Volume { get; set; }
-    public int PeakVolume { get; set; }
+    public double PeakVolume { get; set; }
     public bool Muted { get; set; }
     public List<AudioSession> Sessions { get; set; } = new();
     public bool Default { get; set; }

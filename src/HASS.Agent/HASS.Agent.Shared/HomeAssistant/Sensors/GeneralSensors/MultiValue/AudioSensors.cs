@@ -74,8 +74,8 @@ public class AudioSensors : AbstractMultiValueSensor
 
         var peakVolumeEntityName = $"{parentSensorSafeName}_peak_volume";
         var peakVolumeId = $"{Id}_peak_volume";
-        var peakVolumeSensor = new DataTypeStringSensor(_updateInterval, peakVolumeEntityName, $"Peak Volume", peakVolumeId, string.Empty, "mdi:volume-high", string.Empty, EntityName);
-        peakVolumeSensor.SetState(outputDevice.PeakVolume.ToString(CultureInfo.CurrentCulture));
+        var peakVolumeSensor = new DataTypeDoubleSensor(_updateInterval, peakVolumeEntityName, $"Peak Volume", peakVolumeId, string.Empty, "measurement", "mdi:volume-high", string.Empty, EntityName);
+        peakVolumeSensor.SetState(outputDevice.PeakVolume);
         AddUpdateSensor(peakVolumeId, peakVolumeSensor);
 
         var sessionsEntityName = $"{parentSensorSafeName}_sessions";
@@ -131,7 +131,7 @@ public class AudioSensors : AbstractMultiValueSensor
         var defaultInputDeviceVolumeEntityName = $"{parentSensorSafeName}_default_input_device_volume";
         var defaultInputDeviceVolumeId = $"{Id}_default_input_device_volume";
         var defaultInputDeviceVolumeSensor = new DataTypeIntSensor(_updateInterval, defaultInputDeviceVolumeEntityName, $"Default Input Device Volume", defaultInputDeviceVolumeId, string.Empty, "measurement", "mdi:microphone", string.Empty, EntityName);
-        defaultInputDeviceVolumeSensor.SetState(inputDevice.PeakVolume);
+        defaultInputDeviceVolumeSensor.SetState(Convert.ToInt32(inputDevice.PeakVolume));
         AddUpdateSensor(defaultInputDeviceVolumeId, defaultInputDeviceVolumeSensor);
 
         var audioInputDevices = inputDevices.Select(d => d.FriendlyName).ToList();
