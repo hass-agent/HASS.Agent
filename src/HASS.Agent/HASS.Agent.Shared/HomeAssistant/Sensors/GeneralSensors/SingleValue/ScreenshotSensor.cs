@@ -58,14 +58,14 @@ public class ScreenshotSensor : AbstractSingleValueSensor
 
     public override string GetState()
     {
-        var screenCount = Screen.AllScreens.Length;
-        if (ScreenIndex >= screenCount || ScreenIndex < 0)
+        if (ScreenIndex >= Screen.AllScreens.Length || ScreenIndex < 0)
         {
             Log.Warning("[SCREENSHOT] Wrong index '{index}' - returning image for screen 0", ScreenIndex);
             ScreenIndex = 0;
         }
 
         var screenImage = CaptureScreen(ScreenIndex);
+
         return Convert.ToBase64String(screenImage);
     }
 
@@ -78,6 +78,7 @@ public class ScreenshotSensor : AbstractSingleValueSensor
         catch (Exception ex)
         {
             Log.Error(ex, "[SCREENSHOT] Internal Error capturing screen {index}, {ex}", ex.Message);
+
             return Array.Empty<byte>();
         }
     }
@@ -89,15 +90,18 @@ public class ScreenshotSensor : AbstractSingleValueSensor
         var scalingFactor = Math.Round(decimal.Divide(_devMode.dmPelsWidth, screen.Bounds.Width), 2);
 
         var captureRectangle = screen.Bounds;
-        var captureSize = new Size(Convert.ToInt32(screen.Bounds.Width * scalingFactor), Convert.ToInt32(screen.Bounds.Height * scalingFactor));
+        var captureSize = new Size(
+            Convert.ToInt32(screen.Bounds.Width * scalingFactor),
+            Convert.ToInt32(screen.Bounds.Height * scalingFactor)
+        );
         using var captureBitmap = new Bitmap(captureSize.Width, captureSize.Height, PixelFormat.Format32bppArgb);
-        var captureGraphics = Graphics.FromImage(captureBitmap);
+        using var captureGraphics = Graphics.FromImage(captureBitmap);
         captureGraphics.CopyFromScreen(captureRectangle.Left, captureRectangle.Top, 0, 0, captureSize);
 
-        using var ms = new MemoryStream();
-        captureBitmap.Save(ms, ImageFormat.Png);
+        using var memoryStream = new MemoryStream();
+        captureBitmap.Save(memoryStream, ImageFormat.Png);
 
-        return ms.ToArray();
+        return memoryStream.ToArray();
     }
 
     public override string GetAttributes() => string.Empty;
