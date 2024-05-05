@@ -13,15 +13,11 @@
 #define MyAppPublisher "HASS.Agent Team"
 #define MyAppURL "https://hass-agent.io"
 #define MyAppExeName "HASS.Agent.exe"
-#define MyAppServiceExeName "HASS.Agent.Satellite.Service.exe"
-#define ServiceName "hass.agent.svc"
-#define ServiceDisplayName "HASS.Agent - Satellite Service" 
-#define ServiceDescription "Satellite service for HASS.Agent: a Windows based Home Assistant client. This service processes commands and sensors without the requirement of a logged-in user."
 
 [Setup]
 ArchitecturesInstallIn64BitMode=x64
-SetupMutex=Global\HASS.Agent.Setup.Mutex,HASS.Agent.Setup.Mutex
-AppMutex=Global\HASS.Agent.App.Mutex,HASS.Agent.App.Mutex
+;SetupMutex=Global\HASS.Agent.Setup.Mutex,HASS.Agent.Setup.Mutex
+;AppMutex=Global\HASS.Agent.App.Mutex,HASS.Agent.App.Mutex
 AppId={{7BBED458-609B-4D13-AD9E-4FF219DF8644}
 AppName={#MyAppName}
 AppVersion={#MyAppVersion}
@@ -36,7 +32,7 @@ LicenseFile=..\..\LICENSE.md
 InfoBeforeFile=.\BeforeInstallNotice.rtf
 InfoAfterFile=.\AfterInstallNotice.rtf
 ; Uncomment the following line to run in non administrative install mode (install for current user only.)
-;PrivilegesRequired=lowest
+PrivilegesRequired=lowest
 OutputDir=.\bin
 OutputBaseFilename=HASS.Agent.Installer
 SetupIconFile=..\HASS.Agent\HASS.Agent.Shared\hassagent.ico
@@ -57,12 +53,9 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 [Files]
 ; Client files
-;Source: "..\HASS.Agent\HASS.Agent\bin\Publish-x64\Release\*"; Excludes: "*.pdb"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
-; Service files
-;Source: "..\HASS.Agent\HASS.Agent.Satellite.Service\bin\Publish-x64\Release\*"; Excludes: "*.pdb"; DestDir: "{commonpf64}\{#MyAppName}\Service"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "..\HASS.Agent\HASS.Agent\bin\Publish-x64\Release\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
-; Service files
-Source: "..\HASS.Agent\HASS.Agent.Satellite.Service\bin\Publish-x64\Release\*"; DestDir: "{commonpf64}\{#MyAppName}\Service"; Flags: ignoreversion recursesubdirs createallsubdirs
+; Service installer
+Source: ".\bin\HASS.Agent.Service.Installer.exe"; DestDir: "{tmp}"; Flags: ignoreversion
 
 [Icons]
 Name: "{autoprograms}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"
@@ -70,24 +63,8 @@ Name: "{autodesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Tasks: de
 
 [Run]
 Filename: "{app}\{#MyAppExeName}"; Parameters: "compat_migrate"; Description: "Try to migrate configuration"; Flags: postinstall skipifsilent runascurrentuser unchecked
-Filename: "{sys}\sc.exe"; Parameters: "start {#ServiceName}"; Description: "Start Satellite Service"; Flags: postinstall runhidden runascurrentuser 
+Filename: "{tmp}\HASS.Agent.Service.Installer.exe"; Description: "Install Satellite Service (administrative permissions required)"; Flags: postinstall runascurrentuser 
 Filename: "{app}\{#MyAppExeName}"; Description: "{cm:LaunchProgram,{#StringChange(MyAppName, '&', '&&')}}"; Flags: postinstall skipifsilent nowait
-
-[Registry]
-Root: HKLM; Subkey: "SOFTWARE\HASSAgent\SatelliteService"; ValueType: string; ValueName: "InstallPath"; ValueData: "{commonpf64}\{#MyAppName}\Service"; Flags: createvalueifdoesntexist uninsdeletevalue
-
-; Service registration and removal
-[Run]
-Filename: "{sys}\sc.exe"; Parameters: "create {#ServiceName} binpath= ""{commonpf64}\{#MyAppName}\Service\{#MyAppServiceExeName}"""; Flags: runhidden 
-Filename: "{sys}\sc.exe"; Parameters: "failure {#ServiceName} reset= 86400 actions= restart/60000/restart/60000//1000"; Flags: runhidden 
-Filename: "{sys}\sc.exe"; Parameters: "description {#ServiceName} ""{#ServiceDescription}"""; Flags: runhidden 
-Filename: "{sys}\sc.exe"; Parameters: "config {#ServiceName} DisplayName= ""{#ServiceDisplayName}"""; Flags: runhidden
-Filename: "{sys}\sc.exe"; Parameters: "config {#ServiceName} start= auto"; Flags: runhidden
-[UninstallRun]
-Filename: "{sys}\sc.exe"; Parameters: "stop {#ServiceName}"; RunOnceId: StopService; Flags: runhidden
-Filename: "{sys}\sc.exe"; Parameters: "delete {#ServiceName}" ; RunOnceId: DeleteService; Flags: runhidden
-; Additional delay for the service to be uninstalled
-Filename: "{sys}\timeout.exe"; Parameters: "5"; Flags:runhidden
 
 [Code]
 function InitializeSetup: Boolean;
