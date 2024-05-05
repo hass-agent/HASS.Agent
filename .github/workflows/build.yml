@@ -120,7 +120,12 @@ jobs:
       working-directory: "D:\\a\\HASS.Agent\\HASS.Agent\\src\\HASS.Agent\\HASS.Agent.Satellite.Service"
       run: "dotnet publish -c Release -f net6.0-windows10.0.19041.0 -o bin\\Publish-x64\\Release\\ --no-self-contained -r win-x64 -p:Platform=x64"
 
-    - name: Compile InnoSetup Installer
+    - name: Compile InnoSetup Installer - Satellite Service
+      working-directory: "D:\\a\\HASS.Agent\\HASS.Agent\\src\\HASS.Agent.Installer"
+      run: |
+        & "${Env:ProgramFiles(x86)}\\Inno Setup 6\\iscc.exe" InstallerScript-Service.iss
+
+    - name: Compile InnoSetup Installer - Client
       working-directory: "D:\\a\\HASS.Agent\\HASS.Agent\\src\\HASS.Agent.Installer"
       run: |
         & "${Env:ProgramFiles(x86)}\\Inno Setup 6\\iscc.exe" InstallerScript.iss
