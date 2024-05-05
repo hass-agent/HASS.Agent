@@ -20,7 +20,7 @@
 [Setup]
 ArchitecturesInstallIn64BitMode=x64
 ;SetupMutex=Global\HASS.Agent.Setup.Satellite.Mutex,HASS.Agent.Satellite.Setup.Mutex
-;AppMutex=Global\HASS.Agent.Satellite.App.Mutex,HASS.Agent.Satellite.App.Mutex
+AppMutex=Global\\HASS.Agent.Service.Mutex
 AppId={{4004588E-F411-41C2-ABD8-A898B0A14B93}
 AppName={#MyAppName}
 AppVersion={#MyAppVersion}
@@ -32,8 +32,8 @@ AppUpdatesURL={#MyAppURL}
 DefaultDirName={commonpf64}\{#MyAppName}\Service
 DisableProgramGroupPage=yes
 LicenseFile=..\..\LICENSE.md
-InfoBeforeFile=.\BeforeInstallNotice.rtf
-InfoAfterFile=.\AfterInstallNotice.rtf
+InfoBeforeFile=.\BeforeInstallNotice-Service.rtf
+InfoAfterFile=.\AfterInstallNotice-Service.rtf
 PrivilegesRequired=admin
 OutputDir=.\bin
 OutputBaseFilename=HASS.Agent.Service.Installer
@@ -69,9 +69,9 @@ Filename: "{sys}\sc.exe"; Parameters: "config {#ServiceName} DisplayName= ""{#Se
 Filename: "{sys}\sc.exe"; Parameters: "config {#ServiceName} start= auto"; Flags: runhidden
 [UninstallRun]
 Filename: "{sys}\sc.exe"; Parameters: "stop {#ServiceName}"; RunOnceId: StopService; Flags: runhidden
+Filename: "{sys}\timeout.exe"; Parameters: "5"; RunOnceId: Delay1; Flags:runhidden
 Filename: "{sys}\sc.exe"; Parameters: "delete {#ServiceName}" ; RunOnceId: DeleteService; Flags: runhidden
-; Additional delay for the service to be uninstalled
-Filename: "{sys}\timeout.exe"; Parameters: "5"; Flags:runhidden
+Filename: "{sys}\timeout.exe"; Parameters: "5"; RunOnceId: Delay2; Flags:runhidden
 
 [Code]
 function InitializeSetup: Boolean;

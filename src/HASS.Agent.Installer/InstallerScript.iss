@@ -16,8 +16,8 @@
 
 [Setup]
 ArchitecturesInstallIn64BitMode=x64
-;SetupMutex=Global\HASS.Agent.Setup.Mutex,HASS.Agent.Setup.Mutex
-;AppMutex=Global\HASS.Agent.App.Mutex,HASS.Agent.App.Mutex
+SetupMutex=Global\HASS.Agent.Setup.Mutex,HASS.Agent.Setup.Mutex
+AppMutex=HASS.Agent.App.Mutex
 AppId={{7BBED458-609B-4D13-AD9E-4FF219DF8644}
 AppName={#MyAppName}
 AppVersion={#MyAppVersion}
@@ -94,4 +94,21 @@ begin
   begin
     Result := True;
   end
+end;
+
+procedure CurUninstallStepChanged (CurUninstallStep: TUninstallStep);
+var
+    mres : integer;
+    serviceUninstallerPath : String;
+    ResultCode : integer;
+begin
+  case CurUninstallStep of                   
+    usPostUninstall:
+      begin
+        mres := MsgBox('Do you want to uninstall the Satellite Service? (administrative permissions required)', mbConfirmation, MB_YESNO or MB_DEFBUTTON2)
+        if mres = IDYES then
+          RegQueryStringValue(HKLM, 'SOFTWARE\HASSAgent\SatelliteService', 'InstallPath', serviceUninstallerPath);
+          Exec(serviceUninstallerPath + '\unins000.exe', '', '', SW_SHOW, ewWaitUntilTerminated, ResultCode);
+      end;
+  end;
 end;
