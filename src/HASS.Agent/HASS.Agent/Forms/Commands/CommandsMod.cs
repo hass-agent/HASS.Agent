@@ -265,7 +265,7 @@ namespace HASS.Agent.Forms.Commands
                 MessageBoxAdv.Show(this, Languages.CommandsMod_BtnStore_DeviceNameInSensorName, Variables.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
 
-			var friendlyName = string.IsNullOrEmpty(TbName.Text.Trim()) ? name : TbName.Text.Trim();
+			var friendlyName = string.IsNullOrEmpty(TbFriendlyName.Text.Trim()) ? name : TbFriendlyName.Text.Trim();
 
 			var sanitized = SharedHelperFunctions.GetSafeValue(name);
 			if (sanitized != name)
