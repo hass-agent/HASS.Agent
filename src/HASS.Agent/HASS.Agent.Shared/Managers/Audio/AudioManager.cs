@@ -50,6 +50,7 @@ public static class AudioManager
 
             case DeviceState.NotPresent:
             case DeviceState.UnPlugged:
+            case DeviceState.Disabled:
                 _devicesToBeRemoved.Enqueue(e.DeviceId);
                 break;
 
