@@ -4,39 +4,40 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using CSCore.CoreAudioAPI;
+using NAudio.CoreAudioApi;
 
 namespace HASS.Agent.Shared.Managers.Audio.Internal;
 internal class InternalAudioSessionManager : IDisposable
 {
-    public AudioSessionManager2 Manager { get; private set; }
+    public AudioSessionManager Manager { get; private set; }
     public ConcurrentDictionary<string, InternalAudioSession> Sessions { get; private set; } = new();
-    public InternalAudioSessionManager(AudioSessionManager2 sessionManager2)
+    public InternalAudioSessionManager(AudioSessionManager sessionManager2)
     {
         Manager = sessionManager2;
 
-        using var sessionEnumerator = Manager.GetSessionEnumerator();
-        foreach (var session in sessionEnumerator)
+        var sessions = Manager.Sessions;
+        for (var i = 0; i < sessions.Count; i++)
         {
+            var session = sessions[i];
             var internalSession = new InternalAudioSession(session);
-            Sessions[internalSession.Control2.SessionInstanceIdentifier] = internalSession;
+            Sessions[internalSession.Control.GetSessionInstanceIdentifier] = internalSession;
         }
 
-        Manager.SessionCreated += Manager_SessionCreated;
+        Manager.OnSessionCreated += Manager_OnSessionCreated;
     }
 
-    private void Manager_SessionCreated(object? sender, SessionCreatedEventArgs e)
+    private void Manager_OnSessionCreated(object sender, NAudio.CoreAudioApi.Interfaces.IAudioSessionControl newSession)
     {
-        if (e.NewSession != null)
+        if (newSession != null)
         {
-            var internalSession = new InternalAudioSession(e.NewSession);
-            Sessions[internalSession.Control2.SessionInstanceIdentifier] = internalSession;
+            var internalSession = new InternalAudioSession(new AudioSessionControl(newSession));
+            Sessions[internalSession.Control.GetSessionInstanceIdentifier] = internalSession;
         }
     }
 
     public void RemoveDisconnectedSessions()
     {
-        var expiredSessionsId = Sessions.Values.Where(s => s.Expired).Select(s => s.Control2.SessionInstanceIdentifier);
+        var expiredSessionsId = Sessions.Values.Where(s => s.Expired).Select(s => s.Control.GetSessionInstanceIdentifier);
         if (!expiredSessionsId.Any())
             return;
 
@@ -50,7 +51,7 @@ internal class InternalAudioSessionManager : IDisposable
     public void Dispose()
     {
         if (Manager != null)
-            Manager.SessionCreated -= Manager_SessionCreated;
+            Manager.OnSessionCreated -= Manager_OnSessionCreated;
 
         foreach (var session in Sessions.Values)
         {

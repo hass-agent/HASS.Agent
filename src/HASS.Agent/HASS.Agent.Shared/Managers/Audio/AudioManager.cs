@@ -5,17 +5,18 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using CSCore.CoreAudioAPI;
+using NAudio.CoreAudioApi;
 using HASS.Agent.Shared.Managers.Audio.Exceptions;
 using HASS.Agent.Shared.Managers.Audio.Internal;
 using Serilog;
+using NAudio.CoreAudioApi.Interfaces;
 
 namespace HASS.Agent.Shared.Managers.Audio;
 public static class AudioManager
 {
     private static bool _initialized = false;
 
-    private static MMDeviceEnumerator _enumerator = new();
+    private static MMDeviceEnumerator _enumerator = null;
     private static MMNotificationClient _notificationClient = null;
 
     private static readonly ConcurrentDictionary<string, InternalAudioDevice> _devices = new();
@@ -26,13 +27,16 @@ public static class AudioManager
 
     private static void InitializeDevices()
     {
-        foreach (var device in _enumerator.EnumAudioEndpoints(DataFlow.All, DeviceState.Active))
-            _devices[device.DeviceID] = new InternalAudioDevice(device);
+        _enumerator = new MMDeviceEnumerator();
 
-        _notificationClient = new MMNotificationClient(_enumerator);
+        foreach (var device in _enumerator.EnumerateAudioEndPoints(DataFlow.All, DeviceState.Active))
+            _devices[device.ID] = new InternalAudioDevice(device);
+
+        _notificationClient = new MMNotificationClient();
         _notificationClient.DeviceAdded += DeviceAdded;
         _notificationClient.DeviceRemoved += DeviceRemoved;
         _notificationClient.DeviceStateChanged += DeviceStateChanged;
+        _enumerator.RegisterEndpointNotificationCallback(_notificationClient);
 
         _initialized = true;
     }
@@ -49,7 +53,7 @@ public static class AudioManager
                 break;
 
             case DeviceState.NotPresent:
-            case DeviceState.UnPlugged:
+            case DeviceState.Unplugged:
             case DeviceState.Disabled:
                 _devicesToBeRemoved.Enqueue(e.DeviceId);
                 break;
@@ -133,10 +137,10 @@ public static class AudioManager
                     Id = sessionId,
                     Application = displayName,
                     PlaybackDevice = internalAudioDevice.FriendlyName,
-                    Muted = session.Volume.IsMuted,
-                    Active = session.Control.SessionState == AudioSessionState.AudioSessionStateActive,
-                    MasterVolume = Convert.ToInt32(session.Volume.MasterVolume * 100),
-                    PeakVolume = Convert.ToDouble(session.MeterInformation.PeakValue * 100)
+                    Muted = session.Volume.Mute,
+                    Active = session.Control.State == AudioSessionState.AudioSessionStateActive,
+                    MasterVolume = Convert.ToInt32(session.Volume.Volume * 100),
+                    PeakVolume = Convert.ToDouble(session.MeterInformation.MasterPeakValue * 100)
                 };
 
                 audioSessions.Add(audioSession);
@@ -157,7 +161,7 @@ public static class AudioManager
             DeviceState.Active => "ACTIVE",
             DeviceState.Disabled => "DISABLED",
             DeviceState.NotPresent => "NOT PRESENT",
-            DeviceState.UnPlugged => "UNPLUGGED",
+            DeviceState.Unplugged => "UNPLUGGED",
             DeviceState.All => "STATEMASK_ALL",
             _ => "UNKNOWN"
         };
@@ -179,7 +183,6 @@ public static class AudioManager
 
         Log.Debug("[AUDIOMGR] re-initializing");
 
-        _enumerator = new MMDeviceEnumerator();
         InitializeDevices();
 
         Log.Information("[AUDIOMGR] re-initialized");
@@ -192,6 +195,11 @@ public static class AudioManager
 
         foreach (var device in _devices.Values)
             device.Dispose();
+
+        _notificationClient.DeviceAdded -= DeviceAdded;
+        _notificationClient.DeviceRemoved -= DeviceRemoved;
+        _notificationClient.DeviceStateChanged -= DeviceStateChanged;
+        _enumerator.UnregisterEndpointNotificationCallback(_notificationClient);
 
         _enumerator.Dispose();
 
@@ -211,10 +219,10 @@ public static class AudioManager
             using var defaultInputDevice = _enumerator.GetDefaultAudioEndpoint(DataFlow.Capture, Role.Multimedia);
             using var defaultOutputDevice = _enumerator.GetDefaultAudioEndpoint(DataFlow.Render, Role.Multimedia);
 
-            var defaultInputDeviceId = defaultInputDevice.DeviceID;
-            var defaultOutputDeviceId = defaultOutputDevice.DeviceID;
+            var defaultInputDeviceId = defaultInputDevice.ID;
+            var defaultOutputDeviceId = defaultOutputDevice.ID;
 
-            foreach (var device in _devices.Values.Where(d => d.MMDevice.DeviceState == DeviceState.Active))
+            foreach (var device in _devices.Values.Where(d => d.MMDevice.State == DeviceState.Active))
             {
 
                 var audioSessions = GetDeviceSessions(device);
@@ -222,11 +230,11 @@ public static class AudioManager
 
                 var audioDevice = new AudioDevice
                 {
-                    State = GetReadableState(device.MMDevice.DeviceState),
+                    State = GetReadableState(device.MMDevice.State),
                     Type = device.MMDevice.DataFlow == DataFlow.Capture ? DeviceType.Input : DeviceType.Output,
                     Id = device.DeviceId,
                     FriendlyName = device.FriendlyName,
-                    Volume = Convert.ToInt32(Math.Round(device.AudioEndpointVolume.GetMasterVolumeLevelScalar() * 100, 0)),
+                    Volume = Convert.ToInt32(Math.Round(device.AudioEndpointVolume.MasterVolumeLevelScalar * 100, 0)),
                     PeakVolume = loudestSession == null ? 0 : loudestSession.PeakVolume,
                     Sessions = audioSessions,
                     Default = device.DeviceId == defaultInputDeviceId || device.DeviceId == defaultOutputDeviceId
@@ -253,7 +261,7 @@ public static class AudioManager
 
         using var defaultDevice = _enumerator.GetDefaultAudioEndpoint(dataFlow, role);
 
-        return defaultDevice.DeviceID;
+        return defaultDevice.ID;
     }
 
     public static void Activate(AudioDevice audioDevice)
@@ -276,7 +284,7 @@ public static class AudioManager
             return;
 
         var volumeScalar = volume / 100f;
-        device.AudioEndpointVolume.SetMasterVolumeLevelScalar(volumeScalar, Guid.Empty);
+        device.AudioEndpointVolume.MasterVolumeLevelScalar = volumeScalar;
     }
 
     public static void SetVolume(AudioSession audioSession, int volume)
@@ -292,7 +300,7 @@ public static class AudioManager
             return;
 
         var volumeScalar = volume / 100f;
-        session.Volume.MasterVolume = volumeScalar;
+        session.Volume.Volume = volumeScalar;
     }
 
     public static void SetMute(AudioDevice audioDevice, bool mute)
@@ -303,7 +311,7 @@ public static class AudioManager
         if (!_devices.TryGetValue(audioDevice.Id, out var device))
             return;
 
-        device.AudioEndpointVolume.SetMute(mute, Guid.Empty);
+        device.AudioEndpointVolume.Mute = mute;
     }
 
     public static void SetMute(AudioSession audioSession, bool mute)
@@ -318,7 +326,7 @@ public static class AudioManager
         if (!device.Manager.Sessions.TryGetValue(audioSession.Id, out var session))
             return;
 
-        session.Volume.IsMuted = mute;
+        session.Volume.Mute = mute;
     }
 
     public static void Shutdown()

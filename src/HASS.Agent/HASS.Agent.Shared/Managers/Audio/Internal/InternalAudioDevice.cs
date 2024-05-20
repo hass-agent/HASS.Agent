@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using CSCore.CoreAudioAPI;
+using NAudio.CoreAudioApi;
 
 namespace HASS.Agent.Shared.Managers.Audio.Internal;
 internal class InternalAudioDevice : IDisposable
@@ -19,18 +19,17 @@ internal class InternalAudioDevice : IDisposable
     public InternalAudioDevice(MMDevice device)
     {
         MMDevice = device;
-        var sessionManager2 = AudioSessionManager2.FromMMDevice(device);
-        Manager = new InternalAudioSessionManager(sessionManager2);
-        AudioEndpointVolume = AudioEndpointVolume.FromDevice(device);
+        Manager = new InternalAudioSessionManager(device.AudioSessionManager);
+        AudioEndpointVolume = device.AudioEndpointVolume;
 
-        DeviceId = device.DeviceID;
+        DeviceId = device.ID;
         FriendlyName = device.FriendlyName;
     }
 
     public void Activate()
     {
         using var configClient = new CPolicyConfigVistaClient();
-        configClient.SetDefaultDevice(MMDevice.DeviceID);
+        configClient.SetDefaultDevice(MMDevice.ID);
     }
 
     public void Dispose()
