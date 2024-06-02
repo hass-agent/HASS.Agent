@@ -423,7 +423,7 @@ namespace HASS.Agent.Commands
 
             commandInfoCard = new CommandInfoCard(CommandType.MultipleKeysCommand,
                 Languages.CommandsManager_MultipleKeysCommandDescription,
-                true, false, false);
+                true, false, true);
 
             CommandInfoCards.Add(commandInfoCard.CommandType, commandInfoCard);
 
