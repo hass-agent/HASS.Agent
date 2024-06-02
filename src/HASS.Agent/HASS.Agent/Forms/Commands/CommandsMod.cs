@@ -353,7 +353,19 @@ namespace HASS.Agent.Forms.Commands
 
 						return;
 					}
-					Command.Keys = keys;
+
+                    if (keys.Count == 0)
+                    {
+                        var q = MessageBoxAdv.Show(this, Languages.CommandsMod_BtnStore_MessageBox4, Variables.MessageBoxTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                        if (q != DialogResult.Yes)
+                        {
+                            ActiveControl = TbSetting;
+
+                            return;
+                        }
+                    }
+
+                    Command.Keys = keys;
 					break;
 
 				case CommandType.LaunchUrlCommand:
