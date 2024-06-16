@@ -9,7 +9,7 @@
 
 ; Standard installation constants
 #define MyAppName "HASS.Agent"
-#define MyAppVersion "2.1.0-beta1"
+#define MyAppVersion "2.1.0-beta2"
 #define MyAppPublisher "HASS.Agent Team"
 #define MyAppURL "https://hass-agent.io"
 #define MyAppExeName "HASS.Agent.exe"
@@ -62,7 +62,7 @@ Name: "{autoprograms}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"
 Name: "{autodesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Tasks: desktopicon
 
 [Run]
-Filename: "{app}\{#MyAppExeName}"; Parameters: "compat_migrate"; Description: "Try to migrate configuration"; Flags: postinstall skipifsilent runascurrentuser unchecked
+Filename: "{app}\{#MyAppExeName}"; Parameters: "compat_migrate"; Description: "Try to migrate configuration (administrative permissions required)"; Flags: postinstall skipifsilent runascurrentuser unchecked
 Filename: "{tmp}\HASS.Agent.Service.Installer.exe"; Description: "Install Satellite Service (administrative permissions required)"; Flags: postinstall runascurrentuser 
 Filename: "{app}\{#MyAppExeName}"; Description: "{cm:LaunchProgram,{#StringChange(MyAppName, '&', '&&')}}"; Flags: postinstall skipifsilent nowait
 
