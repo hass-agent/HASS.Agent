@@ -33,11 +33,11 @@
     <PackageReference Include="ByteSize" Version="2.1.2" />
     <PackageReference Include="Cassia.NetStandard" Version="1.0.0" />
     <PackageReference Include="CliWrap" Version="3.6.6" />
-    <PackageReference Include="CSCore" Version="1.2.1.2" />
     <PackageReference Include="LibreHardwareMonitorLib" Version="0.9.3" />
     <PackageReference Include="Microsoft.Win32.Registry" Version="5.0.0" />
     <PackageReference Include="Microsoft.Win32.SystemEvents" Version="8.0.0" />
     <PackageReference Include="MQTTnet" Version="4.3.3.952" />
+    <PackageReference Include="NAudio" Version="2.2.1" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="Serilog" Version="3.1.1" />
     <PackageReference Include="System.Diagnostics.PerformanceCounter" Version="8.0.0" />

@@ -12,6 +12,7 @@ using MQTTnet;
 using Serilog;
 using MediaPlayerState = HASS.Agent.Enums.MediaPlayerState;
 using Octokit;
+using Windows.Media.Core;
 
 namespace HASS.Agent.Media
 {
@@ -406,7 +407,7 @@ namespace HASS.Agent.Media
                 if (Variables.MediaPlayer.CurrentState == Windows.Media.Playback.MediaPlayerState.Playing) Variables.MediaPlayer.Pause();
 
                 // set the uri source
-                Variables.MediaPlayer.SetUriSource(new Uri(localFile));
+                Variables.MediaPlayer.Source = MediaSource.CreateFromUri(new Uri(localFile));
 
                 if (Variables.ExtendedLogging) Log.Information("[MEDIA] Playing: {file}", Path.GetFileName(localFile));
 

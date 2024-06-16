@@ -236,10 +236,7 @@ namespace HASS.Agent.Functions
             {
                 // any value?
                 if (string.IsNullOrWhiteSpace(keyString))
-                {
-                    errorMsg = Languages.HelperFunctions_ParseMultipleKeys_ErrorMsg1;
-                    return false;
-                }
+                    return true;
 
                 // any brackets?
                 if (!keyString.Contains('[') || !keyString.Contains(']'))

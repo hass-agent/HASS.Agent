@@ -4,7 +4,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
-using CSCore.CoreAudioAPI;
+using NAudio.CoreAudioApi;
 
 namespace HASS.Agent.Shared.Managers.Audio.Internal;
 
