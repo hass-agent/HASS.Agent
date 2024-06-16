@@ -54,9 +54,7 @@ internal class InternalAudioSessionManager : IDisposable
             Manager.OnSessionCreated -= Manager_OnSessionCreated;
 
         foreach (var session in Sessions.Values)
-        {
             session?.Dispose();
-        }
 
         Manager?.Dispose();
 

@@ -34,9 +34,7 @@ internal class InternalAudioSession : IDisposable, IAudioSessionEventsHandler
     {
         Control.UnRegisterEventClient(this);
 
-        //MeterInformation?.Dispose();
         Volume?.Dispose();
-        //Control2?.Dispose();
         Control?.Dispose();
 
         GC.SuppressFinalize(this);
