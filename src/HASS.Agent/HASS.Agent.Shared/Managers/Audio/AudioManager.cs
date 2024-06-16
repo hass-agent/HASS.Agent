@@ -235,6 +235,7 @@ public static class AudioManager
                     Id = device.DeviceId,
                     FriendlyName = device.FriendlyName,
                     Volume = Convert.ToInt32(Math.Round(device.AudioEndpointVolume.MasterVolumeLevelScalar * 100, 0)),
+                    Muted = device.MMDevice.AudioEndpointVolume.Mute,
                     PeakVolume = loudestSession == null ? 0 : loudestSession.PeakVolume,
                     Sessions = audioSessions,
                     Default = device.DeviceId == defaultInputDeviceId || device.DeviceId == defaultOutputDeviceId

@@ -13,6 +13,7 @@ using Serilog;
 using MediaPlayerState = HASS.Agent.Enums.MediaPlayerState;
 using Octokit;
 using Windows.Media.Core;
+using HASS.Agent.Shared.Managers.Audio;
 
 namespace HASS.Agent.Media
 {
@@ -38,7 +39,7 @@ namespace HASS.Agent.Media
                 Log.Information("[MEDIA] Disabled");
                 return;
             }
-            
+
             if (!Variables.AppSettings.LocalApiEnabled && !Variables.AppSettings.MqttEnabled)
             {
                 Log.Warning("[MEDIA] Both local API and MQTT are disabled, unable to receive media requests");
@@ -70,7 +71,7 @@ namespace HASS.Agent.Media
             }
             catch (Exception ex)
             {
-                Log.Fatal(ex, "[MEDIA] Unable to initialize: {err}" , ex.Message);
+                Log.Fatal(ex, "[MEDIA] Unable to initialize: {err}", ex.Message);
                 Variables.AppSettings.MediaPlayerEnabled = false;
 
                 Log.Warning("[MEDIA] Failed, disabled");
@@ -79,7 +80,7 @@ namespace HASS.Agent.Media
 
             // start monitoring playing media
             _ = Task.Run(MediaMonitor);
-            
+
             if (!Variables.AppSettings.MqttEnabled) Log.Warning("[MEDIA] MQTT is disabled, only basic media functionality will work");
             else
             {
@@ -191,7 +192,8 @@ namespace HASS.Agent.Media
                     message.AlbumArtist = mediaProperties.AlbumArtist;
                     message.AlbumTitle = mediaProperties.AlbumTitle;
                     message.Volume = MediaManagerRequests.GetVolume();
-                    
+                    message.Muted = AudioManager.GetDevices().FirstOrDefault(d => d.Type == DeviceType.Output && d.Default)?.Muted == true;
+
                     // get timeline info
                     var timeline = session.GetTimelineProperties();
                     if (timeline != null)
@@ -243,9 +245,9 @@ namespace HASS.Agent.Media
             // if none are playing: pick the first
 
             if (sessions.Count == 1) return sessions[0];
-            
-            return sessions.Any(x => x.GetPlaybackInfo().PlaybackStatus == GlobalSystemMediaTransportControlsSessionPlaybackStatus.Playing) 
-                ? sessions.First(x => x.GetPlaybackInfo().PlaybackStatus == GlobalSystemMediaTransportControlsSessionPlaybackStatus.Playing) 
+
+            return sessions.Any(x => x.GetPlaybackInfo().PlaybackStatus == GlobalSystemMediaTransportControlsSessionPlaybackStatus.Playing)
+                ? sessions.First(x => x.GetPlaybackInfo().PlaybackStatus == GlobalSystemMediaTransportControlsSessionPlaybackStatus.Playing)
                 : sessions[0];
         }
 
@@ -331,7 +333,8 @@ namespace HASS.Agent.Media
 
                     case MediaPlayerCommand.Play:
                         if (Variables.ExtendedLogging) Log.Information("[MEDIA] Command received: Play");
-                        if (State == MediaPlayerState.Playing) {
+                        if (State == MediaPlayerState.Playing)
+                        {
                             if (Variables.ExtendedLogging) Log.Warning("[MEDIA] Media already playing");
                             break;
                         }
@@ -340,7 +343,8 @@ namespace HASS.Agent.Media
 
                     case MediaPlayerCommand.Pause:
                         if (Variables.ExtendedLogging) Log.Information("[MEDIA] Command received: Pause");
-                        if (State == MediaPlayerState.Paused) {
+                        if (State == MediaPlayerState.Paused)
+                        {
                             if (Variables.ExtendedLogging) Log.Warning("[MEDIA] Media already paused");
                             break;
                         }
