@@ -134,6 +134,7 @@ message RpcConfiguredServerSensor {
   string instance = 9;
   string name = 10;
   string entityName = 11;
+  string advancedSettings = 12;
 }
 
 message RpcConfiguredServerCommand {
