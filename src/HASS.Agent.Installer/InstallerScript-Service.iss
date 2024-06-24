@@ -52,7 +52,7 @@ Name: "english"; MessagesFile: "compiler:Default.isl"
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 [Files]
 ; Service files
-Source: "..\HASS.Agent\HASS.Agent.Satellite.Service\bin\Publish-x64\Release\*"; DestDir: "{app}"; Flags: recursesubdirs createallsubdirs
+Source: "..\HASS.Agent\HASS.Agent.Satellite.Service\bin\Publish-x64\Release\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 
 [Run]
 Filename: "{sys}\sc.exe"; Parameters: "start {#ServiceName}"; Description: "Start Satellite Service"; Flags: postinstall runhidden runascurrentuser 
