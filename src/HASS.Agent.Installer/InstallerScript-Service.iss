@@ -52,7 +52,7 @@ Name: "english"; MessagesFile: "compiler:Default.isl"
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 [Files]
 ; Service files
-Source: "..\HASS.Agent\HASS.Agent.Satellite.Service\bin\Publish-x64\Release\*"; DestDir: "{app}"; Flags: recursesubdirs createallsubdirs
+Source: "..\HASS.Agent\HASS.Agent.Satellite.Service\bin\Publish-x64\Release\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 
 [Run]
 Filename: "{sys}\sc.exe"; Parameters: "start {#ServiceName}"; Description: "Start Satellite Service"; Flags: postinstall runhidden runascurrentuser 
@@ -80,3 +80,16 @@ begin
   Dependency_AddDotNet60Desktop;
   Result := True;
 end;
+
+//procedure CurStepChanged(CurStep: TSetupStep);
+//var
+//    ResultCode: Integer;
+//    wmicommand: string;
+//begin
+//    // before installation begins
+//    if CurStep = ssInstall then
+//    begin
+//        MsgBox(ExpandConstant('{sys}') + '\sc.exe' + '|||' + 'stop {#ServiceName}', mbInformation, MB_OK);
+//         Exec(ExpandConstant('{sys}') + '\sc.exe', 'stop {#ServiceName}', '', SW_HIDE, ewWaitUntilTerminated, ResultCode);
+//     end;
+// end;
