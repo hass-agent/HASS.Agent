@@ -33,6 +33,7 @@ public abstract class AbstractSingleValueSensor : AbstractDiscoverable
 
         if (!string.IsNullOrWhiteSpace(advancedSettings))
         {
+            AdvancedSettings = advancedSettings;
             _advancedInfo = JsonConvert.DeserializeObject<SensorAdvancedSettings>(advancedSettings);
         }
     }
