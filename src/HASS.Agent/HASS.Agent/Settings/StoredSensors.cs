@@ -21,71 +21,71 @@ using SensorType = HASS.Agent.Shared.Enums.SensorType;
 
 namespace HASS.Agent.Settings
 {
-	/// <summary>
-	/// Handles loading and storing sensors
-	/// </summary>
-	internal static class StoredSensors
-	{
-		/// <summary>
-		/// Load all stored sensors
-		/// </summary>
-		/// <returns></returns>
-		internal static async Task<bool> LoadAsync()
-		{
-			try
-			{
-				// set empty lists
-				Variables.SingleValueSensors = new List<AbstractSingleValueSensor>();
-				Variables.MultiValueSensors = new List<AbstractMultiValueSensor>();
+    /// <summary>
+    /// Handles loading and storing sensors
+    /// </summary>
+    internal static class StoredSensors
+    {
+        /// <summary>
+        /// Load all stored sensors
+        /// </summary>
+        /// <returns></returns>
+        internal static async Task<bool> LoadAsync()
+        {
+            try
+            {
+                // set empty lists
+                Variables.SingleValueSensors = new List<AbstractSingleValueSensor>();
+                Variables.MultiValueSensors = new List<AbstractMultiValueSensor>();
 
-				// check for existing file
-				if (!File.Exists(Variables.SensorsFile))
-				{
-					// none yet
-					Log.Information("[SETTINGS_SENSORS] Config not found, no entities loaded");
-					Variables.MainForm?.SetSensorsStatus(ComponentStatus.Stopped);
-					return true;
-				}
+                // check for existing file
+                if (!File.Exists(Variables.SensorsFile))
+                {
+                    // none yet
+                    Log.Information("[SETTINGS_SENSORS] Config not found, no entities loaded");
+                    Variables.MainForm?.SetSensorsStatus(ComponentStatus.Stopped);
+                    return true;
+                }
 
-				// read the content
-				var sensorsRaw = await File.ReadAllTextAsync(Variables.SensorsFile);
-				if (string.IsNullOrWhiteSpace(sensorsRaw))
-				{
-					Log.Information("[SETTINGS_SENSORS] Config is empty, no entities loaded");
-					Variables.MainForm?.SetSensorsStatus(ComponentStatus.Stopped);
-					return true;
-				}
+                // read the content
+                var sensorsRaw = await File.ReadAllTextAsync(Variables.SensorsFile);
+                if (string.IsNullOrWhiteSpace(sensorsRaw))
+                {
+                    Log.Information("[SETTINGS_SENSORS] Config is empty, no entities loaded");
+                    Variables.MainForm?.SetSensorsStatus(ComponentStatus.Stopped);
+                    return true;
+                }
 
-				// deserialize
-				var configuredSensors = JsonConvert.DeserializeObject<List<ConfiguredSensor>>(sensorsRaw);
+                // deserialize
+                var configuredSensors = JsonConvert.DeserializeObject<List<ConfiguredSensor>>(sensorsRaw);
 
-				// null-check
-				if (configuredSensors == null)
-				{
-					Log.Error("[SETTINGS_SENSORS] Error loading entities: returned null object");
-					Variables.MainForm?.SetSensorsStatus(ComponentStatus.Failed);
-					return false;
-				}
+                // null-check
+                if (configuredSensors == null)
+                {
+                    Log.Error("[SETTINGS_SENSORS] Error loading entities: returned null object");
+                    Variables.MainForm?.SetSensorsStatus(ComponentStatus.Failed);
+                    return false;
+                }
 
-				// convert to abstract sensors
-				await Task.Run(delegate
-				{
-					foreach (var sensor in configuredSensors)
-					{
-						if (sensor.IsSingleValue()) Variables.SingleValueSensors.Add(ConvertConfiguredToAbstractSingleValue(sensor));
-						else Variables.MultiValueSensors.Add(ConvertConfiguredToAbstractMultiValue(sensor));
-					}
-				});
+                // convert to abstract sensors
+                await Task.Run(delegate
+                {
+                    foreach (var sensor in configuredSensors)
+                    {
+                        if (sensor.IsSingleValue()) Variables.SingleValueSensors.Add(ConvertConfiguredToAbstractSingleValue(sensor));
+                        else Variables.MultiValueSensors.Add(ConvertConfiguredToAbstractMultiValue(sensor));
+                    }
+                });
 
-				// all good
-				Log.Information("[SETTINGS_SENSORS] Loaded {count} entities", (Variables.SingleValueSensors.Count + Variables.MultiValueSensors.Count));
-				Variables.MainForm?.SetSensorsStatus(ComponentStatus.Ok);
-				return true;
-			}
-			catch (Exception ex)
-			{
-				Log.Fatal(ex, "[SETTINGS_SENSORS] Error loading entities: {err}", ex.Message);
-				Variables.MainForm?.ShowMessageBox(string.Format(Languages.StoredSensors_Load_MessageBox1, ex.Message), true);
+                // all good
+                Log.Information("[SETTINGS_SENSORS] Loaded {count} entities", (Variables.SingleValueSensors.Count + Variables.MultiValueSensors.Count));
+                Variables.MainForm?.SetSensorsStatus(ComponentStatus.Ok);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Log.Fatal(ex, "[SETTINGS_SENSORS] Error loading entities: {err}", ex.Message);
+                Variables.MainForm?.ShowMessageBox(string.Format(Languages.StoredSensors_Load_MessageBox1, ex.Message), true);
 
                 Variables.MainForm?.SetSensorsStatus(ComponentStatus.Failed);
                 return false;
@@ -127,10 +127,10 @@ namespace HASS.Agent.Settings
                 case SensorType.NamedWindowSensor:
                     abstractSensor = new NamedWindowSensor(sensor.WindowName, sensor.EntityName, sensor.Name, sensor.UpdateInterval, sensor.Id.ToString(), sensor.AdvancedSettings);
                     break;
-				case SensorType.LastActiveSensor:
-					abstractSensor = new LastActiveSensor(sensor.ApplyRounding, sensor.Round, sensor.UpdateInterval, sensor.EntityName, sensor.Name, sensor.Id.ToString(), sensor.AdvancedSettings);
-					break;
-				case SensorType.LastSystemStateChangeSensor:
+                case SensorType.LastActiveSensor:
+                    abstractSensor = new LastActiveSensor(sensor.ApplyRounding, sensor.Round, sensor.UpdateInterval, sensor.EntityName, sensor.Name, sensor.Id.ToString(), sensor.AdvancedSettings);
+                    break;
+                case SensorType.LastSystemStateChangeSensor:
                     abstractSensor = new LastSystemStateChangeSensor(sensor.UpdateInterval, sensor.EntityName, sensor.Name, sensor.Id.ToString(), sensor.AdvancedSettings);
                     break;
                 case SensorType.LastBootSensor:
@@ -207,47 +207,48 @@ namespace HASS.Agent.Settings
                     break;
             }
 
-            abstractSensor.IgnoreAvailability = sensor.IgnoreAvailability;
+            if (abstractSensor != null)
+                abstractSensor.IgnoreAvailability = sensor.IgnoreAvailability;
 
             return abstractSensor;
         }
 
-		/// <summary>
-		/// Convert a multi-value 'ConfiguredSensor' (local storage, UI) to an 'AbstractSensor' (MQTT)
-		/// </summary>
-		/// <param name="sensor"></param>
-		/// <returns></returns>
-		internal static AbstractMultiValueSensor ConvertConfiguredToAbstractMultiValue(ConfiguredSensor sensor)
-		{
-			AbstractMultiValueSensor abstractSensor = null;
+        /// <summary>
+        /// Convert a multi-value 'ConfiguredSensor' (local storage, UI) to an 'AbstractSensor' (MQTT)
+        /// </summary>
+        /// <param name="sensor"></param>
+        /// <returns></returns>
+        internal static AbstractMultiValueSensor ConvertConfiguredToAbstractMultiValue(ConfiguredSensor sensor)
+        {
+            AbstractMultiValueSensor abstractSensor = null;
 
-			switch (sensor.Type)
-			{
-				case SensorType.StorageSensors:
-					abstractSensor = new StorageSensors(sensor.UpdateInterval, sensor.EntityName, sensor.Name, sensor.Id.ToString());
-					break;
-				case SensorType.NetworkSensors:
-					abstractSensor = new NetworkSensors(sensor.UpdateInterval, sensor.EntityName, sensor.Name, sensor.Query, sensor.Id.ToString());
-					break;
-				case SensorType.WindowsUpdatesSensors:
-					abstractSensor = new WindowsUpdatesSensors(sensor.UpdateInterval, sensor.EntityName, sensor.Name, sensor.Id.ToString());
-					break;
-				case SensorType.BatterySensors:
-					abstractSensor = new BatterySensors(sensor.UpdateInterval, sensor.EntityName, sensor.Name, sensor.Id.ToString());
-					break;
-				case SensorType.DisplaySensors:
-					abstractSensor = new DisplaySensors(sensor.UpdateInterval, sensor.EntityName, sensor.Name, sensor.Id.ToString());
-					break;
-				case SensorType.AudioSensors:
-					abstractSensor = new AudioSensors(sensor.UpdateInterval, sensor.EntityName, sensor.Name, sensor.Id.ToString());
-					break;
-				case SensorType.PrintersSensors:
-					abstractSensor = new PrintersSensors(sensor.UpdateInterval, sensor.EntityName, sensor.Name, sensor.Id.ToString());
-					break;
-				default:
-					Log.Error("[SETTINGS_SENSORS] [{name}] Unknown configured multi-value sensor type: {type}", sensor.EntityName, sensor.Type.ToString());
-					break;
-			}
+            switch (sensor.Type)
+            {
+                case SensorType.StorageSensors:
+                    abstractSensor = new StorageSensors(sensor.UpdateInterval, sensor.EntityName, sensor.Name, sensor.Id.ToString());
+                    break;
+                case SensorType.NetworkSensors:
+                    abstractSensor = new NetworkSensors(sensor.UpdateInterval, sensor.EntityName, sensor.Name, sensor.Query, sensor.Id.ToString());
+                    break;
+                case SensorType.WindowsUpdatesSensors:
+                    abstractSensor = new WindowsUpdatesSensors(sensor.UpdateInterval, sensor.EntityName, sensor.Name, sensor.Id.ToString());
+                    break;
+                case SensorType.BatterySensors:
+                    abstractSensor = new BatterySensors(sensor.UpdateInterval, sensor.EntityName, sensor.Name, sensor.Id.ToString());
+                    break;
+                case SensorType.DisplaySensors:
+                    abstractSensor = new DisplaySensors(sensor.UpdateInterval, sensor.EntityName, sensor.Name, sensor.Id.ToString());
+                    break;
+                case SensorType.AudioSensors:
+                    abstractSensor = new AudioSensors(sensor.UpdateInterval, sensor.EntityName, sensor.Name, sensor.Id.ToString());
+                    break;
+                case SensorType.PrintersSensors:
+                    abstractSensor = new PrintersSensors(sensor.UpdateInterval, sensor.EntityName, sensor.Name, sensor.Id.ToString());
+                    break;
+                default:
+                    Log.Error("[SETTINGS_SENSORS] [{name}] Unknown configured multi-value sensor type: {type}", sensor.EntityName, sensor.Type.ToString());
+                    break;
+            }
 
             abstractSensor.IgnoreAvailability = sensor.IgnoreAvailability;
 
@@ -264,142 +265,142 @@ namespace HASS.Agent.Settings
             switch (sensor)
             {
                 case WmiQuerySensor wmiSensor:
-                {
-                    _ = Enum.TryParse<SensorType>(wmiSensor.GetType().Name, out var type);
-                    return new ConfiguredSensor
                     {
-                        Id = Guid.Parse(wmiSensor.Id), 
-                        EntityName = wmiSensor.EntityName,
-                        Name = wmiSensor.Name,
-                        Type = type,
-                        UpdateInterval = wmiSensor.UpdateIntervalSeconds,
-                        IgnoreAvailability = wmiSensor.IgnoreAvailability,
-                        Scope = wmiSensor.Scope,
-                        Query = wmiSensor.Query,
-                        ApplyRounding = wmiSensor.ApplyRounding,
-                        Round= wmiSensor.Round,
-                        AdvancedSettings = wmiSensor.AdvancedSettings
-                    };
-                }
+                        _ = Enum.TryParse<SensorType>(wmiSensor.GetType().Name, out var type);
+                        return new ConfiguredSensor
+                        {
+                            Id = Guid.Parse(wmiSensor.Id),
+                            EntityName = wmiSensor.EntityName,
+                            Name = wmiSensor.Name,
+                            Type = type,
+                            UpdateInterval = wmiSensor.UpdateIntervalSeconds,
+                            IgnoreAvailability = wmiSensor.IgnoreAvailability,
+                            Scope = wmiSensor.Scope,
+                            Query = wmiSensor.Query,
+                            ApplyRounding = wmiSensor.ApplyRounding,
+                            Round = wmiSensor.Round,
+                            AdvancedSettings = wmiSensor.AdvancedSettings
+                        };
+                    }
 
                 case NamedWindowSensor namedWindowSensor:
-                {
-                    _ = Enum.TryParse<SensorType>(namedWindowSensor.GetType().Name, out var type);
-                    return new ConfiguredSensor
                     {
-                        Id = Guid.Parse(namedWindowSensor.Id), 
-                        EntityName = namedWindowSensor.EntityName,
-                        Name = namedWindowSensor.Name,
-                        Type = type,
-                        UpdateInterval = namedWindowSensor.UpdateIntervalSeconds,
-                        IgnoreAvailability = namedWindowSensor.IgnoreAvailability,
-                        WindowName = namedWindowSensor.WindowName,
-                        AdvancedSettings = namedWindowSensor.AdvancedSettings
-                    };
-                }
+                        _ = Enum.TryParse<SensorType>(namedWindowSensor.GetType().Name, out var type);
+                        return new ConfiguredSensor
+                        {
+                            Id = Guid.Parse(namedWindowSensor.Id),
+                            EntityName = namedWindowSensor.EntityName,
+                            Name = namedWindowSensor.Name,
+                            Type = type,
+                            UpdateInterval = namedWindowSensor.UpdateIntervalSeconds,
+                            IgnoreAvailability = namedWindowSensor.IgnoreAvailability,
+                            WindowName = namedWindowSensor.WindowName,
+                            AdvancedSettings = namedWindowSensor.AdvancedSettings
+                        };
+                    }
 
                 case PerformanceCounterSensor performanceCounterSensor:
-                {
-                    _ = Enum.TryParse<SensorType>(performanceCounterSensor.GetType().Name, out var type);
-                    return new ConfiguredSensor
                     {
-                        Id = Guid.Parse(performanceCounterSensor.Id),
-                        EntityName = performanceCounterSensor.EntityName,
-                        Name = performanceCounterSensor.Name,
-                        Type = type,
-                        UpdateInterval = performanceCounterSensor.UpdateIntervalSeconds,
-                        IgnoreAvailability = performanceCounterSensor.IgnoreAvailability,
-                        Category = performanceCounterSensor.CategoryName,
-                        Counter = performanceCounterSensor.CounterName,
-                        Instance = performanceCounterSensor.InstanceName,
-                        ApplyRounding = performanceCounterSensor.ApplyRounding,
-                        Round = performanceCounterSensor.Round,
-                        AdvancedSettings = performanceCounterSensor.AdvancedSettings
-                    };
-                }
+                        _ = Enum.TryParse<SensorType>(performanceCounterSensor.GetType().Name, out var type);
+                        return new ConfiguredSensor
+                        {
+                            Id = Guid.Parse(performanceCounterSensor.Id),
+                            EntityName = performanceCounterSensor.EntityName,
+                            Name = performanceCounterSensor.Name,
+                            Type = type,
+                            UpdateInterval = performanceCounterSensor.UpdateIntervalSeconds,
+                            IgnoreAvailability = performanceCounterSensor.IgnoreAvailability,
+                            Category = performanceCounterSensor.CategoryName,
+                            Counter = performanceCounterSensor.CounterName,
+                            Instance = performanceCounterSensor.InstanceName,
+                            ApplyRounding = performanceCounterSensor.ApplyRounding,
+                            Round = performanceCounterSensor.Round,
+                            AdvancedSettings = performanceCounterSensor.AdvancedSettings
+                        };
+                    }
 
                 case ProcessActiveSensor processActiveSensor:
-                {
-                    _ = Enum.TryParse<SensorType>(processActiveSensor.GetType().Name, out var type);
-                    return new ConfiguredSensor
                     {
-                        Id = Guid.Parse(processActiveSensor.Id),
-                        EntityName = processActiveSensor.EntityName,
-                        Name = processActiveSensor.Name,
-                        Type = type,
-                        UpdateInterval = processActiveSensor.UpdateIntervalSeconds,
-                        IgnoreAvailability = processActiveSensor.IgnoreAvailability,
-                        Query = processActiveSensor.ProcessName,
-                        AdvancedSettings = processActiveSensor.AdvancedSettings
-                    };
-                }
+                        _ = Enum.TryParse<SensorType>(processActiveSensor.GetType().Name, out var type);
+                        return new ConfiguredSensor
+                        {
+                            Id = Guid.Parse(processActiveSensor.Id),
+                            EntityName = processActiveSensor.EntityName,
+                            Name = processActiveSensor.Name,
+                            Type = type,
+                            UpdateInterval = processActiveSensor.UpdateIntervalSeconds,
+                            IgnoreAvailability = processActiveSensor.IgnoreAvailability,
+                            Query = processActiveSensor.ProcessName,
+                            AdvancedSettings = processActiveSensor.AdvancedSettings
+                        };
+                    }
 
                 case ServiceStateSensor serviceStateSensor:
-                {
-                    _ = Enum.TryParse<SensorType>(serviceStateSensor.GetType().Name, out var type);
-                    return new ConfiguredSensor
                     {
-                        Id = Guid.Parse(serviceStateSensor.Id),
-                        EntityName = serviceStateSensor.EntityName,
-                        Name = serviceStateSensor.Name,
-                        Type = type,
-                        UpdateInterval = serviceStateSensor.UpdateIntervalSeconds,
-                        IgnoreAvailability = serviceStateSensor.IgnoreAvailability,
-                        Query = serviceStateSensor.ServiceName,
-                        AdvancedSettings = serviceStateSensor.AdvancedSettings
-                    };
-                }
+                        _ = Enum.TryParse<SensorType>(serviceStateSensor.GetType().Name, out var type);
+                        return new ConfiguredSensor
+                        {
+                            Id = Guid.Parse(serviceStateSensor.Id),
+                            EntityName = serviceStateSensor.EntityName,
+                            Name = serviceStateSensor.Name,
+                            Type = type,
+                            UpdateInterval = serviceStateSensor.UpdateIntervalSeconds,
+                            IgnoreAvailability = serviceStateSensor.IgnoreAvailability,
+                            Query = serviceStateSensor.ServiceName,
+                            AdvancedSettings = serviceStateSensor.AdvancedSettings
+                        };
+                    }
 
                 case PowershellSensor powershellSensor:
-                {
-                    _ = Enum.TryParse<SensorType>(powershellSensor.GetType().Name, out var type);
-                    return new ConfiguredSensor
                     {
-                        Id = Guid.Parse(powershellSensor.Id),
-                        EntityName = powershellSensor.EntityName,
-                        Name = powershellSensor.Name,
-                        Type = type,
-                        UpdateInterval = powershellSensor.UpdateIntervalSeconds,
-                        IgnoreAvailability = powershellSensor.IgnoreAvailability,
-                        Query = powershellSensor.Command,
-                        ApplyRounding = powershellSensor.ApplyRounding,
-                        Round = powershellSensor.Round,
-                        AdvancedSettings = powershellSensor.AdvancedSettings
-                    };
-                }
+                        _ = Enum.TryParse<SensorType>(powershellSensor.GetType().Name, out var type);
+                        return new ConfiguredSensor
+                        {
+                            Id = Guid.Parse(powershellSensor.Id),
+                            EntityName = powershellSensor.EntityName,
+                            Name = powershellSensor.Name,
+                            Type = type,
+                            UpdateInterval = powershellSensor.UpdateIntervalSeconds,
+                            IgnoreAvailability = powershellSensor.IgnoreAvailability,
+                            Query = powershellSensor.Command,
+                            ApplyRounding = powershellSensor.ApplyRounding,
+                            Round = powershellSensor.Round,
+                            AdvancedSettings = powershellSensor.AdvancedSettings
+                        };
+                    }
 
-				case LastActiveSensor lastActiveSensor:
-					{
-						_ = Enum.TryParse<SensorType>(lastActiveSensor.GetType().Name, out var type);
-						return new ConfiguredSensor
-						{
-							Id = Guid.Parse(lastActiveSensor.Id),
-							EntityName = lastActiveSensor.EntityName,
-							Name = lastActiveSensor.Name,
-							Type = type,
-							UpdateInterval = lastActiveSensor.UpdateIntervalSeconds,
-							IgnoreAvailability = lastActiveSensor.IgnoreAvailability,
-							ApplyRounding = lastActiveSensor.ApplyRounding,
-							Round = lastActiveSensor.Round,
+                case LastActiveSensor lastActiveSensor:
+                    {
+                        _ = Enum.TryParse<SensorType>(lastActiveSensor.GetType().Name, out var type);
+                        return new ConfiguredSensor
+                        {
+                            Id = Guid.Parse(lastActiveSensor.Id),
+                            EntityName = lastActiveSensor.EntityName,
+                            Name = lastActiveSensor.Name,
+                            Type = type,
+                            UpdateInterval = lastActiveSensor.UpdateIntervalSeconds,
+                            IgnoreAvailability = lastActiveSensor.IgnoreAvailability,
+                            ApplyRounding = lastActiveSensor.ApplyRounding,
+                            Round = lastActiveSensor.Round,
                             AdvancedSettings = lastActiveSensor.AdvancedSettings
                         };
-					}
+                    }
 
-				case WindowStateSensor windowStateSensor:
-                {
-                    _ = Enum.TryParse<SensorType>(windowStateSensor.GetType().Name, out var type);
-                    return new ConfiguredSensor
+                case WindowStateSensor windowStateSensor:
                     {
-                        Id = Guid.Parse(windowStateSensor.Id),
-                        EntityName = windowStateSensor.EntityName,
-                        Name = windowStateSensor.Name,
-                        Type = type,
-                        UpdateInterval = windowStateSensor.UpdateIntervalSeconds,
-                        IgnoreAvailability = windowStateSensor.IgnoreAvailability,
-                        Query = windowStateSensor.ProcessName,
-                        AdvancedSettings = windowStateSensor.AdvancedSettings
-                    };
-                }
+                        _ = Enum.TryParse<SensorType>(windowStateSensor.GetType().Name, out var type);
+                        return new ConfiguredSensor
+                        {
+                            Id = Guid.Parse(windowStateSensor.Id),
+                            EntityName = windowStateSensor.EntityName,
+                            Name = windowStateSensor.Name,
+                            Type = type,
+                            UpdateInterval = windowStateSensor.UpdateIntervalSeconds,
+                            IgnoreAvailability = windowStateSensor.IgnoreAvailability,
+                            Query = windowStateSensor.ProcessName,
+                            AdvancedSettings = windowStateSensor.AdvancedSettings
+                        };
+                    }
 
                 case HomeAssistant.Sensors.GeneralSensors.SingleValue.InternalDeviceSensor internalDeviceSensor:
                     {
@@ -411,8 +412,8 @@ namespace HASS.Agent.Settings
                             Name = internalDeviceSensor.Name,
                             Type = type,
                             UpdateInterval = internalDeviceSensor.UpdateIntervalSeconds,
-							IgnoreAvailability = internalDeviceSensor.IgnoreAvailability,
-							Query = internalDeviceSensor.SensorType.ToString(),
+                            IgnoreAvailability = internalDeviceSensor.IgnoreAvailability,
+                            Query = internalDeviceSensor.SensorType.ToString(),
                             AdvancedSettings = internalDeviceSensor.AdvancedSettings
                         };
                     }
@@ -434,19 +435,19 @@ namespace HASS.Agent.Settings
                     }
 
                 default:
-                {
-                    _ = Enum.TryParse<SensorType>(sensor.GetType().Name, out var type);
-                    return new ConfiguredSensor
                     {
-                        Id = Guid.Parse(sensor.Id), 
-                        EntityName = sensor.EntityName,
-                        Name = sensor.Name,
-                        Type = type, 
-                        UpdateInterval = sensor.UpdateIntervalSeconds,
-                        IgnoreAvailability = sensor.IgnoreAvailability,
-                        AdvancedSettings = sensor.AdvancedSettings
-                    };
-                }
+                        _ = Enum.TryParse<SensorType>(sensor.GetType().Name, out var type);
+                        return new ConfiguredSensor
+                        {
+                            Id = Guid.Parse(sensor.Id),
+                            EntityName = sensor.EntityName,
+                            Name = sensor.Name,
+                            Type = type,
+                            UpdateInterval = sensor.UpdateIntervalSeconds,
+                            IgnoreAvailability = sensor.IgnoreAvailability,
+                            AdvancedSettings = sensor.AdvancedSettings
+                        };
+                    }
             }
         }
 
@@ -460,147 +461,147 @@ namespace HASS.Agent.Settings
             switch (sensor)
             {
                 case StorageSensors storageSensors:
-                {
-                    _ = Enum.TryParse<SensorType>(storageSensors.GetType().Name, out var type);
-                    return new ConfiguredSensor
                     {
-                        Id = Guid.Parse(sensor.Id),
-                        EntityName = sensor.EntityName,
-                        Name = sensor.EntityName,
-                        Type = type,
-                        UpdateInterval = sensor.UpdateIntervalSeconds,
-                        IgnoreAvailability = sensor.IgnoreAvailability
-                    };
-                }
+                        _ = Enum.TryParse<SensorType>(storageSensors.GetType().Name, out var type);
+                        return new ConfiguredSensor
+                        {
+                            Id = Guid.Parse(sensor.Id),
+                            EntityName = sensor.EntityName,
+                            Name = sensor.EntityName,
+                            Type = type,
+                            UpdateInterval = sensor.UpdateIntervalSeconds,
+                            IgnoreAvailability = sensor.IgnoreAvailability
+                        };
+                    }
 
                 case NetworkSensors networkSensors:
-                {
-                    _ = Enum.TryParse<SensorType>(networkSensors.GetType().Name, out var type);
-                    return new ConfiguredSensor
                     {
-                        Id = Guid.Parse(sensor.Id),
-                        EntityName = sensor.EntityName,
-                        Name = sensor.EntityName,
-                        Query = networkSensors.NetworkCard,
-                        Type = type,
-                        UpdateInterval = sensor.UpdateIntervalSeconds,
-                        IgnoreAvailability = sensor.IgnoreAvailability
-                    };
-                }
+                        _ = Enum.TryParse<SensorType>(networkSensors.GetType().Name, out var type);
+                        return new ConfiguredSensor
+                        {
+                            Id = Guid.Parse(sensor.Id),
+                            EntityName = sensor.EntityName,
+                            Name = sensor.EntityName,
+                            Query = networkSensors.NetworkCard,
+                            Type = type,
+                            UpdateInterval = sensor.UpdateIntervalSeconds,
+                            IgnoreAvailability = sensor.IgnoreAvailability
+                        };
+                    }
 
                 case WindowsUpdatesSensors windowsUpdatesSensors:
-                {
-                    _ = Enum.TryParse<SensorType>(windowsUpdatesSensors.GetType().Name, out var type);
-                    return new ConfiguredSensor
                     {
-                        Id = Guid.Parse(sensor.Id),
-                        EntityName = sensor.EntityName,
-                        Name = sensor.EntityName,
-                        Type = type,
-                        UpdateInterval = sensor.UpdateIntervalSeconds,
-                        IgnoreAvailability = sensor.IgnoreAvailability
-                    };
-                }
+                        _ = Enum.TryParse<SensorType>(windowsUpdatesSensors.GetType().Name, out var type);
+                        return new ConfiguredSensor
+                        {
+                            Id = Guid.Parse(sensor.Id),
+                            EntityName = sensor.EntityName,
+                            Name = sensor.EntityName,
+                            Type = type,
+                            UpdateInterval = sensor.UpdateIntervalSeconds,
+                            IgnoreAvailability = sensor.IgnoreAvailability
+                        };
+                    }
 
                 case BatterySensors batterySensors:
-                {
-                    _ = Enum.TryParse<SensorType>(batterySensors.GetType().Name, out var type);
-                    return new ConfiguredSensor
                     {
-                        Id = Guid.Parse(sensor.Id),
-                        EntityName = sensor.EntityName,
-                        Name = sensor.EntityName,
-                        Type = type,
-                        UpdateInterval = sensor.UpdateIntervalSeconds,
-                        IgnoreAvailability = sensor.IgnoreAvailability
-                    };
-                }
+                        _ = Enum.TryParse<SensorType>(batterySensors.GetType().Name, out var type);
+                        return new ConfiguredSensor
+                        {
+                            Id = Guid.Parse(sensor.Id),
+                            EntityName = sensor.EntityName,
+                            Name = sensor.EntityName,
+                            Type = type,
+                            UpdateInterval = sensor.UpdateIntervalSeconds,
+                            IgnoreAvailability = sensor.IgnoreAvailability
+                        };
+                    }
 
                 case DisplaySensors displaySensors:
-                {
-                    _ = Enum.TryParse<SensorType>(displaySensors.GetType().Name, out var type);
-                    return new ConfiguredSensor
                     {
-                        Id = Guid.Parse(sensor.Id),
-                        EntityName = sensor.EntityName,
-                        Name = sensor.EntityName,
-                        Type = type,
-                        UpdateInterval = sensor.UpdateIntervalSeconds,
-                        IgnoreAvailability = sensor.IgnoreAvailability
-                    };
-                }
+                        _ = Enum.TryParse<SensorType>(displaySensors.GetType().Name, out var type);
+                        return new ConfiguredSensor
+                        {
+                            Id = Guid.Parse(sensor.Id),
+                            EntityName = sensor.EntityName,
+                            Name = sensor.EntityName,
+                            Type = type,
+                            UpdateInterval = sensor.UpdateIntervalSeconds,
+                            IgnoreAvailability = sensor.IgnoreAvailability
+                        };
+                    }
 
                 case AudioSensors audioSensors:
-                {
-                    _ = Enum.TryParse<SensorType>(audioSensors.GetType().Name, out var type);
-                    return new ConfiguredSensor
                     {
-                        Id = Guid.Parse(sensor.Id),
-                        EntityName = sensor.EntityName,
-                        Name = sensor.EntityName,
-                        Type = type,
-                        UpdateInterval = sensor.UpdateIntervalSeconds,
-                        IgnoreAvailability = sensor.IgnoreAvailability
-                    };
-                }
+                        _ = Enum.TryParse<SensorType>(audioSensors.GetType().Name, out var type);
+                        return new ConfiguredSensor
+                        {
+                            Id = Guid.Parse(sensor.Id),
+                            EntityName = sensor.EntityName,
+                            Name = sensor.EntityName,
+                            Type = type,
+                            UpdateInterval = sensor.UpdateIntervalSeconds,
+                            IgnoreAvailability = sensor.IgnoreAvailability
+                        };
+                    }
 
                 case PrintersSensors printersSensors:
-                {
-                    _ = Enum.TryParse<SensorType>(printersSensors.GetType().Name, out var type);
-                    return new ConfiguredSensor
                     {
-                        Id = Guid.Parse(sensor.Id),
-                        EntityName = sensor.EntityName,
-                        Name = sensor.EntityName,
-                        Type = type,
-                        UpdateInterval = sensor.UpdateIntervalSeconds,
-                        IgnoreAvailability = sensor.IgnoreAvailability
-                    };
-                }
+                        _ = Enum.TryParse<SensorType>(printersSensors.GetType().Name, out var type);
+                        return new ConfiguredSensor
+                        {
+                            Id = Guid.Parse(sensor.Id),
+                            EntityName = sensor.EntityName,
+                            Name = sensor.EntityName,
+                            Type = type,
+                            UpdateInterval = sensor.UpdateIntervalSeconds,
+                            IgnoreAvailability = sensor.IgnoreAvailability
+                        };
+                    }
             }
 
-			return null;
-		}
+            return null;
+        }
 
-		/// <summary>
-		/// Store all current sensors
-		/// </summary>
-		/// <returns></returns>
-		internal static bool Store()
-		{
-			try
-			{
-				// check config dir
-				if (!Directory.Exists(Variables.ConfigPath))
-				{
-					// create
-					Directory.CreateDirectory(Variables.ConfigPath);
-				}
+        /// <summary>
+        /// Store all current sensors
+        /// </summary>
+        /// <returns></returns>
+        internal static bool Store()
+        {
+            try
+            {
+                // check config dir
+                if (!Directory.Exists(Variables.ConfigPath))
+                {
+                    // create
+                    Directory.CreateDirectory(Variables.ConfigPath);
+                }
 
-				// convert single-value sensors
-				var configuredSensors = Variables.SingleValueSensors.Select(ConvertAbstractSingleValueToConfigured).Where(configuredSensor => configuredSensor != null).ToList();
+                // convert single-value sensors
+                var configuredSensors = Variables.SingleValueSensors.Select(ConvertAbstractSingleValueToConfigured).Where(configuredSensor => configuredSensor != null).ToList();
 
-				// convert multi-value sensors
-				var configuredMultiValueSensors = Variables.MultiValueSensors.Select(ConvertAbstractMultiValueToConfigured).Where(configuredSensor => configuredSensor != null).ToList();
-				configuredSensors = configuredSensors.Concat(configuredMultiValueSensors).ToList();
+                // convert multi-value sensors
+                var configuredMultiValueSensors = Variables.MultiValueSensors.Select(ConvertAbstractMultiValueToConfigured).Where(configuredSensor => configuredSensor != null).ToList();
+                configuredSensors = configuredSensors.Concat(configuredMultiValueSensors).ToList();
 
-				// serialize to file
-				var sensors = JsonConvert.SerializeObject(configuredSensors, Formatting.Indented);
-				File.WriteAllText(Variables.SensorsFile, sensors);
+                // serialize to file
+                var sensors = JsonConvert.SerializeObject(configuredSensors, Formatting.Indented);
+                File.WriteAllText(Variables.SensorsFile, sensors);
 
-				// done
-				Log.Information("[SETTINGS_SENSORS] Stored {count} entities", (Variables.SingleValueSensors.Count + Variables.MultiValueSensors.Count));
-				Variables.MainForm?.SetSensorsStatus(ComponentStatus.Ok);
-				return true;
-			}
-			catch (Exception ex)
-			{
-				Log.Fatal(ex, "[SETTINGS_SENSORS] Error storing entities: {err}", ex.Message);
-				Variables.MainForm?.ShowMessageBox(string.Format(Languages.StoredSensors_Store_MessageBox1, ex.Message), true);
+                // done
+                Log.Information("[SETTINGS_SENSORS] Stored {count} entities", (Variables.SingleValueSensors.Count + Variables.MultiValueSensors.Count));
+                Variables.MainForm?.SetSensorsStatus(ComponentStatus.Ok);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Log.Fatal(ex, "[SETTINGS_SENSORS] Error storing entities: {err}", ex.Message);
+                Variables.MainForm?.ShowMessageBox(string.Format(Languages.StoredSensors_Store_MessageBox1, ex.Message), true);
 
-				Variables.MainForm?.SetSensorsStatus(ComponentStatus.Failed);
-				return false;
-			}
-		}
-	}
+                Variables.MainForm?.SetSensorsStatus(ComponentStatus.Failed);
+                return false;
+            }
+        }
+    }
 }

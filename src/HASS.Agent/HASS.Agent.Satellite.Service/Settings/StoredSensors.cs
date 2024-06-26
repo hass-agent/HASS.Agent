@@ -172,6 +172,9 @@ namespace HASS.Agent.Satellite.Service.Settings
                     break;
             }
 
+            if (abstractSensor != null)
+                abstractSensor.IgnoreAvailability = sensor.IgnoreAvailability;
+
             return abstractSensor;
         }
 
@@ -231,6 +234,7 @@ namespace HASS.Agent.Satellite.Service.Settings
                             Name = wmiSensor.Name,
                             Type = type,
                             UpdateInterval = wmiSensor.UpdateIntervalSeconds,
+                            IgnoreAvailability = wmiSensor.IgnoreAvailability,
                             Scope = wmiSensor.Scope,
                             Query = wmiSensor.Query,
                             ApplyRounding = wmiSensor.ApplyRounding,
@@ -249,6 +253,7 @@ namespace HASS.Agent.Satellite.Service.Settings
                             Name = namedWindowSensor.EntityName,
                             Type = type,
                             UpdateInterval = namedWindowSensor.UpdateIntervalSeconds,
+                            IgnoreAvailability = namedWindowSensor.IgnoreAvailability,
                             WindowName = namedWindowSensor.WindowName,
                             AdvancedSettings = namedWindowSensor.AdvancedSettings
                         };
@@ -264,6 +269,7 @@ namespace HASS.Agent.Satellite.Service.Settings
                             Name = performanceCounterSensor.EntityName,
                             Type = type,
                             UpdateInterval = performanceCounterSensor.UpdateIntervalSeconds,
+                            IgnoreAvailability = performanceCounterSensor.IgnoreAvailability,
                             Category = performanceCounterSensor.CategoryName,
                             Counter = performanceCounterSensor.CounterName,
                             Instance = performanceCounterSensor.InstanceName,
@@ -283,6 +289,7 @@ namespace HASS.Agent.Satellite.Service.Settings
                             Name = processActiveSensor.EntityName,
                             Type = type,
                             UpdateInterval = processActiveSensor.UpdateIntervalSeconds,
+                            IgnoreAvailability = processActiveSensor.IgnoreAvailability,
                             Query = processActiveSensor.ProcessName,
                             AdvancedSettings = processActiveSensor.AdvancedSettings
                         };
@@ -298,6 +305,7 @@ namespace HASS.Agent.Satellite.Service.Settings
                             Name = serviceStateSensor.EntityName,
                             Type = type,
                             UpdateInterval = serviceStateSensor.UpdateIntervalSeconds,
+                            IgnoreAvailability = serviceStateSensor.IgnoreAvailability,
                             Query = serviceStateSensor.ServiceName,
                             AdvancedSettings = serviceStateSensor.AdvancedSettings
                         };
@@ -313,6 +321,7 @@ namespace HASS.Agent.Satellite.Service.Settings
                             Name = powershellSensor.EntityName,
                             Type = type,
                             UpdateInterval = powershellSensor.UpdateIntervalSeconds,
+                            IgnoreAvailability = powershellSensor.IgnoreAvailability,
                             Query = powershellSensor.Command,
                             ApplyRounding = powershellSensor.ApplyRounding,
                             Round = powershellSensor.Round,
@@ -330,6 +339,7 @@ namespace HASS.Agent.Satellite.Service.Settings
                             Name = windowStateSensor.EntityName,
                             Type = type,
                             UpdateInterval = windowStateSensor.UpdateIntervalSeconds,
+                            IgnoreAvailability = windowStateSensor.IgnoreAvailability,
                             Query = windowStateSensor.ProcessName,
                             AdvancedSettings = windowStateSensor.AdvancedSettings
                         };
@@ -345,6 +355,7 @@ namespace HASS.Agent.Satellite.Service.Settings
                             Name = sensor.EntityName,
                             Type = type,
                             UpdateInterval = sensor.UpdateIntervalSeconds,
+                            IgnoreAvailability = sensor.IgnoreAvailability,
                             AdvancedSettings = sensor.AdvancedSettings
                         };
                     }

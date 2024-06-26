@@ -135,6 +135,9 @@ message RpcConfiguredServerSensor {
   string name = 10;
   string entityName = 11;
   string advancedSettings = 12;
+  bool applyRounding = 13;
+  int32 roundValue = 14;
+  bool ignoreAvailability = 15;
 }
 
 message RpcConfiguredServerCommand {

@@ -110,6 +110,9 @@ namespace HASS.Agent.Satellite.Service.Extensions
                 EntityName = rpcConfiguredSensor.EntityName,
                 Name = rpcConfiguredSensor.Name,
                 AdvancedSettings = rpcConfiguredSensor.AdvancedSettings,
+                IgnoreAvailability = rpcConfiguredSensor.IgnoreAvailability,
+                ApplyRounding = rpcConfiguredSensor.ApplyRounding,
+                Round = rpcConfiguredSensor.RoundValue,
             };
 
             return configuredSensor;
@@ -152,6 +155,9 @@ namespace HASS.Agent.Satellite.Service.Extensions
                 Name = configuredSensor.Name ?? string.Empty,
                 EntityName = configuredSensor?.EntityName ?? string.Empty,
                 AdvancedSettings = configuredSensor?.AdvancedSettings ?? string.Empty,
+                IgnoreAvailability = configuredSensor?.IgnoreAvailability ?? false,
+                ApplyRounding = configuredSensor?.ApplyRounding ?? false,
+                RoundValue = configuredSensor?.Round ?? 0,
             };
 
             return configuredRpcSensor;
