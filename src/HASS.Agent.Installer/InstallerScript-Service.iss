@@ -81,18 +81,18 @@ begin
   Result := True;
 end;
 
-procedure CurStepChanged(CurStep: TSetupStep);
-var 
-  ProgressPage: TOutputProgressWizardPage;
-  I, Step, Wait, ResultCode: Integer;
-begin
-  if CurStep = ssInstall then
-  begin
-    //MsgBox(ExpandConstant('{sys}') + '\sc.exe', mbInformation, MB_OK);
-    //MsgBox('stop ' + ExpandConstant('{#ServiceName}'), mbInformation, MB_OK);
-    Exec(ExpandConstant('{sys}') + '\sc.exe', 'stop ' + ExpandConstant('{#ServiceName}'), '', SW_HIDE, ewWaitUntilTerminated, ResultCode)
-
-    //thanks to https://stackoverflow.com/a/39827761
+//procedure CurStepChanged(CurStep: TSetupStep);
+//var 
+//  ProgressPage: TOutputProgressWizardPage;
+//  I, Step, Wait, ResultCode: Integer;
+//begin
+//  if CurStep = ssInstall then
+//  begin
+//    //MsgBox(ExpandConstant('{sys}') + '\sc.exe', mbInformation, MB_OK);
+//    //MsgBox('stop ' + ExpandConstant('{#ServiceName}'), mbInformation, MB_OK);
+//    Exec(ExpandConstant('{sys}') + '\sc.exe', 'stop ' + ExpandConstant('{#ServiceName}'), '', SW_HIDE, ewWaitUntilTerminated, ResultCode)
+//
+//    //thanks to https://stackoverflow.com/a/39827761
 //    Wait := 5000;
 //    Step := 100;
 //    ProgressPage :=
@@ -112,5 +112,5 @@ begin
 //      ProgressPage.Hide;
 //      ProgressPage.Free;
 //    end;
-  end;
-end;
+//  end;
+//end;
