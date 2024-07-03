@@ -58,11 +58,11 @@ Source: "..\HASS.Agent\HASS.Agent.Satellite.Service\bin\Publish-x64\Release\*"; 
 Filename: "{sys}\sc.exe"; Parameters: "start {#ServiceName}"; Description: "Start Satellite Service"; Flags: postinstall runhidden runascurrentuser 
 
 [Registry]
-Root: HKLM; Subkey: "SOFTWARE\HASSAgent\SatelliteService"; ValueType: string; ValueName: "InstallPath"; ValueData: "{commonpf64}\{#MyAppName}\Service"; Flags: createvalueifdoesntexist uninsdeletevalue
+Root: HKLM; Subkey: "SOFTWARE\HASSAgent\SatelliteService"; ValueType: string; ValueName: "InstallPath"; ValueData: "{app}"; Flags: createvalueifdoesntexist uninsdeletevalue
 
 ; Service registration and removal
 [Run]
-Filename: "{sys}\sc.exe"; Parameters: "create {#ServiceName} binpath= ""{commonpf64}\{#MyAppName}\Service\{#MyAppExeName}"""; Flags: runhidden 
+Filename: "{sys}\sc.exe"; Parameters: "create {#ServiceName} binpath= ""{app}\{#MyAppExeName}"""; Flags: runhidden 
 Filename: "{sys}\sc.exe"; Parameters: "failure {#ServiceName} reset= 86400 actions= restart/60000/restart/60000//1000"; Flags: runhidden 
 Filename: "{sys}\sc.exe"; Parameters: "description {#ServiceName} ""{#ServiceDescription}"""; Flags: runhidden 
 Filename: "{sys}\sc.exe"; Parameters: "config {#ServiceName} DisplayName= ""{#ServiceDisplayName}"""; Flags: runhidden
