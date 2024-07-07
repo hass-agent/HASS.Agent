@@ -42,7 +42,7 @@ namespace HASS.Agent.Shared.HomeAssistant.Commands.InternalCommands
  
             try
             {
-                var audioDevices = AudioManager.GetDevices();
+/*                var audioDevices = AudioManager.GetDevices();
                 var outputDevice = audioDevices
                     .Where(d => d.Type == DeviceType.Output)
                     .Where(d => d.FriendlyName == action)
@@ -57,7 +57,9 @@ namespace HASS.Agent.Shared.HomeAssistant.Commands.InternalCommands
                 if (outputDevice.Default)
                     return;
 
-                AudioManager.Activate(outputDevice);
+                AudioManager.Activate(outputDevice);*/
+
+                AudioManager.ActivateDevice(action);
             }
             catch (Exception ex)
             {

@@ -42,7 +42,7 @@ public class SetAudioInputCommand : InternalCommand
 
         try
         {
-            var audioDevices = AudioManager.GetDevices();
+/*            var audioDevices = AudioManager.GetDevices();
             var inputDevice = audioDevices
                 .Where(d => d.Type == DeviceType.Input)
                 .Where(d => d.FriendlyName == action)
@@ -57,7 +57,9 @@ public class SetAudioInputCommand : InternalCommand
             if(inputDevice.Default)
                 return;
 
-            AudioManager.Activate(inputDevice);
+            AudioManager.Activate(inputDevice);*/
+
+            AudioManager.ActivateDevice(action);
         }
         catch (Exception ex)
         {

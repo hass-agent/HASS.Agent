@@ -71,12 +71,7 @@ namespace HASS.Agent.Media
                 if (volume < 0) volume = 0;
                 if (volume > 100) volume = 100;
 
-                var defaultDeviceId = AudioManager.GetDefaultDeviceId(DeviceType.Output, DeviceRole.Multimedia | DeviceRole.Console);
-                var audioDevice = AudioManager.GetDevices().Where(d => d.Id == defaultDeviceId).FirstOrDefault();
-                if (audioDevice == null)
-                    return;
-
-                AudioManager.SetVolume(audioDevice, volume);
+                AudioManager.SetDefaultDeviceProperties(DeviceType.Output, DeviceRole.Multimedia | DeviceRole.Console, volume, null);
             }
             catch (Exception ex)
             {
