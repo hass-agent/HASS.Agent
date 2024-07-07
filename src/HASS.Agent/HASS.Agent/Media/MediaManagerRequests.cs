@@ -19,12 +19,7 @@ namespace HASS.Agent.Media
         {
             try
             {
-                var defaultDeviceId = AudioManager.GetDefaultDeviceId(DeviceType.Output, DeviceRole.Multimedia);
-                var audioDevice = AudioManager.GetDevices().Where(d => d.Id == defaultDeviceId).FirstOrDefault();
-                if (audioDevice == null)
-                    return 0;
-
-                return audioDevice.Volume;
+                return AudioManager.GetDefaultDeviceVolume(DeviceType.Output, DeviceRole.Multimedia);
             }
             catch (Exception ex)
             {
@@ -41,12 +36,7 @@ namespace HASS.Agent.Media
         {
             try
             {
-                var defaultDeviceId = AudioManager.GetDefaultDeviceId(DeviceType.Output, DeviceRole.Multimedia);
-                var audioDevice = AudioManager.GetDevices().Where(d => d.Id == defaultDeviceId).FirstOrDefault();
-                if (audioDevice == null)
-                    return false;
-
-                return audioDevice.Muted;
+                return AudioManager.GetDefaultDeviceMute(DeviceType.Output, DeviceRole.Multimedia);
             }
             catch (Exception ex)
             {

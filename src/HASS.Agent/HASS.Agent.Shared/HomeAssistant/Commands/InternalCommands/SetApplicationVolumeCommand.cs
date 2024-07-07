@@ -34,16 +34,6 @@ namespace HASS.Agent.Shared.HomeAssistant.Commands.InternalCommands
             TurnOnWithAction(CommandConfig);
         }
 
-        private AudioDevice GetDeviceOrDefault(string deviceName)
-        {
-            var device = AudioManager.GetDevices().Where(d => d.FriendlyName == deviceName).FirstOrDefault();
-            if (device != null)
-                return device;
-
-            var defaultDeviceId = AudioManager.GetDefaultDeviceId(DeviceType.Output, DeviceRole.Multimedia | DeviceRole.Console);
-            return AudioManager.GetDevices().Where(d => d.Id == defaultDeviceId).FirstOrDefault();
-        }
-
         public override void TurnOnWithAction(string action)
         {
             State = "ON";

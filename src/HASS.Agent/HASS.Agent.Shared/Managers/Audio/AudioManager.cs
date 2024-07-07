@@ -11,6 +11,7 @@ using HASS.Agent.Shared.Managers.Audio.Internal;
 using Serilog;
 using NAudio.CoreAudioApi.Interfaces;
 using HidSharp;
+using Microsoft.VisualBasic.ApplicationServices;
 
 namespace HASS.Agent.Shared.Managers.Audio;
 public static class AudioManager
@@ -21,8 +22,6 @@ public static class AudioManager
     private static MMNotificationClient _notificationClient = null;
 
     private static readonly ConcurrentDictionary<string, string> _devices = new();
-    private static readonly ConcurrentQueue<string> _devicesToBeRemoved = new();
-    private static readonly ConcurrentQueue<string> _devicesToBeAdded = new();
 
     private static readonly Dictionary<int, string> _applicationNameCache = new();
 
@@ -42,44 +41,43 @@ public static class AudioManager
         _initialized = true;
     }
 
+    private static void AddDevice(string deviceId)
+    {
+        if (_devices.ContainsKey(deviceId))
+            return;
+
+        using var device = _enumerator.GetDevice(deviceId);
+        _devices[deviceId] = device.FriendlyName;
+        Log.Debug($"[AUDIOMGR] added device: {_devices[deviceId]}");
+    }
+
+    private static void RemoveDevice(string deviceId)
+    {
+        _devices.Remove(deviceId, out var removedDeviceName);
+        if (!string.IsNullOrWhiteSpace(removedDeviceName))
+            Log.Debug($"[AUDIOMGR] removed device: {removedDeviceName}");
+    }
+
+    private static void DeviceRemoved(object sender, DeviceNotificationEventArgs e) => RemoveDevice(e.DeviceId);
+    private static void DeviceAdded(object sender, DeviceNotificationEventArgs e) => AddDevice(e.DeviceId);
+
     private static void DeviceStateChanged(object sender, DeviceStateChangedEventArgs e)
     {
         switch (e.DeviceState)
         {
             case DeviceState.Active:
-                if (_devices.ContainsKey(e.DeviceId))
-                    return;
-
-                _devices.Remove(e.DeviceId, out var _);
-                //_devicesToBeAdded.Enqueue(e.DeviceId);
+                AddDevice(e.DeviceId);
                 break;
 
             case DeviceState.NotPresent:
             case DeviceState.Unplugged:
             case DeviceState.Disabled:
-                {
-                    using var device = _enumerator.GetDevice(e.DeviceId);
-                    _devices[e.DeviceId] = device.FriendlyName;
-                    //_devicesToBeRemoved.Enqueue(e.DeviceId);
-                    break;
-                }
+                RemoveDevice(e.DeviceId);
+                break;
 
             default:
                 break;
         }
-    }
-
-    private static void DeviceRemoved(object sender, DeviceNotificationEventArgs e)
-    {
-        _devicesToBeRemoved.Enqueue(e.DeviceId);
-    }
-
-    private static void DeviceAdded(object sender, DeviceNotificationEventArgs e)
-    {
-        if (_devices.ContainsKey(e.DeviceId))
-            return;
-
-        _devicesToBeAdded.Enqueue(e.DeviceId);
     }
 
     private static bool CheckInitialization()
@@ -87,21 +85,8 @@ public static class AudioManager
         if (!_initialized)
         {
             Log.Warning("[AUDIOMGR] not yet initialized!");
-
             return false;
         }
-
-        /*        while (_devicesToBeRemoved.TryDequeue(out var deviceId))
-                {
-                    if (_devices.Remove(deviceId, out var device))
-                        device.Dispose();
-                }
-
-                while (_devicesToBeAdded.TryDequeue(out var deviceId))
-                {
-                    var device = _enumerator.GetDevice(deviceId);
-                    _devices[deviceId] = new InternalAudioDevice(device);
-                }*/
 
         return true;
     }
@@ -125,7 +110,7 @@ public static class AudioManager
     private static List<AudioSession> GetDeviceSessions(MMDevice mmDevice)
     {
         using var internalAudioSessionManager = new InternalAudioSessionManager(mmDevice.AudioSessionManager);
-        return GetDeviceSessions(mmDevice.FriendlyName, internalAudioSessionManager);
+        return GetDeviceSessions(_devices[mmDevice.ID], internalAudioSessionManager);
     }
 
     private static List<AudioSession> GetDeviceSessions(string deviceName, InternalAudioSessionManager internalAudioSessionManager)
@@ -187,25 +172,10 @@ public static class AudioManager
         Log.Information("[AUDIOMGR] initialized");
     }
 
-    public static void ReInitialize()
-    {
-        if (_initialized)
-            CleanupDevices();
-
-        Log.Debug("[AUDIOMGR] re-initializing");
-
-        InitializeDevices();
-
-        Log.Information("[AUDIOMGR] re-initialized");
-    }
-
     public static void CleanupDevices()
     {
         Log.Debug("[AUDIOMGR] starting cleanup");
         _initialized = false;
-
-        /*        foreach (var device in _devices.Values)
-                    device.Dispose();*/
 
         _notificationClient.DeviceAdded -= DeviceAdded;
         _notificationClient.DeviceRemoved -= DeviceRemoved;
@@ -233,7 +203,7 @@ public static class AudioManager
             var defaultInputDeviceId = defaultInputDevice.ID;
             var defaultOutputDeviceId = defaultOutputDevice.ID;
 
-            foreach (var deviceId in _devices.Keys)
+            foreach (var (deviceId, deviceName) in _devices)
             {
                 using var device = _enumerator.GetDevice(deviceId);
 
@@ -245,7 +215,7 @@ public static class AudioManager
                     State = GetReadableState(device.State),
                     Type = device.DataFlow == DataFlow.Capture ? DeviceType.Input : DeviceType.Output,
                     Id = device.ID,
-                    FriendlyName = device.FriendlyName,
+                    FriendlyName = deviceName,
                     Volume = Convert.ToInt32(Math.Round(device.AudioEndpointVolume.MasterVolumeLevelScalar * 100, 0)),
                     Muted = device.AudioEndpointVolume.Mute,
                     PeakVolume = loudestSession == null ? 0 : loudestSession.PeakVolume,
@@ -258,7 +228,7 @@ public static class AudioManager
         }
         catch (Exception ex)
         {
-            Log.Debug(ex, "[AUDIOMGR] Failed to retrieve devices: {msg}", ex.Message);
+            Log.Debug(ex, "[AUDIOMGR] failed to retrieve devices: {msg}", ex.Message);
         }
 
         return audioDevices;
@@ -277,6 +247,32 @@ public static class AudioManager
         return defaultDevice.ID;
     }
 
+    public static int GetDefaultDeviceVolume(DeviceType deviceType, DeviceRole deviceRole)
+    {
+        if (!CheckInitialization())
+            return 0;
+
+        var dataFlow = deviceType == DeviceType.Input ? DataFlow.Capture : DataFlow.Render;
+        var role = (Role)deviceRole;
+
+        using var defaultDevice = _enumerator.GetDefaultAudioEndpoint(dataFlow, role);
+
+        return Convert.ToInt32(Math.Round(defaultDevice.AudioEndpointVolume.MasterVolumeLevelScalar * 100, 0));
+    }
+
+    public static bool GetDefaultDeviceMute(DeviceType deviceType, DeviceRole deviceRole)
+    {
+        if (!CheckInitialization())
+            return false;
+
+        var dataFlow = deviceType == DeviceType.Input ? DataFlow.Capture : DataFlow.Render;
+        var role = (Role)deviceRole;
+
+        using var defaultDevice = _enumerator.GetDefaultAudioEndpoint(dataFlow, role);
+
+        return defaultDevice.AudioEndpointVolume.Mute;
+    }
+
     public static void ActivateDevice(string deviceName)
     {
         if (!CheckInitialization())
@@ -288,6 +284,8 @@ public static class AudioManager
 
         using var configClient = new CPolicyConfigVistaClient();
         configClient.SetDefaultDevice(deviceId);
+
+        Log.Debug($"[AUDIOMGR] device '{deviceName}' activated");
     }
 
     public static void SetDeviceProperties(string deviceName, int volume, bool? mute)
@@ -308,12 +306,14 @@ public static class AudioManager
         if (mute != null)
         {
             device.AudioEndpointVolume.Mute = (bool)mute;
+            Log.Debug($"[AUDIOMGR] mute for '{_devices[device.ID]}' set to '{mute}'");
         }
 
         if (volume != -1)
         {
             var volumeScalar = volume / 100f;
             device.AudioEndpointVolume.MasterVolumeLevelScalar = volumeScalar;
+            Log.Debug($"[AUDIOMGR] volume for '{_devices[device.ID]}' set to '{volume}'");
         }
     }
 
@@ -336,7 +336,7 @@ public static class AudioManager
 
         using var device = _enumerator.GetDevice(deviceId);
         using var sessionManager = new InternalAudioSessionManager(device.AudioSessionManager);
-        var sessions = GetDeviceSessions(device.FriendlyName, sessionManager);
+        var sessions = GetDeviceSessions(deviceName, sessionManager);
 
         var applicationAudioSessions = sessions.Where(s =>
             s.Application == applicationName
@@ -356,7 +356,7 @@ public static class AudioManager
         {
             if (!sessionManager.Sessions.TryGetValue(sessionId, out var internalSession))
             {
-                Log.Debug("[SETAPPVOLUME] No session {actionData.SessionId} found for device {device}", applicationName, deviceName);
+                Log.Debug("[AUDIOMGR] no session '{sessionId}' found for device '{device}'", sessionId, deviceName);
                 return;
             }
 
@@ -366,13 +366,17 @@ public static class AudioManager
 
     private static void SetSessionProperties(InternalAudioSession internalAudioSession, int volume, bool mute)
     {
+        var displayName = string.IsNullOrWhiteSpace(internalAudioSession.DisplayName) ? GetSessionDisplayName(internalAudioSession) : internalAudioSession.DisplayName;
+
         internalAudioSession.Volume.Mute = mute;
+        Log.Debug("[AUDIOMGR] mute for '{sessionName}' ({sessionId}) set to '{mute}'", displayName, internalAudioSession.Control.GetSessionInstanceIdentifier, mute);
 
         if (volume == -1)
             return;
 
         var volumeScalar = volume / 100f;
         internalAudioSession.Volume.Volume = volumeScalar;
+        Log.Debug("[AUDIOMGR] volume for '{sessionName}' ({sessionId}) set to '{vol}'", displayName, internalAudioSession.Control.GetSessionInstanceIdentifier, volume);
     }
 
     public static void Shutdown()
