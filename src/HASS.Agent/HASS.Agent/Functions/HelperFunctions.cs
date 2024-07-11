@@ -447,13 +447,29 @@ namespace HASS.Agent.Functions
             Variables.MainForm.Invoke(new MethodInvoker(delegate
             {
                 // optionally close an existing one
-                if (Variables.TrayIconWebView != null) Variables.TrayIconWebView.ForceClose();
+                Variables.TrayIconWebView?.ForceClose();
 
                 // bind the new one
                 Variables.TrayIconWebView = new WebView(webViewInfo);
                 Variables.TrayIconWebView.Opacity = 0;
                 Variables.TrayIconWebView.Show();
             }));
+        }
+
+        /// <summary>
+        /// Shows the user-configured webview form near the tray icon
+        /// </summary>
+        /// <param name="webViewInfo"></param>
+        internal static void LaunchTrayIconWebView()
+        {
+            var webView = new WebViewInfo
+            {
+                Url = Variables.AppSettings.TrayIconWebViewUrl,
+                Height = Variables.AppSettings.TrayIconWebViewHeight,
+                Width = Variables.AppSettings.TrayIconWebViewWidth,
+            };
+
+            LaunchTrayIconWebView(webView);
         }
 
         /// <summary>
@@ -491,7 +507,8 @@ namespace HASS.Agent.Functions
             Variables.MainForm.Invoke(new MethodInvoker(delegate
             {
                 // make sure it's ready
-                if (Variables.TrayIconWebView == null || Variables.TrayIconWebView.IsDisposed) PrepareTrayIconWebView();
+                if (Variables.TrayIconWebView == null || Variables.TrayIconWebView.IsDisposed)
+                    PrepareTrayIconWebView();
 
                 // show it
                 Variables.TrayIconWebView?.MakeVisible();
