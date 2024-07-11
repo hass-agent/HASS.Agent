@@ -292,7 +292,7 @@ public static class AudioManager
 
             using var defaultDevice = _enumerator.GetDefaultAudioEndpoint(dataFlow, role);
 
-            volume = Convert.ToInt32(Math.Round(defaultDevice.AudioEndpointVolume.MasterVolumeLevelScalar * 100, 0)) : 0;
+            volume = Convert.ToInt32(Math.Round(defaultDevice.AudioEndpointVolume.MasterVolumeLevelScalar * 100, 0));
         }
         catch (Exception ex)
         {
