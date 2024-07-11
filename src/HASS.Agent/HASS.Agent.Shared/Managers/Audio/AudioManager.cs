@@ -58,8 +58,28 @@ public static class AudioManager
             Log.Debug($"[AUDIOMGR] removed device: {removedDeviceName}");
     }
 
-    private static void DeviceRemoved(object sender, DeviceNotificationEventArgs e) => RemoveDevice(e.DeviceId);
-    private static void DeviceAdded(object sender, DeviceNotificationEventArgs e) => AddDevice(e.DeviceId);
+    private static void DeviceRemoved(object sender, DeviceNotificationEventArgs e)
+    {
+        try
+        {
+            RemoveDevice(e.DeviceId);
+        }
+        catch
+        {
+            Log.Error($"[AUDIOMGR] failed to remove device: {e.DeviceId}");
+        }
+    }
+    private static void DeviceAdded(object sender, DeviceNotificationEventArgs e)
+    {
+        try
+        {
+            AddDevice(e.DeviceId);
+        }
+        catch
+        {
+            Log.Error($"[AUDIOMGR] failed to add device: {e.DeviceId}");
+        }
+    }
 
     private static void DeviceStateChanged(object sender, DeviceStateChangedEventArgs e)
     {
@@ -228,7 +248,7 @@ public static class AudioManager
         }
         catch (Exception ex)
         {
-            Log.Debug(ex, "[AUDIOMGR] failed to retrieve devices: {msg}", ex.Message);
+            Log.Error(ex, "[AUDIOMGR] failed to retrieve devices: {msg}", ex.Message);
         }
 
         return audioDevices;
@@ -239,12 +259,23 @@ public static class AudioManager
         if (!CheckInitialization())
             return string.Empty;
 
-        var dataFlow = deviceType == DeviceType.Input ? DataFlow.Capture : DataFlow.Render;
-        var role = (Role)deviceRole;
+        var deviceId = string.Empty;
 
-        using var defaultDevice = _enumerator.GetDefaultAudioEndpoint(dataFlow, role);
+        try
+        {
+            var dataFlow = deviceType == DeviceType.Input ? DataFlow.Capture : DataFlow.Render;
+            var role = (Role)deviceRole;
 
-        return defaultDevice.ID;
+            using var defaultDevice = _enumerator.GetDefaultAudioEndpoint(dataFlow, role);
+
+            deviceId = defaultDevice.ID;
+        }
+        catch (Exception ex)
+        {
+            Log.Error(ex, "[AUDIOMGR] failed to retrieve default device id: {msg}", ex.Message);
+        }
+
+        return deviceId;
     }
 
     public static int GetDefaultDeviceVolume(DeviceType deviceType, DeviceRole deviceRole)
@@ -252,12 +283,23 @@ public static class AudioManager
         if (!CheckInitialization())
             return 0;
 
-        var dataFlow = deviceType == DeviceType.Input ? DataFlow.Capture : DataFlow.Render;
-        var role = (Role)deviceRole;
+        var volume = 0;
 
-        using var defaultDevice = _enumerator.GetDefaultAudioEndpoint(dataFlow, role);
+        try
+        {
+            var dataFlow = deviceType == DeviceType.Input ? DataFlow.Capture : DataFlow.Render;
+            var role = (Role)deviceRole;
 
-        return Convert.ToInt32(Math.Round(defaultDevice.AudioEndpointVolume.MasterVolumeLevelScalar * 100, 0));
+            using var defaultDevice = _enumerator.GetDefaultAudioEndpoint(dataFlow, role);
+
+            volume = Convert.ToInt32(Math.Round(defaultDevice.AudioEndpointVolume.MasterVolumeLevelScalar * 100, 0)) : 0;
+        }
+        catch (Exception ex)
+        {
+            Log.Error(ex, "[AUDIOMGR] failed to retrieve default device volume: {msg}", ex.Message);
+        }
+
+        return volume;
     }
 
     public static bool GetDefaultDeviceMute(DeviceType deviceType, DeviceRole deviceRole)
@@ -265,12 +307,23 @@ public static class AudioManager
         if (!CheckInitialization())
             return false;
 
-        var dataFlow = deviceType == DeviceType.Input ? DataFlow.Capture : DataFlow.Render;
-        var role = (Role)deviceRole;
+        var mute = false;
 
-        using var defaultDevice = _enumerator.GetDefaultAudioEndpoint(dataFlow, role);
+        try
+        {
+            var dataFlow = deviceType == DeviceType.Input ? DataFlow.Capture : DataFlow.Render;
+            var role = (Role)deviceRole;
 
-        return defaultDevice.AudioEndpointVolume.Mute;
+            using var defaultDevice = _enumerator.GetDefaultAudioEndpoint(dataFlow, role);
+
+            mute = defaultDevice.AudioEndpointVolume.Mute;
+        }
+        catch (Exception ex)
+        {
+            Log.Error(ex, "[AUDIOMGR] failed to retrieve default device mute: {msg}", ex.Message);
+        }
+
+        return mute;
     }
 
     public static void ActivateDevice(string deviceName)
@@ -278,14 +331,21 @@ public static class AudioManager
         if (!CheckInitialization())
             return;
 
-        var deviceId = _devices.FirstOrDefault(v => v.Value == deviceName).Key;
-        if (string.IsNullOrWhiteSpace(deviceId))
-            return;
+        try
+        {
+            var deviceId = _devices.FirstOrDefault(v => v.Value == deviceName).Key;
+            if (string.IsNullOrWhiteSpace(deviceId))
+                return;
 
-        using var configClient = new CPolicyConfigVistaClient();
-        configClient.SetDefaultDevice(deviceId);
+            using var configClient = new CPolicyConfigVistaClient();
+            configClient.SetDefaultDevice(deviceId);
 
-        Log.Debug($"[AUDIOMGR] device '{deviceName}' activated");
+            Log.Debug($"[AUDIOMGR] device '{deviceName}' activated");
+        }
+        catch (Exception ex)
+        {
+            Log.Error(ex, "[AUDIOMGR] failed to activate device '{deviceName}': {msg}", deviceName, ex.Message);
+        }
     }
 
     public static void SetDeviceProperties(string deviceName, int volume, bool? mute)
@@ -293,12 +353,19 @@ public static class AudioManager
         if (!CheckInitialization())
             return;
 
-        var deviceId = _devices.FirstOrDefault(v => v.Value == deviceName).Key;
-        if (string.IsNullOrWhiteSpace(deviceId))
-            return;
+        try
+        {
+            var deviceId = _devices.FirstOrDefault(v => v.Value == deviceName).Key;
+            if (string.IsNullOrWhiteSpace(deviceId))
+                return;
 
-        using var device = _enumerator.GetDevice(deviceId);
-        SetDeviceProperties(device, volume, mute);
+            using var device = _enumerator.GetDevice(deviceId);
+            SetDeviceProperties(device, volume, mute);
+        }
+        catch (Exception ex)
+        {
+            Log.Error(ex, "[AUDIOMGR] failed to set device properties '{deviceName}': {msg}", deviceName, ex.Message);
+        }
     }
 
     private static void SetDeviceProperties(MMDevice device, int volume, bool? mute)
@@ -319,10 +386,17 @@ public static class AudioManager
 
     public static void SetDefaultDeviceProperties(DeviceType type, DeviceRole deviceRole, int volume, bool? mute)
     {
-        var flow = type == DeviceType.Output ? DataFlow.Render : DataFlow.Capture;
-        var role = (Role)deviceRole;
-        using var device = _enumerator.GetDefaultAudioEndpoint(flow, role);
-        SetDeviceProperties(device, volume, mute);
+        try
+        {
+            var flow = type == DeviceType.Output ? DataFlow.Render : DataFlow.Capture;
+            var role = (Role)deviceRole;
+            using var device = _enumerator.GetDefaultAudioEndpoint(flow, role);
+            SetDeviceProperties(device, volume, mute);
+        }
+        catch (Exception ex)
+        {
+            Log.Error(ex, "[AUDIOMGR] failed to set default device properties: {msg}", ex.Message);
+        }
     }
 
     public static void SetApplicationProperties(string deviceName, string applicationName, string sessionId, int volume, bool mute)
@@ -330,37 +404,44 @@ public static class AudioManager
         if (!CheckInitialization())
             return;
 
-        var deviceId = _devices.FirstOrDefault(v => v.Value == deviceName).Key;
-        if (string.IsNullOrWhiteSpace(deviceId))
-            return;
-
-        using var device = _enumerator.GetDevice(deviceId);
-        using var sessionManager = new InternalAudioSessionManager(device.AudioSessionManager);
-        var sessions = GetDeviceSessions(deviceName, sessionManager);
-
-        var applicationAudioSessions = sessions.Where(s =>
-            s.Application == applicationName
-        );
-
-        if (string.IsNullOrWhiteSpace(sessionId))
+        try
         {
-            foreach (var session in applicationAudioSessions)
+            var deviceId = _devices.FirstOrDefault(v => v.Value == deviceName).Key;
+            if (string.IsNullOrWhiteSpace(deviceId))
+                return;
+
+            using var device = _enumerator.GetDevice(deviceId);
+            using var sessionManager = new InternalAudioSessionManager(device.AudioSessionManager);
+            var sessions = GetDeviceSessions(deviceName, sessionManager);
+
+            var applicationAudioSessions = sessions.Where(s =>
+                s.Application == applicationName
+            );
+
+            if (string.IsNullOrWhiteSpace(sessionId))
             {
-                if (!sessionManager.Sessions.TryGetValue(session.Id, out var internalSession))
+                foreach (var session in applicationAudioSessions)
+                {
+                    if (!sessionManager.Sessions.TryGetValue(session.Id, out var internalSession))
+                        return;
+
+                    SetSessionProperties(internalSession, volume, mute);
+                }
+            }
+            else
+            {
+                if (!sessionManager.Sessions.TryGetValue(sessionId, out var internalSession))
+                {
+                    Log.Debug("[AUDIOMGR] no session '{sessionId}' found for device '{device}'", sessionId, deviceName);
                     return;
+                }
 
                 SetSessionProperties(internalSession, volume, mute);
             }
         }
-        else
+        catch (Exception ex)
         {
-            if (!sessionManager.Sessions.TryGetValue(sessionId, out var internalSession))
-            {
-                Log.Debug("[AUDIOMGR] no session '{sessionId}' found for device '{device}'", sessionId, deviceName);
-                return;
-            }
-
-            SetSessionProperties(internalSession, volume, mute);
+            Log.Error(ex, "[AUDIOMGR] failed to set application properties '{appName}': {msg}", applicationName, ex.Message);
         }
     }
 
