@@ -3501,4 +3501,8 @@ Uwaga: jeśli jest używany w usłudze satelitarnej, nie wykryje aplikacji przes
   <data name="AdvancedSensorConfig_Warning" xml:space="preserve">
     <value>Uwaga, dodanie następujących ustawień (nadpisań) może spowodować uszkodzenie czujnika, zachowaj ostrożność!</value>
   </data>
+  <data name="CommandsManager_TrayWebViewCommandDescription" xml:space="preserve">
+    <value>Pokazuje/ukrywa Tray Icon Web View.
+Wymaga konfiguracji w „Configuration -&gt; Tray Icon”</value>
+  </data>
 </root>

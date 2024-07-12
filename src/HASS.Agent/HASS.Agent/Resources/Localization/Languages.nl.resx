@@ -3412,4 +3412,8 @@ Opmerking: indien gebruikt in de satellietdienst, zal het geen gebruikersruimtet
   <data name="AdvancedSensorConfig_Warning" xml:space="preserve">
     <value>Waarschuwing: het toevoegen van de volgende instellingen (overschrijvingen) kan de sensor kapot maken, wees voorzichtig!</value>
   </data>
+  <data name="CommandsManager_TrayWebViewCommandDescription" xml:space="preserve">
+    <value>Toont/verbergt het Tray Icon Web View.
+Vereist dat het geconfigureerd is in "Configuratie -&gt; Tray Icon"</value>
+  </data>
 </root>

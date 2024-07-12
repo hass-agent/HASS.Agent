@@ -3389,4 +3389,7 @@ Ali želite prenesti runtime installer?</value>
   <data name="CommandType_SetAudioInputCommand" xml:space="preserve">
     <value>Nastavite ukaz za zvočni vhod</value>
   </data>
+  <data name="CommandType_TrayWebViewCommand" xml:space="preserve">
+    <value>TrayWebView</value>
+  </data>
 </root>

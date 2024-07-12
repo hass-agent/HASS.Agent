@@ -717,6 +717,7 @@ namespace HASS.Agent.Resources.Localization {
         
         /// <summary>
         ///   Looks up a localized string similar to Shows / hides the Tray Icon Web View.
+        ///Requires it to be configured in &quot;Configuration -&gt; Tray Icon&quot;.
         /// </summary>
         internal static string CommandsManager_TrayWebViewCommandDescription {
             get {

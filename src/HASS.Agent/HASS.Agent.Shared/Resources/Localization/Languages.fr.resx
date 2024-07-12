@@ -3273,4 +3273,7 @@ Do you want to download the runtime installer?</value>
   <data name="CommandType_SetAudioInputCommand" xml:space="preserve">
     <value>Définir la commande d'entrée audio</value>
   </data>
+  <data name="CommandType_TrayWebViewCommand" xml:space="preserve">
+    <value>Vue Web de la barre d'état</value>
+  </data>
 </root>

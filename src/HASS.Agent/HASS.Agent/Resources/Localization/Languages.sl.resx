@@ -3540,4 +3540,8 @@ Opomba: če se uporablja v satelitski storitvi, ne bo zaznal aplikacij uporabni�
   <data name="AdvancedSensorConfig_Warning" xml:space="preserve">
     <value>Opozorilo, dodajanje naslednjih nastavitev (preglasitev) lahko pokvari senzor, uporabljajte previdno!</value>
   </data>
+  <data name="CommandsManager_TrayWebViewCommandDescription" xml:space="preserve">
+    <value>Prikaže/skrije spletni pogled ikone pladnja.
+Zahteva, da je konfiguriran v "Konfiguracija -&gt; Ikona pladnja"</value>
+  </data>
 </root>

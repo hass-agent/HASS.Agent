@@ -3437,4 +3437,8 @@ Nota: se usado no serviço de satélite, não detectará aplicações no espaço
   <data name="AdvancedSensorConfig_Warning" xml:space="preserve">
     <value>Atenção, adicionar as seguintes configurações (substituições) pode quebrar o sensor, use com cuidado!</value>
   </data>
+  <data name="CommandsManager_TrayWebViewCommandDescription" xml:space="preserve">
+    <value>Mostra/oculta o Tray Icon Web View.
+Requer que seja configurado em "Configuration -&gt; Tray Icon"</value>
+  </data>
 </root>

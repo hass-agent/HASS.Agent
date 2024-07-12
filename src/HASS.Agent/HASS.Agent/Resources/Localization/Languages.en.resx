@@ -3421,6 +3421,7 @@ Note: if used in the satellite service, it won't detect userspace applications.<
     <value>Advanced Settings</value>
   </data>
   <data name="CommandsManager_TrayWebViewCommandDescription" xml:space="preserve">
-    <value>Shows / hides the Tray Icon Web View</value>
+    <value>Shows / hides the Tray Icon Web View.
+Requires it to be configured in "Configuration -&gt; Tray Icon"</value>
   </data>
 </root>

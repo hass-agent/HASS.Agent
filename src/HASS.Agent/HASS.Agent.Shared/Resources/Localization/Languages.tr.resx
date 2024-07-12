@@ -2847,4 +2847,7 @@ Lütfen aracınız için credentialları sağlayın, HA Mosquitto eklentisini ku
   <data name="CommandType_SetAudioInputCommand" xml:space="preserve">
     <value>Ses Giriş Komutunu Ayarla</value>
   </data>
+  <data name="CommandType_TrayWebViewCommand" xml:space="preserve">
+    <value>TepsiWebGörünümü</value>
+  </data>
 </root>

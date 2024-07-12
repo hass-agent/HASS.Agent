@@ -3240,4 +3240,7 @@ Oculta, Maximizada, Minimizada, Normal y Desconocida.</value>
   <data name="CommandType_SetAudioInputCommand" xml:space="preserve">
     <value>Establecer comando de entrada de audio</value>
   </data>
+  <data name="CommandType_TrayWebViewCommand" xml:space="preserve">
+    <value>Vista web de la bandeja</value>
+  </data>
 </root>

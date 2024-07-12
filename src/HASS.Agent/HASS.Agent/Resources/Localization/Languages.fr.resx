@@ -3424,4 +3424,8 @@ Remarque : s'il est utilisé dans le service satellite, il ne détectera pas les
   <data name="AdvancedSensorConfig_Warning" xml:space="preserve">
     <value>Attention, l'ajout des paramètres suivants (remplacements) peut casser le capteur, à utiliser avec prudence !</value>
   </data>
+  <data name="CommandsManager_TrayWebViewCommandDescription" xml:space="preserve">
+    <value>Affiche/masque l'affichage Web de l'icône de la barre d'état système.
+Nécessite sa configuration dans « Configuration -&gt; Icône de la barre d'état système »</value>
+  </data>
 </root>
