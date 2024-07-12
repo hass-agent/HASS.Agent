@@ -531,6 +531,8 @@ namespace HASS.Agent.Functions
 
                 var webView = new WebView(webViewInfo);
                 webView.Opacity = 0;
+
+                Variables.TrayIconWebView = webView;
                 webView.Show();
             }));
         }
@@ -562,12 +564,12 @@ namespace HASS.Agent.Functions
             // check for known OK languages
             if (KnownOkInputLanguage.ContainsKey(inputLanguage))
                 return false;
-            
+
             // check for known NOT OK languages
             var germanLayoutDetected = false;
-            foreach(InputLanguage language in InputLanguage.InstalledInputLanguages)
+            foreach (InputLanguage language in InputLanguage.InstalledInputLanguages)
             {
-                if(language.Culture.TwoLetterISOLanguageName == "de")
+                if (language.Culture.TwoLetterISOLanguageName == "de")
                 {
                     germanLayoutDetected = true;
                     break;

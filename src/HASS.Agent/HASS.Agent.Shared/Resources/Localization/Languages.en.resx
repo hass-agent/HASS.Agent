@@ -3240,4 +3240,7 @@ Do you want to download the runtime installer?</value>
   <data name="CommandType_SetAudioInputCommand" xml:space="preserve">
     <value>SetAudioInputCommand</value>
   </data>
+  <data name="CommandType_TrayWebViewCommand" xml:space="preserve">
+    <value>TrayWebView</value>
+  </data>
 </root>

@@ -1339,6 +1339,15 @@ namespace HASS.Agent.Shared.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to TrayWebView.
+        /// </summary>
+        internal static string CommandType_TrayWebViewCommand {
+            get {
+                return ResourceManager.GetString("CommandType_TrayWebViewCommand", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to WebView.
         /// </summary>
         internal static string CommandType_WebViewCommand {
