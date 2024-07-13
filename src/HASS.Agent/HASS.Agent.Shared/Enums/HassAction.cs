@@ -50,6 +50,11 @@ namespace HASS.Agent.Shared.Enums
         [LocalizedDescription("HassAction_Trigger", typeof(Languages))]
         [Category("trigger")]
         [EnumMember(Value = "Trigger")]
-        Trigger
+        Trigger,
+
+        [LocalizedDescription("HassAction_Press", typeof(Languages))]
+        [Category("press")]
+        [EnumMember(Value = "Press")]
+        Press
     }
 }

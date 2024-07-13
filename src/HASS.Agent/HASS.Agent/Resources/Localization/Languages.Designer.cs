@@ -3672,6 +3672,15 @@ namespace HASS.Agent.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string HassAction_Press {
+            get {
+                return ResourceManager.GetString("HassAction_Press", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Stop.
         /// </summary>
         internal static string HassAction_Stop {
@@ -3785,6 +3794,15 @@ namespace HASS.Agent.Resources.Localization {
         internal static string HassDomain_Automation {
             get {
                 return ResourceManager.GetString("HassDomain_Automation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Button.
+        /// </summary>
+        internal static string HassDomain_Button {
+            get {
+                return ResourceManager.GetString("HassDomain_Button", resourceCulture);
             }
         }
         

@@ -3427,4 +3427,7 @@ Requires it to be configured in "Configuration -&gt; Tray Icon"</value>
   <data name="HassAction_Trigger" xml:space="preserve">
     <value>Trigger</value>
   </data>
+  <data name="HassDomain_Button" xml:space="preserve">
+    <value>Button</value>
+  </data>
 </root>

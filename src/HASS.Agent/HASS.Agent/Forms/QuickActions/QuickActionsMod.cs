@@ -388,6 +388,14 @@ namespace HASS.Agent.Forms.QuickActions
                         CbEntity.Items.Add(item.EntityName);
                     }
                     break;
+
+                case HassDomain.Button:
+                    foreach (var item in HassApiManager.ButtonList)
+                    {
+                        CbEntity.AutoCompleteCustomSource.Add(item);
+                        CbEntity.Items.Add(item);
+                    }
+                    break;
             }
         }
 
