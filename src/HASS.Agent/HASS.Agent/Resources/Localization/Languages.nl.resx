@@ -3416,4 +3416,7 @@ Opmerking: indien gebruikt in de satellietdienst, zal het geen gebruikersruimtet
     <value>Toont/verbergt het Tray Icon Web View.
 Vereist dat het geconfigureerd is in "Configuratie -&gt; Tray Icon"</value>
   </data>
+  <data name="HassAction_Trigger" xml:space="preserve">
+    <value>Activering</value>
+  </data>
 </root>

@@ -3367,4 +3367,7 @@ Willst Du den Runtime Installer herunterladen?</value>
   <data name="CommandType_TrayWebViewCommand" xml:space="preserve">
     <value>TrayWebView</value>
   </data>
+  <data name="HassAction_Trigger" xml:space="preserve">
+    <value>Auslösen</value>
+  </data>
 </root>

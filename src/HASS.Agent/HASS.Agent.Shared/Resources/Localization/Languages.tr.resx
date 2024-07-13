@@ -2850,4 +2850,7 @@ Lütfen aracınız için credentialları sağlayın, HA Mosquitto eklentisini ku
   <data name="CommandType_TrayWebViewCommand" xml:space="preserve">
     <value>TepsiWebGörünümü</value>
   </data>
+  <data name="HassAction_Trigger" xml:space="preserve">
+    <value>Tetiklemek</value>
+  </data>
 </root>

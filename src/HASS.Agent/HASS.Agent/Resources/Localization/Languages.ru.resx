@@ -3464,4 +3464,7 @@ Home Assistant.
     <value>Показывает/скрывает веб-представление значка в трее.
 Требует настройки в разделе «Конфигурация -&gt; Значок в трее»</value>
   </data>
+  <data name="HassAction_Trigger" xml:space="preserve">
+    <value>Вызывать</value>
+  </data>
 </root>

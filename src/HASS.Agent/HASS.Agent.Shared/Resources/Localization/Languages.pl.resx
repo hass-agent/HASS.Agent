@@ -3353,4 +3353,7 @@ Czy chcesz pobrać plik instalacyjny?</value>
   <data name="CommandType_TrayWebViewCommand" xml:space="preserve">
     <value>TrayWebView</value>
   </data>
+  <data name="HassAction_Trigger" xml:space="preserve">
+    <value>Wyzwól</value>
+  </data>
 </root>

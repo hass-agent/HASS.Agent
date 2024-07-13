@@ -3690,6 +3690,15 @@ namespace HASS.Agent.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Trigger.
+        /// </summary>
+        internal static string HassAction_Trigger {
+            get {
+                return ResourceManager.GetString("HassAction_Trigger", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Client certificate file not found..
         /// </summary>
         internal static string HassApiManager_CheckHassConfig_CertNotFound {

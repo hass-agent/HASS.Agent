@@ -3243,4 +3243,7 @@ Oculta, Maximizada, Minimizada, Normal y Desconocida.</value>
   <data name="CommandType_TrayWebViewCommand" xml:space="preserve">
     <value>Vista web de la bandeja</value>
   </data>
+  <data name="HassAction_Trigger" xml:space="preserve">
+    <value>Desencadenar</value>
+  </data>
 </root>

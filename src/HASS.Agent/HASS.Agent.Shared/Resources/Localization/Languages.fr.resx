@@ -3276,4 +3276,7 @@ Do you want to download the runtime installer?</value>
   <data name="CommandType_TrayWebViewCommand" xml:space="preserve">
     <value>Vue Web de la barre d'état</value>
   </data>
+  <data name="HassAction_Trigger" xml:space="preserve">
+    <value>Déclencher</value>
+  </data>
 </root>

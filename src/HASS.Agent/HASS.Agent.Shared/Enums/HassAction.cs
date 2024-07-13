@@ -45,6 +45,11 @@ namespace HASS.Agent.Shared.Enums
         [LocalizedDescription("HassAction_Toggle", typeof(Languages))]
         [Category("toggle")]
         [EnumMember(Value = "Toggle")]
-        Toggle
+        Toggle,
+
+        [LocalizedDescription("HassAction_Trigger", typeof(Languages))]
+        [Category("trigger")]
+        [EnumMember(Value = "Trigger")]
+        Trigger
     }
 }

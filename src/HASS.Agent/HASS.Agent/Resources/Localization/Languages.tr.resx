@@ -3011,4 +3011,7 @@ Not: Uydu hizmetinde kullanılırsa kullanıcı alanı uygulamalarını algılam
     <value>Tepsi Simgesi Web Görünümünü gösterir/gizler.
 "Yapılandırma -&gt; Tepsi Simgesi"nde yapılandırılması gerekir</value>
   </data>
+  <data name="HassAction_Trigger" xml:space="preserve">
+    <value>Tetiklemek</value>
+  </data>
 </root>

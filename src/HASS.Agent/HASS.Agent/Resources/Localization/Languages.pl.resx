@@ -3505,4 +3505,7 @@ Uwaga: jeśli jest używany w usłudze satelitarnej, nie wykryje aplikacji przes
     <value>Pokazuje/ukrywa Tray Icon Web View.
 Wymaga konfiguracji w „Configuration -&gt; Tray Icon”</value>
   </data>
+  <data name="HassAction_Trigger" xml:space="preserve">
+    <value>Wyzwól</value>
+  </data>
 </root>

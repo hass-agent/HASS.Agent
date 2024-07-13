@@ -3424,4 +3424,7 @@ Note: if used in the satellite service, it won't detect userspace applications.<
     <value>Shows / hides the Tray Icon Web View.
 Requires it to be configured in "Configuration -&gt; Tray Icon"</value>
   </data>
+  <data name="HassAction_Trigger" xml:space="preserve">
+    <value>Trigger</value>
+  </data>
 </root>

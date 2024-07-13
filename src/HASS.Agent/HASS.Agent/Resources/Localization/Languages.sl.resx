@@ -3544,4 +3544,7 @@ Opomba: če se uporablja v satelitski storitvi, ne bo zaznal aplikacij uporabni�
     <value>Prikaže/skrije spletni pogled ikone pladnja.
 Zahteva, da je konfiguriran v "Konfiguracija -&gt; Ikona pladnja"</value>
   </data>
+  <data name="HassAction_Trigger" xml:space="preserve">
+    <value>Sprožilec</value>
+  </data>
 </root>

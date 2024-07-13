@@ -3441,4 +3441,7 @@ Nota: se usado no serviço de satélite, não detectará aplicações no espaço
     <value>Mostra/oculta o Tray Icon Web View.
 Requer que seja configurado em "Configuration -&gt; Tray Icon"</value>
   </data>
+  <data name="HassAction_Trigger" xml:space="preserve">
+    <value>Acionar</value>
+  </data>
 </root>

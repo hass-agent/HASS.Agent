@@ -3519,4 +3519,7 @@ Hinweis: Bei Verwendung im Satellitendienst werden keine Userspace-Anwendungen e
     <value>Zeigt/verbirgt das Tray-Icon-Web-View.
 Muss unter „Konfiguration -&gt; Tray-Icon“ konfiguriert werden.</value>
   </data>
+  <data name="HassAction_Trigger" xml:space="preserve">
+    <value>Auslösen</value>
+  </data>
 </root>
