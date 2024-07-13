@@ -3293,4 +3293,10 @@ Deseja baixar o Microsoft WebView2 runtime?</value>
   <data name="HassAction_Trigger" xml:space="preserve">
     <value>Acionar</value>
   </data>
+  <data name="HassDomain_Button" xml:space="preserve">
+    <value>Botão</value>
+  </data>
+  <data name="HassAction_Press" xml:space="preserve">
+    <value>Imprensa</value>
+  </data>
 </root>

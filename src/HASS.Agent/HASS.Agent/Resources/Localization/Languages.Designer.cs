@@ -3672,7 +3672,7 @@ namespace HASS.Agent.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Press.
         /// </summary>
         internal static string HassAction_Press {
             get {

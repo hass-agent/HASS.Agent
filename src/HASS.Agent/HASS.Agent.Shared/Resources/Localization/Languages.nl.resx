@@ -3268,4 +3268,10 @@ Wil je de runtime installatie downloaden?</value>
   <data name="HassAction_Trigger" xml:space="preserve">
     <value>Activering</value>
   </data>
+  <data name="HassDomain_Button" xml:space="preserve">
+    <value>Knop</value>
+  </data>
+  <data name="HassAction_Press" xml:space="preserve">
+    <value>Pers</value>
+  </data>
 </root>

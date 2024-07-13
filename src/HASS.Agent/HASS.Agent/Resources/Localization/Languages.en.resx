@@ -3430,4 +3430,7 @@ Requires it to be configured in "Configuration -&gt; Tray Icon"</value>
   <data name="HassDomain_Button" xml:space="preserve">
     <value>Button</value>
   </data>
+  <data name="HassAction_Press" xml:space="preserve">
+    <value>Press</value>
+  </data>
 </root>

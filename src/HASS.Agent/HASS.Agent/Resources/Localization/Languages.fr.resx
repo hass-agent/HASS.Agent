@@ -3431,4 +3431,10 @@ Nécessite sa configuration dans « Configuration -&gt; Icône de la barre d'ét
   <data name="HassAction_Trigger" xml:space="preserve">
     <value>Déclencher</value>
   </data>
+  <data name="HassDomain_Button" xml:space="preserve">
+    <value>Knop</value>
+  </data>
+  <data name="HassAction_Press" xml:space="preserve">
+    <value>Presse</value>
+  </data>
 </root>

@@ -3370,4 +3370,10 @@ Willst Du den Runtime Installer herunterladen?</value>
   <data name="HassAction_Trigger" xml:space="preserve">
     <value>Auslösen</value>
   </data>
+  <data name="HassDomain_Button" xml:space="preserve">
+    <value>Knopf</value>
+  </data>
+  <data name="HassAction_Press" xml:space="preserve">
+    <value>Presse</value>
+  </data>
 </root>

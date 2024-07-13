@@ -3508,4 +3508,10 @@ Wymaga konfiguracji w „Configuration -&gt; Tray Icon”</value>
   <data name="HassAction_Trigger" xml:space="preserve">
     <value>Wyzwól</value>
   </data>
+  <data name="HassDomain_Button" xml:space="preserve">
+    <value>Przycisk</value>
+  </data>
+  <data name="HassAction_Press" xml:space="preserve">
+    <value>Naciśnij</value>
+  </data>
 </root>

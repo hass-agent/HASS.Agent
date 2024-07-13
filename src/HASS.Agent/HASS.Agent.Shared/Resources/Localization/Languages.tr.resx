@@ -2853,4 +2853,10 @@ Lütfen aracınız için credentialları sağlayın, HA Mosquitto eklentisini ku
   <data name="HassAction_Trigger" xml:space="preserve">
     <value>Tetiklemek</value>
   </data>
+  <data name="HassDomain_Button" xml:space="preserve">
+    <value>Buton</value>
+  </data>
+  <data name="HassAction_Press" xml:space="preserve">
+    <value>Basmak</value>
+  </data>
 </root>

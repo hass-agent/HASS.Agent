@@ -3547,4 +3547,10 @@ Zahteva, da je konfiguriran v "Konfiguracija -&gt; Ikona pladnja"</value>
   <data name="HassAction_Trigger" xml:space="preserve">
     <value>Sprožilec</value>
   </data>
+  <data name="HassDomain_Button" xml:space="preserve">
+    <value>Gumb</value>
+  </data>
+  <data name="HassAction_Press" xml:space="preserve">
+    <value>Pritisnite</value>
+  </data>
 </root>

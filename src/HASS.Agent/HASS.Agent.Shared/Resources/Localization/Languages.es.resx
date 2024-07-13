@@ -3246,4 +3246,10 @@ Oculta, Maximizada, Minimizada, Normal y Desconocida.</value>
   <data name="HassAction_Trigger" xml:space="preserve">
     <value>Desencadenar</value>
   </data>
+  <data name="HassDomain_Button" xml:space="preserve">
+    <value>Botón</value>
+  </data>
+  <data name="HassAction_Press" xml:space="preserve">
+    <value>Prensa</value>
+  </data>
 </root>
