@@ -23,7 +23,11 @@ namespace HASS.Agent.Managers.DeviceSensors
                 if (!Available)
                     return null;
 
-                return _barometer.GetCurrentReading().StationPressureInHectopascals.ToString();
+                var sensorReading = _barometer.GetCurrentReading();
+                if (sensorReading == null)
+                    return null;
+
+                return sensorReading.StationPressureInHectopascals.ToString();
             }
         }
 

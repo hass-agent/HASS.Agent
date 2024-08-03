@@ -29,6 +29,9 @@ namespace HASS.Agent.Managers.DeviceSensors
                     return null;
 
                 var sensorReading = _accelerometer.GetCurrentReading();
+                if(sensorReading == null)
+                    return null;
+
                 var accX = Math.Round((decimal)sensorReading.AccelerationX, 2);
                 var accY = Math.Round((decimal)sensorReading.AccelerationX, 2);
                 var accZ = Math.Round((decimal)sensorReading.AccelerationX, 2);
