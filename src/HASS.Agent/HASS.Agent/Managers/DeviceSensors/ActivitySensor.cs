@@ -27,6 +27,9 @@ namespace HASS.Agent.Managers.DeviceSensors
                     return null;
 
                 var sensorReading = _activitySensor.GetCurrentReadingAsync().AsTask().Result;
+                if (sensorReading == null)
+                    return null;
+
                 _attributes[AttributeConfidence] = sensorReading.Confidence.ToString();
                 _attributes[AttributeTimestamp] = sensorReading.Timestamp.ToLocalTime().ToString();
 

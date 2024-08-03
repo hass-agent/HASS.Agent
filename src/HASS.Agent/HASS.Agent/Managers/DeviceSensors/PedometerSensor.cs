@@ -26,7 +26,10 @@ namespace HASS.Agent.Managers.DeviceSensors
                 var totalStepCount = 0;
 
                 var sensorReadings = _pedometer.GetCurrentReadings();
-                foreach(var sensorReading in sensorReadings)
+                if (sensorReadings == null)
+                    return null;
+
+                foreach (var sensorReading in sensorReadings)
                 {
                     var attributeCumulativeSteps = $"{sensorReading.Key}CumulativeSteps";
                     _attributes[attributeCumulativeSteps] = sensorReading.Value.CumulativeSteps.ToString();

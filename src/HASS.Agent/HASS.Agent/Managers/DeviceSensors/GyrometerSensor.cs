@@ -28,6 +28,9 @@ namespace HASS.Agent.Managers.DeviceSensors
                     return null;
 
                 var sensorReading = _gyrometer.GetCurrentReading();
+                if (sensorReading == null)
+                    return null;
+
                 var angVelX = Math.Round((decimal)sensorReading.AngularVelocityX, 2);
                 var angVelY = Math.Round((decimal)sensorReading.AngularVelocityY, 2);
                 var angVelZ = Math.Round((decimal)sensorReading.AngularVelocityZ, 2);

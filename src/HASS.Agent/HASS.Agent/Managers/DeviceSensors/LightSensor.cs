@@ -22,8 +22,12 @@ namespace HASS.Agent.Managers.DeviceSensors
             {
                 if (!Available)
                     return null;
+                
+                var sensorReading = _lightSensor.GetCurrentReading();
+                if (sensorReading == null)
+                    return null;
 
-                return Math.Round((decimal)_lightSensor.GetCurrentReading().IlluminanceInLux, 2).ToString();
+                return Math.Round((decimal)sensorReading.IlluminanceInLux, 2).ToString();
             }
         }
 
