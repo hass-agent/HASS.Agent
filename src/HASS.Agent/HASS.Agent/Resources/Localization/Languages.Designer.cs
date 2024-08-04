@@ -561,6 +561,16 @@ namespace HASS.Agent.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Puts all monitors in sleep (low power) mode using alternative approach of power plan modification.
+        ///Should provide better experience with new systems with &quot;modern S0ix sleep&quot; and not put the system to sleep..
+        /// </summary>
+        internal static string CommandsManager_MonitorSleepPowerPlanCommandDescription {
+            get {
+                return ResourceManager.GetString("CommandsManager_MonitorSleepPowerPlanCommandDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Tries to wake up all monitors by simulating a &apos;arrow up&apos; keypress..
         /// </summary>
         internal static string CommandsManager_MonitorWakeCommandDescription {
@@ -1415,6 +1425,15 @@ namespace HASS.Agent.Resources.Localization {
         internal static string CommandType_MonitorSleepCommand {
             get {
                 return ResourceManager.GetString("CommandType_MonitorSleepCommand", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to MonitorSleepPowerPlan.
+        /// </summary>
+        internal static string CommandType_MonitorSleepPowerPlanCommand {
+            get {
+                return ResourceManager.GetString("CommandType_MonitorSleepPowerPlanCommand", resourceCulture);
             }
         }
         
