@@ -26,6 +26,9 @@ namespace HASS.Agent.Managers.DeviceSensors
                     return null;
 
                 var sensorReading = _compass.GetCurrentReading();
+                if (sensorReading == null)
+                    return null;
+
                 _attributes[AttributeMagneticNorth] = Math.Round((decimal)sensorReading.HeadingMagneticNorth, 2).ToString();
                 return Math.Round((decimal)sensorReading.HeadingTrueNorth, 2).ToString();
             }

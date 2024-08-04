@@ -42,22 +42,7 @@ public class SetAudioInputCommand : InternalCommand
 
         try
         {
-            var audioDevices = AudioManager.GetDevices();
-            var inputDevice = audioDevices
-                .Where(d => d.Type == DeviceType.Input)
-                .Where(d => d.FriendlyName == action)
-                .FirstOrDefault();
-
-            if (inputDevice == null)
-            {
-                Log.Warning("[SETAUDIOIN] No input device {device} found", action);
-                return;
-            }
-
-            if(inputDevice.Default)
-                return;
-
-            AudioManager.Activate(inputDevice);
+            AudioManager.ActivateDevice(action);
         }
         catch (Exception ex)
         {

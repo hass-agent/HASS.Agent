@@ -160,6 +160,9 @@ namespace HASS.Agent.Settings
                 case CommandType.WebViewCommand:
                     abstractCommand = new WebViewCommand(command.EntityName, command.Name, command.Command, command.EntityType, command.Id.ToString());
                     break;
+                case CommandType.TrayWebViewCommand:
+                    abstractCommand = new TrayWebViewCommand(command.EntityName, command.Name, command.EntityType, command.Id.ToString());
+                    break;
                 case CommandType.MonitorSleepCommand:
                     abstractCommand = new MonitorSleepCommand(command.EntityName, command.Name, command.EntityType, command.Id.ToString());
                     break;

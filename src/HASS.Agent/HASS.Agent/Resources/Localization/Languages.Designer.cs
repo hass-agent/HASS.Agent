@@ -716,6 +716,16 @@ namespace HASS.Agent.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Shows / hides the Tray Icon Web View.
+        ///Requires it to be configured in &quot;Configuration -&gt; Tray Icon&quot;.
+        /// </summary>
+        internal static string CommandsManager_TrayWebViewCommandDescription {
+            get {
+                return ResourceManager.GetString("CommandsManager_TrayWebViewCommandDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Shows a window with the provided URL.
         ///
         ///This differs from the &apos;LaunchUrl&apos; command in that it doesn&apos;t load a full-fledged browser, just the provided URL in its own window.
@@ -3662,6 +3672,15 @@ namespace HASS.Agent.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Press.
+        /// </summary>
+        internal static string HassAction_Press {
+            get {
+                return ResourceManager.GetString("HassAction_Press", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Stop.
         /// </summary>
         internal static string HassAction_Stop {
@@ -3676,6 +3695,15 @@ namespace HASS.Agent.Resources.Localization {
         internal static string HassAction_Toggle {
             get {
                 return ResourceManager.GetString("HassAction_Toggle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Trigger.
+        /// </summary>
+        internal static string HassAction_Trigger {
+            get {
+                return ResourceManager.GetString("HassAction_Trigger", resourceCulture);
             }
         }
         
@@ -3766,6 +3794,15 @@ namespace HASS.Agent.Resources.Localization {
         internal static string HassDomain_Automation {
             get {
                 return ResourceManager.GetString("HassDomain_Automation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Button.
+        /// </summary>
+        internal static string HassDomain_Button {
+            get {
+                return ResourceManager.GetString("HassDomain_Button", resourceCulture);
             }
         }
         

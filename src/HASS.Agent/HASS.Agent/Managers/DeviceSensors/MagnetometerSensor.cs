@@ -28,6 +28,9 @@ namespace HASS.Agent.Managers.DeviceSensors
                     return null;
 
                 var sensorReading = _magnetometer.GetCurrentReading();
+                if (sensorReading == null)
+                    return null;
+
                 var magFieldX = Math.Round((decimal)sensorReading.MagneticFieldX,2);
                 var magFieldY = Math.Round((decimal)sensorReading.MagneticFieldY, 2);
                 var magFieldZ = Math.Round((decimal)sensorReading.MagneticFieldZ, 2);

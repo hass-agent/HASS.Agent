@@ -42,22 +42,7 @@ namespace HASS.Agent.Shared.HomeAssistant.Commands.InternalCommands
  
             try
             {
-                var audioDevices = AudioManager.GetDevices();
-                var outputDevice = audioDevices
-                    .Where(d => d.Type == DeviceType.Output)
-                    .Where(d => d.FriendlyName == action)
-                    .FirstOrDefault();
-
-                if (outputDevice == null)
-                {
-                    Log.Warning("[SETAUDIOOUT] No input device {device} found", action);
-                    return;
-                }
-
-                if (outputDevice.Default)
-                    return;
-
-                AudioManager.Activate(outputDevice);
+                AudioManager.ActivateDevice(action);
             }
             catch (Exception ex)
             {

@@ -961,16 +961,7 @@ namespace HASS.Agent.Forms
                 return;
             }
 
-            // prepare the webview
-            var webView = new WebViewInfo
-            {
-                Url = Variables.AppSettings.TrayIconWebViewUrl,
-                Height = Variables.AppSettings.TrayIconWebViewHeight,
-                Width = Variables.AppSettings.TrayIconWebViewWidth,
-            };
-
-            // show it
-            HelperFunctions.LaunchTrayIconWebView(webView);
+            HelperFunctions.LaunchTrayIconWebView();
         }
 
         private async void PbDonate_Click(object sender, EventArgs e)

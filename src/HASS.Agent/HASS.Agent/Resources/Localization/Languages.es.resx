@@ -3391,4 +3391,17 @@ Nota: si se usa en el servicio satelital, no detectará aplicaciones del espacio
   <data name="AdvancedSensorConfig_Warning" xml:space="preserve">
     <value>Advertencia, agregar las siguientes configuraciones (anulaciones) puede dañar el sensor, ¡úselo con precaución!</value>
   </data>
+  <data name="CommandsManager_TrayWebViewCommandDescription" xml:space="preserve">
+    <value>Muestra u oculta la vista web del icono de la bandeja.
+Requiere que se configure en "Configuración -&gt; Icono de la bandeja"</value>
+  </data>
+  <data name="HassAction_Trigger" xml:space="preserve">
+    <value>Desencadenar</value>
+  </data>
+  <data name="HassDomain_Button" xml:space="preserve">
+    <value>Botón</value>
+  </data>
+  <data name="HassAction_Press" xml:space="preserve">
+    <value>Prensa</value>
+  </data>
 </root>

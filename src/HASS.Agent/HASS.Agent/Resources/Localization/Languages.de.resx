@@ -3515,4 +3515,17 @@ Hinweis: Bei Verwendung im Satellitendienst werden keine Userspace-Anwendungen e
   <data name="AdvancedSensorConfig_Warning" xml:space="preserve">
     <value>Achtung: Das Hinzufügen der folgenden Einstellungen (Überschreibungen) kann zur Beschädigung des Sensors führen. Gehen Sie daher vorsichtig vor!</value>
   </data>
+  <data name="CommandsManager_TrayWebViewCommandDescription" xml:space="preserve">
+    <value>Zeigt/verbirgt das Tray-Icon-Web-View.
+Muss unter „Konfiguration -&gt; Tray-Icon“ konfiguriert werden.</value>
+  </data>
+  <data name="HassAction_Trigger" xml:space="preserve">
+    <value>Auslösen</value>
+  </data>
+  <data name="HassDomain_Button" xml:space="preserve">
+    <value>Knopf</value>
+  </data>
+  <data name="HassAction_Press" xml:space="preserve">
+    <value>Presse</value>
+  </data>
 </root>

@@ -39,13 +39,10 @@ namespace HASS.Agent.Shared.HomeAssistant.Sensors.GeneralSensors.SingleValue
 
         public override string GetState()
         {
-            var defaultDeviceId = AudioManager.GetDefaultDeviceId(DeviceType.Output, DeviceRole.Multimedia | DeviceRole.Console);
-            var audioDevice = AudioManager.GetDevices().Where(d => d.Id == defaultDeviceId).FirstOrDefault();
-            if (audioDevice == null)
-                return "0";
+            var volume = AudioManager.GetDefaultDeviceVolume(DeviceType.Output, DeviceRole.Multimedia | DeviceRole.Console);
 
             // return as percentage
-            return audioDevice.Volume.ToString(CultureInfo.InvariantCulture);
+            return volume.ToString(CultureInfo.InvariantCulture);
         }
 
         public override string GetAttributes() => string.Empty;

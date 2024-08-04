@@ -19,8 +19,6 @@ namespace HASS.Agent.Shared.HomeAssistant.Sensors
         public bool ApplyRounding { get; private set; }
         public int? Round { get; private set; }
 
-        public string AdvancedSettings { get; private set; }
-
         protected readonly ObjectQuery ObjectQuery;
         protected readonly ManagementObjectSearcher Searcher;
 
@@ -30,7 +28,6 @@ namespace HASS.Agent.Shared.HomeAssistant.Sensors
             Scope = scope;
             ApplyRounding = applyRounding;
             Round = round;
-            AdvancedSettings = advancedSettings;
 
             // prepare query
             ObjectQuery = new ObjectQuery(Query);

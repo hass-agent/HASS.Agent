@@ -525,6 +525,14 @@ namespace HASS.Agent.Commands
 
             // =================================
 
+            commandInfoCard = new CommandInfoCard(CommandType.TrayWebViewCommand,
+                Languages.CommandsManager_TrayWebViewCommandDescription,
+                true, false, false);
+
+            CommandInfoCards.Add(commandInfoCard.CommandType, commandInfoCard);
+
+            // =================================
+
             commandInfoCard = new CommandInfoCard(CommandType.RadioCommand,
                 Languages.CommandsManager_RadioCommandDescription,
                 true, false, true);

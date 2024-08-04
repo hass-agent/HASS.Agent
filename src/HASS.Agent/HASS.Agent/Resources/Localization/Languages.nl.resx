@@ -3412,4 +3412,17 @@ Opmerking: indien gebruikt in de satellietdienst, zal het geen gebruikersruimtet
   <data name="AdvancedSensorConfig_Warning" xml:space="preserve">
     <value>Waarschuwing: het toevoegen van de volgende instellingen (overschrijvingen) kan de sensor kapot maken, wees voorzichtig!</value>
   </data>
+  <data name="CommandsManager_TrayWebViewCommandDescription" xml:space="preserve">
+    <value>Toont/verbergt het Tray Icon Web View.
+Vereist dat het geconfigureerd is in "Configuratie -&gt; Tray Icon"</value>
+  </data>
+  <data name="HassAction_Trigger" xml:space="preserve">
+    <value>Activering</value>
+  </data>
+  <data name="HassDomain_Button" xml:space="preserve">
+    <value>Knop</value>
+  </data>
+  <data name="HassAction_Press" xml:space="preserve">
+    <value>Pers</value>
+  </data>
 </root>

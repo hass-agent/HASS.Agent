@@ -3007,4 +3007,17 @@ Not: Uydu hizmetinde kullanılırsa kullanıcı alanı uygulamalarını algılam
   <data name="AdvancedSensorConfig_Warning" xml:space="preserve">
     <value>Uyarı, aşağıdaki ayarların (geçersiz kılmaların) eklenmesi sensörü bozabilir, dikkatli kullanın!</value>
   </data>
+  <data name="CommandsManager_TrayWebViewCommandDescription" xml:space="preserve">
+    <value>Tepsi Simgesi Web Görünümünü gösterir/gizler.
+"Yapılandırma -&gt; Tepsi Simgesi"nde yapılandırılması gerekir</value>
+  </data>
+  <data name="HassAction_Trigger" xml:space="preserve">
+    <value>Tetiklemek</value>
+  </data>
+  <data name="HassDomain_Button" xml:space="preserve">
+    <value>Buton</value>
+  </data>
+  <data name="HassAction_Press" xml:space="preserve">
+    <value>Basmak</value>
+  </data>
 </root>

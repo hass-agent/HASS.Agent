@@ -274,10 +274,11 @@ namespace HASS.Agent.Forms
                     return;
                 }
 
+                Opacity = 0;
+
                 // do we need to stay open?
                 if (_isTrayIcon)
                 {
-                    Opacity = 0;
                     e.Cancel = true;
                     return;
                 }

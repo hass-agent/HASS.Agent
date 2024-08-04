@@ -34,16 +34,6 @@ namespace HASS.Agent.Shared.HomeAssistant.Commands.InternalCommands
             TurnOnWithAction(CommandConfig);
         }
 
-        private AudioDevice GetDeviceOrDefault(string deviceName)
-        {
-            var device = AudioManager.GetDevices().Where(d => d.FriendlyName == deviceName).FirstOrDefault();
-            if (device != null)
-                return device;
-
-            var defaultDeviceId = AudioManager.GetDefaultDeviceId(DeviceType.Output, DeviceRole.Multimedia | DeviceRole.Console);
-            return AudioManager.GetDevices().Where(d => d.Id == defaultDeviceId).FirstOrDefault();
-        }
-
         public override void TurnOnWithAction(string action)
         {
             State = "ON";
@@ -59,44 +49,7 @@ namespace HASS.Agent.Shared.HomeAssistant.Commands.InternalCommands
                     return;
                 }
 
-                var audioDevice = GetDeviceOrDefault(actionData.PlaybackDevice);
-                if (audioDevice == null)
-                    return;
-
-                var applicationAudioSessions = audioDevice.Sessions.Where(s =>
-                    s.Application == actionData.ApplicationName
-                );
-
-                if (actionData.Volume == -1)
-                    Log.Debug("[SETAPPVOLUME] No volume value provided, only mute has been set for {app}", actionData.ApplicationName);
-
-
-                if (string.IsNullOrWhiteSpace(actionData.SessionId))
-                {
-                    foreach (var session in applicationAudioSessions)
-                    {
-                        AudioManager.SetMute(session, actionData.Mute);
-                        if (actionData.Volume == -1)
-                            return;
-
-                        AudioManager.SetVolume(session, actionData.Volume);
-                    }
-                }
-                else
-                {
-                    var session = applicationAudioSessions.Where(s => s.Id == actionData.SessionId).FirstOrDefault();
-                    if (session == null)
-                    {
-                        Log.Debug("[SETAPPVOLUME] No session {actionData.SessionId} found for device {device}", actionData.ApplicationName, audioDevice.FriendlyName);
-                        return;
-                    }
-
-                    AudioManager.SetMute(session, actionData.Mute);
-                    if (actionData.Volume == -1)
-                        return;
-
-                    AudioManager.SetVolume(session, actionData.Volume);
-                }
+                AudioManager.SetApplicationProperties(actionData.PlaybackDevice, actionData.ApplicationName, actionData.SessionId, actionData.Volume, actionData.Mute);
             }
             catch (Exception ex)
             {

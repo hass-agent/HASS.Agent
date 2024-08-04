@@ -202,8 +202,6 @@ namespace HASS.Agent.Managers
                     Task.Run(() => Variables.MqttManager.AnnounceAvailabilityAsync());
                     LastSystemStateEvent = SystemStateEvent.Resume;
 
-                    AudioManager.ReInitialize();
-
                     break;
 
                 case PowerModes.Suspend:
@@ -213,8 +211,6 @@ namespace HASS.Agent.Managers
                     Log.Information("[SYSTEMSTATE] Session halting: system suspending");
                     Task.Run(() => Variables.MqttManager.AnnounceAvailabilityAsync(true));
                     LastSystemStateEvent = SystemStateEvent.Suspend;
-
-                    AudioManager.CleanupDevices();
 
                     break;
             }

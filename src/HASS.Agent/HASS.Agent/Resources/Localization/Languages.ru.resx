@@ -3460,4 +3460,17 @@ Home Assistant.
   <data name="AdvancedSensorConfig_Warning" xml:space="preserve">
     <value>Внимание! Добавление следующих настроек (переопределений) может привести к поломке датчика, используйте с осторожностью!</value>
   </data>
+  <data name="CommandsManager_TrayWebViewCommandDescription" xml:space="preserve">
+    <value>Показывает/скрывает веб-представление значка в трее.
+Требует настройки в разделе «Конфигурация -&gt; Значок в трее»</value>
+  </data>
+  <data name="HassAction_Trigger" xml:space="preserve">
+    <value>Вызывать</value>
+  </data>
+  <data name="HassDomain_Button" xml:space="preserve">
+    <value>Button</value>
+  </data>
+  <data name="HassAction_Press" xml:space="preserve">
+    <value>Нажимать</value>
+  </data>
 </root>

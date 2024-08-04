@@ -28,6 +28,9 @@ namespace HASS.Agent.Managers.DeviceSensors
                     return null;
 
                 var sensorReading = _orientationSensor.GetCurrentReading();
+                if (sensorReading == null)
+                    return null;
+
                 _attributes[AttributeRotationMatrix] = JsonConvert.SerializeObject(sensorReading.RotationMatrix);
                 _attributes[AttributeYawAccuracy] = sensorReading.YawAccuracy.ToString();
 

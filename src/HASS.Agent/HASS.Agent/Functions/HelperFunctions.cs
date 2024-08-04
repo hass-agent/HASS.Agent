@@ -447,13 +447,29 @@ namespace HASS.Agent.Functions
             Variables.MainForm.Invoke(new MethodInvoker(delegate
             {
                 // optionally close an existing one
-                if (Variables.TrayIconWebView != null) Variables.TrayIconWebView.ForceClose();
+                Variables.TrayIconWebView?.ForceClose();
 
                 // bind the new one
                 Variables.TrayIconWebView = new WebView(webViewInfo);
                 Variables.TrayIconWebView.Opacity = 0;
                 Variables.TrayIconWebView.Show();
             }));
+        }
+
+        /// <summary>
+        /// Shows the user-configured webview form near the tray icon
+        /// </summary>
+        /// <param name="webViewInfo"></param>
+        internal static void LaunchTrayIconWebView()
+        {
+            var webView = new WebViewInfo
+            {
+                Url = Variables.AppSettings.TrayIconWebViewUrl,
+                Height = Variables.AppSettings.TrayIconWebViewHeight,
+                Width = Variables.AppSettings.TrayIconWebViewWidth,
+            };
+
+            LaunchTrayIconWebView(webView);
         }
 
         /// <summary>
@@ -491,7 +507,8 @@ namespace HASS.Agent.Functions
             Variables.MainForm.Invoke(new MethodInvoker(delegate
             {
                 // make sure it's ready
-                if (Variables.TrayIconWebView == null || Variables.TrayIconWebView.IsDisposed) PrepareTrayIconWebView();
+                if (Variables.TrayIconWebView == null || Variables.TrayIconWebView.IsDisposed)
+                    PrepareTrayIconWebView();
 
                 // show it
                 Variables.TrayIconWebView?.MakeVisible();
@@ -514,6 +531,8 @@ namespace HASS.Agent.Functions
 
                 var webView = new WebView(webViewInfo);
                 webView.Opacity = 0;
+
+                Variables.TrayIconWebView = webView;
                 webView.Show();
             }));
         }
@@ -545,12 +564,12 @@ namespace HASS.Agent.Functions
             // check for known OK languages
             if (KnownOkInputLanguage.ContainsKey(inputLanguage))
                 return false;
-            
+
             // check for known NOT OK languages
             var germanLayoutDetected = false;
-            foreach(InputLanguage language in InputLanguage.InstalledInputLanguages)
+            foreach (InputLanguage language in InputLanguage.InstalledInputLanguages)
             {
-                if(language.Culture.TwoLetterISOLanguageName == "de")
+                if (language.Culture.TwoLetterISOLanguageName == "de")
                 {
                     germanLayoutDetected = true;
                     break;

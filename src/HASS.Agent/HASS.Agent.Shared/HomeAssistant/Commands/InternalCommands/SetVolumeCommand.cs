@@ -48,16 +48,11 @@ namespace HASS.Agent.Shared.HomeAssistant.Commands.InternalCommands
                 if (_volume == -1f)
                 {
                     Log.Warning("[SETVOLUME] [{name}] Unable to trigger command, it's configured as action-only", EntityName);
-                    
+
                     return;
                 }
 
-                var defaultDeviceId = AudioManager.GetDefaultDeviceId(DeviceType.Output, DeviceRole.Multimedia | DeviceRole.Console);
-                var audioDevice = AudioManager.GetDevices().Where(d => d.Id == defaultDeviceId).FirstOrDefault();
-                if(audioDevice == null)
-                    return;
-
-                AudioManager.SetVolume(audioDevice, _volume);
+                AudioManager.SetDefaultDeviceProperties(DeviceType.Output, DeviceRole.Multimedia | DeviceRole.Console, _volume, null);
             }
             catch (Exception ex)
             {
@@ -79,16 +74,11 @@ namespace HASS.Agent.Shared.HomeAssistant.Commands.InternalCommands
                 if (!parsed)
                 {
                     Log.Error("[SETVOLUME] [{name}] Unable to trigger command, the provided action value can't be parsed: {val}", EntityName, action);
-                    
+
                     return;
                 }
 
-                var defaultDeviceId = AudioManager.GetDefaultDeviceId(DeviceType.Output, DeviceRole.Multimedia | DeviceRole.Console);
-                var audioDevice = AudioManager.GetDevices().Where(d => d.Id == defaultDeviceId).FirstOrDefault();
-                if (audioDevice == null)
-                    return;
-
-                AudioManager.SetVolume(audioDevice, volumeInt);
+                AudioManager.SetDefaultDeviceProperties(DeviceType.Output, DeviceRole.Multimedia | DeviceRole.Console, _volume, null);
             }
             catch (Exception ex)
             {
