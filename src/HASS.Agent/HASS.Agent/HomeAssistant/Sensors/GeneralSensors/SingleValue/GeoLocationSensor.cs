@@ -64,53 +64,48 @@ namespace HASS.Agent.HomeAssistant.Sensors.GeneralSensors.SingleValue
                 SetAttributes(jsonPayload);
                 return jsonPayload;
             }
-            else
+
+            Geolocator geolocator = null;
+            Geoposition position;
+            GeolocationInfo gli = new GeolocationInfo();
+
+            var accessStatus = Geolocator.RequestAccessAsync().GetAwaiter().GetResult();
+            switch (accessStatus)
             {
-                Geolocator geolocator = null;
-                Geoposition position;
-                GeolocationInfo gli = new GeolocationInfo();
+                case GeolocationAccessStatus.Allowed:
+                    // notify user: Waiting for update
 
-                var accessStatus = Geolocator.RequestAccessAsync().GetAwaiter().GetResult();
-                switch (accessStatus)
-                {
-                    case GeolocationAccessStatus.Allowed:
-                        // notify user: Waiting for update
+                    //https://community.home-assistant.io/t/attributes-latitude-and-longitude-in-a-lovelace-map/318760
+                    geolocator = new Geolocator();
+                    position = geolocator.GetGeopositionAsync().GetAwaiter().GetResult();
+                    var lat = position.Coordinate.Latitude.ConvertToStringDotDecimalSeperator();
+                    var lon = position.Coordinate.Longitude.ConvertToStringDotDecimalSeperator();
+                    var alt = position.Coordinate.Altitude?.ConvertToStringDotDecimalSeperator();
+                    var accuracy = position.Coordinate.Accuracy.ConvertToStringDotDecimalSeperator();
+                    var sourceType = position.Coordinate.PositionSource;
 
-                        //https://community.home-assistant.io/t/attributes-latitude-and-longitude-in-a-lovelace-map/318760
-                        geolocator = new Geolocator();
-                        position = geolocator.GetGeopositionAsync().GetAwaiter().GetResult();
-                        var lat = position.Coordinate.Latitude.ConvertToStringDotDecimalSeperator();
-                        var lon = position.Coordinate.Longitude.ConvertToStringDotDecimalSeperator();
-                        var alt = position.Coordinate.Altitude?.ConvertToStringDotDecimalSeperator();
-                        var accuracy = position.Coordinate.Accuracy.ConvertToStringDotDecimalSeperator();
-                        var sourceType = position.Coordinate.PositionSource;
+                    gli = new GeolocationInfo(lon, lat, sourceType);
+                    gli.altitude = alt;
+                    gli.gps_accuracy = accuracy;
+                    gli.not_permitted = "false";
 
-                        gli = new GeolocationInfo(lon, lat, sourceType);
-                        gli.altitude = alt;
-                        gli.gps_accuracy = accuracy;
-                        gli.not_permitted = "false";
+                    cache.Set("location_" + this.Id, gli, DateTimeOffset.Now.AddSeconds(120));
+                    break;
 
-                        cache.Set("location_" + this.Id, gli, DateTimeOffset.Now.AddSeconds(120));
+                case GeolocationAccessStatus.Denied:
+                    // notify user: Access to location is denied
+                    gli.not_permitted = "true";
+                    break;
 
-                        break;
-
-                    case GeolocationAccessStatus.Denied:
-                        // notify user: Access to location is denied
-                        gli.not_permitted = "true";
-
-                        break;
-
-                    case GeolocationAccessStatus.Unspecified:
-                        // notify user: Unspecified error
-                        gli.not_permitted = "true";
-
-                        break;
-                }
-
-                string json_payload = JsonConvert.SerializeObject(gli, Formatting.Indented);
-                SetAttributes(json_payload);
-                return json_payload;
+                case GeolocationAccessStatus.Unspecified:
+                    // notify user: Unspecified error
+                    gli.not_permitted = "true";
+                    break;
             }
+
+            string json_payload = JsonConvert.SerializeObject(gli, Formatting.Indented);
+            SetAttributes(json_payload);
+            return json_payload;
         }
     }
 }
