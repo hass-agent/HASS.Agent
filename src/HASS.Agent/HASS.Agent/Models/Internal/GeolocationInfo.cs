@@ -6,6 +6,7 @@ namespace HASS.Agent.Models.Internal
     {
         public string latitude { get; set; }
         public string longitude { get; set; }
+        public string altitude { get; set; }
         public string source_type { get; set; }
         public string gps_accuracy { get; set; }
         public string not_permitted { get; set; }

@@ -1,4 +1,5 @@
-﻿using System.Runtime.Caching;
+﻿#nullable enable
+using System.Runtime.Caching;
 using HASS.Agent.Shared.Extensions;
 using HASS.Agent.Shared.Models.HomeAssistant;
 using Windows.Devices.Geolocation;
@@ -13,7 +14,6 @@ namespace HASS.Agent.HomeAssistant.Sensors.GeneralSensors.SingleValue
     public class GeoLocationSensor : AbstractSingleValueSensor
     {
         private const string DefaultName = "geolocation";
-        private string state = "OFF";
 
         public GeoLocationSensor(int? updateInterval = 10, string name = DefaultName, string friendlyName = DefaultName,
             string id = default) : base(name ?? DefaultName, friendlyName ?? null, updateInterval ?? 30, id)
@@ -31,7 +31,6 @@ namespace HASS.Agent.HomeAssistant.Sensors.GeneralSensors.SingleValue
 
             var deviceConfig = Variables.MqttManager.GetDeviceConfigModel();
             if (deviceConfig == null) return null;
-            //WIP
             Domain = "device_tracker";
             return AutoDiscoveryConfigModel ?? SetAutoDiscoveryConfigModel(new SensorDiscoveryConfigModel()
             {
@@ -47,27 +46,22 @@ namespace HASS.Agent.HomeAssistant.Sensors.GeneralSensors.SingleValue
 
         public override string GetState()
         {
-            var state = "OFF";
-            state = "ON";
-
+            var state = "ON";
             return state;
         }
 
         public void SetAttributes(string value) => _attributes = string.IsNullOrWhiteSpace(value) ? "{}" : value;
-        //public override string GetAttributes() => _attributes;
 
         
         public override string? GetAttributes()
         {
             ObjectCache cache = MemoryCache.Default;
             GeolocationInfo fileContents = cache["location_" + this.Id] as GeolocationInfo;
-            var state = "OFF";
 
             if (fileContents != null)
             {
                 string jsonPayload = JsonConvert.SerializeObject(fileContents, Formatting.Indented);
                 SetAttributes(jsonPayload);
-                state = "ON";
                 return jsonPayload;
             }
             else
@@ -92,12 +86,11 @@ namespace HASS.Agent.HomeAssistant.Sensors.GeneralSensors.SingleValue
                         var sourceType = position.Coordinate.PositionSource;
 
                         gli = new GeolocationInfo(lon, lat, sourceType);
+                        gli.altitude = alt;
                         gli.gps_accuracy = accuracy;
                         gli.not_permitted = "false";
 
                         cache.Set("location_" + this.Id, gli, DateTimeOffset.Now.AddSeconds(120));
-
-                        state = "ON";
 
                         break;
 
