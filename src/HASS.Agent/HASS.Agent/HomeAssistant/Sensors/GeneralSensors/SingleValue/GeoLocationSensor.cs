@@ -14,16 +14,14 @@ namespace HASS.Agent.HomeAssistant.Sensors.GeneralSensors.SingleValue
     public class GeoLocationSensor : AbstractSingleValueSensor
     {
         private const string DefaultName = "geolocation";
-
+        private string _attributes = string.Empty;
+        
         public GeoLocationSensor(int? updateInterval = 10, string name = DefaultName, string friendlyName = DefaultName,
-            string id = default) : base(name ?? DefaultName, friendlyName ?? null, updateInterval ?? 30, id)
+            string id = "") : base(name ?? DefaultName, friendlyName ?? "", updateInterval ?? 30, id)
         {
             Domain = "device_tracker";
             UseAttributes = true;
-
         }
-
-        private string _attributes;
 
         public override DiscoveryConfigModel GetAutoDiscoveryConfig()
         {
@@ -52,21 +50,19 @@ namespace HASS.Agent.HomeAssistant.Sensors.GeneralSensors.SingleValue
 
         public void SetAttributes(string value) => _attributes = string.IsNullOrWhiteSpace(value) ? "{}" : value;
 
-        
         public override string? GetAttributes()
         {
             ObjectCache cache = MemoryCache.Default;
-            GeolocationInfo fileContents = cache["location_" + this.Id] as GeolocationInfo;
+            GeolocationInfo? fileContents = cache["location_" + this.Id] as GeolocationInfo;
+            string jsonPayload = "";
 
             if (fileContents != null)
             {
-                string jsonPayload = JsonConvert.SerializeObject(fileContents, Formatting.Indented);
+                jsonPayload = JsonConvert.SerializeObject(fileContents, Formatting.Indented);
                 SetAttributes(jsonPayload);
                 return jsonPayload;
             }
 
-            Geolocator geolocator = null;
-            Geoposition position;
             GeolocationInfo gli = new GeolocationInfo();
 
             var accessStatus = Geolocator.RequestAccessAsync().GetAwaiter().GetResult();
@@ -76,20 +72,22 @@ namespace HASS.Agent.HomeAssistant.Sensors.GeneralSensors.SingleValue
                     // notify user: Waiting for update
 
                     //https://community.home-assistant.io/t/attributes-latitude-and-longitude-in-a-lovelace-map/318760
-                    geolocator = new Geolocator();
-                    position = geolocator.GetGeopositionAsync().GetAwaiter().GetResult();
+                    var geolocator = new Geolocator();
+                    var position = geolocator.GetGeopositionAsync().GetAwaiter().GetResult();
                     var lat = position.Coordinate.Latitude.ConvertToStringDotDecimalSeperator();
                     var lon = position.Coordinate.Longitude.ConvertToStringDotDecimalSeperator();
                     var alt = position.Coordinate.Altitude?.ConvertToStringDotDecimalSeperator();
                     var accuracy = position.Coordinate.Accuracy.ConvertToStringDotDecimalSeperator();
                     var sourceType = position.Coordinate.PositionSource;
 
-                    gli = new GeolocationInfo(lon, lat, sourceType);
-                    gli.altitude = alt;
-                    gli.gps_accuracy = accuracy;
-                    gli.not_permitted = "false";
+                    gli = new GeolocationInfo(lon, lat, sourceType)
+                    {
+                        altitude = alt,
+                        gps_accuracy = accuracy,
+                        not_permitted = "false"
+                    };
 
-                    cache.Set("location_" + this.Id, gli, DateTimeOffset.Now.AddSeconds(120));
+                    cache.Set("location_" + Id, gli, DateTimeOffset.Now.AddSeconds(120));
                     break;
 
                 case GeolocationAccessStatus.Denied:
@@ -103,9 +101,9 @@ namespace HASS.Agent.HomeAssistant.Sensors.GeneralSensors.SingleValue
                     break;
             }
 
-            string json_payload = JsonConvert.SerializeObject(gli, Formatting.Indented);
-            SetAttributes(json_payload);
-            return json_payload;
+            jsonPayload = JsonConvert.SerializeObject(gli, Formatting.Indented);
+            SetAttributes(jsonPayload);
+            return jsonPayload;
         }
     }
 }
