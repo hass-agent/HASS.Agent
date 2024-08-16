@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Text.Json;
 using Windows.Media.Control;
 using Windows.Media.Playback;
 using HASS.Agent.Enums;
@@ -13,7 +14,6 @@ using MediaPlayerState = HASS.Agent.Enums.MediaPlayerState;
 using Octokit;
 using Windows.Media.Core;
 using HASS.Agent.Shared.Managers.Audio;
-using Newtonsoft.Json;
 
 namespace HASS.Agent.Media
 {
@@ -224,7 +224,7 @@ namespace HASS.Agent.Media
                     {
                         var haMessageBuilder = new MqttApplicationMessageBuilder()
                             .WithTopic($"hass.agent/media_player/{Variables.DeviceConfig.Name}/state")
-                            .WithPayload(JsonConvert.SerializeObject(message, MqttManager.JsonSerializerSettings));
+                            .WithPayload(JsonSerializer.Serialize(message, MqttManager.JsonSerializerOptions));
                         await Variables.MqttManager.PublishAsync(haMessageBuilder.Build());
                     }
 

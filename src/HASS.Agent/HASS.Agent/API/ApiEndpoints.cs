@@ -1,11 +1,11 @@
-﻿using Grapevine;
+﻿using System.Text.Json;
+using Grapevine;
 using HASS.Agent.Enums;
 using HASS.Agent.Extensions;
 using HASS.Agent.Managers;
 using HASS.Agent.Media;
 using HASS.Agent.Models.HomeAssistant;
 using HASS.Agent.MQTT;
-using Newtonsoft.Json;
 using Serilog;
 using HttpMethod = System.Net.Http.HttpMethod;
 
@@ -24,7 +24,7 @@ namespace HASS.Agent.API
         public static async Task DeviceInfoRoute(IHttpContext context)
         {
             context.Response.ContentType = "application/json";
-            await context.Response.SendResponseAsync(JsonConvert.SerializeObject(new
+            await context.Response.SendResponseAsync(JsonSerializer.Serialize(new
             {
                 serial_number = Variables.SerialNumber,
                 device = Variables.DeviceConfig,
@@ -33,7 +33,7 @@ namespace HASS.Agent.API
                     notifications = Variables.AppSettings.NotificationsEnabled,
                     media_player = Variables.AppSettings.MediaPlayerEnabled
                 }
-            }, MqttManager.JsonSerializerSettings));
+            }, MqttManager.JsonSerializerOptions));
         }
         
         /// <summary>
