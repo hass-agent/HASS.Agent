@@ -3433,4 +3433,7 @@ Requires it to be configured in "Configuration -&gt; Tray Icon"</value>
   <data name="HassAction_Press" xml:space="preserve">
     <value>Press</value>
   </data>
+  <data name="Notification_Dismiss" xml:space="preserve">
+    <value>Dismiss</value>
+  </data>
 </root>

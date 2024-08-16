@@ -4513,6 +4513,15 @@ namespace HASS.Agent.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Dismiss.
+        /// </summary>
+        internal static string Notification_Dismiss {
+            get {
+                return ResourceManager.GetString("Notification_Dismiss", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error trying to bind the API to port {0}.
         ///
         ///Make sure no other instance of HASS.Agent is running and the port is available and registered..
