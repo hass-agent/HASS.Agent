@@ -3,8 +3,6 @@ using System.IO;
 using System.Security.Authentication;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
-using System.Text.Json;
-using System.Text.Json.Serialization;
 using HASS.Agent.API;
 using HASS.Agent.Enums;
 using HASS.Agent.Functions;
@@ -22,6 +20,9 @@ using MQTTnet.Adapter;
 using MQTTnet.Client;
 using MQTTnet.Exceptions;
 using MQTTnet.Extensions.ManagedClient;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using Newtonsoft.Json.Serialization;
 using Serilog;
 
 namespace HASS.Agent.MQTT
@@ -447,7 +448,7 @@ namespace HASS.Agent.MQTT
                     if (discoverable.IgnoreAvailability)
                         payload.Availability_topic = null;
 
-                    messageBuilder.WithPayload(JsonSerializer.Serialize(payload, payload.GetType(), JsonSerializerOptions));
+                    messageBuilder.WithPayload(JsonConvert.SerializeObject(payload, payload.GetType(), JsonSerializerSettings));
                 }
                 await PublishAsync(messageBuilder.Build());
             }
@@ -469,15 +470,14 @@ namespace HASS.Agent.MQTT
         private DateTime _lastAvailableAnnouncement = DateTime.MinValue;
         private DateTime _lastAvailableAnnouncementFailedLogged = DateTime.MinValue;
 
-        /// <summary>
-        /// JSON serializer options (camelcase, casing, ignore condition, converters)
-        /// </summary>
-        public static readonly JsonSerializerOptions JsonSerializerOptions = new()
+        public static readonly JsonSerializerSettings JsonSerializerSettings = new()
         {
-            PropertyNamingPolicy = new CamelCaseJsonNamingpolicy(),
-            PropertyNameCaseInsensitive = true,
-            DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
-            Converters = { new JsonStringEnumConverter() }
+            ContractResolver = new DefaultContractResolver()
+            {
+                NamingStrategy = new ToLowerInvariantNamingStrategy()
+            },
+            NullValueHandling = NullValueHandling.Ignore,
+            Converters = { new StringEnumConverter() }
         };
 
         public async Task AnnounceAvailabilityAsync(bool offline = false)
@@ -510,7 +510,7 @@ namespace HASS.Agent.MQTT
 
                     var integrationMsgBuilder = new MqttApplicationMessageBuilder()
                         .WithTopic($"hass.agent/devices/{Variables.DeviceConfig.Name}")
-                        .WithPayload(JsonSerializer.Serialize(new
+                        .WithPayload(JsonConvert.SerializeObject(new
                         {
                             serial_number = Variables.SerialNumber,
                             device = Variables.DeviceConfig,
@@ -519,7 +519,7 @@ namespace HASS.Agent.MQTT
                                 notifications = Variables.AppSettings.NotificationsEnabled,
                                 media_player = Variables.AppSettings.MediaPlayerEnabled
                             }
-                        }, JsonSerializerOptions))
+                        }, JsonSerializerSettings))
                         .WithRetainFlag(Variables.AppSettings.MqttUseRetainFlag);
 
                     await _mqttClient.InternalClient.PublishAsync(integrationMsgBuilder.Build());
@@ -775,7 +775,7 @@ namespace HASS.Agent.MQTT
                 // process as a notification
                 if (applicationMessage.Topic == $"hass.agent/notifications/{HelperFunctions.GetConfiguredDeviceName()}")
                 {
-                    var notification = JsonSerializer.Deserialize<Notification>(applicationMessage.PayloadSegment, JsonSerializerOptions)!;
+                    var notification = JsonConvert.DeserializeObject<Notification>(Encoding.UTF8.GetString(applicationMessage.PayloadSegment), JsonSerializerSettings)!;
                     _ = Task.Run(() => NotificationManager.ShowNotification(notification));
 
                     return Task.CompletedTask;
@@ -784,18 +784,18 @@ namespace HASS.Agent.MQTT
                 // process as a mediaplyer command
                 if (applicationMessage.Topic == $"hass.agent/media_player/{HelperFunctions.GetConfiguredDeviceName()}/cmd")
                 {
-                    var command = JsonSerializer.Deserialize<MqttMediaPlayerCommand>(applicationMessage.PayloadSegment, JsonSerializerOptions)!;
+                    var command = JsonConvert.DeserializeObject<MqttMediaPlayerCommand>(Encoding.UTF8.GetString(applicationMessage.PayloadSegment), JsonSerializerSettings)!;
 
                     switch (command.Command)
                     {
                         case MediaPlayerCommand.PlayMedia:
-                            MediaManager.ProcessMedia(command.Data.GetString());
+                            MediaManager.ProcessMedia(command.Data.ToObject<string>());
                             break;
                         case MediaPlayerCommand.Seek:
-                            MediaManager.ProcessSeekCommand(TimeSpan.FromSeconds(command.Data.GetDouble()).Ticks);
+                            MediaManager.ProcessSeekCommand(TimeSpan.FromSeconds(command.Data.ToObject<double>()).Ticks);
                             break;
                         case MediaPlayerCommand.SetVolume:
-                            MediaManagerCommands.SetVolume(command.Data.GetInt32());
+                            MediaManagerCommands.SetVolume(command.Data.ToObject<int>());
                             break;
                         default:
                             MediaManager.ProcessCommand(command.Command);

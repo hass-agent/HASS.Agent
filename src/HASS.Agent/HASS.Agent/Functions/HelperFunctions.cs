@@ -25,6 +25,7 @@ using Syncfusion.Windows.Forms;
 using Task = System.Threading.Tasks.Task;
 using MediaManager = HASS.Agent.Media.MediaManager;
 using HASS.Agent.Shared.Managers;
+using Newtonsoft.Json.Serialization;
 
 namespace HASS.Agent.Functions
 {
@@ -818,5 +819,15 @@ namespace HASS.Agent.Functions
         /// <param name="name"></param>
         /// <returns></returns>
         public override string ConvertName(string name) => name.ToLowerInvariant();
+    }
+
+    public class ToLowerInvariantNamingStrategy : NamingStrategy
+    {
+        /// <summary>
+        /// Convert name to lowerinvariant
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        protected override string ResolvePropertyName(string name) => name.ToLowerInvariant();
     }
 }
