@@ -3404,4 +3404,7 @@ Requiere que se configure en "Configuración -&gt; Icono de la bandeja"</value>
   <data name="HassAction_Press" xml:space="preserve">
     <value>Prensa</value>
   </data>
+  <data name="Notification_Dismiss" xml:space="preserve">
+    <value>Despedir</value>
+  </data>
 </root>

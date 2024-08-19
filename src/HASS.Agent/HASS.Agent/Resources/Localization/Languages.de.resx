@@ -3528,4 +3528,7 @@ Muss unter „Konfiguration -&gt; Tray-Icon“ konfiguriert werden.</value>
   <data name="HassAction_Press" xml:space="preserve">
     <value>Presse</value>
   </data>
+  <data name="Notification_Dismiss" xml:space="preserve">
+    <value>Zurückweisen</value>
+  </data>
 </root>

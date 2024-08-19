@@ -3473,4 +3473,7 @@ Home Assistant.
   <data name="HassAction_Press" xml:space="preserve">
     <value>Нажимать</value>
   </data>
+  <data name="Notification_Dismiss" xml:space="preserve">
+    <value>Увольнять</value>
+  </data>
 </root>
