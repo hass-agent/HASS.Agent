@@ -206,7 +206,6 @@ namespace HASS.Agent.Forms
 
                 // check if we need to move
                 var desiredPosition = GetDesiredWebViewPosition();
-
                 if (desiredPosition.X != _webViewInfo.X || desiredPosition.Y != _webViewInfo.Y)
                 {
                     // yep
@@ -246,13 +245,11 @@ namespace HASS.Agent.Forms
             switch (taskBarLocation)
             {
                 case HelperFunctions.TaskBarLocation.TOP:
-                    //x = 0;
                     y = Screen.PrimaryScreen.Bounds.Height - Screen.PrimaryScreen.WorkingArea.Height;
                     break;
 
                 case HelperFunctions.TaskBarLocation.LEFT:
                     x = Screen.PrimaryScreen.Bounds.Width - Screen.PrimaryScreen.WorkingArea.Width;
-                    //y = Screen.PrimaryScreen.WorkingArea.Height - Height;
                     break;
 
                 case HelperFunctions.TaskBarLocation.RIGHT:
