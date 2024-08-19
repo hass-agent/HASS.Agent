@@ -3426,4 +3426,7 @@ Requires it to be configured in "Configuration -&gt; Tray Icon"</value>
   <data name="HassDomain_Button" xml:space="preserve">
     <value>Button</value>
   </data>
+  <data name="Notification_Dismiss" xml:space="preserve">
+    <value>Dismiss</value>
+  </data>
 </root>

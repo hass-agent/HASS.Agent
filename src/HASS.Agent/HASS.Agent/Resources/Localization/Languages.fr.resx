@@ -3437,4 +3437,7 @@ Nécessite sa configuration dans « Configuration -&gt; Icône de la barre d'ét
   <data name="HassAction_Press" xml:space="preserve">
     <value>Presse</value>
   </data>
+  <data name="Notification_Dismiss" xml:space="preserve">
+    <value>Rejeter</value>
+  </data>
 </root>

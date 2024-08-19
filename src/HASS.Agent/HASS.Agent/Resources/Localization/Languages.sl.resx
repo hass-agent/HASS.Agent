@@ -3553,4 +3553,7 @@ Zahteva, da je konfiguriran v "Konfiguracija -&gt; Ikona pladnja"</value>
   <data name="HassAction_Press" xml:space="preserve">
     <value>Pritisnite</value>
   </data>
+  <data name="Notification_Dismiss" xml:space="preserve">
+    <value>Odpusti</value>
+  </data>
 </root>
