@@ -524,7 +524,7 @@ The certificate of the downloaded file will get checked before running,you will 
     <value>HASS.Agent GitHub page</value>
   </data>
   <data name="OnboardingDone_LblInfo3" xml:space="preserve">
-	  <value>There's a lot more to tinker with, so make sure you take a look at the Configuration Wwindow!
+	  <value>There's a lot more to tinker with, so make sure you take a look at the Configuration Window!
 
 
 Thank you for using HASS.Agent, hopefully it'll be useful for you :-)
