@@ -3450,4 +3450,11 @@ Requer que seja configurado em "Configuration -&gt; Tray Icon"</value>
   <data name="HassAction_Press" xml:space="preserve">
     <value>Imprensa</value>
   </data>
+  <data name="SensorsManager_DeviceTrackerSensorDescription" xml:space="preserve">
+    <value>Retorna sua latitude, longitude e altitude atuais como rastreador de localização/dispositivo, para exibir e rastrear diretamente em um mapa.
+
+Certifique-se de que os serviços de localização do Windows estejam ativados!
+
+Dependendo da sua versão do Windows, isso pode ser encontrado no novo painel de controle > 'privacidade e segurança' > 'localização'. </value>
+  </data>
 </root>

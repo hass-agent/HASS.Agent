@@ -1,11 +1,11 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>net6.0-windows10.0.19041.0</TargetFramework>
     <Nullable>disable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
-	<UseWPF>true</UseWPF>
+    <UseWPF>true</UseWPF>
     <ImplicitUsings>enable</ImplicitUsings>
     <AssemblyName>HASS.Agent</AssemblyName>
     <ApplicationIcon>hassagent.ico</ApplicationIcon>
@@ -28,25 +28,31 @@
     <WindowsPackageType>None</WindowsPackageType>
     <RuntimeIdentifiers>win10-x64;win10-x86</RuntimeIdentifiers>
     <EnableUnsafeBinaryFormatterSerialization>true</EnableUnsafeBinaryFormatterSerialization>
-	<WindowsAppSDKSelfContained>true</WindowsAppSDKSelfContained>
-	<EnableCoreMrtTooling Condition=" '$(BuildingInsideVisualStudio)' != 'true' ">false</EnableCoreMrtTooling>
-	<ErrorOnDuplicatePublishOutputFiles>false</ErrorOnDuplicatePublishOutputFiles>
-	<IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
+    <WindowsAppSDKSelfContained>true</WindowsAppSDKSelfContained>
+    <EnableCoreMrtTooling Condition=" '$(BuildingInsideVisualStudio)' != 'true' ">false</EnableCoreMrtTooling>
+    <ErrorOnDuplicatePublishOutputFiles>false</ErrorOnDuplicatePublishOutputFiles>
+    <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
   </PropertyGroup>
-
+  <PropertyGroup Label="MultilingualAppToolkit">
+    <MultilingualAppToolkitVersion>4.0</MultilingualAppToolkitVersion>
+    <MultilingualFallbackLanguage>en-US</MultilingualFallbackLanguage>
+    <TranslationReport Condition="'$(Configuration)' == 'Release'">true</TranslationReport>
+    <SuppressPseudoWarning Condition="'$(Configuration)' == 'Debug'">true</SuppressPseudoWarning>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\Multilingual App Toolkit\Microsoft.Multilingual.PriResources.targets" Label="MultilingualAppToolkit" Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\Multilingual App Toolkit\v$(MultilingualAppToolkitVersion)\Microsoft.Multilingual.PriResources.targets')" />
+  <Target Name="MATPrerequisite" BeforeTargets="PrepareForBuild" Condition="!Exists('$(MSBuildExtensionsPath)\Microsoft\Multilingual App Toolkit\Microsoft.Multilingual.PriResources.targets')" Label="MultilingualAppToolkit">
+    <Warning Text="$(MSBuildProjectFile) is Multilingual build enabled, but the Multilingual App Toolkit is unavailable during the build. If building with Visual Studio, please check to ensure that toolkit is properly installed." />
+  </Target>
   <ItemGroup>
     <Content Include="hassagent.ico" />
   </ItemGroup>
-
   <ItemGroup>
     <None Include="..\..\.editorconfig" Link=".editorconfig" />
   </ItemGroup>
-  
   <ItemGroup>
-   <RuntimeHostConfigurationOption Include="Switch.System.Windows.DoNotScaleForDpiChanges" Value="true" />
-   <RuntimeHostConfigurationOption Include="Switch.System.IO.UseLegacyPathHandling" Value="false" />
+    <RuntimeHostConfigurationOption Include="Switch.System.Windows.DoNotScaleForDpiChanges" Value="true" />
+    <RuntimeHostConfigurationOption Include="Switch.System.IO.UseLegacyPathHandling" Value="false" />
   </ItemGroup>
-
   <ItemGroup>
     <PackageReference Include="Grapevine" Version="5.0.0-rc.10" />
     <PackageReference Include="Grpc.Tools" Version="2.62.0">
@@ -75,13 +81,12 @@
     <PackageReference Include="Syncfusion.Licensing" Version="20.3.0.50" />
     <PackageReference Include="Syncfusion.Shared.Base" Version="20.3.0.50" />
     <PackageReference Include="Syncfusion.Tools.Windows" Version="20.3.0.50" />
+    <PackageReference Include="System.Runtime.Caching" Version="8.0.0" />
     <PackageReference Include="System.Text.Encoding.CodePages" Version="8.0.0" />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\HASS.Agent.Shared\HASS.Agent.Shared.csproj" />
   </ItemGroup>
-
   <ItemGroup>
     <Reference Include="HADotNet.Core">
       <HintPath>Libraries\HADotNet.Core.dll</HintPath>
@@ -90,7 +95,6 @@
       <HintPath>Libraries\HotkeyListener.dll</HintPath>
     </Reference>
   </ItemGroup>
-
   <ItemGroup>
     <Compile Update="Controls\Configuration\ConfigNFC.cs">
       <SubType>UserControl</SubType>
@@ -144,7 +148,6 @@
       <DependentUpon>Languages.resx</DependentUpon>
     </Compile>
   </ItemGroup>
-
   <ItemGroup>
     <EmbeddedResource Update="Controls\Configuration\ConfigExternalTools.de.resx">
       <DependentUpon>ConfigExternalTools.resx</DependentUpon>
@@ -1844,7 +1847,6 @@
       <DependentUpon>Languages.resx</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
-
   <ItemGroup>
     <None Update="LICENSE.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -1854,9 +1856,7 @@
       <PackagePath>\</PackagePath>
     </None>
   </ItemGroup>
-
   <ItemGroup>
     <Protobuf Include="Service\Protos\hassagentsatellite.proto" GrpcServices="Client" />
   </ItemGroup>
-
 </Project>

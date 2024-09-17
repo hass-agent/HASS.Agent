@@ -3404,4 +3404,11 @@ Requiere que se configure en "Configuración -&gt; Icono de la bandeja"</value>
   <data name="HassAction_Press" xml:space="preserve">
     <value>Prensa</value>
   </data>
+  <data name="SensorsManager_DeviceTrackerSensorDescription" xml:space="preserve">
+    <value>Devuelve su latitud, longitud y altitud actuales como rastreador de ubicación / dispositivo, para mostrar y rastrear directamente en un mapa.
+
+¡Asegúrate de que los servicios de ubicación de Windows estén habilitados!
+
+Dependiendo de su versión de Windows, esto se puede encontrar en el nuevo panel de control &gt; 'privacidad y seguridad' &gt; 'ubicación'.</value>
+  </data>
 </root>

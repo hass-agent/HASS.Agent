@@ -175,6 +175,9 @@ namespace HASS.Agent.Settings
                 case SensorType.GeoLocationSensor:
                     abstractSensor = new GeoLocationSensor(sensor.UpdateInterval, sensor.EntityName, sensor.Name, sensor.Id.ToString(), sensor.AdvancedSettings);
                     break;
+                case SensorType.DeviceTrackerSensor:
+                    abstractSensor = new DeviceTrackerSensor(sensor.UpdateInterval, sensor.EntityName, sensor.Name, sensor.Id.ToString(), sensor.AdvancedSettings);
+                    break;
                 case SensorType.MonitorPowerStateSensor:
                     abstractSensor = new MonitorPowerStateSensor(sensor.UpdateInterval, sensor.EntityName, sensor.Name, sensor.Id.ToString(), sensor.AdvancedSettings);
                     break;

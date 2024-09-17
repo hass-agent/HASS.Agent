@@ -3362,4 +3362,7 @@ Czy chcesz pobrać plik instalacyjny?</value>
   <data name="HassAction_Press" xml:space="preserve">
     <value>Naciśnij</value>
   </data>
+  <data name="SensorType_DeviceTrackerSensor" xml:space="preserve">
+    <value>DeviceLocationTracker</value>
+  </data>
 </root>

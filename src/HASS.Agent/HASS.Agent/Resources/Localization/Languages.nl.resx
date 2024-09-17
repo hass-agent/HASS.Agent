@@ -3425,4 +3425,11 @@ Vereist dat het geconfigureerd is in "Configuratie -&gt; Tray Icon"</value>
   <data name="HassAction_Press" xml:space="preserve">
     <value>Pers</value>
   </data>
+  <data name="SensorsManager_DeviceTrackerSensorDescription" xml:space="preserve">
+    <value>Retourneert uw huidige breedtegraad, lengtegraad en hoogte als locatie-/apparaattracker, om direct weer te geven en te volgen op een kaart.
+
+Zorg ervoor dat de locatieservices van Windows zijn ingeschakeld!
+
+Afhankelijk van je Windows-versie is dit terug te vinden in het nieuwe configuratiescherm &gt; 'privacy en beveiliging' &gt; 'locatie'. </value>
+  </data>
 </root>

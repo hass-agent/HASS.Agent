@@ -5991,6 +5991,19 @@ namespace HASS.Agent.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Returns your current latitude, longitude and altitude as as location/device tracker, to directly display and track on a map.
+        ///
+        ///Make sure Windows&apos; location services are enabled!
+        ///
+        ///Depending on your Windows version, this can be found in the new control panel -&gt; &apos;privacy and security&apos; -&gt; &apos;location&apos;..
+        /// </summary>
+        internal static string SensorsManager_DeviceTrackerSensorDescription {
+            get {
+                return ResourceManager.GetString("SensorsManager_DeviceTrackerSensorDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Provides a sensor with the amount of displays, name of the primary display, and per display its name, resolution and bits per pixel..
         /// </summary>
         internal static string SensorsManager_DisplaySensorsDescription {

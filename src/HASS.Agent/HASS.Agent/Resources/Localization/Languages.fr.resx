@@ -3437,4 +3437,11 @@ Nécessite sa configuration dans « Configuration -&gt; Icône de la barre d'ét
   <data name="HassAction_Press" xml:space="preserve">
     <value>Presse</value>
   </data>
+  <data name="SensorsManager_DeviceTrackerSensorDescription" xml:space="preserve">
+    <value>Renvoie votre latitude, longitude et altitude actuelles sous forme de traqueur de localisation/appareil, pour les afficher et les suivre directement sur une carte.
+
+Assurez-vous que les services de localisation de Windows sont activés !
+
+Selon votre version de Windows, vous pouvez le trouver dans le nouveau panneau de configuration &gt; 'confidentialité et sécurité' &gt; 'localisation'. </value>
+  </data>
 </root>

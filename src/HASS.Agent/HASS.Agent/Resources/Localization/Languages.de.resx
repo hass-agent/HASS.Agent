@@ -3528,4 +3528,10 @@ Muss unter „Konfiguration -&gt; Tray-Icon“ konfiguriert werden.</value>
   <data name="HassAction_Press" xml:space="preserve">
     <value>Presse</value>
   </data>
+  <data name="SensorsManager_DeviceTrackerSensorDescription" xml:space="preserve">
+    <value>Gibt den aktuellen Breitengrad, Längengrad und die Höhe als Location zurück, um sie direkt auf einer Karte anzuzeigen und zu verfolgen.
+
+Stelle sicher, dass die Ortungsdienste von Windows aktiviert sind!
+Abhängig von Ihrer Windows-Version finden Sie dies in der neuen Systemsteuerung &gt; "Datenschutz und Sicherheit" &gt; "Standort". </value>
+  </data>
 </root>

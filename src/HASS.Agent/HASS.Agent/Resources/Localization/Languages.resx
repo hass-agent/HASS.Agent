@@ -2918,6 +2918,13 @@ Make sure Windows' location services are enabled!
 
 Depending on your Windows version, this can be found in the new control panel -&gt; 'privacy and security' -&gt; 'location'.</value>
   </data>
+  <data name="SensorsManager_DeviceTrackerSensorDescription" xml:space="preserve">
+    <value>Returns your current latitude, longitude and altitude as as location/device tracker, to directly display and track on a map.
+
+Make sure Windows' location services are enabled!
+
+Depending on your Windows version, this can be found in the new control panel -&gt; 'privacy and security' -&gt; 'location'.</value>
+  </data>
   <data name="SensorsManager_MonitorPowerStateSensorDescription" xml:space="preserve">
     <value>Provides the last monitor power state change:
 

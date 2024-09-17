@@ -3285,4 +3285,7 @@ Do you want to download the runtime installer?</value>
   <data name="HassAction_Press" xml:space="preserve">
     <value>Presse</value>
   </data>
+  <data name="SensorType_DeviceTrackerSensor" xml:space="preserve">
+    <value>DeviceLocationTracker</value>
+  </data>
 </root>
