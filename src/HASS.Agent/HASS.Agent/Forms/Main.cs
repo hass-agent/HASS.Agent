@@ -1,4 +1,5 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using HASS.Agent.API;
 using HASS.Agent.Commands;
 using HASS.Agent.Enums;
@@ -20,6 +21,7 @@ using HASS.Agent.Shared.Enums;
 using HASS.Agent.Shared.Extensions;
 using HASS.Agent.Shared.Functions;
 using HASS.Agent.Shared.Managers;
+using HASS.Agent.Shared.Managers.Audio;
 using Serilog;
 using Syncfusion.Windows.Forms;
 using WindowsDesktop;
@@ -89,11 +91,12 @@ namespace HASS.Agent.Forms
                 // core components initialization - required for loading the entities
                 await RadioManager.Initialize();
                 await InternalDeviceSensorsManager.Initialize();
-				InitializeHardwareManager();
-				InitializeVirtualDesktopManager();
+                InitializeHardwareManager();
+                InitializeVirtualDesktopManager();
+                await Task.Run(InitializeAudioManager);
 
-				// load entities
-				var loaded = await SettingsManager.LoadEntitiesAsync();
+                // load entities
+                var loaded = await SettingsManager.LoadEntitiesAsync();
                 if (!loaded)
                 {
                     MessageBoxAdv.Show(this, Languages.Main_Load_MessageBox1, Variables.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -163,6 +166,7 @@ namespace HASS.Agent.Forms
 
         private void OnProcessExit(object sender, EventArgs e)
         {
+            AudioManager.Shutdown();
             HardwareManager.Shutdown();
             NotificationManager.Exit();
         }
@@ -245,8 +249,15 @@ namespace HASS.Agent.Forms
             MessageBoxAdv.Show(this, Languages.Main_CheckDpiScalingFactor_MessageBox1, Variables.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
         }
 
-        private static void ProcessTrayIcon()
+        private void ProcessTrayIcon()
         {
+            if (Variables.AppSettings.TrayIconUseModern)
+            {
+                var icon = (Icon)new System.Resources.ResourceManager(typeof(Main)).GetObject("ModernNotifyIcon");
+                if (icon != null)
+                    NotifyIcon.Icon = icon;
+            }
+
             // are we set to show the webview and keep it loaded?
             if (!Variables.AppSettings.TrayIconShowWebView)
                 return;
@@ -328,6 +339,14 @@ namespace HASS.Agent.Forms
         }
 
         /// <summary>
+        /// Initialized the Audio Manager
+        /// </summary>
+        private void InitializeAudioManager()
+        {
+            AudioManager.Initialize();
+        }
+
+        /// <summary>
         /// Hide if not shutting down, close otherwise
         /// </summary>
         /// <param name="sender"></param>
@@ -337,7 +356,19 @@ namespace HASS.Agent.Forms
             if (_isClosing)
                 return;
 
-            Invoke(new MethodInvoker(Hide));
+            Invoke(() =>
+            {
+                HelperFunctions.GetForm("QuickActions")?.Close();
+                HelperFunctions.GetForm("Configuration")?.Close();
+                HelperFunctions.GetForm("QuickActionsConfig")?.Close();
+                HelperFunctions.GetForm("SensorsConfig")?.Close();
+                HelperFunctions.GetForm("ServiceConfig")?.Close();
+                HelperFunctions.GetForm("CommandsConfig")?.Close();
+                HelperFunctions.GetForm("Help")?.Close();
+                HelperFunctions.GetForm("Donate")?.Close();
+
+                new MethodInvoker(Hide).Invoke();
+            });
 
             if (!Variables.ShuttingDown)
             {
@@ -389,6 +420,11 @@ namespace HASS.Agent.Forms
             }));
         }
 
+        private void HideToTray()
+        {
+            Hide();
+        }
+
         /// <summary>
         /// Show/hide ourself
         /// </summary>
@@ -401,7 +437,7 @@ namespace HASS.Agent.Forms
 
             if (Visible)
             {
-                Hide();
+                HideToTray();
             }
             else
             {
@@ -456,7 +492,7 @@ namespace HASS.Agent.Forms
 
             if (exitDialog.HideToTray)
             {
-                Hide();
+                HideToTray();
 
                 return;
             }
@@ -720,7 +756,7 @@ namespace HASS.Agent.Forms
 
         private void BtnExit_Click(object sender, EventArgs e) => Exit();
 
-        private void BtnHide_Click(object sender, EventArgs e) => Hide();
+        private void BtnHide_Click(object sender, EventArgs e) => HideToTray();
 
         private void BtnAppSettings_Click(object sender, EventArgs e) => ShowConfiguration();
 
@@ -736,7 +772,11 @@ namespace HASS.Agent.Forms
         {
             if (e.KeyCode != Keys.Escape)
                 return;
-            Hide();
+
+            // Escape Pressed, but make sure it's not escape while alt-tabbing
+            if (e.Alt) return;
+
+            HideToTray();
         }
 
         private void TsShow_Click(object sender, EventArgs e) => ShowMain();
@@ -808,7 +848,7 @@ namespace HASS.Agent.Forms
                 }
 
                 // new update, hide
-                Hide();
+                HideToTray();
 
                 // show info
                 ShowUpdateInfo(version);
@@ -931,16 +971,7 @@ namespace HASS.Agent.Forms
                 return;
             }
 
-            // prepare the webview
-            var webView = new WebViewInfo
-            {
-                Url = Variables.AppSettings.TrayIconWebViewUrl,
-                Height = Variables.AppSettings.TrayIconWebViewHeight,
-                Width = Variables.AppSettings.TrayIconWebViewWidth,
-            };
-
-            // show it
-            HelperFunctions.LaunchTrayIconWebView(webView);
+            HelperFunctions.LaunchTrayIconWebView();
         }
 
         private async void PbDonate_Click(object sender, EventArgs e)
