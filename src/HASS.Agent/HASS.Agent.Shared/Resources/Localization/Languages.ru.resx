@@ -3296,4 +3296,28 @@ Home Assistant.
   <data name="SensorType_ActiveDesktopSensor" xml:space="preserve">
     <value>Активдесктоп</value>
   </data>
+  <data name="CommandType_SetApplicationVolumeCommand" xml:space="preserve">
+    <value>Установить громкость приложения</value>
+  </data>
+  <data name="CommandType_SetAudioOutputCommand" xml:space="preserve">
+    <value>Установить команду вывода звука</value>
+  </data>
+  <data name="SensorType_ScreenshotSensor" xml:space="preserve">
+    <value>Скриншот</value>
+  </data>
+  <data name="CommandType_SetAudioInputCommand" xml:space="preserve">
+    <value>Установить команду аудиовхода</value>
+  </data>
+  <data name="CommandType_TrayWebViewCommand" xml:space="preserve">
+    <value>TrayWebView</value>
+  </data>
+  <data name="HassAction_Trigger" xml:space="preserve">
+    <value>Вызывать</value>
+  </data>
+  <data name="HassDomain_Button" xml:space="preserve">
+    <value>Button</value>
+  </data>
+  <data name="HassAction_Press" xml:space="preserve">
+    <value>Нажимать</value>
+  </data>
 </root>

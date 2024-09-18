@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using HASS.Agent.Shared.Enums;
 using HASS.Agent.Shared.Models.HomeAssistant;
+using HASS.Agent.Shared.Resources.Localization;
 using Serilog;
 
 namespace HASS.Agent.Shared.HomeAssistant.Commands
@@ -50,7 +53,7 @@ namespace HASS.Agent.Shared.HomeAssistant.Commands
             //
         }
 
-        public override async void TurnOn()
+        public async override void TurnOn()
         {
             try
             {
@@ -73,9 +76,63 @@ namespace HASS.Agent.Shared.HomeAssistant.Commands
             }
         }
 
-        public override void TurnOnWithAction(string action)
+        public async override void TurnOnWithAction(string action)
         {
-            //
+            var keys = ParseMultipleKeys(action);
+            if (keys.Count == 0)
+                return;
+
+            foreach (var key in keys)
+            {
+                SendKeys.SendWait(key);
+                SendKeys.Flush();
+                await Task.Delay(50);
+            }
+        }
+
+        private List<string> ParseMultipleKeys(string keyString)
+        {
+            var keys = new List<string>();
+
+            try
+            {
+                if (string.IsNullOrWhiteSpace(keyString))
+                    return keys;
+
+
+                if (!keyString.Contains('[') || !keyString.Contains(']'))
+                    return keys;
+
+                // replace all escaped brackets
+                // todo: ugly, let regex do that
+                keyString = keyString.Replace(@"\[", "left_bracket");
+                keyString = keyString.Replace(@"\]", "right_bracket");
+
+                // lets see if the brackets corresponds
+                var leftBrackets = keyString.Count(x => x == '[');
+                var rightBrackets = keyString.Count(x => x == ']');
+
+                if (leftBrackets != rightBrackets)
+                    return keys;
+
+                // ok, try parsen
+                var pattern = @"\[(.*?)\]";
+                var matches = Regex.Matches(keyString, pattern);
+                keys.AddRange(from Match m in matches select m.Groups[1].ToString());
+
+                // restore escaped brackets
+                for (var i = 0; i < keys.Count; i++)
+                {
+                    if (keys[i] == "left_bracket") keys[i] = "[";
+                    if (keys[i] == "right_bracket") keys[i] = "]";
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error("[MULTIPLEKEYS] [{name}] Error parsing multiple keys: {msg}", EntityName, ex.Message);
+            }
+
+            return keys;
         }
     }
 }

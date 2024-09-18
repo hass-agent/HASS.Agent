@@ -3152,20 +3152,16 @@ Verzeker dat Windows' localisatieservices ingeschakeld zijn!
 
 Afhankelijk van je Windows versie, kan dit gevonden worden in het nieuwe configuratiescherm -&gt; 'privacy en beveiliging' -&gt; 'locatie'.</value>
   </data>
-  <data name="SensorsManager_MicrophoneProcessSensorDescription" xml:space="preserve">
-    <value>Geeft de naam van het proces dat momenteel de microfoon gebruikt.
-
-Notitie: als hij in de satellietservice gebruikt wordt, zal hij geen gebruikerapplicaties detecteren.</value>
-  </data>
   <data name="SensorsManager_MonitorPowerStateSensorDescription" xml:space="preserve">
     <value>Geeft de laatste beeldscherm energiemodus status verandering:
 
 Gedimmed, Uitgeschakeld, Ingeschakeld en Onbekend</value>
   </data>
   <data name="SensorsManager_PowershellSensorDescription" xml:space="preserve">
-    <value>Geeft het resultaat van het opgegeven Powershell commando of script.
+    <value>Retourneert het resultaat van de opgegeven Powershell-opdracht of -script.
+Opmerking: houd er rekening mee dat Home Assistant een payload van maximaal 255 tekens accepteert.
 
-Converteert de uitkomst naar text.</value>
+Converteert de uitkomst naar tekst.</value>
   </data>
   <data name="SensorsManager_PrintersSensorsDescription" xml:space="preserve">
     <value>Geeft informatie over alle geïnstalleerde printers en hun wachtrijen.</value>
@@ -3317,7 +3313,15 @@ Commando/payload moet in JSON-indeling zijn. Voorbeeld van alle mogelijke opties
 }
 Als er geen "playbackDevice" is opgegeven, zal HASS.Agent het standaardapparaat gebruiken.
 Als er geen "volume" is opgegeven, zal HASS.Agent alleen de mute-status instellen.
-Als er geen "mute" is opgegeven, zal HASS.Agent het dempen van de opgegeven applicatie opheffen.</value>
+Als er geen "mute" is opgegeven, zal HASS.Agent het dempen van de opgegeven applicatie opheffen.
+
+Geavanceerde optie: er kan een extra "sessionId" worden opgegeven om het volume alleen in te stellen voor een specifieke sessie van de applicatie. De sessie-ID kan worden verkregen via de sensor "Audio Sessions":
+{
+   "playbackDevice":"Speakers (THX SpatialAudio)",
+   "applicationName":"Discord",
+   "volume":50,
+   "sessionid":"&lt;LONG SESSION ID FROM SENSOR&gt;"
+}</value>
   </data>
   <data name="CommandsMod_BtnStore_InvalidJson" xml:space="preserve">
     <value>Voer een geldige JSON-string in!</value>
@@ -3360,5 +3364,68 @@ van de originele versie</value>
   </data>
   <data name="Compat_NameTask_Error_ServiceStart" xml:space="preserve">
     <value>Fout bij starten satellietservice!</value>
+  </data>
+  <data name="CommandsManager_SetAudioOutputCommandDescription" xml:space="preserve">
+    <value>Stelt de standaard audio-uitvoer voor het systeem in.
+Vereist de naam van het audioapparaat als payload.</value>
+  </data>
+  <data name="CommandsMod_LblSetting_AudioDeviceName" xml:space="preserve">
+    <value>Naam audioapparaat</value>
+  </data>
+  <data name="CommandsMod_LblSetting_JsonPayload" xml:space="preserve">
+    <value>JSON-opdrachtpayload</value>
+  </data>
+  <data name="CommandsMod_LblSetting_VolumeRange" xml:space="preserve">
+    <value>Volume (tussen 0 en 100)</value>
+  </data>
+  <data name="SensorsManager_ScreenshotSensorDescription" xml:space="preserve">
+    <value>U levert een screenshot-sensor in de vorm van een camera-entiteit.
+Schermnummer is afhankelijk van de systeemconfiguratie - begint bij 0.</value>
+  </data>
+  <data name="SensorsMod_LblSetting1_ScreenNumber" xml:space="preserve">
+    <value>Schermnummer</value>
+  </data>
+  <data name="CommandsManager_SetAudioInputCommandDescription" xml:space="preserve">
+    <value>Stelt de standaardaudio-invoer in voor het systeem (inclusief het standaardcommunicatieapparaat).
+U hebt de naam van het audioapparaat nodig als payload.</value>
+  </data>
+  <data name="ConfigMqtt_CbIgnoreGracePeriod" xml:space="preserve">
+    <value>Negeer de respijtperiode na het ontwaken uit de winterslaap</value>
+  </data>
+  <data name="ConfigTrayIcon_CbUseModernIcon" xml:space="preserve">
+    <value>Gebruik het moderne ladepictogram</value>
+  </data>
+  <data name="SensorsManager_MicrophoneProcessSensorDescription" xml:space="preserve">
+    <value>Geeft het aantal processen weer die momenteel de microfoon gebruiken - geeft bovendien de naam van de processen in de attributen van de sensor.
+
+Opmerking: indien gebruikt in de satellietdienst, zal het geen gebruikersruimtetoepassingen detecteren.</value>
+  </data>
+  <data name="Configuration_NFC" xml:space="preserve">
+    <value>NFC</value>
+  </data>
+  <data name="AdvancedSensorConfig_Title" xml:space="preserve">
+    <value>Geavanceerde instellingen</value>
+  </data>
+  <data name="SensorsMod_BtnAdvancedSettings" xml:space="preserve">
+    <value>Gea&amp;vanceerde instellingen</value>
+  </data>
+  <data name="AdvancedSensorConfig_Warning" xml:space="preserve">
+    <value>Waarschuwing: het toevoegen van de volgende instellingen (overschrijvingen) kan de sensor kapot maken, wees voorzichtig!</value>
+  </data>
+  <data name="CommandsManager_TrayWebViewCommandDescription" xml:space="preserve">
+    <value>Toont/verbergt het Tray Icon Web View.
+Vereist dat het geconfigureerd is in "Configuratie -&gt; Tray Icon"</value>
+  </data>
+  <data name="HassAction_Trigger" xml:space="preserve">
+    <value>Activering</value>
+  </data>
+  <data name="HassDomain_Button" xml:space="preserve">
+    <value>Knop</value>
+  </data>
+  <data name="HassAction_Press" xml:space="preserve">
+    <value>Pers</value>
+  </data>
+  <data name="Notification_Dismiss" xml:space="preserve">
+    <value>Afwijzen</value>
   </data>
 </root>

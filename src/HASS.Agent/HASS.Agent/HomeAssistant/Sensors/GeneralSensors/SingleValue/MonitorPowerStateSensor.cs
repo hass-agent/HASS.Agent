@@ -10,7 +10,7 @@ namespace HASS.Agent.HomeAssistant.Sensors.GeneralSensors.SingleValue
     public class MonitorPowerStateSensor : AbstractSingleValueSensor
     {
         private const string DefaultName = "monitorpowerstate";
-        public MonitorPowerStateSensor(int? updateInterval = 10, string entityName = DefaultName, string name = DefaultName, string id = default) : base(entityName ?? DefaultName, name ?? null, updateInterval ?? 30, id) { }
+        public MonitorPowerStateSensor(int? updateInterval = 10, string entityName = DefaultName, string name = DefaultName, string id = default, string advancedSettings = default) : base(entityName ?? DefaultName, name ?? null, updateInterval ?? 30, id, advancedSettings: advancedSettings) { }
 
         public override DiscoveryConfigModel GetAutoDiscoveryConfig()
         {

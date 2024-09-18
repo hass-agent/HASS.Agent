@@ -11,6 +11,9 @@ namespace HASS.Agent.Managers.DeviceSensors
     {
         private readonly Windows.Devices.Sensors.LightSensor _lightSensor;
 
+        public string MeasurementType { get; } = "illuminance";
+        public string UnitOfMeasurement { get; } = "lx";
+
         public bool Available => _lightSensor != null;
         public InternalDeviceSensorType Type => InternalDeviceSensorType.LightSensor;
         public string Measurement
@@ -19,10 +22,16 @@ namespace HASS.Agent.Managers.DeviceSensors
             {
                 if (!Available)
                     return null;
+                
+                var sensorReading = _lightSensor.GetCurrentReading();
+                if (sensorReading == null)
+                    return null;
 
-                return Math.Round((decimal)_lightSensor.GetCurrentReading().IlluminanceInLux, 2).ToString();
+                return Math.Round((decimal)sensorReading.IlluminanceInLux, 2).ToString();
             }
         }
+
+        public bool IsNumeric { get; } = true;
 
         public Dictionary<string, string> Attributes => InternalDeviceSensor.NoAttributes;
 

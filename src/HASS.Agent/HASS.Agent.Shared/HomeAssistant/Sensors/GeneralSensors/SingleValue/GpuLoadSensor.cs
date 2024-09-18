@@ -14,7 +14,7 @@ public class GpuLoadSensor : AbstractSingleValueSensor
 	private const string DefaultName = "gpuload";
 	private readonly IHardware _gpu;
 
-	public GpuLoadSensor(int? updateInterval = null, string entityName = DefaultName, string name = DefaultName, string id = default) : base(entityName ?? DefaultName, name ?? null, updateInterval ?? 30, id)
+	public GpuLoadSensor(int? updateInterval = null, string entityName = DefaultName, string name = DefaultName, string id = default, string advancedSettings = default) : base(entityName ?? DefaultName, name ?? null, updateInterval ?? 30, id, advancedSettings: advancedSettings)
 	{
 		_gpu = HardwareManager.Hardware.FirstOrDefault(
 			h => h.HardwareType == HardwareType.GpuAmd ||
@@ -40,7 +40,8 @@ public class GpuLoadSensor : AbstractSingleValueSensor
 			Device = deviceConfig,
 			State_topic = $"{Variables.MqttManager.MqttDiscoveryPrefix()}/{Domain}/{deviceConfig.Name}/{ObjectId}/state",
 			Unit_of_measurement = "%",
-			Availability_topic = $"{Variables.MqttManager.MqttDiscoveryPrefix()}/{Domain}/{deviceConfig.Name}/availability"
+            State_class = "measurement",
+            Availability_topic = $"{Variables.MqttManager.MqttDiscoveryPrefix()}/{Domain}/{deviceConfig.Name}/availability"
 		});
 	}
 

@@ -3352,4 +3352,28 @@ Willst Du den Runtime Installer herunterladen?</value>
   <data name="SensorType_ActiveDesktopSensor" xml:space="preserve">
     <value>AktiverDesktop</value>
   </data>
+  <data name="CommandType_SetApplicationVolumeCommand" xml:space="preserve">
+    <value>Legen Sie die Anwendungslautstärke fest</value>
+  </data>
+  <data name="CommandType_SetAudioOutputCommand" xml:space="preserve">
+    <value>Legen Sie den Audioausgabebefehl fest</value>
+  </data>
+  <data name="SensorType_ScreenshotSensor" xml:space="preserve">
+    <value>Bildschirmfoto</value>
+  </data>
+  <data name="CommandType_SetAudioInputCommand" xml:space="preserve">
+    <value>Legen Sie den Audioeingabebefehl fest</value>
+  </data>
+  <data name="CommandType_TrayWebViewCommand" xml:space="preserve">
+    <value>TrayWebView</value>
+  </data>
+  <data name="HassAction_Trigger" xml:space="preserve">
+    <value>Auslösen</value>
+  </data>
+  <data name="HassDomain_Button" xml:space="preserve">
+    <value>Knopf</value>
+  </data>
+  <data name="HassAction_Press" xml:space="preserve">
+    <value>Presse</value>
+  </data>
 </root>

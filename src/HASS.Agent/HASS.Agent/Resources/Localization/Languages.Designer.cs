@@ -164,6 +164,51 @@ namespace HASS.Agent.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Device class.
+        /// </summary>
+        internal static string AdvancedSensorConfig_LblDeviceClass {
+            get {
+                return ResourceManager.GetString("AdvancedSensorConfig_LblDeviceClass", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to State class.
+        /// </summary>
+        internal static string AdvancedSensorConfig_LblStateClass {
+            get {
+                return ResourceManager.GetString("AdvancedSensorConfig_LblStateClass", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unit of measurement.
+        /// </summary>
+        internal static string AdvancedSensorConfig_LblUnitOfMeasurement {
+            get {
+                return ResourceManager.GetString("AdvancedSensorConfig_LblUnitOfMeasurement", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Advanced Settings.
+        /// </summary>
+        internal static string AdvancedSensorConfig_Title {
+            get {
+                return ResourceManager.GetString("AdvancedSensorConfig_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Warning, adding following settings (overrides) may break the sensor, use with caution!.
+        /// </summary>
+        internal static string AdvancedSensorConfig_Warning {
+            get {
+                return ResourceManager.GetString("AdvancedSensorConfig_Warning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Button.
         /// </summary>
         internal static string CommandEntityType_Button {
@@ -609,6 +654,26 @@ namespace HASS.Agent.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Sets the default audio input for the system (including default communication device).
+        ///Requires audio device name as a payload..
+        /// </summary>
+        internal static string CommandsManager_SetAudioInputCommandDescription {
+            get {
+                return ResourceManager.GetString("CommandsManager_SetAudioInputCommandDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sets the default audio output for the system.
+        ///Requires audio device name as a payload..
+        /// </summary>
+        internal static string CommandsManager_SetAudioOutputCommandDescription {
+            get {
+                return ResourceManager.GetString("CommandsManager_SetAudioOutputCommandDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sets the volume of the current default audiodevice to the specified level..
         /// </summary>
         internal static string CommandsManager_SetVolumeCommandDescription {
@@ -647,6 +712,16 @@ namespace HASS.Agent.Resources.Localization {
         internal static string CommandsManager_SwitchDesktopCommandDescription {
             get {
                 return ResourceManager.GetString("CommandsManager_SwitchDesktopCommandDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Shows / hides the Tray Icon Web View.
+        ///Requires it to be configured in &quot;Configuration -&gt; Tray Icon&quot;.
+        /// </summary>
+        internal static string CommandsManager_TrayWebViewCommandDescription {
+            get {
+                return ResourceManager.GetString("CommandsManager_TrayWebViewCommandDescription", resourceCulture);
             }
         }
         
@@ -1039,6 +1114,15 @@ namespace HASS.Agent.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Audio Device Name.
+        /// </summary>
+        internal static string CommandsMod_LblSetting_AudioDeviceName {
+            get {
+                return ResourceManager.GetString("CommandsMod_LblSetting_AudioDeviceName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Command.
         /// </summary>
         internal static string CommandsMod_LblSetting_Command {
@@ -1053,6 +1137,15 @@ namespace HASS.Agent.Resources.Localization {
         internal static string CommandsMod_LblSetting_CommandScript {
             get {
                 return ResourceManager.GetString("CommandsMod_LblSetting_CommandScript", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to JSON Command Payload.
+        /// </summary>
+        internal static string CommandsMod_LblSetting_JsonPayload {
+            get {
+                return ResourceManager.GetString("CommandsMod_LblSetting_JsonPayload", resourceCulture);
             }
         }
         
@@ -1089,6 +1182,15 @@ namespace HASS.Agent.Resources.Localization {
         internal static string CommandsMod_LblSetting_Url {
             get {
                 return ResourceManager.GetString("CommandsMod_LblSetting_Url", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Volume (between 0 and 100).
+        /// </summary>
+        internal static string CommandsMod_LblSetting_VolumeRange {
+            get {
+                return ResourceManager.GetString("CommandsMod_LblSetting_VolumeRange", resourceCulture);
             }
         }
         
@@ -2316,6 +2418,15 @@ namespace HASS.Agent.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ignore grace period after waking up from hibernation.
+        /// </summary>
+        internal static string ConfigMqtt_CbIgnoreGracePeriod {
+            get {
+                return ResourceManager.GetString("ConfigMqtt_CbIgnoreGracePeriod", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &amp;TLS.
         /// </summary>
         internal static string ConfigMqtt_CbMqttTls {
@@ -3000,6 +3111,15 @@ namespace HASS.Agent.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Use modern tray icon.
+        /// </summary>
+        internal static string ConfigTrayIcon_CbUseModernIcon {
+            get {
+                return ResourceManager.GetString("ConfigTrayIcon_CbUseModernIcon", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &amp;Keep page loaded in the background.
         /// </summary>
         internal static string ConfigTrayIcon_CbWebViewKeepLoaded {
@@ -3189,6 +3309,15 @@ namespace HASS.Agent.Resources.Localization {
         internal static string Configuration_MessageBox_RestartManually {
             get {
                 return ResourceManager.GetString("Configuration_MessageBox_RestartManually", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to NFC.
+        /// </summary>
+        internal static string Configuration_NFC {
+            get {
+                return ResourceManager.GetString("Configuration_NFC", resourceCulture);
             }
         }
         
@@ -3543,6 +3672,15 @@ namespace HASS.Agent.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Press.
+        /// </summary>
+        internal static string HassAction_Press {
+            get {
+                return ResourceManager.GetString("HassAction_Press", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Stop.
         /// </summary>
         internal static string HassAction_Stop {
@@ -3557,6 +3695,15 @@ namespace HASS.Agent.Resources.Localization {
         internal static string HassAction_Toggle {
             get {
                 return ResourceManager.GetString("HassAction_Toggle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Trigger.
+        /// </summary>
+        internal static string HassAction_Trigger {
+            get {
+                return ResourceManager.GetString("HassAction_Trigger", resourceCulture);
             }
         }
         
@@ -3647,6 +3794,15 @@ namespace HASS.Agent.Resources.Localization {
         internal static string HassDomain_Automation {
             get {
                 return ResourceManager.GetString("HassDomain_Automation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Button.
+        /// </summary>
+        internal static string HassDomain_Button {
+            get {
+                return ResourceManager.GetString("HassDomain_Button", resourceCulture);
             }
         }
         
@@ -4353,6 +4509,15 @@ namespace HASS.Agent.Resources.Localization {
         internal static string MqttManager_ToolTip_Disconnected {
             get {
                 return ResourceManager.GetString("MqttManager_ToolTip_Disconnected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dismiss.
+        /// </summary>
+        internal static string Notification_Dismiss {
+            get {
+                return ResourceManager.GetString("Notification_Dismiss", resourceCulture);
             }
         }
         
@@ -5969,7 +6134,7 @@ namespace HASS.Agent.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Provides the name of the process that&apos;s currently using the microphone.
+        ///   Looks up a localized string similar to Provides the number of the processes that currently use the microphone - additionally provides name of the processes in the sensor&apos;s attributes.
         ///
         ///Note: if used in the satellite service, it won&apos;t detect userspace applications..
         /// </summary>
@@ -6029,6 +6194,7 @@ namespace HASS.Agent.Resources.Localization {
         
         /// <summary>
         ///   Looks up a localized string similar to Returns the result of the provided Powershell command or script.
+        ///Note: please keep in mind that Home Assistant accepts payload up to 255 characters.
         ///
         ///Converts the outcome to text..
         /// </summary>
@@ -6055,6 +6221,16 @@ namespace HASS.Agent.Resources.Localization {
         internal static string SensorsManager_ProcessActiveSensorDescription {
             get {
                 return ResourceManager.GetString("SensorsManager_ProcessActiveSensorDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Provides a screenshot sensor in form of a camera entity.
+        ///Screen number depends on system configuration - starts at 0..
+        /// </summary>
+        internal static string SensorsManager_ScreenshotSensorDescription {
+            get {
+                return ResourceManager.GetString("SensorsManager_ScreenshotSensorDescription", resourceCulture);
             }
         }
         
@@ -6163,6 +6339,15 @@ namespace HASS.Agent.Resources.Localization {
         internal static string SensorsMod_All {
             get {
                 return ResourceManager.GetString("SensorsMod_All", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ad&amp;vanced Settings.
+        /// </summary>
+        internal static string SensorsMod_BtnAdvancedSettings {
+            get {
+                return ResourceManager.GetString("SensorsMod_BtnAdvancedSettings", resourceCulture);
             }
         }
         
@@ -6480,6 +6665,15 @@ namespace HASS.Agent.Resources.Localization {
         internal static string SensorsMod_LblSetting1_Process {
             get {
                 return ResourceManager.GetString("SensorsMod_LblSetting1_Process", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Screen number.
+        /// </summary>
+        internal static string SensorsMod_LblSetting1_ScreenNumber {
+            get {
+                return ResourceManager.GetString("SensorsMod_LblSetting1_ScreenNumber", resourceCulture);
             }
         }
         

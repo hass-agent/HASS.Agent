@@ -15,6 +15,9 @@ namespace HASS.Agent.Managers.DeviceSensors
 
         private readonly Gyrometer _gyrometer;
 
+        public string MeasurementType { get; } = string.Empty;
+        public string UnitOfMeasurement { get; } = string.Empty;
+
         public bool Available => _gyrometer != null;
         public InternalDeviceSensorType Type => InternalDeviceSensorType.Gyrometer;
         public string Measurement
@@ -25,6 +28,9 @@ namespace HASS.Agent.Managers.DeviceSensors
                     return null;
 
                 var sensorReading = _gyrometer.GetCurrentReading();
+                if (sensorReading == null)
+                    return null;
+
                 var angVelX = Math.Round((decimal)sensorReading.AngularVelocityX, 2);
                 var angVelY = Math.Round((decimal)sensorReading.AngularVelocityY, 2);
                 var angVelZ = Math.Round((decimal)sensorReading.AngularVelocityZ, 2);
@@ -40,6 +46,8 @@ namespace HASS.Agent.Managers.DeviceSensors
                 ).ToString();
             }
         }
+
+        public bool IsNumeric { get; } = true;
 
         private readonly Dictionary<string, string> _attributes = new();
         public Dictionary<string, string> Attributes => _attributes;

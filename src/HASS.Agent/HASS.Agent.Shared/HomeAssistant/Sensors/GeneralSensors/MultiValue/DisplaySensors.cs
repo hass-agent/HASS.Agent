@@ -48,7 +48,7 @@ public class DisplaySensors : AbstractMultiValueSensor
         var displayCount = displays.Length;
         var displayCountEntityName = $"{parentSensorSafeName}_display_count";
         var displayCountId = $"{Id}_display_count";
-        var displayCountSensor = new DataTypeIntSensor(_updateInterval, displayCountEntityName, "Display Count", displayCountId, string.Empty, "mdi:monitor", string.Empty, EntityName);
+        var displayCountSensor = new DataTypeIntSensor(_updateInterval, displayCountEntityName, "Display Count", displayCountId, string.Empty, "measurement", "mdi:monitor", string.Empty, EntityName);
         displayCountSensor.SetState(displayCount);
         AddUpdateSensor(displayCountId, displayCountSensor);
 

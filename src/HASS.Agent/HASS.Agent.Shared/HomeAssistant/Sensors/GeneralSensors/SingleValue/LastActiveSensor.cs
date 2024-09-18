@@ -23,7 +23,7 @@ namespace HASS.Agent.Shared.HomeAssistant.Sensors.GeneralSensors.SingleValue
         public bool ApplyRounding { get; private set; }
         public int Round { get; private set; }
 
-        public LastActiveSensor(bool updateOnResume, int? updateOnResumeTimeWindow, int? updateInterval = 10, string entityName = DefaultName, string name = DefaultName, string id = default) : base(entityName ?? DefaultName, name ?? null, updateInterval ?? 10, id)
+        public LastActiveSensor(bool updateOnResume, int? updateOnResumeTimeWindow, int? updateInterval = 10, string entityName = DefaultName, string name = DefaultName, string id = default, string advancedSettings = default) : base(entityName ?? DefaultName, name ?? null, updateInterval ?? 10, id, advancedSettings: advancedSettings)
         {
             ApplyRounding = updateOnResume;
             Round = updateOnResumeTimeWindow ?? 30;

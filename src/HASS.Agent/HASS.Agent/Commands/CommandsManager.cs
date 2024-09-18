@@ -17,6 +17,8 @@ namespace HASS.Agent.Commands
         private static bool _active = true;
         private static bool _pause;
 
+        private static bool _discoveryPublished = false;
+
         private static DateTime _lastAutoDiscoPublish = DateTime.MinValue;
 
         /// <summary>
@@ -66,6 +68,8 @@ namespace HASS.Agent.Commands
                 await command.UnPublishAutoDiscoveryConfigAsync();
                 await Variables.MqttManager.UnsubscribeAsync(command);
             }
+
+            _discoveryPublished = false;
         }
 
         /// <summary>
@@ -103,18 +107,24 @@ namespace HASS.Agent.Commands
 
                     firstRun = false;
 
+                    // publish availability & autodiscovery every 30 sec
                     if ((DateTime.Now - _lastAutoDiscoPublish).TotalSeconds > 30)
                     {
                         await Variables.MqttManager.AnnounceAvailabilityAsync();
 
-                        foreach (var command in Variables.Commands
-                            .TakeWhile(_ => !_pause)
-                            .TakeWhile(_ => _active))
+                        if (!_discoveryPublished)
                         {
-                            if (_pause || Variables.MqttManager.GetStatus() != MqttStatus.Connected)
-                                continue;
+                            foreach (var command in Variables.Commands
+                                .TakeWhile(_ => !_pause)
+                                .TakeWhile(_ => _active))
+                            {
+                                if (_pause || Variables.MqttManager.GetStatus() != MqttStatus.Connected)
+                                    continue;
 
-                            await command.PublishAutoDiscoveryConfigAsync();
+                                await command.PublishAutoDiscoveryConfigAsync();
+                            }
+
+                            _discoveryPublished = true;
                         }
 
                         if (!subscribed)
@@ -413,7 +423,7 @@ namespace HASS.Agent.Commands
 
             commandInfoCard = new CommandInfoCard(CommandType.MultipleKeysCommand,
                 Languages.CommandsManager_MultipleKeysCommandDescription,
-                true, false, false);
+                true, false, true);
 
             CommandInfoCards.Add(commandInfoCard.CommandType, commandInfoCard);
 
@@ -455,13 +465,37 @@ namespace HASS.Agent.Commands
                 Languages.CommandsManager_SwitchDesktopCommandDescription,
                 true, false, true);
 
-            // =================================
-
             CommandInfoCards.Add(commandInfoCard.CommandType, commandInfoCard);
+
+            // =================================
 
             commandInfoCard = new CommandInfoCard(CommandType.SetVolumeCommand,
                 Languages.CommandsManager_SetVolumeCommandDescription,
                 true, true, true);
+
+            CommandInfoCards.Add(commandInfoCard.CommandType, commandInfoCard);
+
+            // =================================
+
+            commandInfoCard = new CommandInfoCard(CommandType.SetApplicationVolumeCommand,
+                Languages.CommandsManager_SetApplicationVolumeCommandDescription,
+                true, false, true);
+
+            CommandInfoCards.Add(commandInfoCard.CommandType, commandInfoCard);
+
+            // =================================
+
+            commandInfoCard = new CommandInfoCard(CommandType.SetAudioOutputCommand,
+                Languages.CommandsManager_SetAudioOutputCommandDescription,
+                true, false, true);
+
+            CommandInfoCards.Add(commandInfoCard.CommandType, commandInfoCard);
+
+            // =================================
+
+            commandInfoCard = new CommandInfoCard(CommandType.SetAudioInputCommand,
+                Languages.CommandsManager_SetAudioInputCommandDescription,
+                true, false, true);
 
             CommandInfoCards.Add(commandInfoCard.CommandType, commandInfoCard);
 
@@ -486,6 +520,14 @@ namespace HASS.Agent.Commands
             commandInfoCard = new CommandInfoCard(CommandType.WebViewCommand,
                 Languages.CommandsManager_WebViewCommandDescription,
                 true, false, true);
+
+            CommandInfoCards.Add(commandInfoCard.CommandType, commandInfoCard);
+
+            // =================================
+
+            commandInfoCard = new CommandInfoCard(CommandType.TrayWebViewCommand,
+                Languages.CommandsManager_TrayWebViewCommandDescription,
+                true, false, false);
 
             CommandInfoCards.Add(commandInfoCard.CommandType, commandInfoCard);
 

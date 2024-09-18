@@ -160,6 +160,9 @@ namespace HASS.Agent.Settings
                 case CommandType.WebViewCommand:
                     abstractCommand = new WebViewCommand(command.EntityName, command.Name, command.Command, command.EntityType, command.Id.ToString());
                     break;
+                case CommandType.TrayWebViewCommand:
+                    abstractCommand = new TrayWebViewCommand(command.EntityName, command.Name, command.EntityType, command.Id.ToString());
+                    break;
                 case CommandType.MonitorSleepCommand:
                     abstractCommand = new MonitorSleepCommand(command.EntityName, command.Name, command.EntityType, command.Id.ToString());
                     break;
@@ -174,6 +177,12 @@ namespace HASS.Agent.Settings
                     break;
                 case CommandType.SetApplicationVolumeCommand:
                     abstractCommand = new SetApplicationVolumeCommand(command.EntityName, command.Name, command.Command, command.EntityType, command.Id.ToString());
+                    break;
+                case CommandType.SetAudioOutputCommand:
+                    abstractCommand = new SetAudioOutputCommand(command.EntityName, command.Name, command.Command, command.EntityType, command.Id.ToString());
+                    break;
+                case CommandType.SetAudioInputCommand:
+                    abstractCommand = new SetAudioInputCommand(command.EntityName, command.Name, command.Command, command.EntityType, command.Id.ToString());
                     break;
                 default:
                     Log.Error("[SETTINGS_COMMANDS] [{name}] Unknown configured command type: {type}", command.EntityName, command.Type.ToString());

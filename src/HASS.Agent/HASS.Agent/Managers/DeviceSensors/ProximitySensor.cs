@@ -11,6 +11,9 @@ namespace HASS.Agent.Managers.DeviceSensors
     {
         private Windows.Devices.Sensors.ProximitySensor _proximitySensor;
 
+        public string MeasurementType { get; } = "distance";
+        public string UnitOfMeasurement { get; } = "mm";
+
         public bool Available => _proximitySensor != null;
         public InternalDeviceSensorType Type => InternalDeviceSensorType.ProximitySensor;
         public string Measurement
@@ -20,9 +23,15 @@ namespace HASS.Agent.Managers.DeviceSensors
                 if (!Available)
                     return null;
 
-                return _proximitySensor.GetCurrentReading().DistanceInMillimeters.ToString();
+                var sensorReading = _proximitySensor.GetCurrentReading();
+                if (sensorReading == null)
+                    return null;
+
+                return sensorReading.DistanceInMillimeters.ToString();
             }
         }
+
+        public bool IsNumeric { get; } = true;
 
         public Dictionary<string, string> Attributes => InternalDeviceSensor.NoAttributes;
 

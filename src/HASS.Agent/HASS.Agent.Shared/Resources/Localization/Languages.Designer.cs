@@ -1285,6 +1285,24 @@ namespace HASS.Agent.Shared.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to SetAudioInputCommand.
+        /// </summary>
+        internal static string CommandType_SetAudioInputCommand {
+            get {
+                return ResourceManager.GetString("CommandType_SetAudioInputCommand", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SetAudioOutputCommand.
+        /// </summary>
+        internal static string CommandType_SetAudioOutputCommand {
+            get {
+                return ResourceManager.GetString("CommandType_SetAudioOutputCommand", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to SetVolume.
         /// </summary>
         internal static string CommandType_SetVolumeCommand {
@@ -1317,6 +1335,15 @@ namespace HASS.Agent.Shared.Resources.Localization {
         internal static string CommandType_SwitchDesktopCommand {
             get {
                 return ResourceManager.GetString("CommandType_SwitchDesktopCommand", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to TrayWebView.
+        /// </summary>
+        internal static string CommandType_TrayWebViewCommand {
+            get {
+                return ResourceManager.GetString("CommandType_TrayWebViewCommand", resourceCulture);
             }
         }
         
@@ -3336,6 +3363,15 @@ namespace HASS.Agent.Shared.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Press.
+        /// </summary>
+        internal static string HassAction_Press {
+            get {
+                return ResourceManager.GetString("HassAction_Press", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Stop.
         /// </summary>
         internal static string HassAction_Stop {
@@ -3350,6 +3386,15 @@ namespace HASS.Agent.Shared.Resources.Localization {
         internal static string HassAction_Toggle {
             get {
                 return ResourceManager.GetString("HassAction_Toggle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Trigger.
+        /// </summary>
+        internal static string HassAction_Trigger {
+            get {
+                return ResourceManager.GetString("HassAction_Trigger", resourceCulture);
             }
         }
         
@@ -3440,6 +3485,15 @@ namespace HASS.Agent.Shared.Resources.Localization {
         internal static string HassDomain_Automation {
             get {
                 return ResourceManager.GetString("HassDomain_Automation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Button.
+        /// </summary>
+        internal static string HassDomain_Button {
+            get {
+                return ResourceManager.GetString("HassDomain_Button", resourceCulture);
             }
         }
         
@@ -6723,6 +6777,15 @@ namespace HASS.Agent.Shared.Resources.Localization {
         internal static string SensorType_ProcessActiveSensor {
             get {
                 return ResourceManager.GetString("SensorType_ProcessActiveSensor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Screenshot.
+        /// </summary>
+        internal static string SensorType_ScreenshotSensor {
+            get {
+                return ResourceManager.GetString("SensorType_ScreenshotSensor", resourceCulture);
             }
         }
         

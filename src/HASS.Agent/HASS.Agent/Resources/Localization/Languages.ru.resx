@@ -3198,18 +3198,14 @@ Home Assistant.
 
 В зависимости от вашей версии Windows, это можно найти в новой панели управления -&gt; 'конфиденциальность и безопасность' -&gt; 'местоположение'.</value>
   </data>
-  <data name="SensorsManager_MicrophoneProcessSensorDescription" xml:space="preserve">
-    <value>Указывает имя процесса, который в данный момент использует микрофон.
-
-Примечание: если он используется в спутниковой службе, он не будет обнаруживать приложения пользовательского пространства.</value>
-  </data>
   <data name="SensorsManager_MonitorPowerStateSensorDescription" xml:space="preserve">
     <value>Обеспечивает последнее изменение состояния питания монитора:
 
 Затемненный, Выключенный, Включенный и Неизвестный.</value>
   </data>
   <data name="SensorsManager_PowershellSensorDescription" xml:space="preserve">
-    <value>Возвращает результат предоставленной команды Powershell или сценария.
+    <value>Возвращает результат предоставленной команды или сценария Powershell.
+Примечание. Имейте в виду, что Home Assistant принимает полезную нагрузку длиной до 255 символов.
 
 Преобразует результат в текст.</value>
   </data>
@@ -3365,7 +3361,15 @@ Home Assistant.
 
 Если «playbackDevice» не указано, HASS.Agent будет использовать устройство по умолчанию.
 Если «громкость» не указана, HASS.Agent установит только статус отключения звука.
-Если «отключение звука» не указано, HASS.Agent включит звук предоставленного приложения.</value>
+Если «отключение звука» не указано, HASS.Agent включит звук предоставленного приложения.
+
+Расширенный вариант: можно указать дополнительный «sessionId» для установки громкости только для определенного сеанса приложения, идентификатор сеанса можно получить из датчика «Аудио сеансы»:
+{
+   "playbackDevice":"Speakers (THX SpatialAudio)",
+   "applicationName":"Discord",
+   "volume":50,
+   "sessionid":"&lt;LONG SESSION ID FROM SENSOR&gt;"
+}</value>
   </data>
   <data name="CommandsMod_BtnStore_InvalidJson" xml:space="preserve">
     <value>Пожалуйста, введите действительную строку JSON!</value>
@@ -3408,5 +3412,68 @@ Home Assistant.
   </data>
   <data name="Compat_NameTask_Error_ServiceStart" xml:space="preserve">
     <value>Ошибка при запуске спутниковой службы!</value>
+  </data>
+  <data name="CommandsManager_SetAudioOutputCommandDescription" xml:space="preserve">
+    <value>Устанавливает аудиовыход по умолчанию для системы.
+В качестве полезной нагрузки требуется имя аудиоустройства.</value>
+  </data>
+  <data name="CommandsMod_LblSetting_VolumeRange" xml:space="preserve">
+    <value>Громкость (от 0 до 100)</value>
+  </data>
+  <data name="CommandsMod_LblSetting_JsonPayload" xml:space="preserve">
+    <value>Полезная нагрузка команды JSON</value>
+  </data>
+  <data name="CommandsMod_LblSetting_AudioDeviceName" xml:space="preserve">
+    <value>Имя аудиоустройства</value>
+  </data>
+  <data name="SensorsManager_ScreenshotSensorDescription" xml:space="preserve">
+    <value>Вы предоставляете датчик скриншота в виде объекта камеры.
+Номер экрана зависит от конфигурации системы — начинается с 0.</value>
+  </data>
+  <data name="SensorsMod_LblSetting1_ScreenNumber" xml:space="preserve">
+    <value>Номер экрана</value>
+  </data>
+  <data name="CommandsManager_SetAudioInputCommandDescription" xml:space="preserve">
+    <value>Устанавливает аудиовход по умолчанию для системы (включая устройство связи по умолчанию).
+В качестве полезной нагрузки требуется имя аудиоустройства.</value>
+  </data>
+  <data name="ConfigMqtt_CbIgnoreGracePeriod" xml:space="preserve">
+    <value>Игнорировать льготный период после выхода из спящего режима</value>
+  </data>
+  <data name="ConfigTrayIcon_CbUseModernIcon" xml:space="preserve">
+    <value>Использовать современный значок в трее</value>
+  </data>
+  <data name="SensorsManager_MicrophoneProcessSensorDescription" xml:space="preserve">
+    <value>Предоставляет количество процессов, которые в данный момент используют микрофон. Дополнительно указывается имя процесса в атрибутах датчика.
+
+Примечание. При использовании в спутниковой службе он не обнаружит приложения пользовательского пространства.</value>
+  </data>
+  <data name="Configuration_NFC" xml:space="preserve">
+    <value>NFC</value>
+  </data>
+  <data name="AdvancedSensorConfig_Title" xml:space="preserve">
+    <value>Расширенные настройки</value>
+  </data>
+  <data name="SensorsMod_BtnAdvancedSettings" xml:space="preserve">
+    <value>Рас&amp;ширенные настройки</value>
+  </data>
+  <data name="AdvancedSensorConfig_Warning" xml:space="preserve">
+    <value>Внимание! Добавление следующих настроек (переопределений) может привести к поломке датчика, используйте с осторожностью!</value>
+  </data>
+  <data name="CommandsManager_TrayWebViewCommandDescription" xml:space="preserve">
+    <value>Показывает/скрывает веб-представление значка в трее.
+Требует настройки в разделе «Конфигурация -&gt; Значок в трее»</value>
+  </data>
+  <data name="HassAction_Trigger" xml:space="preserve">
+    <value>Вызывать</value>
+  </data>
+  <data name="HassDomain_Button" xml:space="preserve">
+    <value>Button</value>
+  </data>
+  <data name="HassAction_Press" xml:space="preserve">
+    <value>Нажимать</value>
+  </data>
+  <data name="Notification_Dismiss" xml:space="preserve">
+    <value>Увольнять</value>
   </data>
 </root>

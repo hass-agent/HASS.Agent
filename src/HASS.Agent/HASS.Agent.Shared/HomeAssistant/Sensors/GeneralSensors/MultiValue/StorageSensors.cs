@@ -117,7 +117,7 @@ public class StorageSensors : AbstractMultiValueSensor
          
         var driveCountEntityName = $"{parentSensorSafeName}_total_disk_count";
         var driveCountId = $"{Id}_total_disk_count";
-        var driveCountSensor = new DataTypeIntSensor(_updateInterval, driveCountEntityName, "Total Disk Count", driveCountId, string.Empty, "mdi:harddisk", string.Empty, EntityName);
+        var driveCountSensor = new DataTypeIntSensor(_updateInterval, driveCountEntityName, "Total Disk Count", driveCountId, string.Empty, "measurement", "mdi:harddisk", string.Empty, EntityName);
         driveCountSensor.SetState(driveCount);
 
         AddUpdateSensor(driveCountId, driveCountSensor);

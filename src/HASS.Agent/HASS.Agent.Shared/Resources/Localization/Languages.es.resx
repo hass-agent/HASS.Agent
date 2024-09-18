@@ -3228,4 +3228,28 @@ Oculta, Maximizada, Minimizada, Normal y Desconocida.</value>
   <data name="SensorType_ActiveDesktopSensor" xml:space="preserve">
     <value>EscritorioActivo</value>
   </data>
+  <data name="CommandType_SetApplicationVolumeCommand" xml:space="preserve">
+    <value>Establecer volumen de aplicación</value>
+  </data>
+  <data name="CommandType_SetAudioOutputCommand" xml:space="preserve">
+    <value>Establecer comando de salida de audio</value>
+  </data>
+  <data name="SensorType_ScreenshotSensor" xml:space="preserve">
+    <value>Captura de pantalla</value>
+  </data>
+  <data name="CommandType_SetAudioInputCommand" xml:space="preserve">
+    <value>Establecer comando de entrada de audio</value>
+  </data>
+  <data name="CommandType_TrayWebViewCommand" xml:space="preserve">
+    <value>Vista web de la bandeja</value>
+  </data>
+  <data name="HassAction_Trigger" xml:space="preserve">
+    <value>Desencadenar</value>
+  </data>
+  <data name="HassDomain_Button" xml:space="preserve">
+    <value>Botón</value>
+  </data>
+  <data name="HassAction_Press" xml:space="preserve">
+    <value>Prensa</value>
+  </data>
 </root>
