@@ -236,8 +236,8 @@ namespace HASS.Agent.Forms.Commands
             ListViewTheme.ShowScrollBar(LvCommands.Handle, ListViewTheme.SB_HORZ, false);
         }
 
-        private void PbActionInfo_Click(object sender, EventArgs e) => HelperFunctions.LaunchUrl("https://www.hass-agent.io/latest/setup/commands/");
+        private void PbActionInfo_Click(object sender, EventArgs e) => HelperFunctions.LaunchUrl("https://www.hass-agent.io/latest/getting-started/commands/");
 
-        private void LblActionInfo_Click(object sender, EventArgs e) => HelperFunctions.LaunchUrl("https://www.hass-agent.io/latest/setup/commands/");
+        private void LblActionInfo_Click(object sender, EventArgs e) => HelperFunctions.LaunchUrl("https://www.hass-agent.io/latest/getting-started/commands/");
     }
 }
