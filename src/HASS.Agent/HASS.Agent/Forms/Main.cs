@@ -1,4 +1,5 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using HASS.Agent.API;
 using HASS.Agent.Commands;
 using HASS.Agent.Enums;
@@ -389,6 +390,11 @@ namespace HASS.Agent.Forms
             }));
         }
 
+        private void HideToTray()
+        {
+            Hide();
+        }
+
         /// <summary>
         /// Show/hide ourself
         /// </summary>
@@ -401,7 +407,7 @@ namespace HASS.Agent.Forms
 
             if (Visible)
             {
-                Hide();
+                HideToTray();
             }
             else
             {
@@ -456,7 +462,7 @@ namespace HASS.Agent.Forms
 
             if (exitDialog.HideToTray)
             {
-                Hide();
+                HideToTray();
 
                 return;
             }
@@ -720,7 +726,7 @@ namespace HASS.Agent.Forms
 
         private void BtnExit_Click(object sender, EventArgs e) => Exit();
 
-        private void BtnHide_Click(object sender, EventArgs e) => Hide();
+        private void BtnHide_Click(object sender, EventArgs e) => HideToTray();
 
         private void BtnAppSettings_Click(object sender, EventArgs e) => ShowConfiguration();
 
@@ -736,7 +742,11 @@ namespace HASS.Agent.Forms
         {
             if (e.KeyCode != Keys.Escape)
                 return;
-            Hide();
+
+            // Escape Pressed, but make sure it's not escape while alt-tabbing
+            if (e.Alt) return;
+
+            HideToTray();
         }
 
         private void TsShow_Click(object sender, EventArgs e) => ShowMain();
@@ -808,7 +818,7 @@ namespace HASS.Agent.Forms
                 }
 
                 // new update, hide
-                Hide();
+                HideToTray();
 
                 // show info
                 ShowUpdateInfo(version);
