@@ -5,7 +5,6 @@ using System.IO;
 using System.Net.Http;
 using System.Reflection;
 using Windows.Media.Playback;
-using CoreAudio;
 using Grapevine;
 using HASS.Agent.Forms;
 using HASS.Agent.Functions;
@@ -123,7 +122,6 @@ namespace HASS.Agent
         /// <summary>
         /// Media
         /// </summary>
-        internal static MMDeviceEnumerator AudioDeviceEnumerator { get; set; }
         internal static MediaPlayer MediaPlayer { get; set; }
 
         /// <summary>

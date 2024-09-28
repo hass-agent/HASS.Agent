@@ -66,7 +66,8 @@ namespace HASS.Agent.Forms.Sensors
 			PbService = new PictureBox();
 			LblSpecificClient = new Label();
 			BtnTest = new Syncfusion.WinForms.Controls.SfButton();
-			CbNetworkCard = new ComboBox();
+            BtnAdvSettings = new Syncfusion.WinForms.Controls.SfButton();
+            CbNetworkCard = new ComboBox();
 			NumRound = new Syncfusion.Windows.Forms.Tools.NumericUpDownExt();
 			LblDigits = new Label();
 			CbApplyRounding = new CheckBox();
@@ -521,10 +522,34 @@ namespace HASS.Agent.Forms.Sensors
 			BtnTest.UseVisualStyleBackColor = false;
 			BtnTest.Visible = false;
 			BtnTest.Click += BtnTest_Click;
-			// 
-			// CbNetworkCard
-			// 
-			CbNetworkCard.AccessibleDescription = "List of available network cards.";
+            // 
+            // BtnAdvSettings
+            // 
+            BtnAdvSettings.AccessibleDescription = "Shows popup with advanced sensor settings.";
+            BtnAdvSettings.AccessibleName = "Advanced settings";
+            BtnAdvSettings.AccessibleRole = AccessibleRole.PushButton;
+            BtnAdvSettings.BackColor = Color.FromArgb(63, 63, 70);
+            BtnAdvSettings.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            BtnAdvSettings.ForeColor = Color.FromArgb(241, 241, 241);
+            BtnAdvSettings.Location = new Point(955, 446);
+            BtnAdvSettings.Name = "BtnTest";
+            BtnAdvSettings.Size = new Size(354, 25);
+            BtnAdvSettings.Style.BackColor = Color.FromArgb(63, 63, 70);
+            BtnAdvSettings.Style.FocusedBackColor = Color.FromArgb(63, 63, 70);
+            BtnAdvSettings.Style.FocusedForeColor = Color.FromArgb(241, 241, 241);
+            BtnAdvSettings.Style.ForeColor = Color.FromArgb(241, 241, 241);
+            BtnAdvSettings.Style.HoverBackColor = Color.FromArgb(63, 63, 70);
+            BtnAdvSettings.Style.HoverForeColor = Color.FromArgb(241, 241, 241);
+            BtnAdvSettings.Style.PressedForeColor = Color.Black;
+            BtnAdvSettings.TabIndex = 48;
+            BtnAdvSettings.Text = Languages.SensorsMod_BtnAdvancedSettings;
+            BtnAdvSettings.UseVisualStyleBackColor = false;
+            BtnAdvSettings.Visible = false;
+            BtnAdvSettings.Click += BtnAdvSettings_Click;
+            // 
+            // CbNetworkCard
+            // 
+            CbNetworkCard.AccessibleDescription = "List of available network cards.";
 			CbNetworkCard.AccessibleName = "Network cards";
 			CbNetworkCard.AccessibleRole = AccessibleRole.DropList;
 			CbNetworkCard.BackColor = Color.FromArgb(63, 63, 70);
@@ -688,6 +713,7 @@ namespace HASS.Agent.Forms.Sensors
 			Controls.Add(LblDescription);
 			Controls.Add(LblSetting1);
 			Controls.Add(BtnStore);
+            Controls.Add(BtnAdvSettings);
 			Controls.Add(TbSetting1);
 			Controls.Add(LblType);
 			Controls.Add(LblSeconds);
@@ -755,7 +781,8 @@ namespace HASS.Agent.Forms.Sensors
 		private Label LblSpecificClient;
 		private ColumnHeader ClmId;
 		private Syncfusion.WinForms.Controls.SfButton BtnTest;
-		private ComboBox CbNetworkCard;
+        private Syncfusion.WinForms.Controls.SfButton BtnAdvSettings;
+        private ComboBox CbNetworkCard;
 		private Syncfusion.Windows.Forms.Tools.NumericUpDownExt NumRound;
 		private Label LblDigits;
 		internal CheckBox CbApplyRounding;

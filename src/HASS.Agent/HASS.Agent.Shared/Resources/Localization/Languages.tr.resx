@@ -2835,4 +2835,28 @@ Lütfen aracınız için credentialları sağlayın, HA Mosquitto eklentisini ku
   <data name="SensorType_ActiveDesktopSensor" xml:space="preserve">
     <value>AktifMasaüstü</value>
   </data>
+  <data name="CommandType_SetApplicationVolumeCommand" xml:space="preserve">
+    <value>Uygulama Sesini Ayarla</value>
+  </data>
+  <data name="CommandType_SetAudioOutputCommand" xml:space="preserve">
+    <value>Ses Çıkışı Komutunu Ayarla</value>
+  </data>
+  <data name="SensorType_ScreenshotSensor" xml:space="preserve">
+    <value>Ekran görüntüsü</value>
+  </data>
+  <data name="CommandType_SetAudioInputCommand" xml:space="preserve">
+    <value>Ses Giriş Komutunu Ayarla</value>
+  </data>
+  <data name="CommandType_TrayWebViewCommand" xml:space="preserve">
+    <value>TepsiWebGörünümü</value>
+  </data>
+  <data name="HassAction_Trigger" xml:space="preserve">
+    <value>Tetiklemek</value>
+  </data>
+  <data name="HassDomain_Button" xml:space="preserve">
+    <value>Buton</value>
+  </data>
+  <data name="HassAction_Press" xml:space="preserve">
+    <value>Basmak</value>
+  </data>
 </root>

@@ -11,6 +11,9 @@ namespace HASS.Agent.Managers.DeviceSensors
     {
         private readonly Windows.Devices.Sensors.SimpleOrientationSensor _simpleOrientationSensor;
 
+        public string MeasurementType { get; } = string.Empty;
+        public string UnitOfMeasurement { get; } = string.Empty;
+
         public bool Available => _simpleOrientationSensor != null;
         public InternalDeviceSensorType Type => InternalDeviceSensorType.SimpleOrientationSensor;
         public string Measurement
@@ -23,6 +26,8 @@ namespace HASS.Agent.Managers.DeviceSensors
                 return _simpleOrientationSensor.GetCurrentOrientation().ToString();
             }
         }
+
+        public bool IsNumeric { get; } = false;
 
         public Dictionary<string, string> Attributes => InternalDeviceSensor.NoAttributes;
 

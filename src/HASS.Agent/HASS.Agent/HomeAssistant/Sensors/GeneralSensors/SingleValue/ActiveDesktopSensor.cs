@@ -26,7 +26,7 @@ namespace HASS.Agent.Shared.HomeAssistant.Sensors.GeneralSensors.SingleValue
         private string _desktopName = string.Empty;
         private string _attributes = string.Empty;
 
-        public ActiveDesktopSensor(int? updateInterval = null, string entityName = _defaultName, string name = _defaultName, string id = default) : base(entityName ?? _defaultName, name ?? null, updateInterval ?? 15, id)
+        public ActiveDesktopSensor(int? updateInterval = null, string entityName = _defaultName, string name = _defaultName, string id = default, string advancedSettings = default) : base(entityName ?? _defaultName, name ?? null, updateInterval ?? 15, id, advancedSettings: advancedSettings)
         {
             UseAttributes = true;
         }

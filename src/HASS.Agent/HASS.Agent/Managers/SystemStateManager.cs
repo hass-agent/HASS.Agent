@@ -1,6 +1,7 @@
 ﻿using System.Runtime.InteropServices;
 using HASS.Agent.Functions;
 using HASS.Agent.Shared.Enums;
+using HASS.Agent.Shared.Managers.Audio;
 using Microsoft.Win32;
 using Serilog;
 
@@ -12,7 +13,7 @@ namespace HASS.Agent.Managers
         /// The pointer to unregister the monitor power notifications
         /// </summary>
         internal static IntPtr UnRegPowerNotify { get; set; } = IntPtr.Zero;
-        
+
         /// <summary>
         /// Notes the last time something happened to the system's state, eg. user logged on, session locked, etc
         /// </summary>
@@ -21,7 +22,21 @@ namespace HASS.Agent.Managers
         /// <summary>
         /// Contains the last event that happened to the system, eg. user logged on, session locked, etc
         /// </summary>
-        internal static SystemStateEvent LastSystemStateEvent { get; private set; } = SystemStateEvent.ApplicationStarted;
+        private static SystemStateEvent s_lastSystemStateEvent = SystemStateEvent.ApplicationStarted;
+        internal static SystemStateEvent LastSystemStateEvent
+        {
+            get => s_lastSystemStateEvent;
+            private set
+            {
+                s_lastSystemStateEvent = value;
+                LastEventOccurrence[s_lastSystemStateEvent] = DateTime.Now;
+            }
+        }
+
+        /// <summary>
+        /// Contains the key value pair with SystemStateEvent and the last time it occurred
+        /// </summary>
+        public static Dictionary<SystemStateEvent, DateTime> LastEventOccurrence = new();
 
         /// <summary>
         /// Contains the last event that happened to the monitors, eg. power on
@@ -33,6 +48,7 @@ namespace HASS.Agent.Managers
         /// </summary>
         internal static async void Initialize()
         {
+            LastSystemStateEvent = SystemStateEvent.ApplicationStarted;
             await Task.Run(Monitor);
         }
 
@@ -67,7 +83,7 @@ namespace HASS.Agent.Managers
                     Log.Information("[SYSTEMSTATE] Session ending: system shutting down");
                     Task.Run(() => HelperFunctions.ShutdownAsync(TimeSpan.Zero));
                     LastSystemStateEvent = SystemStateEvent.SystemShutdown;
-                    
+
                 }
                 else
                 {
@@ -185,6 +201,7 @@ namespace HASS.Agent.Managers
                     Log.Information("[SYSTEMSTATE] Session resuming");
                     Task.Run(() => Variables.MqttManager.AnnounceAvailabilityAsync());
                     LastSystemStateEvent = SystemStateEvent.Resume;
+
                     break;
 
                 case PowerModes.Suspend:
@@ -194,6 +211,7 @@ namespace HASS.Agent.Managers
                     Log.Information("[SYSTEMSTATE] Session halting: system suspending");
                     Task.Run(() => Variables.MqttManager.AnnounceAvailabilityAsync(true));
                     LastSystemStateEvent = SystemStateEvent.Suspend;
+
                     break;
             }
         }

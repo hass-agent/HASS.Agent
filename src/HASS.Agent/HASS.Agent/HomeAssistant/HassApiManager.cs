@@ -43,6 +43,7 @@ namespace HASS.Agent.HomeAssistant
         internal static List<string> CoverList = new();
         internal static List<string> ClimateList = new();
         internal static List<string> MediaPlayerList = new();
+        internal static List<string> ButtonList = new();
 
         private static readonly string[] OnStates = { "on", "playing", "open", "opening" };
         private static readonly string[] OffStates = { "off", "idle", "paused", "stopped", "closed", "closing" };
@@ -389,6 +390,7 @@ namespace HASS.Agent.HomeAssistant
                 CoverList.Clear();
                 ClimateList.Clear();
                 MediaPlayerList.Clear();
+                ButtonList.Clear();
             }
 
             try
@@ -402,6 +404,7 @@ namespace HASS.Agent.HomeAssistant
                 await LoadDomain("cover", CoverList);
                 await LoadDomain("climate", ClimateList);
                 await LoadDomain("media_player", MediaPlayerList);
+                await LoadDomain("button", ButtonList);
 
                 if (ManagerStatus != HassManagerStatus.Failed)
                     return;

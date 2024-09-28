@@ -17,7 +17,7 @@ namespace HASS.Agent.HomeAssistant.Sensors.GeneralSensors.SingleValue
 
         private readonly IInternalDeviceSensor _internalDeviceSensor;
 
-        public InternalDeviceSensor(string sensorType, int? updateInterval = 10, string entityName = DefaultName, string name = DefaultName, string id = default) : base(entityName ?? DefaultName, name ?? null, updateInterval ?? 30, id)
+        public InternalDeviceSensor(string sensorType, int? updateInterval = 10, string entityName = DefaultName, string name = DefaultName, string id = default, string advancedSettings = default) : base(entityName ?? DefaultName, name ?? null, updateInterval ?? 30, id, advancedSettings: advancedSettings)
         {
             SensorType = Enum.Parse<InternalDeviceSensorType>(sensorType);
             _internalDeviceSensor = InternalDeviceSensorsManager.AvailableSensors.First(s => s.Type == SensorType);
@@ -47,6 +47,13 @@ namespace HASS.Agent.HomeAssistant.Sensors.GeneralSensors.SingleValue
 
             if (UseAttributes)
                 sensorDiscoveryConfigModel.Json_attributes_topic = $"{Variables.MqttManager.MqttDiscoveryPrefix()}/{Domain}/{deviceConfig.Name}/{ObjectId}/attributes";
+
+            if (!string.IsNullOrWhiteSpace(_internalDeviceSensor.MeasurementType))
+                sensorDiscoveryConfigModel.Device_class = _internalDeviceSensor.MeasurementType;
+            if (!string.IsNullOrWhiteSpace(_internalDeviceSensor.UnitOfMeasurement))
+                sensorDiscoveryConfigModel.Unit_of_measurement = _internalDeviceSensor.UnitOfMeasurement;
+            if (_internalDeviceSensor.IsNumeric)
+                sensorDiscoveryConfigModel.State_class = "measurement";
 
             return AutoDiscoveryConfigModel ?? SetAutoDiscoveryConfigModel(sensorDiscoveryConfigModel);
         }

@@ -165,6 +165,10 @@ namespace HASS.Agent.Shared.Enums
 
         [LocalizedDescription("SensorType_InternalDeviceSensor", typeof(Languages))]
         [EnumMember(Value = "InternalDeviceSensor")]
-        InternalDeviceSensor
+        InternalDeviceSensor,
+
+        [LocalizedDescription("SensorType_ScreenshotSensor", typeof(Languages))]
+        [EnumMember(Value = "ScreenshotSensor")]
+        ScreenshotSensor
     }
 }

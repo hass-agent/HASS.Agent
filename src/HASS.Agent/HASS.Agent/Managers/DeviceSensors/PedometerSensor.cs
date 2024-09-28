@@ -11,6 +11,9 @@ namespace HASS.Agent.Managers.DeviceSensors
     {
         private readonly Pedometer _pedometer;
 
+        public string MeasurementType { get; } = string.Empty;
+        public string UnitOfMeasurement { get; } = string.Empty;
+
         public bool Available => _pedometer != null;
         public InternalDeviceSensorType Type => InternalDeviceSensorType.Pedometer;
         public string Measurement
@@ -23,7 +26,10 @@ namespace HASS.Agent.Managers.DeviceSensors
                 var totalStepCount = 0;
 
                 var sensorReadings = _pedometer.GetCurrentReadings();
-                foreach(var sensorReading in sensorReadings)
+                if (sensorReadings == null)
+                    return null;
+
+                foreach (var sensorReading in sensorReadings)
                 {
                     var attributeCumulativeSteps = $"{sensorReading.Key}CumulativeSteps";
                     _attributes[attributeCumulativeSteps] = sensorReading.Value.CumulativeSteps.ToString();
@@ -36,6 +42,8 @@ namespace HASS.Agent.Managers.DeviceSensors
                 return totalStepCount.ToString();
             }
         }
+
+        public bool IsNumeric { get; } = true;
 
         private readonly Dictionary<string, string> _attributes = new();
         public Dictionary<string, string> Attributes => _attributes;

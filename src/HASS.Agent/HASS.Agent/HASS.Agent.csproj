@@ -12,7 +12,7 @@
     <PlatformTarget>x64</PlatformTarget>
     <Platforms>x64;x86</Platforms>
     <DebugType>full</DebugType>
-    <Version>2.0.1</Version>
+    <Version>2.1.0</Version>
     <Company>HASS.Agent Team</Company>
     <Authors>HASS.Agent Team</Authors>
     <Description>Windows-based client for Home Assistant. Provides notifications, quick actions, commands, sensors and more. </Description>
@@ -22,8 +22,8 @@
     <RepositoryUrl>https://github.com/hass-agent/HASS.Agent</RepositoryUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <ApplicationManifest>app.manifest</ApplicationManifest>
-    <AssemblyVersion>2.0.1</AssemblyVersion>
-    <FileVersion>2.0.1</FileVersion>
+    <AssemblyVersion>2.1.0</AssemblyVersion>
+    <FileVersion>2.1.0</FileVersion>
     <RootNamespace>HASS.Agent</RootNamespace>
     <WindowsPackageType>None</WindowsPackageType>
     <RuntimeIdentifiers>win10-x64;win10-x86</RuntimeIdentifiers>
@@ -49,33 +49,33 @@
 
   <ItemGroup>
     <PackageReference Include="Grapevine" Version="5.0.0-rc.10" />
-    <PackageReference Include="Grpc.Tools" Version="2.59.0">
+    <PackageReference Include="Grpc.Tools" Version="2.62.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="GrpcDotNetNamedPipes" Version="2.1.0" />
+    <PackageReference Include="GrpcDotNetNamedPipes" Version="3.0.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="8.0.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
     <PackageReference Include="Microsoft.Extensions.Logging" Version="8.0.0" />
-    <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.2151.40">
+    <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.2365.46">
       <Aliases>WV2</Aliases>
     </PackageReference>
-    <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.4.231008000" />
-    <PackageReference Include="MQTTnet" Version="4.3.1.873" />
-    <PackageReference Include="MQTTnet.Extensions.ManagedClient" Version="4.3.1.873" />
+    <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.4.240211001" />
+    <PackageReference Include="MQTTnet" Version="4.3.3.952" />
+    <PackageReference Include="MQTTnet.Extensions.ManagedClient" Version="4.3.3.952" />
+    <PackageReference Include="NdefLibrary" Version="4.1.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-    <PackageReference Include="Octokit" Version="9.0.0" />
+    <PackageReference Include="Octokit" Version="10.0.0" />
     <PackageReference Include="Serilog" Version="3.1.1" />
-    <PackageReference Include="Serilog.Extensions.Logging" Version="7.0.0" />
+    <PackageReference Include="Serilog.Extensions.Logging" Version="8.0.0" />
     <PackageReference Include="Serilog.Sinks.Async" Version="1.5.0" />
     <PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
-    <PackageReference Include="Slions.VirtualDesktop" Version="6.2.1" />
+    <PackageReference Include="Slions.VirtualDesktop" Version="6.6.0" />
     <PackageReference Include="Syncfusion.Core.WinForms" Version="20.3.0.50" />
     <PackageReference Include="Syncfusion.Licensing" Version="20.3.0.50" />
     <PackageReference Include="Syncfusion.Shared.Base" Version="20.3.0.50" />
     <PackageReference Include="Syncfusion.Tools.Windows" Version="20.3.0.50" />
     <PackageReference Include="System.Text.Encoding.CodePages" Version="8.0.0" />
-    <PackageReference Include="VirtualDesktop" Version="5.0.5" />
   </ItemGroup>
 
   <ItemGroup>
@@ -92,6 +92,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Controls\Configuration\ConfigNFC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Update="Controls\Configuration\ConfigLocalApi.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -125,6 +128,9 @@
     <Compile Update="Forms\ChildApplications\ServiceReinstall.cs" />
     <Compile Update="Forms\Commands\CommandConfig\WebViewCommandConfig.cs" />
     <Compile Update="Forms\Commands\CommandConfig\CommandMqttTopic.cs" />
+    <Compile Update="Forms\Sensors\SensorConfig\AdvancedSensorSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Forms\WebView.cs" />
     <Compile Update="Forms\Service\ServiceConfig.cs" />
     <Compile Update="Properties\Resources.Designer.cs">
@@ -169,6 +175,36 @@
     </EmbeddedResource>
     <EmbeddedResource Update="Controls\Configuration\ConfigExternalTools.tr.resx">
       <DependentUpon>ConfigExternalTools.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Controls\Configuration\ConfigGeneral - Copy.de.resx">
+      <DependentUpon>ConfigGeneral.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Controls\Configuration\ConfigGeneral - Copy.en.resx">
+      <DependentUpon>ConfigGeneral.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Controls\Configuration\ConfigGeneral - Copy.es.resx">
+      <DependentUpon>ConfigGeneral.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Controls\Configuration\ConfigGeneral - Copy.fr.resx">
+      <DependentUpon>ConfigGeneral.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Controls\Configuration\ConfigGeneral - Copy.nl.resx">
+      <DependentUpon>ConfigGeneral.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Controls\Configuration\ConfigGeneral - Copy.pl.resx">
+      <DependentUpon>ConfigGeneral.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Controls\Configuration\ConfigGeneral - Copy.pt-br.resx">
+      <DependentUpon>ConfigGeneral.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Controls\Configuration\ConfigGeneral - Copy.ru.resx">
+      <DependentUpon>ConfigGeneral.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Controls\Configuration\ConfigGeneral - Copy.sl.resx">
+      <DependentUpon>ConfigGeneral.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Controls\Configuration\ConfigGeneral - Copy.tr.resx">
+      <DependentUpon>ConfigGeneral.resx</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Update="Controls\Configuration\ConfigGeneral.de.resx">
       <DependentUpon>ConfigGeneral.resx</DependentUpon>
@@ -1579,6 +1615,24 @@
     </EmbeddedResource>
     <EmbeddedResource Update="Forms\QuickActions\QuickActionsMod.tr.resx">
       <DependentUpon>QuickActionsMod.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Forms\Sensors\SensorConfig\AdvancedSensorSettings.de.resx">
+      <DependentUpon>AdvancedSensorSettings.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Forms\Sensors\SensorConfig\AdvancedSensorSettings.es.resx">
+      <DependentUpon>AdvancedSensorSettings.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Forms\Sensors\SensorConfig\AdvancedSensorSettings.fr.resx">
+      <DependentUpon>AdvancedSensorSettings.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Forms\Sensors\SensorConfig\AdvancedSensorSettings.nl.resx">
+      <DependentUpon>AdvancedSensorSettings.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Forms\Sensors\SensorConfig\AdvancedSensorSettings.ru.resx">
+      <DependentUpon>AdvancedSensorSettings.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Forms\Sensors\SensorConfig\AdvancedSensorSettings.tr.resx">
+      <DependentUpon>AdvancedSensorSettings.resx</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Update="Forms\Sensors\SensorsConfig.de.resx">
       <DependentUpon>SensorsConfig.resx</DependentUpon>

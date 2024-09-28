@@ -3377,4 +3377,28 @@ Ali želite prenesti runtime installer?</value>
   <data name="SensorType_ActiveDesktopSensor" xml:space="preserve">
     <value>ActiveDesktop</value>
   </data>
+  <data name="CommandType_SetApplicationVolumeCommand" xml:space="preserve">
+    <value>Nastavite glasnost aplikacije</value>
+  </data>
+  <data name="CommandType_SetAudioOutputCommand" xml:space="preserve">
+    <value>Nastavite ukaz za avdio izhod</value>
+  </data>
+  <data name="SensorType_ScreenshotSensor" xml:space="preserve">
+    <value>Posnetek zaslona</value>
+  </data>
+  <data name="CommandType_SetAudioInputCommand" xml:space="preserve">
+    <value>Nastavite ukaz za zvočni vhod</value>
+  </data>
+  <data name="CommandType_TrayWebViewCommand" xml:space="preserve">
+    <value>TrayWebView</value>
+  </data>
+  <data name="HassAction_Trigger" xml:space="preserve">
+    <value>Sprožilec</value>
+  </data>
+  <data name="HassDomain_Button" xml:space="preserve">
+    <value>Gumb</value>
+  </data>
+  <data name="HassAction_Press" xml:space="preserve">
+    <value>Pritisnite</value>
+  </data>
 </root>

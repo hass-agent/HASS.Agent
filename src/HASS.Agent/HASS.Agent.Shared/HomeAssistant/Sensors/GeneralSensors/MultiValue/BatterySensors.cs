@@ -52,14 +52,14 @@ public class BatterySensors : AbstractMultiValueSensor
 
         var fullChargeLifetimeEntityName = $"{parentSensorSafeName}_full_charge_lifetime";
         var fullChargeLifetimeId = $"{Id}_full_charge_lifetime";
-        var fullChargeLifetimeSensor = new DataTypeIntSensor(_updateInterval, fullChargeLifetimeEntityName, "Full Charge Lifetime", fullChargeLifetimeId, string.Empty, "mdi:battery-high", string.Empty, EntityName);
+        var fullChargeLifetimeSensor = new DataTypeIntSensor(_updateInterval, fullChargeLifetimeEntityName, "Full Charge Lifetime", fullChargeLifetimeId, string.Empty, "measurement", "mdi:battery-high", string.Empty, EntityName);
         fullChargeLifetimeSensor.SetState(fullChargeLifetimeMinutes);
         AddUpdateSensor(fullChargeLifetimeId, fullChargeLifetimeSensor);
 
         var chargeRemainingPercentage = Convert.ToInt32(powerStatus.BatteryLifePercent * 100);
         var chargeRemainingPercentageEntityName = $"{parentSensorSafeName}_charge_remaining_percentage";
         var chargeRemainingPercentageId = $"{Id}_charge_remaining_percentage";
-        var chargeRemainingPercentageSensor = new DataTypeIntSensor(_updateInterval, chargeRemainingPercentageEntityName, "Charge Remaining Percentage", chargeRemainingPercentageId, string.Empty, "mdi:battery-high", "%", EntityName);
+        var chargeRemainingPercentageSensor = new DataTypeIntSensor(_updateInterval, chargeRemainingPercentageEntityName, "Charge Remaining Percentage", chargeRemainingPercentageId, string.Empty, "measurement", "mdi:battery-high", "%", EntityName);
         chargeRemainingPercentageSensor.SetState(chargeRemainingPercentage);
         AddUpdateSensor(chargeRemainingPercentageId, chargeRemainingPercentageSensor);
 
@@ -69,7 +69,7 @@ public class BatterySensors : AbstractMultiValueSensor
 
         var chargeRemainingMinutesEntityName = $"{parentSensorSafeName}_charge_remaining";
         var chargeRemainingMinutesId = $"{Id}_charge_remaining";
-        var chargeRemainingMinutesSensor = new DataTypeIntSensor(_updateInterval, chargeRemainingMinutesEntityName, "Charge Remaining", chargeRemainingMinutesId, string.Empty, "mdi:battery-high", string.Empty, EntityName);
+        var chargeRemainingMinutesSensor = new DataTypeIntSensor(_updateInterval, chargeRemainingMinutesEntityName, "Charge Remaining", chargeRemainingMinutesId, string.Empty, "measurement", "mdi:battery-high", string.Empty, EntityName);
         chargeRemainingMinutesSensor.SetState(chargeRemainingMinutes);
         AddUpdateSensor(chargeRemainingMinutesId, chargeRemainingMinutesSensor);
 
