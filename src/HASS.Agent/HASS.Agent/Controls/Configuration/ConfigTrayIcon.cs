@@ -1,14 +1,13 @@
 ﻿using HASS.Agent.Functions;
 using HASS.Agent.Models.Internal;
 using System.Diagnostics;
+using Syncfusion.Windows.Forms.Tools;
 
 namespace HASS.Agent.Controls.Configuration
 {
     public partial class ConfigTrayIcon : UserControl
     {
-        private int _selectedScreen = 0;
-
-        internal int SelectedScreen { get => _selectedScreen; set { _selectedScreen = value; } }
+        internal int SelectedScreen { get; set; }
 
         public ConfigTrayIcon()
         {
@@ -25,7 +24,12 @@ namespace HASS.Agent.Controls.Configuration
         {
             var displays = Screen.AllScreens;
             int ix = 0;
-            int primaryIx = -1;
+
+            if (Screen.AllScreens.Length == 1)
+            {
+                NumWebViewScreen.Visible = false;
+                selectedScreenIndex = 0;
+            }
 
             // Add screens to updownControl
             foreach (var display in displays)
@@ -34,7 +38,6 @@ namespace HASS.Agent.Controls.Configuration
                 if (display.Primary)
                 {
                     label += " (Primary)";
-                    primaryIx = ix;
                 }
                 NumWebViewScreen.Items.Add(label);
                 ix++;
@@ -85,7 +88,7 @@ namespace HASS.Agent.Controls.Configuration
 
         private void domainUpDown1_SelectedItemChanged(object sender, EventArgs e)
         {
-            SelectedScreen = (sender as DomainUpDown).SelectedIndex;
+            SelectedScreen = ((ComboBoxAdv) sender).SelectedIndex;
         }
     }
 }

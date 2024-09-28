@@ -1,4 +1,5 @@
 ﻿using HASS.Agent.Resources.Localization;
+using Syncfusion.Windows.Forms.Tools;
 
 namespace HASS.Agent.Controls.Configuration
 {
@@ -44,7 +45,7 @@ namespace HASS.Agent.Controls.Configuration
             CbWebViewKeepLoaded = new CheckBox();
             LblInfo2 = new Label();
             CbWebViewShowMenuOnLeftClick = new CheckBox();
-            NumWebViewScreen = new DomainUpDown();
+            NumWebViewScreen = new Syncfusion.Windows.Forms.Tools.ComboBoxAdv();
             ((System.ComponentModel.ISupportInitialize)NumWebViewWidth).BeginInit();
             ((System.ComponentModel.ISupportInitialize)NumWebViewHeight).BeginInit();
             SuspendLayout();
@@ -297,8 +298,8 @@ namespace HASS.Agent.Controls.Configuration
             NumWebViewScreen.Name = "domainUpDown1";
             NumWebViewScreen.Size = new Size(120, 23);
             NumWebViewScreen.TabIndex = 78;
-            NumWebViewScreen.Text = "domainUpDown1";
-            NumWebViewScreen.SelectedItemChanged += domainUpDown1_SelectedItemChanged;
+            NumWebViewScreen.Text = "Select Your Display";
+            NumWebViewScreen.SelectedValueChanged += domainUpDown1_SelectedItemChanged;
             // 
             // ConfigTrayIcon
             // 
@@ -349,6 +350,6 @@ namespace HASS.Agent.Controls.Configuration
         internal CheckBox CbWebViewKeepLoaded;
         internal Label LblInfo2;
         internal CheckBox CbWebViewShowMenuOnLeftClick;
-        internal DomainUpDown NumWebViewScreen;
+        internal ComboBoxAdv NumWebViewScreen;
     }
 }
