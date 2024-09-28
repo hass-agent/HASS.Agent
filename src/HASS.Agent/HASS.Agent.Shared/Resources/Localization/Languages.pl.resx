@@ -3338,4 +3338,16 @@ Czy chcesz pobrać plik instalacyjny?</value>
   <data name="SensorType_ActiveDesktopSensor" xml:space="preserve">
     <value>AktywnyPulpit</value>
   </data>
+  <data name="CommandType_SetApplicationVolumeCommand" xml:space="preserve">
+    <value>Ustaw głośność aplikacji</value>
+  </data>
+  <data name="CommandType_SetAudioOutputCommand" xml:space="preserve">
+    <value>Ustaw wyjście audio</value>
+  </data>
+  <data name="SensorType_ScreenshotSensor" xml:space="preserve">
+    <value>Zrzut ekranu</value>
+  </data>
+  <data name="CommandType_SetAudioInputCommand" xml:space="preserve">
+    <value>Ustaw wejście audio</value>
+  </data>
 </root>

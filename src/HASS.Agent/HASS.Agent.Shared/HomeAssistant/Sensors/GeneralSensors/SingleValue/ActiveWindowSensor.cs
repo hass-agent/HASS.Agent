@@ -16,10 +16,12 @@ namespace HASS.Agent.Shared.HomeAssistant.Sensors.GeneralSensors.SingleValue
 
         public override DiscoveryConfigModel GetAutoDiscoveryConfig()
         {
-            if (Variables.MqttManager == null) return null;
+            if (Variables.MqttManager == null)
+                return null;
 
             var deviceConfig = Variables.MqttManager.GetDeviceConfigModel();
-            if (deviceConfig == null) return null;
+            if (deviceConfig == null)
+                return null;
 
             return AutoDiscoveryConfigModel ?? SetAutoDiscoveryConfigModel(new SensorDiscoveryConfigModel()
             {
@@ -43,16 +45,20 @@ namespace HASS.Agent.Shared.HomeAssistant.Sensors.GeneralSensors.SingleValue
         [DllImport("user32.dll")]
         private static extern IntPtr GetForegroundWindow();
 
-        [DllImport("user32.dll")]
-        private static extern int GetWindowText(IntPtr hWnd, StringBuilder text, int count);
+        [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
+        private static extern int GetWindowTextLength(IntPtr hWnd);
+
+        [DllImport("user32.dll", CharSet = CharSet.Auto)]
+        private static extern int GetWindowText(IntPtr hWnd, StringBuilder builder, int count);
 
         private static string GetActiveWindowTitle()
         {
-            const int nChars = 256;
-            var buff = new StringBuilder(nChars);
-            var handle = GetForegroundWindow();
+            var windowHandle = GetForegroundWindow();
+            var titleLength = GetWindowTextLength(windowHandle) + 1;
+            var builder = new StringBuilder(titleLength);
+            var windowTitle = GetWindowText(windowHandle, builder, titleLength) > 0 ? builder.ToString() : string.Empty;
 
-            return GetWindowText(handle, buff, nChars) > 0 ? buff.ToString() : string.Empty;
+            return windowTitle.Length > 255 ? windowTitle[..255]: windowTitle; //Note(Amadeo): to make sure we don't exceed HA limitation of 255 payload length
         }
     }
 }

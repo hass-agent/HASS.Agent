@@ -2250,11 +2250,6 @@ HassAgentStarted, Logoff, SystemShutdown, Resume, Suspend, ConsoleConnect, Conso
     <value>Fornece um valor bool com base em se o microfone está sendo usado no momento.</value>
     <comment>Fuzzy</comment>
   </data>
-  <data name="SensorsManager_MicrophoneProcessSensorDescription" xml:space="preserve">
-    <value>Fornece o nome do processo que está usando o microfone no momento.
-
-Observação: se usado no serviço satélite, ele não detectará aplicativos de espaço de usuário.</value>
-  </data>
   <data name="SensorsManager_MonitorPowerStateSensorDescription" xml:space="preserve">
     <value>Fornece a última alteração do estado de energia do monitor:
 
@@ -2281,6 +2276,7 @@ Você pode explorar os contadores através da ferramenta 'perfmon.exe' do Window
   </data>
   <data name="SensorsManager_PowershellSensorDescription" xml:space="preserve">
     <value>Retorna o resultado do comando ou script do Powershell fornecido.
+Observação: lembre-se de que o Home Assistant aceita carga útil de até 255 caracteres.
 
 Converte o resultado em texto.</value>
   </data>
@@ -3385,5 +3381,40 @@ HASS.Agent da versão original</value>
   </data>
   <data name="Compat_NameTask_Error_ServiceStart" xml:space="preserve">
     <value>Erro ao iniciar o serviço de satélite!</value>
+  </data>
+  <data name="CommandsManager_SetAudioOutputCommandDescription" xml:space="preserve">
+    <value>Define a saída de áudio padrão para o sistema.
+Requer o nome do dispositivo de áudio como carga útil.</value>
+  </data>
+  <data name="CommandsMod_LblSetting_AudioDeviceName" xml:space="preserve">
+    <value>Nome do dispositivo de áudio</value>
+  </data>
+  <data name="CommandsMod_LblSetting_JsonPayload" xml:space="preserve">
+    <value>Carga útil do comando JSON</value>
+  </data>
+  <data name="CommandsMod_LblSetting_VolumeRange" xml:space="preserve">
+    <value>Volume (entre 0 e 100)</value>
+  </data>
+  <data name="SensorsManager_ScreenshotSensorDescription" xml:space="preserve">
+    <value>Você fornece um sensor de captura de tela na forma de uma entidade de câmera.
+O número da tela depende da configuração do sistema – começa em 0.</value>
+  </data>
+  <data name="SensorsMod_LblSetting1_ScreenNumber" xml:space="preserve">
+    <value>Número da tela</value>
+  </data>
+  <data name="CommandsManager_SetAudioInputCommandDescription" xml:space="preserve">
+    <value>Define a entrada de áudio padrão para o sistema (incluindo o dispositivo de comunicação padrão).
+Você precisa do nome do dispositivo de áudio como carga útil.</value>
+  </data>
+  <data name="ConfigMqtt_CbIgnoreGracePeriod" xml:space="preserve">
+    <value>Ignorar o período de carência após sair da hibernação</value>
+  </data>
+  <data name="ConfigTrayIcon_CbUseModernIcon" xml:space="preserve">
+    <value>Use o ícone moderno da bandeja</value>
+  </data>
+  <data name="SensorsManager_MicrophoneProcessSensorDescription" xml:space="preserve">
+    <value>Fornece o número de processos que utilizam atualmente o microfone - fornece adicionalmente o nome dos processos nos atributos do sensor.
+
+Nota: se usado no serviço de satélite, não detectará aplicações no espaço do usuário.</value>
   </data>
 </root>

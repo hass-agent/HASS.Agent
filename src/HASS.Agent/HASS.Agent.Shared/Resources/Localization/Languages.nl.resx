@@ -3250,4 +3250,16 @@ Wil je de runtime installatie downloaden?</value>
   <data name="SensorType_ActiveDesktopSensor" xml:space="preserve">
     <value>ActiveDesktop</value>
   </data>
+  <data name="CommandType_SetApplicationVolumeCommand" xml:space="preserve">
+    <value>Stel het toepassingsvolume in</value>
+  </data>
+  <data name="CommandType_SetAudioOutputCommand" xml:space="preserve">
+    <value>Stel het audio-uitvoercommando in</value>
+  </data>
+  <data name="SensorType_ScreenshotSensor" xml:space="preserve">
+    <value>Schermafbeelding</value>
+  </data>
+  <data name="CommandType_SetAudioInputCommand" xml:space="preserve">
+    <value>Stel het audio-invoercommando in</value>
+  </data>
 </root>

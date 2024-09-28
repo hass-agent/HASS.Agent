@@ -60,5 +60,10 @@
         {
             LblMqttDisabledWarning.Visible = CbEnableMqtt.CheckState != CheckState.Checked;
         }
+
+        private void CbIgnoreGracePeriod_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

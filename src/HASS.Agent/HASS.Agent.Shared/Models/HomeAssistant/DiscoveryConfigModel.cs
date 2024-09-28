@@ -144,6 +144,20 @@ namespace HASS.Agent.Shared.Models.HomeAssistant
     }
 
     [SuppressMessage("ReSharper", "InconsistentNaming")]
+    public class CameraSensorDiscoveryConfigModel : SensorDiscoveryConfigModel
+    {
+        /// <summary>
+        /// Messages published to this topic need to contain full contents of an image
+        /// </summary>
+        public string Topic { get; set; }
+
+        /// <summary>
+        /// (Optional) The encoding of the image payloads received.
+        /// </summary>
+        public string Image_encoding { get; set; }
+    }
+
+    [SuppressMessage("ReSharper", "InconsistentNaming")]
     public class CommandDiscoveryConfigModel : DiscoveryConfigModel
     {
         /// <summary>

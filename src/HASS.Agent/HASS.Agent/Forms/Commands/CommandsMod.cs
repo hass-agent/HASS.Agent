@@ -205,6 +205,8 @@ namespace HASS.Agent.Forms.Commands
 
                 case CommandType.SetVolumeCommand:
                 case CommandType.SetApplicationVolumeCommand:
+                case CommandType.SetAudioOutputCommand:
+                case CommandType.SetAudioInputCommand:
                     TbSetting.Text = Command.Command;
                     break;
             }
@@ -455,6 +457,22 @@ namespace HASS.Agent.Forms.Commands
                     }
                     break;
 
+                case CommandType.SetAudioOutputCommand:
+                case CommandType.SetAudioInputCommand:
+                    var audioDeviceName = TbSetting.Text.Trim();
+                    if (string.IsNullOrEmpty(audioDeviceName))
+                    {
+                        var q = MessageBoxAdv.Show(this, Languages.CommandsMod_BtnStore_MessageBox8, Variables.MessageBoxTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                        if (q != DialogResult.Yes)
+                        {
+                            ActiveControl = BtnConfigureCommand;
+                            return;
+                        }
+                    }
+                    Command.Command = audioDeviceName;
+                    break;
+
+
                 case CommandType.WebViewCommand:
                     var webview = TbSetting.Text.Trim();
                     if (string.IsNullOrEmpty(webview))
@@ -612,6 +630,11 @@ namespace HASS.Agent.Forms.Commands
 				case CommandType.SetApplicationVolumeCommand:
 					SetApplicationVolumeUi();
 					break;
+
+                case CommandType.SetAudioOutputCommand:
+                case CommandType.SetAudioInputCommand:
+                    SetAudioOutputUi();
+                    break;
 
 				case CommandType.RadioCommand:
 					CbConfigDropdown.DataSource = new BindingSource(_radioDevices, null);
@@ -795,10 +818,10 @@ namespace HASS.Agent.Forms.Commands
 			{
 				SetEmptyGui();
 
-				LblSetting.Text = "volume (between 0 and 100)";
-				LblSetting.Visible = true;
+				LblSetting.Text = Languages.CommandsMod_LblSetting_VolumeRange;
+                LblSetting.Visible = true;
 
-				TbSetting.Text = string.Empty;
+                TbSetting.Text = string.Empty;
 				TbSetting.Visible = true;
 			}));
 		}
@@ -812,7 +835,24 @@ namespace HASS.Agent.Forms.Commands
             {
                 SetEmptyGui();
 
-                LblSetting.Text = "JSON Command Payload";
+                LblSetting.Text = Languages.CommandsMod_LblSetting_JsonPayload;
+                LblSetting.Visible = true;
+
+                TbSetting.Text = string.Empty;
+                TbSetting.Visible = true;
+            }));
+        }
+
+        /// <summary>
+        /// Change the UI to a 'setaudiooutput' type
+        /// </summary>
+        private void SetAudioOutputUi()
+        {
+            Invoke(new MethodInvoker(delegate
+            {
+                SetEmptyGui();
+
+                LblSetting.Text = Languages.CommandsMod_LblSetting_AudioDeviceName;
                 LblSetting.Visible = true;
 
                 TbSetting.Text = string.Empty;
