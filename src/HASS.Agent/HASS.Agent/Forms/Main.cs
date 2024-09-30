@@ -747,7 +747,7 @@ namespace HASS.Agent.Forms
             // Escape Pressed, but make sure it's not escape while alt-tabbing
             if (e.Alt) return;
 
-            HideToTray();
+            Hide();
         }
 
         private void TsShow_Click(object sender, EventArgs e) => ShowMain();
