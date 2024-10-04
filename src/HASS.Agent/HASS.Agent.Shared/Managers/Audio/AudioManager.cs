@@ -378,7 +378,7 @@ public static class AudioManager
 
         if (volume != -1)
         {
-            var volumeScalar = volume / 100f;
+            var volumeScalar = Math.Clamp(volume / 100f, 0, 1);
             device.AudioEndpointVolume.MasterVolumeLevelScalar = volumeScalar;
             Log.Debug($"[AUDIOMGR] volume for '{_devices[device.ID]}' set to '{volume}'");
         }
@@ -455,7 +455,7 @@ public static class AudioManager
         if (volume == -1)
             return;
 
-        var volumeScalar = volume / 100f;
+        var volumeScalar = Math.Clamp(volume / 100f, 0, 1);
         internalAudioSession.Volume.Volume = volumeScalar;
         Log.Debug("[AUDIOMGR] volume for '{sessionName}' ({sessionId}) set to '{vol}'", displayName, internalAudioSession.Control.GetSessionInstanceIdentifier, volume);
     }
