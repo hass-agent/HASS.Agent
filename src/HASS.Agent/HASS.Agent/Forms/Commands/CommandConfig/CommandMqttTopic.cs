@@ -56,7 +56,7 @@ namespace HASS.Agent.Forms.Commands.CommandConfig
             BtnCopyClipboard.Enabled = false;
         }
 
-        private void LblHelp_Click(object sender, EventArgs e) => HelperFunctions.LaunchUrl("https://www.hass-agent.io/latest/setup/commands/");
+        private void LblHelp_Click(object sender, EventArgs e) => HelperFunctions.LaunchUrl("https://www.hass-agent.io/latest/getting-started/commands/");
 
         private void BtnClose_Click(object sender, EventArgs e) => Close();
     }
