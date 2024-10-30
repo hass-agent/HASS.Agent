@@ -20,6 +20,7 @@ using HASS.Agent.Shared.Enums;
 using HASS.Agent.Shared.Extensions;
 using HASS.Agent.Shared.Functions;
 using HASS.Agent.Shared.Managers;
+using HASS.Agent.Shared.Managers.Audio;
 using Serilog;
 using Syncfusion.Windows.Forms;
 using WindowsDesktop;
@@ -91,6 +92,7 @@ namespace HASS.Agent.Forms
                 await InternalDeviceSensorsManager.Initialize();
                 InitializeHardwareManager();
                 InitializeVirtualDesktopManager();
+                await Task.Run(InitializeAudioManager);
 
                 // load entities
                 var loaded = await SettingsManager.LoadEntitiesAsync();
@@ -163,6 +165,7 @@ namespace HASS.Agent.Forms
 
         private void OnProcessExit(object sender, EventArgs e)
         {
+            AudioManager.Shutdown();
             HardwareManager.Shutdown();
             NotificationManager.Exit();
         }
@@ -335,6 +338,14 @@ namespace HASS.Agent.Forms
         }
 
         /// <summary>
+        /// Initialized the Audio Manager
+        /// </summary>
+        private void InitializeAudioManager()
+        {
+            AudioManager.Initialize();
+        }
+
+        /// <summary>
         /// Hide if not shutting down, close otherwise
         /// </summary>
         /// <param name="sender"></param>
@@ -344,7 +355,19 @@ namespace HASS.Agent.Forms
             if (_isClosing)
                 return;
 
-            Invoke(new MethodInvoker(Hide));
+            Invoke(() =>
+            {
+                HelperFunctions.GetForm("QuickActions")?.Close();
+                HelperFunctions.GetForm("Configuration")?.Close();
+                HelperFunctions.GetForm("QuickActionsConfig")?.Close();
+                HelperFunctions.GetForm("SensorsConfig")?.Close();
+                HelperFunctions.GetForm("ServiceConfig")?.Close();
+                HelperFunctions.GetForm("CommandsConfig")?.Close();
+                HelperFunctions.GetForm("Help")?.Close();
+                HelperFunctions.GetForm("Donate")?.Close();
+
+                new MethodInvoker(Hide).Invoke();
+            });
 
             if (!Variables.ShuttingDown)
             {
@@ -942,16 +965,7 @@ namespace HASS.Agent.Forms
                 return;
             }
 
-            // prepare the webview
-            var webView = new WebViewInfo
-            {
-                Url = Variables.AppSettings.TrayIconWebViewUrl,
-                Height = Variables.AppSettings.TrayIconWebViewHeight,
-                Width = Variables.AppSettings.TrayIconWebViewWidth,
-            };
-
-            // show it
-            HelperFunctions.LaunchTrayIconWebView(webView);
+            HelperFunctions.LaunchTrayIconWebView();
         }
 
         private async void PbDonate_Click(object sender, EventArgs e)

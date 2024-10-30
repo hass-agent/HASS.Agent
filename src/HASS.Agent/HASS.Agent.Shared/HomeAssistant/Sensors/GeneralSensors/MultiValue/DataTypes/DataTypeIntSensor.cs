@@ -9,17 +9,19 @@ namespace HASS.Agent.Shared.HomeAssistant.Sensors.GeneralSensors.MultiValue.Data
     public class DataTypeIntSensor : AbstractSingleValueSensor
     {
         private readonly string _deviceClass;
+        private readonly string _stateClass;
         private readonly string _unitOfMeasurement;
         private readonly string _icon;
 
         private int _value = 0;
         private string _attributes = string.Empty;
 
-        public DataTypeIntSensor(int? updateInterval, string entityName, string name, string id, string deviceClass, string icon, string unitOfMeasurement, string multiValueSensorName, bool useAttributes = false) : base(entityName, name, updateInterval ?? 30, id, useAttributes)
+        public DataTypeIntSensor(int? updateInterval, string entityName, string name, string id, string deviceClass, string stateClass, string icon, string unitOfMeasurement, string multiValueSensorName, bool useAttributes = false) : base(entityName, name, updateInterval ?? 30, id, useAttributes)
         {
             TopicName = multiValueSensorName;
 
             _deviceClass = deviceClass;
+            _stateClass = stateClass;
             _unitOfMeasurement = unitOfMeasurement;
             _icon = icon;
 
@@ -59,9 +61,14 @@ namespace HASS.Agent.Shared.HomeAssistant.Sensors.GeneralSensors.MultiValue.Data
 
             if (UseAttributes) model.Json_attributes_topic = $"{Variables.MqttManager.MqttDiscoveryPrefix()}/{Domain}/{deviceConfig.Name}/{TopicName}/{ObjectId}/attributes";
 
-            if (!string.IsNullOrWhiteSpace(_deviceClass)) model.Device_class = _deviceClass;
-            if (!string.IsNullOrWhiteSpace(_unitOfMeasurement)) model.Unit_of_measurement = _unitOfMeasurement;
-            if (!string.IsNullOrWhiteSpace(_icon)) model.Icon = _icon;
+            if (!string.IsNullOrWhiteSpace(_deviceClass))
+                model.Device_class = _deviceClass;
+            if (!string.IsNullOrWhiteSpace(_stateClass))
+                model.State_class = _stateClass;
+            if (!string.IsNullOrWhiteSpace(_unitOfMeasurement))
+                model.Unit_of_measurement = _unitOfMeasurement;
+            if (!string.IsNullOrWhiteSpace(_icon))
+                model.Icon = _icon;
 
             return SetAutoDiscoveryConfigModel(model);
         }

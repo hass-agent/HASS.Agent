@@ -3441,7 +3441,15 @@ Ukaz/tovor mora biti v formatu JSON. Primer vseh možnih možnosti:
 
 Če ni na voljo "playbackDevice", bo HASS.Agent uporabil privzeto.
 Če ni na voljo nobena "volume", bo HASS.Agent nastavil samo stanje utišanja.
-Če ni na voljo možnost "mute", bo HASS.Agent znova vključil zvok navedene aplikacije.</value>
+Če ni na voljo možnost "mute", bo HASS.Agent znova vključil zvok navedene aplikacije.
+
+Napredna možnost: dodatni "sessionId" je mogoče zagotoviti za nastavitev glasnosti samo za določeno sejo aplikacije, ID seje je mogoče pridobiti iz senzorja "Audio Sessions":
+{
+   "playbackDevice":"Speakers (THX SpatialAudio)",
+   "applicationName":"Discord",
+   "volume":50,
+   "sessionid":"&lt;LONG SESSION ID FROM SENSOR&gt;"
+}</value>
   </data>
   <data name="CommandsMod_BtnStore_InvalidJson" xml:space="preserve">
     <value>Vnesite veljaven niz JSON!</value>
@@ -3519,5 +3527,33 @@ Ime zvočne naprave potrebujete kot obremenitev.</value>
     <value>Zagotavlja število procesov, ki trenutno uporabljajo mikrofon - dodatno podaja ime procesov v atributih senzorja.
 
 Opomba: če se uporablja v satelitski storitvi, ne bo zaznal aplikacij uporabniškega prostora.</value>
+  </data>
+  <data name="Configuration_NFC" xml:space="preserve">
+    <value>NFC</value>
+  </data>
+  <data name="AdvancedSensorConfig_Title" xml:space="preserve">
+    <value>Napredne nastavitve</value>
+  </data>
+  <data name="SensorsMod_BtnAdvancedSettings" xml:space="preserve">
+    <value>Napredne nasta&amp;vitve</value>
+  </data>
+  <data name="AdvancedSensorConfig_Warning" xml:space="preserve">
+    <value>Opozorilo, dodajanje naslednjih nastavitev (preglasitev) lahko pokvari senzor, uporabljajte previdno!</value>
+  </data>
+  <data name="CommandsManager_TrayWebViewCommandDescription" xml:space="preserve">
+    <value>Prikaže/skrije spletni pogled ikone pladnja.
+Zahteva, da je konfiguriran v "Konfiguracija -&gt; Ikona pladnja"</value>
+  </data>
+  <data name="HassAction_Trigger" xml:space="preserve">
+    <value>Sprožilec</value>
+  </data>
+  <data name="HassDomain_Button" xml:space="preserve">
+    <value>Gumb</value>
+  </data>
+  <data name="HassAction_Press" xml:space="preserve">
+    <value>Pritisnite</value>
+  </data>
+  <data name="Notification_Dismiss" xml:space="preserve">
+    <value>Odpusti</value>
   </data>
 </root>

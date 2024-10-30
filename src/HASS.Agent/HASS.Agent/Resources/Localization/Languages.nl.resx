@@ -3313,7 +3313,15 @@ Commando/payload moet in JSON-indeling zijn. Voorbeeld van alle mogelijke opties
 }
 Als er geen "playbackDevice" is opgegeven, zal HASS.Agent het standaardapparaat gebruiken.
 Als er geen "volume" is opgegeven, zal HASS.Agent alleen de mute-status instellen.
-Als er geen "mute" is opgegeven, zal HASS.Agent het dempen van de opgegeven applicatie opheffen.</value>
+Als er geen "mute" is opgegeven, zal HASS.Agent het dempen van de opgegeven applicatie opheffen.
+
+Geavanceerde optie: er kan een extra "sessionId" worden opgegeven om het volume alleen in te stellen voor een specifieke sessie van de applicatie. De sessie-ID kan worden verkregen via de sensor "Audio Sessions":
+{
+   "playbackDevice":"Speakers (THX SpatialAudio)",
+   "applicationName":"Discord",
+   "volume":50,
+   "sessionid":"&lt;LONG SESSION ID FROM SENSOR&gt;"
+}</value>
   </data>
   <data name="CommandsMod_BtnStore_InvalidJson" xml:space="preserve">
     <value>Voer een geldige JSON-string in!</value>
@@ -3391,5 +3399,33 @@ U hebt de naam van het audioapparaat nodig als payload.</value>
     <value>Geeft het aantal processen weer die momenteel de microfoon gebruiken - geeft bovendien de naam van de processen in de attributen van de sensor.
 
 Opmerking: indien gebruikt in de satellietdienst, zal het geen gebruikersruimtetoepassingen detecteren.</value>
+  </data>
+  <data name="Configuration_NFC" xml:space="preserve">
+    <value>NFC</value>
+  </data>
+  <data name="AdvancedSensorConfig_Title" xml:space="preserve">
+    <value>Geavanceerde instellingen</value>
+  </data>
+  <data name="SensorsMod_BtnAdvancedSettings" xml:space="preserve">
+    <value>Gea&amp;vanceerde instellingen</value>
+  </data>
+  <data name="AdvancedSensorConfig_Warning" xml:space="preserve">
+    <value>Waarschuwing: het toevoegen van de volgende instellingen (overschrijvingen) kan de sensor kapot maken, wees voorzichtig!</value>
+  </data>
+  <data name="CommandsManager_TrayWebViewCommandDescription" xml:space="preserve">
+    <value>Toont/verbergt het Tray Icon Web View.
+Vereist dat het geconfigureerd is in "Configuratie -&gt; Tray Icon"</value>
+  </data>
+  <data name="HassAction_Trigger" xml:space="preserve">
+    <value>Activering</value>
+  </data>
+  <data name="HassDomain_Button" xml:space="preserve">
+    <value>Knop</value>
+  </data>
+  <data name="HassAction_Press" xml:space="preserve">
+    <value>Pers</value>
+  </data>
+  <data name="Notification_Dismiss" xml:space="preserve">
+    <value>Afwijzen</value>
   </data>
 </root>

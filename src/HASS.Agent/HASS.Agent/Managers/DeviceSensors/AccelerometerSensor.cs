@@ -14,6 +14,9 @@ namespace HASS.Agent.Managers.DeviceSensors
         public const string AttributeAccelerationZ = "AccelerationZ";
         public const string AttributeLastShaken = "LastShaken";
 
+        public string MeasurementType { get; } = string.Empty;
+        public string UnitOfMeasurement { get; } = string.Empty;
+
         private readonly Accelerometer _accelerometer;
 
         public bool Available => _accelerometer != null;
@@ -26,6 +29,9 @@ namespace HASS.Agent.Managers.DeviceSensors
                     return null;
 
                 var sensorReading = _accelerometer.GetCurrentReading();
+                if(sensorReading == null)
+                    return null;
+
                 var accX = Math.Round((decimal)sensorReading.AccelerationX, 2);
                 var accY = Math.Round((decimal)sensorReading.AccelerationX, 2);
                 var accZ = Math.Round((decimal)sensorReading.AccelerationX, 2);
@@ -41,6 +47,8 @@ namespace HASS.Agent.Managers.DeviceSensors
                 ).ToString();
             }
         }
+
+        public bool IsNumeric { get; } = true;
 
         private readonly Dictionary<string, string> _attributes = new();
         public Dictionary<string, string> Attributes => _attributes;

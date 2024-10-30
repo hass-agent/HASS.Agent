@@ -3361,7 +3361,15 @@ Home Assistant.
 
 Если «playbackDevice» не указано, HASS.Agent будет использовать устройство по умолчанию.
 Если «громкость» не указана, HASS.Agent установит только статус отключения звука.
-Если «отключение звука» не указано, HASS.Agent включит звук предоставленного приложения.</value>
+Если «отключение звука» не указано, HASS.Agent включит звук предоставленного приложения.
+
+Расширенный вариант: можно указать дополнительный «sessionId» для установки громкости только для определенного сеанса приложения, идентификатор сеанса можно получить из датчика «Аудио сеансы»:
+{
+   "playbackDevice":"Speakers (THX SpatialAudio)",
+   "applicationName":"Discord",
+   "volume":50,
+   "sessionid":"&lt;LONG SESSION ID FROM SENSOR&gt;"
+}</value>
   </data>
   <data name="CommandsMod_BtnStore_InvalidJson" xml:space="preserve">
     <value>Пожалуйста, введите действительную строку JSON!</value>
@@ -3439,5 +3447,33 @@ Home Assistant.
     <value>Предоставляет количество процессов, которые в данный момент используют микрофон. Дополнительно указывается имя процесса в атрибутах датчика.
 
 Примечание. При использовании в спутниковой службе он не обнаружит приложения пользовательского пространства.</value>
+  </data>
+  <data name="Configuration_NFC" xml:space="preserve">
+    <value>NFC</value>
+  </data>
+  <data name="AdvancedSensorConfig_Title" xml:space="preserve">
+    <value>Расширенные настройки</value>
+  </data>
+  <data name="SensorsMod_BtnAdvancedSettings" xml:space="preserve">
+    <value>Рас&amp;ширенные настройки</value>
+  </data>
+  <data name="AdvancedSensorConfig_Warning" xml:space="preserve">
+    <value>Внимание! Добавление следующих настроек (переопределений) может привести к поломке датчика, используйте с осторожностью!</value>
+  </data>
+  <data name="CommandsManager_TrayWebViewCommandDescription" xml:space="preserve">
+    <value>Показывает/скрывает веб-представление значка в трее.
+Требует настройки в разделе «Конфигурация -&gt; Значок в трее»</value>
+  </data>
+  <data name="HassAction_Trigger" xml:space="preserve">
+    <value>Вызывать</value>
+  </data>
+  <data name="HassDomain_Button" xml:space="preserve">
+    <value>Button</value>
+  </data>
+  <data name="HassAction_Press" xml:space="preserve">
+    <value>Нажимать</value>
+  </data>
+  <data name="Notification_Dismiss" xml:space="preserve">
+    <value>Увольнять</value>
   </data>
 </root>

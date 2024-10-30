@@ -46,6 +46,7 @@ namespace HASS.Agent.Forms
             this.TabStartup = new Syncfusion.Windows.Forms.Tools.TabPageAdv();
             this.TabTrayIcon = new Syncfusion.Windows.Forms.Tools.TabPageAdv();
             this.TabUpdates = new Syncfusion.Windows.Forms.Tools.TabPageAdv();
+            this.TabNFC = new Syncfusion.Windows.Forms.Tools.TabPageAdv();
             this.BtnAbout = new Syncfusion.WinForms.Controls.SfButton();
             this.BtnHelp = new Syncfusion.WinForms.Controls.SfButton();
             this.BtnStore = new Syncfusion.WinForms.Controls.SfButton();
@@ -80,6 +81,7 @@ namespace HASS.Agent.Forms
             this.ConfigTabs.Controls.Add(this.TabStartup);
             this.ConfigTabs.Controls.Add(this.TabTrayIcon);
             this.ConfigTabs.Controls.Add(this.TabUpdates);
+            this.ConfigTabs.Controls.Add(this.TabNFC);
             this.ConfigTabs.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ConfigTabs.FixedSingleBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
             this.ConfigTabs.FocusOnTabClick = false;
@@ -355,6 +357,23 @@ namespace HASS.Agent.Forms
             this.TabUpdates.Text = global::HASS.Agent.Resources.Localization.Languages.Configuration_TabUpdates;
             this.TabUpdates.ThemesEnabled = false;
             // 
+            // TabNFC
+            // 
+            this.TabNFC.AccessibleDescription = "Contains the \'NFC\' controls.";
+            this.TabNFC.AccessibleName = "NFC";
+            this.TabNFC.AccessibleRole = System.Windows.Forms.AccessibleRole.PageTab;
+            this.TabNFC.Image = null;
+            this.TabNFC.ImageSize = new System.Drawing.Size(16, 16);
+            this.TabNFC.Location = new System.Drawing.Point(142, 2);
+            this.TabNFC.Name = "TabNFC";
+            this.TabNFC.ShowCloseButton = true;
+            this.TabNFC.Size = new System.Drawing.Size(740, 544);
+            this.TabNFC.TabBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
+            this.TabNFC.TabForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
+            this.TabNFC.TabIndex = 15;
+            this.TabNFC.Text = Languages.Configuration_NFC;
+            this.TabNFC.ThemesEnabled = false;
+            // 
             // BtnAbout
             // 
             this.BtnAbout.AccessibleDescription = "Opens the about window.";
@@ -523,6 +542,7 @@ namespace HASS.Agent.Forms
         private Syncfusion.Windows.Forms.Tools.TabPageAdv TablLocalApi;
         private Syncfusion.Windows.Forms.Tools.TabPageAdv TabMediaPlayer;
         private Syncfusion.Windows.Forms.Tools.TabPageAdv TabTrayIcon;
+        private Syncfusion.Windows.Forms.Tools.TabPageAdv TabNFC;
     }
 }
 

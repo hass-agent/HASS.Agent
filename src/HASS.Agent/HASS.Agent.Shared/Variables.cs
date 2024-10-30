@@ -1,5 +1,4 @@
 ﻿using System;
-using CoreAudio;
 using HASS.Agent.Shared.Mqtt;
 
 namespace HASS.Agent.Shared
@@ -14,7 +13,6 @@ namespace HASS.Agent.Shared
         /// <summary>
         /// public references
         /// </summary>
-        internal static MMDeviceEnumerator AudioDeviceEnumerator { get; } = new MMDeviceEnumerator(Guid.NewGuid());
         internal static Random Rnd { get; } = new Random();
 
         /// <summary>

@@ -79,7 +79,9 @@ namespace HASS.Agent.Models.Config
         public bool MqttUseRetainFlag { get; set; } = true;
         public string MqttRootCertificate { get; set; } = string.Empty;
         public string MqttClientCertificate { get; set; } = string.Empty;
-
         public bool MqttIgnoreGracePeriod { get; set; } = false;
+
+        public bool NfcScanningEnabled { get; set; } = false;
+        public string NfcSelectedScanner { get; set; } = string.Empty;
     }
 }

@@ -139,7 +139,7 @@ public class NetworkSensors : AbstractMultiValueSensor
 
         var nicCountEntityName = $"{parentSensorSafeName}_total_network_card_count";
         var nicCountId = $"{Id}_total_network_card_count";
-        var nicCountSensor = new DataTypeIntSensor(_updateInterval, nicCountEntityName, "Network Card Count", nicCountId, string.Empty, "mdi:lan", string.Empty, EntityName);
+        var nicCountSensor = new DataTypeIntSensor(_updateInterval, nicCountEntityName, "Network Card Count", nicCountId, string.Empty, "measurement", "mdi:lan", string.Empty, EntityName);
         nicCountSensor.SetState(nicCount);
         AddUpdateSensor(nicCountId, nicCountSensor);
     }

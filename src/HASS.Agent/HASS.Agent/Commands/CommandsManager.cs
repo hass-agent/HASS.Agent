@@ -423,7 +423,7 @@ namespace HASS.Agent.Commands
 
             commandInfoCard = new CommandInfoCard(CommandType.MultipleKeysCommand,
                 Languages.CommandsManager_MultipleKeysCommandDescription,
-                true, false, false);
+                true, false, true);
 
             CommandInfoCards.Add(commandInfoCard.CommandType, commandInfoCard);
 
@@ -520,6 +520,14 @@ namespace HASS.Agent.Commands
             commandInfoCard = new CommandInfoCard(CommandType.WebViewCommand,
                 Languages.CommandsManager_WebViewCommandDescription,
                 true, false, true);
+
+            CommandInfoCards.Add(commandInfoCard.CommandType, commandInfoCard);
+
+            // =================================
+
+            commandInfoCard = new CommandInfoCard(CommandType.TrayWebViewCommand,
+                Languages.CommandsManager_TrayWebViewCommandDescription,
+                true, false, false);
 
             CommandInfoCards.Add(commandInfoCard.CommandType, commandInfoCard);
 

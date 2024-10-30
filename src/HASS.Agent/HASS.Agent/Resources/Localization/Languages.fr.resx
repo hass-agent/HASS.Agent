@@ -3325,7 +3325,15 @@ La commande/charge utile doit être au format JSON. Exemple de toutes les option
 
 Si aucun "playbackDevice" n'est fourni, HASS.Agent utilisera celui par défaut.
 Si aucun "volume" n'est fourni, HASS.Agent définira uniquement le statut muet.
-Si aucun "mute" n'est fourni, HASS.Agent réactivera le son de l'application fournie.</value>
+Si aucun "mute" n'est fourni, HASS.Agent réactivera le son de l'application fournie.
+
+Option avancée : un "sessionId" supplémentaire peut être fourni pour définir le volume uniquement pour une session spécifique de l'application, l'identifiant de session peut être obtenu à partir du capteur "Sessions audio" :
+{
+   "playbackDevice":"Speakers (THX SpatialAudio)",
+   "applicationName":"Discord",
+   "volume":50,
+   "sessionid":"&lt;LONG SESSION ID FROM SENSOR&gt;"
+}</value>
   </data>
   <data name="CommandsMod_BtnStore_InvalidJson" xml:space="preserve">
     <value>Veuillez saisir une chaîne JSON valide !</value>
@@ -3403,5 +3411,33 @@ Vous avez besoin du nom du périphérique audio comme charge utile.</value>
     <value>Fournit le nombre de processus qui utilisent actuellement le microphone - fournit en outre le nom des processus dans les attributs du capteur.
 
 Remarque : s'il est utilisé dans le service satellite, il ne détectera pas les applications de l'espace utilisateur.</value>
+  </data>
+  <data name="Configuration_NFC" xml:space="preserve">
+    <value>NFC</value>
+  </data>
+  <data name="AdvancedSensorConfig_Title" xml:space="preserve">
+    <value>Réglages avancés</value>
+  </data>
+  <data name="SensorsMod_BtnAdvancedSettings" xml:space="preserve">
+    <value>Réglages a&amp;vancés</value>
+  </data>
+  <data name="AdvancedSensorConfig_Warning" xml:space="preserve">
+    <value>Attention, l'ajout des paramètres suivants (remplacements) peut casser le capteur, à utiliser avec prudence !</value>
+  </data>
+  <data name="CommandsManager_TrayWebViewCommandDescription" xml:space="preserve">
+    <value>Affiche/masque l'affichage Web de l'icône de la barre d'état système.
+Nécessite sa configuration dans « Configuration -&gt; Icône de la barre d'état système »</value>
+  </data>
+  <data name="HassAction_Trigger" xml:space="preserve">
+    <value>Déclencher</value>
+  </data>
+  <data name="HassDomain_Button" xml:space="preserve">
+    <value>Knop</value>
+  </data>
+  <data name="HassAction_Press" xml:space="preserve">
+    <value>Presse</value>
+  </data>
+  <data name="Notification_Dismiss" xml:space="preserve">
+    <value>Rejeter</value>
   </data>
 </root>

@@ -3312,7 +3312,34 @@ Command / payload needs to be in JSON format. Example of all possible options:
 
 If no "playbackDevice" is provided, HASS.Agent will use the default one.
 If no "volume" is provided, HASS.Agent will set only mute status.
-If no "mute" is provided, HASS.Agent will unmute the provided application.</value>
+If no "mute" is provided, HASS.Agent will unmute the provided application.
+
+Advanced option: additional "sessionId" can be provided to set volume only for specific session of the application, session id can be obtained from "Audio Sessions" sensor:
+{
+   "playbackDevice":"Speakers (THX SpatialAudio)",
+   "applicationName":"Discord",
+   "volume":50,
+   "sessionid":"&lt;LONG SESSION ID FROM SENSOR&gt;"
+}Sets the volume and mute status of the provided application on provided audio device to the specified level.
+Command / payload needs to be in JSON format. Example of all possible options:
+{
+  "playbackDevice": "Speakers (THX Spatial Audio)",
+  "applicationName": "Discord",
+  "volume": 90,
+  "mute": true
+}
+
+If no "playbackDevice" is provided, HASS.Agent will use the default one.
+If no "volume" is provided, HASS.Agent will set only mute status.
+If no "mute" is provided, HASS.Agent will unmute the provided application.
+
+Advanced option: additional "sessionId" can be provided to set volume only for specific session of the application, session id can be obtained from "Audio Sessions" sensor:
+{
+   "playbackDevice":"Speakers (THX SpatialAudio)",
+   "applicationName":"Discord",
+   "volume":50,
+   "sessionid":"&lt;LONG SESSION ID FROM SENSOR&gt;"
+}</value>
   </data>
   <data name="CommandsMod_BtnStore_InvalidJson" xml:space="preserve">
     <value>Please enter a valid JSON string!</value>
@@ -3371,5 +3398,42 @@ Requires audio device name as a payload.</value>
     <value>Provides the number of the processes that currently use the microphone - additionally provides name of the processes in the sensor's attributes.
 
 Note: if used in the satellite service, it won't detect userspace applications.</value>
+  </data>
+  <data name="Configuration_NFC" xml:space="preserve">
+    <value>NFC</value>
+  </data>
+  <data name="SensorsMod_BtnAdvancedSettings" xml:space="preserve">
+    <value>Ad&amp;vanced Settings</value>
+  </data>
+  <data name="AdvancedSensorConfig_Warning" xml:space="preserve">
+    <value>Warning, adding following settings (overrides) may break the sensor, use with caution!</value>
+  </data>
+  <data name="AdvancedSensorConfig_LblDeviceClass" xml:space="preserve">
+    <value>Device class</value>
+  </data>
+  <data name="AdvancedSensorConfig_LblUnitOfMeasurement" xml:space="preserve">
+    <value>Unit of measurement</value>
+  </data>
+  <data name="AdvancedSensorConfig_LblStateClass" xml:space="preserve">
+    <value>State class</value>
+  </data>
+  <data name="AdvancedSensorConfig_Title" xml:space="preserve">
+    <value>Advanced Settings</value>
+  </data>
+  <data name="CommandsManager_TrayWebViewCommandDescription" xml:space="preserve">
+    <value>Shows / hides the Tray Icon Web View.
+Requires it to be configured in "Configuration -&gt; Tray Icon"</value>
+  </data>
+  <data name="HassAction_Trigger" xml:space="preserve">
+    <value>Trigger</value>
+  </data>
+  <data name="HassDomain_Button" xml:space="preserve">
+    <value>Button</value>
+  </data>
+  <data name="HassAction_Press" xml:space="preserve">
+    <value>Press</value>
+  </data>
+  <data name="Notification_Dismiss" xml:space="preserve">
+    <value>Dismiss</value>
   </data>
 </root>

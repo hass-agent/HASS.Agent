@@ -3402,7 +3402,15 @@ Polecenie/ładunek musi być w formacie JSON. Przykład wszystkich możliwych op
 
 Jeśli nie podano „playbackDevice”, HASS.Agent użyje urządzenia domyślnego.
 Jeśli nie zostanie podany „volume”, HASS.Agent ustawi jedynie stan wyciszenia.
-Jeśli nie podano opcji „mute”, HASS.Agent wyłączy wyciszenie dostarczonej aplikacji.</value>
+Jeśli nie podano opcji „mute”, HASS.Agent wyłączy wyciszenie dostarczonej aplikacji.
+
+Opcja zaawansowana: można udostępnić dodatkowy parametr „sessionId”, aby ustawić głośność tylko dla konkretnej sesji aplikacji, identyfikator sesji można uzyskać z czujnika „Audio Sessions”:
+{
+   "playbackDevice":"Speakers (THX SpatialAudio)",
+   "applicationName":"Discord",
+   "volume":50,
+   "sessionid":"&lt;LONG SESSION ID FROM SENSOR&gt;"
+}</value>
   </data>
   <data name="CommandsMod_BtnStore_InvalidJson" xml:space="preserve">
     <value>Proszę wprowadzić prawidłowy ciąg JSON!</value>
@@ -3480,5 +3488,33 @@ Wymaga nazwy urządzenia audio jako ładunku.</value>
     <value>Podaje liczbę procesów aktualnie korzystających z mikrofonu - dodatkowo podaje nazwę procesów w atrybutach czujnika.
 
 Uwaga: jeśli jest używany w usłudze satelitarnej, nie wykryje aplikacji przestrzeni użytkownika.</value>
+  </data>
+  <data name="Configuration_NFC" xml:space="preserve">
+    <value>NFC</value>
+  </data>
+  <data name="AdvancedSensorConfig_Title" xml:space="preserve">
+    <value>Ustawienia zaawansowane</value>
+  </data>
+  <data name="SensorsMod_BtnAdvancedSettings" xml:space="preserve">
+    <value>Ustaw&amp;ienia zaawansowane</value>
+  </data>
+  <data name="AdvancedSensorConfig_Warning" xml:space="preserve">
+    <value>Uwaga, dodanie następujących ustawień (nadpisań) może spowodować uszkodzenie czujnika, zachowaj ostrożność!</value>
+  </data>
+  <data name="CommandsManager_TrayWebViewCommandDescription" xml:space="preserve">
+    <value>Pokazuje/ukrywa Tray Icon Web View.
+Wymaga konfiguracji w „Configuration -&gt; Tray Icon”</value>
+  </data>
+  <data name="HassAction_Trigger" xml:space="preserve">
+    <value>Wyzwól</value>
+  </data>
+  <data name="HassDomain_Button" xml:space="preserve">
+    <value>Przycisk</value>
+  </data>
+  <data name="HassAction_Press" xml:space="preserve">
+    <value>Naciśnij</value>
+  </data>
+  <data name="Notification_Dismiss" xml:space="preserve">
+    <value>Odrzuć</value>
   </data>
 </root>

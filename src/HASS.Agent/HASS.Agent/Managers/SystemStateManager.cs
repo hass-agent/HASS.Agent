@@ -1,6 +1,7 @@
 ﻿using System.Runtime.InteropServices;
 using HASS.Agent.Functions;
 using HASS.Agent.Shared.Enums;
+using HASS.Agent.Shared.Managers.Audio;
 using Microsoft.Win32;
 using Serilog;
 
@@ -200,6 +201,7 @@ namespace HASS.Agent.Managers
                     Log.Information("[SYSTEMSTATE] Session resuming");
                     Task.Run(() => Variables.MqttManager.AnnounceAvailabilityAsync());
                     LastSystemStateEvent = SystemStateEvent.Resume;
+
                     break;
 
                 case PowerModes.Suspend:
@@ -209,6 +211,7 @@ namespace HASS.Agent.Managers
                     Log.Information("[SYSTEMSTATE] Session halting: system suspending");
                     Task.Run(() => Variables.MqttManager.AnnounceAvailabilityAsync(true));
                     LastSystemStateEvent = SystemStateEvent.Suspend;
+
                     break;
             }
         }
