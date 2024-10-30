@@ -940,7 +940,7 @@ namespace HASS.Agent.Forms
             };
 
             // show it
-            HelperFunctions.LaunchTrayIconWebView(webView);
+            HelperFunctions.LaunchTrayIconWebView(webView, Variables.AppSettings.TrayIconWebViewScreen);
         }
 
         private async void PbDonate_Click(object sender, EventArgs e)

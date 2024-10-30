@@ -1,4 +1,5 @@
 ﻿using HASS.Agent.Resources.Localization;
+using Syncfusion.Windows.Forms.Tools;
 
 namespace HASS.Agent.Controls.Configuration
 {
@@ -30,316 +31,308 @@ namespace HASS.Agent.Controls.Configuration
         /// </summary>
         private void InitializeComponent()
         {
-            this.LblInfo1 = new System.Windows.Forms.Label();
-            this.CbDefaultMenu = new System.Windows.Forms.CheckBox();
-            this.CbShowWebView = new System.Windows.Forms.CheckBox();
-            this.TbWebViewUrl = new System.Windows.Forms.TextBox();
-            this.LblWebViewUrl = new System.Windows.Forms.Label();
-            this.LblX = new System.Windows.Forms.Label();
-            this.LblWebViewSize = new System.Windows.Forms.Label();
-            this.BtnShowWebViewPreview = new Syncfusion.WinForms.Controls.SfButton();
-            this.NumWebViewWidth = new Syncfusion.Windows.Forms.Tools.NumericUpDownExt();
-            this.NumWebViewHeight = new Syncfusion.Windows.Forms.Tools.NumericUpDownExt();
-            this.BtnWebViewReset = new Syncfusion.WinForms.Controls.SfButton();
-            this.CbWebViewKeepLoaded = new System.Windows.Forms.CheckBox();
-            this.LblInfo2 = new System.Windows.Forms.Label();
-            this.CbWebViewShowMenuOnLeftClick = new System.Windows.Forms.CheckBox();
-            ((System.ComponentModel.ISupportInitialize)(this.NumWebViewWidth)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.NumWebViewHeight)).BeginInit();
-            this.SuspendLayout();
+            LblInfo1 = new Label();
+            CbDefaultMenu = new CheckBox();
+            CbShowWebView = new CheckBox();
+            TbWebViewUrl = new TextBox();
+            LblWebViewUrl = new Label();
+            LblX = new Label();
+            LblWebViewSize = new Label();
+            BtnShowWebViewPreview = new Syncfusion.WinForms.Controls.SfButton();
+            NumWebViewWidth = new Syncfusion.Windows.Forms.Tools.NumericUpDownExt();
+            NumWebViewHeight = new Syncfusion.Windows.Forms.Tools.NumericUpDownExt();
+            BtnWebViewReset = new Syncfusion.WinForms.Controls.SfButton();
+            CbWebViewKeepLoaded = new CheckBox();
+            LblInfo2 = new Label();
+            CbWebViewShowMenuOnLeftClick = new CheckBox();
+            NumWebViewScreen = new Syncfusion.Windows.Forms.Tools.ComboBoxAdv();
+            ((System.ComponentModel.ISupportInitialize)NumWebViewWidth).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)NumWebViewHeight).BeginInit();
+            SuspendLayout();
             // 
             // LblInfo1
             // 
-            this.LblInfo1.AccessibleDescription = "Tray icon information.";
-            this.LblInfo1.AccessibleName = "Information";
-            this.LblInfo1.AccessibleRole = System.Windows.Forms.AccessibleRole.StaticText;
-            this.LblInfo1.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.LblInfo1.Location = new System.Drawing.Point(70, 36);
-            this.LblInfo1.Name = "LblInfo1";
-            this.LblInfo1.Size = new System.Drawing.Size(541, 78);
-            this.LblInfo1.TabIndex = 31;
-            this.LblInfo1.Text = Languages.ConfigTrayIcon_LblInfo1;
+            LblInfo1.AccessibleDescription = "Tray icon information.";
+            LblInfo1.AccessibleName = "Information";
+            LblInfo1.AccessibleRole = AccessibleRole.StaticText;
+            LblInfo1.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            LblInfo1.Location = new Point(70, 36);
+            LblInfo1.Name = "LblInfo1";
+            LblInfo1.Size = new Size(541, 78);
+            LblInfo1.TabIndex = 31;
+            LblInfo1.Text = "Control the behaviour of the tray icon when it is right-clicked.";
             // 
             // CbDefaultMenu
             // 
-            this.CbDefaultMenu.AccessibleDescription = "If enabled, right clicking the system tray icon will show the default menu.";
-            this.CbDefaultMenu.AccessibleName = "Show default menu";
-            this.CbDefaultMenu.AccessibleRole = System.Windows.Forms.AccessibleRole.CheckButton;
-            this.CbDefaultMenu.AutoSize = true;
-            this.CbDefaultMenu.Checked = true;
-            this.CbDefaultMenu.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.CbDefaultMenu.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.CbDefaultMenu.Location = new System.Drawing.Point(70, 117);
-            this.CbDefaultMenu.Name = "CbDefaultMenu";
-            this.CbDefaultMenu.Size = new System.Drawing.Size(145, 23);
-            this.CbDefaultMenu.TabIndex = 0;
-            this.CbDefaultMenu.Text = global::HASS.Agent.Resources.Localization.Languages.ConfigTrayIcon_CbDefaultMenu;
-            this.CbDefaultMenu.UseVisualStyleBackColor = true;
-            this.CbDefaultMenu.CheckedChanged += new System.EventHandler(this.CbDefaultMenu_CheckedChanged);
+            CbDefaultMenu.AccessibleDescription = "If enabled, right clicking the system tray icon will show the default menu.";
+            CbDefaultMenu.AccessibleName = "Show default menu";
+            CbDefaultMenu.AccessibleRole = AccessibleRole.CheckButton;
+            CbDefaultMenu.AutoSize = true;
+            CbDefaultMenu.Checked = true;
+            CbDefaultMenu.CheckState = CheckState.Checked;
+            CbDefaultMenu.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            CbDefaultMenu.Location = new Point(70, 117);
+            CbDefaultMenu.Name = "CbDefaultMenu";
+            CbDefaultMenu.Size = new Size(149, 23);
+            CbDefaultMenu.TabIndex = 0;
+            CbDefaultMenu.Text = Languages.ConfigTrayIcon_CbDefaultMenu;
+            CbDefaultMenu.UseVisualStyleBackColor = true;
+            CbDefaultMenu.CheckedChanged += CbDefaultMenu_CheckedChanged;
             // 
             // CbShowWebView
             // 
-            this.CbShowWebView.AccessibleDescription = "If enabled, right clicking the system tray icon will show a webview with the url " +
-    "you provide.";
-            this.CbShowWebView.AccessibleName = "Show webview";
-            this.CbShowWebView.AccessibleRole = System.Windows.Forms.AccessibleRole.CheckButton;
-            this.CbShowWebView.AutoSize = true;
-            this.CbShowWebView.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.CbShowWebView.Location = new System.Drawing.Point(70, 209);
-            this.CbShowWebView.Name = "CbShowWebView";
-            this.CbShowWebView.Size = new System.Drawing.Size(116, 23);
-            this.CbShowWebView.TabIndex = 1;
-            this.CbShowWebView.Text = global::HASS.Agent.Resources.Localization.Languages.ConfigTrayIcon_CbShowWebView;
-            this.CbShowWebView.UseVisualStyleBackColor = true;
-            this.CbShowWebView.CheckedChanged += new System.EventHandler(this.CbShowWebView_CheckedChanged);
+            CbShowWebView.AccessibleDescription = "If enabled, right clicking the system tray icon will show a webview with the url you provide.";
+            CbShowWebView.AccessibleName = "Show webview";
+            CbShowWebView.AccessibleRole = AccessibleRole.CheckButton;
+            CbShowWebView.AutoSize = true;
+            CbShowWebView.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            CbShowWebView.Location = new Point(70, 209);
+            CbShowWebView.Name = "CbShowWebView";
+            CbShowWebView.Size = new Size(121, 23);
+            CbShowWebView.TabIndex = 1;
+            CbShowWebView.Text = Languages.ConfigTrayIcon_CbShowWebView;
+            CbShowWebView.UseVisualStyleBackColor = true;
+            CbShowWebView.CheckedChanged += CbShowWebView_CheckedChanged;
             // 
             // TbWebViewUrl
             // 
-            this.TbWebViewUrl.AccessibleDescription = "The URL to show. Defaults to the Home Assistant API\'s URL.";
-            this.TbWebViewUrl.AccessibleName = "URL";
-            this.TbWebViewUrl.AccessibleRole = System.Windows.Forms.AccessibleRole.Text;
-            this.TbWebViewUrl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(63)))), ((int)(((byte)(70)))));
-            this.TbWebViewUrl.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.TbWebViewUrl.Enabled = false;
-            this.TbWebViewUrl.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.TbWebViewUrl.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
-            this.TbWebViewUrl.Location = new System.Drawing.Point(90, 280);
-            this.TbWebViewUrl.Name = "TbWebViewUrl";
-            this.TbWebViewUrl.Size = new System.Drawing.Size(521, 25);
-            this.TbWebViewUrl.TabIndex = 2;
+            TbWebViewUrl.AccessibleDescription = "The URL to show. Defaults to the Home Assistant API's URL.";
+            TbWebViewUrl.AccessibleName = "URL";
+            TbWebViewUrl.AccessibleRole = AccessibleRole.Text;
+            TbWebViewUrl.BackColor = Color.FromArgb(63, 63, 70);
+            TbWebViewUrl.BorderStyle = BorderStyle.FixedSingle;
+            TbWebViewUrl.Enabled = false;
+            TbWebViewUrl.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            TbWebViewUrl.ForeColor = Color.FromArgb(241, 241, 241);
+            TbWebViewUrl.Location = new Point(90, 280);
+            TbWebViewUrl.Name = "TbWebViewUrl";
+            TbWebViewUrl.Size = new Size(521, 25);
+            TbWebViewUrl.TabIndex = 2;
             // 
             // LblWebViewUrl
             // 
-            this.LblWebViewUrl.AccessibleDescription = "URL textbox description";
-            this.LblWebViewUrl.AccessibleName = "URL info";
-            this.LblWebViewUrl.AccessibleRole = System.Windows.Forms.AccessibleRole.StaticText;
-            this.LblWebViewUrl.AutoSize = true;
-            this.LblWebViewUrl.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.LblWebViewUrl.Location = new System.Drawing.Point(87, 258);
-            this.LblWebViewUrl.Name = "LblWebViewUrl";
-            this.LblWebViewUrl.Size = new System.Drawing.Size(349, 19);
-            this.LblWebViewUrl.TabIndex = 49;
-            this.LblWebViewUrl.Text = Languages.ConfigTrayIcon_LblWebViewUrl;
+            LblWebViewUrl.AccessibleDescription = "URL textbox description";
+            LblWebViewUrl.AccessibleName = "URL info";
+            LblWebViewUrl.AccessibleRole = AccessibleRole.StaticText;
+            LblWebViewUrl.AutoSize = true;
+            LblWebViewUrl.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            LblWebViewUrl.Location = new Point(87, 258);
+            LblWebViewUrl.Name = "LblWebViewUrl";
+            LblWebViewUrl.Size = new Size(415, 19);
+            LblWebViewUrl.TabIndex = 49;
+            LblWebViewUrl.Text = "&WebView URL (For instance, your Home Assistant Dashboard URL)";
             // 
             // LblX
             // 
-            this.LblX.AccessibleDescription = "Shows X, meaning \'by\' in this context.";
-            this.LblX.AccessibleName = "X info";
-            this.LblX.AccessibleRole = System.Windows.Forms.AccessibleRole.StaticText;
-            this.LblX.AutoSize = true;
-            this.LblX.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.LblX.Location = new System.Drawing.Point(184, 350);
-            this.LblX.Name = "LblX";
-            this.LblX.Size = new System.Drawing.Size(17, 19);
-            this.LblX.TabIndex = 53;
-            this.LblX.Text = "X";
+            LblX.AccessibleDescription = "Shows X, meaning 'by' in this context.";
+            LblX.AccessibleName = "X info";
+            LblX.AccessibleRole = AccessibleRole.StaticText;
+            LblX.AutoSize = true;
+            LblX.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            LblX.Location = new Point(184, 350);
+            LblX.Name = "LblX";
+            LblX.Size = new Size(17, 19);
+            LblX.TabIndex = 53;
+            LblX.Text = "X";
             // 
             // LblWebViewSize
             // 
-            this.LblWebViewSize.AccessibleDescription = "Size description.";
-            this.LblWebViewSize.AccessibleName = "Size info";
-            this.LblWebViewSize.AccessibleRole = System.Windows.Forms.AccessibleRole.StaticText;
-            this.LblWebViewSize.AutoSize = true;
-            this.LblWebViewSize.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.LblWebViewSize.Location = new System.Drawing.Point(85, 326);
-            this.LblWebViewSize.Name = "LblWebViewSize";
-            this.LblWebViewSize.Size = new System.Drawing.Size(31, 19);
-            this.LblWebViewSize.TabIndex = 51;
-            this.LblWebViewSize.Text = Languages.ConfigTrayIcon_LblWebViewSize;
+            LblWebViewSize.AccessibleDescription = "Size description.";
+            LblWebViewSize.AccessibleName = "Size info";
+            LblWebViewSize.AccessibleRole = AccessibleRole.StaticText;
+            LblWebViewSize.AutoSize = true;
+            LblWebViewSize.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            LblWebViewSize.Location = new Point(85, 326);
+            LblWebViewSize.Name = "LblWebViewSize";
+            LblWebViewSize.Size = new Size(58, 19);
+            LblWebViewSize.TabIndex = 51;
+            LblWebViewSize.Text = "Size (px)";
             // 
             // BtnShowWebViewPreview
             // 
-            this.BtnShowWebViewPreview.AccessibleDescription = "Shows the webview, using the currently configured values.";
-            this.BtnShowWebViewPreview.AccessibleName = "Webview preview";
-            this.BtnShowWebViewPreview.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.BtnShowWebViewPreview.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(63)))), ((int)(((byte)(70)))));
-            this.BtnShowWebViewPreview.Enabled = false;
-            this.BtnShowWebViewPreview.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.BtnShowWebViewPreview.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
-            this.BtnShowWebViewPreview.Location = new System.Drawing.Point(405, 348);
-            this.BtnShowWebViewPreview.Name = "BtnShowWebViewPreview";
-            this.BtnShowWebViewPreview.Size = new System.Drawing.Size(206, 26);
-            this.BtnShowWebViewPreview.Style.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(63)))), ((int)(((byte)(70)))));
-            this.BtnShowWebViewPreview.Style.FocusedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(63)))), ((int)(((byte)(70)))));
-            this.BtnShowWebViewPreview.Style.FocusedForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
-            this.BtnShowWebViewPreview.Style.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
-            this.BtnShowWebViewPreview.Style.HoverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(63)))), ((int)(((byte)(70)))));
-            this.BtnShowWebViewPreview.Style.HoverForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
-            this.BtnShowWebViewPreview.Style.PressedForeColor = System.Drawing.Color.Black;
-            this.BtnShowWebViewPreview.TabIndex = 6;
-            this.BtnShowWebViewPreview.Text = global::HASS.Agent.Resources.Localization.Languages.ConfigTrayIcon_BtnShowWebViewPreview;
-            this.BtnShowWebViewPreview.UseVisualStyleBackColor = false;
-            this.BtnShowWebViewPreview.Click += new System.EventHandler(this.BtnShowWebViewPreview_Click);
+            BtnShowWebViewPreview.AccessibleDescription = "Shows the webview, using the currently configured values.";
+            BtnShowWebViewPreview.AccessibleName = "Webview preview";
+            BtnShowWebViewPreview.AccessibleRole = AccessibleRole.PushButton;
+            BtnShowWebViewPreview.BackColor = Color.FromArgb(63, 63, 70);
+            BtnShowWebViewPreview.Enabled = false;
+            BtnShowWebViewPreview.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            BtnShowWebViewPreview.ForeColor = Color.FromArgb(241, 241, 241);
+            BtnShowWebViewPreview.Location = new Point(494, 348);
+            BtnShowWebViewPreview.Name = "BtnShowWebViewPreview";
+            BtnShowWebViewPreview.Size = new Size(117, 26);
+            BtnShowWebViewPreview.Style.BackColor = Color.FromArgb(63, 63, 70);
+            BtnShowWebViewPreview.Style.FocusedBackColor = Color.FromArgb(63, 63, 70);
+            BtnShowWebViewPreview.Style.FocusedForeColor = Color.FromArgb(241, 241, 241);
+            BtnShowWebViewPreview.Style.ForeColor = Color.FromArgb(241, 241, 241);
+            BtnShowWebViewPreview.Style.HoverBackColor = Color.FromArgb(63, 63, 70);
+            BtnShowWebViewPreview.Style.HoverForeColor = Color.FromArgb(241, 241, 241);
+            BtnShowWebViewPreview.Style.PressedForeColor = Color.Black;
+            BtnShowWebViewPreview.TabIndex = 6;
+            BtnShowWebViewPreview.Text = Languages.ConfigTrayIcon_BtnShowWebViewPreview;
+            BtnShowWebViewPreview.UseVisualStyleBackColor = false;
+            BtnShowWebViewPreview.Click += BtnShowWebViewPreview_Click;
             // 
             // NumWebViewWidth
             // 
-            this.NumWebViewWidth.AccessibleDescription = "The width of the webview. Only accepts numeric values.";
-            this.NumWebViewWidth.AccessibleName = "Width";
-            this.NumWebViewWidth.AccessibleRole = System.Windows.Forms.AccessibleRole.Text;
-            this.NumWebViewWidth.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(63)))), ((int)(((byte)(70)))));
-            this.NumWebViewWidth.BeforeTouchSize = new System.Drawing.Size(83, 25);
-            this.NumWebViewWidth.Border3DStyle = System.Windows.Forms.Border3DStyle.Flat;
-            this.NumWebViewWidth.BorderColor = System.Drawing.SystemColors.WindowFrame;
-            this.NumWebViewWidth.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.NumWebViewWidth.Enabled = false;
-            this.NumWebViewWidth.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.NumWebViewWidth.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
-            this.NumWebViewWidth.Location = new System.Drawing.Point(87, 348);
-            this.NumWebViewWidth.Maximum = new decimal(new int[] {
-            65535,
-            0,
-            0,
-            0});
-            this.NumWebViewWidth.MaxLength = 10;
-            this.NumWebViewWidth.MetroColor = System.Drawing.SystemColors.WindowFrame;
-            this.NumWebViewWidth.Name = "NumWebViewWidth";
-            this.NumWebViewWidth.Size = new System.Drawing.Size(83, 25);
-            this.NumWebViewWidth.TabIndex = 3;
-            this.NumWebViewWidth.ThemeName = "Metro";
-            this.NumWebViewWidth.Value = new decimal(new int[] {
-            700,
-            0,
-            0,
-            0});
-            this.NumWebViewWidth.VisualStyle = Syncfusion.Windows.Forms.VisualStyle.Metro;
+            NumWebViewWidth.AccessibleDescription = "The width of the webview. Only accepts numeric values.";
+            NumWebViewWidth.AccessibleName = "Width";
+            NumWebViewWidth.AccessibleRole = AccessibleRole.Text;
+            NumWebViewWidth.BackColor = Color.FromArgb(63, 63, 70);
+            NumWebViewWidth.BeforeTouchSize = new Size(83, 25);
+            NumWebViewWidth.Border3DStyle = Border3DStyle.Flat;
+            NumWebViewWidth.BorderColor = SystemColors.WindowFrame;
+            NumWebViewWidth.BorderStyle = BorderStyle.FixedSingle;
+            NumWebViewWidth.Enabled = false;
+            NumWebViewWidth.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            NumWebViewWidth.ForeColor = Color.FromArgb(241, 241, 241);
+            NumWebViewWidth.Location = new Point(87, 348);
+            NumWebViewWidth.Maximum = new decimal(new int[] { 65535, 0, 0, 0 });
+            NumWebViewWidth.MaxLength = 10;
+            NumWebViewWidth.MetroColor = SystemColors.WindowFrame;
+            NumWebViewWidth.Name = "NumWebViewWidth";
+            NumWebViewWidth.Size = new Size(83, 25);
+            NumWebViewWidth.TabIndex = 3;
+            NumWebViewWidth.ThemeName = "Metro";
+            NumWebViewWidth.Value = new decimal(new int[] { 700, 0, 0, 0 });
+            NumWebViewWidth.VisualStyle = Syncfusion.Windows.Forms.VisualStyle.Metro;
             // 
             // NumWebViewHeight
             // 
-            this.NumWebViewHeight.AccessibleDescription = "The height of the webview. Only accepts numeric values.";
-            this.NumWebViewHeight.AccessibleName = "Height";
-            this.NumWebViewHeight.AccessibleRole = System.Windows.Forms.AccessibleRole.Text;
-            this.NumWebViewHeight.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(63)))), ((int)(((byte)(70)))));
-            this.NumWebViewHeight.BeforeTouchSize = new System.Drawing.Size(83, 25);
-            this.NumWebViewHeight.Border3DStyle = System.Windows.Forms.Border3DStyle.Flat;
-            this.NumWebViewHeight.BorderColor = System.Drawing.SystemColors.WindowFrame;
-            this.NumWebViewHeight.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.NumWebViewHeight.Enabled = false;
-            this.NumWebViewHeight.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.NumWebViewHeight.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
-            this.NumWebViewHeight.Location = new System.Drawing.Point(218, 348);
-            this.NumWebViewHeight.Maximum = new decimal(new int[] {
-            65535,
-            0,
-            0,
-            0});
-            this.NumWebViewHeight.MaxLength = 10;
-            this.NumWebViewHeight.MetroColor = System.Drawing.SystemColors.WindowFrame;
-            this.NumWebViewHeight.Name = "NumWebViewHeight";
-            this.NumWebViewHeight.Size = new System.Drawing.Size(83, 25);
-            this.NumWebViewHeight.TabIndex = 4;
-            this.NumWebViewHeight.ThemeName = "Metro";
-            this.NumWebViewHeight.Value = new decimal(new int[] {
-            560,
-            0,
-            0,
-            0});
-            this.NumWebViewHeight.VisualStyle = Syncfusion.Windows.Forms.VisualStyle.Metro;
+            NumWebViewHeight.AccessibleDescription = "The height of the webview. Only accepts numeric values.";
+            NumWebViewHeight.AccessibleName = "Height";
+            NumWebViewHeight.AccessibleRole = AccessibleRole.Text;
+            NumWebViewHeight.BackColor = Color.FromArgb(63, 63, 70);
+            NumWebViewHeight.BeforeTouchSize = new Size(83, 25);
+            NumWebViewHeight.Border3DStyle = Border3DStyle.Flat;
+            NumWebViewHeight.BorderColor = SystemColors.WindowFrame;
+            NumWebViewHeight.BorderStyle = BorderStyle.FixedSingle;
+            NumWebViewHeight.Enabled = false;
+            NumWebViewHeight.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            NumWebViewHeight.ForeColor = Color.FromArgb(241, 241, 241);
+            NumWebViewHeight.Location = new Point(218, 348);
+            NumWebViewHeight.Maximum = new decimal(new int[] { 65535, 0, 0, 0 });
+            NumWebViewHeight.MaxLength = 10;
+            NumWebViewHeight.MetroColor = SystemColors.WindowFrame;
+            NumWebViewHeight.Name = "NumWebViewHeight";
+            NumWebViewHeight.Size = new Size(83, 25);
+            NumWebViewHeight.TabIndex = 4;
+            NumWebViewHeight.ThemeName = "Metro";
+            NumWebViewHeight.Value = new decimal(new int[] { 560, 0, 0, 0 });
+            NumWebViewHeight.VisualStyle = Syncfusion.Windows.Forms.VisualStyle.Metro;
             // 
             // BtnWebViewReset
             // 
-            this.BtnWebViewReset.AccessibleDescription = "Resets the width and height values to their defaults.";
-            this.BtnWebViewReset.AccessibleName = "Reset webview";
-            this.BtnWebViewReset.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.BtnWebViewReset.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(63)))), ((int)(((byte)(70)))));
-            this.BtnWebViewReset.Enabled = false;
-            this.BtnWebViewReset.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.BtnWebViewReset.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
-            this.BtnWebViewReset.ImageSize = new System.Drawing.Size(24, 24);
-            this.BtnWebViewReset.Location = new System.Drawing.Point(317, 348);
-            this.BtnWebViewReset.Name = "BtnWebViewReset";
-            this.BtnWebViewReset.Size = new System.Drawing.Size(51, 26);
-            this.BtnWebViewReset.Style.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(63)))), ((int)(((byte)(70)))));
-            this.BtnWebViewReset.Style.FocusedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(63)))), ((int)(((byte)(70)))));
-            this.BtnWebViewReset.Style.FocusedForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
-            this.BtnWebViewReset.Style.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
-            this.BtnWebViewReset.Style.HoverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(63)))), ((int)(((byte)(70)))));
-            this.BtnWebViewReset.Style.HoverForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
-            this.BtnWebViewReset.Style.Image = global::HASS.Agent.Properties.Resources.reset_24;
-            this.BtnWebViewReset.Style.PressedForeColor = System.Drawing.Color.Black;
-            this.BtnWebViewReset.TabIndex = 5;
-            this.BtnWebViewReset.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay;
-            this.BtnWebViewReset.UseVisualStyleBackColor = false;
-            this.BtnWebViewReset.Click += new System.EventHandler(this.BtnWebViewReset_Click);
+            BtnWebViewReset.AccessibleDescription = "Resets the width and height values to their defaults.";
+            BtnWebViewReset.AccessibleName = "Reset webview";
+            BtnWebViewReset.AccessibleRole = AccessibleRole.PushButton;
+            BtnWebViewReset.BackColor = Color.FromArgb(63, 63, 70);
+            BtnWebViewReset.Enabled = false;
+            BtnWebViewReset.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            BtnWebViewReset.ForeColor = Color.FromArgb(241, 241, 241);
+            BtnWebViewReset.ImageSize = new Size(24, 24);
+            BtnWebViewReset.Location = new Point(317, 348);
+            BtnWebViewReset.Name = "BtnWebViewReset";
+            BtnWebViewReset.Size = new Size(51, 26);
+            BtnWebViewReset.Style.BackColor = Color.FromArgb(63, 63, 70);
+            BtnWebViewReset.Style.FocusedBackColor = Color.FromArgb(63, 63, 70);
+            BtnWebViewReset.Style.FocusedForeColor = Color.FromArgb(241, 241, 241);
+            BtnWebViewReset.Style.ForeColor = Color.FromArgb(241, 241, 241);
+            BtnWebViewReset.Style.HoverBackColor = Color.FromArgb(63, 63, 70);
+            BtnWebViewReset.Style.HoverForeColor = Color.FromArgb(241, 241, 241);
+            BtnWebViewReset.Style.Image = Properties.Resources.reset_24;
+            BtnWebViewReset.Style.PressedForeColor = Color.Black;
+            BtnWebViewReset.TabIndex = 5;
+            BtnWebViewReset.TextImageRelation = TextImageRelation.Overlay;
+            BtnWebViewReset.UseVisualStyleBackColor = false;
+            BtnWebViewReset.Click += BtnWebViewReset_Click;
             // 
             // CbWebViewKeepLoaded
             // 
-            this.CbWebViewKeepLoaded.AccessibleDescription = "Keeps the webview loaded in the background, resulting in faster loading when invo" +
-    "ked.";
-            this.CbWebViewKeepLoaded.AccessibleName = "Background loading";
-            this.CbWebViewKeepLoaded.AccessibleRole = System.Windows.Forms.AccessibleRole.CheckButton;
-            this.CbWebViewKeepLoaded.AutoSize = true;
-            this.CbWebViewKeepLoaded.Checked = true;
-            this.CbWebViewKeepLoaded.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.CbWebViewKeepLoaded.Enabled = false;
-            this.CbWebViewKeepLoaded.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.CbWebViewKeepLoaded.Location = new System.Drawing.Point(90, 405);
-            this.CbWebViewKeepLoaded.Name = "CbWebViewKeepLoaded";
-            this.CbWebViewKeepLoaded.Size = new System.Drawing.Size(252, 23);
-            this.CbWebViewKeepLoaded.TabIndex = 7;
-            this.CbWebViewKeepLoaded.Text = global::HASS.Agent.Resources.Localization.Languages.ConfigTrayIcon_CbWebViewKeepLoaded;
-            this.CbWebViewKeepLoaded.UseVisualStyleBackColor = true;
+            CbWebViewKeepLoaded.AccessibleDescription = "Keeps the webview loaded in the background, resulting in faster loading when invoked.";
+            CbWebViewKeepLoaded.AccessibleName = "Background loading";
+            CbWebViewKeepLoaded.AccessibleRole = AccessibleRole.CheckButton;
+            CbWebViewKeepLoaded.AutoSize = true;
+            CbWebViewKeepLoaded.Checked = true;
+            CbWebViewKeepLoaded.CheckState = CheckState.Checked;
+            CbWebViewKeepLoaded.Enabled = false;
+            CbWebViewKeepLoaded.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            CbWebViewKeepLoaded.Location = new Point(90, 405);
+            CbWebViewKeepLoaded.Name = "CbWebViewKeepLoaded";
+            CbWebViewKeepLoaded.Size = new Size(253, 23);
+            CbWebViewKeepLoaded.TabIndex = 7;
+            CbWebViewKeepLoaded.Text = Languages.ConfigTrayIcon_CbWebViewKeepLoaded;
+            CbWebViewKeepLoaded.UseVisualStyleBackColor = true;
             // 
             // LblInfo2
             // 
-            this.LblInfo2.AccessibleDescription = "Background loading information.";
-            this.LblInfo2.AccessibleName = "Background loading info";
-            this.LblInfo2.AccessibleRole = System.Windows.Forms.AccessibleRole.StaticText;
-            this.LblInfo2.AutoSize = true;
-            this.LblInfo2.Enabled = false;
-            this.LblInfo2.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.LblInfo2.Location = new System.Drawing.Point(107, 435);
-            this.LblInfo2.Name = "LblInfo2";
-            this.LblInfo2.Size = new System.Drawing.Size(320, 19);
-            this.LblInfo2.TabIndex = 76;
-            this.LblInfo2.Text = Languages.ConfigTrayIcon_LblInfo2;
+            LblInfo2.AccessibleDescription = "Background loading information.";
+            LblInfo2.AccessibleName = "Background loading info";
+            LblInfo2.AccessibleRole = AccessibleRole.StaticText;
+            LblInfo2.AutoSize = true;
+            LblInfo2.Enabled = false;
+            LblInfo2.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            LblInfo2.Location = new Point(107, 435);
+            LblInfo2.Name = "LblInfo2";
+            LblInfo2.Size = new Size(330, 19);
+            LblInfo2.TabIndex = 76;
+            LblInfo2.Text = "(This uses extra resources, but reduces loading time.)";
             // 
             // CbWebViewShowMenuOnLeftClick
             // 
-            this.CbWebViewShowMenuOnLeftClick.AccessibleDescription = "If enabled, left clicking the system tray icon will show the default menu.";
-            this.CbWebViewShowMenuOnLeftClick.AccessibleName = "Show default menu on left click";
-            this.CbWebViewShowMenuOnLeftClick.AccessibleRole = System.Windows.Forms.AccessibleRole.CheckButton;
-            this.CbWebViewShowMenuOnLeftClick.AutoSize = true;
-            this.CbWebViewShowMenuOnLeftClick.Enabled = false;
-            this.CbWebViewShowMenuOnLeftClick.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.CbWebViewShowMenuOnLeftClick.Location = new System.Drawing.Point(90, 487);
-            this.CbWebViewShowMenuOnLeftClick.Name = "CbWebViewShowMenuOnLeftClick";
-            this.CbWebViewShowMenuOnLeftClick.Size = new System.Drawing.Size(304, 23);
-            this.CbWebViewShowMenuOnLeftClick.TabIndex = 77;
-            this.CbWebViewShowMenuOnLeftClick.Text = Languages.ConfigTrayIcon_CbWebViewShowMenuOnLeftClick;
-            this.CbWebViewShowMenuOnLeftClick.UseVisualStyleBackColor = true;
+            CbWebViewShowMenuOnLeftClick.AccessibleDescription = "If enabled, left clicking the system tray icon will show the default menu.";
+            CbWebViewShowMenuOnLeftClick.AccessibleName = "Show default menu on left click";
+            CbWebViewShowMenuOnLeftClick.AccessibleRole = AccessibleRole.CheckButton;
+            CbWebViewShowMenuOnLeftClick.AutoSize = true;
+            CbWebViewShowMenuOnLeftClick.Enabled = false;
+            CbWebViewShowMenuOnLeftClick.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            CbWebViewShowMenuOnLeftClick.Location = new Point(90, 487);
+            CbWebViewShowMenuOnLeftClick.Name = "CbWebViewShowMenuOnLeftClick";
+            CbWebViewShowMenuOnLeftClick.Size = new Size(265, 23);
+            CbWebViewShowMenuOnLeftClick.TabIndex = 77;
+            CbWebViewShowMenuOnLeftClick.Text = Languages.ConfigTrayIcon_CbWebViewShowMenuOnLeftClick;
+            CbWebViewShowMenuOnLeftClick.UseVisualStyleBackColor = true;
+            // 
+            // NumWebViewScreen
+            // 
+            NumWebViewScreen.Location = new Point(368, 348);
+            NumWebViewScreen.Name = "domainUpDown1";
+            NumWebViewScreen.Size = new Size(120, 23);
+            NumWebViewScreen.TabIndex = 78;
+            NumWebViewScreen.Text = "Select Your Display";
+            NumWebViewScreen.SelectedValueChanged += domainUpDown1_SelectedItemChanged;
             // 
             // ConfigTrayIcon
             // 
-            this.AccessibleDescription = "Panel containing the tray icon configuration.";
-            this.AccessibleName = "Tray icon";
-            this.AccessibleRole = System.Windows.Forms.AccessibleRole.Pane;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
-            this.Controls.Add(this.CbWebViewShowMenuOnLeftClick);
-            this.Controls.Add(this.LblInfo2);
-            this.Controls.Add(this.CbWebViewKeepLoaded);
-            this.Controls.Add(this.BtnWebViewReset);
-            this.Controls.Add(this.NumWebViewHeight);
-            this.Controls.Add(this.NumWebViewWidth);
-            this.Controls.Add(this.BtnShowWebViewPreview);
-            this.Controls.Add(this.LblX);
-            this.Controls.Add(this.LblWebViewSize);
-            this.Controls.Add(this.TbWebViewUrl);
-            this.Controls.Add(this.LblWebViewUrl);
-            this.Controls.Add(this.CbShowWebView);
-            this.Controls.Add(this.LblInfo1);
-            this.Controls.Add(this.CbDefaultMenu);
-            this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
-            this.Margin = new System.Windows.Forms.Padding(4);
-            this.Name = "ConfigTrayIcon";
-            this.Size = new System.Drawing.Size(700, 544);
-            this.Load += new System.EventHandler(this.ConfigTrayIcon_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.NumWebViewWidth)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.NumWebViewHeight)).EndInit();
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AccessibleDescription = "Panel containing the tray icon configuration.";
+            AccessibleName = "Tray icon";
+            AccessibleRole = AccessibleRole.Pane;
+            AutoScaleDimensions = new SizeF(96F, 96F);
+            AutoScaleMode = AutoScaleMode.Dpi;
+            BackColor = Color.FromArgb(45, 45, 48);
+            Controls.Add(NumWebViewScreen);
+            Controls.Add(CbWebViewShowMenuOnLeftClick);
+            Controls.Add(LblInfo2);
+            Controls.Add(CbWebViewKeepLoaded);
+            Controls.Add(BtnWebViewReset);
+            Controls.Add(NumWebViewHeight);
+            Controls.Add(NumWebViewWidth);
+            Controls.Add(BtnShowWebViewPreview);
+            Controls.Add(LblX);
+            Controls.Add(LblWebViewSize);
+            Controls.Add(TbWebViewUrl);
+            Controls.Add(LblWebViewUrl);
+            Controls.Add(CbShowWebView);
+            Controls.Add(LblInfo1);
+            Controls.Add(CbDefaultMenu);
+            ForeColor = Color.FromArgb(241, 241, 241);
+            Margin = new Padding(4);
+            Name = "ConfigTrayIcon";
+            Size = new Size(700, 544);
+            Load += ConfigTrayIcon_Load;
+            ((System.ComponentModel.ISupportInitialize)NumWebViewWidth).EndInit();
+            ((System.ComponentModel.ISupportInitialize)NumWebViewHeight).EndInit();
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -357,5 +350,6 @@ namespace HASS.Agent.Controls.Configuration
         internal CheckBox CbWebViewKeepLoaded;
         internal Label LblInfo2;
         internal CheckBox CbWebViewShowMenuOnLeftClick;
+        internal ComboBoxAdv NumWebViewScreen;
     }
 }

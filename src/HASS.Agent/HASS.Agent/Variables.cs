@@ -1,30 +1,25 @@
 ﻿extern alias WV2;
-using System.Diagnostics.CodeAnalysis;
-using System.Globalization;
-using System.IO;
-using System.Net.Http;
-using System.Reflection;
-using Windows.Media.Playback;
 using CoreAudio;
 using Grapevine;
 using HASS.Agent.Forms;
-using HASS.Agent.Functions;
 using HASS.Agent.Managers;
 using HASS.Agent.Models.Config;
 using HASS.Agent.Models.Internal;
 using HASS.Agent.MQTT;
 using HASS.Agent.Service;
 using HASS.Agent.Settings;
-using HASS.Agent.Shared.HomeAssistant;
-using HASS.Agent.Shared.HomeAssistant.Commands;
-using HASS.Agent.Shared.HomeAssistant.Sensors;
 using HASS.Agent.Shared.Models.HomeAssistant;
 using HASS.Agent.Shared.Mqtt;
-using WV2::Microsoft.Web.WebView2.Core;
-using Microsoft.Win32;
 using MQTTnet;
-using WK.Libraries.HotkeyListenerNS;
 using Serilog.Core;
+using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
+using System.IO;
+using System.Net.Http;
+using System.Reflection;
+using Windows.Media.Playback;
+using WK.Libraries.HotkeyListenerNS;
+using WV2::Microsoft.Web.WebView2.Core;
 
 namespace HASS.Agent
 {
