@@ -835,17 +835,6 @@ namespace HASS.Agent.Forms.Sensors
                     }
                     Sensor.Query = screenIndex;
                     break;
-
-                case SensorType.ScreenshotSensor:
-                    var screenIndex = TbSetting1.Text.Trim();
-                    if (string.IsNullOrEmpty(screenIndex))
-                    {
-                        MessageBoxAdv.Show(this, Languages.SensorsMod_BtnStore_MessageBox10, Variables.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        ActiveControl = TbSetting1;
-                        return;
-                    }
-                    Sensor.Query = screenIndex;
-                    break;
             }
 
             // set values
