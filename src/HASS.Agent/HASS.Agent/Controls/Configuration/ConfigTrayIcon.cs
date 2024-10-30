@@ -1,11 +1,14 @@
-﻿using System.Diagnostics;
-using HASS.Agent.Functions;
+﻿using HASS.Agent.Functions;
 using HASS.Agent.Models.Internal;
+using System.Diagnostics;
+using Syncfusion.Windows.Forms.Tools;
 
 namespace HASS.Agent.Controls.Configuration
 {
     public partial class ConfigTrayIcon : UserControl
     {
+        internal int SelectedScreen { get; set; }
+
         public ConfigTrayIcon()
         {
             InitializeComponent();
@@ -14,6 +17,34 @@ namespace HASS.Agent.Controls.Configuration
         private void ConfigTrayIcon_Load(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(TbWebViewUrl.Text)) TbWebViewUrl.Text = Variables.AppSettings.HassUri;
+            InitMultiScreenConfig(Variables.AppSettings.TrayIconWebViewScreen);
+        }
+
+        private void InitMultiScreenConfig(int selectedScreenIndex = 0)
+        {
+            var displays = Screen.AllScreens;
+            int ix = 0;
+
+            if (Screen.AllScreens.Length == 1)
+            {
+                NumWebViewScreen.Visible = false;
+                selectedScreenIndex = 0;
+            }
+
+            // Add screens to updownControl
+            foreach (var display in displays)
+            {
+                string label = display.DeviceName;
+                if (display.Primary)
+                {
+                    label += " (Primary)";
+                }
+                NumWebViewScreen.Items.Add(label);
+                ix++;
+            }
+
+            NumWebViewScreen.SelectedIndex = selectedScreenIndex;
+            SelectedScreen = selectedScreenIndex;
         }
 
         private void CbDefaultMenu_CheckedChanged(object sender, EventArgs e)
@@ -45,14 +76,19 @@ namespace HASS.Agent.Controls.Configuration
                 IsTrayIconWebView = true,
                 IsTrayIconPreview = true
             };
-
-            HelperFunctions.LaunchTrayIconWebView(webView);
+            Debug.WriteLine("X-Coordinate " + webView.X);
+            HelperFunctions.LaunchTrayIconWebView(webView, NumWebViewScreen.SelectedIndex);
         }
 
         private void BtnWebViewReset_Click(object sender, EventArgs e)
         {
             NumWebViewWidth.Value = 700;
             NumWebViewHeight.Value = 560;
+        }
+
+        private void domainUpDown1_SelectedItemChanged(object sender, EventArgs e)
+        {
+            SelectedScreen = ((ComboBoxAdv) sender).SelectedIndex;
         }
     }
 }

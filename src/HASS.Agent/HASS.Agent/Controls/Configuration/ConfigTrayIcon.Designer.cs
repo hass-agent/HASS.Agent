@@ -1,4 +1,5 @@
 ﻿using HASS.Agent.Resources.Localization;
+using Syncfusion.Windows.Forms.Tools;
 
 namespace HASS.Agent.Controls.Configuration
 {
@@ -43,6 +44,7 @@ namespace HASS.Agent.Controls.Configuration
             NumWebViewHeight = new Syncfusion.Windows.Forms.Tools.NumericUpDownExt();
             BtnWebViewReset = new Syncfusion.WinForms.Controls.SfButton();
             CbWebViewKeepLoaded = new CheckBox();
+            NumWebViewScreen = new Syncfusion.Windows.Forms.Tools.ComboBoxAdv();
             LblInfo2 = new Label();
             CbWebViewShowMenuOnLeftClick = new CheckBox();
             ((System.ComponentModel.ISupportInitialize)NumWebViewWidth).BeginInit();
@@ -106,8 +108,8 @@ namespace HASS.Agent.Controls.Configuration
             CbShowWebView.Text = Languages.ConfigTrayIcon_CbShowWebView;
             CbShowWebView.UseVisualStyleBackColor = true;
             CbShowWebView.CheckedChanged += CbShowWebView_CheckedChanged;
-            // 
-            // TbWebViewUrl
+            this.CbShowWebView.CheckedChanged += new System.EventHandler(this.CbShowWebView_CheckedChanged);
+            this.CbShowWebView.CheckedChanged += new System.EventHandler(this.CbShowWebView_CheckedChanged);
             // 
             TbWebViewUrl.AccessibleDescription = "The URL to show. Defaults to the Home Assistant API's URL.";
             TbWebViewUrl.AccessibleName = "URL";
@@ -121,8 +123,8 @@ namespace HASS.Agent.Controls.Configuration
             TbWebViewUrl.Name = "TbWebViewUrl";
             TbWebViewUrl.Size = new Size(521, 25);
             TbWebViewUrl.TabIndex = 2;
-            // 
-            // LblWebViewUrl
+            this.TbWebViewUrl.TabIndex = 2;
+            this.TbWebViewUrl.TabIndex = 2;
             // 
             LblWebViewUrl.AccessibleDescription = "URL textbox description";
             LblWebViewUrl.AccessibleName = "URL info";
@@ -134,8 +136,8 @@ namespace HASS.Agent.Controls.Configuration
             LblWebViewUrl.Size = new Size(415, 19);
             LblWebViewUrl.TabIndex = 49;
             LblWebViewUrl.Text = "&WebView URL (For instance, your Home Assistant Dashboard URL)";
-            // 
-            // LblX
+            this.LblWebViewUrl.Text = Languages.ConfigTrayIcon_LblWebViewUrl;
+            this.LblWebViewUrl.Text = Languages.ConfigTrayIcon_LblWebViewUrl;
             // 
             LblX.AccessibleDescription = "Shows X, meaning 'by' in this context.";
             LblX.AccessibleName = "X info";
@@ -147,8 +149,8 @@ namespace HASS.Agent.Controls.Configuration
             LblX.Size = new Size(17, 19);
             LblX.TabIndex = 53;
             LblX.Text = "X";
-            // 
-            // LblWebViewSize
+            this.LblX.Text = "X";
+            this.LblX.Text = "X";
             // 
             LblWebViewSize.AccessibleDescription = "Size description.";
             LblWebViewSize.AccessibleName = "Size info";
@@ -160,8 +162,8 @@ namespace HASS.Agent.Controls.Configuration
             LblWebViewSize.Size = new Size(58, 19);
             LblWebViewSize.TabIndex = 51;
             LblWebViewSize.Text = "Size (px)";
-            // 
-            // BtnShowWebViewPreview
+            this.LblWebViewSize.Text = Languages.ConfigTrayIcon_LblWebViewSize;
+            this.LblWebViewSize.Text = Languages.ConfigTrayIcon_LblWebViewSize;
             // 
             BtnShowWebViewPreview.AccessibleDescription = "Shows the webview, using the currently configured values.";
             BtnShowWebViewPreview.AccessibleName = "Webview preview";
@@ -184,8 +186,8 @@ namespace HASS.Agent.Controls.Configuration
             BtnShowWebViewPreview.Text = Languages.ConfigTrayIcon_BtnShowWebViewPreview;
             BtnShowWebViewPreview.UseVisualStyleBackColor = false;
             BtnShowWebViewPreview.Click += BtnShowWebViewPreview_Click;
-            // 
-            // NumWebViewWidth
+            this.BtnShowWebViewPreview.Click += new System.EventHandler(this.BtnShowWebViewPreview_Click);
+            this.BtnShowWebViewPreview.Click += new System.EventHandler(this.BtnShowWebViewPreview_Click);
             // 
             NumWebViewWidth.AccessibleDescription = "The width of the webview. Only accepts numeric values.";
             NumWebViewWidth.AccessibleName = "Width";
@@ -208,9 +210,9 @@ namespace HASS.Agent.Controls.Configuration
             NumWebViewWidth.ThemeName = "Metro";
             NumWebViewWidth.Value = new decimal(new int[] { 700, 0, 0, 0 });
             NumWebViewWidth.VisualStyle = Syncfusion.Windows.Forms.VisualStyle.Metro;
-            // 
-            // NumWebViewHeight
-            // 
+            this.NumWebViewWidth.Size = new System.Drawing.Size(83, 25);
+            this.NumWebViewWidth.TabIndex = 3;
+            this.NumWebViewWidth.ThemeName = "Metro";
             NumWebViewHeight.AccessibleDescription = "The height of the webview. Only accepts numeric values.";
             NumWebViewHeight.AccessibleName = "Height";
             NumWebViewHeight.AccessibleRole = AccessibleRole.Text;
@@ -232,9 +234,9 @@ namespace HASS.Agent.Controls.Configuration
             NumWebViewHeight.ThemeName = "Metro";
             NumWebViewHeight.Value = new decimal(new int[] { 560, 0, 0, 0 });
             NumWebViewHeight.VisualStyle = Syncfusion.Windows.Forms.VisualStyle.Metro;
-            // 
-            // BtnWebViewReset
-            // 
+            this.NumWebViewHeight.Maximum = new decimal(new int[] {
+            65535,
+            0,
             BtnWebViewReset.AccessibleDescription = "Resets the width and height values to their defaults.";
             BtnWebViewReset.AccessibleName = "Reset webview";
             BtnWebViewReset.AccessibleRole = AccessibleRole.PushButton;
@@ -258,9 +260,9 @@ namespace HASS.Agent.Controls.Configuration
             BtnWebViewReset.TextImageRelation = TextImageRelation.Overlay;
             BtnWebViewReset.UseVisualStyleBackColor = false;
             BtnWebViewReset.Click += BtnWebViewReset_Click;
-            // 
-            // CbWebViewKeepLoaded
-            // 
+            this.BtnWebViewReset.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
+            this.BtnWebViewReset.ImageSize = new System.Drawing.Size(24, 24);
+            this.BtnWebViewReset.Location = new System.Drawing.Point(317, 348);
             CbWebViewKeepLoaded.AccessibleDescription = "Keeps the webview loaded in the background, resulting in faster loading when invoked.";
             CbWebViewKeepLoaded.AccessibleName = "Background loading";
             CbWebViewKeepLoaded.AccessibleRole = AccessibleRole.CheckButton;
@@ -275,9 +277,9 @@ namespace HASS.Agent.Controls.Configuration
             CbWebViewKeepLoaded.TabIndex = 7;
             CbWebViewKeepLoaded.Text = Languages.ConfigTrayIcon_CbWebViewKeepLoaded;
             CbWebViewKeepLoaded.UseVisualStyleBackColor = true;
-            // 
-            // LblInfo2
-            // 
+            this.BtnWebViewReset.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
+            this.BtnWebViewReset.ImageSize = new System.Drawing.Size(24, 24);
+            this.BtnWebViewReset.Location = new System.Drawing.Point(317, 348);
             LblInfo2.AccessibleDescription = "Background loading information.";
             LblInfo2.AccessibleName = "Background loading info";
             LblInfo2.AccessibleRole = AccessibleRole.StaticText;
@@ -289,9 +291,9 @@ namespace HASS.Agent.Controls.Configuration
             LblInfo2.Size = new Size(330, 19);
             LblInfo2.TabIndex = 76;
             LblInfo2.Text = "(This uses extra resources, but reduces loading time.)";
-            // 
-            // CbWebViewShowMenuOnLeftClick
-            // 
+            this.CbWebViewKeepLoaded.Size = new System.Drawing.Size(252, 23);
+            this.CbWebViewKeepLoaded.TabIndex = 7;
+            this.CbWebViewKeepLoaded.Text = global::HASS.Agent.Resources.Localization.Languages.ConfigTrayIcon_CbWebViewKeepLoaded;
             CbWebViewShowMenuOnLeftClick.AccessibleDescription = "If enabled, left clicking the system tray icon will show the default menu.";
             CbWebViewShowMenuOnLeftClick.AccessibleName = "Show default menu on left click";
             CbWebViewShowMenuOnLeftClick.AccessibleRole = AccessibleRole.CheckButton;
@@ -305,14 +307,24 @@ namespace HASS.Agent.Controls.Configuration
             CbWebViewShowMenuOnLeftClick.Text = Languages.ConfigTrayIcon_CbWebViewShowMenuOnLeftClick;
             CbWebViewShowMenuOnLeftClick.UseVisualStyleBackColor = true;
             // 
-            // ConfigTrayIcon
+            // NumWebViewScreen
             // 
+            NumWebViewScreen.Location = new Point(368, 348);
+            NumWebViewScreen.Name = "domainUpDown1";
+            NumWebViewScreen.Size = new Size(120, 23);
+            NumWebViewScreen.TabIndex = 78;
+            NumWebViewScreen.Text = "Select Your Display";
+            NumWebViewScreen.SelectedValueChanged += domainUpDown1_SelectedItemChanged;
+            this.LblInfo2.Size = new System.Drawing.Size(320, 19);
+            this.LblInfo2.TabIndex = 76;
+            this.LblInfo2.Text = Languages.ConfigTrayIcon_LblInfo2;
             AccessibleDescription = "Panel containing the tray icon configuration.";
             AccessibleName = "Tray icon";
             AccessibleRole = AccessibleRole.Pane;
             AutoScaleDimensions = new SizeF(96F, 96F);
             AutoScaleMode = AutoScaleMode.Dpi;
             BackColor = Color.FromArgb(45, 45, 48);
+            Controls.Add(NumWebViewScreen);
             Controls.Add(CbWebViewShowMenuOnLeftClick);
             Controls.Add(LblInfo2);
             Controls.Add(CbWebViewKeepLoaded);
@@ -337,6 +349,42 @@ namespace HASS.Agent.Controls.Configuration
             ((System.ComponentModel.ISupportInitialize)NumWebViewHeight).EndInit();
             ResumeLayout(false);
             PerformLayout();
+            this.Controls.Add(this.BtnShowWebViewPreview);
+            this.Controls.Add(this.LblX);
+            this.Controls.Add(this.LblWebViewSize);
+            this.Controls.Add(this.TbWebViewUrl);
+            this.Controls.Add(this.LblWebViewUrl);
+            this.Controls.Add(this.CbShowWebView);
+            this.Controls.Add(this.LblInfo1);
+            this.Controls.Add(this.CbDefaultMenu);
+            this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
+            this.Margin = new System.Windows.Forms.Padding(4);
+            this.Name = "ConfigTrayIcon";
+            this.Size = new System.Drawing.Size(700, 544);
+            this.Load += new System.EventHandler(this.ConfigTrayIcon_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.NumWebViewWidth)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumWebViewHeight)).EndInit();
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
+            this.Controls.Add(this.BtnShowWebViewPreview);
+            this.Controls.Add(this.LblX);
+            this.Controls.Add(this.LblWebViewSize);
+            this.Controls.Add(this.TbWebViewUrl);
+            this.Controls.Add(this.LblWebViewUrl);
+            this.Controls.Add(this.CbShowWebView);
+            this.Controls.Add(this.LblInfo1);
+            this.Controls.Add(this.CbDefaultMenu);
+            this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
+            this.Margin = new System.Windows.Forms.Padding(4);
+            this.Name = "ConfigTrayIcon";
+            this.Size = new System.Drawing.Size(700, 544);
+            this.Load += new System.EventHandler(this.ConfigTrayIcon_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.NumWebViewWidth)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumWebViewHeight)).EndInit();
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
         }
 
         #endregion
@@ -355,5 +403,6 @@ namespace HASS.Agent.Controls.Configuration
         internal CheckBox CbWebViewKeepLoaded;
         internal Label LblInfo2;
         internal CheckBox CbWebViewShowMenuOnLeftClick;
+        internal ComboBoxAdv NumWebViewScreen;
     }
 }
