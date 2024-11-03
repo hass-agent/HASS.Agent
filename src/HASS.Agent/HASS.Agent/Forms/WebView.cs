@@ -48,7 +48,7 @@ namespace HASS.Agent.Forms
                 if (_webViewInfo.IsTrayIconWebView && !_webViewInfo.IsTrayIconPreview && Variables.AppSettings.TrayIconWebViewBackgroundLoading)
                 {
                     _isTrayIcon = true;
-                    
+
                     // done
                     return;
                 }
@@ -87,7 +87,7 @@ namespace HASS.Agent.Forms
 
                 // bind initialization completed event
                 WebViewControl.CoreWebView2InitializationCompleted += WebViewControlOnCoreWebView2InitializationCompleted;
-                
+
                 // initialize
                 await WebViewControl.EnsureCoreWebView2Async(Variables.WebViewEnvironment);
 
@@ -196,7 +196,8 @@ namespace HASS.Agent.Forms
         /// </summary>
         internal void MakeVisible()
         {
-            if (IsClosingOrClosed()) return;
+            if (IsClosingOrClosed())
+                return;
 
             try
             {
@@ -204,14 +205,12 @@ namespace HASS.Agent.Forms
                 Opacity = 100;
 
                 // check if we need to move
-                var x = Screen.PrimaryScreen.WorkingArea.Width - Width;
-                var y = Screen.PrimaryScreen.WorkingArea.Height - Height;
-
-                if (x != _webViewInfo.X || y != _webViewInfo.Y)
+                var desiredPosition = GetDesiredWebViewPosition();
+                if (desiredPosition.X != _webViewInfo.X || desiredPosition.Y != _webViewInfo.Y)
                 {
                     // yep
-                    _webViewInfo.X = x;
-                    _webViewInfo.Y = y;
+                    _webViewInfo.X = desiredPosition.X;
+                    _webViewInfo.Y = desiredPosition.Y;
                     Location = new Point(_webViewInfo.X, _webViewInfo.Y);
                 }
 
@@ -227,18 +226,47 @@ namespace HASS.Agent.Forms
             }
             catch (Exception ex)
             {
-                if (IsClosingOrClosed()) return;
+                if (IsClosingOrClosed())
+                    return;
+
                 Log.Error("[WEBVIEW] Error while showing: {err}", ex.Message);
                 _forceClose = true;
                 Close();
             }
         }
 
+        private Point GetDesiredWebViewPosition()
+        {
+            var taskBarLocation = HelperFunctions.GetTaskBarLocation();
+
+            var x = Screen.PrimaryScreen.WorkingArea.Width - Width;
+            var y = Screen.PrimaryScreen.WorkingArea.Height - Height;
+
+            switch (taskBarLocation)
+            {
+                case HelperFunctions.TaskBarLocation.TOP:
+                    y = Screen.PrimaryScreen.Bounds.Height - Screen.PrimaryScreen.WorkingArea.Height;
+                    break;
+
+                case HelperFunctions.TaskBarLocation.LEFT:
+                    x = Screen.PrimaryScreen.Bounds.Width - Screen.PrimaryScreen.WorkingArea.Width;
+                    break;
+
+                case HelperFunctions.TaskBarLocation.RIGHT:
+                    x = Screen.PrimaryScreen.WorkingArea.Width - Width;
+                    y = Screen.PrimaryScreen.WorkingArea.Height - Height;
+                    break;
+            }
+
+            return new Point(x, y);
+        }
+
         private void WebView_ResizeEnd(object sender, EventArgs e)
         {
             try
             {
-                if (IsClosingOrClosed()) return;
+                if (IsClosingOrClosed())
+                    return;
 
                 Refresh();
 
@@ -254,7 +282,7 @@ namespace HASS.Agent.Forms
                 // best effort
             }
         }
-        
+
         private void WebView_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.KeyCode != Keys.Escape) return;

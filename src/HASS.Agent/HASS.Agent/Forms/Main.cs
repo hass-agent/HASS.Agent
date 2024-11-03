@@ -792,6 +792,10 @@ namespace HASS.Agent.Forms
         {
             if (e.KeyCode != Keys.Escape)
                 return;
+
+            // Escape Pressed, but make sure it's not escape while alt-tabbing
+            if (e.Alt) return;
+
             Hide();
         }
 

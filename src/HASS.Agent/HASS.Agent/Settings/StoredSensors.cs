@@ -465,12 +465,12 @@ namespace HASS.Agent.Settings
                         _ = Enum.TryParse<SensorType>(storageSensors.GetType().Name, out var type);
                         return new ConfiguredSensor
                         {
-                            Id = Guid.Parse(sensor.Id),
-                            EntityName = sensor.EntityName,
-                            Name = sensor.EntityName,
+                            Id = Guid.Parse(storageSensors.Id),
+                            EntityName = storageSensors.EntityName,
+                            Name = storageSensors.Name,
                             Type = type,
-                            UpdateInterval = sensor.UpdateIntervalSeconds,
-                            IgnoreAvailability = sensor.IgnoreAvailability
+                            UpdateInterval = storageSensors.UpdateIntervalSeconds,
+                            IgnoreAvailability = storageSensors.IgnoreAvailability
                         };
                     }
 
@@ -479,13 +479,13 @@ namespace HASS.Agent.Settings
                         _ = Enum.TryParse<SensorType>(networkSensors.GetType().Name, out var type);
                         return new ConfiguredSensor
                         {
-                            Id = Guid.Parse(sensor.Id),
-                            EntityName = sensor.EntityName,
-                            Name = sensor.EntityName,
+                            Id = Guid.Parse(networkSensors.Id),
+                            EntityName = networkSensors.EntityName,
+                            Name = networkSensors.Name,
                             Query = networkSensors.NetworkCard,
                             Type = type,
-                            UpdateInterval = sensor.UpdateIntervalSeconds,
-                            IgnoreAvailability = sensor.IgnoreAvailability
+                            UpdateInterval = networkSensors.UpdateIntervalSeconds,
+                            IgnoreAvailability = networkSensors.IgnoreAvailability
                         };
                     }
 
@@ -494,12 +494,12 @@ namespace HASS.Agent.Settings
                         _ = Enum.TryParse<SensorType>(windowsUpdatesSensors.GetType().Name, out var type);
                         return new ConfiguredSensor
                         {
-                            Id = Guid.Parse(sensor.Id),
-                            EntityName = sensor.EntityName,
-                            Name = sensor.EntityName,
+                            Id = Guid.Parse(windowsUpdatesSensors.Id),
+                            EntityName = windowsUpdatesSensors.EntityName,
+                            Name = windowsUpdatesSensors.Name,
                             Type = type,
-                            UpdateInterval = sensor.UpdateIntervalSeconds,
-                            IgnoreAvailability = sensor.IgnoreAvailability
+                            UpdateInterval = windowsUpdatesSensors.UpdateIntervalSeconds,
+                            IgnoreAvailability = windowsUpdatesSensors.IgnoreAvailability
                         };
                     }
 
@@ -508,12 +508,12 @@ namespace HASS.Agent.Settings
                         _ = Enum.TryParse<SensorType>(batterySensors.GetType().Name, out var type);
                         return new ConfiguredSensor
                         {
-                            Id = Guid.Parse(sensor.Id),
-                            EntityName = sensor.EntityName,
-                            Name = sensor.EntityName,
+                            Id = Guid.Parse(batterySensors.Id),
+                            EntityName = batterySensors.EntityName,
+                            Name = batterySensors.Name,
                             Type = type,
-                            UpdateInterval = sensor.UpdateIntervalSeconds,
-                            IgnoreAvailability = sensor.IgnoreAvailability
+                            UpdateInterval = batterySensors.UpdateIntervalSeconds,
+                            IgnoreAvailability = batterySensors.IgnoreAvailability
                         };
                     }
 
@@ -522,12 +522,12 @@ namespace HASS.Agent.Settings
                         _ = Enum.TryParse<SensorType>(displaySensors.GetType().Name, out var type);
                         return new ConfiguredSensor
                         {
-                            Id = Guid.Parse(sensor.Id),
-                            EntityName = sensor.EntityName,
-                            Name = sensor.EntityName,
+                            Id = Guid.Parse(displaySensors.Id),
+                            EntityName = displaySensors.EntityName,
+                            Name = displaySensors.Name,
                             Type = type,
-                            UpdateInterval = sensor.UpdateIntervalSeconds,
-                            IgnoreAvailability = sensor.IgnoreAvailability
+                            UpdateInterval = displaySensors.UpdateIntervalSeconds,
+                            IgnoreAvailability = displaySensors.IgnoreAvailability
                         };
                     }
 
@@ -536,12 +536,12 @@ namespace HASS.Agent.Settings
                         _ = Enum.TryParse<SensorType>(audioSensors.GetType().Name, out var type);
                         return new ConfiguredSensor
                         {
-                            Id = Guid.Parse(sensor.Id),
-                            EntityName = sensor.EntityName,
-                            Name = sensor.EntityName,
+                            Id = Guid.Parse(audioSensors.Id),
+                            EntityName = audioSensors.EntityName,
+                            Name = audioSensors.Name,
                             Type = type,
-                            UpdateInterval = sensor.UpdateIntervalSeconds,
-                            IgnoreAvailability = sensor.IgnoreAvailability
+                            UpdateInterval = audioSensors.UpdateIntervalSeconds,
+                            IgnoreAvailability = audioSensors.IgnoreAvailability
                         };
                     }
 
@@ -550,12 +550,12 @@ namespace HASS.Agent.Settings
                         _ = Enum.TryParse<SensorType>(printersSensors.GetType().Name, out var type);
                         return new ConfiguredSensor
                         {
-                            Id = Guid.Parse(sensor.Id),
-                            EntityName = sensor.EntityName,
-                            Name = sensor.EntityName,
+                            Id = Guid.Parse(printersSensors.Id),
+                            EntityName = printersSensors.EntityName,
+                            Name = printersSensors.Name,
                             Type = type,
-                            UpdateInterval = sensor.UpdateIntervalSeconds,
-                            IgnoreAvailability = sensor.IgnoreAvailability
+                            UpdateInterval = printersSensors.UpdateIntervalSeconds,
+                            IgnoreAvailability = printersSensors.IgnoreAvailability
                         };
                     }
             }

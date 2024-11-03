@@ -174,9 +174,9 @@ namespace HASS.Agent.Satellite.Service.Settings
                         {
                             Id = Guid.Parse(customCommand.Id),
                             EntityName = customCommand.EntityName,
-                            Name = customCommand.EntityName,
+                            Name = customCommand.Name,
                             Type = type,
-                            EntityType = command.EntityType,
+                            EntityType = customCommand.EntityType,
                             Command = customCommand.Command,
                             RunAsLowIntegrity = customCommand.RunAsLowIntegrity
                         };
@@ -189,9 +189,9 @@ namespace HASS.Agent.Satellite.Service.Settings
                         {
                             Id = Guid.Parse(powershellCommand.Id),
                             EntityName = powershellCommand.EntityName,
-                            Name = powershellCommand.EntityName,
+                            Name = powershellCommand.Name,
                             Type = type,
-                            EntityType = command.EntityType,
+                            EntityType = powershellCommand.EntityType,
                             Command = powershellCommand.Command
                         };
                     }
@@ -203,9 +203,9 @@ namespace HASS.Agent.Satellite.Service.Settings
                         {
                             Id = Guid.Parse(customKeyCommand.Id),
                             EntityName = customKeyCommand.EntityName,
-                            Name = customKeyCommand.EntityName,
+                            Name = customKeyCommand.Name,
                             Type = type,
-                            EntityType = command.EntityType,
+                            EntityType = customKeyCommand.EntityType,
                             KeyCode = customKeyCommand.KeyCode
                         };
                     }
@@ -217,10 +217,10 @@ namespace HASS.Agent.Satellite.Service.Settings
                         {
                             Id = Guid.Parse(internalCommand.Id),
                             EntityName = internalCommand.EntityName,
-                            Name = internalCommand.EntityName,
+                            Name = internalCommand.Name,
                             Command = internalCommand.CommandConfig ?? string.Empty,
                             Type = type,
-                            EntityType = command.EntityType,
+                            EntityType = internalCommand.EntityType,
                         };
                     }
 
@@ -231,10 +231,10 @@ namespace HASS.Agent.Satellite.Service.Settings
                         {
                             Id = Guid.Parse(multipleKeysCommand.Id),
                             EntityName = multipleKeysCommand.EntityName,
-                            Name = multipleKeysCommand.EntityName,
+                            Name = multipleKeysCommand.Name,
                             Keys = multipleKeysCommand.Keys ?? new List<string>(),
                             Type = type,
-                            EntityType = command.EntityType,
+                            EntityType = multipleKeysCommand.EntityType,
                         };
                     }
             }

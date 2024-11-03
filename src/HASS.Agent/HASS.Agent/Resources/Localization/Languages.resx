@@ -3433,4 +3433,7 @@ Requires it to be configured in "Configuration -&gt; Tray Icon"</value>
     <value>Puts all monitors in sleep (low power) mode using alternative approach of power plan modification.
 Should provide better experience with new systems with "modern S0ix sleep" and not put the system to sleep.</value>
   </data>
+  <data name="Notification_Dismiss" xml:space="preserve">
+    <value>Dismiss</value>
+  </data>
 </root>

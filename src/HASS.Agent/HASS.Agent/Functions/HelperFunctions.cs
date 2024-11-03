@@ -25,6 +25,8 @@ using Syncfusion.Windows.Forms;
 using Task = System.Threading.Tasks.Task;
 using MediaManager = HASS.Agent.Media.MediaManager;
 using HASS.Agent.Shared.Managers;
+using Newtonsoft.Json.Serialization;
+using System.Windows;
 
 namespace HASS.Agent.Functions
 {
@@ -359,9 +361,9 @@ namespace HASS.Agent.Functions
         /// </summary>
         /// <param name="formName"></param>
         /// <returns></returns>
-        internal static bool CheckIfFormIsOpen(string formName) => Application.OpenForms.Cast<Form>().Any(form => form?.Name == formName);
+        internal static bool CheckIfFormIsOpen(string formName) => System.Windows.Forms.Application.OpenForms.Cast<Form>().Any(form => form?.Name == formName);
 
-        internal static Form GetForm(string formName) => Application.OpenForms.Cast<Form>().FirstOrDefault(x => x.Name == formName);
+        internal static Form GetForm(string formName) => System.Windows.Forms.Application.OpenForms.Cast<Form>().FirstOrDefault(x => x.Name == formName);
 
         /// <summary>
         /// Launches the url with the user's custom browser if provided, or the system's default
@@ -808,6 +810,32 @@ namespace HASS.Agent.Functions
                 Log.Fatal(ex, "[SYSTEM] Unable to make form visible: {err}", ex.Message);
             }
         }
+
+        internal enum TaskBarLocation
+        {
+            TOP,
+            BOTTOM,
+            LEFT,
+            RIGHT
+        }
+
+        /// <summary>
+        /// Returns the location of taskbar on the primary screen
+        /// </summary>
+        /// <returns></returns>
+        internal static TaskBarLocation GetTaskBarLocation()
+        {
+            if (SystemParameters.WorkArea.Left > 0)
+                return TaskBarLocation.LEFT;
+
+            if (SystemParameters.WorkArea.Top > 0)
+                return TaskBarLocation.TOP;
+
+            if (SystemParameters.WorkArea.Left == 0 && SystemParameters.WorkArea.Width < SystemParameters.PrimaryScreenWidth)
+                return TaskBarLocation.RIGHT;
+
+            return TaskBarLocation.BOTTOM;
+        }
     }
 
     public class CamelCaseJsonNamingpolicy : JsonNamingPolicy
@@ -818,5 +846,15 @@ namespace HASS.Agent.Functions
         /// <param name="name"></param>
         /// <returns></returns>
         public override string ConvertName(string name) => name.ToLowerInvariant();
+    }
+
+    public class ToLowerInvariantNamingStrategy : NamingStrategy
+    {
+        /// <summary>
+        /// Convert name to lowerinvariant
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        protected override string ResolvePropertyName(string name) => name.ToLowerInvariant();
     }
 }

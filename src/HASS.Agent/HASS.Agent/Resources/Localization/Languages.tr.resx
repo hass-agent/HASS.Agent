@@ -3020,4 +3020,7 @@ Not: Uydu hizmetinde kullanılırsa kullanıcı alanı uygulamalarını algılam
   <data name="HassAction_Press" xml:space="preserve">
     <value>Basmak</value>
   </data>
+  <data name="Notification_Dismiss" xml:space="preserve">
+    <value>Azletmek</value>
+  </data>
 </root>

@@ -3450,4 +3450,7 @@ Requer que seja configurado em "Configuration -&gt; Tray Icon"</value>
   <data name="HassAction_Press" xml:space="preserve">
     <value>Imprensa</value>
   </data>
+  <data name="Notification_Dismiss" xml:space="preserve">
+    <value>Dispensar</value>
+  </data>
 </root>

@@ -3425,4 +3425,7 @@ Vereist dat het geconfigureerd is in "Configuratie -&gt; Tray Icon"</value>
   <data name="HassAction_Press" xml:space="preserve">
     <value>Pers</value>
   </data>
+  <data name="Notification_Dismiss" xml:space="preserve">
+    <value>Afwijzen</value>
+  </data>
 </root>
