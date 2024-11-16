@@ -2,6 +2,8 @@
 using System.IO;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Security.Policy;
+using System.Text.RegularExpressions;
 using System.Threading;
 using Serilog;
 using Task = System.Threading.Tasks.Task;
@@ -10,6 +12,41 @@ namespace HASS.Agent.Managers
 {
     internal static class StorageManager
     {
+        private static bool IsAbsoluteUrl(string url) => Regex.IsMatch(url, "^https?://");
+
+        private static string GetElementUrl(string url)
+        {
+            if (IsAbsoluteUrl(url))
+            {
+                return url;
+            }
+
+            Uri uri;
+            Uri.TryCreate(url, UriKind.Absolute, out uri);
+            uri ??= new Uri(new Uri("https://www.home-assistant.io"), url);
+
+            if (uri == null)
+            {
+                return url;
+            }
+
+            var builder = new UriBuilder(Variables.AppSettings.HassUri);
+            if (!string.IsNullOrWhiteSpace(uri.LocalPath))
+            {
+                builder.Path = uri.LocalPath.Trim();
+            }
+            if (!string.IsNullOrWhiteSpace(uri.Query))
+            {
+                builder.Query = uri.Query.Trim();
+            }
+            if (!string.IsNullOrWhiteSpace(uri.Fragment))
+            {
+                builder.Fragment = uri.Fragment.Trim();
+            }
+
+            return builder.Uri.AbsoluteUri;
+        }
+
         /// <summary>
         /// Download an image to local temp path
         /// </summary>
@@ -33,7 +70,8 @@ namespace HASS.Agent.Managers
                     return (true, uri);
                 }
 
-                if (!uri.ToLower().StartsWith("http"))
+                var elementUrl = GetElementUrl(uri);
+                if (!IsAbsoluteUrl(elementUrl))
                 {
                     Log.Error("[STORAGE] Unable to download image: only HTTP & file:// uri's are allowed, got: {uri}", uri);
 
@@ -45,7 +83,7 @@ namespace HASS.Agent.Managers
 
                 // check for extension
                 // this fails for hass proxy urls, so add an extra length check
-                var ext = Path.GetExtension(uri);
+                var ext = Path.GetExtension(elementUrl);
                 if (string.IsNullOrEmpty(ext) || ext.Length > 5)
                     ext = ".png";
 
@@ -54,7 +92,7 @@ namespace HASS.Agent.Managers
                 localFile = Path.Combine(Variables.ImageCachePath, $"{localFile}{ext}");
 
                 // parse the uri as a check
-                var safeUri = new Uri(uri);
+                var safeUri = new Uri(elementUrl);
 
                 // download the file
                 await DownloadRemoteFileAsync(safeUri.AbsoluteUri, localFile);

@@ -3163,20 +3163,16 @@ Assurez-vous que les services de localisation de Windows sont activés !
 
 Selon votre version de Windows, cela peut être trouvé dans le nouveau panneau de configuration -&gt; 'confidentialité et sécurité' -&gt; 'emplacement'.</value>
   </data>
-  <data name="SensorsManager_MicrophoneProcessSensorDescription" xml:space="preserve">
-    <value>Provides the name of the process that's currently using the microphone.
-
-Note: if used in the satellite service, it won't detect userspace applications.</value>
-  </data>
   <data name="SensorsManager_MonitorPowerStateSensorDescription" xml:space="preserve">
     <value>Provides the last monitor power state change:
 
 Dimmed, PowerOff, PowerOn and Unkown.</value>
   </data>
   <data name="SensorsManager_PowershellSensorDescription" xml:space="preserve">
-    <value>Returns the result of the provided Powershell command or script.
+    <value>Renvoie le résultat de la commande ou du script Powershell fourni.
+Remarque : veuillez garder à l'esprit que Home Assistant accepte des charges utiles allant jusqu'à 255 caractères.
 
-Converts the outcome to text.</value>
+Convertit le résultat en texte.</value>
   </data>
   <data name="SensorsManager_PrintersSensorsDescription" xml:space="preserve">
     <value>Fournit des informations sur toutes les imprimantes installées et leurs files d'attente.</value>
@@ -3329,7 +3325,15 @@ La commande/charge utile doit être au format JSON. Exemple de toutes les option
 
 Si aucun "playbackDevice" n'est fourni, HASS.Agent utilisera celui par défaut.
 Si aucun "volume" n'est fourni, HASS.Agent définira uniquement le statut muet.
-Si aucun "mute" n'est fourni, HASS.Agent réactivera le son de l'application fournie.</value>
+Si aucun "mute" n'est fourni, HASS.Agent réactivera le son de l'application fournie.
+
+Option avancée : un "sessionId" supplémentaire peut être fourni pour définir le volume uniquement pour une session spécifique de l'application, l'identifiant de session peut être obtenu à partir du capteur "Sessions audio" :
+{
+   "playbackDevice":"Speakers (THX SpatialAudio)",
+   "applicationName":"Discord",
+   "volume":50,
+   "sessionid":"&lt;LONG SESSION ID FROM SENSOR&gt;"
+}</value>
   </data>
   <data name="CommandsMod_BtnStore_InvalidJson" xml:space="preserve">
     <value>Veuillez saisir une chaîne JSON valide !</value>
@@ -3396,5 +3400,44 @@ Le numéro d'écran dépend de la configuration du système - commence à 0.</va
   <data name="CommandsManager_SetAudioInputCommandDescription" xml:space="preserve">
     <value>Définit l'entrée audio par défaut du système (y compris le périphérique de communication par défaut).
 Vous avez besoin du nom du périphérique audio comme charge utile.</value>
+  </data>
+  <data name="ConfigMqtt_CbIgnoreGracePeriod" xml:space="preserve">
+    <value>Ignorer la période de grâce après la sortie de l'hibernation</value>
+  </data>
+  <data name="ConfigTrayIcon_CbUseModernIcon" xml:space="preserve">
+    <value>Utiliser l'icône de la barre d'état moderne</value>
+  </data>
+  <data name="SensorsManager_MicrophoneProcessSensorDescription" xml:space="preserve">
+    <value>Fournit le nombre de processus qui utilisent actuellement le microphone - fournit en outre le nom des processus dans les attributs du capteur.
+
+Remarque : s'il est utilisé dans le service satellite, il ne détectera pas les applications de l'espace utilisateur.</value>
+  </data>
+  <data name="Configuration_NFC" xml:space="preserve">
+    <value>NFC</value>
+  </data>
+  <data name="AdvancedSensorConfig_Title" xml:space="preserve">
+    <value>Réglages avancés</value>
+  </data>
+  <data name="SensorsMod_BtnAdvancedSettings" xml:space="preserve">
+    <value>Réglages a&amp;vancés</value>
+  </data>
+  <data name="AdvancedSensorConfig_Warning" xml:space="preserve">
+    <value>Attention, l'ajout des paramètres suivants (remplacements) peut casser le capteur, à utiliser avec prudence !</value>
+  </data>
+  <data name="CommandsManager_TrayWebViewCommandDescription" xml:space="preserve">
+    <value>Affiche/masque l'affichage Web de l'icône de la barre d'état système.
+Nécessite sa configuration dans « Configuration -&gt; Icône de la barre d'état système »</value>
+  </data>
+  <data name="HassAction_Trigger" xml:space="preserve">
+    <value>Déclencher</value>
+  </data>
+  <data name="HassDomain_Button" xml:space="preserve">
+    <value>Knop</value>
+  </data>
+  <data name="HassAction_Press" xml:space="preserve">
+    <value>Presse</value>
+  </data>
+  <data name="Notification_Dismiss" xml:space="preserve">
+    <value>Rejeter</value>
   </data>
 </root>

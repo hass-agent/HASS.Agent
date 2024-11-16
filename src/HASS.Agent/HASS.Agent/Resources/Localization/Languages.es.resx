@@ -3130,11 +3130,6 @@ Asegúrese de que los servicios de localización de Windows están activados.
 
 Dependiendo de su versión de Windows, esto se puede encontrar en el nuevo panel de control -&gt; 'privacidad y seguridad' -&gt; 'ubicación'.</value>
   </data>
-  <data name="SensorsManager_MicrophoneProcessSensorDescription" xml:space="preserve">
-    <value>Proporciona el nombre del proceso que está usando actualmente el micrófono.
-
-Nota: si se usa en el servicio de satélite, no detectará las aplicaciones del espacio de usuario.</value>
-  </data>
   <data name="SensorsManager_MonitorPowerStateSensorDescription" xml:space="preserve">
     <value>Proporciona el último cambio de estado de energía del monitor:
 
@@ -3142,6 +3137,7 @@ Atenuado, Apagado, Encendido y Desconocido.</value>
   </data>
   <data name="SensorsManager_PowershellSensorDescription" xml:space="preserve">
     <value>Devuelve el resultado del comando o script de Powershell proporcionado.
+Nota: tenga en cuenta que Home Assistant acepta una carga útil de hasta 255 caracteres.
 
 Convierte el resultado en texto.</value>
   </data>
@@ -3296,7 +3292,15 @@ El comando/carga útil debe estar en formato JSON. Ejemplo de todas las opciones
 
 Si no se proporciona ningún "playbackDevice", HASS.Agent utilizará el predeterminado.
 Si no se proporciona ningún "volume", HASS.Agent establecerá sólo el estado de silencio.
-Si no se proporciona ningún "mute", HASS.Agent reactivará el silencio de la aplicación proporcionada.</value>
+Si no se proporciona ningún "mute", HASS.Agent reactivará el silencio de la aplicación proporcionada.
+
+Opción avanzada: se puede proporcionar un "sessionId" adicional para configurar el volumen solo para una sesión específica de la aplicación; el id de sesión se puede obtener del sensor "Sesiones de audio":
+{
+   "playbackDevice":"Speakers (THX SpatialAudio)",
+   "applicationName":"Discord",
+   "volume":50,
+   "sessionid":"&lt;LONG SESSION ID FROM SENSOR&gt;"
+}</value>
   </data>
   <data name="CommandsMod_BtnStore_InvalidJson" xml:space="preserve">
     <value>¡Ingrese una cadena JSON válida!</value>
@@ -3363,5 +3367,44 @@ El número de pantalla depende de la configuración del sistema: comienza en 0.<
   <data name="CommandsManager_SetAudioInputCommandDescription" xml:space="preserve">
     <value>Establece la entrada de audio predeterminada para el sistema (incluido el dispositivo de comunicación predeterminado).
 Necesita el nombre del dispositivo de audio como carga útil.</value>
+  </data>
+  <data name="ConfigMqtt_CbIgnoreGracePeriod" xml:space="preserve">
+    <value>Ignorar el período de gracia después de despertar de la hibernación</value>
+  </data>
+  <data name="ConfigTrayIcon_CbUseModernIcon" xml:space="preserve">
+    <value>Utilice el icono de bandeja moderno</value>
+  </data>
+  <data name="SensorsManager_MicrophoneProcessSensorDescription" xml:space="preserve">
+    <value>Proporciona el número de procesos que utilizan actualmente el micrófono; además, proporciona el nombre de los procesos en los atributos del sensor.
+
+Nota: si se usa en el servicio satelital, no detectará aplicaciones del espacio de usuario.</value>
+  </data>
+  <data name="Configuration_NFC" xml:space="preserve">
+    <value>NFC</value>
+  </data>
+  <data name="AdvancedSensorConfig_Title" xml:space="preserve">
+    <value>Ajustes avanzados</value>
+  </data>
+  <data name="SensorsMod_BtnAdvancedSettings" xml:space="preserve">
+    <value>A&amp;justes avanzados</value>
+  </data>
+  <data name="AdvancedSensorConfig_Warning" xml:space="preserve">
+    <value>Advertencia, agregar las siguientes configuraciones (anulaciones) puede dañar el sensor, ¡úselo con precaución!</value>
+  </data>
+  <data name="CommandsManager_TrayWebViewCommandDescription" xml:space="preserve">
+    <value>Muestra u oculta la vista web del icono de la bandeja.
+Requiere que se configure en "Configuración -&gt; Icono de la bandeja"</value>
+  </data>
+  <data name="HassAction_Trigger" xml:space="preserve">
+    <value>Desencadenar</value>
+  </data>
+  <data name="HassDomain_Button" xml:space="preserve">
+    <value>Botón</value>
+  </data>
+  <data name="HassAction_Press" xml:space="preserve">
+    <value>Prensa</value>
+  </data>
+  <data name="Notification_Dismiss" xml:space="preserve">
+    <value>Despedir</value>
   </data>
 </root>

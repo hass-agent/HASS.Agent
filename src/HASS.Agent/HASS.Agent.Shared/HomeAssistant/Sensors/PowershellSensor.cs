@@ -18,7 +18,7 @@ public class PowershellSensor : AbstractSingleValueSensor
     public bool ApplyRounding { get; private set; }
     public int? Round { get; private set; }
 
-    public PowershellSensor(string command, bool applyRounding = false, int? round = null, int? updateInterval = null, string entityName = DefaultName, string name = DefaultName, string id = default) : base(entityName ?? DefaultName, name ?? null, updateInterval ?? 10, id)
+    public PowershellSensor(string command, bool applyRounding = false, int? round = null, int? updateInterval = null, string entityName = DefaultName, string name = DefaultName, string id = default, string advancedSettings = default) : base(entityName ?? DefaultName, name ?? null, updateInterval ?? 10, id, advancedSettings: advancedSettings)
     {
         Command = command;
         ApplyRounding = applyRounding;

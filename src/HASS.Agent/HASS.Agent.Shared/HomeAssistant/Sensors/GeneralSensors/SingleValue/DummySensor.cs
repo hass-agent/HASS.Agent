@@ -9,7 +9,7 @@ namespace HASS.Agent.Shared.HomeAssistant.Sensors.GeneralSensors.SingleValue
     {
         private const string DefaultName = "dummy";
 
-        public DummySensor(int? updateInterval = null, string entityName = DefaultName, string name = DefaultName, string id = default) : base(entityName ?? DefaultName, name ?? null, updateInterval ?? 5, id) { }
+        public DummySensor(int? updateInterval = null, string entityName = DefaultName, string name = DefaultName, string id = default, string advancedSettings = default) : base(entityName ?? DefaultName, name ?? null, updateInterval ?? 5, id, advancedSettings: advancedSettings) { }
 
         public override DiscoveryConfigModel GetAutoDiscoveryConfig()
         {
@@ -25,6 +25,7 @@ namespace HASS.Agent.Shared.HomeAssistant.Sensors.GeneralSensors.SingleValue
                 Unique_id = Id,
                 Device = deviceConfig,
                 State_topic = $"{Variables.MqttManager.MqttDiscoveryPrefix()}/{Domain}/{deviceConfig.Name}/{ObjectId}/state",
+                State_class = "measurement",
                 Availability_topic = $"{Variables.MqttManager.MqttDiscoveryPrefix()}/{Domain}/{deviceConfig.Name}/availability"
             });
         }

@@ -2250,11 +2250,6 @@ HassAgentStarted, Logoff, SystemShutdown, Resume, Suspend, ConsoleConnect, Conso
     <value>Fornece um valor bool com base em se o microfone está sendo usado no momento.</value>
     <comment>Fuzzy</comment>
   </data>
-  <data name="SensorsManager_MicrophoneProcessSensorDescription" xml:space="preserve">
-    <value>Fornece o nome do processo que está usando o microfone no momento.
-
-Observação: se usado no serviço satélite, ele não detectará aplicativos de espaço de usuário.</value>
-  </data>
   <data name="SensorsManager_MonitorPowerStateSensorDescription" xml:space="preserve">
     <value>Fornece a última alteração do estado de energia do monitor:
 
@@ -2281,6 +2276,7 @@ Você pode explorar os contadores através da ferramenta 'perfmon.exe' do Window
   </data>
   <data name="SensorsManager_PowershellSensorDescription" xml:space="preserve">
     <value>Retorna o resultado do comando ou script do Powershell fornecido.
+Observação: lembre-se de que o Home Assistant aceita carga útil de até 255 caracteres.
 
 Converte o resultado em texto.</value>
   </data>
@@ -3342,7 +3338,15 @@ O comando/carga precisa estar no formato JSON. Exemplo de todas as opções poss
 
 Se nenhum "playbackDevice" for fornecido, o HASS.Agent usará o padrão.
 Se nenhum "volume" for fornecido, o HASS.Agent definirá apenas o status mudo.
-Se nenhum "mute" for fornecido, o HASS.Agent ativará o som do aplicativo fornecido.</value>
+Se nenhum "mute" for fornecido, o HASS.Agent ativará o som do aplicativo fornecido.
+
+Opção avançada: "sessionId" adicional pode ser fornecido para definir o volume apenas para uma sessão específica do aplicativo, o ID da sessão pode ser obtido no sensor "Sessões de Áudio":
+{
+   "playbackDevice":"Speakers (THX SpatialAudio)",
+   "applicationName":"Discord",
+   "volume":50,
+   "sessionid":"&lt;LONG SESSION ID FROM SENSOR&gt;"
+}</value>
   </data>
   <data name="CommandsMod_BtnStore_InvalidJson" xml:space="preserve">
     <value>Insira uma string JSON válida!</value>
@@ -3409,5 +3413,44 @@ O número da tela depende da configuração do sistema – começa em 0.</value>
   <data name="CommandsManager_SetAudioInputCommandDescription" xml:space="preserve">
     <value>Define a entrada de áudio padrão para o sistema (incluindo o dispositivo de comunicação padrão).
 Você precisa do nome do dispositivo de áudio como carga útil.</value>
+  </data>
+  <data name="ConfigMqtt_CbIgnoreGracePeriod" xml:space="preserve">
+    <value>Ignorar o período de carência após sair da hibernação</value>
+  </data>
+  <data name="ConfigTrayIcon_CbUseModernIcon" xml:space="preserve">
+    <value>Use o ícone moderno da bandeja</value>
+  </data>
+  <data name="SensorsManager_MicrophoneProcessSensorDescription" xml:space="preserve">
+    <value>Fornece o número de processos que utilizam atualmente o microfone - fornece adicionalmente o nome dos processos nos atributos do sensor.
+
+Nota: se usado no serviço de satélite, não detectará aplicações no espaço do usuário.</value>
+  </data>
+  <data name="Configuration_NFC" xml:space="preserve">
+    <value>NFC</value>
+  </data>
+  <data name="AdvancedSensorConfig_Title" xml:space="preserve">
+    <value>Configurações avançadas</value>
+  </data>
+  <data name="SensorsMod_BtnAdvancedSettings" xml:space="preserve">
+    <value>Configurações a&amp;vançadas</value>
+  </data>
+  <data name="AdvancedSensorConfig_Warning" xml:space="preserve">
+    <value>Atenção, adicionar as seguintes configurações (substituições) pode quebrar o sensor, use com cuidado!</value>
+  </data>
+  <data name="CommandsManager_TrayWebViewCommandDescription" xml:space="preserve">
+    <value>Mostra/oculta o Tray Icon Web View.
+Requer que seja configurado em "Configuration -&gt; Tray Icon"</value>
+  </data>
+  <data name="HassAction_Trigger" xml:space="preserve">
+    <value>Acionar</value>
+  </data>
+  <data name="HassDomain_Button" xml:space="preserve">
+    <value>Botão</value>
+  </data>
+  <data name="HassAction_Press" xml:space="preserve">
+    <value>Imprensa</value>
+  </data>
+  <data name="Notification_Dismiss" xml:space="preserve">
+    <value>Dispensar</value>
   </data>
 </root>

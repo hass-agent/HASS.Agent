@@ -3262,4 +3262,16 @@ Wil je de runtime installatie downloaden?</value>
   <data name="CommandType_SetAudioInputCommand" xml:space="preserve">
     <value>Stel het audio-invoercommando in</value>
   </data>
+  <data name="CommandType_TrayWebViewCommand" xml:space="preserve">
+    <value>TrayWebView</value>
+  </data>
+  <data name="HassAction_Trigger" xml:space="preserve">
+    <value>Activering</value>
+  </data>
+  <data name="HassDomain_Button" xml:space="preserve">
+    <value>Knop</value>
+  </data>
+  <data name="HassAction_Press" xml:space="preserve">
+    <value>Pers</value>
+  </data>
 </root>

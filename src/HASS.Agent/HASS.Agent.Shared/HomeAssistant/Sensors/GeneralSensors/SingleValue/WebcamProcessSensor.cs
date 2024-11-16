@@ -14,7 +14,7 @@ namespace HASS.Agent.Shared.HomeAssistant.Sensors.GeneralSensors.SingleValue
     {
         private const string DefaultName = "webcamprocess";
 
-        public WebcamProcessSensor(int? updateInterval = null, string entityName = DefaultName, string name = DefaultName, string id = default, bool useAttributes = true) : base(entityName ?? DefaultName, name ?? null, updateInterval ?? 10, id, useAttributes)
+        public WebcamProcessSensor(int? updateInterval = null, string entityName = DefaultName, string name = DefaultName, string id = default, string advancedSettings = default) : base(entityName ?? DefaultName, name ?? null, updateInterval ?? 10, id, true, advancedSettings: advancedSettings)
         {
             //
         }
@@ -41,6 +41,7 @@ namespace HASS.Agent.Shared.HomeAssistant.Sensors.GeneralSensors.SingleValue
                 Unique_id = Id,
                 Device = deviceConfig,
                 State_topic = $"{Variables.MqttManager.MqttDiscoveryPrefix()}/{Domain}/{deviceConfig.Name}/{ObjectId}/state",
+                State_class = "measurement",
                 Availability_topic = $"{Variables.MqttManager.MqttDiscoveryPrefix()}/sensor/{deviceConfig.Name}/availability",
                 Icon = "mdi:webcam"
             };

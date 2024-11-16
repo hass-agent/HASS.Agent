@@ -3,9 +3,11 @@ using System.Data.SqlTypes;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
-using CoreAudio;
+using System.Linq;
 using HASS.Agent.Shared.Enums;
 using HASS.Agent.Shared.Functions;
+using HASS.Agent.Shared.Managers;
+using HASS.Agent.Shared.Managers.Audio;
 using Serilog;
 
 namespace HASS.Agent.Shared.HomeAssistant.Commands.InternalCommands
@@ -18,7 +20,7 @@ namespace HASS.Agent.Shared.HomeAssistant.Commands.InternalCommands
     public class SetVolumeCommand : InternalCommand
     {
         private const string DefaultName = "setvolume";
-        private readonly float _volume = -1f;
+        private readonly int _volume = -1;
 
         public SetVolumeCommand(string entityName = DefaultName, string name = DefaultName, string volume = "", CommandEntityType entityType = CommandEntityType.Button, string id = default) : base(entityName ?? DefaultName, name ?? null, volume, entityType, id)
         {
@@ -28,10 +30,10 @@ namespace HASS.Agent.Shared.HomeAssistant.Commands.InternalCommands
                 if (!parsed)
                 {
                     Log.Error("[SETVOLUME] [{name}] Unable to parse configured volume level, not an int: {val}", EntityName, volume);
-                    _volume = -1f;
+                    _volume = -1;
                 }
 
-                _volume = volumeInt / 100.0f;
+                _volume = volumeInt;
             }
 
             State = "OFF";
@@ -46,20 +48,11 @@ namespace HASS.Agent.Shared.HomeAssistant.Commands.InternalCommands
                 if (_volume == -1f)
                 {
                     Log.Warning("[SETVOLUME] [{name}] Unable to trigger command, it's configured as action-only", EntityName);
-                    
+
                     return;
                 }
 
-                // get the current default endpoint
-                using var audioDevice = Variables.AudioDeviceEnumerator?.GetDefaultAudioEndpoint(DataFlow.Render, Role.Multimedia);
-                if (audioDevice?.AudioEndpointVolume == null)
-                {
-                    Log.Warning("[SETVOLUME] [{name}] Unable to trigger command, no default audio endpoint found", EntityName);
-                    
-                    return;
-                }
-
-                audioDevice.AudioEndpointVolume.MasterVolumeLevelScalar = _volume;
+                AudioManager.SetDefaultDeviceProperties(DeviceType.Output, DeviceRole.Multimedia | DeviceRole.Console, _volume, null);
             }
             catch (Exception ex)
             {
@@ -77,24 +70,16 @@ namespace HASS.Agent.Shared.HomeAssistant.Commands.InternalCommands
 
             try
             {
-                var parsed = int.TryParse(action, out var volumeInt);
+                var parsed = float.TryParse(action, out var volumeFloat);
                 if (!parsed)
                 {
                     Log.Error("[SETVOLUME] [{name}] Unable to trigger command, the provided action value can't be parsed: {val}", EntityName, action);
-                    
+
                     return;
                 }
-
-                // get the current default endpoint
-                using var audioDevice = Variables.AudioDeviceEnumerator?.GetDefaultAudioEndpoint(DataFlow.Render, Role.Multimedia);
-                if (audioDevice?.AudioEndpointVolume == null)
-                {
-                    Log.Warning("[SETVOLUME] [{name}] Unable to trigger action for command, no default audio endpoint found", EntityName);
-                    
-                    return;
-                }
-
-                audioDevice.AudioEndpointVolume.MasterVolumeLevelScalar = volumeInt / 100.0f; ;
+                
+                var volumeInt = (int)Math.Ceiling(volumeFloat);
+                AudioManager.SetDefaultDeviceProperties(DeviceType.Output, DeviceRole.Multimedia | DeviceRole.Console, volumeInt, null);
             }
             catch (Exception ex)
             {

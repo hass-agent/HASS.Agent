@@ -15,6 +15,9 @@ namespace HASS.Agent.Managers.DeviceSensors
 
         private readonly Magnetometer _magnetometer;
 
+        public string MeasurementType { get; } = string.Empty;
+        public string UnitOfMeasurement { get; } = string.Empty;
+
         public bool Available => _magnetometer != null;
         public InternalDeviceSensorType Type => InternalDeviceSensorType.Magnetometer;
         public string Measurement
@@ -25,6 +28,9 @@ namespace HASS.Agent.Managers.DeviceSensors
                     return null;
 
                 var sensorReading = _magnetometer.GetCurrentReading();
+                if (sensorReading == null)
+                    return null;
+
                 var magFieldX = Math.Round((decimal)sensorReading.MagneticFieldX,2);
                 var magFieldY = Math.Round((decimal)sensorReading.MagneticFieldY, 2);
                 var magFieldZ = Math.Round((decimal)sensorReading.MagneticFieldZ, 2);
@@ -40,6 +46,8 @@ namespace HASS.Agent.Managers.DeviceSensors
                 ).ToString();
             }
         }
+
+        public bool IsNumeric { get; } = true;
 
         private readonly Dictionary<string, string> _attributes = new();
         public Dictionary<string, string> Attributes => _attributes;

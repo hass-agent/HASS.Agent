@@ -3,8 +3,7 @@ using System.IO;
 using System.Security.Authentication;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Threading;
 using HASS.Agent.API;
 using HASS.Agent.Enums;
 using HASS.Agent.Functions;
@@ -14,6 +13,8 @@ using HASS.Agent.Models.HomeAssistant;
 using HASS.Agent.Resources.Localization;
 using HASS.Agent.Settings;
 using HASS.Agent.Shared.Enums;
+using HASS.Agent.Shared.Managers;
+using HASS.Agent.Shared.Managers.Audio;
 using HASS.Agent.Shared.Models.HomeAssistant;
 using HASS.Agent.Shared.Mqtt;
 using MQTTnet;
@@ -21,6 +22,9 @@ using MQTTnet.Adapter;
 using MQTTnet.Client;
 using MQTTnet.Exceptions;
 using MQTTnet.Extensions.ManagedClient;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using Newtonsoft.Json.Serialization;
 using Serilog;
 
 namespace HASS.Agent.MQTT
@@ -130,10 +134,14 @@ namespace HASS.Agent.MQTT
 
             Variables.MainForm?.SetMqttStatus(ComponentStatus.Connecting);
 
+            var gracePeriod = Variables.AppSettings.DisconnectedGracePeriodSeconds;
+
             // give the connection the grace period to recover
             var runningTimer = Stopwatch.StartNew();
-            while (runningTimer.Elapsed.TotalSeconds < Variables.AppSettings.DisconnectedGracePeriodSeconds)
+            while (runningTimer.Elapsed.TotalSeconds < gracePeriod)
             {
+                await Task.Delay(TimeSpan.FromSeconds(5));
+
                 if (IsConnected())
                 {
                     _isReady = true;
@@ -143,12 +151,20 @@ namespace HASS.Agent.MQTT
 
                     _status = MqttStatus.Connected;
                     Variables.MainForm?.SetMqttStatus(ComponentStatus.Ok);
-                    Log.Information("[MQTT] Connected");
+                    Log.Information("[MQTT] Reconnected from disconnection");
 
                     return;
                 }
 
-                await Task.Delay(TimeSpan.FromSeconds(5));
+                if (Variables.AppSettings.MqttIgnoreGracePeriod)
+                {
+                    var lastResumed = SystemStateManager.LastEventOccurrence.TryGetValue(SystemStateEvent.Resume, out var lastResumeEventDate);
+                    if (lastResumed && DateTime.Now < lastResumeEventDate.AddSeconds(gracePeriod))
+                    {
+                        Log.Information("[MQTT] System resumed less than {gracePeriod} seconds ago, ignoring grace period on disconnection");
+                        break;
+                    }
+                }
             }
 
             // nope, call it
@@ -172,10 +188,14 @@ namespace HASS.Agent.MQTT
         {
             Variables.MainForm?.SetMqttStatus(ComponentStatus.Connecting);
 
+            var gracePeriod = Variables.AppSettings.DisconnectedGracePeriodSeconds;
+
             // give the connection the grace period to recover
             var runningTimer = Stopwatch.StartNew();
-            while (runningTimer.Elapsed.TotalSeconds < Variables.AppSettings.DisconnectedGracePeriodSeconds)
+            while (runningTimer.Elapsed.TotalSeconds < gracePeriod)
             {
+                await Task.Delay(TimeSpan.FromSeconds(5));
+
                 if (IsConnected())
                 {
                     // recovered
@@ -184,12 +204,20 @@ namespace HASS.Agent.MQTT
 
                     _status = MqttStatus.Connected;
                     Variables.MainForm?.SetMqttStatus(ComponentStatus.Ok);
-                    Log.Information("[MQTT] Connected");
+                    Log.Information("[MQTT] Reconnected from failed connection");
 
                     return;
                 }
 
-                await Task.Delay(TimeSpan.FromSeconds(5));
+                if (Variables.AppSettings.MqttIgnoreGracePeriod)
+                {
+                    var lastResumed = SystemStateManager.LastEventOccurrence.TryGetValue(SystemStateEvent.Resume, out var lastResumeEventDate);
+                    if (lastResumed && DateTime.Now < lastResumeEventDate.AddSeconds(gracePeriod))
+                    {
+                        Log.Information("[MQTT] System resumed more than {gracePeriod} seconds ago, ignoring grace period on connection failed");
+                        break;
+                    }
+                }
             }
 
             // nope, call it
@@ -422,7 +450,7 @@ namespace HASS.Agent.MQTT
                     if (discoverable.IgnoreAvailability)
                         payload.Availability_topic = null;
 
-                    messageBuilder.WithPayload(JsonSerializer.Serialize(payload, payload.GetType(), JsonSerializerOptions));
+                    messageBuilder.WithPayload(JsonConvert.SerializeObject(payload, payload.GetType(), JsonSerializerSettings));
                 }
                 await PublishAsync(messageBuilder.Build());
             }
@@ -444,15 +472,14 @@ namespace HASS.Agent.MQTT
         private DateTime _lastAvailableAnnouncement = DateTime.MinValue;
         private DateTime _lastAvailableAnnouncementFailedLogged = DateTime.MinValue;
 
-        /// <summary>
-        /// JSON serializer options (camelcase, casing, ignore condition, converters)
-        /// </summary>
-        public static readonly JsonSerializerOptions JsonSerializerOptions = new()
+        public static readonly JsonSerializerSettings JsonSerializerSettings = new()
         {
-            PropertyNamingPolicy = new CamelCaseJsonNamingpolicy(),
-            PropertyNameCaseInsensitive = true,
-            DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
-            Converters = { new JsonStringEnumConverter() }
+            ContractResolver = new DefaultContractResolver()
+            {
+                NamingStrategy = new ToLowerInvariantNamingStrategy()
+            },
+            NullValueHandling = NullValueHandling.Ignore,
+            Converters = { new StringEnumConverter() }
         };
 
         public async Task AnnounceAvailabilityAsync(bool offline = false)
@@ -485,7 +512,7 @@ namespace HASS.Agent.MQTT
 
                     var integrationMsgBuilder = new MqttApplicationMessageBuilder()
                         .WithTopic($"hass.agent/devices/{Variables.DeviceConfig.Name}")
-                        .WithPayload(JsonSerializer.Serialize(new
+                        .WithPayload(JsonConvert.SerializeObject(new
                         {
                             serial_number = Variables.SerialNumber,
                             device = Variables.DeviceConfig,
@@ -494,7 +521,7 @@ namespace HASS.Agent.MQTT
                                 notifications = Variables.AppSettings.NotificationsEnabled,
                                 media_player = Variables.AppSettings.MediaPlayerEnabled
                             }
-                        }, JsonSerializerOptions))
+                        }, JsonSerializerSettings))
                         .WithRetainFlag(Variables.AppSettings.MqttUseRetainFlag);
 
                     await _mqttClient.InternalClient.PublishAsync(integrationMsgBuilder.Build());
@@ -537,11 +564,38 @@ namespace HASS.Agent.MQTT
                 {
                     if (string.IsNullOrEmpty(Variables.AppSettings.MqttDiscoveryPrefix))
                         Variables.AppSettings.MqttDiscoveryPrefix = "homeassistant";
-
                     var messageBuilder = new MqttApplicationMessageBuilder()
                         .WithTopic($"{Variables.AppSettings.MqttDiscoveryPrefix}/sensor/{Variables.DeviceConfig.Name}/availability")
                         .WithPayload(Array.Empty<byte>())
-                        .WithRetainFlag(Variables.AppSettings.MqttUseRetainFlag);
+                        .WithRetainFlag(false);
+
+                    await _mqttClient.InternalClient.PublishAsync(messageBuilder.Build());
+
+                    messageBuilder = new MqttApplicationMessageBuilder()
+                        .WithTopic($"hass.agent/devices/{Variables.DeviceConfig.Name}")
+                        .WithPayload(Array.Empty<byte>())
+                        .WithRetainFlag(false);
+
+                    await _mqttClient.InternalClient.PublishAsync(messageBuilder.Build());
+
+                    messageBuilder = new MqttApplicationMessageBuilder()
+                        .WithTopic($"hass.agent/media_player/{Variables.DeviceConfig.Name}")
+                        .WithPayload(Array.Empty<byte>())
+                        .WithRetainFlag(false);
+
+                    await _mqttClient.InternalClient.PublishAsync(messageBuilder.Build());
+
+                    messageBuilder = new MqttApplicationMessageBuilder()
+                        .WithTopic($"hass.agent/media_player/{Variables.DeviceConfig.Name}/thumbnail")
+                        .WithPayload(Array.Empty<byte>())
+                        .WithRetainFlag(false);
+
+                    await _mqttClient.InternalClient.PublishAsync(messageBuilder.Build());
+
+                    messageBuilder = new MqttApplicationMessageBuilder()
+                        .WithTopic($"hass.agent/media_player/{Variables.DeviceConfig.Name}/state")
+                        .WithPayload(Array.Empty<byte>())
+                        .WithRetainFlag(false);
 
                     await _mqttClient.InternalClient.PublishAsync(messageBuilder.Build());
                 }
@@ -723,7 +777,7 @@ namespace HASS.Agent.MQTT
                 // process as a notification
                 if (applicationMessage.Topic == $"hass.agent/notifications/{HelperFunctions.GetConfiguredDeviceName()}")
                 {
-                    var notification = JsonSerializer.Deserialize<Notification>(applicationMessage.PayloadSegment, JsonSerializerOptions)!;
+                    var notification = JsonConvert.DeserializeObject<Notification>(Encoding.UTF8.GetString(applicationMessage.PayloadSegment), JsonSerializerSettings)!;
                     _ = Task.Run(() => NotificationManager.ShowNotification(notification));
 
                     return Task.CompletedTask;
@@ -732,18 +786,27 @@ namespace HASS.Agent.MQTT
                 // process as a mediaplyer command
                 if (applicationMessage.Topic == $"hass.agent/media_player/{HelperFunctions.GetConfiguredDeviceName()}/cmd")
                 {
-                    var command = JsonSerializer.Deserialize<MqttMediaPlayerCommand>(applicationMessage.PayloadSegment, JsonSerializerOptions)!;
+                    var command = JsonConvert.DeserializeObject<MqttMediaPlayerCommand>(Encoding.UTF8.GetString(applicationMessage.PayloadSegment), JsonSerializerSettings)!;
 
                     switch (command.Command)
                     {
                         case MediaPlayerCommand.PlayMedia:
-                            MediaManager.ProcessMedia(command.Data.GetString());
+                            MediaManager.ProcessMedia(command.Data.ToObject<string>());
                             break;
                         case MediaPlayerCommand.Seek:
-                            MediaManager.ProcessSeekCommand(TimeSpan.FromSeconds(command.Data.GetDouble()).Ticks);
+                            MediaManager.ProcessSeekCommand(TimeSpan.FromSeconds(command.Data.ToObject<double>()).Ticks);
                             break;
                         case MediaPlayerCommand.SetVolume:
-                            MediaManagerCommands.SetVolume(command.Data.GetInt32());
+                            MediaManagerCommands.SetVolume(command.Data.ToObject<int>());
+                            break;
+                        case MediaPlayerCommand.Mute:
+                            //Note(Amadeo): tech debt :)
+                            //              this logic should be in MediaManager.ProcessCommand but it's also used in "local api"
+                            //              from all messy and time viable options, this one is the "cleanest"
+                            if (command.Data == null)
+                                goto default;
+
+                            AudioManager.SetDefaultDeviceProperties(DeviceType.Output, DeviceRole.Multimedia | DeviceRole.Console, -1, command.Data.ToObject<bool>());
                             break;
                         default:
                             MediaManager.ProcessCommand(command.Command);

@@ -85,8 +85,7 @@ namespace HASS.Agent
                 }
 
                 LocalizationManager.Initialize();
-
-                Application.SetHighDpiMode(HighDpiMode.DpiUnaware);
+                                                                                               
                 Application.SetDefaultFont(Variables.DefaultFont);
 
                 Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
@@ -95,6 +94,9 @@ namespace HASS.Agent
 
                 if (LaunchedAsChildApplication(args))
                     return;
+
+                Application.EnableVisualStyles();
+                Application.SetCompatibleTextRenderingDefault(false);
 
                 Variables.MainForm = new Main();
 

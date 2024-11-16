@@ -1,4 +1,5 @@
 ﻿using HASS.Agent.Extensions;
+using HASS.Agent.Managers;
 using HASS.Agent.Models.Internal;
 using HASS.Agent.Resources.Localization;
 using HASS.Agent.Settings;
@@ -6,7 +7,10 @@ using HASS.Agent.Shared.Enums;
 using HASS.Agent.Shared.Extensions;
 using HASS.Agent.Shared.Models.Config;
 using HASS.Agent.Shared.Models.HomeAssistant;
+using MQTTnet;
+using Newtonsoft.Json;
 using Serilog;
+using static HASS.Agent.Shared.Functions.Inputs;
 
 namespace HASS.Agent.Sensors
 {
@@ -19,6 +23,8 @@ namespace HASS.Agent.Sensors
 
         private static bool _active = true;
         private static bool _pause;
+
+        private static bool _discoveryPublished = false;
 
         private static DateTime _lastAutoDiscoPublish = DateTime.MinValue;
 
@@ -96,32 +102,50 @@ namespace HASS.Agent.Sensors
                     // optionally flag as the first real run
                     if (!firstRunDone) firstRunDone = true;
 
-                    // publish availability & sensor autodisco's every 30 sec
+                    // publish availability & autodiscovery every 30 sec
                     if ((DateTime.Now - _lastAutoDiscoPublish).TotalSeconds > 30)
                     {
-                        // let hass know we're still here
                         await Variables.MqttManager.AnnounceAvailabilityAsync();
 
-                        // publish the autodisco's
-                        if (SingleValueSensorsPresent())
+                        if (!_discoveryPublished)
                         {
-                            foreach (var sensor in Variables.SingleValueSensors.TakeWhile(_ => !_pause).TakeWhile(_ => _active))
+                            if (SingleValueSensorsPresent())
                             {
-                                if (_pause || Variables.MqttManager.GetStatus() != MqttStatus.Connected) continue;
-                                await sensor.PublishAutoDiscoveryConfigAsync();
+                                foreach (var sensor in Variables.SingleValueSensors.TakeWhile(_ => !_pause).TakeWhile(_ => _active))
+                                {
+                                    if (_pause || Variables.MqttManager.GetStatus() != MqttStatus.Connected) continue;
+                                    await sensor.PublishAutoDiscoveryConfigAsync();
+                                }
                             }
+
+                            if (MultiValueSensorsPresent())
+                            {
+                                foreach (var sensor in Variables.MultiValueSensors.TakeWhile(_ => !_pause).TakeWhile(_ => _active))
+                                {
+                                    if (_pause || Variables.MqttManager.GetStatus() != MqttStatus.Connected) continue;
+                                    await sensor.PublishAutoDiscoveryConfigAsync();
+                                }
+                            }
+
+                            //if (RadioManager.AvailableNFCReader.Any())
+                            if (true)
+                            {
+                                var tagScannerConfigMesage = new MqttApplicationMessageBuilder()
+                                    .WithTopic($"{Variables.AppSettings.MqttDiscoveryPrefix}/tag/{Variables.DeviceConfig.Name}/config")
+                                    .WithPayload(JsonConvert.SerializeObject(new
+                                    {
+                                        topic = $"hass.agent/devices/{Variables.DeviceConfig.Name}/tag_scanned",
+                                        value_template = "{{ value_json.UID }}"
+                                    }))
+                                    .WithRetainFlag(Variables.AppSettings.MqttUseRetainFlag)
+                                    .Build();
+
+                                await Variables.MqttManager.PublishAsync(tagScannerConfigMesage);
+                            }
+
+                            _discoveryPublished = true;
                         }
 
-                        if (MultiValueSensorsPresent())
-                        {
-                            foreach (var sensor in Variables.MultiValueSensors.TakeWhile(_ => !_pause).TakeWhile(_ => _active))
-                            {
-                                if (_pause || Variables.MqttManager.GetStatus() != MqttStatus.Connected) continue;
-                                await sensor.PublishAutoDiscoveryConfigAsync();
-                            }
-                        }
-
-                        // log moment
                         _lastAutoDiscoPublish = DateTime.Now;
                     }
 

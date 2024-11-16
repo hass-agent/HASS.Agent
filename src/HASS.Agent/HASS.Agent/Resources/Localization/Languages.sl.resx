@@ -2328,11 +2328,6 @@ HassAgentStarted, Odjava, SystemShutdown, Resume, Suspend, ConsoleConnect, Conso
     <value>Zagotavlja bool vrednost glede na to, ali se mikrofon trenutno uporablja.</value>
     <comment>Fuzzy</comment>
   </data>
-  <data name="SensorsManager_MicrophoneProcessSensorDescription" xml:space="preserve">
-    <value>Vrne ime procesa, ki trenutno uporablja mikrofon.
-
-Opomba: če se uporablja v satelitski storitvi</value>
-  </data>
   <data name="SensorsManager_MonitorPowerStateSensorDescription" xml:space="preserve">
     <value>Vrne zadnjo spremembo načina monitorja:
 
@@ -2358,9 +2353,10 @@ Primer: _Skupaj
 Številke lahko raziščete z orodjem Windows 'perfmon.exe'.</value>
   </data>
   <data name="SensorsManager_PowershellSensorDescription" xml:space="preserve">
-    <value>Vrne rezultat Powershell ukaza ali skripta.
+    <value>Vrne rezultat podanega ukaza ali skripta Powershell.
+Opomba: ne pozabite, da Home Assistant sprejme vsebino do 255 znakov.
 
-Pretvori rezultat v tekst.</value>
+Pretvori rezultat v besedilo.</value>
   </data>
   <data name="SensorsManager_PrintersSensorsDescription" xml:space="preserve">
     <value>Vrne informacijo o nameščenih tiskalnikih in čakalni vrsti za njih.</value>
@@ -3445,7 +3441,15 @@ Ukaz/tovor mora biti v formatu JSON. Primer vseh možnih možnosti:
 
 Če ni na voljo "playbackDevice", bo HASS.Agent uporabil privzeto.
 Če ni na voljo nobena "volume", bo HASS.Agent nastavil samo stanje utišanja.
-Če ni na voljo možnost "mute", bo HASS.Agent znova vključil zvok navedene aplikacije.</value>
+Če ni na voljo možnost "mute", bo HASS.Agent znova vključil zvok navedene aplikacije.
+
+Napredna možnost: dodatni "sessionId" je mogoče zagotoviti za nastavitev glasnosti samo za določeno sejo aplikacije, ID seje je mogoče pridobiti iz senzorja "Audio Sessions":
+{
+   "playbackDevice":"Speakers (THX SpatialAudio)",
+   "applicationName":"Discord",
+   "volume":50,
+   "sessionid":"&lt;LONG SESSION ID FROM SENSOR&gt;"
+}</value>
   </data>
   <data name="CommandsMod_BtnStore_InvalidJson" xml:space="preserve">
     <value>Vnesite veljaven niz JSON!</value>
@@ -3512,5 +3516,44 @@ Zahteva ime zvočne naprave kot tovor.</value>
   <data name="CommandsManager_SetAudioInputCommandDescription" xml:space="preserve">
     <value>Nastavi privzeti zvočni vhod za sistem (vključno s privzeto komunikacijsko napravo).
 Ime zvočne naprave potrebujete kot obremenitev.</value>
+  </data>
+  <data name="ConfigMqtt_CbIgnoreGracePeriod" xml:space="preserve">
+    <value>Po prebujanju iz mirovanja prezrite obdobje odloga</value>
+  </data>
+  <data name="ConfigTrayIcon_CbUseModernIcon" xml:space="preserve">
+    <value>Uporabi sodobno ikono pladnja</value>
+  </data>
+  <data name="SensorsManager_MicrophoneProcessSensorDescription" xml:space="preserve">
+    <value>Zagotavlja število procesov, ki trenutno uporabljajo mikrofon - dodatno podaja ime procesov v atributih senzorja.
+
+Opomba: če se uporablja v satelitski storitvi, ne bo zaznal aplikacij uporabniškega prostora.</value>
+  </data>
+  <data name="Configuration_NFC" xml:space="preserve">
+    <value>NFC</value>
+  </data>
+  <data name="AdvancedSensorConfig_Title" xml:space="preserve">
+    <value>Napredne nastavitve</value>
+  </data>
+  <data name="SensorsMod_BtnAdvancedSettings" xml:space="preserve">
+    <value>Napredne nasta&amp;vitve</value>
+  </data>
+  <data name="AdvancedSensorConfig_Warning" xml:space="preserve">
+    <value>Opozorilo, dodajanje naslednjih nastavitev (preglasitev) lahko pokvari senzor, uporabljajte previdno!</value>
+  </data>
+  <data name="CommandsManager_TrayWebViewCommandDescription" xml:space="preserve">
+    <value>Prikaže/skrije spletni pogled ikone pladnja.
+Zahteva, da je konfiguriran v "Konfiguracija -&gt; Ikona pladnja"</value>
+  </data>
+  <data name="HassAction_Trigger" xml:space="preserve">
+    <value>Sprožilec</value>
+  </data>
+  <data name="HassDomain_Button" xml:space="preserve">
+    <value>Gumb</value>
+  </data>
+  <data name="HassAction_Press" xml:space="preserve">
+    <value>Pritisnite</value>
+  </data>
+  <data name="Notification_Dismiss" xml:space="preserve">
+    <value>Odpusti</value>
   </data>
 </root>

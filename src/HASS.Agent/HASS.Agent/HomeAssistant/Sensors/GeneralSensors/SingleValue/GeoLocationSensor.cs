@@ -9,7 +9,7 @@ namespace HASS.Agent.HomeAssistant.Sensors.GeneralSensors.SingleValue
     public class GeoLocationSensor : AbstractSingleValueSensor
     {
         private const string DefaultName = "geolocation";
-        public GeoLocationSensor(int? updateInterval = 10, string entityName = DefaultName, string name = DefaultName, string id = default) : base(entityName ?? DefaultName, name ?? null, updateInterval ?? 30, id) { }
+        public GeoLocationSensor(int? updateInterval = 10, string entityName = DefaultName, string name = DefaultName, string id = default, string advancedSettings = default) : base(entityName ?? DefaultName, name ?? null, updateInterval ?? 30, id, advancedSettings: advancedSettings) { }
 
         public override DiscoveryConfigModel GetAutoDiscoveryConfig()
         {
