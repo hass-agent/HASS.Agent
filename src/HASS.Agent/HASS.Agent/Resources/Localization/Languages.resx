@@ -3429,4 +3429,7 @@ Requires it to be configured in "Configuration -&gt; Tray Icon"</value>
   <data name="Notification_Dismiss" xml:space="preserve">
     <value>Dismiss</value>
   </data>
+  <data name="HassDomain_InputButton" xml:space="preserve">
+    <value>Input Button</value>
+  </data>
 </root>

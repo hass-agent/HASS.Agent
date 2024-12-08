@@ -3252,4 +3252,7 @@ Oculta, Maximizada, Minimizada, Normal y Desconocida.</value>
   <data name="HassAction_Press" xml:space="preserve">
     <value>Prensa</value>
   </data>
+  <data name="HassDomain_InputButton" xml:space="preserve">
+    <value>botón de entrada</value>
+  </data>
 </root>

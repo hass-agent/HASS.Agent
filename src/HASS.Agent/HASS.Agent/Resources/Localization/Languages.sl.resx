@@ -3556,4 +3556,7 @@ Zahteva, da je konfiguriran v "Konfiguracija -&gt; Ikona pladnja"</value>
   <data name="Notification_Dismiss" xml:space="preserve">
     <value>Odpusti</value>
   </data>
+  <data name="HassDomain_InputButton" xml:space="preserve">
+    <value>Gumb za vnos</value>
+  </data>
 </root>

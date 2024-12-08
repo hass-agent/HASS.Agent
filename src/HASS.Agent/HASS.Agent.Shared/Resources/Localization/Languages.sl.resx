@@ -3401,4 +3401,7 @@ Ali želite prenesti runtime installer?</value>
   <data name="HassAction_Press" xml:space="preserve">
     <value>Pritisnite</value>
   </data>
+  <data name="HassDomain_InputButton" xml:space="preserve">
+    <value>Gumb za vnos</value>
+  </data>
 </root>

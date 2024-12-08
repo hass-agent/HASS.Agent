@@ -3274,4 +3274,7 @@ Wil je de runtime installatie downloaden?</value>
   <data name="HassAction_Press" xml:space="preserve">
     <value>Pers</value>
   </data>
+  <data name="HassDomain_InputButton" xml:space="preserve">
+    <value>Invoerknop</value>
+  </data>
 </root>

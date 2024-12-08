@@ -3235,4 +3235,7 @@ Do you want to download the runtime installer?</value>
   <data name="HassDomain_Button" xml:space="preserve">
     <value>Button</value>
   </data>
+  <data name="HassDomain_InputButton" xml:space="preserve">
+    <value>InputButton</value>
+  </data>
 </root>

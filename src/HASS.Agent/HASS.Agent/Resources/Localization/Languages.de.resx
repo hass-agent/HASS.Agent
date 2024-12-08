@@ -3531,4 +3531,7 @@ Muss unter „Konfiguration -&gt; Tray-Icon“ konfiguriert werden.</value>
   <data name="Notification_Dismiss" xml:space="preserve">
     <value>Zurückweisen</value>
   </data>
+  <data name="HassDomain_InputButton" xml:space="preserve">
+    <value>Eingabetaste</value>
+  </data>
 </root>
