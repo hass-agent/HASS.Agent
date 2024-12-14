@@ -578,6 +578,9 @@ namespace HASS.Agent.Functions
                 }
             }
 
+            if (InputLanguage.CurrentInputLanguage.LayoutName == "German") //system *language* might be english, but keyboard layout is still *german*
+                germanLayoutDetected = true;
+
             if (KnownNotOkInputLanguage.ContainsKey(inputLanguage) || germanLayoutDetected)
             {
                 // get human-readable name
