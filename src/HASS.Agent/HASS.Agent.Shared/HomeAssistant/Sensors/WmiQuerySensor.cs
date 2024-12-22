@@ -40,11 +40,11 @@ namespace HASS.Agent.Shared.HomeAssistant.Sensors
         {
             Searcher?.Dispose();
 
-            var managementscope = !string.IsNullOrWhiteSpace(Scope)
+            var managementScope = !string.IsNullOrWhiteSpace(Scope)
                 ? new ManagementScope(Scope)
                 : new ManagementScope(@"\\localhost\");
 
-            return new ManagementObjectSearcher(managementscope, ObjectQuery);
+            return new ManagementObjectSearcher(managementScope, ObjectQuery);
         }
 
         public void Dispose() => Searcher?.Dispose();
