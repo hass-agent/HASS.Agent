@@ -95,7 +95,7 @@ namespace HASS.Agent.Managers
                 var safeUri = new Uri(elementUrl);
 
                 // download the file
-                await DownloadRemoteFileAsync(safeUri.AbsoluteUri, localFile);
+                await RetrieveRemoteRecourceAsync(safeUri.AbsoluteUri, localFile);
 
                 return (true, localFile);
             }
@@ -108,11 +108,11 @@ namespace HASS.Agent.Managers
         }
 
         /// <summary>
-        /// Download an audio file to local temp path
+        /// Downloads an audio file to local cache or returns the unchanged URI if file is streamed by the server
         /// </summary>
         /// <param name="uri"></param>
         /// <returns></returns>
-        internal static async Task<(bool success, string resourceUri)> DownloadAudioAsync(string uri)
+        internal static async Task<(bool success, string resourceUri)> RetrieveAudioAsync(string uri)
         {
             try
             {
@@ -151,7 +151,7 @@ namespace HASS.Agent.Managers
                 var safeUri = new Uri(uri);
 
                 // download the file
-                var (downloaded, resourceUri) = await DownloadRemoteFileAsync(safeUri.AbsoluteUri, localFile);
+                var (downloaded, resourceUri) = await RetrieveRemoteRecourceAsync(safeUri.AbsoluteUri, localFile);
                 if(!downloaded && resourceUri == null)
                 {
                     throw new Exception("cannot retrieve the resource");
@@ -207,7 +207,7 @@ namespace HASS.Agent.Managers
                 var safeUri = new Uri(uri);
 
                 // download the file
-                await DownloadRemoteFileAsync(safeUri.AbsoluteUri, localFile);
+                await RetrieveRemoteRecourceAsync(safeUri.AbsoluteUri, localFile);
 
                 return true;
             }
@@ -470,20 +470,20 @@ namespace HASS.Agent.Managers
         }
 
         /// <summary>
-        /// Downloads the provided URI to a local file
+        /// Downloads the provided URI to a local file or returns the unchanged URI if file is streamed by the server
         /// </summary>
         /// <param name="uri"></param>
         /// <param name="localFile"></param>
         /// <returns></returns>
-        private static async Task<(bool, string)> DownloadRemoteFileAsync(string uri, string resourceUri)
+        private static async Task<(bool, string)> RetrieveRemoteRecourceAsync(string uri, string localResourceUri)
         {
             var cancelationTokenSource = new CancellationTokenSource();
 
             try
             {
-                if (File.Exists(resourceUri))
+                if (File.Exists(localResourceUri))
                 {
-                    File.Delete(resourceUri);
+                    File.Delete(localResourceUri);
                     await Task.Delay(50);
                 }
 
@@ -513,17 +513,17 @@ namespace HASS.Agent.Managers
                 var stream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
 
                 // get a local file stream
-                await using var fileStream = new FileStream(resourceUri, FileMode.CreateNew);
+                await using var fileStream = new FileStream(localResourceUri, FileMode.CreateNew);
 
                 // transfer the data
                 await stream.CopyToAsync(fileStream);
 
                 // done
-                return (true, uri);
+                return (true, localResourceUri);
             }
             catch (Exception ex)
             {
-                Log.Error("[STORAGE] Error while downloading file!\r\nRemote URI: {uri}\r\nLocal file: {localFile}\r\nError: {err}", uri, resourceUri, ex.Message);
+                Log.Error("[STORAGE] Error while downloading file!\r\nRemote URI: {uri}\r\nLocal file: {localFile}\r\nError: {err}", uri, localResourceUri, ex.Message);
 
                 return (false, string.Empty);
             }

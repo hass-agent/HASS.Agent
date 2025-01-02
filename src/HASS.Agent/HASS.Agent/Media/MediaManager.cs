@@ -403,7 +403,7 @@ namespace HASS.Agent.Media
                 if (audioUri.ToLower().StartsWith("http"))
                 {
                     // remote file, try to download
-                    var (downloaded, resourceUri) = await StorageManager.DownloadAudioAsync(mediaUri);
+                    var (downloaded, resourceUri) = await StorageManager.RetrieveAudioAsync(mediaUri);
                     if (!downloaded && string.IsNullOrWhiteSpace(resourceUri))
                     {
                         Log.Error("[MEDIA] Unable to download media");
