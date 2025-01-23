@@ -15,7 +15,7 @@ namespace HASS.Agent.Controls.Configuration
             InitializeComponent();
         }
 
-        private void BtnNotificationsReadme_Click(object sender, EventArgs e) => HelperFunctions.LaunchUrl("https://www.hass-agent.io/latest/setup/notifications/");
+        private void BtnNotificationsReadme_Click(object sender, EventArgs e) => HelperFunctions.LaunchUrl("https://www.hass-agent.io/latest/getting-started/notifications/");
 
         private void BtnSendTestNotification_Click(object sender, EventArgs e)
         {

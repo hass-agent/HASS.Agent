@@ -3,6 +3,7 @@ using System.IO;
 using System.Security.Authentication;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
+using System.Threading;
 using HASS.Agent.API;
 using HASS.Agent.Enums;
 using HASS.Agent.Functions;
@@ -13,6 +14,7 @@ using HASS.Agent.Resources.Localization;
 using HASS.Agent.Settings;
 using HASS.Agent.Shared.Enums;
 using HASS.Agent.Shared.Managers;
+using HASS.Agent.Shared.Managers.Audio;
 using HASS.Agent.Shared.Models.HomeAssistant;
 using HASS.Agent.Shared.Mqtt;
 using MQTTnet;
@@ -796,6 +798,15 @@ namespace HASS.Agent.MQTT
                             break;
                         case MediaPlayerCommand.SetVolume:
                             MediaManagerCommands.SetVolume(command.Data.ToObject<int>());
+                            break;
+                        case MediaPlayerCommand.Mute:
+                            //Note(Amadeo): tech debt :)
+                            //              this logic should be in MediaManager.ProcessCommand but it's also used in "local api"
+                            //              from all messy and time viable options, this one is the "cleanest"
+                            if (command.Data == null)
+                                goto default;
+
+                            AudioManager.SetDefaultDeviceProperties(DeviceType.Output, DeviceRole.Multimedia | DeviceRole.Console, -1, command.Data.ToObject<bool>());
                             break;
                         default:
                             MediaManager.ProcessCommand(command.Command);

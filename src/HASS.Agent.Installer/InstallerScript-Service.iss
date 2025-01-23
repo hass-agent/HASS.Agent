@@ -9,7 +9,7 @@
 
 ; Standard installation constants
 #define MyAppName "HASS.Agent Satellite Service"
-#define MyAppVersion "2.1.0"
+#define MyAppVersion "2.1.1-beta3"
 #define MyAppPublisher "HASS.Agent Team"
 #define MyAppURL "https://hass-agent.io"
 #define MyAppExeName "HASS.Agent.Satellite.Service.exe"
@@ -62,11 +62,12 @@ Root: HKLM; Subkey: "SOFTWARE\HASSAgent\SatelliteService"; ValueType: string; Va
 
 ; Service registration and removal
 [Run]
-Filename: "{sys}\sc.exe"; Parameters: "create {#ServiceName} binpath= ""{app}\{#MyAppExeName}"""; Flags: runhidden 
+Filename: "{sys}\sc.exe"; Parameters: "create {#ServiceName} binpath= ""\""{app}\{#MyAppExeName}""\"""; Flags: runhidden 
 Filename: "{sys}\sc.exe"; Parameters: "failure {#ServiceName} reset= 86400 actions= restart/60000/restart/60000//1000"; Flags: runhidden 
 Filename: "{sys}\sc.exe"; Parameters: "description {#ServiceName} ""{#ServiceDescription}"""; Flags: runhidden 
 Filename: "{sys}\sc.exe"; Parameters: "config {#ServiceName} DisplayName= ""{#ServiceDisplayName}"""; Flags: runhidden
 Filename: "{sys}\sc.exe"; Parameters: "config {#ServiceName} start= auto"; Flags: runhidden
+Filename: "{sys}\sc.exe"; Parameters: "config {#ServiceName} binpath= ""\""{app}\{#MyAppExeName}""\"""; Flags: runhidden 
 [UninstallRun]
 Filename: "{sys}\sc.exe"; Parameters: "stop {#ServiceName}"; RunOnceId: StopService; Flags: runhidden
 Filename: "{sys}\timeout.exe"; Parameters: "5"; RunOnceId: Delay1; Flags:runhidden
