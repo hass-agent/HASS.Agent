@@ -114,11 +114,11 @@ jobs:
     
     - name: Build & Publish HASS.Agent
       working-directory: "D:\\a\\HASS.Agent\\HASS.Agent\\src\\HASS.Agent\\HASS.Agent"
-      run: "dotnet publish -c Release -f net6.0-windows10.0.19041.0 -o bin\\Publish-x64\\Release\\ --no-self-contained -r win-x64 -p:Platform=x64"
+      run: "dotnet publish -c Release -f net6.0-windows10.0.22621.0 -o bin\\Publish-x64\\Release\\ --no-self-contained -r win-x64 -p:Platform=x64"
    
     - name: Build & Publish HASS.Agent.Satellite.Service
       working-directory: "D:\\a\\HASS.Agent\\HASS.Agent\\src\\HASS.Agent\\HASS.Agent.Satellite.Service"
-      run: "dotnet publish -c Release -f net6.0-windows10.0.19041.0 -o bin\\Publish-x64\\Release\\ --no-self-contained -r win-x64 -p:Platform=x64"
+      run: "dotnet publish -c Release -f net6.0-windows10.0.22621.0 -o bin\\Publish-x64\\Release\\ --no-self-contained -r win-x64 -p:Platform=x64"
 
     - name: Compile InnoSetup Installer - Satellite Service
       working-directory: "D:\\a\\HASS.Agent\\HASS.Agent\\src\\HASS.Agent.Installer"
