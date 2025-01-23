@@ -216,7 +216,7 @@ jobs:
         zip -r HASS.Agent.Satellite.Service.zip ./
         
     - name: Create Draft Release and Upload Build Artifacts
-      uses: ncipollo/release-action@v1.10.0
+      uses: ncipollo/release-action@v1.15.0
       with:
         name: ${{ github.event.inputs.releasetitle }}
         draft: true
