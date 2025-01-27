@@ -70,7 +70,7 @@ Filename: "{app}\{#MyAppExeName}"; Description: "{cm:LaunchProgram,{#StringChang
 function InitializeSetup: Boolean;
 begin
   Dependency_ForceX86 := False;
-  Dependency_AddDotNet60Desktop;
+  Dependency_AddDotNet80Desktop;
   Result := True;
 end;
 
