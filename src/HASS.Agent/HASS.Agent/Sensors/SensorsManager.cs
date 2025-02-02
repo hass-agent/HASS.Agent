@@ -95,7 +95,7 @@ namespace HASS.Agent.Sensors
                     // is mqtt available?
                     if (Variables.MqttManager.GetStatus() != MqttStatus.Connected)
                     {
-                        // nothing to do
+                        _discoveryPublished = false;
                         continue;
                     }
 
