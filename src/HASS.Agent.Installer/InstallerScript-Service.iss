@@ -9,7 +9,7 @@
 
 ; Standard installation constants
 #define MyAppName "HASS.Agent Satellite Service"
-#define MyAppVersion "2.1.1-beta3"
+#define MyAppVersion "2.1.1"
 #define MyAppPublisher "HASS.Agent Team"
 #define MyAppURL "https://hass-agent.io"
 #define MyAppExeName "HASS.Agent.Satellite.Service.exe"

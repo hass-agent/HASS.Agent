@@ -114,7 +114,7 @@ namespace HASS.Agent.Satellite.Service.Commands
                     // is mqtt available?
                     if (Variables.MqttManager.GetStatus() != MqttStatus.Connected)
                     {
-                        // nothing to do
+                        _discoveryPublished = false;
                         continue;
                     }
 
