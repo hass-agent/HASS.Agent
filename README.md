@@ -6,7 +6,7 @@
 ![GitHub latest](https://img.shields.io/github/downloads/hass-agent/HASS.Agent/latest/total?color=blue)
 [![Discord](https://img.shields.io/badge/dynamic/json?color=blue&label=Discord&logo=discord&logoColor=white&query=presence_count&suffix=%20Online&url=https://discord.com/api/guilds/1173033284519862392/widget.json)](https://discord.com/invite/JfZj98xqJr)
 
-<a href="https://github.com/LAB02-Research/HASS.Agent/">
+<a href="https://github.com/hass-agent/HASS.Agent/">
     <img src="https://raw.githubusercontent.com/LAB02-Research/HASS.Agent/main/images/logo_128.png" alt="HASS.Agent logo" title="HASS.Agent" align="right" height="128" /></a>
 
 # HASS.Agent
