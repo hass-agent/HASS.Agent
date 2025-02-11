@@ -23,10 +23,14 @@ internal static class UpdateManager
         // wait a minute in case Windows is busy launching
         await Task.Delay(TimeSpan.FromMinutes(1));
 
+
         // initial check
-        var (isAvailable, version) = await CheckIsUpdateAvailableAsync();
-        if (isAvailable)
-            ProcessAvailableUpdate(version);
+        if (Variables.AppSettings.CheckForUpdates)
+        {
+            var (isAvailable, version) = await CheckIsUpdateAvailableAsync();
+            if (isAvailable)
+                ProcessAvailableUpdate(version);
+        }
 
         // start periodic check
         _ = Task.Run(PeriodicUpdateCheck);
@@ -92,7 +96,7 @@ internal static class UpdateManager
                 return (false, pendingUpdate);
 
             // we are interested only in releases created after 30.11.2023
-            if(latestRelease.CreatedAt.CompareTo(s_releaseCutoff) <= 0)
+            if (latestRelease.CreatedAt.CompareTo(s_releaseCutoff) <= 0)
                 return (false, pendingUpdate);
 
             var isNewer = UpdateIsNewer(Variables.Version, latestRelease.TagName);
