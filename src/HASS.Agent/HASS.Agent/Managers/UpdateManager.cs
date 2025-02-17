@@ -111,7 +111,7 @@ internal static class UpdateManager
         catch (Exception ex)
         {
             Log.Fatal(ex, "[UPDATER] Error checking for updates: {err}", ex.Message);
-            return (false, pendingUpdate);
+            return (false, null);
         }
     }
 
@@ -160,7 +160,7 @@ internal static class UpdateManager
         catch (Exception ex)
         {
             Log.Fatal(ex, "[UPDATER] Error checking for beta updates: {err}", ex.Message);
-            return (false, pendingUpdate);
+            return (false, null);
         }
     }
 
