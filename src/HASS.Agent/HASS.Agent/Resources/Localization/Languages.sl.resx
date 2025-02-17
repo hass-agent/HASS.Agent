@@ -3556,4 +3556,7 @@ Zahteva, da je konfiguriran v "Konfiguracija -&gt; Ikona pladnja"</value>
   <data name="Notification_Dismiss" xml:space="preserve">
     <value>Odpusti</value>
   </data>
+  <data name="Main_CheckForUpdateFailed_MessageBox1" xml:space="preserve">
+    <value>Neuspešno preverjanje posodobitve!</value>
+  </data>
 </root>
