@@ -839,9 +839,9 @@ namespace HASS.Agent.Forms
                     MessageBoxAdv.Show(this, string.Format(Languages.Main_CheckForUpdate_MessageBox1, Variables.Version, beta), Variables.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
                 }
-                else
+                else if(!isAvailable)
                 {
-                    MessageBoxAdv.Show(this, "failed to get update");
+                    MessageBoxAdv.Show(this, Languages.Main_CheckForUpdateFailed_MessageBox1, Variables.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 
