@@ -88,7 +88,7 @@ namespace HASS.Agent.Controls.Configuration
 
         private void domainUpDown1_SelectedItemChanged(object sender, EventArgs e)
         {
-            SelectedScreen = ((ComboBoxAdv) sender).SelectedIndex;
+            SelectedScreen = ((ComboBoxAdv)sender).SelectedIndex;
         }
     }
 }

@@ -40,15 +40,16 @@ namespace HASS.Agent.Controls.Configuration
             LblX = new Label();
             LblWebViewSize = new Label();
             BtnShowWebViewPreview = new Syncfusion.WinForms.Controls.SfButton();
-            NumWebViewWidth = new Syncfusion.Windows.Forms.Tools.NumericUpDownExt();
-            NumWebViewHeight = new Syncfusion.Windows.Forms.Tools.NumericUpDownExt();
+            NumWebViewWidth = new NumericUpDownExt();
+            NumWebViewHeight = new NumericUpDownExt();
             BtnWebViewReset = new Syncfusion.WinForms.Controls.SfButton();
             CbWebViewKeepLoaded = new CheckBox();
             LblInfo2 = new Label();
             CbWebViewShowMenuOnLeftClick = new CheckBox();
-            NumWebViewScreen = new Syncfusion.Windows.Forms.Tools.ComboBoxAdv();
+            NumWebViewScreen = new ComboBoxAdv();
             ((System.ComponentModel.ISupportInitialize)NumWebViewWidth).BeginInit();
             ((System.ComponentModel.ISupportInitialize)NumWebViewHeight).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)NumWebViewScreen).BeginInit();
             SuspendLayout();
             // 
             // LblInfo1
@@ -144,7 +145,7 @@ namespace HASS.Agent.Controls.Configuration
             LblX.AccessibleRole = AccessibleRole.StaticText;
             LblX.AutoSize = true;
             LblX.Font = new Font("Segoe UI", 10F);
-            LblX.Location = new Point(184, 350);
+            LblX.Location = new Point(176, 350);
             LblX.Name = "LblX";
             LblX.Size = new Size(17, 19);
             LblX.TabIndex = 53;
@@ -172,9 +173,9 @@ namespace HASS.Agent.Controls.Configuration
             BtnShowWebViewPreview.Enabled = false;
             BtnShowWebViewPreview.Font = new Font("Segoe UI", 10F);
             BtnShowWebViewPreview.ForeColor = Color.FromArgb(241, 241, 241);
-            BtnShowWebViewPreview.Location = new Point(405, 348);
+            BtnShowWebViewPreview.Location = new Point(494, 348);
             BtnShowWebViewPreview.Name = "BtnShowWebViewPreview";
-            BtnShowWebViewPreview.Size = new Size(206, 26);
+            BtnShowWebViewPreview.Size = new Size(117, 26);
             BtnShowWebViewPreview.Style.BackColor = Color.FromArgb(63, 63, 70);
             BtnShowWebViewPreview.Style.FocusedBackColor = Color.FromArgb(63, 63, 70);
             BtnShowWebViewPreview.Style.FocusedForeColor = Color.FromArgb(241, 241, 241);
@@ -224,7 +225,7 @@ namespace HASS.Agent.Controls.Configuration
             NumWebViewHeight.Enabled = false;
             NumWebViewHeight.Font = new Font("Segoe UI", 10F);
             NumWebViewHeight.ForeColor = Color.FromArgb(241, 241, 241);
-            NumWebViewHeight.Location = new Point(218, 348);
+            NumWebViewHeight.Location = new Point(197, 348);
             NumWebViewHeight.Maximum = new decimal(new int[] { 65535, 0, 0, 0 });
             NumWebViewHeight.MaxLength = 10;
             NumWebViewHeight.MetroColor = SystemColors.WindowFrame;
@@ -245,7 +246,7 @@ namespace HASS.Agent.Controls.Configuration
             BtnWebViewReset.Font = new Font("Segoe UI", 10F);
             BtnWebViewReset.ForeColor = Color.FromArgb(241, 241, 241);
             BtnWebViewReset.ImageSize = new Size(24, 24);
-            BtnWebViewReset.Location = new Point(317, 348);
+            BtnWebViewReset.Location = new Point(289, 348);
             BtnWebViewReset.Name = "BtnWebViewReset";
             BtnWebViewReset.Size = new Size(51, 26);
             BtnWebViewReset.Style.BackColor = Color.FromArgb(63, 63, 70);
@@ -309,9 +310,12 @@ namespace HASS.Agent.Controls.Configuration
             // 
             // NumWebViewScreen
             // 
-            NumWebViewScreen.Location = new Point(368, 348);
-            NumWebViewScreen.Name = "domainUpDown1";
-            NumWebViewScreen.Size = new Size(120, 23);
+            NumWebViewScreen.AccessibleDescription = "Dropdown containing the screens to choose for tray web view display.";
+            NumWebViewScreen.BeforeTouchSize = new Size(142, 23);
+            NumWebViewScreen.Font = new Font("Segoe UI", 10F);
+            NumWebViewScreen.Location = new Point(346, 348);
+            NumWebViewScreen.Name = "NumWebViewScreen";
+            NumWebViewScreen.Size = new Size(142, 23);
             NumWebViewScreen.TabIndex = 78;
             NumWebViewScreen.Text = "Select Your Display";
             NumWebViewScreen.SelectedValueChanged += domainUpDown1_SelectedItemChanged;
@@ -347,22 +351,23 @@ namespace HASS.Agent.Controls.Configuration
             Load += ConfigTrayIcon_Load;
             ((System.ComponentModel.ISupportInitialize)NumWebViewWidth).EndInit();
             ((System.ComponentModel.ISupportInitialize)NumWebViewHeight).EndInit();
+            ((System.ComponentModel.ISupportInitialize)NumWebViewScreen).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
-        private System.Windows.Forms.Label LblInfo1;
-        internal System.Windows.Forms.CheckBox CbUseModernIcon;
-        internal System.Windows.Forms.CheckBox CbDefaultMenu;
+        private Label LblInfo1;
+        internal CheckBox CbUseModernIcon;
+        internal CheckBox CbDefaultMenu;
         internal CheckBox CbShowWebView;
         internal TextBox TbWebViewUrl;
         internal Syncfusion.WinForms.Controls.SfButton BtnShowWebViewPreview;
         internal Label LblWebViewUrl;
         internal Label LblX;
         internal Label LblWebViewSize;
-        internal Syncfusion.Windows.Forms.Tools.NumericUpDownExt NumWebViewWidth;
-        internal Syncfusion.Windows.Forms.Tools.NumericUpDownExt NumWebViewHeight;
+        internal NumericUpDownExt NumWebViewWidth;
+        internal NumericUpDownExt NumWebViewHeight;
         internal Syncfusion.WinForms.Controls.SfButton BtnWebViewReset;
         internal CheckBox CbWebViewKeepLoaded;
         internal Label LblInfo2;
