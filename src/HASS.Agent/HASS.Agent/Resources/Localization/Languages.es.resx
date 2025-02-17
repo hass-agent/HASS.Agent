@@ -3407,4 +3407,7 @@ Requiere que se configure en "Configuración -&gt; Icono de la bandeja"</value>
   <data name="Notification_Dismiss" xml:space="preserve">
     <value>Despedir</value>
   </data>
+  <data name="ConfigTrayIcon_NumWebViewScreen" xml:space="preserve">
+    <value>Pantalla a utilizar para mostrar WebView</value>
+  </data>
 </root>

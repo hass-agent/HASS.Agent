@@ -3429,4 +3429,7 @@ Requires it to be configured in "Configuration -&gt; Tray Icon"</value>
   <data name="Notification_Dismiss" xml:space="preserve">
     <value>Dismiss</value>
   </data>
+  <data name="ConfigTrayIcon_NumWebViewScreen" xml:space="preserve">
+	  <value>Screen to use for WebView to show</value>
+  </data>
 </root>

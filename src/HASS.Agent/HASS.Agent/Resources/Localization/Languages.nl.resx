@@ -3428,4 +3428,7 @@ Vereist dat het geconfigureerd is in "Configuratie -&gt; Tray Icon"</value>
   <data name="Notification_Dismiss" xml:space="preserve">
     <value>Afwijzen</value>
   </data>
+  <data name="ConfigTrayIcon_NumWebViewScreen" xml:space="preserve">
+    <value>Scherm dat moet worden gebruikt om WebView weer te geven</value>
+  </data>
 </root>

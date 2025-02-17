@@ -3453,4 +3453,7 @@ Requer que seja configurado em "Configuration -&gt; Tray Icon"</value>
   <data name="Notification_Dismiss" xml:space="preserve">
     <value>Dispensar</value>
   </data>
+  <data name="ConfigTrayIcon_NumWebViewScreen" xml:space="preserve">
+    <value>Tela a ser usada para exibição do WebView</value>
+  </data>
 </root>

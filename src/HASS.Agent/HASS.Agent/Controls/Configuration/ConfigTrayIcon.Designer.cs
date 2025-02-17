@@ -311,13 +311,14 @@ namespace HASS.Agent.Controls.Configuration
             // NumWebViewScreen
             // 
             NumWebViewScreen.AccessibleDescription = "Dropdown containing the screens to choose for tray web view display.";
+            NumWebViewScreen.AccessibleName = "Display on which to show the tray web view";
             NumWebViewScreen.BeforeTouchSize = new Size(142, 23);
             NumWebViewScreen.Font = new Font("Segoe UI", 10F);
             NumWebViewScreen.Location = new Point(346, 348);
             NumWebViewScreen.Name = "NumWebViewScreen";
             NumWebViewScreen.Size = new Size(142, 23);
             NumWebViewScreen.TabIndex = 78;
-            NumWebViewScreen.Text = "Select Your Display";
+            NumWebViewScreen.Text = Languages.ConfigTrayIcon_NumWebViewScreen;
             NumWebViewScreen.SelectedValueChanged += domainUpDown1_SelectedItemChanged;
             // 
             // ConfigTrayIcon
