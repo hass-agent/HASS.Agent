@@ -361,6 +361,7 @@ namespace HASS.Agent.Forms
             _trayIcon.CbShowWebView.CheckState = Variables.AppSettings.TrayIconShowWebView ? CheckState.Checked : CheckState.Unchecked;
             _trayIcon.NumWebViewWidth.Value = Variables.AppSettings.TrayIconWebViewWidth;
             _trayIcon.NumWebViewHeight.Value = Variables.AppSettings.TrayIconWebViewHeight;
+            _trayIcon.SelectedScreen = Variables.AppSettings.TrayIconWebViewScreen; 
             _trayIcon.TbWebViewUrl.Text = Variables.AppSettings.TrayIconWebViewUrl;
             _trayIcon.CbWebViewKeepLoaded.CheckState = Variables.AppSettings.TrayIconWebViewBackgroundLoading ? CheckState.Checked : CheckState.Unchecked;
             _trayIcon.CbWebViewShowMenuOnLeftClick.CheckState = Variables.AppSettings.TrayIconWebViewShowMenuOnLeftClick ? CheckState.Checked : CheckState.Unchecked;
@@ -470,6 +471,7 @@ namespace HASS.Agent.Forms
             Variables.AppSettings.TrayIconShowWebView = _trayIcon.CbShowWebView.CheckState == CheckState.Checked;
             Variables.AppSettings.TrayIconWebViewWidth = (int)_trayIcon.NumWebViewWidth.Value;
             Variables.AppSettings.TrayIconWebViewHeight = (int)_trayIcon.NumWebViewHeight.Value;
+            Variables.AppSettings.TrayIconWebViewScreen = _trayIcon.NumWebViewScreen.SelectedIndex;
             Variables.AppSettings.TrayIconWebViewUrl = _trayIcon.TbWebViewUrl.Text;
             Variables.AppSettings.TrayIconWebViewBackgroundLoading = _trayIcon.CbWebViewKeepLoaded.CheckState == CheckState.Checked;
             Variables.AppSettings.TrayIconWebViewShowMenuOnLeftClick = _trayIcon.CbWebViewShowMenuOnLeftClick.CheckState == CheckState.Checked;

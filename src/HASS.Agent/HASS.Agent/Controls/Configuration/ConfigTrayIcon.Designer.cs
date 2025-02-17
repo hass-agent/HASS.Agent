@@ -1,4 +1,5 @@
 ﻿using HASS.Agent.Resources.Localization;
+using Syncfusion.Windows.Forms.Tools;
 
 namespace HASS.Agent.Controls.Configuration
 {
@@ -45,6 +46,7 @@ namespace HASS.Agent.Controls.Configuration
             CbWebViewKeepLoaded = new CheckBox();
             LblInfo2 = new Label();
             CbWebViewShowMenuOnLeftClick = new CheckBox();
+            NumWebViewScreen = new Syncfusion.Windows.Forms.Tools.ComboBoxAdv();
             ((System.ComponentModel.ISupportInitialize)NumWebViewWidth).BeginInit();
             ((System.ComponentModel.ISupportInitialize)NumWebViewHeight).BeginInit();
             SuspendLayout();
@@ -305,6 +307,15 @@ namespace HASS.Agent.Controls.Configuration
             CbWebViewShowMenuOnLeftClick.Text = Languages.ConfigTrayIcon_CbWebViewShowMenuOnLeftClick;
             CbWebViewShowMenuOnLeftClick.UseVisualStyleBackColor = true;
             // 
+            // NumWebViewScreen
+            // 
+            NumWebViewScreen.Location = new Point(368, 348);
+            NumWebViewScreen.Name = "domainUpDown1";
+            NumWebViewScreen.Size = new Size(120, 23);
+            NumWebViewScreen.TabIndex = 78;
+            NumWebViewScreen.Text = "Select Your Display";
+            NumWebViewScreen.SelectedValueChanged += domainUpDown1_SelectedItemChanged;
+            // 
             // ConfigTrayIcon
             // 
             AccessibleDescription = "Panel containing the tray icon configuration.";
@@ -328,6 +339,7 @@ namespace HASS.Agent.Controls.Configuration
             Controls.Add(LblInfo1);
             Controls.Add(CbDefaultMenu);
             Controls.Add(CbUseModernIcon);
+            Controls.Add(NumWebViewScreen);
             ForeColor = Color.FromArgb(241, 241, 241);
             Margin = new Padding(4);
             Name = "ConfigTrayIcon";
@@ -355,5 +367,6 @@ namespace HASS.Agent.Controls.Configuration
         internal CheckBox CbWebViewKeepLoaded;
         internal Label LblInfo2;
         internal CheckBox CbWebViewShowMenuOnLeftClick;
+        internal ComboBoxAdv NumWebViewScreen;
     }
 }
