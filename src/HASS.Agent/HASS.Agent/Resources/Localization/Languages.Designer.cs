@@ -4204,6 +4204,15 @@ namespace HASS.Agent.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Failed checking for update!.
+        /// </summary>
+        internal static string Main_CheckForUpdateFailed_MessageBox1 {
+            get {
+                return ResourceManager.GetString("Main_CheckForUpdateFailed_MessageBox1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Check for Updates.
         /// </summary>
         internal static string Main_CheckForUpdates {
