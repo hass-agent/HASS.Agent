@@ -23,24 +23,26 @@ namespace HASS.Agent.Controls.Configuration
         private void InitMultiScreenConfig(int selectedScreenIndex = 0)
         {
             var displays = Screen.AllScreens;
-            int ix = 0;
 
             if (Screen.AllScreens.Length == 1)
             {
-                NumWebViewScreen.Visible = false;
+                NumWebViewScreen.Visible = true;
+                NumWebViewScreen.Items.Add("Single Screen Mode");
+                NumWebViewScreen.Enabled = false;
                 selectedScreenIndex = 0;
             }
-
-            // Add screens to updownControl
-            foreach (var display in displays)
+            else
             {
-                string label = display.DeviceName;
-                if (display.Primary)
+                // Add screens to updownControl
+                foreach (var display in displays)
                 {
-                    label += " (Primary)";
+                    string label = display.DeviceName;
+                    if (display.Primary)
+                    {
+                        label += " (Primary)";
+                    }
+                    NumWebViewScreen.Items.Add(label);
                 }
-                NumWebViewScreen.Items.Add(label);
-                ix++;
             }
 
             NumWebViewScreen.SelectedIndex = selectedScreenIndex;
