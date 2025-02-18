@@ -299,5 +299,5 @@ namespace HASS.Agent.Managers
 
             _notificationManager.Unregister();
         }
-    }
+    } 
 }

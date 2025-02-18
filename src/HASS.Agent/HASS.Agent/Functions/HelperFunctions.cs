@@ -471,7 +471,7 @@ namespace HASS.Agent.Functions
                 Width = Variables.AppSettings.TrayIconWebViewWidth,
             };
 
-            LaunchTrayIconWebView(webView);
+            LaunchTrayIconWebView(webView, Variables.AppSettings.TrayIconWebViewScreen);
         }
 
         /// <summary>
