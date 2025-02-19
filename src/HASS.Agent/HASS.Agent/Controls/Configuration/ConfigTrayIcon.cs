@@ -1,6 +1,5 @@
 ﻿using HASS.Agent.Functions;
 using HASS.Agent.Models.Internal;
-using System.Diagnostics;
 using Syncfusion.Windows.Forms.Tools;
 
 namespace HASS.Agent.Controls.Configuration
@@ -78,7 +77,6 @@ namespace HASS.Agent.Controls.Configuration
                 IsTrayIconWebView = true,
                 IsTrayIconPreview = true
             };
-            Debug.WriteLine("X-Coordinate " + webView.X);
             HelperFunctions.LaunchTrayIconWebView(webView, NumWebViewScreen.SelectedIndex);
         }
 

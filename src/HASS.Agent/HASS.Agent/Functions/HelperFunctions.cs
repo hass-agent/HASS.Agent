@@ -1,13 +1,7 @@
-﻿using System.ComponentModel;
-using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
-using System.Globalization;
+﻿using System.Diagnostics;
 using System.IO;
-using System.Reflection;
-using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
-using System.Text;
 using System.Text.Json;
 using System.Text.RegularExpressions;
 using HASS.Agent.API;
@@ -521,8 +515,17 @@ namespace HASS.Agent.Functions
         {
             Variables.MainForm.Invoke(new MethodInvoker(delegate
             {
-                var x = Screen.AllScreens[screenIndex].Bounds.Right - webViewInfo.Width;
-                var y = Screen.AllScreens[screenIndex].Bounds.Bottom - webViewInfo.Height;
+                var totalX = 0;
+
+                foreach (var widthscreen in Screen.AllScreens)
+                {
+                    totalX += widthscreen.Bounds.X;
+                }
+
+                Screen targetScreen = Screen.AllScreens[screenIndex];
+
+                var x = targetScreen.Bounds.X + webViewInfo.Width;
+                var y = targetScreen.WorkingArea.Height - webViewInfo.Height;
 
                 webViewInfo.X = x;
                 webViewInfo.Y = y;
@@ -533,9 +536,14 @@ namespace HASS.Agent.Functions
 
                 var webView = new WebView(webViewInfo);
                 webView.Opacity = 0;
+                webView.AutoScaleMode = AutoScaleMode.Font;
+                webView.Show();
+
+                webView.Left = targetScreen.WorkingArea.Right - webView.Width;
+                webView.Top = targetScreen.WorkingArea.Bottom - webView.Height;
 
                 Variables.TrayIconWebView = webView;
-                webView.Show();
+                
             }));
         }
 
