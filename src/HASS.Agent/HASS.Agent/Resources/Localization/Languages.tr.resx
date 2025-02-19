@@ -3023,4 +3023,7 @@ Not: Uydu hizmetinde kullanılırsa kullanıcı alanı uygulamalarını algılam
   <data name="Notification_Dismiss" xml:space="preserve">
     <value>Azletmek</value>
   </data>
+  <data name="ConfigTrayIcon_NumWebViewScreen" xml:space="preserve">
+    <value>WebView'in göstermesi için kullanılacak ekran</value>
+  </data>
 </root>

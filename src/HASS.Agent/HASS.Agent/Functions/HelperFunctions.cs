@@ -1,13 +1,7 @@
-﻿using System.ComponentModel;
-using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
-using System.Globalization;
+﻿using System.Diagnostics;
 using System.IO;
-using System.Reflection;
-using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
-using System.Text;
 using System.Text.Json;
 using System.Text.RegularExpressions;
 using HASS.Agent.API;
@@ -423,7 +417,7 @@ namespace HASS.Agent.Functions
         /// <summary>
         /// Prepares and loads the tray icon's webview
         /// </summary>
-        internal static void PrepareTrayIconWebView()
+        internal static void PrepareTrayIconWebView(int screenIndex = 0)
         {
             // prepare the webview info
             var webViewInfo = new WebViewInfo
@@ -434,8 +428,8 @@ namespace HASS.Agent.Functions
                 IsTrayIconWebView = true
             };
 
-            var x = Screen.PrimaryScreen.WorkingArea.Width - webViewInfo.Width;
-            var y = Screen.PrimaryScreen.WorkingArea.Height - webViewInfo.Height;
+            var x = Screen.AllScreens[screenIndex].Bounds.Right - webViewInfo.Width;
+            var y = Screen.AllScreens[screenIndex].Bounds.Bottom - webViewInfo.Height;
 
             webViewInfo.X = x;
             webViewInfo.Y = y;
@@ -471,20 +465,20 @@ namespace HASS.Agent.Functions
                 Width = Variables.AppSettings.TrayIconWebViewWidth,
             };
 
-            LaunchTrayIconWebView(webView);
+            LaunchTrayIconWebView(webView, Variables.AppSettings.TrayIconWebViewScreen);
         }
 
         /// <summary>
         /// Shows a new webview form near the tray icon
         /// </summary>
         /// <param name="webViewInfo"></param>
-        internal static void LaunchTrayIconWebView(WebViewInfo webViewInfo)
+        internal static void LaunchTrayIconWebView(WebViewInfo webViewInfo, int screenIndex = 0)
         {
             // are we previewing?
             if (webViewInfo.IsTrayIconPreview)
             {
                 // yep, show as configured
-                LaunchTrayIconCustomWebView(webViewInfo);
+                LaunchTrayIconCustomWebView(webViewInfo, screenIndex);
 
                 // done
                 return;
@@ -494,17 +488,17 @@ namespace HASS.Agent.Functions
             if (Variables.AppSettings.TrayIconWebViewBackgroundLoading)
             {
                 // yep
-                LaunchTrayIconBackgroundLoadedWebView();
+                LaunchTrayIconBackgroundLoadedWebView(screenIndex);
 
                 // done
                 return;
             }
 
             // show a new webview from within the UI thread
-            LaunchTrayIconCustomWebView(webViewInfo);
+            LaunchTrayIconCustomWebView(webViewInfo, screenIndex);
         }
 
-        private static void LaunchTrayIconBackgroundLoadedWebView()
+        private static void LaunchTrayIconBackgroundLoadedWebView(int screenIndex)
         {
             Variables.MainForm.Invoke(new MethodInvoker(delegate
             {
@@ -517,12 +511,21 @@ namespace HASS.Agent.Functions
             }));
         }
 
-        private static void LaunchTrayIconCustomWebView(WebViewInfo webViewInfo)
+        private static void LaunchTrayIconCustomWebView(WebViewInfo webViewInfo, int screenIndex = 0)
         {
             Variables.MainForm.Invoke(new MethodInvoker(delegate
             {
-                var x = Screen.PrimaryScreen.WorkingArea.Width - webViewInfo.Width;
-                var y = Screen.PrimaryScreen.WorkingArea.Height - webViewInfo.Height;
+                var totalX = 0;
+
+                foreach (var widthscreen in Screen.AllScreens)
+                {
+                    totalX += widthscreen.Bounds.X;
+                }
+
+                Screen targetScreen = Screen.AllScreens[screenIndex];
+
+                var x = targetScreen.Bounds.X + webViewInfo.Width;
+                var y = targetScreen.WorkingArea.Height - webViewInfo.Height;
 
                 webViewInfo.X = x;
                 webViewInfo.Y = y;
@@ -533,9 +536,14 @@ namespace HASS.Agent.Functions
 
                 var webView = new WebView(webViewInfo);
                 webView.Opacity = 0;
+                webView.AutoScaleMode = AutoScaleMode.Font;
+                webView.Show();
+
+                webView.Left = targetScreen.WorkingArea.Right - webView.Width;
+                webView.Top = targetScreen.WorkingArea.Bottom - webView.Height;
 
                 Variables.TrayIconWebView = webView;
-                webView.Show();
+                
             }));
         }
 

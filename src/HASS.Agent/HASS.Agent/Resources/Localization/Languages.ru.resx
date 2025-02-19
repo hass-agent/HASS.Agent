@@ -3476,4 +3476,7 @@ Home Assistant.
   <data name="Notification_Dismiss" xml:space="preserve">
     <value>Увольнять</value>
   </data>
+  <data name="ConfigTrayIcon_NumWebViewScreen" xml:space="preserve">
+    <value>Экран, который будет использоваться для отображения WebView</value>
+  </data>
 </root>

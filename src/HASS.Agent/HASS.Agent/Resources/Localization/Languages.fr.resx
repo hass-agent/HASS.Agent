@@ -3440,4 +3440,7 @@ Nécessite sa configuration dans « Configuration -&gt; Icône de la barre d'ét
   <data name="Notification_Dismiss" xml:space="preserve">
     <value>Rejeter</value>
   </data>
+  <data name="ConfigTrayIcon_NumWebViewScreen" xml:space="preserve">
+    <value>Écran à utiliser pour l'affichage du WebView</value>
+  </data>
 </root>
