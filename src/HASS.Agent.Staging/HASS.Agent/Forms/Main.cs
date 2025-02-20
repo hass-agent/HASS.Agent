@@ -311,7 +311,6 @@ namespace HASS.Agent.Forms
 
         internal void RefreshTrayIcon()
         {
-            Log.Information("[MAIN] Refreshing tray icon");
             var iconResourceName = Variables.AppSettings.TrayIconUseModern ? "ModernNotifyIcon" : "NotifyIcon.Icon";
             var icon = (Icon)new System.Resources.ResourceManager(typeof(Main)).GetObject(iconResourceName);
             if (icon != null)
