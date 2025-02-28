@@ -1,0 +1,3164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ConfigExternalTools_LblInfo1" xml:space="preserve">
+    <value>此页面允许您配置与外部工具的绑定。</value>
+  </data>
+  <data name="ConfigExternalTools_LblBrowserName" xml:space="preserve">
+    <value>浏览器名称</value>
+  </data>
+  <data name="ConfigExternalTools_LblInfo2" xml:space="preserve">
+	  <value>默认情况下，HASS.Agent将使用您的默认浏览器启动URL。您还可以配置特定的浏览器以及用于私密模式的启动参数。</value>
+  </data>
+  <data name="ConfigExternalTools_LblBrowserBinary" xml:space="preserve">
+    <value>浏览器二进制文件</value>
+  </data>
+  <data name="ConfigExternalTools_LblLaunchIncogArg" xml:space="preserve">
+    <value>附加启动参数</value>
+  </data>
+  <data name="ConfigExternalTools_LblCustomExecutorBinary" xml:space="preserve">
+    <value>自定义执行器二进制文件</value>
+  </data>
+  <data name="ConfigExternalTools_LblInfo3" xml:space="preserve">
+	  <value>您可以配置HASS.Agent使用特定的解释器，例如Perl或Python。使用“自定义执行器”命令来启动此执行器。</value>
+  </data>
+  <data name="ConfigExternalTools_LblCustomExecutorName" xml:space="preserve">
+    <value>自定义执行器名称</value>
+  </data>
+  <data name="ConfigExternalTools_LblTip1" xml:space="preserve">
+    <value>提示：双击以浏览</value>
+  </data>
+  <data name="ConfigExternalTools_BtnExternalBrowserIncognitoTest" xml:space="preserve">
+    <value>&amp;测试</value>
+  </data>
+  <data name="ConfigGeneral_LblInfo4" xml:space="preserve">
+	  <value>HASS.Agent将在通知您与MQTT或HA的API断开连接之前等待一个宽限期。您可以在下面设置此宽限期的秒数。</value>
+  </data>
+  <data name="ConfigGeneral_LblDisconGraceSeconds" xml:space="preserve">
+    <value>秒</value>
+  </data>
+  <data name="ConfigGeneral_LblDisconGracePeriod" xml:space="preserve">
+    <value>断开连接宽限期</value>
+  </data>
+  <data name="ConfigGeneral_LblInfo3" xml:space="preserve">
+	  <value>重要提示：如果您更改此值，HASS.Agent将取消发布您所有的传感器和命令，并强制重新启动自身，以便在新设备名称下重新发布。您的自动化和脚本将继续工作。</value>
+  </data>
+  <data name="ConfigGeneral_LblInfo2" xml:space="preserve">
+	  <value>设备名称用于在Home Assistant中识别您的机器。它也用作您的命令/传感器名称的前缀（这可以按实体更改）。</value>
+  </data>
+  <data name="ConfigGeneral_LblInfo1" xml:space="preserve">
+    <value>此页面包含一般配置设置，您可以在左侧浏览选项卡以获取更多设置。</value>
+  </data>
+  <data name="ConfigGeneral_LblDeviceName" xml:space="preserve">
+    <value>设备名称</value>
+  </data>
+  <data name="ConfigHomeAssistantApi_LblTip1" xml:space="preserve">
+    <value>提示：双击此字段以浏览</value>
+  </data>
+  <data name="ConfigHomeAssistantApi_LblClientCertificate" xml:space="preserve">
+    <value>客户端证书</value>
+  </data>
+  <data name="ConfigHomeAssistantApi_CbHassAutoClientCertificate" xml:space="preserve">
+    <value>使用自动客户端证书选择</value>
+  </data>
+  <data name="ConfigHomeAssistantApi_BtnTestApi" xml:space="preserve">
+    <value>&amp;测试连接</value>
+  </data>
+  <data name="ConfigHomeAssistantApi_LblInfo1" xml:space="preserve">
+	  <value>要了解您已配置的实体并发送快速操作，HASS.Agent使用Home Assistant的API。请提供一个长期访问令牌和您的Home Assistant实例的地址。您可以通过单击左下角的个人资料图片并导航到页面底部，直到看到“创建令牌”按钮来获取令牌。</value>
+  </data>
+  <data name="ConfigHomeAssistantApi_LblApiToken" xml:space="preserve">
+    <value>&amp;API令牌</value>
+  </data>
+  <data name="ConfigHomeAssistantApi_LblServerUri" xml:space="preserve">
+    <value>服务器URI</value>
+  </data>
+  <data name="ConfigHotKey_BtnClearHotKey" xml:space="preserve">
+    <value>&amp;清除</value>
+  </data>
+  <data name="ConfigHotKey_LblInfo1" xml:space="preserve">
+	  <value>快速调用的简单方法是使用全局热键。这样，无论您在机器上做什么，您都可以始终与Home Assistant进行交互。</value>
+  </data>
+  <data name="ConfigHotKey_CbEnableQuickActionsHotkey" xml:space="preserve">
+    <value>&amp;启用快速操作热键</value>
+  </data>
+  <data name="ConfigHotKey_LblHotkeyCombo" xml:space="preserve">
+    <value>&amp;热键组合</value>
+  </data>
+  <data name="ConfigLocalStorage_BtnClearImageCache" xml:space="preserve">
+    <value>清除图像缓存</value>
+  </data>
+  <data name="ConfigLocalStorage_BtnOpenImageCache" xml:space="preserve">
+    <value>打开文件夹</value>
+  </data>
+  <data name="ConfigLocalStorage_LblCacheLocations" xml:space="preserve">
+    <value>图像缓存位置</value>
+  </data>
+  <data name="ConfigLocalStorage_LblCacheDays" xml:space="preserve">
+    <value>天</value>
+  </data>
+  <data name="ConfigLocalStorage_LblInfo1" xml:space="preserve">
+	  <value>某些项目（如在通知中显示的图像）必须临时存储在本地。您可以配置它们在HASS.Agent删除之前应保留的天数。输入“0”以永久保留它们。</value>
+  </data>
+  <data name="ConfigLogging_LblInfo1" xml:space="preserve">
+	  <value>扩展日志记录提供更详细和深入的日志记录，以防默认日志记录不足。请注意，启用此功能可能会导致日志文件变得庞大，仅在您怀疑HASS.Agent本身存在问题或在开发人员要求时使用。</value>
+  </data>
+  <data name="ConfigLogging_CbExtendedLogging" xml:space="preserve">
+    <value>&amp;启用扩展日志记录</value>
+  </data>
+  <data name="ConfigLogging_BtnShowLogs" xml:space="preserve">
+    <value>&amp;打开日志文件夹</value>
+  </data>
+  <data name="ConfigMqtt_LblTip3" xml:space="preserve">
+    <value>提示：双击这些字段以浏览</value>
+  </data>
+  <data name="ConfigMqtt_LblClientCert" xml:space="preserve">
+    <value>客户端证书</value>
+  </data>
+  <data name="ConfigMqtt_LblRootCert" xml:space="preserve">
+    <value>根证书</value>
+  </data>
+  <data name="ConfigMqtt_CbUseRetainFlag" xml:space="preserve">
+    <value>使用保留标志</value>
+  </data>
+  <data name="ConfigMqtt_CbAllowUntrustedCertificates" xml:space="preserve">
+    <value>允许不受信任的证书</value>
+  </data>
+  <data name="ConfigMqtt_BtnMqttClearConfig" xml:space="preserve">
+    <value>清除配置</value>
+  </data>
+  <data name="ConfigMqtt_LblTip1" xml:space="preserve">
+    <value>（如果不确定，请保留默认值）</value>
+  </data>
+  <data name="ConfigMqtt_LblInfo1" xml:space="preserve">
+	  <value>命令和传感器通过MQTT发送，通知和媒体播放器功能在使用新集成时也会使用它们。请为您的代理提供凭据，如果您使用HA Mosquitto附加组件，您可以使用预设地址。注意：这些设置（不包括客户端ID）也将应用于卫星服务。</value>
+  </data>
+  <data name="ConfigMqtt_LblDiscoPrefix" xml:space="preserve">
+    <value>发现前缀</value>
+  </data>
+  <data name="ConfigMqtt_LblBrokerPassword" xml:space="preserve">
+    <value>密码</value>
+  </data>
+  <data name="ConfigMqtt_LblBrokerUsername" xml:space="preserve">
+    <value>用户名</value>
+  </data>
+  <data name="ConfigMqtt_LblBrokerPort" xml:space="preserve">
+    <value>端口</value>
+  </data>
+  <data name="ConfigMqtt_LblBrokerIp" xml:space="preserve">
+    <value>代理IP地址或主机名</value>
+  </data>
+  <data name="ConfigMqtt_LblTip2" xml:space="preserve">
+    <value>（留空以自动生成）</value>
+  </data>
+  <data name="ConfigMqtt_LblClientId" xml:space="preserve">
+    <value>客户端ID</value>
+  </data>
+  <data name="ConfigNotifications_LblInfo2" xml:space="preserve">
+	  <value>如果某些功能无法正常工作，请确保您尝试以下步骤：- 安装HASS.Agent集成 - 重启Home Assistant - 确保HASS.Agent处于活动状态并启用MQTT！ - 您的设备应自动被检测并添加为实体 - 可选：使用本地API手动添加它</value>
+  </data>
+  <data name="ConfigNotifications_LblInfo1" xml:space="preserve">
+    <value>HASS.Agent可以接收来自Home Assistant的通知，使用文本、图像和操作。如果您启用了MQTT，您的设备将自动添加。否则，请手动配置集成以使用本地API。</value>
+  </data>
+  <data name="ConfigNotifications_BtnNotificationsReadme" xml:space="preserve">
+    <value>通知和文档</value>
+  </data>
+  <data name="ConfigNotifications_LblPort" xml:space="preserve">
+    <value>端口</value>
+  </data>
+  <data name="ConfigNotifications_CbAcceptNotifications" xml:space="preserve">
+    <value>接受通知</value>
+  </data>
+  <data name="ConfigNotifications_BtnSendTestNotification" xml:space="preserve">
+    <value>显示测试通知</value>
+  </data>
+  <data name="ConfigNotifications_BtnExecutePortReservation" xml:space="preserve">
+    <value>执行端口保留</value>
+  </data>
+  <data name="ConfigNotifications_CbNotificationsIgnoreImageCertErrors" xml:space="preserve">
+    <value>忽略图像的证书错误</value>
+  </data>
+  <data name="ConfigService_LblInfo1" xml:space="preserve">
+	  <value>卫星服务允许您在没有用户登录的情况下运行传感器和命令。使用主窗口上的“卫星服务”按钮进行管理。</value>
+  </data>
+  <data name="ConfigService_LblServiceStatusInfo" xml:space="preserve">
+    <value>服务状态：</value>
+  </data>
+  <data name="ConfigService_BtnStartService" xml:space="preserve">
+    <value>启动服务</value>
+  </data>
+  <data name="ConfigService_BtnDisableService" xml:space="preserve">
+    <value>禁用服务</value>
+  </data>
+  <data name="ConfigService_BtnStopService" xml:space="preserve">
+    <value>停止服务</value>
+  </data>
+  <data name="ConfigService_BtnEnableService" xml:space="preserve">
+    <value>启用服务</value>
+  </data>
+  <data name="ConfigService_BtnReinstallService" xml:space="preserve">
+    <value>重新安装服务</value>
+  </data>
+  <data name="ConfigService_LblInfo2" xml:space="preserve">
+	  <value>如果您不配置服务，它将不会执行任何操作。但是，您仍然可以选择禁用它。安装程序将保留禁用的服务（如果您删除服务，安装程序将重新安装它）。</value>
+  </data>
+  <data name="ConfigService_LblInfo3" xml:space="preserve">
+	  <value>如果服务无法正常工作，您可以尝试重新安装服务。您的配置和实体将不会被删除。</value>
+  </data>
+  <data name="ConfigService_BtnShowLogs" xml:space="preserve">
+    <value>打开服务日志文件夹</value>
+  </data>
+  <data name="ConfigService_LblInfo4" xml:space="preserve">
+    <value>如果服务在重新安装后仍然失败，请打开工单并发送最新日志的内容。</value>
+  </data>
+  <data name="ConfigStartup_LblInfo1" xml:space="preserve">
+	  <value>HASS.Agent可以在您登录时通过在用户配置文件的注册表中创建条目来启动。由于HASS.Agent是基于用户的，如果您想为其他用户启动，只需在该用户那里安装和配置HASS.Agent。</value>
+  </data>
+  <data name="ConfigStartup_BtnSetStartOnLogin" xml:space="preserve">
+    <value>启用登录时启动</value>
+  </data>
+  <data name="ConfigStartup_LblStartOnLoginStatusInfo" xml:space="preserve">
+    <value>登录时启动状态：</value>
+  </data>
+  <data name="ConfigUpdates_CbBetaUpdates" xml:space="preserve">
+    <value>通知我有关测试版发布</value>
+  </data>
+  <data name="ConfigUpdates_LblInfo2" xml:space="preserve">
+	  <value>当有新更新可用时，HASS.Agent可以为您下载安装程序并启动它。下载文件的证书将在运行之前进行检查，您仍然可以查看发布说明并手动批准更新。</value>
+  </data>
+  <data name="ConfigUpdates_CbExecuteUpdater" xml:space="preserve">
+    <value>自动下载未来的更新</value>
+  </data>
+  <data name="ConfigUpdates_LblInfo1" xml:space="preserve">
+	  <value>如果启用，HASS.Agent将在后台检查更新。 如果发现新更新，您将收到推送通知，告知您新版本已准备好安装。</value>
+  </data>
+  <data name="ConfigUpdates_CbUpdates" xml:space="preserve">
+    <value>当有新版本可用时通知我</value>
+  </data>
+  <data name="OnboardingWelcome_LblInfo1" xml:space="preserve">
+	  <value>欢迎使用HASS.Agent！看起来这是您第一次启动代理。为了帮助您进行首次设置，请按照下面的配置步骤进行操作，或者单击“关闭”。</value>
+  </data>
+  <data name="OnboardingWelcome_LblInfo2" xml:space="preserve">
+    <value>设备名称用于在Home Assistant中识别您的机器，它也用作您命令和传感器的建议前缀。</value>
+  </data>
+  <data name="OnboardingWelcome_LblDeviceName" xml:space="preserve">
+    <value>设备名称</value>
+  </data>
+  <data name="OnboardingStartup_BtnSetLaunchOnLogin" xml:space="preserve">
+    <value>是的，在系统登录时启动HASS.Agent</value>
+  </data>
+  <data name="OnboardingStartup_LblInfo1" xml:space="preserve">
+	  <value>HASS.Agent可以与您的系统一起启动，这样可以在您登录后立即开始设备与Home Assistant之间的任何传感器和数据传输。此设置可以在HASS.Agent配置窗口中随时更改。</value>
+  </data>
+  <data name="OnboardingStartup_LblCreateInfo" xml:space="preserve">
+    <value>正在获取当前状态，请稍候..</value>
+  </data>
+  <data name="OnboardingNotifications_LblTip1" xml:space="preserve">
+    <value>注意：5115是默认端口，仅在您在Home Assistant中更改时才更改它。</value>
+  </data>
+  <data name="OnboardingNotifications_CbAcceptNotifications" xml:space="preserve">
+    <value>是的，接受端口上的通知</value>
+  </data>
+  <data name="OnboardingNotifications_LblInfo1" xml:space="preserve">
+	  <value>HASS.Agent可以接收来自Home Assistant的通知，使用文本和/或图像。您想启用此功能吗？</value>
+  </data>
+  <data name="OnboardingIntegration_LblIntegration" xml:space="preserve">
+    <value>HASS.Agent-Notifier GitHub页面</value>
+  </data>
+  <data name="OnboardingIntegration_LblInfo2" xml:space="preserve">
+	  <value>确保您遵循以下步骤：- 安装HASS.Agent-Notifier集成 - 重启Home Assistant - 配置通知实体 - 重启Home Assistant</value>
+  </data>
+  <data name="OnboardingIntegration_LblInfo1" xml:space="preserve">
+	  <value>要使用通知，您需要在Home Assistant中安装和配置HASS.Agent-notifier集成。这非常简单，使用HACS即可，但也可以手动安装，访问下面的链接以获取更多信息。</value>
+  </data>
+  <data name="OnboardingApi_LblApiToken" xml:space="preserve">
+    <value>API令牌</value>
+  </data>
+  <data name="OnboardingApi_LblServerUri" xml:space="preserve">
+    <value>服务器URI（应该可以这样）</value>
+  </data>
+  <data name="OnboardingApi_LblInfo1" xml:space="preserve">
+	  <value>要了解您已配置的实体并发送快速操作，HASS.Agent使用Home Assistant的API。请提供一个长期访问令牌和您的Home Assistant实例的地址。您可以通过单击左下角的个人资料图片并导航到页面底部，直到看到“创建令牌”按钮来获取令牌。</value>
+  </data>
+  <data name="OnboardingApi_BtnTest" xml:space="preserve">
+    <value>测试连接</value>
+  </data>
+  <data name="OnboardingApi_LblTip1" xml:space="preserve">
+    <value>提示：可以在配置窗口中找到专门的设置。</value>
+  </data>
+  <data name="OnboardingMqtt_LblPassword" xml:space="preserve">
+    <value>密码</value>
+  </data>
+  <data name="OnboardingMqtt_LblUsername" xml:space="preserve">
+    <value>用户名</value>
+  </data>
+  <data name="OnboardingMqtt_LblPort" xml:space="preserve">
+    <value>端口</value>
+  </data>
+  <data name="OnboardingMqtt_LblIpAdress" xml:space="preserve">
+    <value>IP地址或主机名</value>
+  </data>
+  <data name="OnboardingMqtt_LblInfo1" xml:space="preserve">
+	  <value>命令和传感器通过MQTT发送。通知和媒体播放器集成也使用它们。提示：如果您使用HA附加组件，您可以使用预设地址 - 只需提供凭据。</value>
+  </data>
+  <data name="OnboardingMqtt_LblDiscoveryPrefix" xml:space="preserve">
+    <value>发现前缀</value>
+  </data>
+  <data name="OnboardingMqtt_LblTip1" xml:space="preserve">
+    <value>（如果不确定，请保留默认值）</value>
+  </data>
+  <data name="OnboardingMqtt_LblTip2" xml:space="preserve">
+    <value>提示：可以在配置窗口中找到专门的设置。</value>
+  </data>
+  <data name="OnboardingHotKey_LblHotkeyCombo" xml:space="preserve">
+    <value>热键组合</value>
+  </data>
+  <data name="OnboardingHotKey_LblInfo1" xml:space="preserve">
+	  <value>快速调用的简单方法是使用全局热键。这样，无论您在机器上做什么，您都可以始终与Home Assistant进行交互。</value>
+  </data>
+  <data name="OnboardingHotKey_BtnClear" xml:space="preserve">
+    <value>清除</value>
+  </data>
+  <data name="OnboardingUpdates_LblInfo1" xml:space="preserve">
+	  <value>如果启用，HASS.Agent将在后台检查更新。 如果发现新更新，您将收到推送通知，告知您新版本已准备好安装。您想启用此自动更新检查吗？</value>
+  </data>
+  <data name="OnboardingUpdates_CbNofityOnUpdate" xml:space="preserve">
+    <value>是的，通知我有关新更新</value>
+  </data>
+  <data name="OnboardingUpdates_CbExecuteUpdater" xml:space="preserve">
+    <value>是的，为我下载并启动安装程序</value>
+  </data>
+  <data name="OnboardingUpdates_LblInfo2" xml:space="preserve">
+	  <value>当有新更新可用时，HASS.Agent可以为您下载安装程序并启动它。下载文件的证书将在运行之前进行检查，您仍然可以查看发布说明并手动批准更新。</value>
+  </data>
+  <data name="OnboardingDone_LblGitHub" xml:space="preserve">
+    <value>HASS.Agent GitHub页面</value>
+  </data>
+  <data name="OnboardingDone_LblInfo3" xml:space="preserve">
+	  <value>还有很多可以调整的内容，因此请确保查看配置窗口！感谢您使用HASS.Agent，希望它对您有用:-)</value>
+  </data>
+  <data name="OnboardingDone_LblInfo2" xml:space="preserve">
+    <value>HASS.Agent现在将重新启动以应用您的配置更改。</value>
+  </data>
+  <data name="OnboardingDone_LblInfo1" xml:space="preserve">
+    <value>完成！</value>
+  </data>
+  <data name="ServiceCommands_LblLowIntegrity" xml:space="preserve">
+    <value>低完整性</value>
+  </data>
+  <data name="ServiceCommands_ClmName" xml:space="preserve">
+    <value>名称</value>
+  </data>
+  <data name="ServiceCommands_ClmType" xml:space="preserve">
+    <value>类型</value>
+  </data>
+  <data name="ServiceCommands_BtnRemove" xml:space="preserve">
+    <value>移除</value>
+  </data>
+  <data name="ServiceCommands_BtnModify" xml:space="preserve">
+    <value>修改</value>
+  </data>
+  <data name="ServiceCommands_BtnAdd" xml:space="preserve">
+    <value>添加新</value>
+  </data>
+  <data name="ServiceCommands_BtnStore" xml:space="preserve">
+    <value>发送并激活命令</value>
+  </data>
+  <data name="ServiceCommands_LblStored" xml:space="preserve">
+    <value>命令已存储！</value>
+  </data>
+  <data name="ServiceConnect_BtnRetryAuthId" xml:space="preserve">
+    <value>应用</value>
+  </data>
+  <data name="ServiceConnect_LblRetryAuthId" xml:space="preserve">
+    <value>身份验证ID</value>
+  </data>
+  <data name="ServiceConnect_LblAuthenticate" xml:space="preserve">
+    <value>身份验证</value>
+  </data>
+  <data name="ServiceConnect_LblConnect" xml:space="preserve">
+    <value>连接服务</value>
+  </data>
+  <data name="ServiceConnect_LblLoading" xml:space="preserve">
+    <value>正在连接卫星服务，请稍候..</value>
+  </data>
+  <data name="ServiceConnect_LblFetchConfig" xml:space="preserve">
+    <value>获取配置</value>
+  </data>
+  <data name="ServiceGeneral_LblInfo1" xml:space="preserve">
+    <value>此页面包含一般配置设置，MQTT设置、命令和传感器，请浏览上面的不同选项卡。</value>
+  </data>
+  <data name="ServiceGeneral_LblAuthId" xml:space="preserve">
+    <value>身份验证ID</value>
+  </data>
+  <data name="ServiceGeneral_LblDeviceName" xml:space="preserve">
+    <value>设备名称</value>
+  </data>
+  <data name="ServiceGeneral_LblTip1" xml:space="preserve">
+    <value>提示：双击这些字段以浏览</value>
+  </data>
+  <data name="ServiceGeneral_LblCustomExecBinary" xml:space="preserve">
+    <value>自定义执行器二进制文件</value>
+  </data>
+  <data name="ServiceGeneral_LblCustomExecName" xml:space="preserve">
+    <value>自定义执行器名称</value>
+  </data>
+  <data name="ServiceGeneral_LblSeconds" xml:space="preserve">
+    <value>秒</value>
+  </data>
+  <data name="ServiceGeneral_LblDisconGrace" xml:space="preserve">
+    <value>断开连接宽限期</value>
+  </data>
+  <data name="ServiceGeneral_Apply" xml:space="preserve">
+    <value>应用</value>
+  </data>
+  <data name="ServiceGeneral_LblVersionInfo" xml:space="preserve">
+    <value>版本</value>
+  </data>
+  <data name="ServiceGeneral_LblTip2" xml:space="preserve">
+    <value>提示：双击以生成随机数</value>
+  </data>
+  <data name="ServiceGeneral_Stored" xml:space="preserve">
+    <value>已存储！</value>
+  </data>
+  <data name="ServiceMqtt_LblTip2" xml:space="preserve">
+    <value>（留空以自动生成）</value>
+  </data>
+  <data name="ServiceMqtt_LblClientId" xml:space="preserve">
+    <value>客户端ID</value>
+  </data>
+  <data name="ServiceMqtt_LblTip3" xml:space="preserve">
+    <value>提示：双击这些字段以浏览</value>
+  </data>
+  <data name="ServiceMqtt_LblClientCert" xml:space="preserve">
+    <value>客户端证书</value>
+  </data>
+  <data name="ServiceMqtt_LblRootCert" xml:space="preserve">
+    <value>根证书</value>
+  </data>
+  <data name="ServiceMqtt_CbUseRetainFlag" xml:space="preserve">
+    <value>使用保留标志</value>
+  </data>
+  <data name="ServiceMqtt_CbAllowUntrustedCertificates" xml:space="preserve">
+    <value>允许不受信任的证书</value>
+  </data>
+  <data name="ServiceMqtt_BtnMqttClearConfig" xml:space="preserve">
+    <value>清除配置</value>
+  </data>
+  <data name="ServiceMqtt_LblTip1" xml:space="preserve">
+    <value>（如果不确定，请保留默认值）</value>
+  </data>
+  <data name="ServiceMqtt_LblInfo1" xml:space="preserve">
+	  <value>命令和传感器通过MQTT发送。请为您的服务器提供凭据。如果您使用HA附加组件，您可以使用预设地址。</value>
+  </data>
+  <data name="ServiceMqtt_LblDiscoPrefix" xml:space="preserve">
+    <value>发现前缀</value>
+  </data>
+  <data name="ServiceMqtt_LblBrokerPassword" xml:space="preserve">
+    <value>密码</value>
+  </data>
+  <data name="ServiceMqtt_LblBrokerUsername" xml:space="preserve">
+    <value>用户名</value>
+  </data>
+  <data name="ServiceMqtt_LblBrokerPort" xml:space="preserve">
+    <value>端口</value>
+  </data>
+  <data name="ServiceMqtt_LblBrokerIp" xml:space="preserve">
+    <value>代理IP地址或主机名</value>
+  </data>
+  <data name="ServiceMqtt_BtnStore" xml:space="preserve">
+    <value>发送并激活配置</value>
+  </data>
+  <data name="ServiceMqtt_BtnCopy" xml:space="preserve">
+    <value>从HASS.Agent复制</value>
+  </data>
+  <data name="ServiceMqtt_LblStored" xml:space="preserve">
+    <value>配置已存储！</value>
+  </data>
+  <data name="ServiceMqtt_LblStatusInfo" xml:space="preserve">
+    <value>状态</value>
+  </data>
+  <data name="ServiceMqtt_LblStatus" xml:space="preserve">
+    <value>查询中..</value>
+  </data>
+  <data name="ServiceSensors_ClmName" xml:space="preserve">
+    <value>名称</value>
+  </data>
+  <data name="ServiceSensors_ClmType" xml:space="preserve">
+    <value>类型</value>
+  </data>
+  <data name="ServiceSensors_LblRefresh" xml:space="preserve">
+    <value>刷新</value>
+  </data>
+  <data name="ServiceSensors_BtnRemove" xml:space="preserve">
+    <value>移除</value>
+  </data>
+  <data name="ServiceSensors_BtnAdd" xml:space="preserve">
+    <value>添加新</value>
+  </data>
+  <data name="ServiceSensors_BtnModify" xml:space="preserve">
+    <value>修改</value>
+  </data>
+  <data name="ServiceSensors_BtnStore" xml:space="preserve">
+    <value>发送并激活传感器</value>
+  </data>
+  <data name="ServiceSensors_LblStored" xml:space="preserve">
+    <value>传感器已存储！</value>
+  </data>
+  <data name="PortReservation_LblInfo1" xml:space="preserve">
+    <value>请稍等，任务正在执行..</value>
+  </data>
+  <data name="PortReservation_LblTask1" xml:space="preserve">
+    <value>创建API端口绑定</value>
+  </data>
+  <data name="PortReservation_LblTask2" xml:space="preserve">
+    <value>设置防火墙规则</value>
+  </data>
+  <data name="PortReservation_Title" xml:space="preserve">
+    <value>HASS.Agent端口保留</value>
+  </data>
+  <data name="PostUpdate_LblInfo1" xml:space="preserve">
+    <value>请稍等，正在执行一些后更新任务..</value>
+  </data>
+  <data name="PostUpdate_LblTask1" xml:space="preserve">
+    <value>配置卫星服务</value>
+  </data>
+  <data name="PostUpdate_LblTask2" xml:space="preserve">
+    <value>创建API端口绑定</value>
+  </data>
+  <data name="PostUpdate_Title" xml:space="preserve">
+    <value>HASS.Agent后更新</value>
+  </data>
+  <data name="Restart_LblInfo1" xml:space="preserve">
+    <value>请稍候，HASS.Agent正在重启..</value>
+  </data>
+  <data name="Restart_LblTask1" xml:space="preserve">
+    <value>等待先前实例关闭..</value>
+  </data>
+  <data name="Restart_LblTask2" xml:space="preserve">
+    <value>重新启动HASS.Agent</value>
+  </data>
+  <data name="Restart_Title" xml:space="preserve">
+    <value>HASS.Agent重启器</value>
+  </data>
+  <data name="ServiceReinstall_LblInfo1" xml:space="preserve">
+    <value>请稍候，正在重新安装卫星服务..</value>
+  </data>
+  <data name="ServiceReinstall_LblTask1" xml:space="preserve">
+    <value>移除卫星服务</value>
+  </data>
+  <data name="ServiceReinstall_LblTask2" xml:space="preserve">
+    <value>安装卫星服务</value>
+  </data>
+  <data name="ServiceReinstall_Title" xml:space="preserve">
+    <value>HASS.Agent重新安装卫星服务</value>
+  </data>
+  <data name="ServiceSetState_LblInfo1" xml:space="preserve">
+    <value>请稍候，正在配置卫星服务..</value>
+  </data>
+  <data name="ServiceSetState_LblTask1" xml:space="preserve">
+    <value>启用卫星服务</value>
+  </data>
+  <data name="ServiceSetState_Title" xml:space="preserve">
+    <value>HASS.Agent配置卫星服务</value>
+  </data>
+  <data name="CommandMqttTopic_BtnClose" xml:space="preserve">
+    <value>关闭</value>
+  </data>
+  <data name="CommandMqttTopic_LblInfo1" xml:space="preserve">
+    <value>这是您可以发布操作命令的MQTT主题：</value>
+  </data>
+  <data name="CommandMqttTopic_BtnCopyClipboard" xml:space="preserve">
+    <value>复制到剪贴板</value>
+  </data>
+  <data name="CommandMqttTopic_LblHelp" xml:space="preserve">
+    <value>帮助和示例</value>
+  </data>
+  <data name="CommandMqttTopic_Title" xml:space="preserve">
+    <value>MQTT操作主题</value>
+  </data>
+  <data name="CommandsConfig_BtnRemove" xml:space="preserve">
+    <value>移除</value>
+  </data>
+  <data name="CommandsConfig_BtnModify" xml:space="preserve">
+    <value>修改</value>
+  </data>
+  <data name="CommandsConfig_BtnAdd" xml:space="preserve">
+    <value>添加新</value>
+  </data>
+  <data name="CommandsConfig_BtnStore" xml:space="preserve">
+    <value>存储并激活命令</value>
+  </data>
+  <data name="CommandsConfig_ClmName" xml:space="preserve">
+    <value>名称</value>
+  </data>
+  <data name="CommandsConfig_ClmType" xml:space="preserve">
+    <value>类型</value>
+  </data>
+  <data name="CommandsConfig_LblLowIntegrity" xml:space="preserve">
+    <value>低完整性</value>
+  </data>
+  <data name="CommandsConfig_LblActionInfo" xml:space="preserve">
+    <value>操作</value>
+  </data>
+  <data name="CommandsConfig_Title" xml:space="preserve">
+    <value>命令配置</value>
+  </data>
+  <data name="CommandsMod_BtnStore" xml:space="preserve">
+    <value>存储命令</value>
+  </data>
+  <data name="CommandsMod_LblSetting" xml:space="preserve">
+    <value>配置</value>
+  </data>
+  <data name="CommandsMod_LblName" xml:space="preserve">
+    <value>名称</value>
+  </data>
+  <data name="CommandsMod_LblDescription" xml:space="preserve">
+    <value>描述</value>
+  </data>
+  <data name="CommandsMod_CbRunAsLowIntegrity" xml:space="preserve">
+    <value>以“低完整性”运行</value>
+  </data>
+  <data name="CommandsMod_LblIntegrityInfo" xml:space="preserve">
+    <value>这是什么？</value>
+  </data>
+  <data name="CommandsMod_ClmSensorName" xml:space="preserve">
+    <value>类型</value>
+  </data>
+  <data name="CommandsMod_LblSelectedType" xml:space="preserve">
+    <value>选定类型</value>
+  </data>
+  <data name="CommandsMod_LblService" xml:space="preserve">
+    <value>服务</value>
+  </data>
+  <data name="CommandsMod_LblAgent" xml:space="preserve">
+    <value>代理</value>
+  </data>
+  <data name="CommandsMod_LblSpecificClient" xml:space="preserve">
+    <value>仅限HASS.Agent！</value>
+  </data>
+  <data name="CommandsMod_LblEntityType" xml:space="preserve">
+    <value>实体类型</value>
+  </data>
+  <data name="CommandsMod_LblMqttTopic" xml:space="preserve">
+    <value>显示MQTT操作主题</value>
+  </data>
+  <data name="CommandsMod_LblActionInfo" xml:space="preserve">
+    <value>操作</value>
+  </data>
+  <data name="CommandsMod_Title" xml:space="preserve">
+    <value>命令</value>
+  </data>
+  <data name="QuickActions_LblLoading" xml:space="preserve">
+    <value>正在检索实体，请稍候..</value>
+  </data>
+  <data name="QuickActions_Title" xml:space="preserve">
+    <value>快速操作</value>
+  </data>
+  <data name="QuickActionsConfig_BtnStore" xml:space="preserve">
+    <value>存储快速操作</value>
+  </data>
+  <data name="QuickActionsConfig_BtnAdd" xml:space="preserve">
+    <value>添加新</value>
+  </data>
+  <data name="QuickActionsConfig_BtnModify" xml:space="preserve">
+    <value>修改</value>
+  </data>
+  <data name="QuickActionsConfig_BtnRemove" xml:space="preserve">
+    <value>移除</value>
+  </data>
+  <data name="QuickActionsConfig_BtnPreview" xml:space="preserve">
+    <value>预览</value>
+  </data>
+  <data name="QuickActionsConfig_ClmDomain" xml:space="preserve">
+    <value>域</value>
+  </data>
+  <data name="QuickActionsConfig_ClmEntity" xml:space="preserve">
+    <value>实体</value>
+  </data>
+  <data name="QuickActionsConfig_ClmAction" xml:space="preserve">
+    <value>操作</value>
+  </data>
+  <data name="QuickActionsConfig_ClmHotKey" xml:space="preserve">
+    <value>热键</value>
+  </data>
+  <data name="QuickActionsConfig_ClmDescription" xml:space="preserve">
+    <value>描述</value>
+  </data>
+  <data name="QuickActionsConfig_LblHotkey" xml:space="preserve">
+	  <value>热键已启用</value>
+  </data>
+  <data name="QuickActionsConfig_Title" xml:space="preserve">
+    <value>快速操作配置</value>
+  </data>
+  <data name="QuickActionsMod_BtnStore" xml:space="preserve">
+    <value>存储快速操作</value>
+  </data>
+  <data name="QuickActionsMod_LblDomain" xml:space="preserve">
+    <value>域</value>
+  </data>
+  <data name="QuickActionsMod_LblEntityInfo" xml:space="preserve">
+    <value>实体</value>
+  </data>
+  <data name="QuickActionsMod_LblAction" xml:space="preserve">
+    <value>期望的操作</value>
+  </data>
+  <data name="QuickActionsMod_LblDescription" xml:space="preserve">
+    <value>描述</value>
+  </data>
+  <data name="QuickActionsMod_LblLoading" xml:space="preserve">
+    <value>正在检索实体，请稍候..</value>
+  </data>
+  <data name="QuickActionsMod_CbEnableHotkey" xml:space="preserve">
+    <value>启用热键</value>
+  </data>
+  <data name="QuickActionsMod_LblHotkey" xml:space="preserve">
+    <value>热键组合</value>
+  </data>
+  <data name="QuickActionsMod_LblTip1" xml:space="preserve">
+    <value>（可选，将用于替代实体名称）</value>
+  </data>
+  <data name="QuickActionsMod_Title" xml:space="preserve">
+    <value>快速操作</value>
+  </data>
+  <data name="SensorsConfig_BtnRemove" xml:space="preserve">
+    <value>移除</value>
+  </data>
+  <data name="SensorsConfig_BtnModify" xml:space="preserve">
+    <value>修改</value>
+  </data>
+  <data name="SensorsConfig_BtnAdd" xml:space="preserve">
+    <value>添加新</value>
+  </data>
+  <data name="SensorsConfig_BtnStore" xml:space="preserve">
+    <value>存储并激活传感器</value>
+  </data>
+  <data name="SensorsConfig_ClmName" xml:space="preserve">
+    <value>名称</value>
+  </data>
+  <data name="SensorsConfig_ClmType" xml:space="preserve">
+    <value>类型</value>
+  </data>
+  <data name="SensorsConfig_LblRefresh" xml:space="preserve">
+    <value>刷新</value>
+  </data>
+  <data name="SensorsConfig_Title" xml:space="preserve">
+    <value>传感器配置</value>
+  </data>
+  <data name="SensorsMod_BtnStore" xml:space="preserve">
+    <value>存储传感器</value>
+  </data>
+  <data name="SensorsMod_LblSetting1" xml:space="preserve">
+    <value>设置1</value>
+  </data>
+  <data name="SensorsMod_LblType" xml:space="preserve">
+    <value>选定类型</value>
+  </data>
+  <data name="SensorsMod_LblName" xml:space="preserve">
+    <value>名称</value>
+  </data>
+  <data name="SensorsMod_LblUpdate" xml:space="preserve">
+    <value>每次更新</value>
+  </data>
+  <data name="SensorsMod_LblSeconds" xml:space="preserve">
+    <value>秒</value>
+  </data>
+  <data name="SensorsMod_LblDescription" xml:space="preserve">
+    <value>描述</value>
+  </data>
+  <data name="SensorsMod_LblSetting2" xml:space="preserve">
+    <value>设置2</value>
+  </data>
+  <data name="SensorsMod_LblSetting3" xml:space="preserve">
+    <value>设置3</value>
+  </data>
+  <data name="SensorsMod_ClmSensorName" xml:space="preserve">
+    <value>类型</value>
+  </data>
+  <data name="SensorsMod_LblMultiValue" xml:space="preserve">
+	  <value>多值</value>
+  </data>
+  <data name="SensorsMod_LblAgent" xml:space="preserve">
+    <value>代理</value>
+  </data>
+  <data name="SensorsMod_LblService" xml:space="preserve">
+    <value>服务</value>
+  </data>
+  <data name="SensorsMod_LblSpecificClient" xml:space="preserve">
+    <value>仅限HASS.Agent！</value>
+  </data>
+  <data name="SensorsMod_Title" xml:space="preserve">
+    <value>传感器</value>
+  </data>
+  <data name="ServiceConfig_TabGeneral" xml:space="preserve">
+    <value>常规</value>
+  </data>
+  <data name="ServiceConfig_TabMqtt" xml:space="preserve">
+    <value>MQTT</value>
+  </data>
+  <data name="ServiceConfig_TabCommands" xml:space="preserve">
+    <value>命令</value>
+  </data>
+  <data name="ServiceConfig_TabSensors" xml:space="preserve">
+    <value>传感器</value>
+  </data>
+  <data name="ServiceConfig_Title" xml:space="preserve">
+    <value>卫星服务配置</value>
+  </data>
+  <data name="About_BtnClose" xml:space="preserve">
+    <value>关闭</value>
+  </data>
+  <data name="About_LblInfo1" xml:space="preserve">
+    <value>基于Windows的Home Assistant平台客户端。</value>
+  </data>
+  <data name="About_LblInfo3" xml:space="preserve">
+	  <value>此应用程序是开源的，完全免费，请查看所用组件的项目页面以获取各自的许可证：</value>
+  </data>
+  <data name="About_LblInfo4" xml:space="preserve">
+	  <value>非常感谢这些项目的开发者，他们慷慨地与我们分享他们的辛勤工作。</value>
+  </data>
+  <data name="About_LblInfo5" xml:space="preserve">
+	  <value>当然，感谢Paulus Shoutsen和整个开发团队，他们创建并维护Home Assistant :-)</value>
+  </data>
+  <data name="About_LblInfo2" xml:space="preserve">
+    <value>由爱心创造</value>
+  </data>
+  <data name="About_LblInfo6" xml:space="preserve">
+    <value>喜欢这个工具吗？通过买一杯咖啡来支持我们（阅读：保持我们清醒）：</value>
+  </data>
+  <data name="About_Title" xml:space="preserve">
+    <value>关于</value>
+  </data>
+  <data name="Configuration_TabGeneral" xml:space="preserve">
+    <value>常规</value>
+  </data>
+  <data name="Configuration_TabExternalTools" xml:space="preserve">
+    <value>外部工具</value>
+  </data>
+  <data name="Configuration_TabHassApi" xml:space="preserve">
+    <value>Home Assistant API</value>
+  </data>
+  <data name="Configuration_TabHotKey" xml:space="preserve">
+    <value>热键</value>
+  </data>
+  <data name="Configuration_TabLocalStorage" xml:space="preserve">
+    <value>本地存储</value>
+  </data>
+  <data name="Configuration_TabLogging" xml:space="preserve">
+    <value>日志记录</value>
+  </data>
+  <data name="Configuration_TabMQTT" xml:space="preserve">
+    <value>MQTT</value>
+  </data>
+  <data name="Configuration_TabNotifications" xml:space="preserve">
+    <value>通知</value>
+  </data>
+  <data name="Configuration_TabService" xml:space="preserve">
+    <value>卫星服务</value>
+  </data>
+  <data name="Configuration_TabStartup" xml:space="preserve">
+    <value>启动</value>
+  </data>
+  <data name="Configuration_TabUpdates" xml:space="preserve">
+    <value>更新</value>
+  </data>
+  <data name="Configuration_BtnAbout" xml:space="preserve">
+    <value>关于</value>
+  </data>
+  <data name="Configuration_BtnHelp" xml:space="preserve">
+    <value>帮助与联系</value>
+  </data>
+  <data name="Configuration_BtnStore" xml:space="preserve">
+    <value>保存配置</value>
+  </data>
+  <data name="Configuration_BtnClose" xml:space="preserve">
+    <value>关闭而不保存</value>
+  </data>
+  <data name="Configuration_Title" xml:space="preserve">
+    <value>配置</value>
+  </data>
+  <data name="ExitDialog_LblInfo1" xml:space="preserve">
+    <value>您想做什么？</value>
+  </data>
+  <data name="ExitDialog_BtnRestart" xml:space="preserve">
+    <value>重启</value>
+  </data>
+  <data name="ExitDialog_BtnHide" xml:space="preserve">
+    <value>隐藏</value>
+  </data>
+  <data name="ExitDialog_BtnExit" xml:space="preserve">
+    <value>退出</value>
+  </data>
+  <data name="ExitDialog_Title" xml:space="preserve">
+    <value>退出对话框</value>
+  </data>
+  <data name="Help_BtnClose" xml:space="preserve">
+    <value>关闭</value>
+  </data>
+  <data name="Help_LblInfo1" xml:space="preserve">
+	  <value>如果您在使用HASS.Agent时遇到问题并需要支持，关于任何传感器、命令或一般支持和反馈，您可以通过几种方式与我们联系：</value>
+  </data>
+  <data name="Help_LblAbout" xml:space="preserve">
+    <value>关于</value>
+  </data>
+  <data name="Help_LblHAForum" xml:space="preserve">
+    <value>Home Assistant论坛</value>
+  </data>
+  <data name="Help_LblGitHub" xml:space="preserve">
+    <value>GitHub问题</value>
+  </data>
+  <data name="Help_LblHAInfo" xml:space="preserve">
+	  <value>各种信息，其他HA用户也可以帮助您！</value>
+  </data>
+  <data name="Help_LblGitHubInfo" xml:space="preserve">
+    <value>报告错误，发布功能请求，查看最新更改等。</value>
+  </data>
+  <data name="Help_LblDiscordInfo" xml:space="preserve">
+	  <value>获取有关设置和使用HASS.Agent的帮助，报告错误或参与一般聊天！</value>
+  </data>
+  <data name="Help_LblWikiInfo" xml:space="preserve">
+    <value>浏览HASS.Agent文档和使用示例。</value>
+  </data>
+  <data name="Help_Title" xml:space="preserve">
+    <value>帮助</value>
+  </data>
+  <data name="Main_TsShow" xml:space="preserve">
+    <value>显示HASS.Agent</value>
+  </data>
+  <data name="Main_TsShowQuickActions" xml:space="preserve">
+    <value>显示快速操作</value>
+  </data>
+  <data name="Main_TsConfig" xml:space="preserve">
+    <value>配置</value>
+  </data>
+  <data name="Main_TsQuickItemsConfig" xml:space="preserve">
+    <value>管理快速操作</value>
+  </data>
+  <data name="Main_TsLocalSensors" xml:space="preserve">
+    <value>管理本地传感器</value>
+  </data>
+  <data name="Main_TsCommands" xml:space="preserve">
+    <value>管理命令</value>
+  </data>
+  <data name="Main_CheckForUpdates" xml:space="preserve">
+    <value>检查更新</value>
+  </data>
+  <data name="Main_TsDonate" xml:space="preserve">
+    <value>捐赠</value>
+  </data>
+  <data name="Main_TsHelp" xml:space="preserve">
+    <value>帮助与联系</value>
+  </data>
+  <data name="Main_TsAbout" xml:space="preserve">
+    <value>关于</value>
+  </data>
+  <data name="Main_TsExit" xml:space="preserve">
+    <value>退出HASS.Agent</value>
+  </data>
+  <data name="Main_BtnHide" xml:space="preserve">
+    <value>隐藏</value>
+  </data>
+  <data name="Main_GpControls" xml:space="preserve">
+    <value>控制</value>
+  </data>
+  <data name="Main_BtnServiceManager" xml:space="preserve">
+    <value>卫星服务</value>
+  </data>
+  <data name="Main_BtnAppSettings" xml:space="preserve">
+    <value>配置</value>
+  </data>
+  <data name="Main_BtnActionsManager" xml:space="preserve">
+    <value>快速操作</value>
+  </data>
+  <data name="Main_BtnCommandsManager" xml:space="preserve">
+    <value>加载中..</value>
+  </data>
+  <data name="Main_BtnSensorsManager" xml:space="preserve">
+    <value>加载中..</value>
+  </data>
+  <data name="Main_GpStatus" xml:space="preserve">
+    <value>系统状态</value>
+  </data>
+  <data name="Main_LblService" xml:space="preserve">
+    <value>卫星服务：</value>
+  </data>
+  <data name="Main_LblCommands" xml:space="preserve">
+    <value>命令：</value>
+  </data>
+  <data name="Main_LblSensors" xml:space="preserve">
+    <value>传感器：</value>
+  </data>
+  <data name="Main_LblQuickActions" xml:space="preserve">
+    <value>快速操作：</value>
+  </data>
+  <data name="Main_LblHomeAssistantApi" xml:space="preserve">
+    <value>Home Assistant API：</value>
+  </data>
+  <data name="Main_LblNotificationApi" xml:space="preserve">
+    <value>通知API：</value>
+  </data>
+  <data name="Onboarding_BtnNext" xml:space="preserve">
+    <value>下一步</value>
+  </data>
+  <data name="Onboarding_BtnClose" xml:space="preserve">
+    <value>关闭</value>
+  </data>
+  <data name="Onboarding_BtnPrevious" xml:space="preserve">
+    <value>上一步</value>
+  </data>
+  <data name="Onboarding_Onboarding" xml:space="preserve">
+    <value>HASS.Agent入门</value>
+  </data>
+  <data name="UpdatePending_BtnDownload" xml:space="preserve">
+    <value>正在获取信息，请稍候..</value>
+  </data>
+  <data name="UpdatePending_LblNewReleaseInfo" xml:space="preserve">
+    <value>有新版本可用：</value>
+  </data>
+  <data name="UpdatePending_LblInfo1" xml:space="preserve">
+    <value>发布说明</value>
+  </data>
+  <data name="UpdatePending_BtnIgnore" xml:space="preserve">
+    <value>忽略更新</value>
+  </data>
+  <data name="UpdatePending_LblRelease" xml:space="preserve">
+    <value>发布页面</value>
+  </data>
+  <data name="UpdatePending_Title" xml:space="preserve">
+    <value>HASS.Agent更新</value>
+  </data>
+  <data name="CommandsManager_CustomCommandDescription" xml:space="preserve">
+	  <value>执行自定义命令。这些命令在没有特殊提升的情况下运行。要以提升的方式运行，请创建计划任务，并使用'schtasks /Run /TN "TaskName"'作为执行任务的命令。或者启用“以低完整性运行”，以实现更严格的执行。</value>
+  </data>
+  </data>
+  <data name="CommandsManager_CustomExecutorCommandDescription" xml:space="preserve">
+	  <value>通过配置的自定义执行器执行命令（在配置 -&gt; 外部工具中）。
+
+您的命令作为参数“原样”提供，因此如果需要，您必须自己提供引号等。</value>
+  </data>
+  <data name="CommandsManager_HibernateCommandDescription" xml:space="preserve">
+    <value>将计算机设置为休眠状态。</value>
+  </data>
+  <data name="CommandsManager_KeyCommandDescription" xml:space="preserve">
+	  <value>模拟单个按键。
+
+单击“键码”文本框并按下您想要模拟的键。相应的键码将为您输入。
+
+如果您需要更多的键和/或修饰符，如CTRL，请使用MultipleKeys命令。</value>
+  </data>
+  <data name="CommandsManager_LaunchUrlCommandDescription" xml:space="preserve">
+	  <value>启动提供的URL，默认在您的默认浏览器中。
+
+要使用“隐身”，请在配置 -&gt; 外部工具中提供特定的浏览器。
+
+如果您只想要一个特定URL的窗口（而不是整个浏览器），请使用“WebView”命令。</value>
+  </data>
+  <data name="CommandsManager_LockCommandDescription" xml:space="preserve">
+    <value>锁定当前会话。</value>
+  </data>
+  <data name="CommandsManager_LogOffCommandDescription" xml:space="preserve">
+    <value>注销当前会话。</value>
+  </data>
+  <data name="CommandsManager_MediaMuteCommandDescription" xml:space="preserve">
+    <value>模拟“静音”键。</value>
+  </data>
+  <data name="CommandsManager_MediaNextCommandDescription" xml:space="preserve">
+    <value>模拟“媒体下一曲”键。</value>
+  </data>
+  <data name="CommandsManager_MediaPlayPauseCommandDescription" xml:space="preserve">
+    <value>模拟“媒体暂停/播放”键。</value>
+  </data>
+  <data name="CommandsManager_MediaPreviousCommandDescription" xml:space="preserve">
+    <value>模拟“媒体上一曲”键。</value>
+  </data>
+  <data name="CommandsManager_MediaVolumeDownCommandDescription" xml:space="preserve">
+    <value>模拟“音量减小”键。</value>
+  </data>
+  <data name="CommandsManager_MediaVolumeUpCommandDescription" xml:space="preserve">
+    <value>模拟“音量增大”键。</value>
+  </data>
+  <data name="CommandsManager_MultipleKeysCommandDescription" xml:space="preserve">
+	  <value>模拟按下多个键。
+
+您需要在每个键之间放置[ ]，否则HASS.Agent无法区分它们。因此，如果您想按下X TAB Y SHIFT-Z，则应为[X] [{TAB}] [Y] [+Z]。
+
+您可以使用一些技巧：
+
+- 如果您想按下一个括号，请转义它，因此[是[\[]，]是[\]] 
+
+- 特殊键放在{ }之间，例如{TAB}或{UP}
+
+- 在键前加+以添加SHIFT，^表示CTRL，%表示ALT。因此，+C是SHIFT-C。或者，+(CD)是SHIFT-C和SHIFT-D，而+CD是SHIFT-C和D
+
+- 对于多次按下，请使用{z 15}，这意味着Z将被按下15次。
+
+更多信息： https://docs.microsoft.com/en-us/dotnet/api/system.windows.forms.sendkeys</value>
+  </data>
+  <data name="CommandsManager_PowershellCommandDescription" xml:space="preserve">
+	  <value>执行Powershell命令或脚本。
+
+您可以提供脚本的路径（*.ps1）或单行命令。
+
+这将不需要特殊提升。</value>
+  </data>
+  <data name="CommandsManager_PublishAllSensorsCommandDescription" xml:space="preserve">
+	  <value>重置所有传感器检查，强制所有传感器处理并发送其值。
+
+例如，如果您想在HA重启后强制HASS.Agent更新所有传感器，这非常有用。</value>
+  </data>
+  <data name="CommandsManager_RestartCommandDescription" xml:space="preserve">
+	  <value>在一分钟后重启计算机。
+
+提示：意外触发？运行'shutdown /a'以中止关机。</value>
+  </data>
+  <data name="CommandsManager_ShutdownCommandDescription" xml:space="preserve">
+	  <value>在一分钟后关闭计算机。
+
+提示：意外触发？运行'shutdown /a'以中止关机。</value>
+  </data>
+  <data name="CommandsManager_SleepCommandDescription" xml:space="preserve">
+	  <value>将计算机置于睡眠状态。
+
+注意：由于Windows的限制，只有在禁用休眠时此功能才有效，否则它将仅休眠。
+
+您可以使用类似NirCmd（http://www.nirsoft.net/utils/nircmd.html）的方法来规避此问题。</value>
+  </data>
+  <data name="ConfigExternalTools_BtnExternalBrowserIncognitoTest_MessageBox1" xml:space="preserve">
+    <value>请输入浏览器的二进制文件位置！(.exe文件)</value>
+  </data>
+  <data name="ConfigExternalTools_ConfigExternalTools_BtnExternalBrowserIncognitoTest_MessageBox2" xml:space="preserve">
+    <value>提供的浏览器二进制文件未找到，请确保路径正确并重试。</value>
+  </data>
+  <data name="ConfigExternalTools_BtnExternalBrowserIncognitoTest_MessageBox3" xml:space="preserve">
+	  <value>未提供隐身参数，因此浏览器可能会正常启动。
+
+您想继续吗？</value>
+  </data>
+  <data name="ConfigExternalTools_BtnExternalBrowserIncognitoTest_MessageBox4" xml:space="preserve">
+	  <value>启动浏览器的隐身模式时出现问题！
+
+请检查日志以获取更多信息。</value>
+  </data>
+  <data name="ConfigHomeAssistantApi_BtnTestApi_MessageBox1" xml:space="preserve">
+    <value>请输入有效的API密钥！</value>
+  </data>
+  <data name="ConfigHomeAssistantApi_BtnTestApi_MessageBox2" xml:space="preserve">
+    <value>请输入您Home Assistant的URI值。</value>
+  </data>
+  <data name="ConfigHomeAssistantApi_BtnTestApi_MessageBox3" xml:space="preserve">
+	  <value>无法连接，返回以下错误：
+
+{0}</value>
+  </data>
+  <data name="ConfigHomeAssistantApi_BtnTestApi_MessageBox4" xml:space="preserve">
+	  <value>连接成功！
+
+Home Assistant版本：{0}</value>
+  </data>
+  <data name="ConfigLocalStorage_BtnClearImageCache_MessageBox1" xml:space="preserve">
+    <value>图像缓存已清除！</value>
+  </data>
+  <data name="ConfigLocalStorage_BtnClearImageCache_InfoText1" xml:space="preserve">
+    <value>清理中..</value>
+  </data>
+  <data name="ConfigNotifications_BtnSendTestNotification_MessageBox1" xml:space="preserve">
+    <value>通知当前已禁用，请启用它们并重启HASS.Agent，然后重试。</value>
+  </data>
+  <data name="ConfigNotifications_BtnSendTestNotification_MessageBox2" xml:space="preserve">
+	  <value>测试通知应该已经出现，如果您没有收到，请检查日志或查阅文档以获取故障排除提示。
+
+注意：这仅在本地测试通知是否可以显示！</value>
+  </data>
+  <data name="ConfigNotifications_TestNotification" xml:space="preserve">
+    <value>这是一个测试通知！</value>
+  </data>
+  <data name="ConfigNotifications_BtnExecutePortReservation_Busy" xml:space="preserve">
+    <value>正在执行，请稍候..</value>
+  </data>
+  <data name="ConfigNotifications_BtnExecutePortReservation_MessageBox1" xml:space="preserve">
+	  <value>在保留端口时出现问题！
+
+需要手动执行，并且命令已复制到您的剪贴板，请打开提升的终端并粘贴命令。
+
+此外，请记得更改您的防火墙规则端口！</value>
+  </data>
+  <data name="ConfigService_NotInstalled" xml:space="preserve">
+    <value>未安装</value>
+  </data>
+  <data name="ConfigService_Disabled" xml:space="preserve">
+    <value>已禁用</value>
+  </data>
+  <data name="ConfigService_Running" xml:space="preserve">
+    <value>正在运行</value>
+  </data>
+  <data name="ConfigService_Stopped" xml:space="preserve">
+    <value>已停止</value>
+  </data>
+  <data name="ConfigService_Failed" xml:space="preserve">
+    <value>失败</value>
+  </data>
+  <data name="ConfigService_BtnStopService_MessageBox1" xml:space="preserve">
+	  <value>停止服务时出现问题，您是否允许UAC提示？
+
+请检查HASS.Agent（而不是服务）日志以获取更多信息。</value>
+  </data>
+  <data name="ConfigService_BtnStartService_MessageBox1" xml:space="preserve">
+	  <value>服务设置为“禁用”，因此无法启动。
+
+请先启用服务，然后重试。</value>
+  </data>
+  <data name="ConfigService_BtnStartService_MessageBox2" xml:space="preserve">
+	  <value>启动服务时出现问题，您是否允许UAC提示？
+
+请检查HASS.Agent（而不是服务）日志以获取更多信息。</value>
+  </data>
+  <data name="ConfigService_BtnDisableService_MessageBox1" xml:space="preserve">
+	  <value>禁用服务时出现问题，您是否允许UAC提示？
+
+请检查HASS.Agent（而不是服务）日志以获取更多信息。</value>
+  </data>
+  <data name="ConfigService_BtnEnableService_MessageBox1" xml:space="preserve">
+	  <value>启用服务时出现问题，您是否允许UAC提示？
+
+请检查HASS.Agent（而不是服务）日志以获取更多信息。</value>
+  </data>
+  <data name="ConfigService_BtnShowLogs_MessageBox1" xml:space="preserve">
+	  <value>重新安装服务时出现问题，您是否允许UAC提示？
+
+请检查HASS.Agent（而不是服务）日志以获取更多信息。</value>
+  </data>
+  <data name="ConfigStartup_BtnSetStartOnLogin_MessageBox1" xml:space="preserve">
+    <value>禁用开机启动时出现问题，请检查日志以获取更多信息。</value>
+  </data>
+  <data name="ConfigStartup_BtnSetStartOnLogin_MessageBox2" xml:space="preserve">
+    <value>禁用开机启动时出现问题，请检查日志以获取更多信息。</value>
+  </data>
+  <data name="ConfigStartup_Enabled" xml:space="preserve">
+    <value>已启用</value>
+  </data>
+  <data name="ConfigStartup_Disable" xml:space="preserve">
+    <value>禁用开机启动</value>
+  </data>
+  <data name="ConfigStartup_Disabled" xml:space="preserve">
+    <value>已禁用</value>
+  </data>
+  <data name="ConfigStartup_Enable" xml:space="preserve">
+    <value>启用开机启动</value>
+  </data>
+  <data name="OnboardingStartup_Activated" xml:space="preserve">
+    <value>开机启动已激活！</value>
+  </data>
+  <data name="OnboardingStartup_EnableNow" xml:space="preserve">
+    <value>您想现在启用开机启动吗？</value>
+  </data>
+  <data name="OnboardingStartup_AlreadyActivated" xml:space="preserve">
+    <value>开机启动已激活，全部就绪！</value>
+  </data>
+  <data name="OnboardingStartup_Activating" xml:space="preserve">
+    <value>正在激活开机启动..</value>
+  </data>
+  <data name="OnboardingStartup_Failed" xml:space="preserve">
+    <value>出现问题。您可以重试，或跳到下一页并在HASS.Agent重启后重试。</value>
+  </data>
+  <data name="OnboardingStartup_BtnSetLaunchOnLogin_2" xml:space="preserve">
+    <value>启用开机启动</value>
+  </data>
+  <data name="OnboardingApi_BtnTest_MessageBox1" xml:space="preserve">
+    <value>请提供有效的API密钥。</value>
+  </data>
+  <data name="OnboardingApi_BtnTest_MessageBox2" xml:space="preserve">
+    <value>请输入您Home Assistant的URI。</value>
+  </data>
+  <data name="OnboardingApi_BtnTest_MessageBox3" xml:space="preserve">
+	  <value>无法连接，返回以下错误：
+
+{0}</value>
+  </data>
+  <data name="OnboardingApi_BtnTest_MessageBox4" xml:space="preserve">
+	  <value>连接成功！
+
+Home Assistant版本：{0}</value>
+  </data>
+  <data name="OnboardingApi_BtnTest_Testing" xml:space="preserve">
+    <value>测试中..</value>
+  </data>
+  <data name="ServiceCommands_BtnStore_MessageBox1" xml:space="preserve">
+    <value>保存命令时发生错误，请检查日志以获取更多信息。</value>
+  </data>
+  <data name="ServiceCommands_BtnStore_Storing" xml:space="preserve">
+    <value>正在存储和注册，请稍候..</value>
+  </data>
+  <data name="ServiceConnect_Connecting" xml:space="preserve">
+    <value>正在连接卫星服务，请稍候..</value>
+  </data>
+  <data name="ServiceConnect_Failed" xml:space="preserve">
+    <value>连接服务失败！</value>
+  </data>
+  <data name="ServiceConnect_FailedMessage" xml:space="preserve">
+	  <value>未找到服务！您可以从配置面板安装和管理它。
+
+当它启动并运行时，请返回此处配置命令和传感器。</value>
+  </data>
+  <data name="ServiceConnect_CommunicationFailed" xml:space="preserve">
+    <value>与服务的通信失败！</value>
+  </data>
+  <data name="ServiceConnect_CommunicationFailedMessage" xml:space="preserve">
+	  <value>无法与服务通信。请检查日志以获取更多信息。
+
+您可以从配置面板打开日志并管理服务。</value>
+  </data>
+  <data name="ServiceConnect_Unauthorized" xml:space="preserve">
+    <value>未授权</value>
+  </data>
+  <data name="ServiceConnect_UnauthorizedMessage" xml:space="preserve">
+	  <value>您没有权限联系服务。
+
+如果您有正确的auth ID，您可以现在设置并重试。</value>
+  </data>
+  <data name="ServiceConnect_SettingsFailed" xml:space="preserve">
+    <value>获取设置失败！</value>
+  </data>
+  <data name="ServiceConnect_SettingsFailedMessage" xml:space="preserve">
+	  <value>服务在请求其设置时返回错误。请检查日志以获取更多信息。
+
+您可以从配置面板打开日志并管理服务。</value>
+  </data>
+  <data name="ServiceConnect_MqttFailed" xml:space="preserve">
+    <value>获取MQTT设置失败！</value>
+  </data>
+  <data name="ServiceConnect_MqttFailedMessage" xml:space="preserve">
+	  <value>服务在请求其MQTT设置时返回错误。请检查日志以获取更多信息。
+
+您可以从配置面板打开日志并管理服务。</value>
+  </data>
+  <data name="ServiceConnect_CommandsFailed" xml:space="preserve">
+    <value>获取配置命令失败！</value>
+  </data>
+  <data name="ServiceConnect_CommandsFailedMessage" xml:space="preserve">
+	  <value>服务在请求其配置命令时返回错误。请检查日志以获取更多信息。
+
+您可以从配置面板打开日志并管理服务。</value>
+  </data>
+  <data name="ServiceConnect_SensorsFailed" xml:space="preserve">
+    <value>获取配置传感器失败！</value>
+  </data>
+  <data name="ServiceConnect_SensorsFailedMessage" xml:space="preserve">
+	  <value>服务在请求其配置传感器时返回错误。请检查日志以获取更多信息。
+
+您可以从配置面板打开日志并管理服务。</value>
+  </data>
+  <data name="ServiceGeneral_TbAuthId_MessageBox1" xml:space="preserve">
+	  <value>存储空的auth ID将允许所有HASS.Agent访问服务。
+
+您确定要这样做吗？</value>
+  </data>
+  <data name="ServiceGeneral_SavingFailedMessageBox" xml:space="preserve">
+    <value>保存时发生错误，请检查日志以获取更多信息。</value>
+  </data>
+  <data name="ServiceGeneral_BtnStoreDeviceName_MessageBox1" xml:space="preserve">
+    <value>请输入设备名称！</value>
+  </data>
+  <data name="ServiceGeneral_BtnStoreCustomExecutor_MessageBox1" xml:space="preserve">
+    <value>请先选择一个执行器。（提示：双击以浏览）</value>
+  </data>
+  <data name="ServiceGeneral_BtnStoreCustomExecutor_MessageBox2" xml:space="preserve">
+    <value>未找到所选执行器，请确保提供的路径正确并重试。</value>
+  </data>
+  <data name="ServiceGeneral_LblAuthIdInfo_MessageBox1" xml:space="preserve">
+	  <value>如果您不希望此PC上的每个HASS.Agent实例都连接到卫星服务，请设置auth ID。
+
+只有具有正确ID的实例才能连接。
+
+留空以允许所有人连接。</value>
+  </data>
+  <data name="ServiceGeneral_LblDeviceNameInfo_MessageBox1" xml:space="preserve">
+	  <value>这是卫星服务在Home Assistant上注册的名称。
+
+默认情况下，它是您PC的名称加上“-satellite”。</value>
+  </data>
+  <data name="ServiceGeneral_LblDisconGraceInfo_MessageBox1" xml:space="preserve">
+    <value>卫星服务在报告与MQTT代理的连接丢失之前将等待的时间。</value>
+  </data>
+  <data name="ServiceMqtt_StatusError" xml:space="preserve">
+    <value>获取状态时出错，请检查日志以获取信息。</value>
+  </data>
+  <data name="ServiceMqtt_BtnStore_MessageBox1" xml:space="preserve">
+    <value>保存配置时发生错误，请检查日志以获取更多信息。</value>
+  </data>
+  <data name="ServiceMqtt_BtnStore_Storing" xml:space="preserve">
+    <value>正在存储和注册，请稍候..</value>
+  </data>
+  <data name="ServiceSensors_BtnStore_MessageBox1" xml:space="preserve">
+    <value>保存传感器时发生错误，请检查日志以获取更多信息。</value>
+  </data>
+  <data name="ServiceSensors_BtnStore_Storing" xml:space="preserve">
+    <value>正在存储和注册，请稍候..</value>
+  </data>
+  <data name="PortReservation_ProcessPostUpdate_MessageBox1" xml:space="preserve">
+    <value>并非所有步骤都成功完成。请查阅日志以获取更多信息。</value>
+  </data>
+  <data name="PostUpdate_ProcessPostUpdate_MessageBox1" xml:space="preserve">
+    <value>并非所有步骤都成功完成。请查阅日志以获取更多信息。</value>
+  </data>
+  <data name="Restart_ProcessRestart_MessageBox1" xml:space="preserve">
+	  <value>HASS.Agent在{0}秒后仍然处于活动状态。请关闭所有实例并手动重启。
+
+检查日志以获取更多信息，并可选择通知开发人员。</value>
+  </data>
+  <data name="ServiceReinstall_ProcessReinstall_MessageBox1" xml:space="preserve">
+    <value>并非所有步骤都成功完成，请检查日志以获取更多信息。</value>
+  </data>
+  <data name="ServiceSetState_Enabled" xml:space="preserve">
+    <value>启用卫星服务</value>
+  </data>
+  <data name="ServiceSetState_Disabled" xml:space="preserve">
+    <value>禁用卫星服务</value>
+  </data>
+  <data name="ServiceSetState_Started" xml:space="preserve">
+    <value>启动卫星服务</value>
+  </data>
+  <data name="ServiceSetState_Stopped" xml:space="preserve">
+    <value>停止卫星服务</value>
+  </data>
+  <data name="ServiceSetState_ProcessState_MessageBox1" xml:space="preserve">
+	  <value>处理所需服务状态时出现问题。
+
+请查阅日志以获取更多信息。</value>
+  </data>
+  <data name="CommandMqttTopic_BtnCopyClipboard_Copied" xml:space="preserve">
+    <value>主题已复制到剪贴板！</value>
+  </data>
+  <data name="CommandsConfig_BtnStore_Storing" xml:space="preserve">
+    <value>正在存储和注册，请稍候..</value>
+  </data>
+  <data name="CommandsConfig_BtnStore_MessageBox1" xml:space="preserve">
+    <value>保存命令时发生错误，请检查日志以获取更多信息。</value>
+  </data>
+  <data name="CommandsMod_Title_NewCommand" xml:space="preserve">
+    <value>新命令</value>
+  </data>
+  <data name="CommandsMod_Title_ModCommand" xml:space="preserve">
+    <value>修改命令</value>
+  </data>
+  <data name="CommandsMod_BtnStore_MessageBox1" xml:space="preserve">
+    <value>请选择命令类型！</value>
+  </data>
+  <data name="CommandsMod_BtnStore_MessageBox2" xml:space="preserve">
+    <value>请选择有效的命令类型！</value>
+  </data>
+  <data name="CommandsMod_MessageBox_EntityType" xml:space="preserve">
+    <value>请先选择有效的实体类型。</value>
+  </data>
+  <data name="CommandsMod_MessageBox_Name" xml:space="preserve">
+    <value>请输入名称！</value>
+  </data>
+  <data name="CommandsMod_BtnStore_MessageBox3" xml:space="preserve">
+    <value>具有该名称的命令已存在，您确定要继续吗？</value>
+  </data>
+  <data name="CommandsMod_BtnStore_MessageBox4" xml:space="preserve">
+	  <value>如果未提供命令，您只能通过Home Assistant使用此实体的“操作”值，按原样运行将没有任何操作。
+
+您确定要继续吗？</value>
+  </data>
+  <data name="CommandsMod_MessageBox_Action" xml:space="preserve">
+	  <value>如果您不输入命令或脚本，您只能通过Home Assistant使用此实体的“操作”值。按原样运行将不会做任何事情。
+
+您确定要这样做吗？</value>
+  </data>
+  <data name="CommandsMod_BtnStore_MessageBox5" xml:space="preserve">
+    <value>请输入一个键码！</value>
+  </data>
+  <data name="CommandsMod_BtnStore_MessageBox6" xml:space="preserve">
+    <value>检查键失败：{0}</value>
+  </data>
+  <data name="CommandsMod_BtnStore_MessageBox7" xml:space="preserve">
+	  <value>如果未提供URL，您只能通过Home Assistant使用此实体的“操作”值，按原样运行将没有任何操作。
+
+您确定要继续吗？</value>
+  </data>
+  <data name="CommandsMod_LblSetting_Command" xml:space="preserve">
+    <value>命令</value>
+  </data>
+  <data name="CommandsMod_LblSetting_CommandScript" xml:space="preserve">
+    <value>命令或脚本</value>
+  </data>
+  <data name="CommandsMod_LblSetting_KeyCode" xml:space="preserve">
+    <value>键码</value>
+  </data>
+  <data name="CommandsMod_LblSetting_KeyCodes" xml:space="preserve">
+    <value>键码</value>
+  </data>
+  <data name="CommandsMod_CbCommandSpecific_Incognito" xml:space="preserve">
+    <value>在隐身模式下启动</value>
+  </data>
+  <data name="CommandsMod_LblInfo_Browser" xml:space="preserve">
+	  <value>浏览器：默认
+
+请配置自定义浏览器以启用隐身模式。</value>
+  </data>
+  <data name="CommandsMod_LblSetting_Url" xml:space="preserve">
+    <value>URL</value>
+  </data>
+  <data name="CommandsMod_LblInfo_BrowserSpecific" xml:space="preserve">
+    <value>浏览器：{0}</value>
+  </data>
+  <data name="CommandsMod_LblInfo_Executor" xml:space="preserve">
+	  <value>执行器：无
+
+请配置执行器，否则您的命令将无法运行。</value>
+  </data>
+  <data name="CommandsMod_LblInfo_ExecutorSpecific" xml:space="preserve">
+    <value>执行器：{0}</value>
+  </data>
+  <data name="CommandsMod_LblIntegrityInfo_InfoMsg1" xml:space="preserve">
+    <value>低完整性意味着您的命令将以受限权限执行。</value>
+  </data>
+  <data name="CommandsMod_LblIntegrityInfo_InfoMsg2" xml:space="preserve">
+    <value>这意味着它只能在某些位置保存和修改文件，</value>
+  </data>
+  <data name="CommandsMod_LblIntegrityInfo_InfoMsg3" xml:space="preserve">
+    <value>例如“%USERPROFILE%\AppData\LocalLow”文件夹或</value>
+  </data>
+  <data name="CommandsMod_LblIntegrityInfo_InfoMsg4" xml:space="preserve">
+    <value>“HKEY_CURRENT_USER\Software\AppDataLow”注册表项。</value>
+  </data>
+  <data name="CommandsMod_LblIntegrityInfo_InfoMsg5" xml:space="preserve">
+    <value>您应该测试您的命令以确保它不受此影响！</value>
+  </data>
+  <data name="CommandsMod_SpecificClient" xml:space="preserve">
+    <value>{0}仅适用！</value>
+  </data>
+  <data name="CommandsMod_LblMqttTopic_MessageBox1" xml:space="preserve">
+    <value>MQTT管理器未正确配置，或尚未完成启动。</value>
+  </data>
+  <data name="QuickActions_CheckHassManager_MessageBox1" xml:space="preserve">
+    <value>由于缺少配置，无法获取您的实体，请在配置屏幕中输入所需的值。</value>
+  </data>
+  <data name="QuickActions_MessageBox_EntityFailed" xml:space="preserve">
+    <value>尝试获取您的实体时发生错误！</value>
+  </data>
+  <data name="QuickActionsMod_Title_New" xml:space="preserve">
+    <value>新快速操作</value>
+  </data>
+  <data name="QuickActionsMod_Title_Mod" xml:space="preserve">
+    <value>修改快速操作</value>
+  </data>
+  <data name="QuickActionsMod_CheckHassManager_MessageBox1" xml:space="preserve">
+    <value>由于缺少配置，无法获取您的实体，请在配置屏幕中输入所需的值。</value>
+  </data>
+  <data name="QuickActionsMod_MessageBox_Entities" xml:space="preserve">
+    <value>尝试获取您的实体时发生错误。</value>
+  </data>
+  <data name="QuickActionsMod_BtnStore_MessageBox1" xml:space="preserve">
+    <value>请选择一个实体！</value>
+  </data>
+  <data name="QuickActionsMod_BtnStore_MessageBox2" xml:space="preserve">
+    <value>请选择一个域！</value>
+  </data>
+  <data name="QuickActionsMod_BtnStore_MessageBox3" xml:space="preserve">
+    <value>未知操作，请选择一个有效的操作。</value>
+  </data>
+  <data name="SensorsConfig_BtnStore_Storing" xml:space="preserve">
+    <value>正在存储和注册，请稍候..</value>
+  </data>
+  <data name="SensorsConfig_BtnStore_MessageBox1" xml:space="preserve">
+    <value>保存传感器时发生错误，请检查日志以获取更多信息。</value>
+  </data>
+  <data name="SensorsMod_Title_New" xml:space="preserve">
+    <value>新传感器</value>
+  </data>
+  <data name="SensorsMod_Title_Mod" xml:space="preserve">
+    <value>修改传感器</value>
+  </data>
+  <data name="SensorsMod_LblSetting1_WindowName" xml:space="preserve">
+    <value>窗口名称</value>
+  </data>
+  <data name="SensorsMod_LblSetting1_Wmi" xml:space="preserve">
+    <value>WMI查询</value>
+  </data>
+  <data name="SensorsMod_LblSetting2_Wmi" xml:space="preserve">
+    <value>WMI范围（可选）</value>
+  </data>
+  <data name="SensorsMod_LblSetting1_Category" xml:space="preserve">
+    <value>类别</value>
+  </data>
+  <data name="SensorsMod_LblSetting2_Counter" xml:space="preserve">
+    <value>计数器</value>
+  </data>
+  <data name="SensorsMod_LblSetting3_Instance" xml:space="preserve">
+    <value>实例（可选）</value>
+  </data>
+  <data name="SensorsMod_LblSetting1_Process" xml:space="preserve">
+    <value>进程</value>
+  </data>
+  <data name="SensorsMod_LblSetting1_Service" xml:space="preserve">
+    <value>服务</value>
+  </data>
+  <data name="SensorsMod_BtnStore_MessageBox1" xml:space="preserve">
+    <value>请选择传感器类型！</value>
+  </data>
+  <data name="SensorsMod_BtnStore_MessageBox2" xml:space="preserve">
+    <value>请选择有效的传感器类型！</value>
+  </data>
+  <data name="SensorsMod_BtnStore_MessageBox3" xml:space="preserve">
+    <value>请输入名称！</value>
+  </data>
+  <data name="SensorsMod_BtnStore_MessageBox4" xml:space="preserve">
+    <value>已经存在具有该名称的单值传感器，您确定要继续吗？</value>
+  </data>
+  <data name="SensorsMod_BtnStore_MessageBox5" xml:space="preserve">
+    <value>已经存在具有该名称的多值传感器，您确定要继续吗？</value>
+  </data>
+  <data name="SensorsMod_BtnStore_MessageBox6" xml:space="preserve">
+    <value>请输入一个介于1到43200（12小时）之间的间隔！</value>
+  </data>
+  <data name="SensorsMod_BtnStore_MessageBox7" xml:space="preserve">
+    <value>请输入窗口名称！</value>
+  </data>
+  <data name="SensorsMod_BtnStore_MessageBox8" xml:space="preserve">
+    <value>请输入查询！</value>
+  </data>
+  <data name="SensorsMod_BtnStore_MessageBox9" xml:space="preserve">
+    <value>请输入类别和实例！</value>
+  </data>
+  <data name="SensorsMod_BtnStore_MessageBox10" xml:space="preserve">
+    <value>请输入进程名称！</value>
+  </data>
+  <data name="SensorsMod_BtnStore_MessageBox11" xml:space="preserve">
+    <value>请输入服务名称！</value>
+  </data>
+  <data name="SensorsMod_SpecificClient" xml:space="preserve">
+    <value>{0}仅适用！</value>
+  </data>
+  <data name="Configuration_ProcessChanges_MessageBox1" xml:space="preserve">
+	  <value>您已更改设备名称。
+
+所有传感器和命令将被取消发布，并在HASS.Agent重启后重新发布。
+
+别担心，它们将保留当前名称，因此您的自动化或脚本将继续工作。
+
+注意：名称将被“清理”，这意味着除了字母、数字和空格外，所有内容都将被替换为下划线。这是HA所要求的。</value>
+  </data>
+  <data name="Configuration_ProcessChanges_MessageBox2" xml:space="preserve">
+	  <value>您已更改本地API的端口。此新端口需要被保留。
+
+您将收到UAC请求，请批准。</value>
+  </data>
+  <data name="Configuration_ProcessChanges_MessageBox3" xml:space="preserve">
+	  <value>出现问题！
+
+请手动执行所需的命令。它已复制到您的剪贴板，您只需将其粘贴到提升的命令提示符中。
+
+记得更改防火墙规则的端口。</value>
+  </data>
+  <data name="Configuration_ProcessChanges_MessageBox4" xml:space="preserve">
+	  <value>端口已成功保留！
+
+HASS.Agent现在将重启以激活新配置。</value>
+  </data>
+  <data name="Configuration_MessageBox_RestartManually" xml:space="preserve">
+	  <value>准备重启时出现问题。
+请手动重启。</value>
+  </data>
+  <data name="Configuration_ProcessChanges_MessageBox5" xml:space="preserve">
+	  <value>您的配置已保存。大多数更改需要HASS.Agent重启才能生效。
+
+您想现在重启吗？</value>
+  </data>
+  <data name="Main_Load_MessageBox1" xml:space="preserve">
+	  <value>加载设置时出现问题。
+
+检查'config'子文件夹中的appsettings.json，或直接删除它以重新开始。</value>
+  </data>
+  <data name="Main_Load_MessageBox2" xml:space="preserve">
+	  <value>启动HASS.Agent时发生错误。
+请检查日志并在GitHub上提交错误报告。</value>
+  </data>
+  <data name="Main_BtnSensorsManage_Ready" xml:space="preserve">
+	  <value>&amp;传感器</value>
+  </data>
+  <data name="Main_BtnCommandsManager_Ready" xml:space="preserve">
+    <value>&amp;命令</value>
+  </data>
+  <data name="Main_Checking" xml:space="preserve">
+    <value>检查中..</value>
+  </data>
+  <data name="Main_CheckForUpdate_MessageBox1" xml:space="preserve">
+    <value>您正在运行最新版本：{0}{1}</value>
+  </data>
+  <data name="UpdatePending_NewBetaRelease" xml:space="preserve">
+    <value>有一个新的BETA版本可用：</value>
+  </data>
+  <data name="UpdatePending_Title_Beta" xml:space="preserve">
+    <value>HASS.Agent BETA更新</value>
+  </data>
+  <data name="UpdatePending_LblUpdateQuestion_Download" xml:space="preserve">
+    <value>您想要&amp;下载并启动安装程序吗？</value>
+  </data>
+  <data name="UpdatePending_LblUpdateQuestion_Navigate" xml:space="preserve">
+    <value>您想要&amp;导航到发布页面吗？</value>
+  </data>
+  <data name="UpdatePending_InstallUpdate" xml:space="preserve">
+    <value>安装更新</value>
+  </data>
+  <data name="UpdatePending_InstallBetaRelease" xml:space="preserve">
+    <value>安装Beta版本</value>
+  </data>
+  <data name="UpdatePending_OpenReleasePage" xml:space="preserve">
+    <value>打开发布页面</value>
+  </data>
+  <data name="UpdatePending_OpenBetaReleasePage" xml:space="preserve">
+    <value>打开Beta发布页面</value>
+  </data>
+  <data name="UpdatePending_LblUpdateQuestion_Processing" xml:space="preserve">
+    <value>处理请求，请稍候..</value>
+  </data>
+  <data name="UpdatePending_BtnDownload_Processing" xml:space="preserve">
+    <value>正在处理..</value>
+  </data>
+  <data name="OnboardingManager_OnboardingTitle_Start" xml:space="preserve">
+    <value>HASS.Agent入门：开始 [{0}/{1}]</value>
+  </data>
+  <data name="OnboardingManager_OnboardingTitle_Startup" xml:space="preserve">
+    <value>HASS.Agent入门：启动 [{0}/{1}]</value>
+  </data>
+  <data name="OnboardingManager_OnboardingTitle_Notifications" xml:space="preserve">
+    <value>HASS.Agent入门：通知 [{0}/{1}]</value>
+  </data>
+  <data name="OnboardingManager_OnboardingTitle_Integration" xml:space="preserve">
+    <value>HASS.Agent入门：集成 [{0}/{1}]</value>
+  </data>
+  <data name="OnboardingManager_OnboardingTitle_Api" xml:space="preserve">
+    <value>HASS.Agent入门：API [{0}/{1}]</value>
+  </data>
+  <data name="OnboardingManager_OnboardingTitle_Mqtt" xml:space="preserve">
+    <value>HASS.Agent入门：MQTT [{0}/{1}]</value>
+  </data>
+  <data name="OnboardingManager_OnboardingTitle_HotKey" xml:space="preserve">
+    <value>HASS.Agent入门：热键 [{0}/{1}]</value>
+  </data>
+  <data name="OnboardingManager_OnboardingTitle_Updates" xml:space="preserve">
+    <value>HASS.Agent入门：更新 [{0}/{1}]</value>
+  </data>
+  <data name="OnboardingManager_OnboardingTitle_Completed" xml:space="preserve">
+    <value>HASS.Agent入门：完成 [{0}/{1}]</value>
+  </data>
+  <data name="OnboardingManager_ConfirmBeforeClose_MessageBox1" xml:space="preserve">
+	  <value>您确定要中止入门过程吗？
+
+您的进度将不会被保存，并且在下次启动时不会再次显示。</value>
+  </data>
+  <data name="UpdateManager_GetLatestVersionInfo_Error" xml:space="preserve">
+    <value>获取信息时出错，请检查日志以获取更多信息。</value>
+  </data>
+  <data name="UpdateManager_DownloadAndExecuteUpdate_MessageBox1" xml:space="preserve">
+	  <value>无法准备下载更新，请检查日志以获取更多信息。
+
+发布页面将现在打开。</value>
+  </data>
+  <data name="UpdateManager_DownloadAndExecuteUpdate_MessageBox2" xml:space="preserve">
+	  <value>无法下载更新，请检查日志以获取更多信息。
+
+发布页面将现在打开。</value>
+  </data>
+  <data name="UpdateManager_DownloadAndExecuteUpdate_MessageBox3" xml:space="preserve">
+	  <value>下载的文件未通过证书检查。
+
+这可能是技术错误，但也可能是篡改的文件！
+
+请检查日志，并提交票据以报告发现。</value>
+  </data>
+  <data name="UpdateManager_DownloadAndExecuteUpdate_MessageBox4" xml:space="preserve">
+	  <value>无法启动安装程序（您是否批准了UAC提示？），请检查日志以获取更多信息。
+
+发布页面将现在打开。</value>
+  </data>
+  <data name="HassApiManager_ToolTip_ConnectionSetupFailed" xml:space="preserve">
+    <value>HASS API：连接设置失败。</value>
+  </data>
+  <data name="HassApiManager_ToolTip_InitialConnectionFailed" xml:space="preserve">
+    <value>HASS API：初始连接失败。</value>
+  </data>
+  <data name="HassApiManager_ToolTip_ConnectionFailed" xml:space="preserve">
+    <value>HASS API：连接失败。</value>
+  </data>
+  <data name="HassApiManager_CheckHassConfig_CertNotFound" xml:space="preserve">
+    <value>未找到客户端证书文件。</value>
+  </data>
+  <data name="HassApiManager_CheckHassConfig_UnableToConnect" xml:space="preserve">
+    <value>无法连接，请检查URI。</value>
+  </data>
+  <data name="HassApiManager_CheckHassConfig_ConfigFailed" xml:space="preserve">
+    <value>无法获取配置，请检查API密钥。</value>
+  </data>
+  <data name="HassApiManager_ConnectionFailed" xml:space="preserve">
+    <value>无法连接，请检查URI和配置。</value>
+  </data>
+  <data name="HassApiManager_ToolTip_QuickActionFailed" xml:space="preserve">
+    <value>快速操作：操作失败，请检查日志以获取信息</value>
+  </data>
+  <data name="HassApiManager_ToolTip_QuickActionFailedOnEntity" xml:space="preserve">
+    <value>快速操作：操作失败，未找到实体</value>
+  </data>
+  <data name="MqttManager_ToolTip_ConnectionError" xml:space="preserve">
+    <value>MQTT：连接时出错</value>
+  </data>
+  <data name="MqttManager_ToolTip_ConnectionFailed" xml:space="preserve">
+    <value>MQTT：连接失败</value>
+  </data>
+  <data name="MqttManager_ToolTip_Disconnected" xml:space="preserve">
+    <value>MQTT：已断开连接</value>
+  </data>
+  <data name="NotifierManager_Initialize_MessageBox1" xml:space="preserve">
+	  <value>尝试将API绑定到端口{0}时出错。
+
+确保没有其他HASS.Agent实例正在运行，并且端口可用且已注册。</value>
+  </data>
+  <data name="SensorsManager_ActiveWindowSensorDescription" xml:space="preserve">
+    <value>提供当前活动窗口的标题。</value>
+  </data>
+  <data name="SensorsManager_AudioSensorsDescription" xml:space="preserve">
+	  <value>提供设备音频的各种信息：
+
+当前峰值音量级别（可用作简单的“是否正在播放”值）。
+
+默认音频设备：名称、状态和音量。
+
+音频会话的摘要：应用程序名称、静音状态、音量和当前峰值音量。</value>
+  </data>
+  <data name="SensorsManager_BatterySensorsDescription" xml:space="preserve">
+    <value>提供传感器的当前充电状态、充满电时的估计分钟数、剩余电量百分比、剩余电量分钟数和电源线状态。</value>
+  </data>
+  <data name="SensorsManager_CpuLoadSensorDescription" xml:space="preserve">
+    <value>提供第一个CPU的当前负载百分比。</value>
+  </data>
+  <data name="SensorsManager_CurrentClockSpeedSensorDescription" xml:space="preserve">
+    <value>提供第一个CPU的当前时钟速度。</value>
+  </data>
+  <data name="SensorsManager_CurrentVolumeSensorDescription" xml:space="preserve">
+	  <value>提供当前音量级别的百分比。
+
+当前取决于默认设备的音量。</value>
+  </data>
+  <data name="SensorsManager_DisplaySensorsDescription" xml:space="preserve">
+    <value>提供传感器的显示数量、主显示器的名称，以及每个显示器的名称、分辨率和每像素位数。</value>
+  </data>
+  <data name="SensorsManager_DummySensorDescription" xml:space="preserve">
+    <value>用于测试目的的虚拟传感器，发送0到100之间的随机整数值。</value>
+  </data>
+  <data name="SensorsManager_GpuLoadSensorDescription" xml:space="preserve">
+    <value>提供第一个GPU的当前负载百分比。</value>
+  </data>
+  <data name="SensorsManager_GpuTemperatureSensorDescription" xml:space="preserve">
+    <value>提供第一个GPU的当前温度。</value>
+  </data>
+  <data name="SensorsManager_LastActiveSensorDescription" xml:space="preserve">
+    <value>提供一个包含用户最后输入时间的日期时间值。</value>
+  </data>
+  <data name="SensorsManager_LastBootSensorDescription" xml:space="preserve">
+	  <value>提供一个包含系统（重新）启动的最后时间的日期时间值。
+
+重要提示：Windows的快速启动选项可能会影响此值，因为这是一种休眠形式。您可以通过电源选项 -&gt; “选择电源按钮的操作” -&gt; 取消选中“启用快速启动”来禁用它。对于现代SSD机器，这并没有太大区别，但禁用可以确保在重启后获得干净状态。</value>
+  </data>
+  <data name="SensorsManager_LastSystemStateChangeSensorDescription" xml:space="preserve">
+	  <value>提供最后的系统状态更改：
+
+ApplicationStarted、Logoff、SystemShutdown、Resume、Suspend、ConsoleConnect、ConsoleDisconnect、RemoteConnect、RemoteDisconnect、SessionLock、SessionLogoff、SessionLogon、SessionRemoteControl和SessionUnlock。</value>
+  </data>
+  <data name="SensorsManager_LoggedUserSensorDescription" xml:space="preserve">
+	  <value>返回当前登录用户的名称。
+
+这将仅显示活动用户，如果没有，则回退为“空”。如果有多个，将使用第一个。</value>
+  </data>
+  <data name="SensorsManager_LoggedUsersSensorDescription" xml:space="preserve">
+	  <value>返回当前登录用户的json格式列表。
+
+这也将包含不活动的用户。如果您只想要当前活动用户，请使用LoggedUser传感器。</value>
+  </data>
+  <data name="SensorsManager_MemoryUsageSensorDescription" xml:space="preserve">
+    <value>提供已用内存的百分比。</value>
+  </data>
+  <data name="SensorsManager_MicrophoneActiveSensorDescription" xml:space="preserve">
+	  <value>提供一个布尔值，基于麦克风当前是否正在使用。
+
+注意：如果在卫星服务中使用，它将无法检测用户空间应用程序。</value>
+  </data>
+  <data name="SensorsManager_NamedWindowSensorDescription" xml:space="preserve">
+    <value>提供一个基于窗口当前是否打开（不必是活动）的开/关值。</value>
+  </data>
+  <data name="SensorsManager_NetworkSensorsDescription" xml:space="preserve">
+	  <value>提供所选网络卡的卡信息、配置、传输和包统计信息以及地址（ip、mac、dhcp、dns）。
+
+这是一个多值传感器。</value>
+  </data>
+  <data name="SensorsManager_PerformanceCounterSensorDescription" xml:space="preserve">
+	  <value>提供性能计数器的值。
+
+例如，内置的CPU负载传感器使用这些值：
+
+类别：处理器
+计数器：%处理器时间
+实例：_总计
+
+您可以通过Windows的“perfmon.exe”工具探索计数器。</value>
+  </data>
+  <data name="SensorsManager_ProcessActiveSensorDescription" xml:space="preserve">
+	  <value>提供进程的活动实例数量。
+
+注意：不要添加扩展名（例如，notepad.exe变为notepad）。</value>
+  </data>
+  <data name="SensorsManager_ServiceStateSensorDescription" xml:space="preserve">
+	  <value>返回提供的服务的状态：NotFound、Stopped、StartPending、StopPending、Running、ContinuePending、PausePending或Paused。
+
+确保提供“服务名称”，而不是“显示名称”。</value>
+  </data>
+  <data name="SensorsManager_SessionStateSensorDescription" xml:space="preserve">
+	  <value>提供当前会话状态：
+
+锁定、解锁或未知。
+
+使用LastSystemStateChangeSensor监控会话状态更改。</value>
+  </data>
+  <data name="SensorsManager_StorageSensorsDescription" xml:space="preserve">
+    <value>提供所有现有非可移动磁盘的标签、总大小（MB）、可用空间（MB）、已用空间（MB）和文件系统。</value>
+  </data>
+  <data name="SensorsManager_UserNotificationStateSensorDescription" xml:space="preserve">
+	  <value>提供当前用户状态：
+
+NotPresent、Busy、RunningDirect3dFullScreen、PresentationMode、AcceptsNotifications、QuietTime或RunningWindowsStoreApp。
+
+可以用于确定是否发送通知或TTS消息。</value>
+  </data>
+  <data name="SensorsManager_WebcamActiveSensorDescription" xml:space="preserve">
+	  <value>提供一个布尔值，基于网络摄像头当前是否正在使用。
+
+注意：如果在卫星服务中使用，它将无法检测用户空间应用程序。</value>
+  </data>
+  <data name="SensorsManager_WindowsUpdatesSensorsDescription" xml:space="preserve">
+	  <value>提供一个传感器，显示待处理的驱动程序更新数量、待处理的软件更新数量、一个包含所有待处理驱动程序更新信息的传感器（标题、kb文章id、隐藏、类型和类别）以及一个包含待处理软件更新的相同信息的传感器。
+
+这是一个耗费资源的请求，因此推荐的间隔为15分钟（900秒）。但它限制在10分钟，如果您提供较低的值，您将获得最后已知的列表。</value>
+  </data>
+  <data name="SensorsManager_WmiQuerySensorDescription" xml:space="preserve">
+    <value>提供WMI查询的结果。</value>
+  </data>
+  <data name="SettingsManager_LoadAppSettings_MessageBox1" xml:space="preserve">
+	  <value>加载设置时出错：
+
+{0}</value>
+  </data>
+  <data name="SettingsManager_StoreInitialSettings_MessageBox1" xml:space="preserve">
+	  <value>存储初始设置时出错：
+
+{0}</value>
+  </data>
+  <data name="SettingsManager_StoreAppSettings_MessageBox1" xml:space="preserve">
+	  <value>存储设置时出错：
+
+{0}</value>
+  </data>
+  <data name="StoredCommands_Load_MessageBox1" xml:space="preserve">
+	  <value>加载命令时出错：
+
+{0}</value>
+  </data>
+  <data name="StoredCommands_Store_MessageBox1" xml:space="preserve">
+	  <value>存储命令时出错：
+
+{0}</value>
+  </data>
+  <data name="StoredQuickActions_Load_MessageBox1" xml:space="preserve">
+	  <value>加载快速操作时出错：
+
+{0}</value>
+  </data>
+  <data name="StoredQuickActions_Store_MessageBox1" xml:space="preserve">
+	  <value>存储快速操作时出错：
+
+{0}</value>
+  </data>
+  <data name="StoredSensors_Load_MessageBox1" xml:space="preserve">
+	  <value>加载传感器时出错：
+
+{0}</value>
+  </data>
+  <data name="StoredSensors_Store_MessageBox1" xml:space="preserve">
+	  <value>存储传感器时出错：
+
+{0}</value>
+  </data>
+  <data name="Main_LblMqtt" xml:space="preserve">
+    <value>MQTT：</value>
+  </data>
+  <data name="Help_LblWiki" xml:space="preserve">
+    <value>维基</value>
+  </data>
+  <data name="Configuration_BtnStore_Busy" xml:space="preserve">
+    <value>忙，请稍候..</value>
+  </data>
+  <data name="ConfigGeneral_LblInterfaceLangauge" xml:space="preserve">
+    <value>界面&amp;语言</value>
+  </data>
+  <data name="About_LblOr" xml:space="preserve">
+    <value>或</value>
+  </data>
+  <data name="OnboardingManager_BtnNext_Finish" xml:space="preserve">
+    <value>完成</value>
+  </data>
+  <data name="OnboardingWelcome_LblInterfaceLangauge" xml:space="preserve">
+    <value>界面&amp;语言</value>
+  </data>
+  <data name="ServiceMqtt_SetMqttStatus_ConfigError" xml:space="preserve">
+    <value>缺少配置</value>
+  </data>
+  <data name="ServiceMqtt_SetMqttStatus_Connected" xml:space="preserve">
+    <value>已连接</value>
+  </data>
+  <data name="ServiceMqtt_SetMqttStatus_Connecting" xml:space="preserve">
+    <value>连接中..</value>
+  </data>
+  <data name="ServiceMqtt_SetMqttStatus_Disconnected" xml:space="preserve">
+    <value>已断开连接</value>
+  </data>
+  <data name="ServiceMqtt_SetMqttStatus_Error" xml:space="preserve">
+    <value>错误</value>
+  </data>
+  <data name="CommandType_CustomCommand" xml:space="preserve">
+    <value>自定义</value>
+  </data>
+  <data name="CommandType_CustomExecutorCommand" xml:space="preserve">
+    <value>自定义执行器</value>
+  </data>
+  <data name="CommandType_HibernateCommand" xml:space="preserve">
+    <value>休眠</value>
+  </data>
+  <data name="CommandType_KeyCommand" xml:space="preserve">
+    <value>键</value>
+  </data>
+  <data name="CommandType_LaunchUrlCommand" xml:space="preserve">
+    <value>启动URL</value>
+  </data>
+  <data name="CommandType_LockCommand" xml:space="preserve">
+    <value>锁定</value>
+  </data>
+  <data name="CommandType_LogOffCommand" xml:space="preserve">
+    <value>注销</value>
+  </data>
+  <data name="CommandType_MediaMuteCommand" xml:space="preserve">
+    <value>媒体静音</value>
+  </data>
+  <data name="CommandType_MediaNextCommand" xml:space="preserve">
+    <value>媒体下一曲</value>
+  </data>
+  <data name="CommandType_MediaPlayPauseCommand" xml:space="preserve">
+    <value>媒体播放/暂停</value>
+  </data>
+  <data name="CommandType_MediaPreviousCommand" xml:space="preserve">
+    <value>媒体上一曲</value>
+  </data>
+  <data name="CommandType_MediaVolumeDownCommand" xml:space="preserve">
+    <value>媒体音量减小</value>
+  </data>
+  <data name="CommandType_MediaVolumeUpCommand" xml:space="preserve">
+    <value>媒体音量增大</value>
+  </data>
+  <data name="CommandType_MultipleKeysCommand" xml:space="preserve">
+    <value>多个键</value>
+  </data>
+  <data name="CommandType_PowershellCommand" xml:space="preserve">
+    <value>Powershell</value>
+  </data>
+  <data name="CommandType_PublishAllSensorsCommand" xml:space="preserve">
+    <value>发布所有传感器</value>
+  </data>
+  <data name="CommandType_RestartCommand" xml:space="preserve">
+    <value>重启</value>
+  </data>
+  <data name="CommandType_ShutdownCommand" xml:space="preserve">
+    <value>关闭</value>
+  </data>
+  <data name="CommandType_SleepCommand" xml:space="preserve">
+    <value>睡眠</value>
+  </data>
+  <data name="UserNotificationState_AcceptsNotifications" xml:space="preserve">
+    <value>接受通知</value>
+  </data>
+  <data name="UserNotificationState_Busy" xml:space="preserve">
+    <value>忙碌</value>
+  </data>
+  <data name="UserNotificationState_NotPresent" xml:space="preserve">
+    <value>未出现</value>
+  </data>
+  <data name="UserNotificationState_PresentationMode" xml:space="preserve">
+    <value>演示模式</value>
+  </data>
+  <data name="UserNotificationState_QuietTime" xml:space="preserve">
+    <value>安静时间</value>
+  </data>
+  <data name="UserNotificationState_RunningDirect3dFullScreen" xml:space="preserve">
+    <value>运行Direct3d全屏</value>
+  </data>
+  <data name="UserNotificationState_RunningWindowsStoreApp" xml:space="preserve">
+    <value>运行Windows Store应用</value>
+  </data>
+  <data name="SystemStateEvent_ConsoleConnect" xml:space="preserve">
+    <value>控制台连接</value>
+  </data>
+  <data name="SystemStateEvent_ConsoleDisconnect" xml:space="preserve">
+    <value>控制台断开</value>
+  </data>
+  <data name="SystemStateEvent_HassAgentSatelliteServiceStarted" xml:space="preserve">
+    <value>HassAgent卫星服务已启动</value>
+  </data>
+  <data name="SystemStateEvent_HassAgentStarted" xml:space="preserve">
+    <value>HassAgent已启动</value>
+  </data>
+  <data name="SystemStateEvent_Logoff" xml:space="preserve">
+    <value>注销</value>
+  </data>
+  <data name="SystemStateEvent_RemoteConnect" xml:space="preserve">
+    <value>远程连接</value>
+  </data>
+  <data name="SystemStateEvent_RemoteDisconnect" xml:space="preserve">
+    <value>远程断开</value>
+  </data>
+  <data name="SystemStateEvent_Resume" xml:space="preserve">
+    <value>恢复</value>
+  </data>
+  <data name="SystemStateEvent_SessionLock" xml:space="preserve">
+    <value>会话锁定</value>
+  </data>
+  <data name="SystemStateEvent_SessionLogoff" xml:space="preserve">
+    <value>会话注销</value>
+  </data>
+  <data name="SystemStateEvent_SessionLogon" xml:space="preserve">
+    <value>会话登录</value>
+  </data>
+  <data name="SystemStateEvent_SessionRemoteControl" xml:space="preserve">
+    <value>会话远程控制</value>
+  </data>
+  <data name="SystemStateEvent_SessionUnlock" xml:space="preserve">
+    <value>会话解锁</value>
+  </data>
+  <data name="SystemStateEvent_Suspend" xml:space="preserve">
+    <value>挂起</value>
+  </data>
+  <data name="SystemStateEvent_SystemShutdown" xml:space="preserve">
+    <value>系统关机</value>
+  </data>
+  <data name="SensorType_ActiveWindowSensor" xml:space="preserve">
+    <value>活动窗口传感器</value>
+  </data>
+  <data name="SensorType_AudioSensors" xml:space="preserve">
+    <value>音频传感器</value>
+  </data>
+  <data name="SensorType_BatterySensors" xml:space="preserve">
+    <value>电池传感器</value>
+  </data>
+  <data name="SensorType_CpuLoadSensor" xml:space="preserve">
+    <value>CPU负载传感器</value>
+  </data>
+  <data name="SensorType_CurrentClockSpeedSensor" xml:space="preserve">
+    <value>当前时钟速度传感器</value>
+  </data>
+  <data name="SensorType_CurrentVolumeSensor" xml:space="preserve">
+    <value>当前音量传感器</value>
+  </data>
+  <data name="SensorType_DisplaySensors" xml:space="preserve">
+    <value>显示传感器</value>
+  </data>
+  <data name="SensorType_DummySensor" xml:space="preserve">
+    <value>虚拟传感器</value>
+  </data>
+  <data name="SensorType_GpuLoadSensor" xml:space="preserve">
+    <value>GPU负载传感器</value>
+  </data>
+  <data name="SensorType_GpuTemperatureSensor" xml:space="preserve">
+    <value>GPU温度传感器</value>
+  </data>
+  <data name="SensorType_LastActiveSensor" xml:space="preserve">
+    <value>最后活动传感器</value>
+  </data>
+  <data name="SensorType_LastBootSensor" xml:space="preserve">
+    <value>最后启动传感器</value>
+  </data>
+  <data name="SensorType_LastSystemStateChangeSensor" xml:space="preserve">
+    <value>最后系统状态变化传感器</value>
+  </data>
+  <data name="SensorType_LoggedUserSensor" xml:space="preserve">
+    <value>已登录用户传感器</value>
+  </data>
+  <data name="SensorType_LoggedUsersSensor" xml:space="preserve">
+    <value>已登录用户传感器</value>
+  </data>
+  <data name="SensorType_MemoryUsageSensor" xml:space="preserve">
+    <value>内存使用传感器</value>
+  </data>
+  <data name="SensorType_MicrophoneActiveSensor" xml:space="preserve">
+    <value>麦克风活动传感器</value>
+  </data>
+  <data name="SensorType_NamedWindowSensor" xml:space="preserve">
+    <value>命名窗口传感器</value>
+  </data>
+  <data name="SensorType_NetworkSensors" xml:space="preserve">
+    <value>网络传感器</value>
+  </data>
+  <data name="SensorType_PerformanceCounterSensor" xml:space="preserve">
+    <value>性能计数器传感器</value>
+  </data>
+  <data name="SensorType_ProcessActiveSensor" xml:space="preserve">
+    <value>活动进程传感器</value>
+  </data>
+  <data name="SensorType_ServiceStateSensor" xml:space="preserve">
+    <value>服务状态传感器</value>
+  </data>
+  <data name="SensorType_SessionStateSensor" xml:space="preserve">
+    <value>会话状态传感器</value>
+  </data>
+  <data name="SensorType_StorageSensors" xml:space="preserve">
+    <value>存储传感器</value>
+  </data>
+  <data name="SensorType_UserNotificationStateSensor" xml:space="preserve">
+    <value>用户通知状态传感器</value>
+  </data>
+  <data name="SensorType_WebcamActiveSensor" xml:space="preserve">
+    <value>网络摄像头活动传感器</value>
+  </data>
+  <data name="SensorType_WindowsUpdatesSensors" xml:space="preserve">
+    <value>Windows更新传感器</value>
+  </data>
+  <data name="SensorType_WmiQuerySensor" xml:space="preserve">
+    <value>WMI查询传感器</value>
+  </data>
+  <data name="HassDomain_Automation" xml:space="preserve">
+    <value>自动化</value>
+  </data>
+  <data name="HassDomain_Climate" xml:space="preserve">
+    <value>气候</value>
+  </data>
+  <data name="HassDomain_Cover" xml:space="preserve">
+    <value>覆盖</value>
+  </data>
+  <data name="HassDomain_InputBoolean" xml:space="preserve">
+    <value>输入布尔值</value>
+  </data>
+  <data name="HassDomain_Light" xml:space="preserve">
+    <value>灯光</value>
+  </data>
+  <data name="HassDomain_MediaPlayer" xml:space="preserve">
+    <value>媒体播放器</value>
+  </data>
+  <data name="HassDomain_Scene" xml:space="preserve">
+    <value>场景</value>
+  </data>
+  <data name="HassDomain_Script" xml:space="preserve">
+    <value>脚本</value>
+  </data>
+  <data name="HassDomain_Switch" xml:space="preserve">
+    <value>开关</value>
+  </data>
+  <data name="HassAction_Close" xml:space="preserve">
+    <value>关闭</value>
+  </data>
+  <data name="HassAction_Off" xml:space="preserve">
+    <value>关闭</value>
+  </data>
+  <data name="HassAction_On" xml:space="preserve">
+    <value>开启</value>
+  </data>
+  <data name="HassAction_Open" xml:space="preserve">
+    <value>打开</value>
+  </data>
+  <data name="HassAction_Pause" xml:space="preserve">
+    <value>暂停</value>
+  </data>
+  <data name="HassAction_Play" xml:space="preserve">
+    <value>播放</value>
+  </data>
+  <data name="HassAction_Stop" xml:space="preserve">
+    <value>停止</value>
+  </data>
+  <data name="HassAction_Toggle" xml:space="preserve">
+    <value>切换</value>
+  </data>
+  <data name="CommandEntityType_Button" xml:space="preserve">
+    <value>按钮</value>
+  </data>
+  <data name="CommandEntityType_Light" xml:space="preserve">
+    <value>灯光</value>
+  </data>
+  <data name="CommandEntityType_Lock" xml:space="preserve">
+    <value>锁</value>
+  </data>
+  <data name="CommandEntityType_Siren" xml:space="preserve">
+    <value>警报</value>
+  </data>
+  <data name="CommandEntityType_Switch" xml:space="preserve">
+    <value>开关</value>
+  </data>
+  <data name="ComponentStatus_Connecting" xml:space="preserve">
+    <value>连接中..</value>
+  </data>
+  <data name="ComponentStatus_Disabled" xml:space="preserve">
+    <value>已禁用</value>
+  </data>
+  <data name="ComponentStatus_Failed" xml:space="preserve">
+    <value>失败</value>
+  </data>
+  <data name="ComponentStatus_Loading" xml:space="preserve">
+    <value>加载中..</value>
+  </data>
+  <data name="ComponentStatus_Ok" xml:space="preserve">
+	  <value>正在运行</value>
+  </data>
+  <data name="ComponentStatus_Stopped" xml:space="preserve">
+    <value>已停止</value>
+  </data>
+  <data name="LockState_Locked" xml:space="preserve">
+    <value>已锁定</value>
+  </data>
+  <data name="LockState_Unknown" xml:space="preserve">
+    <value>未知</value>
+  </data>
+  <data name="LockState_Unlocked" xml:space="preserve">
+    <value>已解锁</value>
+  </data>
+  <data name="SensorType_GeoLocationSensor" xml:space="preserve">
+    <value>地理位置传感器</value>
+  </data>
+  <data name="SensorsMod_All" xml:space="preserve">
+    <value>所有</value>
+  </data>
+  <data name="SensorsMod_BtnTest" xml:space="preserve">
+    <value>&amp;测试</value>
+  </data>
+  <data name="SensorsMod_BtnTest_PerformanceCounter" xml:space="preserve">
+    <value>测试性能计数器</value>
+  </data>
+  <data name="SensorsMod_BtnTest_Wmi" xml:space="preserve">
+    <value>测试WMI查询</value>
+  </data>
+  <data name="SensorsMod_LblSetting1_Network" xml:space="preserve">
+    <value>网络卡</value>
+  </data>
+  <data name="SensorsMod_TestPerformanceCounter_MessageBox1" xml:space="preserve">
+    <value>首先输入类别和计数器。</value>
+  </data>
+  <data name="SensorsMod_TestPerformanceCounter_MessageBox2" xml:space="preserve">
+	  <value>测试成功执行，结果值：
+
+{0}</value>
+  </data>
+  <data name="SensorsMod_TestPerformanceCounter_MessageBox3" xml:space="preserve">
+	  <value>测试未能执行：
+
+{0}
+
+您想打开日志文件夹吗？</value>
+  </data>
+  <data name="SensorsMod_TestWmi_MessageBox1" xml:space="preserve">
+    <value>首先输入WMI查询。</value>
+  </data>
+  <data name="SensorsMod_TestWmi_MessageBox2" xml:space="preserve">
+	  <value>查询成功执行，结果值：
+
+{0}</value>
+  </data>
+  <data name="SensorsMod_TestWmi_MessageBox3" xml:space="preserve">
+	  <value>查询未能执行：
+
+{0}
+
+您想打开日志文件夹吗？</value>
+  </data>
+  <data name="SensorsMod_WmiTestFailed" xml:space="preserve">
+	  <value>看起来您的范围格式不正确，它应该可能以这样的方式开始：
+
+\\.\ROOT\
+
+您输入的范围：
+
+{0}
+
+提示：确保您没有将范围和查询字段搞混。
+
+您仍然想使用当前值吗？</value>
+  </data>
+  <data name="SystemStateEvent_ApplicationStarted" xml:space="preserve">
+    <value>应用程序已启动</value>
+  </data>
+  <data name="ServiceGeneral_LblInfo2" xml:space="preserve">
+    <value>您可以使用卫星服务在不登录的情况下运行传感器和命令。并非所有类型都可用，例如“LaunchUrl”命令只能作为常规命令添加。</value>
+  </data>
+  <data name="SensorsConfig_ClmValue" xml:space="preserve">
+    <value>最后已知值</value>
+  </data>
+  <data name="LocalApiManager_Initialize_MessageBox1" xml:space="preserve">
+	  <value>尝试将API绑定到端口{0}时出错。
+
+确保没有其他HASS.Agent实例正在运行，并且端口可用且已注册。</value>
+  </data>
+  <data name="CommandType_SendWindowToFrontCommand" xml:space="preserve">
+    <value>将窗口发送到前面</value>
+  </data>
+  <data name="CommandType_WebViewCommand" xml:space="preserve">
+    <value>网页视图</value>
+  </data>
+  <data name="CommandsManager_WebViewCommandDescription" xml:space="preserve">
+	  <value>显示一个带有提供的URL的窗口。
+
+这与“启动URL”命令不同，因为它不会加载完整的浏览器，而只是将提供的URL在自己的窗口中加载。
+
+您可以用它快速显示Home Assistant的仪表板。
+
+默认情况下，它会无限期存储cookie，因此您只需登录一次。</value>
+  </data>
+  <data name="HassDomain_HASSAgentCommands" xml:space="preserve">
+    <value>HASS.Agent命令</value>
+  </data>
+  <data name="CommandsManager_CommandsManager_SendWindowToFrontCommandDescription" xml:space="preserve">
+	  <value>查找指定的进程，并尝试将其主窗口发送到前面。
+
+如果应用程序被最小化，它将被恢复。
+
+示例：如果您想将VLC发送到前台，请使用“vlc”。</value>
+  </data>
+  <data name="CommandsMod_BtnStore_MessageBox8" xml:space="preserve">
+	  <value>如果您不配置该命令，您只能通过Home Assistant使用此实体的“操作”值，它将使用默认设置出现，按原样运行将没有任何操作。
+
+您确定要这样做吗？</value>
+  </data>
+  <data name="ConfigLocalStorage_BtnClearAudioCache" xml:space="preserve">
+    <value>清除音频缓存</value>
+  </data>
+  <data name="ConfigLocalStorage_BtnClearAudioCache_InfoText1" xml:space="preserve">
+    <value>清理中..</value>
+  </data>
+  <data name="ConfigLocalStorage_BtnClearAudioCache_MessageBox1" xml:space="preserve">
+    <value>音频缓存已清除！</value>
+  </data>
+  <data name="ConfigLocalStorage_BtnClearWebViewCache" xml:space="preserve">
+    <value>清除网页视图缓存</value>
+  </data>
+  <data name="ConfigLocalStorage_BtnClearWebViewCache_InfoText1" xml:space="preserve">
+    <value>清理中..</value>
+  </data>
+  <data name="ConfigLocalStorage_BtnClearWebViewCache_MessageBox1" xml:space="preserve">
+    <value>网页视图缓存已清除！</value>
+  </data>
+  <data name="Main_CheckDpiScalingFactor_MessageBox1" xml:space="preserve">
+	  <value>看起来您正在使用替代缩放。这可能导致HASS.Agent的某些部分看起来不如预期。
+
+请在GitHub上报告任何无法使用的方面。谢谢！
+
+注意：此消息仅显示一次。</value>
+  </data>
+  <data name="WebViewCommandConfig_SetStoredVariables_MessageBox1" xml:space="preserve">
+    <value>无法加载存储的命令设置，正在重置为默认值。</value>
+  </data>
+  <data name="CommandsMod_BtnConfigureCommand" xml:space="preserve">
+    <value>配置命令和参数</value>
+  </data>
+  <data name="ConfigLocalApi_BtnExecutePortReservation" xml:space="preserve">
+    <value>执行端口预留</value>
+  </data>
+  <data name="ConfigLocalApi_CbLocalApiActive" xml:space="preserve">
+    <value>启用本地API</value>
+  </data>
+  <data name="ConfigLocalApi_LblInfo1" xml:space="preserve">
+	  <value>HASS.Agent有自己的本地API，因此Home Assistant可以发送请求（例如发送通知）。您可以在这里全局配置它，然后可以配置依赖的部分（当前为通知和媒体播放器）。
+
+注意：这不是新集成正常工作的必要条件。只有在您不使用MQTT时才启用和使用它。</value>
+  </data>
+  <data name="ConfigLocalApi_LblInfo2" xml:space="preserve">
+    <value>为了能够监听请求，HASS.Agent需要保留其端口并在您的防火墙中打开。您可以使用此按钮为您完成此操作。</value>
+  </data>
+  <data name="ConfigLocalApi_LblPort" xml:space="preserve">
+    <value>端口</value>
+  </data>
+  <data name="ConfigLocalStorage_LblAudioCacheLocation" xml:space="preserve">
+    <value>音频缓存位置</value>
+  </data>
+  <data name="ConfigLocalStorage_LblImageCacheDays" xml:space="preserve">
+    <value>天</value>
+  </data>
+  <data name="ConfigLocalStorage_LblImageCacheLocation" xml:space="preserve">
+    <value>图像缓存位置</value>
+  </data>
+  <data name="ConfigLocalStorage_LblKeepAudio" xml:space="preserve">
+    <value>保留音频</value>
+  </data>
+  <data name="ConfigLocalStorage_LblKeepImages" xml:space="preserve">
+    <value>保留图像</value>
+  </data>
+  <data name="ConfigLocalStorage_LblKeepWebView" xml:space="preserve">
+    <value>每隔清除缓存</value>
+  </data>
+  <data name="ConfigLocalStorage_LblWebViewCacheLocation" xml:space="preserve">
+    <value>网页视图缓存位置</value>
+  </data>
+  <data name="ConfigMediaPlayer_BtnMediaPlayerReadme" xml:space="preserve">
+    <value>媒体播放器和文档</value>
+  </data>
+  <data name="ConfigMediaPlayer_CbEnableMediaPlayer" xml:space="preserve">
+    <value>启用媒体播放器功能</value>
+  </data>
+  <data name="ConfigMediaPlayer_LblInfo1" xml:space="preserve">
+    <value>HASS.Agent可以作为Home Assistant的媒体播放器，因此您将能够查看和控制任何正在播放的媒体，并发送文本到语音。如果您启用了MQTT，您的设备将自动添加。否则，请手动配置集成以使用本地API。</value>
+  </data>
+  <data name="ConfigMediaPlayer_LblInfo2" xml:space="preserve">
+	  <value>如果某些功能无法正常工作，请确保您尝试以下步骤：
+
+- 安装HASS.Agent集成
+- 重启Home Assistant
+- 确保HASS.Agent处于活动状态并启用MQTT！
+- 您的设备应自动被检测并添加为实体
+- 可选：使用本地API手动添加</value>
+  </data>
+  <data name="ConfigMediaPlayer_LblLocalApiDisabled" xml:space="preserve">
+    <value>本地API已禁用，但媒体播放器需要它才能正常工作。</value>
+  </data>
+  <data name="ConfigMqtt_CbMqttTls" xml:space="preserve">
+    <value>启用TLS</value>
+  </data>
+  <data name="ConfigNotifications_LblLocalApiDisabled" xml:space="preserve">
+    <value>本地API已禁用，但媒体播放器需要它才能正常工作。</value>
+  </data>
+  <data name="ConfigTrayIcon_BtnShowWebViewPreview" xml:space="preserve">
+    <value>显示预览</value>
+  </data>
+  <data name="ConfigTrayIcon_CbDefaultMenu" xml:space="preserve">
+    <value>在鼠标左键单击时显示默认菜单</value>
+  </data>
+  <data name="ConfigTrayIcon_CbShowWebView" xml:space="preserve">
+    <value>显示网页视图</value>
+  </data>
+  <data name="ConfigTrayIcon_CbWebViewKeepLoaded" xml:space="preserve">
+    <value>在后台保持页面加载</value>
+  </data>
+  <data name="ConfigTrayIcon_LblInfo1" xml:space="preserve">
+    <value>控制托盘图标在右键单击时的行为。</value>
+  </data>
+  <data name="ConfigTrayIcon_LblInfo2" xml:space="preserve">
+    <value>（这会使用额外的资源，但减少加载时间。）</value>
+  </data>
+  <data name="ConfigTrayIcon_LblWebViewSize" xml:space="preserve">
+    <value>大小（像素）</value>
+  </data>
+  <data name="ConfigTrayIcon_LblWebViewUrl" xml:space="preserve">
+    <value>网页视图URL（例如，您的Home Assistant仪表板URL）</value>
+  </data>
+  <data name="Configuration_TablLocalApi" xml:space="preserve">
+    <value>本地API</value>
+  </data>
+  <data name="Configuration_TabMediaPlayer" xml:space="preserve">
+    <value>媒体播放器</value>
+  </data>
+  <data name="Configuration_TabTrayIcon" xml:space="preserve">
+    <value>托盘图标</value>
+  </data>
+  <data name="HelperFunctions_InputLanguageCheckDiffers_ErrorMsg1" xml:space="preserve">
+    <value>您的输入语言'{0}'已知与默认的CTRL-ALT-Q热键冲突。请设置您自己的。</value>
+  </data>
+  <data name="HelperFunctions_InputLanguageCheckDiffers_ErrorMsg2" xml:space="preserve">
+    <value>您的输入语言'{0}'未知，可能与默认的CTRL-ALT-Q热键冲突。请确保检查。如果是，请考虑在GitHub上打开一个票据，以便将其添加到列表中。</value>
+  </data>
+  <data name="HelperFunctions_ParseMultipleKeys_ErrorMsg1" xml:space="preserve">
+    <value>未找到键</value>
+  </data>
+  <data name="HelperFunctions_ParseMultipleKeys_ErrorMsg2" xml:space="preserve">
+    <value>缺少括号，请用[ ]开始和结束所有键</value>
+  </data>
+  <data name="HelperFunctions_ParseMultipleKeys_ErrorMsg3" xml:space="preserve">
+    <value>解析键时出错，请检查日志以获取更多信息。</value>
+  </data>
+  <data name="HelperFunctions_ParseMultipleKeys_ErrorMsg4" xml:space="preserve">
+    <value>打开括号（'['）的数量与关闭括号（']'）的数量不对应。({0}到{1})</value>
+  </data>
+  <data name="Help_LblDocumentation" xml:space="preserve">
+    <value>文档</value>
+  </data>
+  <data name="Help_LblDocumentationInfo" xml:space="preserve">
+    <value>文档和使用示例</value>
+  </data>
+  <data name="Main_BtnCheckForUpdate" xml:space="preserve">
+    <value>检查更新</value>
+  </data>
+  <data name="Main_LblLocalApi" xml:space="preserve">
+    <value>本地API：</value>
+  </data>
+  <data name="Main_TsSatelliteService" xml:space="preserve">
+    <value>管理卫星服务</value>
+  </data>
+  <data name="OnboardingIntegrations_LblInfo1" xml:space="preserve">
+	  <value>要使用通知，您需要在Home Assistant中安装和配置HASS.Agent-notifier集成。
+
+使用HACS非常简单，但您也可以手动安装。请访问下面的链接以获取更多信息。</value>
+  </data>
+  <data name="OnboardingIntegrations_LblInfo2" xml:space="preserve">
+	  <value>确保您遵循以下步骤：
+
+- 安装HASS.Agent-Notifier和/或HASS.Agent-MediaPlayer集成
+- 重启Home Assistant
+- 配置通知和/或媒体播放器实体
+- 重启Home Assistant</value>
+  </data>
+  <data name="OnboardingIntegrations_LblInfo3" xml:space="preserve">
+    <value>媒体播放器也是如此，此集成允许您将设备控制为媒体播放器实体，查看正在播放的内容并发送文本到语音。</value>
+  </data>
+  <data name="OnboardingIntegrations_LblMediaPlayerIntegration" xml:space="preserve">
+    <value>HASS.Agent-MediaPlayer GitHub页面</value>
+  </data>
+  <data name="OnboardingIntegrations_LblNotifierIntegration" xml:space="preserve">
+    <value>HASS.Agent-集成 GitHub页面</value>
+  </data>
+  <data name="OnboardingLocalApi_CbEnableLocalApi" xml:space="preserve">
+    <value>是的，启用本地API在端口</value>
+  </data>
+  <data name="OnboardingLocalApi_CbEnableMediaPlayer" xml:space="preserve">
+    <value>启用媒体播放器和文本到语音（TTS）</value>
+  </data>
+  <data name="OnboardingLocalApi_CbEnableNotifications" xml:space="preserve">
+    <value>启用通知</value>
+  </data>
+  <data name="OnboardingLocalApi_LblInfo1" xml:space="preserve">
+	  <value>HASS.Agent有自己的内部API，因此Home Assistant可以发送请求（如通知或文本到语音）。
+
+您想启用它吗？</value>
+  </data>
+  <data name="OnboardingLocalApi_LblInfo2" xml:space="preserve">
+    <value>您可以选择要启用的模块。它们需要HA集成，但请放心，下一页将为您提供有关如何设置它们的更多信息。</value>
+  </data>
+  <data name="OnboardingLocalApi_LblTip1" xml:space="preserve">
+    <value>注意：5115是默认端口，只有在您在Home Assistant中更改时才更改它。</value>
+  </data>
+  <data name="OnboardingMqtt_CbMqttTls" xml:space="preserve">
+    <value>启用TLS</value>
+  </data>
+  <data name="OnboardingWelcome_Store_MessageBox1" xml:space="preserve">
+	  <value>您的设备名称包含一些HA不允许的字符（仅字母、数字和空格）。
+
+最终名称是：{0}
+
+您想使用该版本吗？</value>
+  </data>
+  <data name="Onboarding_Title" xml:space="preserve">
+    <value>HASS.Agent入门</value>
+  </data>
+  <data name="ServiceGeneral_LblAuthStored" xml:space="preserve">
+    <value>已存储！</value>
+  </data>
+  <data name="ServiceMqtt_CbMqttTls" xml:space="preserve">
+    <value>启用TLS</value>
+  </data>
+  <data name="WebViewCommandConfig_BtnSave" xml:space="preserve">
+    <value>保存</value>
+  </data>
+  <data name="WebViewCommandConfig_CbCenterScreen" xml:space="preserve">
+    <value>始终居中显示在屏幕上</value>
+  </data>
+  <data name="WebViewCommandConfig_CbShowTitleBar" xml:space="preserve">
+    <value>显示窗口的标题栏</value>
+  </data>
+  <data name="WebViewCommandConfig_CbTopMost" xml:space="preserve">
+    <value>将窗口设置为“始终在顶部”</value>
+  </data>
+  <data name="WebViewCommandConfig_LblInfo1" xml:space="preserve">
+    <value>拖动并调整此窗口的大小以设置您的网页视图命令的大小和位置。</value>
+  </data>
+  <data name="WebViewCommandConfig_LblLocation" xml:space="preserve">
+    <value>位置</value>
+  </data>
+  <data name="WebViewCommandConfig_LblSize" xml:space="preserve">
+    <value>大小</value>
+  </data>
+  <data name="WebViewCommandConfig_LblTip1" xml:space="preserve">
+    <value>提示：按ESC键关闭网页视图。</value>
+  </data>
+  <data name="WebViewCommandConfig_LblUrl" xml:space="preserve">
+    <value>网址</value>
+  </data>
+  <data name="WebViewCommandConfig_Title" xml:space="preserve">
+    <value>网页视图配置</value>
+  </data>
+  <data name="WebView_Title" xml:space="preserve">
+    <value>网页视图</value>
+  </data>
+  <data name="CommandsMod_BtnStore_MessageBox9" xml:space="preserve">
+	  <value>您提供的键码不是有效的数字！
+
+请确保键码字段处于焦点状态并按下您想要模拟的键，键码将为您生成。</value>
+  </data>
+  <data name="ConfigGeneral_CbEnableDeviceNameSanitation" xml:space="preserve">
+    <value>启用设备名称清理</value>
+  </data>
+  <data name="ConfigGeneral_CbEnableStateNotifications" xml:space="preserve">
+    <value>启用状态通知</value>
+  </data>
+  <data name="ConfigGeneral_LblInfo5" xml:space="preserve">
+    <value>HASS.Agent将清理您的设备名称，以确保HA接受它，如果您确定您的名称将被接受，可以在下面覆盖此规则。</value>
+  </data>
+  <data name="ConfigGeneral_LblInfo6" xml:space="preserve">
+    <value>HASS.Agent在模块状态更改时发送通知，您可以在下面调整是否希望接收这些通知。</value>
+  </data>
+  <data name="Configuration_ProcessChanges_MessageBox6" xml:space="preserve">
+	  <value>您已更改设备名称。
+
+您所有的传感器和命令现在将被取消发布，并在HASS.Agent重启后重新发布。
+
+别担心！它们将保持当前名称，因此您的自动化和脚本将继续工作。
+
+注意：您禁用了清理，因此请确保您的设备名称被Home Assistant接受。</value>
+  </data>
+  <data name="SensorType_PrintersSensors" xml:space="preserve">
+    <value>打印机</value>
+  </data>
+  <data name="CommandType_MonitorSleepCommand" xml:space="preserve">
+    <value>监视器休眠</value>
+  </data>
+  <data name="CommandType_MonitorWakeCommand" xml:space="preserve">
+    <value>监视器唤醒</value>
+  </data>
+  <data name="MonitorPowerEvent_PowerOn" xml:space="preserve">
+    <value>开机</value>
+  </data>
+  <data name="MonitorPowerEvent_PowerOff" xml:space="preserve">
+    <value>关机</value>
+  </data>
+  <data name="MonitorPowerEvent_Dimmed" xml:space="preserve">
+    <value>调暗</value>
+  </data>
+  <data name="MonitorPowerEvent_Unknown" xml:space="preserve">
+    <value>未知</value>
+  </data>
+  <data name="SensorType_MonitorPowerStateSensor" xml:space="preserve">
+    <value>监视器电源状态传感器</value>
+  </data>
+  <data name="SensorType_PowershellSensor" xml:space="preserve">
+    <value>Powershell传感器</value>
+  </data>
+  <data name="CommandType_SetVolumeCommand" xml:space="preserve">
+    <value>设置音量</value>
+  </data>
+  <data name="WindowState_Maximized" xml:space="preserve">
+    <value>最大化</value>
+  </data>
+  <data name="WindowState_Minimized" xml:space="preserve">
+    <value>最小化</value>
+  </data>
+  <data name="WindowState_Normal" xml:space="preserve">
+    <value>正常</value>
+  </data>
+  <data name="WindowState_Unknown" xml:space="preserve">
+    <value>未知</value>
+  </data>
+  <data name="WindowState_Hidden" xml:space="preserve">
+    <value>隐藏</value>
+  </data>
+  <data name="SensorType_WindowStateSensor" xml:space="preserve">
+    <value>窗口状态传感器</value>
+  </data>
+  <data name="SensorType_WebcamProcessSensor" xml:space="preserve">
+    <value>网络摄像头进程传感器</value>
+  </data>
+  <data name="SensorType_MicrophoneProcessSensor" xml:space="preserve">
+    <value>麦克风进程传感器</value>
+  </data>
+  <data name="CommandsManager_MonitorSleepCommandDescription" xml:space="preserve">
+    <value>将所有监视器置于休眠（低功耗）模式。</value>
+  </data>
+  <data name="CommandsManager_MonitorWakeCommandDescription" xml:space="preserve">
+    <value>通过模拟“向上箭头”按键来尝试唤醒所有监视器。</value>
+  </data>
+  <data name="CommandsManager_SetVolumeCommandDescription" xml:space="preserve">
+    <value>将当前默认音频设备的音量设置为指定级别。</value>
+  </data>
+  <data name="CommandsMod_BtnStore_MessageBox10" xml:space="preserve">
+    <value>请输入0-100之间的值作为所需的音量级别！</value>
+  </data>
+  <data name="CommandsMod_CommandsMod" xml:space="preserve">
+    <value>命令</value>
+  </data>
+  <data name="CommandsMod_MessageBox_Action2" xml:space="preserve">
+	  <value>如果您不输入音量值，您只能通过Home Assistant使用此实体的“操作”值。按原样运行将不会有任何效果。
+
+您确定要这样做吗？</value>
+  </data>
+  <data name="CommandsMod_MessageBox_Sanitize" xml:space="preserve">
+	  <value>您提供的名称包含不支持的字符，将无法使用。建议的版本是：
+
+{0}
+
+您想使用这个版本吗？</value>
+  </data>
+  <data name="ConfigHomeAssistantApi_BtnTestApi_MessageBox5" xml:space="preserve">
+	  <value>您提供的API令牌似乎无效，请确保您选择了整个令牌（不要使用CTRL + A或双击）。有效的API密钥包含三个部分，由两个点分隔。
+
+您确定要使用此密钥吗？</value>
+  </data>
+  <data name="ConfigHomeAssistantApi_BtnTestApi_MessageBox6" xml:space="preserve">
+	  <value>您提供的URI似乎无效，有效的URI可能看起来像以下任意一个：
+- http://homeassistant.local:8123
+- http://192.168.0.1:8123
+
+您确定要使用此URI吗？</value>
+  </data>
+  <data name="ConfigHomeAssistantApi_BtnTestApi_Testing" xml:space="preserve">
+    <value>测试中..</value>
+  </data>
+  <data name="ConfigMediaPlayer_LblConnectivityDisabled" xml:space="preserve">
+    <value>本地API和MQTT均已禁用，但集成至少需要一个才能正常工作</value>
+  </data>
+  <data name="ConfigMqtt_CbEnableMqtt" xml:space="preserve">
+    <value>启用MQTT</value>
+  </data>
+  <data name="ConfigMqtt_LblMqttDisabledWarning" xml:space="preserve">
+    <value>如果未启用MQTT，命令和传感器将无法工作！</value>
+  </data>
+  <data name="ConfigNotifications_LblConnectivityDisabled" xml:space="preserve">
+    <value>本地API和MQTT均已禁用，但集成至少需要一个才能正常工作</value>
+  </data>
+  <data name="ConfigService_BtnManageService" xml:space="preserve">
+    <value>管理服务</value>
+  </data>
+  <data name="ConfigService_BtnManageService_MessageBox1" xml:space="preserve">
+	  <value>服务当前已停止，无法配置。
+
+请先启动服务以进行配置。</value>
+  </data>
+  <data name="ConfigService_LblInfo5" xml:space="preserve">
+    <value>如果您想管理服务（添加命令和传感器，修改设置），可以在这里进行，或使用主窗口上的“卫星服务”按钮。</value>
+  </data>
+  <data name="ConfigTrayIcon_CbWebViewShowMenuOnLeftClick" xml:space="preserve">
+    <value>在鼠标左键单击时显示默认菜单</value>
+  </data>
+  <data name="Configuration_CheckValues_MessageBox1" xml:space="preserve">
+	  <value>您的Home Assistant API令牌看起来不正确。确保您选择了整个令牌（不要使用CTRL+A或双击）。
+它应包含三个部分（由两个点分隔）。
+
+您确定要这样使用吗？</value>
+  </data>
+  <data name="Configuration_CheckValues_MessageBox2" xml:space="preserve">
+	  <value>您的Home Assistant URI看起来不正确。它应类似于“http://homeassistant.local:8123”或“https://192.168.0.1:8123”。
+
+您确定要这样使用吗？</value>
+  </data>
+  <data name="Configuration_CheckValues_MessageBox3" xml:space="preserve">
+	  <value>您的MQTT代理URI看起来不正确。它应类似于“homeassistant.local”或“192.168.0.1”。
+
+您确定要这样使用吗？</value>
+  </data>
+  <data name="Donate_BtnClose" xml:space="preserve">
+    <value>关闭</value>
+  </data>
+  <data name="Donate_CbHideDonateButton" xml:space="preserve">
+    <value>我已经捐赠，隐藏主窗口上的按钮。</value>
+  </data>
+  <data name="Donate_LblInfo" xml:space="preserve">
+	  <value>HASS.Agent完全免费，并将始终保持这种状态，没有限制！
+
+但是，开发和维护此工具（以及周围的一切，例如支持和文档）需要花费大量时间。
+
+像大多数开发人员一样，我依赖咖啡因 - 如果您能提供一杯咖啡，我将非常感激！</value>
+  </data>
+  <data name="Donate_Title" xml:space="preserve">
+    <value>捐赠</value>
+  </data>
+  <data name="Main_NotifyIcon_MouseClick_MessageBox1" xml:space="preserve">
+    <value>未设置URL！请通过配置 -&gt; 托盘图标配置网页视图。</value>
+  </data>
+  <data name="Main_TsCheckForUpdates" xml:space="preserve">
+    <value>检查更新</value>
+  </data>
+  <data name="OnboardingApi_BtnTest_MessageBox5" xml:space="preserve">
+	  <value>您提供的API令牌似乎无效，请确保您选择了整个令牌（不要使用CTRL + A或双击）。有效的API密钥包含三个部分，由两个点分隔。
+
+您确定要使用此密钥吗？</value>
+  </data>
+  <data name="OnboardingApi_BtnTest_MessageBox6" xml:space="preserve">
+	  <value>您提供的URI似乎无效，有效的URI可能看起来像以下任意一个：
+- http://homeassistant.local:8123
+- http://192.168.0.1:8123
+
+您确定要使用此URI吗？</value>
+  </data>
+  <data name="OnboardingDone_LblInfo6" xml:space="preserve">
+    <value>开发和维护此工具（以及周围的一切）需要花费大量时间。像大多数开发人员一样，我依赖咖啡因 - 如果您能提供一杯咖啡，我将非常感激！</value>
+  </data>
+  <data name="OnboardingDone_LblTip2" xml:space="preserve">
+    <value>提示：其他捐赠方式可在关于窗口中找到。</value>
+  </data>
+  <data name="OnboardingIntegrations_CbEnableMediaPlayer" xml:space="preserve">
+    <value>启用媒体播放器（包括文本到语音）</value>
+  </data>
+  <data name="OnboardingIntegrations_CbEnableNotifications" xml:space="preserve">
+    <value>启用通知</value>
+  </data>
+  <data name="OnboardingMqtt_CbEnableMqtt" xml:space="preserve">
+    <value>启用MQTT</value>
+  </data>
+  <data name="PostUpdate_PostUpdate" xml:space="preserve">
+    <value>HASS.Agent更新后</value>
+  </data>
+  <data name="SensorsManager_BluetoothDevicesSensorDescription" xml:space="preserve">
+	  <value>提供一个传感器，显示找到的蓝牙设备数量。
+
+设备及其连接状态作为属性添加。</value>
+  </data>
+  <data name="SensorsManager_BluetoothLeDevicesSensorDescription" xml:space="preserve">
+	  <value>提供一个传感器，显示找到的蓝牙LE设备数量。
+
+设备及其连接状态作为属性添加。
+
+仅显示自上次报告以来看到的设备，即当传感器发布时，列表会清空。</value>
+  </data>
+  <data name="SensorsManager_GeoLocationSensorDescription" xml:space="preserve">
+	  <value>返回您当前的纬度、经度和高度，以逗号分隔的值。
+
+确保启用Windows的位置服务！
+
+根据您的Windows版本，可以在新的控制面板中找到 -&gt; “隐私和安全” -&gt; “位置”。</value>
+  </data>
+  <data name="SensorsManager_MicrophoneProcessSensorDescription" xml:space="preserve">
+	  <value>提供当前使用麦克风的进程的名称。
+
+注意：如果在卫星服务中使用，它将无法检测用户空间应用程序。</value>
+  </data>
+  <data name="SensorsManager_MonitorPowerStateSensorDescription" xml:space="preserve">
+	  <value>提供最后一次监视器电源状态更改：
+
+调暗、关机、开机和未知。</value>
+  </data>
+  <data name="SensorsManager_PowershellSensorDescription" xml:space="preserve">
+	  <value>返回提供的Powershell命令或脚本的结果。
+
+将结果转换为文本。</value>
+  </data>
+  <data name="SensorsManager_PrintersSensorsDescription" xml:space="preserve">
+    <value>提供有关所有已安装打印机及其队列的信息。</value>
+  </data>
+  <data name="SensorsManager_WebcamProcessSensorDescription" xml:space="preserve">
+	  <value>提供当前使用网络摄像头的进程的名称。
+
+注意：如果在卫星服务中使用，它将无法检测用户空间应用程序。</value>
+  </data>
+  <data name="SensorsManager_WindowStateSensorDescription" xml:space="preserve">
+	  <value>提供进程窗口的当前状态：
+
+隐藏、最大化、最小化、正常和未知。</value>
+  </data>
+  <data name="SensorsMod_LblSetting1_Powershell" xml:space="preserve">
+    <value>powershell命令或脚本</value>
+  </data>
+  <data name="SensorsMod_MessageBox_Sanitize" xml:space="preserve">
+	  <value>您提供的名称包含不支持的字符，将无法使用。建议的版本是：
+
+{0}
+
+您想使用这个版本吗？</value>
+  </data>
+  <data name="SensorsMod_SensorsMod_BtnTest_Powershell" xml:space="preserve">
+    <value>测试命令/脚本</value>
+  </data>
+  <data name="SensorsMod_TestPowershell_MessageBox1" xml:space="preserve">
+    <value>请输入命令或脚本！</value>
+  </data>
+  <data name="SensorsMod_TestPowershell_MessageBox2" xml:space="preserve">
+	  <value>测试成功执行，结果值：
+
+{0}</value>
+  </data>
+  <data name="SensorsMod_TestPowershell_MessageBox3" xml:space="preserve">
+	  <value>测试未能执行：
+
+{0}
+
+您想打开日志文件夹吗？</value>
+  </data>
+  <data name="SensorType_BluetoothDevicesSensor" xml:space="preserve">
+    <value>蓝牙设备</value>
+  </data>
+  <data name="SensorType_BluetoothLeDevicesSensor" xml:space="preserve">
+    <value>蓝牙LE设备</value>
+  </data>
+  <data name="ServiceControllerManager_Error_Fatal" xml:space="preserve">
+    <value>致命错误，请检查日志以获取信息！</value>
+  </data>
+  <data name="ServiceControllerManager_Error_Timeout" xml:space="preserve">
+    <value>超时已过期</value>
+  </data>
+  <data name="ServiceControllerManager_Error_Unknown" xml:space="preserve">
+    <value>未知原因</value>
+  </data>
+  <data name="ServiceHelper_ChangeStartMode_Error1" xml:space="preserve">
+    <value>无法打开服务管理器</value>
+  </data>
+  <data name="ServiceHelper_ChangeStartMode_Error2" xml:space="preserve">
+    <value>无法打开服务</value>
+  </data>
+  <data name="ServiceHelper_ChangeStartMode_Error3" xml:space="preserve">
+    <value>配置启动模式时出错，请检查日志以获取更多信息。</value>
+  </data>
+  <data name="ServiceHelper_ChangeStartMode_Error4" xml:space="preserve">
+    <value>设置启动模式时出错，请检查日志以获取更多信息。</value>
+  </data>
+  <data name="WebView_InitializeAsync_MessageBox1" xml:space="preserve">
+	  <value>未在您的计算机上找到Microsoft的WebView2运行时。通常由安装程序处理，但您可以手动安装。
+
+您想下载运行时安装程序吗？</value>
+  </data>
+  <data name="WebView_InitializeAsync_MessageBox2" xml:space="preserve">
+    <value>初始化WebView时出现问题！请检查您的日志并在GitHub上打开问题以获取进一步的帮助。</value>
+  </data>
+  <data name="QuickActionsMod_ClmDomain" xml:space="preserve">
+	  <value>域</value>
+  </data>
+  <data name="CommandType_RadioCommand" xml:space="preserve">
+    <value>无线电命令</value>
+  </data>
+  <data name="SensorType_InternalDeviceSensor" xml:space="preserve">
+    <value>内部设备传感器</value>
+  </data>
+  <data name="SensorType_ActiveDesktopSensor" xml:space="preserve">
+    <value>活动桌面</value>
+  </data>
+  <data name="CommandType_SetApplicationVolumeCommand" xml:space="preserve">
+    <value>设置应用程序音量</value>
+  </data>
+  <data name="CommandType_SetAudioOutputCommand" xml:space="preserve">
+    <value>设置音频输出命令</value>
+  </data>
+  <data name="SensorType_ScreenshotSensor" xml:space="preserve">
+    <value>截图</value>
+  </data>
+  <data name="CommandType_SetAudioInputCommand" xml:space="preserve">
+    <value>设置音频输入命令</value>
+  </data>
+  <data name="CommandType_TrayWebViewCommand" xml:space="preserve">
+    <value>托盘网页视图命令</value>
+  </data>
+  <data name="HassAction_Trigger" xml:space="preserve">
+    <value>触发</value>
+  </data>
+  <data name="HassAction_Press" xml:space="preserve">
+    <value>按下</value>
+  </data>
+  <data name="HassDomain_Button" xml:space="preserve">
+    <value>按钮</value>
+  </data>
