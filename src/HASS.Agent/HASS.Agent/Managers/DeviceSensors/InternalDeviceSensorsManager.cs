@@ -27,6 +27,7 @@ namespace HASS.Agent.Managers.DeviceSensors
                 deviceSensors.Add(new CompassSensor(Compass.GetDefault()));
                 deviceSensors.Add(new GyrometerSensor(Gyrometer.GetDefault()));
                 deviceSensors.Add(new HingeAngleSensor(await Windows.Devices.Sensors.HingeAngleSensor.GetDefaultAsync()));
+                deviceSensors.Add(new HumanPresenceSensor(Windows.Devices.Sensors.HumanPresenceSensor.GetDefault()));
                 deviceSensors.Add(new InclinometerSensor(Inclinometer.GetDefault()));
                 deviceSensors.Add(new LightSensor(Windows.Devices.Sensors.LightSensor.GetDefault()));
                 deviceSensors.Add(new MagnetometerSensor(Magnetometer.GetDefault()));
