@@ -10,7 +10,6 @@ using HASS.Agent.Shared.Managers.Audio.Exceptions;
 using HASS.Agent.Shared.Managers.Audio.Internal;
 using Serilog;
 using NAudio.CoreAudioApi.Interfaces;
-using HidSharp;
 using Microsoft.VisualBasic.ApplicationServices;
 
 namespace HASS.Agent.Shared.Managers.Audio;

@@ -40,8 +40,6 @@ namespace HASS.Agent.Satellite.Service
             {
                 _log.LogInformation("[WORKER] Startup completed, commencing execution ..");
 
-                HardwareManager.Initialize();
-
                 // load stored settings (if any)
                 var launched = await SettingsManager.LoadAsync();
                 if (!launched)
@@ -99,8 +97,6 @@ namespace HASS.Agent.Satellite.Service
             }
             finally
             {
-                HardwareManager.Shutdown();
-
                 // stop the application
                 _hostApplicationLifetime.StopApplication();
 

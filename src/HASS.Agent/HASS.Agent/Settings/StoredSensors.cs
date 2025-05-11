@@ -14,7 +14,6 @@ using HASS.Agent.Shared.HomeAssistant.Sensors.PerfCounterSensors.SingleValue;
 using HASS.Agent.Shared.HomeAssistant.Sensors.WmiSensors.SingleValue;
 using HASS.Agent.Shared.Models.Config;
 using HASS.Agent.Shared.Models.HomeAssistant;
-using LibreHardwareMonitor.Hardware;
 using Newtonsoft.Json;
 using Serilog;
 using SensorType = HASS.Agent.Shared.Enums.SensorType;
