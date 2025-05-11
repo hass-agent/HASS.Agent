@@ -9,7 +9,6 @@ using HASS.Agent.Shared.HomeAssistant.Sensors.WmiSensors.SingleValue;
 using HASS.Agent.Shared.Models.HomeAssistant;
 using Newtonsoft.Json;
 using Serilog;
-using LibreHardwareMonitor.Hardware;
 using SensorType = HASS.Agent.Shared.Enums.SensorType;
 
 namespace HASS.Agent.Satellite.Service.Settings

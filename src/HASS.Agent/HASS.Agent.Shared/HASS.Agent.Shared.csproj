@@ -33,7 +33,6 @@
     <PackageReference Include="ByteSize" Version="2.1.2" />
     <PackageReference Include="Cassia.NetStandard" Version="1.0.0" />
     <PackageReference Include="CliWrap" Version="3.6.6" />
-    <PackageReference Include="LibreHardwareMonitorLib" Version="0.9.3" />
     <PackageReference Include="Microsoft.Win32.Registry" Version="5.0.0" />
     <PackageReference Include="Microsoft.Win32.SystemEvents" Version="8.0.0" />
     <PackageReference Include="MQTTnet" Version="4.3.3.952" />

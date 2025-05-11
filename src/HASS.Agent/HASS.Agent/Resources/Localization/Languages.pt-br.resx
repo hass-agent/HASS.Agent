@@ -3453,4 +3453,7 @@ Requer que seja configurado em "Configuration -&gt; Tray Icon"</value>
   <data name="Notification_Dismiss" xml:space="preserve">
     <value>Dispensar</value>
   </data>
+  <data name="Main_CheckForUpdateFailed_MessageBox1" xml:space="preserve">
+    <value>Falha na verificação da atualização!</value>
+  </data>
 </root>

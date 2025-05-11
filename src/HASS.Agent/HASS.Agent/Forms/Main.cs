@@ -90,7 +90,6 @@ namespace HASS.Agent.Forms
                 // core components initialization - required for loading the entities
                 await RadioManager.Initialize();
                 await InternalDeviceSensorsManager.Initialize();
-                InitializeHardwareManager();
                 InitializeVirtualDesktopManager();
                 await Task.Run(InitializeAudioManager);
 
@@ -166,7 +165,6 @@ namespace HASS.Agent.Forms
         private void OnProcessExit(object sender, EventArgs e)
         {
             AudioManager.Shutdown();
-            HardwareManager.Shutdown();
             NotificationManager.Exit();
         }
 
@@ -327,14 +325,6 @@ namespace HASS.Agent.Forms
         private void InitializeVirtualDesktopManager()
         {
             VirtualDesktopManager.Initialize();
-        }
-
-        /// <summary>
-        /// Initialized the Hardware Manager
-        /// </summary>
-        private void InitializeHardwareManager()
-        {
-            HardwareManager.Initialize();
         }
 
         /// <summary>
@@ -833,11 +823,15 @@ namespace HASS.Agent.Forms
                 BtnCheckForUpdate.Text = Languages.Main_Checking;
 
                 var (isAvailable, version) = await UpdateManager.CheckIsUpdateAvailableAsync();
-                if (!isAvailable)
+                if (!isAvailable && version != null)
                 {
                     var beta = Variables.Beta ? " [BETA]" : string.Empty;
                     MessageBoxAdv.Show(this, string.Format(Languages.Main_CheckForUpdate_MessageBox1, Variables.Version, beta), Variables.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
-
+                    return;
+                }
+                else if(!isAvailable)
+                {
+                    MessageBoxAdv.Show(this, Languages.Main_CheckForUpdateFailed_MessageBox1, Variables.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 
