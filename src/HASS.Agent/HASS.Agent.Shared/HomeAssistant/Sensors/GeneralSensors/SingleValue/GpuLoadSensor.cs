@@ -60,7 +60,7 @@ public class GpuLoadSensor : AbstractSingleValueSensor
                 .ToList();
 
             gpuCounters.ForEach(x => { _ = x.NextValue(); });
-            Thread.Sleep(10);
+            Thread.Sleep(10); //TODO(Amadeo): fix this
 
             return gpuCounters.Sum(x => x.NextValue());
         }
