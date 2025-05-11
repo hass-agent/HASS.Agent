@@ -9,7 +9,6 @@ using HASS.Agent.Shared.Managers;
 using HASS.Agent.Shared.Managers.Audio;
 using HASS.Agent.Shared.Models.HomeAssistant;
 using HASS.Agent.Shared.Models.Internal;
-using HidSharp;
 using Newtonsoft.Json;
 using Serilog;
 

@@ -90,7 +90,6 @@ namespace HASS.Agent.Forms
                 // core components initialization - required for loading the entities
                 await RadioManager.Initialize();
                 await InternalDeviceSensorsManager.Initialize();
-                InitializeHardwareManager();
                 InitializeVirtualDesktopManager();
                 await Task.Run(InitializeAudioManager);
 
@@ -166,7 +165,6 @@ namespace HASS.Agent.Forms
         private void OnProcessExit(object sender, EventArgs e)
         {
             AudioManager.Shutdown();
-            HardwareManager.Shutdown();
             NotificationManager.Exit();
         }
 
@@ -327,14 +325,6 @@ namespace HASS.Agent.Forms
         private void InitializeVirtualDesktopManager()
         {
             VirtualDesktopManager.Initialize();
-        }
-
-        /// <summary>
-        /// Initialized the Hardware Manager
-        /// </summary>
-        private void InitializeHardwareManager()
-        {
-            HardwareManager.Initialize();
         }
 
         /// <summary>
