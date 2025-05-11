@@ -103,7 +103,10 @@ namespace HASS.Agent.Commands
                     await Task.Delay(firstRun ? TimeSpan.FromSeconds(1) : TimeSpan.FromMilliseconds(750));
 
                     if (_pause || Variables.MqttManager.GetStatus() != MqttStatus.Connected || !CommandsPresent())
+                    {
+                        _discoveryPublished = false;
                         continue;
+                    }
 
                     firstRun = false;
 

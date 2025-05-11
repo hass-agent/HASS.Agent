@@ -833,11 +833,15 @@ namespace HASS.Agent.Forms
                 BtnCheckForUpdate.Text = Languages.Main_Checking;
 
                 var (isAvailable, version) = await UpdateManager.CheckIsUpdateAvailableAsync();
-                if (!isAvailable)
+                if (!isAvailable && version != null)
                 {
                     var beta = Variables.Beta ? " [BETA]" : string.Empty;
                     MessageBoxAdv.Show(this, string.Format(Languages.Main_CheckForUpdate_MessageBox1, Variables.Version, beta), Variables.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
-
+                    return;
+                }
+                else if(!isAvailable)
+                {
+                    MessageBoxAdv.Show(this, Languages.Main_CheckForUpdateFailed_MessageBox1, Variables.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 

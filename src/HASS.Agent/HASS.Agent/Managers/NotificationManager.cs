@@ -233,7 +233,7 @@ namespace HASS.Agent.Managers
                 var uri = GetValueFromEventArgs(e, UriPrefix);
                 var clickAction = GetValueFromEventArgs(e, ClickActionPrefix);
 
-                if (string.IsNullOrWhiteSpace(uri) && Variables.AppSettings.NotificationsOpenActionUri)
+                if (!string.IsNullOrWhiteSpace(uri) && Variables.AppSettings.NotificationsOpenActionUri)
                     HelperFunctions.LaunchUrl(uri);
                 else if (!string.IsNullOrWhiteSpace(clickAction))
                     HelperFunctions.LaunchUrl(clickAction);

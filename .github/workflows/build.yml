@@ -150,19 +150,19 @@ jobs:
 
     #Upload project artifacts: https://github.com/marketplace/actions/upload-a-build-artifact
     - name: Upload build artifacts (HASS Agent)
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v4.6.0
       with:
         name: HASS.Agent
         path: "src\\HASS.Agent\\HASS.Agent\\bin\\Publish-x64\\Release"
 
     - name: Upload build artifacts (HASS Agent Satellite Service)
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v4.6.0
       with:
         name: HASS.Agent.Satellite.Service
         path: "src\\HASS.Agent\\HASS.Agent.Satellite.Service\\bin\\Publish-x64\\Release"
 
     - name: Upload build artifacts (HASS Agent Installer)
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v4.6.0
       with:
         name: HASS.Agent.Installer
         path: "src\\HASS.Agent.Installer\\bin\\HASS.Agent.Installer.exe"
@@ -187,19 +187,19 @@ jobs:
         ls -la
     
     - name: Download Build Artifacts (HASS Agent)
-      uses: actions/download-artifact@v4
+      uses: actions/download-artifact@v4.1.8
       with:
         name: HASS.Agent
         path: HASS.Agent
 
     - name: Download Build Artifacts (HASS Agent Satellite Service)
-      uses: actions/download-artifact@v4
+      uses: actions/download-artifact@v4.1.8
       with:
         name: HASS.Agent.Satellite.Service
         path: HASS.Agent.Satellite.Service
 
     - name: Download Build Artifacts (HASS Agent Installer)
-      uses: actions/download-artifact@v4
+      uses: actions/download-artifact@v4.1.8
       with:
         name: HASS.Agent.Installer
         path: HASS.Agent.Installer

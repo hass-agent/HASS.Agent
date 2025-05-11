@@ -3476,4 +3476,7 @@ Home Assistant.
   <data name="Notification_Dismiss" xml:space="preserve">
     <value>Увольнять</value>
   </data>
+  <data name="Main_CheckForUpdateFailed_MessageBox1" xml:space="preserve">
+    <value>Не удалось проверить обновление!</value>
+  </data>
 </root>
