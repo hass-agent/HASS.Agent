@@ -14,6 +14,9 @@
 #define MyAppURL "https://hass-agent.io"
 #define MyAppExeName "HASS.Agent.exe"
 
+#define MigrationNotice "MigrationNotice.rtf"
+#define DotNet8Notice "DotNet8Notice.rtf"
+
 [Setup]
 ArchitecturesInstallIn64BitMode=x64
 SetupMutex=Global\HASS.Agent.Setup.Mutex,HASS.Agent.Setup.Mutex
@@ -54,6 +57,8 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 [Files]
 ; Client files
 Source: "..\HASS.Agent\HASS.Agent\bin\Publish-x64\Release\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "{#MigrationNotice}"; Flags: dontcopy
+Source: "{#DotNet8Notice}"; Flags: dontcopy
 ; Service installer
 Source: ".\bin\HASS.Agent.Service.Installer.exe"; DestDir: "{tmp}"; Flags: ignoreversion
 
@@ -67,6 +72,23 @@ Filename: "{tmp}\HASS.Agent.Service.Installer.exe"; Description: "Install Satell
 Filename: "{app}\{#MyAppExeName}"; Description: "{cm:LaunchProgram,{#StringChange(MyAppName, '&', '&&')}}"; Flags: postinstall skipifsilent nowait
 
 [Code]
+procedure InitializeWizard;
+var
+  AfterID: Integer;
+  MigrationNotice: AnsiString;
+  DotNet8Notice: AnsiString;
+begin
+  AfterID := wpSelectTasks;
+
+  ExtractTemporaryFile('{#MigrationNotice}');
+  LoadStringFromFile(ExpandConstant('{tmp}\{#MigrationNotice}'), MigrationNotice);
+  AfterID := CreateOutputMsgMemoPage(AfterID, 'Configuration migration', 'Please read carefully before proceeding.', 'Ignoring below message might cause you to loose your configuration.' , MigrationNotice).ID  
+
+  ExtractTemporaryFile('{#DotNet8Notice}');
+  LoadStringFromFile(ExpandConstant('{tmp}\{#DotNet8Notice}'), DotNet8Notice);
+  AfterID := CreateOutputMsgMemoPage(AfterID, '.NET 8', 'New .NET version required with this HASS.Agent version.', '' , DotNet8Notice).ID   
+end;
+
 function InitializeSetup: Boolean;
 begin
   Dependency_ForceX86 := False;
