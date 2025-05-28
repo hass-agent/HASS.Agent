@@ -1,17 +1,17 @@
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/hass-agent/HASS.Agent)](https://github.com/hass-agent/HASS.Agent/releases/)
 [![license](https://img.shields.io/badge/license-MIT-blue)](#license)
 [![OS - Windows](https://img.shields.io/badge/OS-Windows-blue?logo=windows&logoColor=white)](https://www.microsoft.com/ "Go to Microsoft homepage")
-[![dotnet](https://img.shields.io/badge/.NET-6.0-blue)](https://img.shields.io/badge/.NET-6.0-blue)
+[![dotnet](https://img.shields.io/badge/.NET-8.0-blue)](https://img.shields.io/badge/.NET-8.0-blue)
 ![GitHub all releases](https://img.shields.io/github/downloads/hass-agent/HASS.Agent/total?color=blue)
 ![GitHub latest](https://img.shields.io/github/downloads/hass-agent/HASS.Agent/latest/total?color=blue)
 [![Discord](https://img.shields.io/badge/dynamic/json?color=blue&label=Discord&logo=discord&logoColor=white&query=presence_count&suffix=%20Online&url=https://discord.com/api/guilds/1173033284519862392/widget.json)](https://discord.com/invite/JfZj98xqJr)
 
-<a href="https://github.com/LAB02-Research/HASS.Agent/">
+<a href="https://github.com/hass-agent/HASS.Agent/">
     <img src="https://raw.githubusercontent.com/LAB02-Research/HASS.Agent/main/images/logo_128.png" alt="HASS.Agent logo" title="HASS.Agent" align="right" height="128" /></a>
 
 # HASS.Agent
 
-HASS.Agent is a Windows-based client (*companion*) application for [Home Assistant](https://www.home-assistant.io), developed in .NET 6.
+HASS.Agent is a Windows-based client (*companion*) application for [Home Assistant](https://www.home-assistant.io), developed in .NET 8.
 
 Click [here](https://github.com/hass-agent/HASS.Agent/releases/latest/download/HASS.Agent.Installer.exe) to download the latest installer.
 
@@ -124,7 +124,7 @@ You'll be guided through the configuration options during onboarding:
 
 ### Installation
 
-Installing HASS.Agent is easy; just [download the latest installer](https://github.com/hass-agent/HASS.Agent/releases/latest/download/HASS.Agent.Installer.exe), run it and you're done! The installer is signed by us and won't download or do weird stuff - it just places everything where it should, and launches with the right parameter. (optionally installing .NET6)
+Installing HASS.Agent is easy; just [download the latest installer](https://github.com/hass-agent/HASS.Agent/releases/latest/download/HASS.Agent.Installer.exe), run it and you're done! The installer is signed by us and won't download or do weird stuff - it just places everything where it should, and launches with the right parameter. (optionally installing .NET8)
 
 After installing, the onboarding process will help you get everything configured, step by step. If you want an introduction into HASS.Agent, be sure to read the [introduction docs](https://www.hass-agent.io/latest/getting-started/).
 
@@ -168,7 +168,7 @@ Liam Alexander Colman from [Home Assistant Guide](https://home-assistant-guide.c
 
 A Linux/macOS client! 
 
-This question comes up a lot, understandably. However it's currently focussed on being a Windows-based client. Even though .NET 6 allows for Linux/macOS development, it's not as easy as pressing a button. The interface would have to be redesigned from the ground up, sensors and commands would need multiple codebases for each OS, testing would take way more time, every OS handles notifications differently, etc.
+This question comes up a lot, understandably. However it's currently focussed on being a Windows-based client. Even though .NET 8 allows for Linux/macOS development, it's not as easy as pressing a button. The interface would have to be redesigned from the ground up, sensors and commands would need multiple codebases for each OS, testing would take way more time, every OS handles notifications differently, etc.
 
 You can use the [official companion app](https://apps.apple.com/us/app/home-assistant/id1099568401) for macOS, or [IoPC](https://github.com/maksimkurb/IoPC) which runs on Linux. Note: We haven't tested either.
 
@@ -208,7 +208,7 @@ Everything on the HASS.Agent platform is released under the [MIT license](https:
 
 ### Legacy
 
-HASS.Agent is a .NET 6 application. If for some reason you can't install .NET 6, you can use the last .NET Framework 4.8 version:
+HASS.Agent is a .NET 8 application. If for some reason you can't install .NET 8, you can use the last .NET Framework 4.8 version:
 
 [v2022.3.8](https://github.com/LAB02-Research/HASS.Agent/releases/tag/v2022.3.8)
 
