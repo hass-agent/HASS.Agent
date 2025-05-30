@@ -142,8 +142,8 @@ jobs:
         working-directory: "D:\\a\\HASS.Agent\\HASS.Agent\\src\\HASS.Agent.Installer"
         run: |
           $certificatePassword = ConvertTo-SecureString "${{ secrets.BASE64_ENCODED_PFX_PASSWORD }}" -AsPlainText -Force
-          # $certificate = Get-PfxCertificate -FilePath ".\\HASS.Agent.Installer.pfx" -Password $certificatePassword
-          # Set-AuthenticodeSignature -FilePath ".\\bin\\HASS.Agent.Installer.exe" -Certificate $certificate -HashAlgorithm SHA256 -TimestampServer http://timestamp.digicert.com
+          $certificate = Get-PfxCertificate -FilePath ".\\HASS.Agent.Installer.pfx" -Password $certificatePassword
+          Set-AuthenticodeSignature -FilePath ".\\bin\\HASS.Agent.Installer.exe" -Certificate $certificate -HashAlgorithm SHA256 -TimestampServer http://timestamp.digicert.com
 
       - name: Remove the pfx
         working-directory: "D:\\a\\HASS.Agent\\HASS.Agent\\src\\HASS.Agent.Installer"
