@@ -131,19 +131,19 @@ jobs:
         run: |
           & "${Env:ProgramFiles(x86)}\\Inno Setup 6\\iscc.exe" InstallerScript.iss
 
-      # - name: Decode the pfx
-      #   working-directory: "D:\\a\\HASS.Agent\\HASS.Agent\\src\\HASS.Agent.Installer"
-      #   run: |
-      #     $pfxBytes = [System.Convert]::FromBase64String("${{ secrets.BASE64_ENCODED_PFX }}")
-      #     $certificatePath = [IO.Path]::GetFullPath(".\\HASS.Agent.Installer.pfx")
-      #     [IO.File]::WriteAllBytes($certificatePath, $pfxBytes)
+      - name: Decode the pfx
+        working-directory: "D:\\a\\HASS.Agent\\HASS.Agent\\src\\HASS.Agent.Installer"
+        run: |
+          $pfxBytes = [System.Convert]::FromBase64String("${{ secrets.BASE64_ENCODED_PFX }}")
+          $certificatePath = [IO.Path]::GetFullPath(".\\HASS.Agent.Installer.pfx")
+          [IO.File]::WriteAllBytes($certificatePath, $pfxBytes)
 
-      # - name: Sign the installer
-      #   working-directory: "D:\\a\\HASS.Agent\\HASS.Agent\\src\\HASS.Agent.Installer"
-      #   run: |
-      #     $certificatePassword = ConvertTo-SecureString "${{ secrets.BASE64_ENCODED_PFX_PASSWORD }}" -AsPlainText -Force
-      #     $certificate = Get-PfxCertificate -FilePath ".\\HASS.Agent.Installer.pfx" -Password $certificatePassword
-      #     Set-AuthenticodeSignature -FilePath ".\\bin\\HASS.Agent.Installer.exe" -Certificate $certificate -HashAlgorithm SHA256 -TimestampServer http://timestamp.digicert.com
+      - name: Sign the installer
+        working-directory: "D:\\a\\HASS.Agent\\HASS.Agent\\src\\HASS.Agent.Installer"
+        run: |
+          $certificatePassword = ConvertTo-SecureString "${{ secrets.BASE64_ENCODED_PFX_PASSWORD }}" -AsPlainText -Force
+          # $certificate = Get-PfxCertificate -FilePath ".\\HASS.Agent.Installer.pfx" -Password $certificatePassword
+          # Set-AuthenticodeSignature -FilePath ".\\bin\\HASS.Agent.Installer.exe" -Certificate $certificate -HashAlgorithm SHA256 -TimestampServer http://timestamp.digicert.com
 
       - name: Remove the pfx
         working-directory: "D:\\a\\HASS.Agent\\HASS.Agent\\src\\HASS.Agent.Installer"
