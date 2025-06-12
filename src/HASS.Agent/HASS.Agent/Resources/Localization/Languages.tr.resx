@@ -3026,4 +3026,10 @@ Not: Uydu hizmetinde kullanılırsa kullanıcı alanı uygulamalarını algılam
   <data name="Main_CheckForUpdateFailed_MessageBox1" xml:space="preserve">
     <value>Güncelleme kontrolü başarısız oldu!</value>
   </data>
+  <data name="SensorType_NamedActiveWindowSensor" xml:space="preserve">
+    <value>AdlandırılmışAktifPencere</value>
+  </data>
+  <data name="SensorsManager_NamedActiveWindowSensorDescription" xml:space="preserve">
+    <value>Odaklanan pencere adının yapılandırılmış dizeyi içerip içermediğine bağlı olarak bir AÇIK/KAPALI değeri sağlar.</value>
+  </data>
 </root>

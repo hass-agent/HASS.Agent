@@ -3443,4 +3443,10 @@ Nécessite sa configuration dans « Configuration -&gt; Icône de la barre d'ét
   <data name="Main_CheckForUpdateFailed_MessageBox1" xml:space="preserve">
     <value>Échec de la vérification de la mise à jour !</value>
   </data>
+  <data name="SensorType_NamedActiveWindowSensor" xml:space="preserve">
+    <value>Fenêtre active nommée</value>
+  </data>
+  <data name="SensorsManager_NamedActiveWindowSensorDescription" xml:space="preserve">
+    <value>Fournit une valeur ON/OFF selon que le nom de la fenêtre focalisée contient ou non une chaîne configurée.</value>
+  </data>
 </root>

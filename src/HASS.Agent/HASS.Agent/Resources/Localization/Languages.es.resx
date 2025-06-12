@@ -3410,4 +3410,10 @@ Requiere que se configure en "Configuración -&gt; Icono de la bandeja"</value>
   <data name="Main_CheckForUpdateFailed_MessageBox1" xml:space="preserve">
     <value>Error al comprobar la actualización.</value>
   </data>
+  <data name="SensorType_NamedActiveWindowSensor" xml:space="preserve">
+    <value>Ventana activa con nombre</value>
+  </data>
+  <data name="SensorsManager_NamedActiveWindowSensorDescription" xml:space="preserve">
+    <value>Proporciona un valor de ENCENDIDO/APAGADO según si el nombre de la ventana enfocada contiene una cadena configurada.</value>
+  </data>
 </root>

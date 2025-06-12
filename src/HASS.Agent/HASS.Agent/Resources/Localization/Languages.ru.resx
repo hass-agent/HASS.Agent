@@ -3479,4 +3479,10 @@ Home Assistant.
   <data name="Main_CheckForUpdateFailed_MessageBox1" xml:space="preserve">
     <value>Не удалось проверить обновление!</value>
   </data>
+  <data name="SensorType_NamedActiveWindowSensor" xml:space="preserve">
+    <value>ИменованноеАктивноеОкно</value>
+  </data>
+  <data name="SensorsManager_NamedActiveWindowSensorDescription" xml:space="preserve">
+    <value>Предоставляет значение ВКЛ/ВЫКЛ в зависимости от того, содержит ли имя окна в фокусе настроенную строку.</value>
+  </data>
 </root>

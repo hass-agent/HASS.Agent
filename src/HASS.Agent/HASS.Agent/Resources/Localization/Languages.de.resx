@@ -3534,4 +3534,10 @@ Muss unter „Konfiguration -&gt; Tray-Icon“ konfiguriert werden.</value>
   <data name="Main_CheckForUpdateFailed_MessageBox1" xml:space="preserve">
     <value>Suche nach Update fehlgeschlagen!</value>
   </data>
+  <data name="SensorType_NamedActiveWindowSensor" xml:space="preserve">
+    <value>BenanntesAktivesFenster</value>
+  </data>
+  <data name="SensorsManager_NamedActiveWindowSensorDescription" xml:space="preserve">
+    <value>Stellt einen EIN/AUS-Wert bereit, basierend darauf, ob der fokussierte Fenstername eine konfigurierte Zeichenfolge enthält.</value>
+  </data>
 </root>
