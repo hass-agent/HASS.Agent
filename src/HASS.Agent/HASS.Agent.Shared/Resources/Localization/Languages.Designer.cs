@@ -5817,6 +5817,15 @@ namespace HASS.Agent.Shared.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Provides an ON/OFF value based on whether the focused window name contains configured string..
+        /// </summary>
+        internal static string SensorsManager_NamedActiveWindowSensorDescription {
+            get {
+                return ResourceManager.GetString("SensorsManager_NamedActiveWindowSensorDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Provides an ON/OFF value based on whether the window is currently open (doesn&apos;t have to be active)..
         /// </summary>
         internal static string SensorsManager_NamedWindowSensorDescription {
@@ -6723,6 +6732,15 @@ namespace HASS.Agent.Shared.Resources.Localization {
         internal static string SensorType_MonitorPowerStateSensor {
             get {
                 return ResourceManager.GetString("SensorType_MonitorPowerStateSensor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to NamedActiveWindow.
+        /// </summary>
+        internal static string SensorType_NamedActiveWindowSensor {
+            get {
+                return ResourceManager.GetString("SensorType_NamedActiveWindowSensor", resourceCulture);
             }
         }
         

@@ -3431,4 +3431,10 @@ Vereist dat het geconfigureerd is in "Configuratie -&gt; Tray Icon"</value>
   <data name="Main_CheckForUpdateFailed_MessageBox1" xml:space="preserve">
     <value>Controle op update mislukt!</value>
   </data>
+  <data name="SensorType_NamedActiveWindowSensor" xml:space="preserve">
+    <value>SchermActiefNaam</value>
+  </data>
+  <data name="SensorsManager_NamedActiveWindowSensorDescription" xml:space="preserve">
+    <value>Geeft een AAN/UIT-waarde op basis van het al dan niet bevatten van de focusvensternaam van een geconfigureerde tekenreeks.</value>
+  </data>
 </root>

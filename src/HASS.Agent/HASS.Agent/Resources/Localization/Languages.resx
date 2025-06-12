@@ -3432,4 +3432,10 @@ Requires it to be configured in "Configuration -&gt; Tray Icon"</value>
   <data name="Main_CheckForUpdateFailed_MessageBox1" xml:space="preserve">
     <value>Failed checking for update!</value>
   </data>
+  <data name="SensorType_NamedActiveWindowSensor" xml:space="preserve">
+    <value>NamedActiveWindow</value>
+  </data>
+  <data name="SensorsManager_NamedActiveWindowSensorDescription" xml:space="preserve">
+    <value>Provides an ON/OFF value based on whether the focused window name contains configured string.</value>
+  </data>
 </root>

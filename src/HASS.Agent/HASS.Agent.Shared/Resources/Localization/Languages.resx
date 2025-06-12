@@ -3235,4 +3235,10 @@ Do you want to download the runtime installer?</value>
   <data name="HassDomain_Button" xml:space="preserve">
     <value>Button</value>
   </data>
+  <data name="SensorType_NamedActiveWindowSensor" xml:space="preserve">
+    <value>NamedActiveWindow</value>
+  </data>
+  <data name="SensorsManager_NamedActiveWindowSensorDescription" xml:space="preserve">
+    <value>Provides an ON/OFF value based on whether the focused window name contains configured string.</value>
+  </data>
 </root>

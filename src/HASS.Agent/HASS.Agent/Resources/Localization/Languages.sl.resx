@@ -3559,4 +3559,10 @@ Zahteva, da je konfiguriran v "Konfiguracija -&gt; Ikona pladnja"</value>
   <data name="Main_CheckForUpdateFailed_MessageBox1" xml:space="preserve">
     <value>Neuspešno preverjanje posodobitve!</value>
   </data>
+  <data name="SensorType_NamedActiveWindowSensor" xml:space="preserve">
+    <value>PoimenovanoAktivnoOkno</value>
+  </data>
+  <data name="SensorsManager_NamedActiveWindowSensorDescription" xml:space="preserve">
+    <value>Zagotavlja vrednost VKLOP/IZKLOP glede na to, ali ime okna v fokusu vsebuje konfiguriran niz.</value>
+  </data>
 </root>
