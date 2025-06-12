@@ -29,8 +29,11 @@ using System.Windows;
 
 namespace HASS.Agent.Functions
 {
-    internal static class HelperFunctions
+    internal static partial class HelperFunctions
     {
+        [GeneratedRegex("^https?://")]
+        private static partial Regex AbsoluteURLRegex();
+
         private static bool _shutdownCalled = false;
 
         /// <summary>
@@ -363,6 +366,8 @@ namespace HASS.Agent.Functions
         internal static bool CheckIfFormIsOpen(string formName) => System.Windows.Forms.Application.OpenForms.Cast<Form>().Any(form => form?.Name == formName);
 
         internal static Form GetForm(string formName) => System.Windows.Forms.Application.OpenForms.Cast<Form>().FirstOrDefault(x => x.Name == formName);
+
+        internal static bool IsAbsoluteUrl(string url) => AbsoluteURLRegex().IsMatch(url);
 
         /// <summary>
         /// Launches the url with the user's custom browser if provided, or the system's default
