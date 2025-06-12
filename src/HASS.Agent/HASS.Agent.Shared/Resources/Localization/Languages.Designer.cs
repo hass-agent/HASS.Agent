@@ -6520,6 +6520,15 @@ namespace HASS.Agent.Shared.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to AccentColor.
+        /// </summary>
+        internal static string SensorType_AccentColorSensor {
+            get {
+                return ResourceManager.GetString("SensorType_AccentColorSensor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ActiveDesktop.
         /// </summary>
         internal static string SensorType_ActiveDesktopSensor {

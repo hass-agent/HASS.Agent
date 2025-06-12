@@ -5914,6 +5914,16 @@ namespace HASS.Agent.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Provides #RRGGBB color values for system accent colors.
+        ///Main accent color is the sensor value, additional accent colors are available as attributes..
+        /// </summary>
+        internal static string SensorsManager_AccentColorSensorDescription {
+            get {
+                return ResourceManager.GetString("SensorsManager_AccentColorSensorDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Provides the ID of the currently active virtual desktop..
         /// </summary>
         internal static string SensorsManager_ActiveDesktopSensorDescription {
