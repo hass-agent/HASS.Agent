@@ -5,6 +5,7 @@ using System.Net.Http.Headers;
 using System.Security.Policy;
 using System.Text.RegularExpressions;
 using System.Threading;
+using HASS.Agent.Functions;
 using Serilog;
 using Task = System.Threading.Tasks.Task;
 
@@ -12,11 +13,9 @@ namespace HASS.Agent.Managers
 {
     internal static class StorageManager
     {
-        private static bool IsAbsoluteUrl(string url) => Regex.IsMatch(url, "^https?://");
-
-        private static string GetElementUrl(string url)
+        public static string GetElementUrl(string url)
         {
-            if (IsAbsoluteUrl(url))
+            if (HelperFunctions.IsAbsoluteUrl(url))
             {
                 return url;
             }
@@ -71,7 +70,7 @@ namespace HASS.Agent.Managers
                 }
 
                 var elementUrl = GetElementUrl(uri);
-                if (!IsAbsoluteUrl(elementUrl))
+                if (!HelperFunctions.IsAbsoluteUrl(elementUrl))
                 {
                     Log.Error("[STORAGE] Unable to download image: only HTTP & file:// uri's are allowed, got: {uri}", uri);
 
