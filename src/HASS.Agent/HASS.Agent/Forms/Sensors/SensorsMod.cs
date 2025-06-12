@@ -180,6 +180,7 @@ namespace HASS.Agent.Forms.Sensors
             switch (_selectedSensorType)
             {
                 case SensorType.NamedWindowSensor:
+                case SensorType.NamedActiveWindowSensor:
                     TbSetting1.Text = Sensor.WindowName;
                     break;
 
@@ -291,6 +292,7 @@ namespace HASS.Agent.Forms.Sensors
             // process the interface
             switch (sensorCard.SensorType)
             {
+                case SensorType.NamedActiveWindowSensor:
                 case SensorType.NamedWindowSensor:
                     SetWindowGui();
                     break;
@@ -702,6 +704,7 @@ namespace HASS.Agent.Forms.Sensors
             switch (sensorCard.SensorType)
             {
                 case SensorType.NamedWindowSensor:
+                case SensorType.NamedActiveWindowSensor:
                     var window = TbSetting1.Text.Trim();
                     if (string.IsNullOrEmpty(window))
                     {

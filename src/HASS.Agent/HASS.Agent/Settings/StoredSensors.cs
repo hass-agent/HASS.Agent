@@ -126,6 +126,9 @@ namespace HASS.Agent.Settings
                 case SensorType.NamedWindowSensor:
                     abstractSensor = new NamedWindowSensor(sensor.WindowName, sensor.EntityName, sensor.Name, sensor.UpdateInterval, sensor.Id.ToString(), sensor.AdvancedSettings);
                     break;
+                case SensorType.NamedActiveWindowSensor:
+                    abstractSensor = new NamedActiveWindowSensor(sensor.WindowName, sensor.EntityName, sensor.Name, sensor.UpdateInterval, sensor.Id.ToString(), sensor.AdvancedSettings);
+                    break;
                 case SensorType.LastActiveSensor:
                     abstractSensor = new LastActiveSensor(sensor.ApplyRounding, sensor.Round, sensor.UpdateInterval, sensor.EntityName, sensor.Name, sensor.Id.ToString(), sensor.AdvancedSettings);
                     break;
@@ -295,6 +298,22 @@ namespace HASS.Agent.Settings
                             IgnoreAvailability = namedWindowSensor.IgnoreAvailability,
                             WindowName = namedWindowSensor.WindowName,
                             AdvancedSettings = namedWindowSensor.AdvancedSettings
+                        };
+                    }
+
+                case NamedActiveWindowSensor namedActiveWindowSensor:
+                    {
+                        _ = Enum.TryParse<SensorType>(namedActiveWindowSensor.GetType().Name, out var type);
+                        return new ConfiguredSensor
+                        {
+                            Id = Guid.Parse(namedActiveWindowSensor.Id),
+                            EntityName = namedActiveWindowSensor.EntityName,
+                            Name = namedActiveWindowSensor.Name,
+                            Type = type,
+                            UpdateInterval = namedActiveWindowSensor.UpdateIntervalSeconds,
+                            IgnoreAvailability = namedActiveWindowSensor.IgnoreAvailability,
+                            WindowName = namedActiveWindowSensor.WindowName,
+                            AdvancedSettings = namedActiveWindowSensor.AdvancedSettings
                         };
                     }
 
