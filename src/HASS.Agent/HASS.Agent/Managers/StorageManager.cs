@@ -13,7 +13,7 @@ namespace HASS.Agent.Managers
 {
     internal static class StorageManager
     {
-        private static string GetElementUrl(string url)
+        public static string GetElementUrl(string url)
         {
             if (HelperFunctions.IsAbsoluteUrl(url))
             {

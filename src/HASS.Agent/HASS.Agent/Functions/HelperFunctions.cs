@@ -26,6 +26,7 @@ using MediaManager = HASS.Agent.Media.MediaManager;
 using HASS.Agent.Shared.Managers;
 using Newtonsoft.Json.Serialization;
 using System.Windows;
+using System.Security.Policy;
 
 namespace HASS.Agent.Functions
 {
@@ -376,11 +377,13 @@ namespace HASS.Agent.Functions
         /// <param name="incognito"></param>
         internal static void LaunchUrl(string url, bool incognito = false)
         {
+            var targetUrl = StorageManager.GetElementUrl(url);
+
             // did the user provide a browser?
             if (string.IsNullOrEmpty(Variables.AppSettings.BrowserBinary))
             {
                 // nope
-                using (_ = Process.Start(new ProcessStartInfo(url) { UseShellExecute = true })) { }
+                using (_ = Process.Start(new ProcessStartInfo(targetUrl) { UseShellExecute = true })) { }
                 return;
             }
 
@@ -389,7 +392,7 @@ namespace HASS.Agent.Functions
                 // yep, but not found
                 Log.Warning("[BROWSER] User provided browser not found, using default: {bin}", Variables.AppSettings.BrowserBinary);
 
-                using (_ = Process.Start(new ProcessStartInfo(url) { UseShellExecute = true })) { }
+                using (_ = Process.Start(new ProcessStartInfo(targetUrl) { UseShellExecute = true })) { }
                 return;
             }
 
@@ -398,8 +401,8 @@ namespace HASS.Agent.Functions
             var startupArgs = new ProcessStartInfo { FileName = Variables.AppSettings.BrowserBinary };
 
             // if incgonito flag is set, use the incog. args (if set) - otherwise, just the url
-            if (incognito) startupArgs.Arguments = !string.IsNullOrEmpty(Variables.AppSettings.BrowserIncognitoArg) ? $"{Variables.AppSettings.BrowserIncognitoArg} {url}" : url;
-            else startupArgs.Arguments = url;
+            if (incognito) startupArgs.Arguments = !string.IsNullOrEmpty(Variables.AppSettings.BrowserIncognitoArg) ? $"{Variables.AppSettings.BrowserIncognitoArg} {targetUrl}" : targetUrl;
+            else startupArgs.Arguments = targetUrl;
 
             userBrowser.StartInfo = startupArgs;
             userBrowser.Start();
