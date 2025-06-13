@@ -3305,4 +3305,7 @@ Deseja baixar o Microsoft WebView2 runtime?</value>
   <data name="SensorType_NamedActiveWindowSensor" xml:space="preserve">
     <value>JanelaAtiva Nomeada</value>
   </data>
+  <data name="SensorType_AccentColorSensor" xml:space="preserve">
+    <value>Cor de destaque</value>
+  </data>
 </root>

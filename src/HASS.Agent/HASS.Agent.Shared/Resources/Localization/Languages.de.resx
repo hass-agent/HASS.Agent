@@ -3382,4 +3382,7 @@ Willst Du den Runtime Installer herunterladen?</value>
   <data name="SensorType_NamedActiveWindowSensor" xml:space="preserve">
     <value>BenanntesAktivesFenster</value>
   </data>
+  <data name="SensorType_AccentColorSensor" xml:space="preserve">
+    <value>Akzentfarbe</value>
+  </data>
 </root>

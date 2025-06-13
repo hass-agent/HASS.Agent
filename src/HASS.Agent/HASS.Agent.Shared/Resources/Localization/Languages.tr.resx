@@ -2865,4 +2865,7 @@ Lütfen aracınız için credentialları sağlayın, HA Mosquitto eklentisini ku
   <data name="SensorType_NamedActiveWindowSensor" xml:space="preserve">
     <value>AdlandırılmışAktifPencere</value>
   </data>
+  <data name="SensorType_AccentColorSensor" xml:space="preserve">
+    <value>Vurgu Rengi</value>
+  </data>
 </root>

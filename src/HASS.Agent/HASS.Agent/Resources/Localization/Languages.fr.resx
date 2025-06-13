@@ -3449,4 +3449,7 @@ Nécessite sa configuration dans « Configuration -&gt; Icône de la barre d'ét
   <data name="SensorsManager_NamedActiveWindowSensorDescription" xml:space="preserve">
     <value>Fournit une valeur ON/OFF selon que le nom de la fenêtre focalisée contient ou non une chaîne configurée.</value>
   </data>
+  <data name="SensorsManager_AccentColorSensorDescription" xml:space="preserve">
+    <value>Fournit les valeurs de couleur #RRGGBB pour les couleurs d'accentuation du système. La couleur d'accentuation principale est la valeur du capteur ; des couleurs d'accentuation supplémentaires sont disponibles sous forme d'attributs.</value>
+  </data>
 </root>

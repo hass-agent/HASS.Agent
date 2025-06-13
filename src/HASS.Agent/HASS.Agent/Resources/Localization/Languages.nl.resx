@@ -3437,4 +3437,8 @@ Vereist dat het geconfigureerd is in "Configuratie -&gt; Tray Icon"</value>
   <data name="SensorsManager_NamedActiveWindowSensorDescription" xml:space="preserve">
     <value>Geeft een AAN/UIT-waarde op basis van het al dan niet bevatten van de focusvensternaam van een geconfigureerde tekenreeks.</value>
   </data>
+  <data name="SensorsManager_AccentColorSensorDescription" xml:space="preserve">
+    <value>Biedt #RRGGBB-kleurwaarden voor systeemaccentkleuren.
+De belangrijkste accentkleur is de sensorwaarde. Aanvullende accentkleuren zijn beschikbaar als attributen.</value>
+  </data>
 </root>

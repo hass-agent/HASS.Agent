@@ -3540,4 +3540,8 @@ Muss unter „Konfiguration -&gt; Tray-Icon“ konfiguriert werden.</value>
   <data name="SensorsManager_NamedActiveWindowSensorDescription" xml:space="preserve">
     <value>Stellt einen EIN/AUS-Wert bereit, basierend darauf, ob der fokussierte Fenstername eine konfigurierte Zeichenfolge enthält.</value>
   </data>
+  <data name="SensorsManager_AccentColorSensorDescription" xml:space="preserve">
+    <value>Stellt #RRGGBB-Farbwerte für System-Akzentfarben bereit.
+Die Hauptakzentfarbe ist der Sensorwert. Zusätzliche Akzentfarben sind als Attribute verfügbar.</value>
+  </data>
 </root>

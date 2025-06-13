@@ -3526,4 +3526,8 @@ Wymaga konfiguracji w „Configuration -&gt; Tray Icon”</value>
   <data name="SensorsManager_NamedActiveWindowSensorDescription" xml:space="preserve">
     <value>Zapewnia wartość WŁ./WYŁ. w zależności od tego, czy nazwa wybranego okna zawiera skonfigurowany ciąg znaków.</value>
   </data>
+  <data name="SensorsManager_AccentColorSensorDescription" xml:space="preserve">
+    <value>Zapewnia wartości kolorów #RRGGBB dla kolorów akcentowych systemu.
+Główny kolor akcentowy to wartość czujnika, dodatkowe kolory akcentowe są dostępne jako atrybuty.</value>
+  </data>
 </root>

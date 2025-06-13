@@ -3416,4 +3416,8 @@ Requiere que se configure en "Configuración -&gt; Icono de la bandeja"</value>
   <data name="SensorsManager_NamedActiveWindowSensorDescription" xml:space="preserve">
     <value>Proporciona un valor de ENCENDIDO/APAGADO según si el nombre de la ventana enfocada contiene una cadena configurada.</value>
   </data>
+  <data name="SensorsManager_AccentColorSensorDescription" xml:space="preserve">
+    <value>Proporciona valores de color #RRGGBB para los colores de acento del sistema.
+El color de acento principal es el valor del sensor; hay colores de acento adicionales disponibles como atributos.</value>
+  </data>
 </root>
