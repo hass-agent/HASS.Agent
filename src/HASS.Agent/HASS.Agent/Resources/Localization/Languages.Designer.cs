@@ -4737,7 +4737,7 @@ namespace HASS.Agent.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to There&apos;s a lot more to tinker with, so make sure you take a look at the Configuration Wwindow!
+        ///   Looks up a localized string similar to There&apos;s a lot more to tinker with, so make sure you take a look at the Configuration Window!
         ///
         ///
         ///Thank you for using HASS.Agent, hopefully it&apos;ll be useful for you :-)
