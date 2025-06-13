@@ -24,6 +24,9 @@ public static class AudioManager
 
     private static readonly Dictionary<int, string> _applicationNameCache = new();
 
+    private static bool _noDefaultInputLogged = false;
+    private static bool _noDefaultOutputLogged = false;
+
     private static void InitializeDevices()
     {
         _enumerator = new MMDeviceEnumerator();
@@ -207,6 +210,18 @@ public static class AudioManager
         Log.Debug("[AUDIOMGR] cleanup completed");
     }
 
+    private static MMDevice GetDefaultMultimediaDevice(DataFlow dataFlow)
+    {
+        MMDevice device = null;
+        try
+        {
+            device = _enumerator.GetDefaultAudioEndpoint(dataFlow, Role.Multimedia);
+        }
+        catch { }
+
+        return device;
+    }
+
     public static List<AudioDevice> GetDevices()
     {
         var audioDevices = new List<AudioDevice>();
@@ -216,11 +231,29 @@ public static class AudioManager
 
         try
         {
-            using var defaultInputDevice = _enumerator.GetDefaultAudioEndpoint(DataFlow.Capture, Role.Multimedia);
-            using var defaultOutputDevice = _enumerator.GetDefaultAudioEndpoint(DataFlow.Render, Role.Multimedia);
+            using var defaultInputDevice = GetDefaultMultimediaDevice(DataFlow.Capture);
+            if (defaultInputDevice == null && !_noDefaultInputLogged)
+            {
+                Log.Information("[AUDIOMGR] no default input device detected");
+                _noDefaultInputLogged = true;
+            }
+            else if (defaultInputDevice != null)
+            {
+                _noDefaultInputLogged = false;
+            }
 
-            var defaultInputDeviceId = defaultInputDevice.ID;
-            var defaultOutputDeviceId = defaultOutputDevice.ID;
+            using var defaultOutputDevice = GetDefaultMultimediaDevice(DataFlow.Render);
+            if (defaultOutputDevice == null && !_noDefaultOutputLogged)
+            {
+                Log.Information("[AUDIOMGR] no default output device detected");
+                _noDefaultOutputLogged = true;
+            }else if (defaultOutputDevice != null)
+            {
+                _noDefaultOutputLogged = false;
+            }
+
+            var defaultInputDeviceId = defaultInputDevice != null ? defaultInputDevice.ID : string.Empty;
+            var defaultOutputDeviceId = defaultOutputDevice != null ? defaultOutputDevice.ID : string.Empty;
 
             foreach (var (deviceId, deviceName) in _devices)
             {
