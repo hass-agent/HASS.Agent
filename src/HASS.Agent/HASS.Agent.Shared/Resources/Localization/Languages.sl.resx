@@ -3407,4 +3407,7 @@ Ali želite prenesti runtime installer?</value>
   <data name="SensorType_NamedActiveWindowSensor" xml:space="preserve">
     <value>PoimenovanoAktivnoOkno</value>
   </data>
+  <data name="SensorType_AccentColorSensor" xml:space="preserve">
+    <value>Barva poudarka</value>
+  </data>
 </root>

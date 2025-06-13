@@ -3368,4 +3368,7 @@ Czy chcesz pobrać plik instalacyjny?</value>
   <data name="SensorType_NamedActiveWindowSensor" xml:space="preserve">
     <value>NazwaAktywnegoOkna</value>
   </data>
+  <data name="SensorType_AccentColorSensor" xml:space="preserve">
+    <value>Kolor akcentu</value>
+  </data>
 </root>

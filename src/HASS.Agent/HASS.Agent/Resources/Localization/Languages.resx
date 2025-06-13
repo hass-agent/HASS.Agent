@@ -3438,4 +3438,8 @@ Requires it to be configured in "Configuration -&gt; Tray Icon"</value>
   <data name="SensorsManager_NamedActiveWindowSensorDescription" xml:space="preserve">
     <value>Provides an ON/OFF value based on whether the focused window name contains configured string.</value>
   </data>
+  <data name="SensorsManager_AccentColorSensorDescription" xml:space="preserve">
+    <value>Provides #RRGGBB color values for system accent colors.
+Main accent color is the sensor value, additional accent colors are available as attributes.</value>
+  </data>
 </root>

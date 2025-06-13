@@ -3565,4 +3565,8 @@ Zahteva, da je konfiguriran v "Konfiguracija -&gt; Ikona pladnja"</value>
   <data name="SensorsManager_NamedActiveWindowSensorDescription" xml:space="preserve">
     <value>Zagotavlja vrednost VKLOP/IZKLOP glede na to, ali ime okna v fokusu vsebuje konfiguriran niz.</value>
   </data>
+  <data name="SensorsManager_AccentColorSensorDescription" xml:space="preserve">
+    <value>Zagotavlja barvne vrednosti #RRGGBB za sistemske poudarjene barve.
+Glavna poudarjena barva je vrednost senzorja, dodatne poudarjene barve so na voljo kot atributi.</value>
+  </data>
 </root>

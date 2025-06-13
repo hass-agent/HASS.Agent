@@ -3326,4 +3326,7 @@ Home Assistant.
   <data name="SensorType_NamedActiveWindowSensor" xml:space="preserve">
     <value>ИменованноеАктивноеОкно</value>
   </data>
+  <data name="SensorType_AccentColorSensor" xml:space="preserve">
+    <value>Акцентный цвет</value>
+  </data>
 </root>

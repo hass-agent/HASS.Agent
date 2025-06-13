@@ -3032,4 +3032,8 @@ Not: Uydu hizmetinde kullanılırsa kullanıcı alanı uygulamalarını algılam
   <data name="SensorsManager_NamedActiveWindowSensorDescription" xml:space="preserve">
     <value>Odaklanan pencere adının yapılandırılmış dizeyi içerip içermediğine bağlı olarak bir AÇIK/KAPALI değeri sağlar.</value>
   </data>
+  <data name="SensorsManager_AccentColorSensorDescription" xml:space="preserve">
+    <value>Sistem vurgu renkleri için #RRGGBB renk değerleri sağlar.
+Ana vurgu rengi sensör değeridir, ek vurgu renkleri öznitelikler olarak mevcuttur.</value>
+  </data>
 </root>

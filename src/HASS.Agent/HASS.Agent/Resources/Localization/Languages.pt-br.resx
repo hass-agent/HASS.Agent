@@ -3462,4 +3462,8 @@ Requer que seja configurado em "Configuration -&gt; Tray Icon"</value>
   <data name="SensorsManager_NamedActiveWindowSensorDescription" xml:space="preserve">
     <value>Fornece um valor ON/OFF com base na presença ou não de uma string configurada no nome da janela em foco.</value>
   </data>
+  <data name="SensorsManager_AccentColorSensorDescription" xml:space="preserve">
+    <value>Fornece valores de cor #RRGGBB para as cores de destaque do sistema.
+A cor de destaque principal é o valor do sensor; cores de destaque adicionais estão disponíveis como atributos.</value>
+  </data>
 </root>

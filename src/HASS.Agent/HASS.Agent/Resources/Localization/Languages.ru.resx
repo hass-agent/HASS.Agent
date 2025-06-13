@@ -3485,4 +3485,8 @@ Home Assistant.
   <data name="SensorsManager_NamedActiveWindowSensorDescription" xml:space="preserve">
     <value>Предоставляет значение ВКЛ/ВЫКЛ в зависимости от того, содержит ли имя окна в фокусе настроенную строку.</value>
   </data>
+  <data name="SensorsManager_AccentColorSensorDescription" xml:space="preserve">
+    <value>Предоставляет значения цвета #RRGGBB для акцентных цветов системы.
+Основной акцентный цвет — это значение датчика, дополнительные акцентные цвета доступны в качестве атрибутов.</value>
+  </data>
 </root>

@@ -3280,4 +3280,7 @@ Wil je de runtime installatie downloaden?</value>
   <data name="SensorType_NamedActiveWindowSensor" xml:space="preserve">
     <value>SchermActiefNaam</value>
   </data>
+  <data name="SensorType_AccentColorSensor" xml:space="preserve">
+    <value>Accentkleur</value>
+  </data>
 </root>

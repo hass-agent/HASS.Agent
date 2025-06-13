@@ -390,6 +390,14 @@ namespace HASS.Agent.Sensors
 
             // =================================
 
+            sensorInfoCard = new SensorInfoCard(SensorType.AccentColorSensor,
+                Languages.SensorsManager_AccentColorSensorDescription,
+                120, false, true, false);
+
+            SensorInfoCards.Add(sensorInfoCard.SensorType, sensorInfoCard);
+
+            // =================================
+
             sensorInfoCard = new SensorInfoCard(SensorType.AudioSensors,
                 Languages.SensorsManager_AudioSensorsDescription,
                 20, true, true, true);

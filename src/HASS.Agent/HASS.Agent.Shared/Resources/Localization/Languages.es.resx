@@ -3258,4 +3258,7 @@ Oculta, Maximizada, Minimizada, Normal y Desconocida.</value>
   <data name="SensorType_NamedActiveWindowSensor" xml:space="preserve">
     <value>Ventana activa con nombre</value>
   </data>
+  <data name="SensorType_AccentColorSensor" xml:space="preserve">
+    <value>Color de acento</value>
+  </data>
 </root>

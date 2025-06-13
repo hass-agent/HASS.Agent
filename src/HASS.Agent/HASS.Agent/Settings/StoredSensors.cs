@@ -123,6 +123,9 @@ namespace HASS.Agent.Settings
                 case SensorType.ActiveDesktopSensor:
                     abstractSensor = new ActiveDesktopSensor(sensor.UpdateInterval, sensor.EntityName, sensor.Name, sensor.Id.ToString(), sensor.AdvancedSettings);
                     break;
+                case SensorType.AccentColorSensor:
+                    abstractSensor = new AccentColorSensor(sensor.UpdateInterval, sensor.EntityName, sensor.Name, sensor.Id.ToString(), sensor.AdvancedSettings);
+                    break;
                 case SensorType.NamedWindowSensor:
                     abstractSensor = new NamedWindowSensor(sensor.WindowName, sensor.EntityName, sensor.Name, sensor.UpdateInterval, sensor.Id.ToString(), sensor.AdvancedSettings);
                     break;
