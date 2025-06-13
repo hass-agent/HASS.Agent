@@ -59,7 +59,7 @@ namespace HASS.Agent.Controls.Onboarding
             if (!HelperFunctions.InputLanguageCheckDiffers(out var knownToCollide, out var warning)) return;
 
             // the system's input language is unknown or collides with our hotkey, let the user know if it's set to default
-            if (Variables.AppSettings.QuickActionsHotKey != "Shift, Alt + Q") return;
+            if (Variables.AppSettings.QuickActionsHotKey != "Control, Alt + Q") return;
 
             if (knownToCollide) LblLanguageWarning.Text = warning;
         }
