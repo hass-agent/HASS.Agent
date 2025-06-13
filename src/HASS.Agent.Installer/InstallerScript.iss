@@ -68,16 +68,26 @@ Name: "{autodesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Tasks: de
 
 [Run]
 Filename: "{app}\{#MyAppExeName}"; Parameters: "compat_migrate"; Description: "Try to migrate configuration - use only once (administrative permissions required)"; Flags: postinstall skipifsilent runascurrentuser unchecked
-Filename: "{tmp}\HASS.Agent.Service.Installer.exe"; Description: "Install Satellite Service (administrative permissions required)"; Flags: postinstall runascurrentuser 
+Filename: "{tmp}\HASS.Agent.Service.Installer.exe"; Parameters: "{code:GetCmdLineParams}"; Description: "Install Satellite Service (administrative permissions required)"; Flags: postinstall runascurrentuser 
 Filename: "{app}\{#MyAppExeName}"; Description: "{cm:LaunchProgram,{#StringChange(MyAppName, '&', '&&')}}"; Flags: postinstall skipifsilent nowait
 
 [Code]
+var
+  OriginalCmdLine: String;
+
+function GetCmdLineParams(Param: String): String;
+begin
+  Result := OriginalCmdLine;
+end;
+
 procedure InitializeWizard;
 var
   AfterID: Integer;
   MigrationNotice: AnsiString;
   DotNet8Notice: AnsiString;
 begin
+  OriginalCmdLine := GetCmdTail;
+
   AfterID := wpSelectTasks;
 
   ExtractTemporaryFile('{#MigrationNotice}');
