@@ -120,6 +120,7 @@ message RpcServiceMqttSettings {
   string mqttRootCertificate = 9;
   string mqttClientCertificate = 10;
   string mqttClientId = 11;
+  bool mqttUseWebSocket = 12;
 }
 
 message RpcConfiguredServerSensor {

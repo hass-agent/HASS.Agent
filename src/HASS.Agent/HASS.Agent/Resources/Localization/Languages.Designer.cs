@@ -2447,9 +2447,9 @@ namespace HASS.Agent.Resources.Localization {
         /// <summary>
         ///   Looks up a localized string similar to Use &amp;WebSocket.
         /// </summary>
-        internal static string ConfigMqtt_CbUseWebSocketFlag {
+        internal static string ConfigMqtt_CbUseWebSocket {
             get {
-                return ResourceManager.GetString("ConfigMqtt_CbUseWebSocketFlag", resourceCulture);
+                return ResourceManager.GetString("ConfigMqtt_CbUseWebSocket", resourceCulture);
             }
         }
         
@@ -8034,6 +8034,15 @@ namespace HASS.Agent.Resources.Localization {
         internal static string ServiceMqtt_CbUseRetainFlag {
             get {
                 return ResourceManager.GetString("ServiceMqtt_CbUseRetainFlag", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Use .
+        /// </summary>
+        internal static string ServiceMqtt_CbUseWebSocket {
+            get {
+                return ResourceManager.GetString("ServiceMqtt_CbUseWebSocket", resourceCulture);
             }
         }
         

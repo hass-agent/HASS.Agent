@@ -157,7 +157,7 @@ namespace HASS.Agent.Controls.Configuration
             this.CbUseWebSocket.Name = "CbUseWebSocketFlag";
             this.CbUseWebSocket.Size = new System.Drawing.Size(114, 23);
             this.CbUseWebSocket.TabIndex = 57;
-            this.CbUseWebSocket.Text = Languages.ConfigMqtt_CbUseWebSocketFlag;
+            this.CbUseWebSocket.Text = Languages.ConfigMqtt_CbUseWebSocket;
             this.CbUseWebSocket.UseVisualStyleBackColor = true;
             // 
             // CbAllowUntrustedCertificates

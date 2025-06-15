@@ -3449,7 +3449,10 @@ Requires it to be configured in "Configuration -&gt; Tray Icon"</value>
     <value>Provides #RRGGBB color values for system accent colors.
 Main accent color is the sensor value, additional accent colors are available as attributes.</value>
   </data>
-  <data name="ConfigMqtt_CbUseWebSocketFlag" xml:space="preserve">
+  <data name="ConfigMqtt_CbUseWebSocket" xml:space="preserve">
+    <value>Use &amp;WebSocket</value>
+  </data>
+  <data name="ServiceMqtt_CbUseWebSocket" xml:space="preserve">
     <value>Use &amp;WebSocket</value>
   </data>
 </root>
