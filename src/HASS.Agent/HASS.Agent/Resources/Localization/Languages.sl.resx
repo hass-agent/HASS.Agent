@@ -3569,4 +3569,7 @@ Zahteva, da je konfiguriran v "Konfiguracija -&gt; Ikona pladnja"</value>
     <value>Zagotavlja barvne vrednosti #RRGGBB za sistemske poudarjene barve.
 Glavna poudarjena barva je vrednost senzorja, dodatne poudarjene barve so na voljo kot atributi.</value>
   </data>
+  <data name="ConfigMqtt_CbUseWebSocketFlag" xml:space="preserve">
+    <value>Uporabi &amp;WebSocket</value>
+  </data>
 </root>

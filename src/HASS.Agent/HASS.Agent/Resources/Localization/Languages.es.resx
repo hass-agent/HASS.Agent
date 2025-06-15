@@ -3420,4 +3420,7 @@ Requiere que se configure en "Configuración -&gt; Icono de la bandeja"</value>
     <value>Proporciona valores de color #RRGGBB para los colores de acento del sistema.
 El color de acento principal es el valor del sensor; hay colores de acento adicionales disponibles como atributos.</value>
   </data>
+  <data name="ConfigMqtt_CbUseWebSocketFlag" xml:space="preserve">
+    <value>Utilice &amp;WebSocket</value>
+  </data>
 </root>

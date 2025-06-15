@@ -2445,6 +2445,15 @@ namespace HASS.Agent.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Use &amp;WebSocket.
+        /// </summary>
+        internal static string ConfigMqtt_CbUseWebSocketFlag {
+            get {
+                return ResourceManager.GetString("ConfigMqtt_CbUseWebSocketFlag", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Broker IP Address or Hostname.
         /// </summary>
         internal static string ConfigMqtt_LblBrokerIp {

@@ -3036,4 +3036,7 @@ Not: Uydu hizmetinde kullanılırsa kullanıcı alanı uygulamalarını algılam
     <value>Sistem vurgu renkleri için #RRGGBB renk değerleri sağlar.
 Ana vurgu rengi sensör değeridir, ek vurgu renkleri öznitelikler olarak mevcuttur.</value>
   </data>
+  <data name="ConfigMqtt_CbUseWebSocketFlag" xml:space="preserve">
+    <value>&amp;WebSocket'i kullanın</value>
+  </data>
 </root>

@@ -3441,4 +3441,7 @@ Vereist dat het geconfigureerd is in "Configuratie -&gt; Tray Icon"</value>
     <value>Biedt #RRGGBB-kleurwaarden voor systeemaccentkleuren.
 De belangrijkste accentkleur is de sensorwaarde. Aanvullende accentkleuren zijn beschikbaar als attributen.</value>
   </data>
+  <data name="ConfigMqtt_CbUseWebSocketFlag" xml:space="preserve">
+    <value>Gebruik &amp;WebSocket</value>
+  </data>
 </root>

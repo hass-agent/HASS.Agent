@@ -3452,4 +3452,7 @@ Nécessite sa configuration dans « Configuration -&gt; Icône de la barre d'ét
   <data name="SensorsManager_AccentColorSensorDescription" xml:space="preserve">
     <value>Fournit les valeurs de couleur #RRGGBB pour les couleurs d'accentuation du système. La couleur d'accentuation principale est la valeur du capteur ; des couleurs d'accentuation supplémentaires sont disponibles sous forme d'attributs.</value>
   </data>
+  <data name="ConfigMqtt_CbUseWebSocketFlag" xml:space="preserve">
+    <value>Utiliser &amp;WebSocket</value>
+  </data>
 </root>

@@ -37,6 +37,7 @@ namespace HASS.Agent.Controls.Configuration
             this.TbMqttRootCertificate = new System.Windows.Forms.TextBox();
             this.LblRootCert = new System.Windows.Forms.Label();
             this.CbUseRetainFlag = new System.Windows.Forms.CheckBox();
+            this.CbUseWebSocket = new System.Windows.Forms.CheckBox();
             this.CbAllowUntrustedCertificates = new System.Windows.Forms.CheckBox();
             this.BtnMqttClearConfig = new Syncfusion.WinForms.Controls.SfButton();
             this.LblTip1 = new System.Windows.Forms.Label();
@@ -138,12 +139,26 @@ namespace HASS.Agent.Controls.Configuration
             this.CbUseRetainFlag.AccessibleRole = System.Windows.Forms.AccessibleRole.CheckButton;
             this.CbUseRetainFlag.AutoSize = true;
             this.CbUseRetainFlag.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.CbUseRetainFlag.Location = new System.Drawing.Point(412, 451);
+            this.CbUseRetainFlag.Location = new System.Drawing.Point(412, 431);
             this.CbUseRetainFlag.Name = "CbUseRetainFlag";
             this.CbUseRetainFlag.Size = new System.Drawing.Size(114, 23);
             this.CbUseRetainFlag.TabIndex = 10;
             this.CbUseRetainFlag.Text = Languages.ConfigMqtt_CbUseRetainFlag;
             this.CbUseRetainFlag.UseVisualStyleBackColor = true;
+            // 
+            // CbUseWebSocketFlag
+            // 
+            this.CbUseWebSocket.AccessibleDescription = "Use WebSocket for MQTT connection instead of direct one.";
+            this.CbUseWebSocket.AccessibleName = "WebSocket flag";
+            this.CbUseWebSocket.AccessibleRole = System.Windows.Forms.AccessibleRole.CheckButton;
+            this.CbUseWebSocket.AutoSize = true;
+            this.CbUseWebSocket.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.CbUseWebSocket.Location = new System.Drawing.Point(412, 469);
+            this.CbUseWebSocket.Name = "CbUseWebSocketFlag";
+            this.CbUseWebSocket.Size = new System.Drawing.Size(114, 23);
+            this.CbUseWebSocket.TabIndex = 57;
+            this.CbUseWebSocket.Text = Languages.ConfigMqtt_CbUseWebSocketFlag;
+            this.CbUseWebSocket.UseVisualStyleBackColor = true;
             // 
             // CbAllowUntrustedCertificates
             // 
@@ -500,6 +515,7 @@ namespace HASS.Agent.Controls.Configuration
             this.Controls.Add(TbMqttRootCertificate);
             this.Controls.Add(LblRootCert);
             this.Controls.Add(CbUseRetainFlag);
+            this.Controls.Add(CbUseWebSocket);
             this.Controls.Add(CbAllowUntrustedCertificates);
             this.Controls.Add(BtnMqttClearConfig);
             this.Controls.Add(LblTip1);
@@ -540,6 +556,7 @@ namespace HASS.Agent.Controls.Configuration
         internal System.Windows.Forms.TextBox TbMqttClientCertificate;
         internal System.Windows.Forms.TextBox TbMqttRootCertificate;
         internal System.Windows.Forms.CheckBox CbUseRetainFlag;
+        internal System.Windows.Forms.CheckBox CbUseWebSocket;
         internal System.Windows.Forms.CheckBox CbAllowUntrustedCertificates;
         internal Syncfusion.WinForms.Controls.SfButton BtnMqttClearConfig;
         internal System.Windows.Forms.TextBox TbMqttDiscoveryPrefix;
