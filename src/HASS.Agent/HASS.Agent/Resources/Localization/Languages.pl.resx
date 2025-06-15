@@ -3530,4 +3530,10 @@ Wymaga konfiguracji w „Configuration -&gt; Tray Icon”</value>
     <value>Zapewnia wartości kolorów #RRGGBB dla kolorów akcentowych systemu.
 Główny kolor akcentowy to wartość czujnika, dodatkowe kolory akcentowe są dostępne jako atrybuty.</value>
   </data>
+  <data name="ConfigMqtt_CbUseWebSocket" xml:space="preserve">
+    <value>Użyj &amp;WebSocket</value>
+  </data>
+  <data name="ServiceMqtt_CbUseWebSocket" xml:space="preserve">
+    <value>Użyj &amp;WebSocket</value>
+  </data>
 </root>

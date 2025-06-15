@@ -3489,4 +3489,10 @@ Home Assistant.
     <value>Предоставляет значения цвета #RRGGBB для акцентных цветов системы.
 Основной акцентный цвет — это значение датчика, дополнительные акцентные цвета доступны в качестве атрибутов.</value>
   </data>
+  <data name="ConfigMqtt_CbUseWebSocket" xml:space="preserve">
+    <value>Использовать &amp;WebSocket</value>
+  </data>
+  <data name="ServiceMqtt_CbUseWebSocket" xml:space="preserve">
+    <value>Использовать &amp;WebSocket</value>
+  </data>
 </root>
