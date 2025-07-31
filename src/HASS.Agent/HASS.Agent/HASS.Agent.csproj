@@ -14,8 +14,8 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <AssemblyName>HASS.Agent</AssemblyName>
     <ApplicationIcon>hassagent.ico</ApplicationIcon>
-    <PlatformTarget>x64</PlatformTarget>
-    <Platforms>x64;x86</Platforms>
+    <PlatformTarget>anycpu</PlatformTarget>
+    <Platforms>x64;x86;AnyCPU</Platforms>
     <DebugType>full</DebugType>
     <Version>2.1.1</Version>
     <Company>HASS.Agent Team</Company>
@@ -31,13 +31,13 @@
     <FileVersion>2.1.1</FileVersion>
     <RootNamespace>HASS.Agent</RootNamespace>
     <WindowsPackageType>None</WindowsPackageType>
-    <RuntimeIdentifiers>win-x64;win-x86</RuntimeIdentifiers>
     <EnableUnsafeBinaryFormatterSerialization>true</EnableUnsafeBinaryFormatterSerialization>
 	<WindowsAppSDKSelfContained>true</WindowsAppSDKSelfContained>
 	<EnableCoreMrtTooling Condition=" '$(BuildingInsideVisualStudio)' != 'true' ">false</EnableCoreMrtTooling>
 	<ErrorOnDuplicatePublishOutputFiles>false</ErrorOnDuplicatePublishOutputFiles>
 	<IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
 	<WindowsSdkPackageVersion>10.0.22621.38</WindowsSdkPackageVersion>
+	<RuntimeIdentifier>win-x64</RuntimeIdentifier>
   </PropertyGroup>
 
   <ItemGroup>
