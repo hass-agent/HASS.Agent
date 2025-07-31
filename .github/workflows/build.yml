@@ -177,19 +177,19 @@ jobs:
     - name: Upload build artifacts x64 (HASS Agent)
       uses: actions/upload-artifact@v4.6.0
       with:
-        name: HASS.Agent.x64
+        name: HASS.Agent
         path: "src\\HASS.Agent\\HASS.Agent\\bin\\Publish-x64\\Release"
 
     - name: Upload build artifacts x64 (HASS Agent Satellite Service)
       uses: actions/upload-artifact@v4.6.0
       with:
-        name: HASS.Agent.Satellite.Service.x64
+        name: HASS.Agent.Satellite.Service
         path: "src\\HASS.Agent\\HASS.Agent.Satellite.Service\\bin\\Publish-x64\\Release"
 
     - name: Upload build artifacts x64 (HASS Agent Installer)
       uses: actions/upload-artifact@v4.6.0
       with:
-        name: HASS.Agent.Installer.x64
+        name: HASS.Agent.Installer
         path: "src\\HASS.Agent.Installer\\bin\\HASS.Agent.Installer.exe"
         
     # Upload x86 project artifacts
@@ -225,9 +225,9 @@ jobs:
     steps:
     - name: Create directories for Build Artifacts to download
       run: |
-        mkdir HASS.Agent.x64
-        mkdir HASS.Agent.Satellite.Service.x64
-        mkdir HASS.Agent.Installer.x64
+        mkdir HASS.Agent
+        mkdir HASS.Agent.Satellite.Service
+        mkdir HASS.Agent.Installer
         mkdir HASS.Agent.x86
         mkdir HASS.Agent.Satellite.Service.x86
         mkdir HASS.Agent.Installer.x86
@@ -237,20 +237,20 @@ jobs:
     - name: Download Build Artifacts x64 (HASS Agent)
       uses: actions/download-artifact@v4.1.8
       with:
-        name: HASS.Agent.x64
-        path: HASS.Agent.x64
+        name: HASS.Agent
+        path: HASS.Agent
 
     - name: Download Build Artifacts x64 (HASS Agent Satellite Service)
       uses: actions/download-artifact@v4.1.8
       with:
-        name: HASS.Agent.Satellite.Service.x64
-        path: HASS.Agent.Satellite.Service.x64
+        name: HASS.Agent.Satellite.Service
+        path: HASS.Agent.Satellite.Service
 
     - name: Download Build Artifacts x64 (HASS Agent Installer)
       uses: actions/download-artifact@v4.1.8
       with:
-        name: HASS.Agent.Installer.x64
-        path: HASS.Agent.Installer.x64
+        name: HASS.Agent.Installer
+        path: HASS.Agent.Installer
         
     # x86 download
     - name: Download Build Artifacts x86 (HASS Agent)
@@ -274,14 +274,15 @@ jobs:
 
     - name: Compress HASS Agent directories for manual install
       run: |
-        cd HASS.Agent.x64
+        cd HASS.Agent
         ls -la
         zip -r HASS.Agent.zip ./
         cd ../
-        cd HASS.Agent.Satellite.Service.x64
+        cd HASS.Agent.Satellite.Service
         ls -la
         zip -r HASS.Agent.Satellite.Service.zip ./
-        cd ../HASS.Agent.x86
+        cd ../
+        cd HASS.Agent.x86
         ls -la
         zip -r HASS.Agent.x86.zip ./
         cd ../
@@ -297,4 +298,4 @@ jobs:
         prerelease: ${{ github.event.inputs.prerelease }}
         tag: ${{ github.event.inputs.releasetag }}
         artifacts:
-          HASS.Agent/HASS.Agent.zip,HASS.Agent.Satellite.Service/HASS.Agent.Satellite.Service.zip,HASS.Agent.Installer/HASS.Agent.Installer.exe,HASS.Agent.x86/HASS.Agent.x86.zip,HASS.Agent.Satellite.Service/HASS.Agent.Satellite.Service.x86.zip,HASS.Agent.Installer/HASS.Agent.Installer.x86.exe
+          HASS.Agent/HASS.Agent.zip,HASS.Agent.Satellite.Service/HASS.Agent.Satellite.Service.zip,HASS.Agent.Installer/HASS.Agent.Installer.exe,HASS.Agent.x86/HASS.Agent.x86.zip,HASS.Agent.Satellite.Service.x86/HASS.Agent.Satellite.Service.x86.zip,HASS.Agent.Installer.x86/HASS.Agent.Installer.x86.exe
