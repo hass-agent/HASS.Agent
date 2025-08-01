@@ -39,7 +39,7 @@ namespace HASS.Agent.Controls.Onboarding
         {
             /*            if (!HelperFunctions.InputLanguageCheckDiffers(out var knownToCollide, out var warning))
                         {
-                            TbQuickActionsHotkey.Text = "Shift, Alt + Q";
+                            TbQuickActionsHotkey.Text = "Shift, Control + Q";
                             LblLanguageWarning.Visible = false;
                             return;
                         }
@@ -55,11 +55,11 @@ namespace HASS.Agent.Controls.Onboarding
 
             // the system's input language is unknown, we're presetting the default but warn the user
             // deprecated, we're not doing this anymore
-            //TbQuickActionsHotkey.Text = "Shift, Alt + Q";
+            //TbQuickActionsHotkey.Text = "Shift, Control + Q";
             //LblLanguageWarning.ForeColor = Color.DarkOrange;
             //LblLanguageWarning.Text = warning;
 
-            TbQuickActionsHotkey.Text = "Shift, Alt + Q";
+            TbQuickActionsHotkey.Text = "Shift, Control + Q";
             LblLanguageWarning.Visible = false;
         }
 
@@ -71,7 +71,7 @@ namespace HASS.Agent.Controls.Onboarding
                 return;
 
             // the system's input language is unknown or collides with our hotkey, let the user know if it's set to default
-            if (Variables.AppSettings.QuickActionsHotKey != "Control, Alt + Q")
+            if (Variables.AppSettings.QuickActionsHotKey != "Shift, Control + Q")
                 return;
 
             if (knownToCollide)
