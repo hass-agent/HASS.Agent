@@ -1,0 +1,60 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32319.34
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HASS.Agent", "HASS.Agent\HASS.Agent\HASS.Agent.csproj", "{6CB1FA4F-4798-4939-B8DF-7E908FD23242}"
+	ProjectSection(ProjectDependencies) = postProject
+		{3EE6337D-63D6-4AE0-9B8C-788F7598D076} = {3EE6337D-63D6-4AE0-9B8C-788F7598D076}
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HASS.Agent.Shared", "HASS.Agent\HASS.Agent.Shared\HASS.Agent.Shared.csproj", "{3EE6337D-63D6-4AE0-9B8C-788F7598D076}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HASS.Agent.Satellite.Service", "HASS.Agent\HASS.Agent.Satellite.Service\HASS.Agent.Satellite.Service.csproj", "{C4138592-B05C-4B3D-B55C-A1337E97CDDD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8807B76C-04C9-408D-9ED7-BD1FEC59D0F8}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6CB1FA4F-4798-4939-B8DF-7E908FD23242}.Debug|x64.ActiveCfg = Debug|x64
+		{6CB1FA4F-4798-4939-B8DF-7E908FD23242}.Debug|x64.Build.0 = Debug|x64
+		{6CB1FA4F-4798-4939-B8DF-7E908FD23242}.Debug|x86.ActiveCfg = Debug|x86
+		{6CB1FA4F-4798-4939-B8DF-7E908FD23242}.Debug|x86.Build.0 = Debug|x86
+		{6CB1FA4F-4798-4939-B8DF-7E908FD23242}.Release|x64.ActiveCfg = Release|x64
+		{6CB1FA4F-4798-4939-B8DF-7E908FD23242}.Release|x64.Build.0 = Release|x64
+		{6CB1FA4F-4798-4939-B8DF-7E908FD23242}.Release|x86.ActiveCfg = Release|x86
+		{6CB1FA4F-4798-4939-B8DF-7E908FD23242}.Release|x86.Build.0 = Release|x86
+		{3EE6337D-63D6-4AE0-9B8C-788F7598D076}.Debug|x64.ActiveCfg = Debug|x64
+		{3EE6337D-63D6-4AE0-9B8C-788F7598D076}.Debug|x64.Build.0 = Debug|x64
+		{3EE6337D-63D6-4AE0-9B8C-788F7598D076}.Debug|x86.ActiveCfg = Debug|x86
+		{3EE6337D-63D6-4AE0-9B8C-788F7598D076}.Debug|x86.Build.0 = Debug|x86
+		{3EE6337D-63D6-4AE0-9B8C-788F7598D076}.Release|x64.ActiveCfg = Release|x64
+		{3EE6337D-63D6-4AE0-9B8C-788F7598D076}.Release|x64.Build.0 = Release|x64
+		{3EE6337D-63D6-4AE0-9B8C-788F7598D076}.Release|x86.ActiveCfg = Release|x86
+		{3EE6337D-63D6-4AE0-9B8C-788F7598D076}.Release|x86.Build.0 = Release|x86
+		{C4138592-B05C-4B3D-B55C-A1337E97CDDD}.Debug|x64.ActiveCfg = Debug|x64
+		{C4138592-B05C-4B3D-B55C-A1337E97CDDD}.Debug|x64.Build.0 = Debug|x64
+		{C4138592-B05C-4B3D-B55C-A1337E97CDDD}.Debug|x86.ActiveCfg = Debug|x86
+		{C4138592-B05C-4B3D-B55C-A1337E97CDDD}.Debug|x86.Build.0 = Debug|x86
+		{C4138592-B05C-4B3D-B55C-A1337E97CDDD}.Release|x64.ActiveCfg = Release|x64
+		{C4138592-B05C-4B3D-B55C-A1337E97CDDD}.Release|x64.Build.0 = Release|x64
+		{C4138592-B05C-4B3D-B55C-A1337E97CDDD}.Release|x86.ActiveCfg = Release|x86
+		{C4138592-B05C-4B3D-B55C-A1337E97CDDD}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		VisualSVNWorkingCopyRoot = .
+		SolutionGuid = {C17243F4-9756-47EF-9AA8-86C64B7582A6}
+	EndGlobalSection
+EndGlobal

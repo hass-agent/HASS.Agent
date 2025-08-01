@@ -1,0 +1,149 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows10.0.22621.0</TargetFramework>
+    <Platforms>x64;x86</Platforms>
+    <AssemblyName>HASS.Agent.Shared</AssemblyName>
+    <PackageId>HASS.Agent.Shared</PackageId>
+    <Authors>HASS.Agent Team</Authors>
+    <Company>HASS.Agent Team</Company>
+    <Description>Shared functions and models for the HASS.Agent platform.</Description>
+    <PackageProjectUrl>https://github.com/hass-agent/HASS.Agent</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/hass-agent/HASS.Agent</RepositoryUrl>
+    <AssemblyVersion>2.1.1</AssemblyVersion>
+    <FileVersion>2.1.1</FileVersion>
+    <Version>2.1.1</Version>
+    <PackageIcon>logo_128.png</PackageIcon>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <ApplicationIcon>hassagent.ico</ApplicationIcon>
+    <RootNamespace>HASS.Agent.Shared</RootNamespace>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
+    <Nullable>disable</Nullable>
+    <DebugType>full</DebugType>
+    <SupportedOSPlatformVersion>10.0.17763.0</SupportedOSPlatformVersion>
+	<IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="hassagent.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="ByteSize" Version="2.1.2" />
+    <PackageReference Include="Cassia.NetStandard" Version="1.0.0" />
+    <PackageReference Include="CliWrap" Version="3.9.0" />
+    <PackageReference Include="Microsoft.Win32.Registry" Version="5.0.0" />
+    <PackageReference Include="Microsoft.Win32.SystemEvents" Version="9.0.6" />
+    <PackageReference Include="MQTTnet" Version="4.3.3.952" />
+    <PackageReference Include="NAudio" Version="2.2.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="Serilog" Version="4.3.0" />
+    <PackageReference Include="System.Diagnostics.PerformanceCounter" Version="9.0.6" />
+    <PackageReference Include="System.DirectoryServices.AccountManagement" Version="9.0.6" />
+    <PackageReference Include="System.Drawing.Common" Version="9.0.6" />
+    <PackageReference Include="System.Management" Version="9.0.6" />
+    <PackageReference Include="System.Reactive" Version="6.0.1" />
+    <PackageReference Include="System.ServiceProcess.ServiceController" Version="9.0.6" />
+    <PackageReference Include="System.Text.Encoding.CodePages" Version="9.0.6" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Interop.WUApiLib">
+      <HintPath>Libraries\Interop.WUApiLib.dll</HintPath>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="System.Windows.Forms">
+      <HintPath>C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.8\System.Windows.Forms.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\Localization\Languages.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Languages.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.de.resx">
+      <DependentUpon>Resources.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Properties\Resources.es.resx">
+      <DependentUpon>Resources.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Properties\Resources.fr.resx">
+      <DependentUpon>Resources.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Properties\Resources.nl.resx">
+      <DependentUpon>Resources.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Properties\Resources.pl.resx">
+      <DependentUpon>Resources.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Properties\Resources.pt-br.resx">
+      <DependentUpon>Resources.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Properties\Resources.ru.resx">
+      <DependentUpon>Resources.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Properties\Resources.sl.resx">
+      <DependentUpon>Resources.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Properties\Resources.tr.resx">
+      <DependentUpon>Resources.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Localization\Languages.de.resx">
+      <DependentUpon>Languages.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Localization\Languages.en.resx">
+      <DependentUpon>Languages.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Localization\Languages.es.resx">
+      <DependentUpon>Languages.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Localization\Languages.fr.resx">
+      <DependentUpon>Languages.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Localization\Languages.nl.resx">
+      <DependentUpon>Languages.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Localization\Languages.pl.resx">
+      <DependentUpon>Languages.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Localization\Languages.pt-br.resx">
+      <DependentUpon>Languages.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Localization\Languages.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Languages.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Localization\Languages.ru.resx">
+      <DependentUpon>Languages.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Localization\Languages.sl.resx">
+      <DependentUpon>Languages.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Localization\Languages.tr.resx">
+      <DependentUpon>Languages.resx</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="logo_128.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
+</Project>

@@ -1,7 +1,7 @@
 
 The MIT License (MIT)
 
-Copyright (c) 2022 LAB02 Research
+Copyright (c) 2023 HASS.Agent Team
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
