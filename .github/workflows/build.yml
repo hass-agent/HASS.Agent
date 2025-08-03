@@ -274,21 +274,9 @@ jobs:
 
     - name: Compress HASS Agent directories for manual install
       run: |
-        cd HASS.Agent
         ls -la
-        zip -r HASS.Agent.zip ./
-        cd ../
-        cd HASS.Agent.Satellite.Service
+        zip -r HASS.Agent.Standalone.zip HASS.Agent HASS.Agent.Satellite.Service HASS.Agent.x86 HASS.Agent.Satellite.Service.x86
         ls -la
-        zip -r HASS.Agent.Satellite.Service.zip ./
-        cd ../
-        cd HASS.Agent.x86
-        ls -la
-        zip -r HASS.Agent.x86.zip ./
-        cd ../
-        cd HASS.Agent.Satellite.Service.x86
-        ls -la
-        zip -r HASS.Agent.Satellite.Service.x86.zip ./
         
     - name: Create Draft Release and Upload Build Artifacts
       uses: ncipollo/release-action@v1.15.0
@@ -298,4 +286,4 @@ jobs:
         prerelease: ${{ github.event.inputs.prerelease }}
         tag: ${{ github.event.inputs.releasetag }}
         artifacts:
-          HASS.Agent/HASS.Agent.zip,HASS.Agent.Satellite.Service/HASS.Agent.Satellite.Service.zip,HASS.Agent.Installer/HASS.Agent.Installer.exe,HASS.Agent.x86/HASS.Agent.x86.zip,HASS.Agent.Satellite.Service.x86/HASS.Agent.Satellite.Service.x86.zip,HASS.Agent.Installer.x86/HASS.Agent.Installer.x86.exe
+          HASS.Agent.Installer/HASS.Agent.Installer.exe,HASS.Agent.Installer.x86/HASS.Agent.Installer.x86.exe,HASS.Agent.Standalone.zip
