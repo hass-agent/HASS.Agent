@@ -1249,11 +1249,12 @@ Je commando wordt onveranderd toegevoegd als argument, dus je moet je eigen haak
   </data>
   <data name="CommandsManager_KeyCommandDescription" xml:space="preserve">
     <value>Simuleert een enkele toetsaanslag.
+Door van dit commando een "switch"-type te maken, blijft de knop ingedrukt zolang de switch aan staat.
 
-Klik op het tekstvak 'sleutelcode' en druk op de sleutel die u wilt simuleren. De bijbehorende sleutelcode wordt voor u ingevoerd.
-Gebruik voor de TAB-sleutel LCTRL+TAB.
+Klik op het tekstvak 'keycode' en druk op de toets die u wilt simuleren. De bijbehorende toetscode wordt automatisch ingevoerd.
+Gebruik LCTRL+TAB voor de TAB-toets.
 
-Als u meer sleutels en/of modifiers zoals CTRL nodig heeft, gebruikt u de opdracht MultipleKeys.</value>
+Als u meer toetsen en/of modifiers zoals CTRL nodig hebt, gebruik dan het commando 'MultipleKeys'.</value>
     <comment>Fuzzy</comment>
   </data>
   <data name="CommandsManager_LaunchUrlCommandDescription" xml:space="preserve">

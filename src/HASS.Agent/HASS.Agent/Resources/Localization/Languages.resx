@@ -361,6 +361,7 @@ Your command is provided as an argument 'as is', so you have to supply your own 
   </data>
   <data name="CommandsManager_KeyCommandDescription" xml:space="preserve">
     <value>Simulates a single keypress.
+Making this command a "switch" type will make the button pressed as long as the switch is turned on.
 
 Click on the 'keycode' textbox and press the key you want simulated. The corresponding keycode will be entered for you.
 For TAB key please use LCTRL+TAB.

@@ -245,11 +245,12 @@ Vaš ukaz je podan kot argument 'tako kot je', zato morate po potrebi navesti sv
   </data>
   <data name="CommandsManager_KeyCommandDescription" xml:space="preserve">
     <value>Simulira en sam pritisk tipke.
+Če ta ukaz nastavite na »stikalo«, bo gumb pritisnjen, dokler je stikalo vklopljeno.
 
-Kliknite besedilno polje 'keycode' in pritisnite tipko, ki jo želite simulirati. Vnesena bo ustrezna koda tipke.
+Kliknite na besedilno polje »koda tipke« in pritisnite tipko, ki jo želite simulirati. Ustrezna koda tipke bo vnesena samodejno.
 Za tipko TAB uporabite LCTRL+TAB.
 
-Če potrebujete več tipk in/ali modifikatorjev, kot je CTRL, uporabite ukaz MultipleKeys.</value>
+Če potrebujete več tipk in/ali modifikatorjev, kot je CTRL, uporabite ukaz Več tipk.</value>
     <comment>Fuzzy</comment>
   </data>
   <data name="CommandsManager_LaunchUrlCommandDescription" xml:space="preserve">

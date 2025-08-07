@@ -1352,11 +1352,12 @@ Dein Befehl wird als Argument so wie er ist bereitgestellt, sodass du selbst Anf
   </data>
   <data name="CommandsManager_KeyCommandDescription" xml:space="preserve">
     <value>Simuliert einen einzelnen Tastendruck.
+Wenn Sie diesen Befehl als „Schalter“ definieren, wird die Taste gedrückt, solange der Schalter eingeschaltet ist.
 
-Klicken Sie auf das Textfeld „Tastencode“ und drücken Sie die Taste, die Sie simulieren möchten. Der entsprechende Schlüsselcode wird für Sie eingegeben.
-Für die TAB-Taste verwenden Sie bitte LCTRL+TAB.
+Klicken Sie auf das Textfeld „Tastencode“ und drücken Sie die zu simulierende Taste. Der entsprechende Tastencode wird automatisch eingegeben.
+Für die Tabulatortaste verwenden Sie bitte LCTRL+TAB.
 
-Wenn Sie weitere Tasten und/oder Modifikatoren wie STRG benötigen, verwenden Sie den Befehl MultipleKeys.</value>
+Wenn Sie weitere Tasten und/oder Modifikatoren wie STRG benötigen, verwenden Sie den Befehl „Mehrere Tasten“.</value>
     <comment>Fuzzy</comment>
   </data>
   <data name="CommandsManager_LaunchUrlCommandDescription" xml:space="preserve">

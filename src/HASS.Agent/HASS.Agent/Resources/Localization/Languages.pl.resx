@@ -1335,9 +1335,10 @@ Twoje polecenie jest dostarczane jako argument „tak jak jest”, więc w razie
   </data>
   <data name="CommandsManager_KeyCommandDescription" xml:space="preserve">
     <value>Symuluje pojedyncze naciśnięcie klawisza.
+Ustawienie tego polecenia jako „przełącznik” spowoduje, że przycisk będzie wciśnięty tak długo, jak przełącznik będzie włączony.
 
-Kliknij pole tekstowe „Kod klucza” i naciśnij klawisz, który chcesz zasymulować. Odpowiedni kod zostanie wprowadzony.
-W przypadku klawisza TAB użyj LCTRL+TAB.
+Kliknij pole tekstowe „kod klawisza” i naciśnij klawisz, który chcesz symulować. Odpowiedni kod klawisza zostanie wprowadzony automatycznie.
+W przypadku klawisza TAB użyj kombinacji klawiszy LCTRL+TAB.
 
 Jeśli potrzebujesz więcej klawiszy i/lub modyfikatorów, takich jak CTRL, użyj polecenia MultipleKeys.</value>
     <comment>Fuzzy</comment>

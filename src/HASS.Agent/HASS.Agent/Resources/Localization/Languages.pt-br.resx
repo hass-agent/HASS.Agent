@@ -237,12 +237,13 @@ Seu comando é fornecido como um argumento 'as is', então você deve fornecer s
     <value>Coloca a máquina em hibernação.</value>
   </data>
   <data name="CommandsManager_KeyCommandDescription" xml:space="preserve">
-    <value>Simula um único pressionamento de tecla.
+    <value>Simula um único toque de tecla.
+Tornar este comando do tipo "interruptor" fará com que o botão seja premido enquanto o interruptor estiver ligado.
 
-Clique na caixa de texto 'keycode' e pressione a tecla que deseja simular. O código-chave correspondente será inserido para você.
-Para a tecla TAB, use LCTRL+TAB.
+Clique na caixa de texto "código da tecla" e pressione a tecla que pretende simular. O código da tecla correspondente será introduzido.
+Para a tecla TAB, utilize LCTRL+TAB.
 
-Se precisar de mais teclas e/ou modificadores como CTRL, use o comando MultipleKeys.</value>
+Se necessitar de mais teclas e/ou modificadores como CTRL, utilize o comando MultipleKeys.</value>
     <comment>Fuzzy</comment>
   </data>
   <data name="CommandsManager_LaunchUrlCommandDescription" xml:space="preserve">
