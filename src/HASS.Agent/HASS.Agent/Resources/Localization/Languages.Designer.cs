@@ -454,6 +454,7 @@ namespace HASS.Agent.Resources.Localization {
         
         /// <summary>
         ///   Looks up a localized string similar to Simulates a single keypress.
+        ///Making this command a &quot;switch&quot; type will make the button pressed as long as the switch is turned on.
         ///
         ///Click on the &apos;keycode&apos; textbox and press the key you want simulated. The corresponding keycode will be entered for you.
         ///For TAB key please use LCTRL+TAB.
