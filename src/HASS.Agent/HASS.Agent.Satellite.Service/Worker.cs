@@ -7,6 +7,7 @@ using HASS.Agent.Satellite.Service.Sensors;
 using HASS.Agent.Satellite.Service.Settings;
 using Serilog;
 using HASS.Agent.Shared.Managers;
+using HASS.Agent.Shared.Managers.Audio;
 
 namespace HASS.Agent.Satellite.Service
 {
@@ -57,6 +58,9 @@ namespace HASS.Agent.Satellite.Service
                 // initialize the RPC server
                 _ = Task.Run(RpcManager.Initialize, stoppingToken);
                 
+                // initialize the audio manager
+                _ = Task.Run(AudioManager.Initialize, stoppingToken);
+
                 // initialize the mqtt manager
                 _ = Task.Run(Variables.MqttManager.Initialize, stoppingToken);
 
