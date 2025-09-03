@@ -3283,4 +3283,12 @@ Wil je de runtime installatie downloaden?</value>
   <data name="SensorType_AccentColorSensor" xml:space="preserve">
     <value>Accentkleur</value>
   </data>
+  <data name="CommandsManager_WinformsSleepCommandDescription" xml:space="preserve">
+    <value>Zet de machine in slaapstand met behulp van de WinForms API.
+
+Opmerking: vanwege "Modern Sleep" kunnen de slaapopdrachten zich anders gedragen, afhankelijk van de OEM van het apparaat en de configuratie van het besturingssysteem.</value>
+  </data>
+  <data name="CommandType_WinformsSleepCommand" xml:space="preserve">
+    <value>WinformsSleep</value>
+  </data>
 </root>

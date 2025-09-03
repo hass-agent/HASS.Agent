@@ -608,6 +608,15 @@ namespace HASS.Agent.Shared.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Puts the machine.
+        /// </summary>
+        internal static string CommandsManager_WinformsSleepCommandDescription {
+            get {
+                return ResourceManager.GetString("CommandsManager_WinformsSleepCommandDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Configure Command &amp;Parameters.
         /// </summary>
         internal static string CommandsMod_BtnConfigureCommand {

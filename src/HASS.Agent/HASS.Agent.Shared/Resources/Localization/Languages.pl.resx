@@ -3371,4 +3371,12 @@ Czy chcesz pobrać plik instalacyjny?</value>
   <data name="SensorType_AccentColorSensor" xml:space="preserve">
     <value>Kolor akcentu</value>
   </data>
+  <data name="CommandsManager_WinformsSleepCommandDescription" xml:space="preserve">
+    <value>Uśpij maszynę za pomocą interfejsu API WinForms.
+
+Uwaga: ze względu na „Modern Sleep” polecenia uśpienia mogą zachowywać się inaczej w zależności od producenta OEM urządzenia i konfiguracji systemu operacyjnego.</value>
+  </data>
+  <data name="CommandType_WinformsSleepCommand" xml:space="preserve">
+    <value>WinformsSleep</value>
+  </data>
 </root>

@@ -520,6 +520,14 @@ namespace HASS.Agent.Commands
 
             // =================================
 
+            commandInfoCard = new CommandInfoCard(CommandType.WinformsSleepCommand,
+                Languages.CommandsManager_WinformsSleepCommandDescription,
+                true, false, false);
+
+            CommandInfoCards.Add(commandInfoCard.CommandType, commandInfoCard);
+
+            // =================================
+
             commandInfoCard = new CommandInfoCard(CommandType.WebViewCommand,
                 Languages.CommandsManager_WebViewCommandDescription,
                 true, false, true);

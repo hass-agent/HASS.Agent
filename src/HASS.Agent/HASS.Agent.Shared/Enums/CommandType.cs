@@ -127,6 +127,10 @@ namespace HASS.Agent.Shared.Enums
 
         [LocalizedDescription("CommandType_RadioCommand", typeof(Languages))]
         [EnumMember(Value = "RadioCommand")]
-        RadioCommand
+        RadioCommand,
+
+        [LocalizedDescription("CommandType_WinformsSleepCommand", typeof(Languages))]
+        [EnumMember(Value = "WinformsSleepCommand")]
+        WinformsSleepCommand
     }
 }

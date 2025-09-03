@@ -3329,4 +3329,12 @@ Home Assistant.
   <data name="SensorType_AccentColorSensor" xml:space="preserve">
     <value>Акцентный цвет</value>
   </data>
+  <data name="CommandsManager_WinformsSleepCommandDescription" xml:space="preserve">
+    <value>Переводит устройство в спящий режим с помощью API WinForms.
+
+Примечание: из-за «Modern Sleep» команды перехода в спящий режим могут работать по-разному в зависимости от производителя устройства и конфигурации ОС.</value>
+  </data>
+  <data name="CommandType_WinformsSleepCommand" xml:space="preserve">
+    <value>WinformsSleep</value>
+  </data>
 </root>

@@ -3294,4 +3294,12 @@ Do you want to download the runtime installer?</value>
   <data name="SensorType_AccentColorSensor" xml:space="preserve">
     <value>AccentColor</value>
   </data>
+  <data name="CommandsManager_WinformsSleepCommandDescription" xml:space="preserve">
+    <value>Met la machine en veille à l'aide de l'API WinForms.
+
+Remarque : en raison de la fonction « Modern Sleep », les commandes de mise en veille peuvent se comporter différemment selon le fabricant de l'appareil et la configuration du système d'exploitation.</value>
+  </data>
+  <data name="CommandType_WinformsSleepCommand" xml:space="preserve">
+    <value>WinformsSleep</value>
+  </data>
 </root>

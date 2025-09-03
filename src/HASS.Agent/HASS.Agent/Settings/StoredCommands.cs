@@ -106,6 +106,9 @@ namespace HASS.Agent.Settings
                 case CommandType.SleepCommand:
                     abstractCommand = new SleepCommand(command.EntityName, command.Name, command.EntityType, command.Id.ToString());
                     break;
+                case CommandType.WinformsSleepCommand:
+                    abstractCommand = new WinformsSleepCommand(command.EntityName, command.Name, command.EntityType, command.Id.ToString());
+                    break;
                 case CommandType.LogOffCommand:
                     abstractCommand = new LogOffCommand(command.EntityName, command.Name, command.EntityType, command.Id.ToString());
                     break;

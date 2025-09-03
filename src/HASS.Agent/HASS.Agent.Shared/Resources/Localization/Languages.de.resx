@@ -3385,4 +3385,12 @@ Willst Du den Runtime Installer herunterladen?</value>
   <data name="SensorType_AccentColorSensor" xml:space="preserve">
     <value>Akzentfarbe</value>
   </data>
+  <data name="CommandsManager_WinformsSleepCommandDescription" xml:space="preserve">
+    <value>Versetzt den Rechner mithilfe der WinForms-API in den Ruhezustand.
+
+Hinweis: Aufgrund des „Modern Sleep“-Modus können sich die Ruhezustandsbefehle je nach Geräte-OEM und Betriebssystemkonfiguration unterschiedlich verhalten.</value>
+  </data>
+  <data name="CommandType_WinformsSleepCommand" xml:space="preserve">
+    <value>WinformsSleep</value>
+  </data>
 </root>

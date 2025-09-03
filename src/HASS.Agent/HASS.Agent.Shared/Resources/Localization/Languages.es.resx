@@ -3261,4 +3261,12 @@ Oculta, Maximizada, Minimizada, Normal y Desconocida.</value>
   <data name="SensorType_AccentColorSensor" xml:space="preserve">
     <value>Color de acento</value>
   </data>
+  <data name="CommandsManager_WinformsSleepCommandDescription" xml:space="preserve">
+    <value>Pone la máquina en suspensión mediante la API de WinForms.
+
+Nota: Debido al modo de suspensión moderno, los comandos de suspensión pueden comportarse de forma diferente según el fabricante del dispositivo y la configuración del sistema operativo.</value>
+  </data>
+  <data name="CommandType_WinformsSleepCommand" xml:space="preserve">
+    <value>WinformsSleep</value>
+  </data>
 </root>

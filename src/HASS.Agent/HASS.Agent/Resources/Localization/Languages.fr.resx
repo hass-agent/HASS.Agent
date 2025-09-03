@@ -3459,4 +3459,12 @@ Pour la touche TAB, utilisez Ctrl+Clic+Tab.
 
 Si vous avez besoin de touches supplémentaires et/ou de modificateurs comme Ctrl, utilisez la commande TouchesMultiples.</value>
   </data>
+  <data name="CommandsManager_WinformsSleepCommandDescription" xml:space="preserve">
+    <value>Met la machine en veille à l'aide de l'API WinForms.
+
+Remarque : en raison de la fonction « Modern Sleep », les commandes de mise en veille peuvent se comporter différemment selon le fabricant de l'appareil et la configuration du système d'exploitation.</value>
+  </data>
+  <data name="CommandType_WinformsSleepCommand" xml:space="preserve">
+    <value>WinformsSleep</value>
+  </data>
 </root>

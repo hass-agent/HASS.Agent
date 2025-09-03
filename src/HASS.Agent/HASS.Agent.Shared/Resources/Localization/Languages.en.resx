@@ -3261,4 +3261,12 @@ Do you want to download the runtime installer?</value>
   <data name="SensorType_AccentColorSensor" xml:space="preserve">
     <value>AccentColor</value>
   </data>
+  <data name="CommandsManager_WinformsSleepCommandDescription" xml:space="preserve">
+    <value>Puts the machine to sleep using WinForms API.
+
+Note: due to "Modern Sleep" the sleep commands might behave differently depending on the device OEM and OS configuration.</value>
+  </data>
+  <data name="CommandType_WinformsSleepCommand" xml:space="preserve">
+    <value>WinformsSleep</value>
+  </data>
 </root>

@@ -2868,4 +2868,12 @@ Lütfen aracınız için credentialları sağlayın, HA Mosquitto eklentisini ku
   <data name="SensorType_AccentColorSensor" xml:space="preserve">
     <value>Vurgu Rengi</value>
   </data>
+  <data name="CommandsManager_WinformsSleepCommandDescription" xml:space="preserve">
+    <value>WinForms API'sini kullanarak makineyi uyku moduna geçirir.
+
+Not: "Modern Uyku" nedeniyle uyku komutları, cihazın OEM ve işletim sistemi yapılandırmasına bağlı olarak farklı davranabilir.</value>
+  </data>
+  <data name="CommandType_WinformsSleepCommand" xml:space="preserve">
+    <value>WinformsSleep</value>
+  </data>
 </root>
