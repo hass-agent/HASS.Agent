@@ -6,23 +6,19 @@ using System.Reflection;
 using Windows.Media.Playback;
 using Grapevine;
 using HASS.Agent.Forms;
-using HASS.Agent.Functions;
 using HASS.Agent.Managers;
 using HASS.Agent.Models.Config;
 using HASS.Agent.Models.Internal;
 using HASS.Agent.MQTT;
 using HASS.Agent.Service;
 using HASS.Agent.Settings;
-using HASS.Agent.Shared.HomeAssistant;
-using HASS.Agent.Shared.HomeAssistant.Commands;
-using HASS.Agent.Shared.HomeAssistant.Sensors;
 using HASS.Agent.Shared.Models.HomeAssistant;
 using HASS.Agent.Shared.Mqtt;
 using Microsoft.Win32;
 using MQTTnet;
-using WK.Libraries.HotkeyListenerNS;
 using Serilog.Core;
 using Microsoft.Web.WebView2.Core;
+using WK.Libraries.HotkeyListenerNS;
 
 namespace HASS.Agent
 {

@@ -3532,6 +3532,9 @@ Muss unter „Konfiguration -&gt; Tray-Icon“ konfiguriert werden.</value>
   <data name="Notification_Dismiss" xml:space="preserve">
     <value>Zurückweisen</value>
   </data>
+  <data name="ConfigTrayIcon_NumWebViewScreen" xml:space="preserve">
+    <value>Zu verwendender Bildschirm für die Anzeige von WebView</value>
+  </data>
   <data name="Main_CheckForUpdateFailed_MessageBox1" xml:space="preserve">
     <value>Suche nach Update fehlgeschlagen!</value>
   </data>

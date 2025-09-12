@@ -3185,6 +3185,15 @@ namespace HASS.Agent.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Screen to use for WebView to show.
+        /// </summary>
+        internal static string ConfigTrayIcon_NumWebViewScreen {
+            get {
+                return ResourceManager.GetString("ConfigTrayIcon_NumWebViewScreen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Notify me of &amp;beta releases.
         /// </summary>
         internal static string ConfigUpdates_CbBetaUpdates {

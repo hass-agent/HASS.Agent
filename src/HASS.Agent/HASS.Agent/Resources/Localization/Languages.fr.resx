@@ -3432,6 +3432,9 @@ Nécessite sa configuration dans « Configuration -&gt; Icône de la barre d'ét
   <data name="Notification_Dismiss" xml:space="preserve">
     <value>Rejeter</value>
   </data>
+  <data name="ConfigTrayIcon_NumWebViewScreen" xml:space="preserve">
+    <value>Écran à utiliser pour l'affichage du WebView</value>
+  </data>
   <data name="Main_CheckForUpdateFailed_MessageBox1" xml:space="preserve">
     <value>Échec de la vérification de la mise à jour !</value>
   </data>

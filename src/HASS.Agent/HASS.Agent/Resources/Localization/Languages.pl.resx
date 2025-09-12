@@ -3518,6 +3518,9 @@ Wymaga konfiguracji w „Configuration -&gt; Tray Icon”</value>
   <data name="Notification_Dismiss" xml:space="preserve">
     <value>Odrzuć</value>
   </data>
+  <data name="ConfigTrayIcon_NumWebViewScreen" xml:space="preserve">
+    <value>Ekran używany do wyświetlania WebView</value>
+  </data>
   <data name="Main_CheckForUpdateFailed_MessageBox1" xml:space="preserve">
     <value>Sprawdzanie aktualizacji nie powiodło się!</value>
   </data>
