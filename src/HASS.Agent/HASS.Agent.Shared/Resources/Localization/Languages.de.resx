@@ -3376,4 +3376,13 @@ Willst Du den Runtime Installer herunterladen?</value>
   <data name="HassAction_Press" xml:space="preserve">
     <value>Presse</value>
   </data>
+  <data name="SensorsManager_NamedActiveWindowSensorDescription" xml:space="preserve">
+    <value>Stellt einen EIN/AUS-Wert bereit, basierend darauf, ob der fokussierte Fenstername eine konfigurierte Zeichenfolge enthält.</value>
+  </data>
+  <data name="SensorType_NamedActiveWindowSensor" xml:space="preserve">
+    <value>BenanntesAktivesFenster</value>
+  </data>
+  <data name="SensorType_AccentColorSensor" xml:space="preserve">
+    <value>Akzentfarbe</value>
+  </data>
 </root>

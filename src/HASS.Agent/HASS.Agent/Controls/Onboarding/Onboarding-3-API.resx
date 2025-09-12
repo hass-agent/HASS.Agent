@@ -63,7 +63,8 @@ Home Assistant's API.
 
 Please provide a long-lived access token and the address of your Home Assistant instance.
 You can get a token in Home Assistant by clicking your profile picture at the bottom-left
-and navigating to the bottom of the page until you see the 'CREATE TOKEN' button.
+switch to the security tab at the top and navigating to the bottom of the page until you
+see the 'CREATE TOKEN' button.
 
 Please note, that for actionable notification functionality you need to provide admin account token.</value>
   </data>

@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using System.IO;
+using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Text.Json;
@@ -21,11 +22,15 @@ using MediaManager = HASS.Agent.Media.MediaManager;
 using HASS.Agent.Shared.Managers;
 using Newtonsoft.Json.Serialization;
 using System.Windows;
+using System.Security.Policy;
 
 namespace HASS.Agent.Functions
 {
-    internal static class HelperFunctions
+    internal static partial class HelperFunctions
     {
+        [GeneratedRegex("^https?://")]
+        private static partial Regex AbsoluteURLRegex();
+
         private static bool _shutdownCalled = false;
 
         /// <summary>
@@ -359,6 +364,8 @@ namespace HASS.Agent.Functions
 
         internal static Form GetForm(string formName) => System.Windows.Forms.Application.OpenForms.Cast<Form>().FirstOrDefault(x => x.Name == formName);
 
+        internal static bool IsAbsoluteUrl(string url) => AbsoluteURLRegex().IsMatch(url);
+
         /// <summary>
         /// Launches the url with the user's custom browser if provided, or the system's default
         /// </summary>
@@ -366,11 +373,13 @@ namespace HASS.Agent.Functions
         /// <param name="incognito"></param>
         internal static void LaunchUrl(string url, bool incognito = false)
         {
+            var targetUrl = StorageManager.GetElementUrl(url);
+
             // did the user provide a browser?
             if (string.IsNullOrEmpty(Variables.AppSettings.BrowserBinary))
             {
                 // nope
-                using (_ = Process.Start(new ProcessStartInfo(url) { UseShellExecute = true })) { }
+                using (_ = Process.Start(new ProcessStartInfo(targetUrl) { UseShellExecute = true })) { }
                 return;
             }
 
@@ -379,7 +388,7 @@ namespace HASS.Agent.Functions
                 // yep, but not found
                 Log.Warning("[BROWSER] User provided browser not found, using default: {bin}", Variables.AppSettings.BrowserBinary);
 
-                using (_ = Process.Start(new ProcessStartInfo(url) { UseShellExecute = true })) { }
+                using (_ = Process.Start(new ProcessStartInfo(targetUrl) { UseShellExecute = true })) { }
                 return;
             }
 
@@ -388,8 +397,8 @@ namespace HASS.Agent.Functions
             var startupArgs = new ProcessStartInfo { FileName = Variables.AppSettings.BrowserBinary };
 
             // if incgonito flag is set, use the incog. args (if set) - otherwise, just the url
-            if (incognito) startupArgs.Arguments = !string.IsNullOrEmpty(Variables.AppSettings.BrowserIncognitoArg) ? $"{Variables.AppSettings.BrowserIncognitoArg} {url}" : url;
-            else startupArgs.Arguments = url;
+            if (incognito) startupArgs.Arguments = !string.IsNullOrEmpty(Variables.AppSettings.BrowserIncognitoArg) ? $"{Variables.AppSettings.BrowserIncognitoArg} {targetUrl}" : targetUrl;
+            else startupArgs.Arguments = targetUrl;
 
             userBrowser.StartInfo = startupArgs;
             userBrowser.Start();

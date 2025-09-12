@@ -1,5 +1,4 @@
-﻿extern alias WV2;
-using System.Diagnostics.CodeAnalysis;
+﻿using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.IO;
 using System.Net.Http;
@@ -15,10 +14,10 @@ using HASS.Agent.Service;
 using HASS.Agent.Settings;
 using HASS.Agent.Shared.Models.HomeAssistant;
 using HASS.Agent.Shared.Mqtt;
+using Microsoft.Win32;
 using MQTTnet;
 using Serilog.Core;
-using WK.Libraries.HotkeyListenerNS;
-using WV2::Microsoft.Web.WebView2.Core;
+using Microsoft.Web.WebView2.Core;
 
 namespace HASS.Agent
 {

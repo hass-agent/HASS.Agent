@@ -3362,4 +3362,13 @@ Czy chcesz pobrać plik instalacyjny?</value>
   <data name="HassAction_Press" xml:space="preserve">
     <value>Naciśnij</value>
   </data>
+  <data name="SensorsManager_NamedActiveWindowSensorDescription" xml:space="preserve">
+    <value>Zapewnia wartość WŁ./WYŁ. w zależności od tego, czy nazwa wybranego okna zawiera skonfigurowany ciąg znaków.</value>
+  </data>
+  <data name="SensorType_NamedActiveWindowSensor" xml:space="preserve">
+    <value>NazwaAktywnegoOkna</value>
+  </data>
+  <data name="SensorType_AccentColorSensor" xml:space="preserve">
+    <value>Kolor akcentu</value>
+  </data>
 </root>

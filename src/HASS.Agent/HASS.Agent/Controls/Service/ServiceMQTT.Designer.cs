@@ -40,6 +40,7 @@ namespace HASS.Agent.Controls.Service
             this.TbMqttRootCertificate = new System.Windows.Forms.TextBox();
             this.LblRootCert = new System.Windows.Forms.Label();
             this.CbUseRetainFlag = new System.Windows.Forms.CheckBox();
+            this.CbUseWebSocket = new System.Windows.Forms.CheckBox();
             this.CbAllowUntrustedCertificates = new System.Windows.Forms.CheckBox();
             this.BtnMqttClearConfig = new Syncfusion.WinForms.Controls.SfButton();
             this.LblTip1 = new System.Windows.Forms.Label();
@@ -206,7 +207,7 @@ namespace HASS.Agent.Controls.Service
             // 
             // CbUseRetainFlag
             // 
-            this.CbUseRetainFlag.AccessibleDescription = "Enable using the retain flag for messages.";
+            this.CbUseRetainFlag.AccessibleDescription = "Use WebSocket for MQTT connection instead of direct one.";
             this.CbUseRetainFlag.AccessibleName = "Retain flag";
             this.CbUseRetainFlag.AccessibleRole = System.Windows.Forms.AccessibleRole.CheckButton;
             this.CbUseRetainFlag.AutoSize = true;
@@ -217,6 +218,20 @@ namespace HASS.Agent.Controls.Service
             this.CbUseRetainFlag.TabIndex = 10;
             this.CbUseRetainFlag.Text = global::HASS.Agent.Resources.Localization.Languages.ServiceMqtt_CbUseRetainFlag;
             this.CbUseRetainFlag.UseVisualStyleBackColor = true;
+            // 
+            // CbUseWebSocket
+            // 
+            this.CbUseWebSocket.AccessibleDescription = "Enable using the retain flag for messages.";
+            this.CbUseWebSocket.AccessibleName = "WebSocket flag";
+            this.CbUseWebSocket.AccessibleRole = System.Windows.Forms.AccessibleRole.CheckButton;
+            this.CbUseWebSocket.AutoSize = true;
+            this.CbUseWebSocket.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.CbUseWebSocket.Location = new System.Drawing.Point(506, 393);
+            this.CbUseWebSocket.Name = "CbUseWebSocket";
+            this.CbUseWebSocket.Size = new System.Drawing.Size(114, 23);
+            this.CbUseWebSocket.TabIndex = 14;
+            this.CbUseWebSocket.Text = global::HASS.Agent.Resources.Localization.Languages.ServiceMqtt_CbUseWebSocket;
+            this.CbUseWebSocket.UseVisualStyleBackColor = true;
             // 
             // CbAllowUntrustedCertificates
             // 
@@ -546,6 +561,7 @@ namespace HASS.Agent.Controls.Service
             this.Controls.Add(this.TbMqttRootCertificate);
             this.Controls.Add(this.LblRootCert);
             this.Controls.Add(this.CbUseRetainFlag);
+            this.Controls.Add(this.CbUseWebSocket);
             this.Controls.Add(this.CbAllowUntrustedCertificates);
             this.Controls.Add(this.BtnMqttClearConfig);
             this.Controls.Add(this.LblTip1);
@@ -584,6 +600,7 @@ namespace HASS.Agent.Controls.Service
         internal TextBox TbMqttRootCertificate;
         private Label LblRootCert;
         internal CheckBox CbUseRetainFlag;
+        internal CheckBox CbUseWebSocket;
         internal CheckBox CbAllowUntrustedCertificates;
         internal Syncfusion.WinForms.Controls.SfButton BtnMqttClearConfig;
         private Label LblTip1;

@@ -361,6 +361,7 @@ Your command is provided as an argument 'as is', so you have to supply your own 
   </data>
   <data name="CommandsManager_KeyCommandDescription" xml:space="preserve">
     <value>Simulates a single keypress.
+Making this command a "switch" type will make the button pressed as long as the switch is turned on.
 
 Click on the 'keycode' textbox and press the key you want simulated. The corresponding keycode will be entered for you.
 For TAB key please use LCTRL+TAB.
@@ -3086,7 +3087,7 @@ Tip: if you're using the HA addon, you can probably use the preset address - jus
     <value>Developing and maintaining this tool (and everything that surrounds it) takes up a lot of time. Like most developers, I run on caffeïne - so if you can spare it, a cup of coffee is always very much appreciated!</value>
   </data>
   <data name="OnboardingDone_LblInfo3" xml:space="preserve">
-    <value>There's a lot more to tinker with, so make sure you take a look at the Configuration Wwindow!
+    <value>There's a lot more to tinker with, so make sure you take a look at the Configuration Window!
 
 
 Thank you for using HASS.Agent, hopefully it'll be useful for you :-)
@@ -3431,5 +3432,24 @@ Requires it to be configured in "Configuration -&gt; Tray Icon"</value>
   </data>
   <data name="ConfigTrayIcon_NumWebViewScreen" xml:space="preserve">
 	  <value>Screen to use for WebView to show</value>
+  </data>
+  <data name="Main_CheckForUpdateFailed_MessageBox1" xml:space="preserve">
+    <value>Failed checking for update!</value>
+  </data>
+  <data name="SensorType_NamedActiveWindowSensor" xml:space="preserve">
+    <value>NamedActiveWindow</value>
+  </data>
+  <data name="SensorsManager_NamedActiveWindowSensorDescription" xml:space="preserve">
+    <value>Provides an ON/OFF value based on whether the focused window name contains configured string.</value>
+  </data>
+  <data name="SensorsManager_AccentColorSensorDescription" xml:space="preserve">
+    <value>Provides #RRGGBB color values for system accent colors.
+Main accent color is the sensor value, additional accent colors are available as attributes.</value>
+  </data>
+  <data name="ConfigMqtt_CbUseWebSocket" xml:space="preserve">
+    <value>Use &amp;WebSocket</value>
+  </data>
+  <data name="ServiceMqtt_CbUseWebSocket" xml:space="preserve">
+    <value>Use </value>
   </data>
 </root>

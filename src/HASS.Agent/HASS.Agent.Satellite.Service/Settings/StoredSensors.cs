@@ -9,7 +9,6 @@ using HASS.Agent.Shared.HomeAssistant.Sensors.WmiSensors.SingleValue;
 using HASS.Agent.Shared.Models.HomeAssistant;
 using Newtonsoft.Json;
 using Serilog;
-using LibreHardwareMonitor.Hardware;
 using SensorType = HASS.Agent.Shared.Enums.SensorType;
 
 namespace HASS.Agent.Satellite.Service.Settings
@@ -109,6 +108,9 @@ namespace HASS.Agent.Satellite.Service.Settings
                     break;
                 case SensorType.NamedWindowSensor:
                     abstractSensor = new NamedWindowSensor(sensor.WindowName, sensor.EntityName, sensor.Name, sensor.UpdateInterval, sensor.Id.ToString(), sensor.AdvancedSettings);
+                    break;
+                case SensorType.NamedActiveWindowSensor:
+                    abstractSensor = new NamedActiveWindowSensor(sensor.WindowName, sensor.EntityName, sensor.Name, sensor.UpdateInterval, sensor.Id.ToString(), sensor.AdvancedSettings);
                     break;
                 case SensorType.LastActiveSensor:
                     abstractSensor = new LastActiveSensor(sensor.ApplyRounding, sensor.Round, sensor.UpdateInterval, sensor.EntityName, sensor.Name, sensor.Id.ToString(), sensor.AdvancedSettings);
@@ -256,6 +258,22 @@ namespace HASS.Agent.Satellite.Service.Settings
                             IgnoreAvailability = namedWindowSensor.IgnoreAvailability,
                             WindowName = namedWindowSensor.WindowName,
                             AdvancedSettings = namedWindowSensor.AdvancedSettings
+                        };
+                    }
+
+                case NamedActiveWindowSensor namedActiveWindowSensor:
+                    {
+                        _ = Enum.TryParse<SensorType>(namedActiveWindowSensor.GetType().Name, out var type);
+                        return new ConfiguredSensor
+                        {
+                            Id = Guid.Parse(namedActiveWindowSensor.Id),
+                            EntityName = namedActiveWindowSensor.EntityName,
+                            Name = namedActiveWindowSensor.Name,
+                            Type = type,
+                            UpdateInterval = namedActiveWindowSensor.UpdateIntervalSeconds,
+                            IgnoreAvailability = namedActiveWindowSensor.IgnoreAvailability,
+                            WindowName = namedActiveWindowSensor.WindowName,
+                            AdvancedSettings = namedActiveWindowSensor.AdvancedSettings
                         };
                     }
 

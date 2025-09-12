@@ -1269,14 +1269,6 @@ Votre commande est passée en tant qu'argument 'tel quel', vous devez donc fourn
   <data name="CommandsManager_HibernateCommandDescription" xml:space="preserve">
     <value>Mettre Windows en veille prolongée</value>
   </data>
-  <data name="CommandsManager_KeyCommandDescription" xml:space="preserve">
-    <value>Simule une seule pression de touche.
-
-Cliquez sur la zone de texte "keycode" et appuyez sur la touche que vous souhaitez simuler. Le code clé correspondant sera saisi pour vous.
-Pour la touche TAB, veuillez utiliser LCTRL+TAB.
-
-Si vous avez besoin de plus de touches et/ou de modificateurs comme CTRL, utilisez la commande MultipleKeys.</value>
-  </data>
   <data name="CommandsManager_LaunchUrlCommandDescription" xml:space="preserve">
     <value>Ouvre l'URL fournie, par défaut dans votre navigateur par défaut.
 
@@ -3442,5 +3434,32 @@ Nécessite sa configuration dans « Configuration -&gt; Icône de la barre d'ét
   </data>
   <data name="ConfigTrayIcon_NumWebViewScreen" xml:space="preserve">
     <value>Écran à utiliser pour l'affichage du WebView</value>
+  </data>
+  <data name="Main_CheckForUpdateFailed_MessageBox1" xml:space="preserve">
+    <value>Échec de la vérification de la mise à jour !</value>
+  </data>
+  <data name="SensorType_NamedActiveWindowSensor" xml:space="preserve">
+    <value>Fenêtre active nommée</value>
+  </data>
+  <data name="SensorsManager_NamedActiveWindowSensorDescription" xml:space="preserve">
+    <value>Fournit une valeur ON/OFF selon que le nom de la fenêtre focalisée contient ou non une chaîne configurée.</value>
+  </data>
+  <data name="SensorsManager_AccentColorSensorDescription" xml:space="preserve">
+    <value>Fournit les valeurs de couleur #RRGGBB pour les couleurs d'accentuation du système. La couleur d'accentuation principale est la valeur du capteur ; des couleurs d'accentuation supplémentaires sont disponibles sous forme d'attributs.</value>
+  </data>
+  <data name="ConfigMqtt_CbUseWebSocket" xml:space="preserve">
+    <value>Utiliser &amp;WebSocket</value>
+  </data>
+  <data name="ServiceMqtt_CbUseWebSocket" xml:space="preserve">
+    <value>Utiliser &amp;WebSocket</value>
+  </data>
+  <data name="CommandsManager_KeyCommandDescription" xml:space="preserve">
+    <value>Simule une simple pression de touche.
+Si cette commande est de type « interrupteur », le bouton restera enfoncé tant que l'interrupteur sera activé.
+
+Cliquez sur la zone de texte « Code touche » et appuyez sur la touche à simuler. Le code touche correspondant sera saisi automatiquement.
+Pour la touche TAB, utilisez Ctrl+Clic+Tab.
+
+Si vous avez besoin de touches supplémentaires et/ou de modificateurs comme Ctrl, utilisez la commande TouchesMultiples.</value>
   </data>
 </root>

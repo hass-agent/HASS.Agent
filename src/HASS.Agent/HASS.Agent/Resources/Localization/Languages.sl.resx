@@ -245,11 +245,12 @@ Vaš ukaz je podan kot argument 'tako kot je', zato morate po potrebi navesti sv
   </data>
   <data name="CommandsManager_KeyCommandDescription" xml:space="preserve">
     <value>Simulira en sam pritisk tipke.
+Če ta ukaz nastavite na »stikalo«, bo gumb pritisnjen, dokler je stikalo vklopljeno.
 
-Kliknite besedilno polje 'keycode' in pritisnite tipko, ki jo želite simulirati. Vnesena bo ustrezna koda tipke.
+Kliknite na besedilno polje »koda tipke« in pritisnite tipko, ki jo želite simulirati. Ustrezna koda tipke bo vnesena samodejno.
 Za tipko TAB uporabite LCTRL+TAB.
 
-Če potrebujete več tipk in/ali modifikatorjev, kot je CTRL, uporabite ukaz MultipleKeys.</value>
+Če potrebujete več tipk in/ali modifikatorjev, kot je CTRL, uporabite ukaz Več tipk.</value>
     <comment>Fuzzy</comment>
   </data>
   <data name="CommandsManager_LaunchUrlCommandDescription" xml:space="preserve">
@@ -3558,5 +3559,24 @@ Zahteva, da je konfiguriran v "Konfiguracija -&gt; Ikona pladnja"</value>
   </data>
   <data name="ConfigTrayIcon_NumWebViewScreen" xml:space="preserve">
     <value>Zaslon, ki se uporabi za prikaz WebView</value>
+  </data>
+  <data name="Main_CheckForUpdateFailed_MessageBox1" xml:space="preserve">
+    <value>Neuspešno preverjanje posodobitve!</value>
+  </data>
+  <data name="SensorType_NamedActiveWindowSensor" xml:space="preserve">
+    <value>PoimenovanoAktivnoOkno</value>
+  </data>
+  <data name="SensorsManager_NamedActiveWindowSensorDescription" xml:space="preserve">
+    <value>Zagotavlja vrednost VKLOP/IZKLOP glede na to, ali ime okna v fokusu vsebuje konfiguriran niz.</value>
+  </data>
+  <data name="SensorsManager_AccentColorSensorDescription" xml:space="preserve">
+    <value>Zagotavlja barvne vrednosti #RRGGBB za sistemske poudarjene barve.
+Glavna poudarjena barva je vrednost senzorja, dodatne poudarjene barve so na voljo kot atributi.</value>
+  </data>
+  <data name="ConfigMqtt_CbUseWebSocket" xml:space="preserve">
+    <value>Uporabi &amp;WebSocket</value>
+  </data>
+  <data name="ServiceMqtt_CbUseWebSocket" xml:space="preserve">
+    <value>Uporabi &amp;WebSocket</value>
   </data>
 </root>

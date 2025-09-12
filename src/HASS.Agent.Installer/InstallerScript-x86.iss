@@ -18,7 +18,6 @@
 #define DotNet8Notice "DotNet8Notice.rtf"
 
 [Setup]
-ArchitecturesInstallIn64BitMode=x64
 SetupMutex=Global\HASS.Agent.Setup.Mutex,HASS.Agent.Setup.Mutex
 AppMutex=HASS.Agent.App.Mutex
 AppId={{7BBED458-609B-4D13-AD9E-4FF219DF8644}
@@ -37,7 +36,7 @@ InfoAfterFile=.\AfterInstallNotice.rtf
 ; Uncomment the following line to run in non administrative install mode (install for current user only.)
 PrivilegesRequired=lowest
 OutputDir=.\bin
-OutputBaseFilename=HASS.Agent.Installer
+OutputBaseFilename=HASS.Agent.Installer.x86
 SetupIconFile=..\HASS.Agent\HASS.Agent.Shared\hassagent.ico
 Compression=lzma
 SolidCompression=yes
@@ -56,11 +55,11 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 [Files]
 ; Client files
-Source: "..\HASS.Agent\HASS.Agent\bin\Publish-x64\Release\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "..\HASS.Agent\HASS.Agent\bin\Publish-x86\Release\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "{#MigrationNotice}"; Flags: dontcopy
 Source: "{#DotNet8Notice}"; Flags: dontcopy
 ; Service installer
-Source: ".\bin\HASS.Agent.Service.Installer.exe"; DestDir: "{tmp}"; Flags: ignoreversion
+Source: ".\bin\HASS.Agent.Service.Installer.x86.exe"; DestDir: "{tmp}"; Flags: ignoreversion
 
 [Icons]
 Name: "{autoprograms}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"
@@ -68,7 +67,7 @@ Name: "{autodesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Tasks: de
 
 [Run]
 Filename: "{app}\{#MyAppExeName}"; Parameters: "compat_migrate"; Description: "Try to migrate configuration - use only once (administrative permissions required)"; Flags: postinstall runascurrentuser unchecked
-Filename: "{tmp}\HASS.Agent.Service.Installer.exe"; Parameters: "{code:GetCmdLineParams}"; Description: "Install Satellite Service (administrative permissions required)"; Flags: postinstall runascurrentuser 
+Filename: "{tmp}\HASS.Agent.Service.Installer.x86.exe"; Parameters: "{code:GetCmdLineParams}"; Description: "Install Satellite Service (administrative permissions required)"; Flags: postinstall runascurrentuser 
 Filename: "{app}\{#MyAppExeName}"; Description: "{cm:LaunchProgram,{#StringChange(MyAppName, '&', '&&')}}"; Flags: postinstall skipifsilent nowait
 
 [Code]
@@ -101,7 +100,7 @@ end;
 
 function InitializeSetup: Boolean;
 begin
-  Dependency_ForceX86 := False;
+  Dependency_ForceX86 := True;
   Dependency_AddDotNet80Desktop;
   Result := True;
 end;

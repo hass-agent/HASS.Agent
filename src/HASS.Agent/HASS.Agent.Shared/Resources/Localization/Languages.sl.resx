@@ -3401,4 +3401,13 @@ Ali želite prenesti runtime installer?</value>
   <data name="HassAction_Press" xml:space="preserve">
     <value>Pritisnite</value>
   </data>
+  <data name="SensorsManager_NamedActiveWindowSensorDescription" xml:space="preserve">
+    <value>Zagotavlja vrednost VKLOP/IZKLOP glede na to, ali ime okna v fokusu vsebuje konfiguriran niz.</value>
+  </data>
+  <data name="SensorType_NamedActiveWindowSensor" xml:space="preserve">
+    <value>PoimenovanoAktivnoOkno</value>
+  </data>
+  <data name="SensorType_AccentColorSensor" xml:space="preserve">
+    <value>Barva poudarka</value>
+  </data>
 </root>

@@ -454,6 +454,7 @@ namespace HASS.Agent.Resources.Localization {
         
         /// <summary>
         ///   Looks up a localized string similar to Simulates a single keypress.
+        ///Making this command a &quot;switch&quot; type will make the button pressed as long as the switch is turned on.
         ///
         ///Click on the &apos;keycode&apos; textbox and press the key you want simulated. The corresponding keycode will be entered for you.
         ///For TAB key please use LCTRL+TAB.
@@ -581,7 +582,8 @@ namespace HASS.Agent.Resources.Localization {
         ///- Special keys go between { }, like {TAB} or {UP}
         ///
         ///- Put a + in front of a key to add SHIFT, ^ for CTRL and % for ALT. So, +C is SHIFT-C. Or, +(CD) is SHIFT-C and SHIFT-D, while +CD is SHIFT-C and D
-        ///        /// [rest of string was truncated]&quot;;.
+        ///
+        /// [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string CommandsManager_MultipleKeysCommandDescription {
             get {
@@ -2445,6 +2447,15 @@ namespace HASS.Agent.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Use &amp;WebSocket.
+        /// </summary>
+        internal static string ConfigMqtt_CbUseWebSocket {
+            get {
+                return ResourceManager.GetString("ConfigMqtt_CbUseWebSocket", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Broker IP Address or Hostname.
         /// </summary>
         internal static string ConfigMqtt_LblBrokerIp {
@@ -4213,6 +4224,15 @@ namespace HASS.Agent.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Failed checking for update!.
+        /// </summary>
+        internal static string Main_CheckForUpdateFailed_MessageBox1 {
+            get {
+                return ResourceManager.GetString("Main_CheckForUpdateFailed_MessageBox1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Check for Updates.
         /// </summary>
         internal static string Main_CheckForUpdates {
@@ -4737,7 +4757,7 @@ namespace HASS.Agent.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to There&apos;s a lot more to tinker with, so make sure you take a look at the Configuration Wwindow!
+        ///   Looks up a localized string similar to There&apos;s a lot more to tinker with, so make sure you take a look at the Configuration Window!
         ///
         ///
         ///Thank you for using HASS.Agent, hopefully it&apos;ll be useful for you :-)
@@ -5914,6 +5934,16 @@ namespace HASS.Agent.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Provides #RRGGBB color values for system accent colors.
+        ///Main accent color is the sensor value, additional accent colors are available as attributes..
+        /// </summary>
+        internal static string SensorsManager_AccentColorSensorDescription {
+            get {
+                return ResourceManager.GetString("SensorsManager_AccentColorSensorDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Provides the ID of the currently active virtual desktop..
         /// </summary>
         internal static string SensorsManager_ActiveDesktopSensorDescription {
@@ -6161,6 +6191,15 @@ namespace HASS.Agent.Resources.Localization {
         internal static string SensorsManager_MonitorPowerStateSensorDescription {
             get {
                 return ResourceManager.GetString("SensorsManager_MonitorPowerStateSensorDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Provides an ON/OFF value based on whether the focused window name contains configured string..
+        /// </summary>
+        internal static string SensorsManager_NamedActiveWindowSensorDescription {
+            get {
+                return ResourceManager.GetString("SensorsManager_NamedActiveWindowSensorDescription", resourceCulture);
             }
         }
         
@@ -7187,6 +7226,15 @@ namespace HASS.Agent.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to NamedActiveWindow.
+        /// </summary>
+        internal static string SensorType_NamedActiveWindowSensor {
+            get {
+                return ResourceManager.GetString("SensorType_NamedActiveWindowSensor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to NamedWindow.
         /// </summary>
         internal static string SensorType_NamedWindowSensor {
@@ -7997,6 +8045,15 @@ namespace HASS.Agent.Resources.Localization {
         internal static string ServiceMqtt_CbUseRetainFlag {
             get {
                 return ResourceManager.GetString("ServiceMqtt_CbUseRetainFlag", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Use .
+        /// </summary>
+        internal static string ServiceMqtt_CbUseWebSocket {
+            get {
+                return ResourceManager.GetString("ServiceMqtt_CbUseWebSocket", resourceCulture);
             }
         }
         

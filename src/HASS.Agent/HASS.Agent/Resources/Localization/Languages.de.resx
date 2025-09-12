@@ -1352,11 +1352,12 @@ Dein Befehl wird als Argument so wie er ist bereitgestellt, sodass du selbst Anf
   </data>
   <data name="CommandsManager_KeyCommandDescription" xml:space="preserve">
     <value>Simuliert einen einzelnen Tastendruck.
+Wenn Sie diesen Befehl als „Schalter“ definieren, wird die Taste gedrückt, solange der Schalter eingeschaltet ist.
 
-Klicken Sie auf das Textfeld „Tastencode“ und drücken Sie die Taste, die Sie simulieren möchten. Der entsprechende Schlüsselcode wird für Sie eingegeben.
-Für die TAB-Taste verwenden Sie bitte LCTRL+TAB.
+Klicken Sie auf das Textfeld „Tastencode“ und drücken Sie die zu simulierende Taste. Der entsprechende Tastencode wird automatisch eingegeben.
+Für die Tabulatortaste verwenden Sie bitte LCTRL+TAB.
 
-Wenn Sie weitere Tasten und/oder Modifikatoren wie STRG benötigen, verwenden Sie den Befehl MultipleKeys.</value>
+Wenn Sie weitere Tasten und/oder Modifikatoren wie STRG benötigen, verwenden Sie den Befehl „Mehrere Tasten“.</value>
     <comment>Fuzzy</comment>
   </data>
   <data name="CommandsManager_LaunchUrlCommandDescription" xml:space="preserve">
@@ -3533,5 +3534,24 @@ Muss unter „Konfiguration -&gt; Tray-Icon“ konfiguriert werden.</value>
   </data>
   <data name="ConfigTrayIcon_NumWebViewScreen" xml:space="preserve">
     <value>Zu verwendender Bildschirm für die Anzeige von WebView</value>
+  </data>
+  <data name="Main_CheckForUpdateFailed_MessageBox1" xml:space="preserve">
+    <value>Suche nach Update fehlgeschlagen!</value>
+  </data>
+  <data name="SensorType_NamedActiveWindowSensor" xml:space="preserve">
+    <value>BenanntesAktivesFenster</value>
+  </data>
+  <data name="SensorsManager_NamedActiveWindowSensorDescription" xml:space="preserve">
+    <value>Stellt einen EIN/AUS-Wert bereit, basierend darauf, ob der fokussierte Fenstername eine konfigurierte Zeichenfolge enthält.</value>
+  </data>
+  <data name="SensorsManager_AccentColorSensorDescription" xml:space="preserve">
+    <value>Stellt #RRGGBB-Farbwerte für System-Akzentfarben bereit.
+Die Hauptakzentfarbe ist der Sensorwert. Zusätzliche Akzentfarben sind als Attribute verfügbar.</value>
+  </data>
+  <data name="ConfigMqtt_CbUseWebSocket" xml:space="preserve">
+    <value>Verwenden Sie &amp;WebSocket</value>
+  </data>
+  <data name="ServiceMqtt_CbUseWebSocket" xml:space="preserve">
+    <value>Verwenden Sie &amp;WebSocket</value>
   </data>
 </root>
