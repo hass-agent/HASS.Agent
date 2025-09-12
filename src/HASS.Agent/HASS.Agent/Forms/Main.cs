@@ -28,6 +28,7 @@ using WK.Libraries.HotkeyListenerNS;
 using NativeMethods = HASS.Agent.Functions.NativeMethods;
 using QuickActionsConfig = HASS.Agent.Forms.QuickActions.QuickActionsConfig;
 using Task = System.Threading.Tasks.Task;
+using Microsoft.Win32;
 
 namespace HASS.Agent.Forms
 {
@@ -116,7 +117,10 @@ namespace HASS.Agent.Forms
                 if (Variables.ShuttingDown)
                     return;
 
+                // prepare the tray icon config
+                SystemEvents.DisplaySettingsChanged += (s, a) => RefreshTrayIcon();
                 ProcessTrayIcon();
+
                 InitializeHotkeys();
 
                 var initTask = Task.Run(async () =>
@@ -248,13 +252,8 @@ namespace HASS.Agent.Forms
 
         private void ProcessTrayIcon()
         {
-            if (Variables.AppSettings.TrayIconUseModern)
-            {
-                var icon = (Icon)new System.Resources.ResourceManager(typeof(Main)).GetObject("ModernNotifyIcon");
-                if (icon != null)
-                    NotifyIcon.Icon = icon;
-            }
-
+            RefreshTrayIcon();
+            
             // are we set to show the webview and keep it loaded?
             if (!Variables.AppSettings.TrayIconShowWebView)
                 return;
@@ -388,6 +387,21 @@ namespace HASS.Agent.Forms
             {
                 NotifyIcon.Visible = false;
             }));
+        }
+
+        internal void RefreshTrayIcon()
+        {
+            var iconResourceName = Variables.AppSettings.TrayIconUseModern ? "ModernNotifyIcon" : "NotifyIcon.Icon";
+            var icon = (Icon)new System.Resources.ResourceManager(typeof(Main)).GetObject(iconResourceName);
+            if (icon != null)
+            {
+                Invoke(new MethodInvoker(delegate
+                {
+                    NotifyIcon.Visible = false;
+                    NotifyIcon.Icon = icon;
+                    NotifyIcon.Visible = true;
+                }));
+            }
         }
 
         /// <summary>
