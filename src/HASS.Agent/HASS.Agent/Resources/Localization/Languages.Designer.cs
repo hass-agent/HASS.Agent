@@ -582,7 +582,8 @@ namespace HASS.Agent.Resources.Localization {
         ///- Special keys go between { }, like {TAB} or {UP}
         ///
         ///- Put a + in front of a key to add SHIFT, ^ for CTRL and % for ALT. So, +C is SHIFT-C. Or, +(CD) is SHIFT-C and SHIFT-D, while +CD is SHIFT-C and D
-        ///        /// [rest of string was truncated]&quot;;.
+        ///
+        /// [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string CommandsManager_MultipleKeysCommandDescription {
             get {
