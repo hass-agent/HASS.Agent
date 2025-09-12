@@ -516,8 +516,7 @@ namespace HASS.Agent.Shared.Resources.Localization {
         ///- Special keys go between { }, like {TAB} or {UP}
         ///
         ///- Put a + in front of a key to add SHIFT, ^ for CTRL and % for ALT. So, +C is SHIFT-C. Or, +(CD) is SHIFT-C and SHIFT-D, while +CD is SHIFT-C and D
-        ///
-        /// [rest of string was truncated]&quot;;.
+        ///        /// [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string CommandsManager_MultipleKeysCommandDescription {
             get {
@@ -3531,6 +3530,15 @@ namespace HASS.Agent.Shared.Resources.Localization {
         internal static string HassDomain_InputBoolean {
             get {
                 return ResourceManager.GetString("HassDomain_InputBoolean", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to InputButton.
+        /// </summary>
+        internal static string HassDomain_InputButton {
+            get {
+                return ResourceManager.GetString("HassDomain_InputButton", resourceCulture);
             }
         }
         
