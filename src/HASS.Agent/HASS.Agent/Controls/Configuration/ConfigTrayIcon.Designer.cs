@@ -320,10 +320,13 @@ namespace HASS.Agent.Controls.Configuration
             NumWebViewScreen.TabIndex = 78;
             NumWebViewScreen.Text = Languages.ConfigTrayIcon_NumWebViewScreen;
             NumWebViewScreen.SelectedValueChanged += domainUpDown1_SelectedItemChanged;
-            // 
-            // ConfigTrayIcon
-            // 
-            AccessibleDescription = "Panel containing the tray icon configuration.";
+			NumWebViewScreen.BackColor = Color.FromArgb(63, 63, 70);
+			NumWebViewScreen.Border3DStyle = Border3DStyle.Flat;
+			NumWebViewScreen.ForeColor = Color.FromArgb(241, 241, 241);
+			// 
+			// ConfigTrayIcon
+			// 
+			AccessibleDescription = "Panel containing the tray icon configuration.";
             AccessibleName = "Tray icon";
             AccessibleRole = AccessibleRole.Pane;
             AutoScaleDimensions = new SizeF(96F, 96F);
