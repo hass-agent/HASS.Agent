@@ -125,6 +125,7 @@ namespace HASS.Agent.Controls.Service
             TbMqttClientCertificate.Text = mqttSettings.MqttClientCertificate;
             CbAllowUntrustedCertificates.Checked = mqttSettings.MqttAllowUntrustedCertificates;
             CbUseRetainFlag.Checked = mqttSettings.MqttUseRetainFlag;
+            CbUseWebSocket.Checked = mqttSettings.MqttUseWebSocket;
         }
 
         /// <summary>
@@ -145,6 +146,7 @@ namespace HASS.Agent.Controls.Service
             TbMqttClientCertificate.Text = Variables.AppSettings.MqttClientCertificate;
             CbAllowUntrustedCertificates.Checked = Variables.AppSettings.MqttAllowUntrustedCertificates;
             CbUseRetainFlag.Checked = Variables.AppSettings.MqttUseRetainFlag;
+            CbUseWebSocket.Checked = Variables.AppSettings.MqttUseWebSocket;
         }
 
         /// <summary>
@@ -165,6 +167,7 @@ namespace HASS.Agent.Controls.Service
             TbMqttClientCertificate.Text = string.Empty;
             CbAllowUntrustedCertificates.Checked = true;
             CbUseRetainFlag.Checked = true;
+            CbUseWebSocket.Checked = false;
         }
 
         private async void BtnStore_Click(object sender, EventArgs e)
@@ -188,7 +191,8 @@ namespace HASS.Agent.Controls.Service
                 MqttRootCertificate = TbMqttRootCertificate.Text,
                 MqttClientCertificate = TbMqttClientCertificate.Text,
                 MqttAllowUntrustedCertificates = CbAllowUntrustedCertificates.Checked,
-                MqttUseRetainFlag = CbUseRetainFlag.Checked
+                MqttUseRetainFlag = CbUseRetainFlag.Checked,
+                MqttUseWebSocket = CbUseWebSocket.Checked
             };
 
             // store

@@ -10,7 +10,6 @@ using HASS.Agent.Shared.Managers.Audio.Exceptions;
 using HASS.Agent.Shared.Managers.Audio.Internal;
 using Serilog;
 using NAudio.CoreAudioApi.Interfaces;
-using HidSharp;
 using Microsoft.VisualBasic.ApplicationServices;
 
 namespace HASS.Agent.Shared.Managers.Audio;
@@ -24,6 +23,9 @@ public static class AudioManager
     private static readonly ConcurrentDictionary<string, string> _devices = new();
 
     private static readonly Dictionary<int, string> _applicationNameCache = new();
+
+    private static bool _noDefaultInputLogged = false;
+    private static bool _noDefaultOutputLogged = false;
 
     private static void InitializeDevices()
     {
@@ -208,6 +210,18 @@ public static class AudioManager
         Log.Debug("[AUDIOMGR] cleanup completed");
     }
 
+    private static MMDevice GetDefaultMultimediaDevice(DataFlow dataFlow)
+    {
+        MMDevice device = null;
+        try
+        {
+            device = _enumerator.GetDefaultAudioEndpoint(dataFlow, Role.Multimedia);
+        }
+        catch { }
+
+        return device;
+    }
+
     public static List<AudioDevice> GetDevices()
     {
         var audioDevices = new List<AudioDevice>();
@@ -217,11 +231,29 @@ public static class AudioManager
 
         try
         {
-            using var defaultInputDevice = _enumerator.GetDefaultAudioEndpoint(DataFlow.Capture, Role.Multimedia);
-            using var defaultOutputDevice = _enumerator.GetDefaultAudioEndpoint(DataFlow.Render, Role.Multimedia);
+            using var defaultInputDevice = GetDefaultMultimediaDevice(DataFlow.Capture);
+            if (defaultInputDevice == null && !_noDefaultInputLogged)
+            {
+                Log.Information("[AUDIOMGR] no default input device detected");
+                _noDefaultInputLogged = true;
+            }
+            else if (defaultInputDevice != null)
+            {
+                _noDefaultInputLogged = false;
+            }
 
-            var defaultInputDeviceId = defaultInputDevice.ID;
-            var defaultOutputDeviceId = defaultOutputDevice.ID;
+            using var defaultOutputDevice = GetDefaultMultimediaDevice(DataFlow.Render);
+            if (defaultOutputDevice == null && !_noDefaultOutputLogged)
+            {
+                Log.Information("[AUDIOMGR] no default output device detected");
+                _noDefaultOutputLogged = true;
+            }else if (defaultOutputDevice != null)
+            {
+                _noDefaultOutputLogged = false;
+            }
+
+            var defaultInputDeviceId = defaultInputDevice != null ? defaultInputDevice.ID : string.Empty;
+            var defaultOutputDeviceId = defaultOutputDevice != null ? defaultOutputDevice.ID : string.Empty;
 
             foreach (var (deviceId, deviceName) in _devices)
             {
@@ -378,9 +410,9 @@ public static class AudioManager
 
         if (volume != -1)
         {
-            var volumeScalar = volume / 100f;
+            var volumeScalar = Math.Clamp(volume / 100f, 0, 1);
             device.AudioEndpointVolume.MasterVolumeLevelScalar = volumeScalar;
-            Log.Debug($"[AUDIOMGR] volume for '{_devices[device.ID]}' set to '{volume}'");
+            Log.Debug($"[AUDIOMGR] volume for '{_devices[device.ID]}' set to '{volume}'/'{volumeScalar}'");
         }
     }
 
@@ -455,9 +487,9 @@ public static class AudioManager
         if (volume == -1)
             return;
 
-        var volumeScalar = volume / 100f;
+        var volumeScalar = Math.Clamp(volume / 100f, 0, 1);
         internalAudioSession.Volume.Volume = volumeScalar;
-        Log.Debug("[AUDIOMGR] volume for '{sessionName}' ({sessionId}) set to '{vol}'", displayName, internalAudioSession.Control.GetSessionInstanceIdentifier, volume);
+        Log.Debug("[AUDIOMGR] volume for '{sessionName}' ({sessionId}) set to '{vol}'/'{volScal}'", displayName, internalAudioSession.Control.GetSessionInstanceIdentifier, volume, volumeScalar);
     }
 
     public static void Shutdown()

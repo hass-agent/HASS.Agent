@@ -516,7 +516,8 @@ namespace HASS.Agent.Shared.Resources.Localization {
         ///- Special keys go between { }, like {TAB} or {UP}
         ///
         ///- Put a + in front of a key to add SHIFT, ^ for CTRL and % for ALT. So, +C is SHIFT-C. Or, +(CD) is SHIFT-C and SHIFT-D, while +CD is SHIFT-C and D
-        ///        /// [rest of string was truncated]&quot;;.
+        ///
+        /// [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string CommandsManager_MultipleKeysCommandDescription {
             get {
@@ -4410,7 +4411,7 @@ namespace HASS.Agent.Shared.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to There&apos;s a lot more to tinker with, so make sure you take a look at the Configuration Wwindow!
+        ///   Looks up a localized string similar to There&apos;s a lot more to tinker with, so make sure you take a look at the Configuration Window!
         ///
         ///
         ///Thank you for using HASS.Agent, hopefully it&apos;ll be useful for you :-)
@@ -5817,6 +5818,15 @@ namespace HASS.Agent.Shared.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Provides an ON/OFF value based on whether the focused window name contains configured string..
+        /// </summary>
+        internal static string SensorsManager_NamedActiveWindowSensorDescription {
+            get {
+                return ResourceManager.GetString("SensorsManager_NamedActiveWindowSensorDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Provides an ON/OFF value based on whether the window is currently open (doesn&apos;t have to be active)..
         /// </summary>
         internal static string SensorsManager_NamedWindowSensorDescription {
@@ -6511,6 +6521,15 @@ namespace HASS.Agent.Shared.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to AccentColor.
+        /// </summary>
+        internal static string SensorType_AccentColorSensor {
+            get {
+                return ResourceManager.GetString("SensorType_AccentColorSensor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ActiveDesktop.
         /// </summary>
         internal static string SensorType_ActiveDesktopSensor {
@@ -6732,6 +6751,15 @@ namespace HASS.Agent.Shared.Resources.Localization {
         internal static string SensorType_MonitorPowerStateSensor {
             get {
                 return ResourceManager.GetString("SensorType_MonitorPowerStateSensor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to NamedActiveWindow.
+        /// </summary>
+        internal static string SensorType_NamedActiveWindowSensor {
+            get {
+                return ResourceManager.GetString("SensorType_NamedActiveWindowSensor", resourceCulture);
             }
         }
         

@@ -3404,4 +3404,13 @@ Ali želite prenesti runtime installer?</value>
   <data name="SensorType_DeviceTrackerSensor" xml:space="preserve">
     <value>DeviceLocationTracker</value>
   </data>
+  <data name="SensorsManager_NamedActiveWindowSensorDescription" xml:space="preserve">
+    <value>Zagotavlja vrednost VKLOP/IZKLOP glede na to, ali ime okna v fokusu vsebuje konfiguriran niz.</value>
+  </data>
+  <data name="SensorType_NamedActiveWindowSensor" xml:space="preserve">
+    <value>PoimenovanoAktivnoOkno</value>
+  </data>
+  <data name="SensorType_AccentColorSensor" xml:space="preserve">
+    <value>Barva poudarka</value>
+  </data>
 </root>

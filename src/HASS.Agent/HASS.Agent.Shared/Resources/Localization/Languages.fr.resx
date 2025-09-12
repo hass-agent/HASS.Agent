@@ -3288,4 +3288,13 @@ Do you want to download the runtime installer?</value>
   <data name="SensorType_DeviceTrackerSensor" xml:space="preserve">
     <value>DeviceLocationTracker</value>
   </data>
+  <data name="SensorsManager_NamedActiveWindowSensorDescription" xml:space="preserve">
+    <value>Fournit une valeur ON/OFF selon que le nom de la fenêtre focalisée contient ou non une chaîne configurée.</value>
+  </data>
+  <data name="SensorType_NamedActiveWindowSensor" xml:space="preserve">
+    <value>Fenêtre active nommée</value>
+  </data>
+  <data name="SensorType_AccentColorSensor" xml:space="preserve">
+    <value>AccentColor</value>
+  </data>
 </root>

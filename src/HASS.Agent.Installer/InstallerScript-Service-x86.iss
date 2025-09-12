@@ -18,7 +18,6 @@
 #define ServiceDescription "Satellite service for HASS.Agent: a Windows based Home Assistant client. This service processes commands and sensors without the requirement of a logged-in user."
 
 [Setup]
-ArchitecturesInstallIn64BitMode=x64
 ;SetupMutex=Global\HASS.Agent.Setup.Satellite.Mutex,HASS.Agent.Satellite.Setup.Mutex
 AppMutex=Global\\HASS.Agent.Service.Mutex
 AppId={{4004588E-F411-41C2-ABD8-A898B0A14B93}
@@ -29,14 +28,14 @@ AppPublisher={#MyAppPublisher}
 AppPublisherURL={#MyAppURL}
 AppSupportURL={#MyAppURL}
 AppUpdatesURL={#MyAppURL}
-DefaultDirName={commonpf64}\{#MyAppName}\Service
+DefaultDirName={commonpf32}\{#MyAppName}\Service
 DisableProgramGroupPage=yes
 LicenseFile=..\..\LICENSE.md
 InfoBeforeFile=.\BeforeInstallNotice-Service.rtf
 InfoAfterFile=.\AfterInstallNotice-Service.rtf
 PrivilegesRequired=admin
 OutputDir=.\bin
-OutputBaseFilename=HASS.Agent.Service.Installer
+OutputBaseFilename=HASS.Agent.Service.Installer.x86
 SetupIconFile=..\HASS.Agent\HASS.Agent.Shared\hassagent.ico
 Compression=lzma
 SolidCompression=yes
@@ -52,7 +51,7 @@ Name: "english"; MessagesFile: "compiler:Default.isl"
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 [Files]
 ; Service files
-Source: "..\HASS.Agent\HASS.Agent.Satellite.Service\bin\Publish-x64\Release\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "..\HASS.Agent\HASS.Agent.Satellite.Service\bin\Publish-x86\Release\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 
 [Run]
 Filename: "{sys}\sc.exe"; Parameters: "start {#ServiceName}"; Description: "Start Satellite Service"; Flags: postinstall runhidden runascurrentuser 
@@ -77,7 +76,7 @@ Filename: "{sys}\timeout.exe"; Parameters: "5"; RunOnceId: Delay2; Flags:runhidd
 [Code]
 function InitializeSetup: Boolean;
 begin
-  Dependency_ForceX86 := False;
+  Dependency_ForceX86 := True;
   Dependency_AddDotNet80Desktop;
   Result := True;
 end;

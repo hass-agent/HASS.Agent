@@ -3323,4 +3323,13 @@ Home Assistant.
   <data name="SensorType_DeviceTrackerSensor" xml:space="preserve">
     <value>DeviceLocationTracker</value>
   </data>
+  <data name="SensorsManager_NamedActiveWindowSensorDescription" xml:space="preserve">
+    <value>Предоставляет значение ВКЛ/ВЫКЛ в зависимости от того, содержит ли имя окна в фокусе настроенную строку.</value>
+  </data>
+  <data name="SensorType_NamedActiveWindowSensor" xml:space="preserve">
+    <value>ИменованноеАктивноеОкно</value>
+  </data>
+  <data name="SensorType_AccentColorSensor" xml:space="preserve">
+    <value>Акцентный цвет</value>
+  </data>
 </root>

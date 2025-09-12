@@ -2,7 +2,10 @@
 using System.IO;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Security.Policy;
+using System.Text.RegularExpressions;
 using System.Threading;
+using HASS.Agent.Functions;
 using Serilog;
 using Task = System.Threading.Tasks.Task;
 
@@ -10,6 +13,39 @@ namespace HASS.Agent.Managers
 {
     internal static class StorageManager
     {
+        public static string GetElementUrl(string url)
+        {
+            if (HelperFunctions.IsAbsoluteUrl(url))
+            {
+                return url;
+            }
+
+            Uri uri;
+            Uri.TryCreate(url, UriKind.Absolute, out uri);
+            uri ??= new Uri(new Uri("https://www.home-assistant.io"), url);
+
+            if (uri == null)
+            {
+                return url;
+            }
+
+            var builder = new UriBuilder(Variables.AppSettings.HassUri);
+            if (!string.IsNullOrWhiteSpace(uri.LocalPath))
+            {
+                builder.Path = uri.LocalPath.Trim();
+            }
+            if (!string.IsNullOrWhiteSpace(uri.Query))
+            {
+                builder.Query = uri.Query.Trim();
+            }
+            if (!string.IsNullOrWhiteSpace(uri.Fragment))
+            {
+                builder.Fragment = uri.Fragment.Trim();
+            }
+
+            return builder.Uri.AbsoluteUri;
+        }
+
         /// <summary>
         /// Download an image to local temp path
         /// </summary>
@@ -33,7 +69,8 @@ namespace HASS.Agent.Managers
                     return (true, uri);
                 }
 
-                if (!uri.ToLower().StartsWith("http"))
+                var elementUrl = GetElementUrl(uri);
+                if (!HelperFunctions.IsAbsoluteUrl(elementUrl))
                 {
                     Log.Error("[STORAGE] Unable to download image: only HTTP & file:// uri's are allowed, got: {uri}", uri);
 
@@ -45,7 +82,7 @@ namespace HASS.Agent.Managers
 
                 // check for extension
                 // this fails for hass proxy urls, so add an extra length check
-                var ext = Path.GetExtension(uri);
+                var ext = Path.GetExtension(elementUrl);
                 if (string.IsNullOrEmpty(ext) || ext.Length > 5)
                     ext = ".png";
 
@@ -54,10 +91,10 @@ namespace HASS.Agent.Managers
                 localFile = Path.Combine(Variables.ImageCachePath, $"{localFile}{ext}");
 
                 // parse the uri as a check
-                var safeUri = new Uri(uri);
+                var safeUri = new Uri(elementUrl);
 
                 // download the file
-                await DownloadRemoteFileAsync(safeUri.AbsoluteUri, localFile);
+                await RetrieveRemoteRecourceAsync(safeUri.AbsoluteUri, localFile);
 
                 return (true, localFile);
             }
@@ -70,11 +107,11 @@ namespace HASS.Agent.Managers
         }
 
         /// <summary>
-        /// Download an audio file to local temp path
+        /// Downloads an audio file to local cache or returns the unchanged URI if file is streamed by the server
         /// </summary>
         /// <param name="uri"></param>
         /// <returns></returns>
-        internal static async Task<(bool success, string localFile)> DownloadAudioAsync(string uri)
+        internal static async Task<(bool success, string resourceUri)> RetrieveAudioAsync(string uri)
         {
             try
             {
@@ -92,13 +129,18 @@ namespace HASS.Agent.Managers
                     return (false, string.Empty);
                 }
 
-                if (!Directory.Exists(Variables.AudioCachePath)) Directory.CreateDirectory(Variables.AudioCachePath);
+                if (!Directory.Exists(Variables.AudioCachePath))
+                {
+                    Directory.CreateDirectory(Variables.AudioCachePath);
+                }
 
                 // check for extension
                 // this fails for hass proxy urls, so add an extra length check
                 var ext = Path.GetExtension(uri);
                 if (string.IsNullOrEmpty(ext) || ext.Length > 5)
+                {
                     ext = ".mp3";
+                }
 
                 // create a random local filename
                 var localFile = $"{DateTime.Now:yyyyMMddHHmmss}_{Guid.NewGuid().ToString()[..8]}";
@@ -108,9 +150,13 @@ namespace HASS.Agent.Managers
                 var safeUri = new Uri(uri);
 
                 // download the file
-                await DownloadRemoteFileAsync(safeUri.AbsoluteUri, localFile);
+                var (downloaded, resourceUri) = await RetrieveRemoteRecourceAsync(safeUri.AbsoluteUri, localFile);
+                if(!downloaded && resourceUri == null)
+                {
+                    throw new Exception("cannot retrieve the resource");
+                }
 
-                return (true, localFile);
+                return (downloaded, localFile);
             }
             catch (Exception ex)
             {
@@ -160,7 +206,7 @@ namespace HASS.Agent.Managers
                 var safeUri = new Uri(uri);
 
                 // download the file
-                await DownloadRemoteFileAsync(safeUri.AbsoluteUri, localFile);
+                await RetrieveRemoteRecourceAsync(safeUri.AbsoluteUri, localFile);
 
                 return true;
             }
@@ -422,58 +468,67 @@ namespace HASS.Agent.Managers
             }
         }
 
-        private static async Task<Stream> GetHttpClientRequestStream(string uri)
-        {
-            if (!uri.StartsWith(Variables.AppSettings.HassUri))
-                return await Variables.HttpClient.GetStreamAsync(uri);
-
-            Log.Debug("[STORAGE] Using token bearer authentication for : {uri}", uri);
-
-            var httpRequest =  new HttpRequestMessage{
-                Method = HttpMethod.Get,
-                RequestUri = new Uri(uri, UriKind.RelativeOrAbsolute),
-            };
-            httpRequest.Headers.Authorization = new AuthenticationHeaderValue("Bearer", Variables.AppSettings.HassToken);
-
-            var response = await Variables.HttpClient.SendAsync(httpRequest);
-            response.EnsureSuccessStatusCode();
-
-            return await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
-        }
-
         /// <summary>
-        /// Downloads the provided URI to a local file
+        /// Downloads the provided URI to a local file or returns the unchanged URI if file is streamed by the server
         /// </summary>
         /// <param name="uri"></param>
         /// <param name="localFile"></param>
         /// <returns></returns>
-        private static async Task<bool> DownloadRemoteFileAsync(string uri, string localFile)
+        private static async Task<(bool, string)> RetrieveRemoteRecourceAsync(string uri, string localResourceUri)
         {
+            var cancelationTokenSource = new CancellationTokenSource();
+
             try
             {
-                if (File.Exists(localFile))
+                if (File.Exists(localResourceUri))
                 {
-                    File.Delete(localFile);
+                    File.Delete(localResourceUri);
                     await Task.Delay(50);
                 }
 
-                // get a stream from our http client
-                await using var stream = await GetHttpClientRequestStream(uri);
+                var httpRequest = new HttpRequestMessage
+                {
+                    Method = HttpMethod.Get,
+                    RequestUri = new Uri(uri, UriKind.RelativeOrAbsolute)
+                };
+
+                if (uri.StartsWith(Variables.AppSettings.HassUri))
+                {
+                    Log.Debug("[STORAGE] Using token bearer authentication for : {uri}", uri);
+                    httpRequest.Headers.Authorization = new AuthenticationHeaderValue("Bearer", Variables.AppSettings.HassToken);
+                }
+
+                var response = await Variables.HttpClient.SendAsync(httpRequest, HttpCompletionOption.ResponseHeadersRead, cancelationTokenSource.Token);
+                response.EnsureSuccessStatusCode();
+
+                if (response.Content.Headers.ContentLength == null)
+                {
+                    Log.Debug("[STORAGE] URI {uri} does not provide content length, treating as stream", uri);
+                    cancelationTokenSource.Cancel();
+
+                    return (false, uri);
+                }
+
+                var stream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
 
                 // get a local file stream
-                await using var fileStream = new FileStream(localFile!, FileMode.CreateNew);
+                await using var fileStream = new FileStream(localResourceUri, FileMode.CreateNew);
 
                 // transfer the data
                 await stream.CopyToAsync(fileStream);
 
                 // done
-                return true;
+                return (true, localResourceUri);
             }
             catch (Exception ex)
             {
-                Log.Error("[STORAGE] Error while downloading file!\r\nRemote URI: {uri}\r\nLocal file: {localFile}\r\nError: {err}", uri, localFile, ex.Message);
-                
-                return false;
+                Log.Error("[STORAGE] Error while downloading file!\r\nRemote URI: {uri}\r\nLocal file: {localFile}\r\nError: {err}", uri, localResourceUri, ex.Message);
+
+                return (false, string.Empty);
+            }
+            finally
+            {
+                cancelationTokenSource.Dispose();
             }
         }
     }

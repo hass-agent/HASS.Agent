@@ -13,6 +13,7 @@ using Microsoft.Windows.AppLifecycle;
 using System.Windows.Markup;
 using System.Text;
 using System.Net;
+using HASS.Agent.Resources.Localization;
 
 namespace HASS.Agent.Managers
 {
@@ -22,8 +23,16 @@ namespace HASS.Agent.Managers
 
         public static bool Ready { get; private set; } = false;
 
-        private static readonly string s_actionPrefix = "action=";
-        private static readonly string s_uriPrefix = "uri=";
+        private const string ActionKey = "action";
+        private const string UriKey = "uri";
+        private const string ClickActionKey = "clickAction";
+
+        private const string ActionPrefix = $"{ActionKey}=";
+        private const string UriPrefix = $"{UriKey}=";
+        private const string ClickActionPrefix = $"{ClickActionKey}=";
+
+        private const string SpecialClear = "clear_notification";
+
 
         private static readonly AppNotificationManager _notificationManager = AppNotificationManager.Default;
 
@@ -99,9 +108,22 @@ namespace HASS.Agent.Managers
                 if (!Variables.AppSettings.NotificationsEnabled || _notificationManager == null)
                     return;
 
+                if (notification.Message == SpecialClear)
+                {
+                    if (!string.IsNullOrWhiteSpace(notification.Data.Tag) && !string.IsNullOrWhiteSpace(notification.Data.Group))
+                        await _notificationManager.RemoveByTagAndGroupAsync(notification.Data.Tag, notification.Data.Group);
+                    else if (!string.IsNullOrWhiteSpace(notification.Data.Tag))
+                        await _notificationManager.RemoveByTagAsync(notification.Data.Tag);
+
+                    return;
+                }
+
                 var toastBuilder = new AppNotificationBuilder()
                     .AddText(notification.Title)
                     .AddText(notification.Message);
+
+                if (notification.Data.ClickAction != Models.HomeAssistant.NotificationData.NoAction)
+                    toastBuilder.AddArgument(ClickActionKey, EncodeNotificationParameter(notification.Data.ClickAction));
 
                 if (!string.IsNullOrWhiteSpace(notification.Data?.Image))
                 {
@@ -120,10 +142,10 @@ namespace HASS.Agent.Managers
                             continue;
 
                         var button = new AppNotificationButton(action.Title)
-                            .AddArgument("action", EncodeNotificationParameter(action.Action));
+                            .AddArgument(ActionKey, EncodeNotificationParameter(action.Action));
 
                         if (action.Uri != null)
-                            button.AddArgument("uri", EncodeNotificationParameter(action.Uri));
+                            button.AddArgument(UriKey, EncodeNotificationParameter(action.Uri));
 
                         toastBuilder.AddButton(button);
                     }
@@ -139,6 +161,28 @@ namespace HASS.Agent.Managers
                         toastBuilder.AddTextBox(input.Id, input.Text, input.Title);
                     }
                 }
+
+                if (!string.IsNullOrWhiteSpace(notification.Data.Group))
+                    toastBuilder.SetGroup(notification.Data.Group);
+                if (!string.IsNullOrWhiteSpace(notification.Data.Tag))
+                    toastBuilder.SetTag(notification.Data.Tag);
+
+                if (notification.Data.Sticky)
+                {
+                    toastBuilder.SetScenario(AppNotificationScenario.Reminder);
+                    if (notification.Data.Actions.Count == 0)
+                        toastBuilder.AddButton(new AppNotificationButton(Languages.Notification_Dismiss)); //Note(Amadeo): required for reminder scenario
+                }
+
+                if (AppNotificationBuilder.IsUrgentScenarioSupported() && notification.Data.Importance == Models.HomeAssistant.NotificationData.ImportanceHigh)
+                {
+                    toastBuilder.SetScenario(AppNotificationScenario.Urgent);
+                    if (notification.Data.Sticky)
+                        Log.Warning("[NOTIFIER] Notification importance overrides sticky", notification.Title);
+                }
+
+                if (!string.IsNullOrWhiteSpace(notification.Data.IconUrl))
+                    toastBuilder.SetAppLogoOverride(new Uri(notification.Data.IconUrl));
 
                 var toast = toastBuilder.BuildNotification();
 
@@ -184,12 +228,15 @@ namespace HASS.Agent.Managers
         {
             try
             {
-                var action = GetValueFromEventArgs(e, s_actionPrefix);
+                var action = GetValueFromEventArgs(e, ActionPrefix);
                 var input = GetInputFromEventArgs(e);
-                var uri = GetValueFromEventArgs(e, s_uriPrefix);
+                var uri = GetValueFromEventArgs(e, UriPrefix);
+                var clickAction = GetValueFromEventArgs(e, ClickActionPrefix);
 
-                if (uri != null && Variables.AppSettings.NotificationsOpenActionUri)
+                if (!string.IsNullOrWhiteSpace(uri) && Variables.AppSettings.NotificationsOpenActionUri)
                     HelperFunctions.LaunchUrl(uri);
+                else if (!string.IsNullOrWhiteSpace(clickAction))
+                    HelperFunctions.LaunchUrl(clickAction);
 
                 var haEventTask = HassApiManager.FireEvent("hass_agent_notifications", new
                 {
@@ -221,7 +268,7 @@ namespace HASS.Agent.Managers
             }
             catch (Exception ex)
             {
-                Log.Fatal(ex, "[NOTIFIER] Unable to process button: {err}", ex.Message);
+                Log.Fatal(ex, "[NOTIFIER] Unable to process notification activation: {err}", ex.Message);
             }
         }
 
