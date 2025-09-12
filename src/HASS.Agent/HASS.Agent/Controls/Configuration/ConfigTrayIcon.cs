@@ -16,32 +16,42 @@ namespace HASS.Agent.Controls.Configuration
         private void ConfigTrayIcon_Load(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(TbWebViewUrl.Text)) TbWebViewUrl.Text = Variables.AppSettings.HassUri;
-            InitMultiScreenConfig(Variables.AppSettings.TrayIconWebViewScreen);
+            InitMultiScreenConfig();
         }
 
-        private void InitMultiScreenConfig(int selectedScreenIndex = 0)
+        private void InitMultiScreenConfig()
         {
+			var primaryScreenIndex = 0;
             var displays = Screen.AllScreens;
 
             if (Screen.AllScreens.Length == 1)
             {
-                NumWebViewScreen.Visible = true;
+				Variables.AppSettings.TrayIconWebViewScreen = 0;
+				NumWebViewScreen.Visible = true;
                 NumWebViewScreen.Items.Add("Single Screen Mode");
                 NumWebViewScreen.Enabled = false;
-                selectedScreenIndex = 0;
-            }
+			}
             else
             {
-                // Add screens to updownControl
-                foreach (var display in displays)
+                for (var i=0; i<displays.Length; i++)
                 {
-                    string label = display.DeviceName;
+                    var display = displays[i];
+
                     if (display.Primary)
                     {
-                        label += " (Primary)";
+                        primaryScreenIndex = i;
                     }
+
+                    string label = display.Primary? $"{display.DeviceName} (Primary)":display.DeviceName;
                     NumWebViewScreen.Items.Add(label);
                 }
+            }
+
+			var selectedScreenIndex = Variables.AppSettings.TrayIconWebViewScreen;
+
+			if (selectedScreenIndex == -1)
+            {
+                selectedScreenIndex = primaryScreenIndex; 
             }
 
             NumWebViewScreen.SelectedIndex = selectedScreenIndex;
