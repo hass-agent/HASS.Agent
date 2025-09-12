@@ -36,8 +36,8 @@ namespace HASS.Agent.MQTT
     {
         private IManagedMqttClient _mqttClient = null;
 
-        private bool _disconnectionNotified = false;
         private bool _connectingFailureNotified = false;
+        private Stopwatch _disconnectedTimer = null;
 
         private MqttStatus _status = MqttStatus.Connecting;
 
@@ -132,53 +132,21 @@ namespace HASS.Agent.MQTT
         {
             _isReady = false;
 
-            Variables.MainForm?.SetMqttStatus(ComponentStatus.Connecting);
-
-            var gracePeriod = Variables.AppSettings.DisconnectedGracePeriodSeconds;
-
-            // give the connection the grace period to recover
-            var runningTimer = Stopwatch.StartNew();
-            while (runningTimer.Elapsed.TotalSeconds < gracePeriod)
+            if (Variables.ShuttingDown)
             {
-                await Task.Delay(TimeSpan.FromSeconds(5));
-
-                if (IsConnected())
-                {
-                    _isReady = true;
-
-                    if (_status == MqttStatus.Connected)
-                        return;
-
-                    _status = MqttStatus.Connected;
-                    Variables.MainForm?.SetMqttStatus(ComponentStatus.Ok);
-                    Log.Information("[MQTT] Reconnected from disconnection");
-
-                    return;
-                }
-
-                if (Variables.AppSettings.MqttIgnoreGracePeriod)
-                {
-                    var lastResumed = SystemStateManager.LastEventOccurrence.TryGetValue(SystemStateEvent.Resume, out var lastResumeEventDate);
-                    if (lastResumed && DateTime.Now < lastResumeEventDate.AddSeconds(gracePeriod))
-                    {
-                        Log.Information("[MQTT] System resumed less than {gracePeriod} seconds ago, ignoring grace period on disconnection");
-                        break;
-                    }
-                }
+                Variables.MainForm?.SetMqttStatus(ComponentStatus.Stopped);
+                _status = MqttStatus.Disconnected;
+                return;
             }
 
-            // nope, call it
-            _status = MqttStatus.Disconnected;
-            Variables.MainForm?.SetMqttStatus(ComponentStatus.Stopped);
+            Variables.MainForm?.SetMqttStatus(ComponentStatus.Connecting);
+            _status = MqttStatus.Connecting;
 
-            // log if we're not shutting down, but only once
-            if (Variables.ShuttingDown || _disconnectionNotified)
-                return;
-
-            _disconnectionNotified = true;
-
-            Variables.MainForm?.ShowToolTip(Languages.MqttManager_ToolTip_Disconnected, true);
-            Log.Warning("[MQTT] Disconnected: {reason}", arg.Reason.ToString());
+            if (_disconnectedTimer == null)
+            {
+                _disconnectedTimer = Stopwatch.StartNew();
+                Log.Warning("[MQTT] Disconnected: {reason}", arg.Reason.ToString());
+            }
         }
 
         /// <summary>
@@ -186,61 +154,22 @@ namespace HASS.Agent.MQTT
         /// </summary>
         private async Task OnMqttConnectionFailed(ConnectingFailedEventArgs arg)
         {
-            Variables.MainForm?.SetMqttStatus(ComponentStatus.Connecting);
-
             var gracePeriod = Variables.AppSettings.DisconnectedGracePeriodSeconds;
-
-            // give the connection the grace period to recover
-            var runningTimer = Stopwatch.StartNew();
-            while (runningTimer.Elapsed.TotalSeconds < gracePeriod)
+            if (_disconnectedTimer?.Elapsed.TotalSeconds > gracePeriod && !_connectingFailureNotified)
             {
-                await Task.Delay(TimeSpan.FromSeconds(5));
+                Variables.MainForm?.ShowToolTip(Languages.MqttManager_ToolTip_ConnectionFailed, true);
+                _connectingFailureNotified = true;
 
-                if (IsConnected())
-                {
-                    // recovered
-                    if (_status == MqttStatus.Connected)
-                        return;
-
-                    _status = MqttStatus.Connected;
-                    Variables.MainForm?.SetMqttStatus(ComponentStatus.Ok);
-                    Log.Information("[MQTT] Reconnected from failed connection");
-
-                    return;
-                }
-
-                if (Variables.AppSettings.MqttIgnoreGracePeriod)
-                {
-                    var lastResumed = SystemStateManager.LastEventOccurrence.TryGetValue(SystemStateEvent.Resume, out var lastResumeEventDate);
-                    if (lastResumed && DateTime.Now < lastResumeEventDate.AddSeconds(gracePeriod))
-                    {
-                        Log.Information("[MQTT] System resumed more than {gracePeriod} seconds ago, ignoring grace period on connection failed");
-                        break;
-                    }
-                }
+                var excMsg = arg.Exception.ToString();
+                if (excMsg.Contains("SocketException"))
+                    Log.Error("[MQTT] Error while connecting: {err}", arg.Exception.Message);
+                else if (excMsg.Contains("MqttCommunicationTimedOutException"))
+                    Log.Error("[MQTT] Error while connecting: {err}", "Connection timed out");
+                else if (excMsg.Contains("NotAuthorized"))
+                    Log.Error("[MQTT] Error while connecting: {err}", "Not authorized, check your credentials.");
+                else
+                    Log.Fatal(arg.Exception, "[MQTT] Error while connecting: {err}", arg.Exception.Message);
             }
-
-            // nope, call it
-            _status = MqttStatus.Error;
-            Variables.MainForm?.SetMqttStatus(ComponentStatus.Failed);
-
-            // log only once
-            if (_connectingFailureNotified)
-                return;
-
-            _connectingFailureNotified = true;
-
-            var excMsg = arg.Exception.ToString();
-            if (excMsg.Contains("SocketException"))
-                Log.Error("[MQTT] Error while connecting: {err}", arg.Exception.Message);
-            else if (excMsg.Contains("MqttCommunicationTimedOutException"))
-                Log.Error("[MQTT] Error while connecting: {err}", "Connection timed out");
-            else if (excMsg.Contains("NotAuthorized"))
-                Log.Error("[MQTT] Error while connecting: {err}", "Not authorized, check your credentials.");
-            else
-                Log.Fatal(arg.Exception, "[MQTT] Error while connecting: {err}", arg.Exception.Message);
-
-            Variables.MainForm?.ShowToolTip(Languages.MqttManager_ToolTip_ConnectionFailed, true);
         }
 
         private Task OnMqttConnected(MqttClientConnectedEventArgs arg)
@@ -249,8 +178,10 @@ namespace HASS.Agent.MQTT
             Variables.MainForm?.SetMqttStatus(ComponentStatus.Ok);
             Log.Information("[MQTT] Connected");
 
-            // reset error notifications 
-            _disconnectionNotified = false;
+            Task.Run(async () => await AnnounceAvailabilityAsync());
+            _isReady = true;
+
+            _disconnectedTimer = null;
             _connectingFailureNotified = false;
 
             return Task.CompletedTask;
@@ -282,7 +213,6 @@ namespace HASS.Agent.MQTT
                 // reset state
                 _status = MqttStatus.Connecting;
                 Variables.MainForm?.SetMqttStatus(ComponentStatus.Connecting);
-                _disconnectionNotified = false;
                 _connectingFailureNotified = false;
 
                 Log.Information("[MQTT] Initializing ..");
@@ -307,7 +237,6 @@ namespace HASS.Agent.MQTT
             try
             {
                 await _mqttClient.StartAsync(options);
-                InitialRegistration();
             }
             catch (MqttConnectingFailedException ex)
             {
@@ -321,23 +250,6 @@ namespace HASS.Agent.MQTT
             {
                 Log.Error("[MQTT] Exception while connecting with broker: {msg}", ex.ToString());
             }
-        }
-
-        /// <summary>
-        /// Announce our general availability
-        /// </summary>
-        private async void InitialRegistration()
-        {
-            if (!Variables.AppSettings.MqttEnabled || _mqttClient == null)
-                return;
-
-            while (!IsConnected())
-                await Task.Delay(2000);
-
-            await AnnounceAvailabilityAsync();
-            _isReady = true;
-
-            Log.Information("[MQTT] Initial registration completed");
         }
 
         /// <summary>
