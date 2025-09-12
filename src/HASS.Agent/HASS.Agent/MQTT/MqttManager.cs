@@ -177,7 +177,8 @@ namespace HASS.Agent.MQTT
 
             _disconnectionNotified = true;
 
-            Variables.MainForm?.ShowToolTip(Languages.MqttManager_ToolTip_Disconnected, true);
+            // Logic is flawed as the notification should only appear if no connection possible after reconnect grace period
+            // Variables.MainForm?.ShowToolTip(Languages.MqttManager_ToolTip_Disconnected, true);
             Log.Warning("[MQTT] Disconnected: {reason}", arg.Reason.ToString());
         }
 
