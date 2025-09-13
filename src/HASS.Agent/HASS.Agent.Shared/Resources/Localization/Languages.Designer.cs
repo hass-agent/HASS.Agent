@@ -5722,7 +5722,10 @@ namespace HASS.Agent.Shared.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Provides the current temperature of the first GPU..
+        ///   Looks up a localized string similar to NOTE: This is a non-functioning sensor.
+        ///
+        ///Due to the security concerns regarding Libre Hardwar Monitor (library allowing HASS.Agent to access GPU temperature data) this sensor is left for backward compatibility reasons and will always return 0.
+        ///Please see documentation for alternative options..
         /// </summary>
         internal static string SensorsManager_GpuTemperatureSensorDescription {
             get {

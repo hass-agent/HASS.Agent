@@ -2167,7 +2167,10 @@ Obecnie zwraca głośność domyślnego urządzenia.</value>
     <value>Zwraca obciążenie pierwszego GPU w procentach.</value>
   </data>
   <data name="SensorsManager_GpuTemperatureSensorDescription" xml:space="preserve">
-    <value>Zwraca temperaturę pierwszego GPU.</value>
+    <value>UWAGA: Ten czujnik nie działa.
+
+Ze względu na obawy dotyczące bezpieczeństwa Libre Hardwar Monitor (biblioteki umożliwiającej HASS.Agent dostęp do danych o temperaturze GPU), ten czujnik został pozostawiony ze względu na kompatybilność wsteczną i zawsze będzie zwracał wartość 0.
+Informacje o alternatywnych opcjach znajdują się w dokumentacji.</value>
   </data>
   <data name="SensorsManager_LastActiveSensorDescription" xml:space="preserve">
     <value>Zwraca datę/godzinę, która zawiera czas ostatniej aktywności użytkownika. (klawiatura/myszka)

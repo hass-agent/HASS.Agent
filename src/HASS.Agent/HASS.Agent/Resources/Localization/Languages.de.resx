@@ -2177,7 +2177,10 @@ Nimmt derzeit die Lautstärke deines Standardgeräts.</value>
     <value>Liefert die aktuelle Auslastung der ersten GPU in Prozent.</value>
   </data>
   <data name="SensorsManager_GpuTemperatureSensorDescription" xml:space="preserve">
-    <value>Liefert die aktuelle Temperatur der ersten GPU.</value>
+    <value>HINWEIS: Dieser Sensor funktioniert nicht.
+
+Aufgrund von Sicherheitsbedenken bezüglich Libre Hardware Monitor (Bibliothek, die HASS.Agent Zugriff auf GPU-Temperaturdaten ermöglicht) wurde dieser Sensor aus Gründen der Abwärtskompatibilität beibehalten und gibt immer 0 zurück.
+Weitere Optionen finden Sie in der Dokumentation.</value>
   </data>
   <data name="SensorsManager_LastActiveSensorDescription" xml:space="preserve">
     <value>Stellt einen Datums-/Uhrzeitwert bereit, der den letzten Zeitpunkt enthält, zu dem der Benutzer eine Eingabe vorgenommen hat.

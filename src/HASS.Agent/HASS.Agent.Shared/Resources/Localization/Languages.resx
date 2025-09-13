@@ -1147,7 +1147,10 @@ Currently takes the volume of your default device.</value>
 		<value>Provides the current load of the first GPU as a percentage.</value>
 	</data>
   <data name="SensorsManager_GpuTemperatureSensorDescription" xml:space="preserve">
-		<value>Provides the current temperature of the first GPU.</value>
+		<value>NOTE: This is a non-functioning sensor.
+
+Due to the security concerns regarding Libre Hardwar Monitor (library allowing HASS.Agent to access GPU temperature data) this sensor is left for backward compatibility reasons and will always return 0.
+Please see documentation for alternative options.</value>
 	</data>
   <data name="SensorsManager_LastActiveSensorDescription" xml:space="preserve">
 		<value>Provides a datetime value containing the last moment the user provided any input.</value>
