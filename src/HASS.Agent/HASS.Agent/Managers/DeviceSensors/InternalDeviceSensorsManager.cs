@@ -20,21 +20,51 @@ namespace HASS.Agent.Managers.DeviceSensors
                 deviceWatcher = DeviceInformation.CreateWatcher(Windows.Devices.Sensors.ProximitySensor.GetDeviceSelector());
                 deviceWatcher.Added += OnProximitySensorAdded;
 
-                deviceSensors.Add(new AccelerometerSensor(Accelerometer.GetDefault()));
-                deviceSensors.Add(new ActivitySensor(await Windows.Devices.Sensors.ActivitySensor.GetDefaultAsync()));
-                deviceSensors.Add(new AltimeterSensor(Altimeter.GetDefault()));
-                deviceSensors.Add(new BarometerSensor(Barometer.GetDefault()));
-                deviceSensors.Add(new CompassSensor(Compass.GetDefault()));
-                deviceSensors.Add(new GyrometerSensor(Gyrometer.GetDefault()));
-                deviceSensors.Add(new HingeAngleSensor(await Windows.Devices.Sensors.HingeAngleSensor.GetDefaultAsync()));
-                deviceSensors.Add(new HumanPresenceSensor(Windows.Devices.Sensors.HumanPresenceSensor.GetDefault()));
-                deviceSensors.Add(new InclinometerSensor(Inclinometer.GetDefault()));
-                deviceSensors.Add(new LightSensor(Windows.Devices.Sensors.LightSensor.GetDefault()));
-                deviceSensors.Add(new MagnetometerSensor(Magnetometer.GetDefault()));
-                deviceSensors.Add(new OrientationSensor(Windows.Devices.Sensors.OrientationSensor.GetDefault()));
-                deviceSensors.Add(new PedometerSensor(await Pedometer.GetDefaultAsync()));
-                deviceSensors.Add(new ProximitySensor(await GetDefaultProximitySensorAsync()));
-                deviceSensors.Add(new SimpleOrientationSensor(Windows.Devices.Sensors.SimpleOrientationSensor.GetDefault()));
+                //TODO(Amadeo): this is ugly
+                try { deviceSensors.Add(new AccelerometerSensor(Accelerometer.GetDefault())); }
+                catch { Log.Debug("[INTERNALSENSORS] Accelerometer not added"); }
+
+                try { deviceSensors.Add(new ActivitySensor(await Windows.Devices.Sensors.ActivitySensor.GetDefaultAsync()));}
+                catch { Log.Debug("[INTERNALSENSORS] ActivitySensor not added"); }
+
+                try { deviceSensors.Add(new AltimeterSensor(Altimeter.GetDefault())); }
+                catch { Log.Debug("[INTERNALSENSORS] Altimeter not added"); }
+
+                try { deviceSensors.Add(new BarometerSensor(Barometer.GetDefault())); }
+                catch { Log.Debug("[INTERNALSENSORS] Barometer not added"); }
+
+                try { deviceSensors.Add(new CompassSensor(Compass.GetDefault())); }
+                catch { Log.Debug("[INTERNALSENSORS] Compass not added"); }
+
+                try { deviceSensors.Add(new GyrometerSensor(Gyrometer.GetDefault())); }
+                catch { Log.Debug("[INTERNALSENSORS] Gyrometer not added"); }
+
+                try { deviceSensors.Add(new HingeAngleSensor(await Windows.Devices.Sensors.HingeAngleSensor.GetDefaultAsync())); }
+                catch { Log.Debug("[INTERNALSENSORS] HingeAngleSensor not added"); }
+
+                try { deviceSensors.Add(new HumanPresenceSensor(Windows.Devices.Sensors.HumanPresenceSensor.GetDefault())); }
+                catch { Log.Debug("[INTERNALSENSORS] HumanPresenceSensor not added"); }
+
+                try { deviceSensors.Add(new InclinometerSensor(Inclinometer.GetDefault())); }
+                catch { Log.Debug("[INTERNALSENSORS] Inclinometer not added"); }
+
+                try { deviceSensors.Add(new LightSensor(Windows.Devices.Sensors.LightSensor.GetDefault())); }
+                catch { Log.Debug("[INTERNALSENSORS] LightSensor not added"); }
+
+                try { deviceSensors.Add(new MagnetometerSensor(Magnetometer.GetDefault())); }
+                catch { Log.Debug("[INTERNALSENSORS] Magnetometer not added"); }
+
+                try { deviceSensors.Add(new OrientationSensor(Windows.Devices.Sensors.OrientationSensor.GetDefault())); }
+                catch { Log.Debug("[INTERNALSENSORS] OrientationSensor not added"); }
+
+                try { deviceSensors.Add(new PedometerSensor(await Pedometer.GetDefaultAsync())); }
+                catch { Log.Debug("[INTERNALSENSORS] Pedometer not added"); }
+
+                try { deviceSensors.Add(new ProximitySensor(await GetDefaultProximitySensorAsync())); }
+                catch { Log.Debug("[INTERNALSENSORS] ProximitySensor not added"); }
+
+                try { deviceSensors.Add(new SimpleOrientationSensor(Windows.Devices.Sensors.SimpleOrientationSensor.GetDefault())); }
+                catch { Log.Debug("[INTERNALSENSORS] SimpleOrientationSensor not added"); }
 
                 Log.Information("[INTERNALSENSORS] Ready");
             }
