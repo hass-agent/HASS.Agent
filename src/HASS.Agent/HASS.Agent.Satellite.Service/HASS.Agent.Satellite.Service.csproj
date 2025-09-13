@@ -17,9 +17,9 @@
     <PackageProjectUrl>https://github.com/hass-agent/HASS.Agent</PackageProjectUrl>
     <RepositoryUrl>https://github.com/hass-agent/HASS.Agent</RepositoryUrl>
     <PackageIcon>hass.png</PackageIcon>
-    <AssemblyVersion>2.1.1</AssemblyVersion>
+    <AssemblyVersion>2.2.0</AssemblyVersion>
     <ApplicationIcon>hass.ico</ApplicationIcon>
-    <FileVersion>2.1.1</FileVersion>
+    <FileVersion>2.2.0</FileVersion>
     <SupportedOSPlatformVersion>10.0.17763.0</SupportedOSPlatformVersion>
 	<IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
   </PropertyGroup>
