@@ -174,9 +174,11 @@ internal static class UpdateManager
         {
             // get the installer
             var installerAssetUrl = string.Empty;
-            var installerAsset = pendingUpdate.GitHubRelease.Assets.Select(x => x).FirstOrDefault(y => y.BrowserDownloadUrl.ToLower().EndsWith("installer.exe"));
+            var installerVersionSuffix = IntPtr.Size == 8 ? "installer.exe" : "installer.x86.exe";
+
+            var installerAsset = pendingUpdate.GitHubRelease.Assets.Select(x => x).FirstOrDefault(y => y.BrowserDownloadUrl.ToLower().EndsWith(installerVersionSuffix));
             if (installerAsset == null)
-                Log.Error("[UPDATER] No .installer.exe asset found for release: {v}", pendingUpdate.GitHubRelease.TagName);
+                Log.Error("[UPDATER] No installer asset found for release: {v}", pendingUpdate.GitHubRelease.TagName);
             else
                 installerAssetUrl = installerAsset.BrowserDownloadUrl;
 
