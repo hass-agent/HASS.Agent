@@ -2063,7 +2063,10 @@ Actualmente toma el volumen de su dispositivo predeterminado.</value>
     <value>Proporciona la carga actual de la primera GPU como porcentaje.</value>
   </data>
   <data name="SensorsManager_GpuTemperatureSensorDescription" xml:space="preserve">
-    <value>Proporciona la temperatura actual de la primera GPU.</value>
+    <value>NOTA: Este sensor no funciona.
+
+Debido a problemas de seguridad relacionados con Libre Hardware Monitor (biblioteca que permite a HASS.Agent acceder a los datos de temperatura de la GPU), este sensor se mantiene por compatibilidad con versiones anteriores y siempre devolverá 0.
+Consulte la documentación para ver opciones alternativas.</value>
   </data>
   <data name="SensorsManager_LastActiveSensorDescription" xml:space="preserve">
     <value>Proporciona un valor de fecha y hora que contiene la última vez que el usuario realizó una entrada.

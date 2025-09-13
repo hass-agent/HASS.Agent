@@ -2074,7 +2074,10 @@ Pakt momenteel het volume van je standaardapparaat.</value>
     <value>Geeft de huidige belasting van de eerste GPU als een percentage.</value>
   </data>
   <data name="SensorsManager_GpuTemperatureSensorDescription" xml:space="preserve">
-    <value>Geeft de huidige temperatuur van de eerste GPU.</value>
+    <value>OPMERKING: Dit is een niet-functionerende sensor.
+
+Vanwege beveiligingsproblemen met Libre Hardware Monitor (bibliotheek die HASS.Agent toegang geeft tot GPU-temperatuurgegevens) wordt deze sensor om redenen van achterwaartse compatibiliteit niet gebruikt en retourneert altijd 0.
+Raadpleeg de documentatie voor alternatieve opties.</value>
   </data>
   <data name="SensorsManager_LastActiveSensorDescription" xml:space="preserve">
     <value>Biedt een datum/tijd-waarde die de laatste keer bevat dat de gebruiker iets heeft ingevoerd.

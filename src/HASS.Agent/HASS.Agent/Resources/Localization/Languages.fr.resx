@@ -2084,7 +2084,10 @@ Indique le volume de votre appareil par défaut.</value>
     <value>Fournit la charge actuelle du premier GPU sous forme de pourcentage.</value>
   </data>
   <data name="SensorsManager_GpuTemperatureSensorDescription" xml:space="preserve">
-    <value>Fournit la température actuelle du premier GPU.</value>
+    <value>REMARQUE : Ce capteur est non fonctionnel.
+
+Pour des raisons de sécurité concernant Libre Hardware Monitor (bibliothèque permettant à HASS.Agent d'accéder aux données de température du GPU), ce capteur est conservé pour des raisons de rétrocompatibilité et renvoie toujours 0.
+Veuillez consulter la documentation pour connaître les autres options.</value>
   </data>
   <data name="SensorsManager_LastActiveSensorDescription" xml:space="preserve">
     <value>Fournit une valeur datetime qui contient la dernière fois que l'utilisateur a effectué une entrée.

@@ -2296,7 +2296,10 @@ Glede na verzijo Windows-ov se to lahko nahaja v Nadzorna plošča --&gt; Sistem
     <value>Zagotavlja trenutno obremenitev prvega GPU-ja v odstotkih.</value>
   </data>
   <data name="SensorsManager_GpuTemperatureSensorDescription" xml:space="preserve">
-    <value>Zagotavlja trenutno temperaturo prvega GPU-ja.</value>
+    <value>OPOMBA: To je nedelujoč senzor.
+
+Zaradi varnostnih pomislekov glede Libre Hardware Monitor (knjižnica, ki omogoča HASS.Agent dostop do podatkov o temperaturi GPU) je ta senzor ostal zaradi združljivosti s prejšnjimi različicami in bo vedno vrnil vrednost 0.
+Za alternativne možnosti glejte dokumentacijo.</value>
   </data>
   <data name="SensorsManager_LastActiveSensorDescription" xml:space="preserve">
     <value>Zagotavlja vrednost datuma in časa, ki vsebuje čas zadnjega vnosa uporabnika.
