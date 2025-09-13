@@ -2091,7 +2091,7 @@ Indique le volume de votre appareil par défaut.</value>
   <data name="SensorsManager_GpuTemperatureSensorDescription" xml:space="preserve">
     <value>REMARQUE : Ce capteur est non fonctionnel.
 
-En raison de problèmes de sécurité concernant Libre Hardwar Monitor (bibliothèque permettant à HASS.Agent d'accéder aux données de température du GPU), ce capteur est conservé pour des raisons de rétrocompatibilité et renvoie toujours 0.
+Pour des raisons de sécurité concernant Libre Hardware Monitor (bibliothèque permettant à HASS.Agent d'accéder aux données de température du GPU), ce capteur est conservé pour des raisons de rétrocompatibilité et renvoie toujours 0.
 Veuillez consulter la documentation pour connaître les autres options.</value>
   </data>
   <data name="SensorsManager_LastActiveSensorDescription" xml:space="preserve">

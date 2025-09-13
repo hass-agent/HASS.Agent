@@ -2217,7 +2217,7 @@ Dependendo da sua versão do Windows, isso pode ser encontrado no novo painel de
   <data name="SensorsManager_GpuTemperatureSensorDescription" xml:space="preserve">
     <value>NOTA: Este sensor não está a funcionar.
 
-Devido a questões de segurança relacionadas com o Libre Hardwar Monitor (biblioteca que permite ao HASS.Agent aceder aos dados de temperatura da GPU), este sensor foi mantido por motivos de compatibilidade com versões anteriores e irá sempre retornar 0.
+Devido a questões de segurança relacionadas com o Libre Hardware Monitor (biblioteca que permite ao HASS.Agent aceder aos dados de temperatura da GPU), este sensor foi mantido por motivos de compatibilidade com versões anteriores e irá sempre retornar 0.
 Consulte a documentação para obter opções alternativas.</value>
   </data>
   <data name="SensorsManager_LastActiveSensorDescription" xml:space="preserve">
