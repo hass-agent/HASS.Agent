@@ -60,6 +60,11 @@ Filename: "{sys}\sc.exe"; Parameters: "start {#ServiceName}"; Description: "Star
 [Registry]
 Root: HKLM; Subkey: "SOFTWARE\HASSAgent\SatelliteService"; ValueType: string; ValueName: "InstallPath"; ValueData: "{app}"; Flags: createvalueifdoesntexist uninsdeletevalue
 
+; Ensure LibreHardwareMonitor/WinRing0 files are removed
+[InstallDelete]
+Type: files; Name: "{app}\LibreHardwareMonitorLib.dll"
+Type: files; Name: "{app}\HASS.Agent.Satellite.Service.sys"
+
 ; Service registration and removal
 [Run]
 Filename: "{sys}\sc.exe"; Parameters: "create {#ServiceName} binpath= ""\""{app}\{#MyAppExeName}""\"""; Flags: runhidden 

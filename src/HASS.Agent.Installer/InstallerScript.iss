@@ -66,6 +66,11 @@ Source: ".\bin\HASS.Agent.Service.Installer.exe"; DestDir: "{tmp}"; Flags: ignor
 Name: "{autoprograms}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"
 Name: "{autodesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Tasks: desktopicon
 
+; Ensure LibreHardwareMonitor/WinRing0 files are removed
+[InstallDelete]
+Type: files; Name: "{app}\LibreHardwareMonitorLib.dll"
+Type: files; Name: "{app}\HASS.Agent.sys"
+
 [Run]
 Filename: "{app}\{#MyAppExeName}"; Parameters: "compat_migrate"; Description: "Try to migrate configuration - use only once (administrative permissions required)"; Flags: postinstall runascurrentuser unchecked
 Filename: "{tmp}\HASS.Agent.Service.Installer.exe"; Parameters: "{code:GetCmdLineParams}"; Description: "Install Satellite Service (administrative permissions required)"; Flags: postinstall runascurrentuser 
