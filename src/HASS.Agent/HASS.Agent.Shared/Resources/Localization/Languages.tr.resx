@@ -2859,6 +2859,9 @@ Lütfen aracınız için credentialları sağlayın, HA Mosquitto eklentisini ku
   <data name="HassAction_Press" xml:space="preserve">
     <value>Basmak</value>
   </data>
+  <data name="SensorType_DeviceTrackerSensor" xml:space="preserve">
+    <value>DeviceLocationTracker</value>
+  </data>
   <data name="SensorsManager_NamedActiveWindowSensorDescription" xml:space="preserve">
     <value>Odaklanan pencere adının yapılandırılmış dizeyi içerip içermediğine bağlı olarak bir AÇIK/KAPALI değeri sağlar.</value>
   </data>

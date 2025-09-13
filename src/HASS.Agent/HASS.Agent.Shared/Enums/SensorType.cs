@@ -62,6 +62,10 @@ namespace HASS.Agent.Shared.Enums
         [LocalizedDescription("SensorType_GeoLocationSensor", typeof(Languages))]
         [EnumMember(Value = "GeoLocationSensor")]
         GeoLocationSensor,
+        
+        [LocalizedDescription("SensorType_DeviceTrackerSensor", typeof(Languages))]
+        [EnumMember(Value = "DeviceTrackerSensor")]
+        DeviceTrackerSensor,
 
         [LocalizedDescription("SensorType_GpuLoadSensor", typeof(Languages))]
         [EnumMember(Value = "GpuLoadSensor")]

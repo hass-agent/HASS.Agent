@@ -3515,6 +3515,13 @@ Wymaga konfiguracji w „Configuration -&gt; Tray Icon”</value>
   <data name="HassAction_Press" xml:space="preserve">
     <value>Naciśnij</value>
   </data>
+  <data name="SensorsManager_DeviceTrackerSensorDescription" xml:space="preserve">
+    <value>Zwraca aktualną szerokość, długość i wysokość jako lokalizację/urządzenie śledzące, aby bezpośrednio wyświetlić i śledzić na mapie.
+
+Upewnij się, że usługi lokalizacyjne systemu Windows są włączone!
+
+W zależności od wersji systemu Windows można to znaleźć w nowym panelu sterowania &gt; "prywatność i bezpieczeństwo" &gt; "lokalizacja". </value>
+  </data>
   <data name="Notification_Dismiss" xml:space="preserve">
     <value>Odrzuć</value>
   </data>

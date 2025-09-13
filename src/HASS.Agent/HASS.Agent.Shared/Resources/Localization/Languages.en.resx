@@ -3252,6 +3252,9 @@ Do you want to download the runtime installer?</value>
   <data name="HassDomain_Button" xml:space="preserve">
     <value>Button</value>
   </data>
+  <data name="SensorType_DeviceTrackerSensor" xml:space="preserve">
+    <value>DeviceLocationTracker</value>
+  </data>
   <data name="SensorType_NamedActiveWindowSensor" xml:space="preserve">
     <value>NamedActiveWindow</value>
   </data>

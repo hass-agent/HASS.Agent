@@ -3376,6 +3376,9 @@ Willst Du den Runtime Installer herunterladen?</value>
   <data name="HassAction_Press" xml:space="preserve">
     <value>Presse</value>
   </data>
+  <data name="SensorType_DeviceTrackerSensor" xml:space="preserve">
+    <value>DeviceLocationTracker</value>
+  </data>
   <data name="SensorsManager_NamedActiveWindowSensorDescription" xml:space="preserve">
     <value>Stellt einen EIN/AUS-Wert bereit, basierend darauf, ob der fokussierte Fenstername eine konfigurierte Zeichenfolge enthält.</value>
   </data>

@@ -475,6 +475,13 @@ namespace HASS.Agent.Sensors
                 30, false, true, false);
 
             SensorInfoCards.Add(sensorInfoCard.SensorType, sensorInfoCard);
+            // =================================
+
+            sensorInfoCard = new SensorInfoCard(SensorType.DeviceTrackerSensor,
+                Languages.SensorsManager_DeviceTrackerSensorDescription,
+                30, false, true, false);
+
+            SensorInfoCards.Add(sensorInfoCard.SensorType, sensorInfoCard);
 
             // =================================
 

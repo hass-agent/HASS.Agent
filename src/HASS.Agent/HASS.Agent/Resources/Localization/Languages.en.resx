@@ -3434,6 +3434,13 @@ Requires it to be configured in "Configuration -&gt; Tray Icon"</value>
   <data name="HassAction_Press" xml:space="preserve">
     <value>Press</value>
   </data>
+  <data name="SensorsManager_DeviceTrackerSensorDescription" xml:space="preserve">
+    <value>Returns your current latitude, longitude and altitude as as location/device tracker, to directly display and track on a map.
+
+Make sure Windows' location services are enabled!
+
+Depending on your Windows version, this can be found in the new control panel -&gt; 'privacy and security' -&gt; 'location'.</value>
+  </data>
   <data name="Notification_Dismiss" xml:space="preserve">
     <value>Dismiss</value>
   </data>

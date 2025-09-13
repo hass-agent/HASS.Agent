@@ -3285,6 +3285,9 @@ Do you want to download the runtime installer?</value>
   <data name="HassAction_Press" xml:space="preserve">
     <value>Presse</value>
   </data>
+  <data name="SensorType_DeviceTrackerSensor" xml:space="preserve">
+    <value>DeviceLocationTracker</value>
+  </data>
   <data name="SensorsManager_NamedActiveWindowSensorDescription" xml:space="preserve">
     <value>Fournit une valeur ON/OFF selon que le nom de la fenêtre focalisée contient ou non une chaîne configurée.</value>
   </data>

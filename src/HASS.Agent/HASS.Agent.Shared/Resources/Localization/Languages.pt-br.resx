@@ -3299,6 +3299,9 @@ Deseja baixar o Microsoft WebView2 runtime?</value>
   <data name="HassAction_Press" xml:space="preserve">
     <value>Imprensa</value>
   </data>
+  <data name="SensorType_DeviceTrackerSensor" xml:space="preserve">
+    <value>DeviceLocationTracker</value>
+  </data>
   <data name="SensorsManager_NamedActiveWindowSensorDescription" xml:space="preserve">
     <value>Fornece um valor ON/OFF com base na presença ou não de uma string configurada no nome da janela em foco.</value>
   </data>

@@ -3274,6 +3274,9 @@ Wil je de runtime installatie downloaden?</value>
   <data name="HassAction_Press" xml:space="preserve">
     <value>Pers</value>
   </data>
+  <data name="SensorType_DeviceTrackerSensor" xml:space="preserve">
+    <value>DeviceLocationTracker</value>
+  </data>
   <data name="SensorsManager_NamedActiveWindowSensorDescription" xml:space="preserve">
     <value>Geeft een AAN/UIT-waarde op basis van het al dan niet bevatten van de focusvensternaam van een geconfigureerde tekenreeks.</value>
   </data>

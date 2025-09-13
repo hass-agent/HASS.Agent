@@ -6619,6 +6619,15 @@ namespace HASS.Agent.Shared.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to DeviceLocationTracker.
+        /// </summary>
+        internal static string SensorType_DeviceTrackerSensor {
+            get {
+                return ResourceManager.GetString("SensorType_DeviceTrackerSensor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Display.
         /// </summary>
         internal static string SensorType_DisplaySensors {

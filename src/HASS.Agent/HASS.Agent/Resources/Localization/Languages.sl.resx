@@ -3554,6 +3554,13 @@ Zahteva, da je konfiguriran v "Konfiguracija -&gt; Ikona pladnja"</value>
   <data name="HassAction_Press" xml:space="preserve">
     <value>Pritisnite</value>
   </data>
+  <data name="SensorsManager_DeviceTrackerSensorDescription" xml:space="preserve">
+    <value>Vráti vašu aktuálnu zemepisnú šírku, dĺžku a nadmorskú výšku ako sledovanie polohy/zariadenia na priame zobrazenie a sledovanie na mape.
+
+Uistite sa, že sú povolené lokalizačné služby systému Windows!
+
+V závislosti od verzie systému Windows ho nájdete v novom ovládacom paneli &gt; "súkromie a zabezpečenie" &gt; "umiestnenie".</value>
+  </data>
   <data name="Notification_Dismiss" xml:space="preserve">
     <value>Odpusti</value>
   </data>
