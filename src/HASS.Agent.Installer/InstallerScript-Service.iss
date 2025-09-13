@@ -9,7 +9,7 @@
 
 ; Standard installation constants
 #define MyAppName "HASS.Agent Satellite Service"
-#define MyAppVersion "2.1.1"
+#define MyAppVersion "2.2.0-beta1"
 #define MyAppPublisher "HASS.Agent Team"
 #define MyAppURL "https://hass-agent.io"
 #define MyAppExeName "HASS.Agent.Satellite.Service.exe"
@@ -59,6 +59,11 @@ Filename: "{sys}\sc.exe"; Parameters: "start {#ServiceName}"; Description: "Star
 
 [Registry]
 Root: HKLM; Subkey: "SOFTWARE\HASSAgent\SatelliteService"; ValueType: string; ValueName: "InstallPath"; ValueData: "{app}"; Flags: createvalueifdoesntexist uninsdeletevalue
+
+; Ensure LibreHardwareMonitor/WinRing0 files are removed
+[InstallDelete]
+Type: files; Name: "{app}\LibreHardwareMonitorLib.dll"
+Type: files; Name: "{app}\HASS.Agent.Satellite.Service.sys"
 
 ; Service registration and removal
 [Run]
