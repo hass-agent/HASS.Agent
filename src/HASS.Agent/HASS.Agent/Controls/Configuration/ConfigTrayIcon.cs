@@ -21,41 +21,28 @@ namespace HASS.Agent.Controls.Configuration
 
         private void InitMultiScreenConfig()
         {
-            var primaryScreenIndex = 0;
-            var displays = Screen.AllScreens;
-
+            if (Variables.AppSettings.TrayIconWebViewScreen == -1)
+            {
+                HelperFunctions.InitMultiScreenConfig();
+            }
+            
             if (Screen.AllScreens.Length == 1)
             {
-                Variables.AppSettings.TrayIconWebViewScreen = 0;
                 NumWebViewScreen.Visible = true;
                 NumWebViewScreen.Items.Add("Single Screen Mode");
                 NumWebViewScreen.Enabled = false;
             }
             else
             {
-                for (var i = 0; i < displays.Length; i++)
+                foreach (var display in Screen.AllScreens)
                 {
-                    var display = displays[i];
-
-                    if (display.Primary)
-                    {
-                        primaryScreenIndex = i;
-                    }
-
-                    string label = display.Primary ? $"{display.DeviceName} (Primary)" : display.DeviceName;
+                    var label = display.Primary ? $"{display.DeviceName} (Primary)" : display.DeviceName;
                     NumWebViewScreen.Items.Add(label);
                 }
             }
 
-            var selectedScreenIndex = Variables.AppSettings.TrayIconWebViewScreen;
-
-            if (selectedScreenIndex == -1)
-            {
-                selectedScreenIndex = primaryScreenIndex;
-            }
-
-            NumWebViewScreen.SelectedIndex = selectedScreenIndex;
-            SelectedScreen = selectedScreenIndex;
+            NumWebViewScreen.SelectedIndex = Variables.AppSettings.TrayIconWebViewScreen;
+            SelectedScreen = Variables.AppSettings.TrayIconWebViewScreen;
         }
 
         private void CbDefaultMenu_CheckedChanged(object sender, EventArgs e)
