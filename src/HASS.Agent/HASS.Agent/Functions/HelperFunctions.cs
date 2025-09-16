@@ -522,6 +522,12 @@ namespace HASS.Agent.Functions
 
         private static void LaunchTrayIconCustomWebView(WebViewInfo webViewInfo, int screenIndex = 0)
         {
+            if (screenIndex == -1)
+            {
+                InitMultiScreenConfig();
+                screenIndex = Variables.AppSettings.TrayIconWebViewScreen;
+            }
+
             Variables.MainForm.Invoke(new MethodInvoker(delegate
             {
                 var totalX = 0;
@@ -552,8 +558,34 @@ namespace HASS.Agent.Functions
                 webView.Top = targetScreen.WorkingArea.Bottom - webView.Height;
 
                 Variables.TrayIconWebView = webView;
-                
+
             }));
+        }
+
+        public static void InitMultiScreenConfig()
+        {
+            var primaryScreenIndex = 0;
+            var displays = Screen.AllScreens;
+
+            if (Screen.AllScreens.Length == 1)
+            {
+                Variables.AppSettings.TrayIconWebViewScreen = 0;
+            }
+            else
+            {
+                for (var i = 0; i < displays.Length; i++)
+                {
+                    var display = displays[i];
+
+                    if (display.Primary)
+                    {
+                        primaryScreenIndex = i;
+                        break;
+                    }
+                }
+            }
+
+            Variables.AppSettings.TrayIconWebViewScreen = primaryScreenIndex;
         }
 
         private static readonly Dictionary<IntPtr, string> KnownOkInputLanguage = new()
