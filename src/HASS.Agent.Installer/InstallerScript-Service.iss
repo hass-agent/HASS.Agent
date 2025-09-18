@@ -41,7 +41,7 @@ SetupIconFile=..\HASS.Agent\HASS.Agent.Shared\hassagent.ico
 Compression=lzma
 SolidCompression=yes
 WizardStyle=modern
-CloseApplications=force
+CloseApplications=yes
 CloseApplicationsFilter=*.*
 UninstallDisplayIcon={app}\{#MyAppExeName}
 UninstallDisplayName={#MyAppName} {#MyAppVersion}
@@ -52,7 +52,7 @@ Name: "english"; MessagesFile: "compiler:Default.isl"
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 [Files]
 ; Service files
-Source: "..\HASS.Agent\HASS.Agent.Satellite.Service\bin\Publish-x64\Release\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs; BeforeInstall: KillSatelliteService()
+Source: "..\HASS.Agent\HASS.Agent.Satellite.Service\bin\Publish-x64\Release\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs; BeforeInstall: StopSatelliteService()
 
 [Run]
 Filename: "{sys}\sc.exe"; Parameters: "start {#ServiceName}"; Description: "Start Satellite Service"; Flags: postinstall runhidden runascurrentuser
@@ -60,7 +60,7 @@ Filename: "{sys}\sc.exe"; Parameters: "start {#ServiceName}"; Description: "Star
 [Registry]
 Root: HKLM; Subkey: "SOFTWARE\HASSAgent\SatelliteService"; ValueType: string; ValueName: "InstallPath"; ValueData: "{app}"; Flags: createvalueifdoesntexist uninsdeletevalue
 
-; Ensure LibreHardwareMonitor/WinRing0 files are removed
+; Ensure LibreHardwareMonitor/WinRing0 files are removed if left due to any reason by previous installs
 [InstallDelete]
 Type: files; Name: "{app}\LibreHardwareMonitorLib.dll"
 Type: files; Name: "{app}\HASS.Agent.Satellite.Service.sys"
@@ -74,7 +74,7 @@ Filename: "{sys}\sc.exe"; Parameters: "config {#ServiceName} DisplayName= ""{#Se
 Filename: "{sys}\sc.exe"; Parameters: "config {#ServiceName} start= auto"; Flags: runhidden
 Filename: "{sys}\sc.exe"; Parameters: "config {#ServiceName} binpath= ""\""{app}\{#MyAppExeName}""\"""; Flags: runhidden 
 [UninstallRun]
-Filename: "{sys}\sc.exe"; Parameters: "stop {#ServiceName}"; RunOnceId: StopService; Flags: runhidden
+Filename: "{sys}\net.exe"; Parameters: "stop {#ServiceName}"; RunOnceId: StopService; Flags: runhidden
 Filename: "{sys}\timeout.exe"; Parameters: "5"; RunOnceId: Delay1; Flags:runhidden
 Filename: "{sys}\sc.exe"; Parameters: "delete {#ServiceName}" ; RunOnceId: DeleteService; Flags: runhidden
 Filename: "{sys}\timeout.exe"; Parameters: "5"; RunOnceId: Delay2; Flags:runhidden
@@ -94,8 +94,6 @@ var
 begin
   if CurStep = ssInstall then
   begin
-    Exec(ExpandConstant('{sys}') + '\sc.exe', 'stop ' + ExpandConstant('{#ServiceName}'), '', SW_HIDE, ewWaitUntilTerminated, ResultCode)
-
     //thanks to https://stackoverflow.com/a/39827761
     Wait := 5000;
     Step := 100;
@@ -106,6 +104,9 @@ begin
     ProgressPage.SetText('Making sure the satellite service is stopped...', '');
     ProgressPage.SetProgress(0, Wait);
     ProgressPage.Show;
+
+    Exec(ExpandConstant('{sys}') + '\net.exe', 'stop ' + ExpandConstant('{#ServiceName}'), '', SW_HIDE, ewWaitUntilTerminated, ResultCode)
+
     try
       for I := 0 to Wait div Step do
       begin
@@ -116,12 +117,20 @@ begin
       ProgressPage.Hide;
       ProgressPage.Free;
     end;
+
+    Exec(ExpandConstant('{sys}') + '\net.exe', 'stop ' + ExpandConstant('{#ServiceName}'), '', SW_HIDE, ewWaitUntilTerminated, ResultCode)
+    //Exec(ExpandConstant('{sys}\taskkill.exe'), '/f /im ' + '"' + ExpandConstant('{#MyAppExeName}') + '"', ExpandConstant('{sys}'), SW_HIDE, ewWaitUntilTerminated, ResultCode);
+
   end;
 end;
 
-procedure KillSatelliteService();
+procedure StopSatelliteService();
 var
   ResultCode: Integer;
 begin
-    Exec(ExpandConstant('{sys}\taskkill.exe'), '/f /im ' + '"' + ExpandConstant('{#MyAppExeName}') + '"', ExpandConstant('{sys}'), SW_HIDE, ewWaitUntilTerminated, ResultCode);
+    Exec(ExpandConstant('{sys}') + '\net.exe', 'stop ' + ExpandConstant('{#ServiceName}'), '', SW_HIDE, ewWaitUntilTerminated, ResultCode)    
+
+    //Ensure LibreHardwareMonitor/WinRing0 files are removed
+    DeleteFile(ExpandConstant('{app}\LibreHardwareMonitorLib.dll'));
+    DeleteFile(ExpandConstant('{app}\HASS.Agent.Satellite.Service.sys'));
 end;
