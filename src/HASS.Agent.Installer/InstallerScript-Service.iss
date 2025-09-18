@@ -52,10 +52,10 @@ Name: "english"; MessagesFile: "compiler:Default.isl"
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 [Files]
 ; Service files
-Source: "..\HASS.Agent\HASS.Agent.Satellite.Service\bin\Publish-x64\Release\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "..\HASS.Agent\HASS.Agent.Satellite.Service\bin\Publish-x64\Release\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs; BeforeInstall: KillSatelliteService()
 
 [Run]
-Filename: "{sys}\sc.exe"; Parameters: "start {#ServiceName}"; Description: "Start Satellite Service"; Flags: postinstall runhidden runascurrentuser 
+Filename: "{sys}\sc.exe"; Parameters: "start {#ServiceName}"; Description: "Start Satellite Service"; Flags: postinstall runhidden runascurrentuser
 
 [Registry]
 Root: HKLM; Subkey: "SOFTWARE\HASSAgent\SatelliteService"; ValueType: string; ValueName: "InstallPath"; ValueData: "{app}"; Flags: createvalueifdoesntexist uninsdeletevalue
@@ -117,4 +117,11 @@ begin
       ProgressPage.Free;
     end;
   end;
+end;
+
+procedure KillSatelliteService();
+var
+  ResultCode: Integer;
+begin
+    Exec(ExpandConstant('{sys}\taskkill.exe'), '/f /im ' + '"' + ExpandConstant('{#MyAppExeName}') + '"', ExpandConstant('{sys}'), SW_HIDE, ewWaitUntilTerminated, ResultCode);
 end;
