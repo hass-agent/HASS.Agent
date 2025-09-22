@@ -2,10 +2,12 @@
 using Grapevine;
 using HASS.Agent.Enums;
 using HASS.Agent.Extensions;
+using HASS.Agent.Functions;
 using HASS.Agent.Managers;
 using HASS.Agent.Media;
 using HASS.Agent.Models.HomeAssistant;
 using HASS.Agent.MQTT;
+using HASS.Agent.Shared.Models.HomeAssistant;
 using Newtonsoft.Json;
 using Serilog;
 using HttpMethod = System.Net.Http.HttpMethod;
@@ -24,6 +26,21 @@ namespace HASS.Agent.API
         /// <returns></returns>
         public static async Task DeviceInfoRoute(IHttpContext context)
         {
+            if (Variables.DeviceConfig == null)
+            {
+                var name = HelperFunctions.GetConfiguredDeviceName();
+                Log.Information("[LOCALAPI] Device configuration missing, creating and identifying as device: {name}", name);
+
+                Variables.DeviceConfig = new DeviceConfigModel
+                {
+                    Name = name,
+                    Identifiers = "hass.agent-" + name,
+                    Manufacturer = "HASS.Agent Team",
+                    Model = Environment.OSVersion.ToString(),
+                    Sw_version = Variables.Version
+                };
+            }
+
             context.Response.ContentType = "application/json";
             await context.Response.SendResponseAsync(JsonConvert.SerializeObject(new
             {
@@ -36,7 +53,7 @@ namespace HASS.Agent.API
                 }
             }, MqttManager.JsonSerializerSettings));
         }
-        
+
         /// <summary>
         /// Notification route, handles all incoming notifications on '/notify'
         /// </summary>
