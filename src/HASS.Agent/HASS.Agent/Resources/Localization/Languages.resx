@@ -3458,4 +3458,7 @@ Main accent color is the sensor value, additional accent colors are available as
   <data name="HassDomain_InputButton" xml:space="preserve">
     <value>InputButton</value>
   </data>
+  <data name="HassDomain_Fan" xml:space="preserve">
+    <value>Fan</value>
+  </data>
 </root>

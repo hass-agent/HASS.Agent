@@ -3465,4 +3465,7 @@ Pour la touche TAB, utilisez Ctrl+Clic+Tab.
 
 Si vous avez besoin de touches supplémentaires et/ou de modificateurs comme Ctrl, utilisez la commande TouchesMultiples.</value>
   </data>
+  <data name="HassDomain_Fan" xml:space="preserve">
+    <value>Ventilateur</value>
+  </data>
 </root>

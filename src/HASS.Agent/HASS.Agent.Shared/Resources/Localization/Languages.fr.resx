@@ -3297,4 +3297,7 @@ Do you want to download the runtime installer?</value>
   <data name="SensorType_AccentColorSensor" xml:space="preserve">
     <value>AccentColor</value>
   </data>
+  <data name="HassDomain_Fan" xml:space="preserve">
+    <value>Ventilateur</value>
+  </data>
 </root>

@@ -3479,4 +3479,7 @@ A cor de destaque principal é o valor do sensor; cores de destaque adicionais e
   <data name="ServiceMqtt_CbUseWebSocket" xml:space="preserve">
     <value>Utilizar &amp;WebSocket</value>
   </data>
+  <data name="HassDomain_Fan" xml:space="preserve">
+    <value>Fã</value>
+  </data>
 </root>
