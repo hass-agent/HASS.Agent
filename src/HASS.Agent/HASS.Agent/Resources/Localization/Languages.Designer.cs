@@ -3844,6 +3844,15 @@ namespace HASS.Agent.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Fan.
+        /// </summary>
+        internal static string HassDomain_Fan {
+            get {
+                return ResourceManager.GetString("HassDomain_Fan", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to HASS.Agent Commands.
         /// </summary>
         internal static string HassDomain_HASSAgentCommands {

@@ -2871,4 +2871,7 @@ Alternatif seçenekler için lütfen belgelere bakın.</value>
   <data name="SensorType_AccentColorSensor" xml:space="preserve">
     <value>Vurgu Rengi</value>
   </data>
+  <data name="HassDomain_Fan" xml:space="preserve">
+    <value>Fan</value>
+  </data>
 </root>
