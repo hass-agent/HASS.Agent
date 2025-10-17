@@ -49,7 +49,7 @@ namespace HASS.Agent.Shared.HomeAssistant.Sensors.GeneralSensors.MultiValue.Data
             var deviceConfig = Variables.MqttManager.GetDeviceConfigModel();
             if (deviceConfig == null) return null;
 
-            var model = new SensorDiscoveryConfigModel()
+            var model = new SensorDiscoveryConfigModel(Domain)
             {
                 EntityName = EntityName,
                 Name = Name,

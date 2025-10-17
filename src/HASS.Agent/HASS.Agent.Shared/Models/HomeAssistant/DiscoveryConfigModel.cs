@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using System.Text.Json.Serialization;
+using Newtonsoft.Json;
 
 namespace HASS.Agent.Shared.Models.HomeAssistant
 {
@@ -12,9 +12,12 @@ namespace HASS.Agent.Shared.Models.HomeAssistant
     public abstract class DiscoveryConfigModel
     {
         /// <summary>
-        /// (Optional) The MQTT topic subscribed to receive availability (online/offline) updates.
+        /// Domain of the entity, used to create default object id property.
         /// </summary>
         /// <value></value>
+        [Newtonsoft.Json.JsonIgnore]
+        public string Domain { get; set; }
+
         public string Availability_topic { get; set; }
 
         /// <summary>
@@ -41,6 +44,16 @@ namespace HASS.Agent.Shared.Models.HomeAssistant
         /// </summary>
         /// <value></value>
         public string State_topic { get; set; }
+
+        protected DiscoveryConfigModel(string domain)
+        {
+            if (string.IsNullOrWhiteSpace(domain))
+            {
+                throw new ArgumentException("domain cannot be null or empty string/whitespace");
+            }
+
+            Domain = domain;
+        }
     }
 
     [SuppressMessage("ReSharper", "InconsistentNaming")]
@@ -133,8 +146,15 @@ namespace HASS.Agent.Shared.Models.HomeAssistant
 
                 return $"{Device.Name}_{EntityName}";
             }
-            set { _objectId = value; }
+
+            set => _objectId = value;
         }
+
+        //TODO(Amadeo): move Object_id logic here once it's fully deprecated in HA (or even better, finish v3 rewrite and abandon this monstrosity of a code...)
+        /// <summary>
+        /// Default object id parameter required starting with HA 2025.10
+        /// </summary>
+        public string Default_object_id => $"{Domain}.{Object_id}";
 
         /// <summary>
         /// (Optional) Defines the units of measurement of the sensor, if any.
@@ -147,6 +167,8 @@ namespace HASS.Agent.Shared.Models.HomeAssistant
         /// </summary>
         /// <value></value>
         public string Value_template { get; set; }
+
+        public SensorDiscoveryConfigModel(string domain) :base(domain) { }
     }
 
     [SuppressMessage("ReSharper", "InconsistentNaming")]
@@ -161,6 +183,8 @@ namespace HASS.Agent.Shared.Models.HomeAssistant
         /// (Optional) The encoding of the image payloads received.
         /// </summary>
         public string Image_encoding { get; set; }
+
+        public CameraSensorDiscoveryConfigModel(string domain) : base(domain) { }
     }
 
     [SuppressMessage("ReSharper", "InconsistentNaming")]
@@ -259,14 +283,23 @@ namespace HASS.Agent.Shared.Models.HomeAssistant
 
                 return $"{Device.Name}_{EntityName}";
             }
-            set { _objectId = value; }
+
+            set => _objectId = value;
         }
+
+        //TODO(Amadeo): move Object_id logic here once it's fully deprecated in HA (or even better, finish v3 rewrite and abandon this monstrosity of a code...)
+        /// <summary>
+        /// Default object id parameter required starting with HA 2025.10
+        /// </summary>
+        public string Default_object_id => $"{Domain}.{Object_id}";
 
         /// <summary>
         /// (Optional) Defines a template to extract the value.
         /// </summary>
         /// <value></value>
         public string Value_template { get; set; }
+
+        public CommandDiscoveryConfigModel(string domain) : base(domain) { }
     }
 
     /// <summary>
