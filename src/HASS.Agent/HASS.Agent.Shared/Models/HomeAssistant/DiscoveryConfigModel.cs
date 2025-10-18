@@ -154,7 +154,7 @@ namespace HASS.Agent.Shared.Models.HomeAssistant
         /// <summary>
         /// Default object id parameter required starting with HA 2025.10
         /// </summary>
-        public string Default_object_id => $"{Domain}.{Object_id}";
+        public string Default_entity_id => $"{Domain}.{Object_id}";
 
         /// <summary>
         /// (Optional) Defines the units of measurement of the sensor, if any.
@@ -291,7 +291,7 @@ namespace HASS.Agent.Shared.Models.HomeAssistant
         /// <summary>
         /// Default object id parameter required starting with HA 2025.10
         /// </summary>
-        public string Default_object_id => $"{Domain}.{Object_id}";
+        public string Default_entity_id => $"{Domain}.{Object_id}";
 
         /// <summary>
         /// (Optional) Defines a template to extract the value.
