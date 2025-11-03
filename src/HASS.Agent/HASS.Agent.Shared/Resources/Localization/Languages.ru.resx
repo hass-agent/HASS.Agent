@@ -3332,4 +3332,7 @@ Home Assistant.
   <data name="SensorType_AccentColorSensor" xml:space="preserve">
     <value>Акцентный цвет</value>
   </data>
+  <data name="HassDomain_Fan" xml:space="preserve">
+    <value>Вентилятор</value>
+  </data>
 </root>

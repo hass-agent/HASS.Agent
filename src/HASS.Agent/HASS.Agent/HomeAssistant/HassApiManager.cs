@@ -45,6 +45,7 @@ namespace HASS.Agent.HomeAssistant
         internal static List<string> MediaPlayerList = new();
         internal static List<string> ButtonList = new();
         internal static List<string> InputButtonList = new();
+        internal static List<string> FanList = new();
 
         private static readonly string[] OnStates = { "on", "playing", "open", "opening" };
         private static readonly string[] OffStates = { "off", "idle", "paused", "stopped", "closed", "closing" };
@@ -407,6 +408,7 @@ namespace HASS.Agent.HomeAssistant
                 await LoadDomain("media_player", MediaPlayerList);
                 await LoadDomain("button", ButtonList);
                 await LoadDomain("input_button", InputButtonList);
+                await LoadDomain("fan", FanList);
 
                 if (ManagerStatus != HassManagerStatus.Failed)
                     return;

@@ -3267,4 +3267,7 @@ Do you want to download the runtime installer?</value>
   <data name="HassDomain_InputButton" xml:space="preserve">
     <value>InputButton</value>
   </data>
+  <data name="HassDomain_Fan" xml:space="preserve">
+    <value>Fan</value>
+  </data>
 </root>

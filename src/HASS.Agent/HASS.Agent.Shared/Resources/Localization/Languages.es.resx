@@ -3264,4 +3264,7 @@ Oculta, Maximizada, Minimizada, Normal y Desconocida.</value>
   <data name="SensorType_AccentColorSensor" xml:space="preserve">
     <value>Color de acento</value>
   </data>
+  <data name="HassDomain_Fan" xml:space="preserve">
+    <value>Admirador</value>
+  </data>
 </root>

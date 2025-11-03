@@ -3433,4 +3433,7 @@ El color de acento principal es el valor del sensor; hay colores de acento adici
   <data name="ServiceMqtt_CbUseWebSocket" xml:space="preserve">
     <value>Utilice &amp;WebSocket</value>
   </data>
+  <data name="HassDomain_Fan" xml:space="preserve">
+    <value>Admirador</value>
+  </data>
 </root>
