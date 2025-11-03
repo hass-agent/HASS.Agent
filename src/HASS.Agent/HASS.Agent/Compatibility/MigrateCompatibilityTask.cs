@@ -255,6 +255,36 @@ namespace HASS.Agent.Compatibility
             Log.Information("[COMPATTASK] Commands configuration migrated");
         }
 
+
+        private void CreateForkConfigBackup()
+        {
+            var backupFolderName = $"migrationBackup_{DateTime.Now.ToString("ddMMyy_HHmmss")}";
+            Log.Information("[COMPATTASK] Creating backup of existing configuration into {bf}", backupFolderName);
+
+            var destination = Path.Combine(Variables.ConfigPath, backupFolderName);
+            Directory.CreateDirectory(destination);
+
+            var currentConfigFiles = new DirectoryInfo(Variables.ConfigPath).GetFiles();
+            foreach (var file in currentConfigFiles)
+            {
+                Log.Information("[COMPATTASK] Backing up {fn}", file.FullName);
+                file.CopyTo(Path.Combine(destination, file.Name), true);
+            }
+
+            Log.Information("[COMPATTASK] Creating backup of existing service configuration into {bf}", backupFolderName);
+
+            var serviceConfigPath = Path.Combine(ServiceManager.GetInstallPath(), "config");
+            destination = Path.Combine(serviceConfigPath, backupFolderName);
+            Directory.CreateDirectory(destination);
+
+            currentConfigFiles = new DirectoryInfo(serviceConfigPath).GetFiles();
+            foreach (var file in currentConfigFiles)
+            {
+                Log.Information("[COMPATTASK] Backing up {fn}", file.FullName);
+                file.CopyTo(Path.Combine(destination, file.Name), true);
+            }
+        }
+
         public async Task<(bool, string)> Perform()
         {
             try
@@ -264,6 +294,8 @@ namespace HASS.Agent.Compatibility
                 Log.Information("[COMPATTASK] Migration name compatibility task started");
 
                 StopOriginalInstances();
+
+                CreateForkConfigBackup();
 
                 MigrateServiceConfig();
                 MigrateClientConfig();
