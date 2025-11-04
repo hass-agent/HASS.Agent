@@ -3514,4 +3514,10 @@ Home Assistant.
   <data name="CommandType_WinformsSleepCommand" xml:space="preserve">
     <value>WinformsSleep</value>
   </data>
+  <data name="OnboardingMqtt_BtnTest_MessageError" xml:space="preserve">
+    <value>Не удалось подключиться.</value>
+  </data>
+  <data name="OnboardingMqtt_BtnTest_MessageOk" xml:space="preserve">
+    <value>Соединение в порядке!</value>
+  </data>
 </root>
