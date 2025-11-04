@@ -894,5 +894,66 @@ namespace HASS.Agent.MQTT
 
             command.TurnOnWithAction(payload);
         }
+
+        //Note(Amadeo): ideally this should use logic of the manager but yeah, we live with what we've got I guess
+        internal static async Task<bool> TestConnection(string address, int port, bool useTls, bool useWebSocket, string username, string password)
+        {
+            var mqttFactory = new MqttFactory();
+
+            using (var mqttClient = mqttFactory.CreateMqttClient())
+            {
+                var clientOptionsBuilder = new MqttClientOptionsBuilder()
+                    .WithClientId("hassAgentConnectionTest")
+                    .WithCleanSession()
+                    .WithKeepAlivePeriod(TimeSpan.FromSeconds(1));
+
+                if (useWebSocket)
+                {
+                    clientOptionsBuilder.WithWebSocketServer(o => o.WithUri($"{address}:{port}"));
+                }
+                else
+                {
+                    clientOptionsBuilder.WithTcpServer(address, port);
+                }
+
+                if (!string.IsNullOrEmpty(Variables.AppSettings.MqttUsername))
+                {
+                    clientOptionsBuilder.WithCredentials(username, password);
+                }
+
+                var clientTlsOptions = new MqttClientTlsOptions()
+                {
+                    UseTls = useTls,
+                    AllowUntrustedCertificates = true,
+                    SslProtocol = useTls ? SslProtocols.Tls12 : SslProtocols.None,
+                    IgnoreCertificateChainErrors = true,
+                    IgnoreCertificateRevocationErrors = true,
+                    CertificateValidationHandler = delegate (MqttClientCertificateValidationEventArgs _)
+                    {
+                        return true;
+                    }
+                };
+
+                clientOptionsBuilder.WithTlsOptions(clientTlsOptions);
+                var options = clientOptionsBuilder.Build();
+
+                try
+                {
+                    using var timeoutToken = new CancellationTokenSource(TimeSpan.FromSeconds(10));
+                    await mqttClient.ConnectAsync(options, timeoutToken.Token);
+
+                    return mqttClient.IsConnected;
+                }
+                catch
+                {
+                    return false;
+                }
+                finally
+                {
+                    await mqttClient.DisconnectAsync();
+                    mqttClient.Dispose();
+                }
+            }
+        }
     }
 }

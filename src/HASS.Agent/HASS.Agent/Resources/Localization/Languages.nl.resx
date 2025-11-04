@@ -3465,4 +3465,10 @@ Opmerking: vanwege "Modern Sleep" kunnen de slaapopdrachten zich anders gedragen
   <data name="CommandType_WinformsSleepCommand" xml:space="preserve">
     <value>WinformsSleep</value>
   </data>
+  <data name="OnboardingMqtt_BtnTest_MessageError" xml:space="preserve">
+    <value>Kan geen verbinding maken.</value>
+  </data>
+  <data name="OnboardingMqtt_BtnTest_MessageOk" xml:space="preserve">
+    <value>Verbinding OK!</value>
+  </data>
 </root>

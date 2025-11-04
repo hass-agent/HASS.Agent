@@ -3473,4 +3473,10 @@ Note: due to "Modern Sleep" the sleep commands might behave differently dependin
   <data name="CommandType_WinformsSleepCommand" xml:space="preserve">
     <value>WinformsSleep</value>
   </data>
+  <data name="OnboardingMqtt_BtnTest_MessageOk" xml:space="preserve">
+    <value>Connection OK!</value>
+  </data>
+  <data name="OnboardingMqtt_BtnTest_MessageError" xml:space="preserve">
+    <value>Unable to connect.</value>
+  </data>
 </root>

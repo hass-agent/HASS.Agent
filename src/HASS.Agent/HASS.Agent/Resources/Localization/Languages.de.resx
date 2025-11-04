@@ -3568,4 +3568,10 @@ Hinweis: Aufgrund des „Modern Sleep“-Modus können sich die Ruhezustandsbefe
   <data name="CommandType_WinformsSleepCommand" xml:space="preserve">
     <value>WinformsSleep</value>
   </data>
+  <data name="OnboardingMqtt_BtnTest_MessageError" xml:space="preserve">
+    <value>Verbindung nicht möglich.</value>
+  </data>
+  <data name="OnboardingMqtt_BtnTest_MessageOk" xml:space="preserve">
+    <value>Verbindung OK!</value>
+  </data>
 </root>

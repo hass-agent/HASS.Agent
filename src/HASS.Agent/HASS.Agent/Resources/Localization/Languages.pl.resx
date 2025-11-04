@@ -3554,4 +3554,10 @@ Uwaga: ze względu na „Modern Sleep” polecenia uśpienia mogą zachowywać s
   <data name="CommandType_WinformsSleepCommand" xml:space="preserve">
     <value>WinformsSleep</value>
   </data>
+  <data name="OnboardingMqtt_BtnTest_MessageError" xml:space="preserve">
+    <value>Nie można nawiązać połączenia.</value>
+  </data>
+  <data name="OnboardingMqtt_BtnTest_MessageOk" xml:space="preserve">
+    <value>Połączenie OK!</value>
+  </data>
 </root>

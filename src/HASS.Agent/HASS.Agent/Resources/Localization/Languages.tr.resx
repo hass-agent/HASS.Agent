@@ -3060,4 +3060,10 @@ Not: "Modern Uyku" nedeniyle uyku komutları, cihazın OEM ve işletim sistemi y
   <data name="CommandType_WinformsSleepCommand" xml:space="preserve">
     <value>WinformsSleep</value>
   </data>
+  <data name="OnboardingMqtt_BtnTest_MessageError" xml:space="preserve">
+    <value>Bağlantı kurulamıyor.</value>
+  </data>
+  <data name="OnboardingMqtt_BtnTest_MessageOk" xml:space="preserve">
+    <value>Bağlantı Tamam!</value>
+  </data>
 </root>

@@ -3476,4 +3476,10 @@ Remarque : en raison de la fonction « Modern Sleep », les commandes de mise
   <data name="CommandType_WinformsSleepCommand" xml:space="preserve">
     <value>WinformsSleep</value>
   </data>
+  <data name="OnboardingMqtt_BtnTest_MessageError" xml:space="preserve">
+    <value>Connexion impossible.</value>
+  </data>
+  <data name="OnboardingMqtt_BtnTest_MessageOk" xml:space="preserve">
+    <value>Connexion OK !</value>
+  </data>
 </root>

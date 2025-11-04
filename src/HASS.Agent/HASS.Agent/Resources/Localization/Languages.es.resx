@@ -3444,4 +3444,10 @@ Nota: Debido al modo de suspensión moderno, los comandos de suspensión pueden 
   <data name="CommandType_WinformsSleepCommand" xml:space="preserve">
     <value>WinformsSleep</value>
   </data>
+  <data name="OnboardingMqtt_BtnTest_MessageError" xml:space="preserve">
+    <value>No se puede conectar.</value>
+  </data>
+  <data name="OnboardingMqtt_BtnTest_MessageOk" xml:space="preserve">
+    <value>¡Conexión correcta!</value>
+  </data>
 </root>

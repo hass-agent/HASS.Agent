@@ -48,6 +48,8 @@ namespace HASS.Agent.Controls.Onboarding
             this.NumMqttPort = new Syncfusion.Windows.Forms.Tools.NumericUpDownExt();
             this.PbShow = new System.Windows.Forms.PictureBox();
             this.CbEnableMqtt = new System.Windows.Forms.CheckBox();
+            this.CbUseWebSocket = new System.Windows.Forms.CheckBox();
+            this.BtnTest = new Syncfusion.WinForms.Controls.SfButton();
             ((System.ComponentModel.ISupportInitialize)(this.PbHassAgentLogo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumMqttPort)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PbShow)).BeginInit();
@@ -125,6 +127,20 @@ namespace HASS.Agent.Controls.Onboarding
             this.CbMqttTls.Text = Languages.OnboardingMqtt_CbMqttTls;
             this.CbMqttTls.UseVisualStyleBackColor = true;
             this.CbMqttTls.CheckedChanged += new System.EventHandler(this.CbMqttTls_CheckedChanged);
+            // 
+            // CbUseWebSocketFlag
+            // 
+            this.CbUseWebSocket.AccessibleDescription = "Use WebSocket for MQTT connection instead of direct one.";
+            this.CbUseWebSocket.AccessibleName = "WebSocket flag";
+            this.CbUseWebSocket.AccessibleRole = System.Windows.Forms.AccessibleRole.CheckButton;
+            this.CbUseWebSocket.AutoSize = true;
+            this.CbUseWebSocket.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.CbUseWebSocket.Location = new System.Drawing.Point(371, 148);
+            this.CbUseWebSocket.Name = "CbUseWebSocketFlag";
+            this.CbUseWebSocket.Size = new System.Drawing.Size(114, 23);
+            this.CbUseWebSocket.TabIndex = 104;
+            this.CbUseWebSocket.Text = Languages.ConfigMqtt_CbUseWebSocket;
+            this.CbUseWebSocket.UseVisualStyleBackColor = true;
             // 
             // LblPassword
             // 
@@ -306,6 +322,29 @@ namespace HASS.Agent.Controls.Onboarding
             this.CbEnableMqtt.Text = Languages.OnboardingMqtt_CbEnableMqtt;
             this.CbEnableMqtt.UseVisualStyleBackColor = true;
             // 
+            // BtnTest
+            // 
+            BtnTest.AccessibleDescription = "Perform a test connection with your MQTT instance.";
+            BtnTest.AccessibleName = "Test connection";
+            BtnTest.AccessibleRole = AccessibleRole.PushButton;
+            BtnTest.BackColor = Color.FromArgb(63, 63, 70);
+            BtnTest.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            BtnTest.ForeColor = Color.FromArgb(241, 241, 241);
+            BtnTest.Location = new Point(558, 349);
+            BtnTest.Name = "BtnTest";
+            BtnTest.Size = new Size(180, 23);
+            BtnTest.Style.BackColor = Color.FromArgb(63, 63, 70);
+            BtnTest.Style.FocusedBackColor = Color.FromArgb(63, 63, 70);
+            BtnTest.Style.FocusedForeColor = Color.FromArgb(241, 241, 241);
+            BtnTest.Style.ForeColor = Color.FromArgb(241, 241, 241);
+            BtnTest.Style.HoverBackColor = Color.FromArgb(63, 63, 70);
+            BtnTest.Style.HoverForeColor = Color.FromArgb(241, 241, 241);
+            BtnTest.Style.PressedForeColor = Color.Black;
+            BtnTest.TabIndex = 103;
+            BtnTest.Text = Languages.OnboardingApi_BtnTest;
+            BtnTest.UseVisualStyleBackColor = false;
+            BtnTest.Click += BtnTest_Click;
+            // 
             // OnboardingMqtt
             // 
             this.AccessibleDescription = "Panel containing the onboarding MQTT configuration.";
@@ -325,12 +364,14 @@ namespace HASS.Agent.Controls.Onboarding
             this.Controls.Add(this.TbMqttUsername);
             this.Controls.Add(this.TbMqttAddress);
             this.Controls.Add(this.CbMqttTls);
+            this.Controls.Add(this.CbUseWebSocket);
             this.Controls.Add(this.LblPassword);
             this.Controls.Add(this.LblUsername);
             this.Controls.Add(this.LblPort);
             this.Controls.Add(this.LblIpAdress);
             this.Controls.Add(this.LblInfo1);
             this.Controls.Add(this.PbHassAgentLogo);
+            this.Controls.Add(this.BtnTest);
             this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "OnboardingMqtt";
@@ -350,6 +391,7 @@ namespace HASS.Agent.Controls.Onboarding
         private System.Windows.Forms.TextBox TbMqttUsername;
         private System.Windows.Forms.TextBox TbMqttAddress;
         private System.Windows.Forms.CheckBox CbMqttTls;
+        private System.Windows.Forms.CheckBox CbUseWebSocket;
         private System.Windows.Forms.Label LblPassword;
         private System.Windows.Forms.Label LblUsername;
         private System.Windows.Forms.Label LblPort;
@@ -359,7 +401,8 @@ namespace HASS.Agent.Controls.Onboarding
         private System.Windows.Forms.Label LblDiscoveryPrefix;
         private System.Windows.Forms.Label LblTip1;
         private System.Windows.Forms.Label LblTip2;
-        internal Syncfusion.Windows.Forms.Tools.NumericUpDownExt NumMqttPort;
+        private Syncfusion.WinForms.Controls.SfButton BtnTest;
+        private Syncfusion.Windows.Forms.Tools.NumericUpDownExt NumMqttPort;
         private PictureBox PbShow;
         internal CheckBox CbEnableMqtt;
     }

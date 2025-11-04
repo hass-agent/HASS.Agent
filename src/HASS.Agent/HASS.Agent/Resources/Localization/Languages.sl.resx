@@ -3593,4 +3593,10 @@ Opomba: Zaradi »modernega mirovanja« se lahko ukazi za mirovanje obnašajo dru
   <data name="CommandType_WinformsSleepCommand" xml:space="preserve">
     <value>WinformsSleep</value>
   </data>
+  <data name="OnboardingMqtt_BtnTest_MessageError" xml:space="preserve">
+    <value>Povezave ni mogoče vzpostaviti.</value>
+  </data>
+  <data name="OnboardingMqtt_BtnTest_MessageOk" xml:space="preserve">
+    <value>Povezava v redu!</value>
+  </data>
 </root>
