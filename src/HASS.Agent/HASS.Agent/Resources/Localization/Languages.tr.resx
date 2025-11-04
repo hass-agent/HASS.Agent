@@ -1855,7 +1855,10 @@ CTRL gibi daha fazla tuşa ve/veya değiştiriciye ihtiyacınız varsa, Multiple
     <value>Yüzde olarak ilk GPU'nun mevcut yükünü sağlar.</value>
   </data>
   <data name="SensorsManager_GpuTemperatureSensorDescription" xml:space="preserve">
-    <value>İlk GPU'nun mevcut sıcaklığını sağlar.</value>
+    <value>NOT: Bu, çalışmayan bir sensördür.
+
+Libre Donanım İzleyicisi (HASS.Agent'ın GPU sıcaklık verilerine erişmesine izin veren kütüphane) ile ilgili güvenlik endişeleri nedeniyle, bu sensör geriye dönük uyumluluk nedeniyle bırakılmıştır ve her zaman 0 döndürecektir.
+Alternatif seçenekler için lütfen belgelere bakın.</value>
   </data>
   <data name="SensorsManager_LastActiveSensorDescription" xml:space="preserve">
     <value>Kullanıcının en son ne zaman giriş yaptığını içeren bir tarih saat değeri sağlar.
@@ -3024,6 +3027,9 @@ Not: Uydu hizmetinde kullanılırsa kullanıcı alanı uygulamalarını algılam
   <data name="Notification_Dismiss" xml:space="preserve">
     <value>Azletmek</value>
   </data>
+  <data name="ConfigTrayIcon_NumWebViewScreen" xml:space="preserve">
+    <value>WebView'in göstermesi için kullanılacak ekran</value>
+  </data>
   <data name="Main_CheckForUpdateFailed_MessageBox1" xml:space="preserve">
     <value>Güncelleme kontrolü başarısız oldu!</value>
   </data>
@@ -3042,6 +3048,9 @@ Ana vurgu rengi sensör değeridir, ek vurgu renkleri öznitelikler olarak mevcu
   </data>
   <data name="ServiceMqtt_CbUseWebSocket" xml:space="preserve">
     <value>&amp;WebSocket'i kullanın</value>
+  </data>
+  <data name="HassDomain_Fan" xml:space="preserve">
+    <value>Fan</value>
   </data>
   <data name="CommandsManager_WinformsSleepCommandDescription" xml:space="preserve">
     <value>WinForms API'sini kullanarak makineyi uyku moduna geçirir.

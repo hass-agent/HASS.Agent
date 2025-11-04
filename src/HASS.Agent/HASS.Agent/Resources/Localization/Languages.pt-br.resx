@@ -2218,7 +2218,10 @@ Dependendo da sua versão do Windows, isso pode ser encontrado no novo painel de
     <value>Fornece a carga atual da GPU como uma porcentagem.</value>
   </data>
   <data name="SensorsManager_GpuTemperatureSensorDescription" xml:space="preserve">
-    <value>Fornece a temperatura atual da GPU.</value>
+    <value>NOTA: Este sensor não está a funcionar.
+
+Devido a questões de segurança relacionadas com o Libre Hardware Monitor (biblioteca que permite ao HASS.Agent aceder aos dados de temperatura da GPU), este sensor foi mantido por motivos de compatibilidade com versões anteriores e irá sempre retornar 0.
+Consulte a documentação para obter opções alternativas.</value>
   </data>
   <data name="SensorsManager_LastActiveSensorDescription" xml:space="preserve">
     <value>Fornece um valor de data e hora que contém a última vez que o usuário fez uma entrada.
@@ -3454,6 +3457,9 @@ Requer que seja configurado em "Configuration -&gt; Tray Icon"</value>
   <data name="Notification_Dismiss" xml:space="preserve">
     <value>Dispensar</value>
   </data>
+  <data name="ConfigTrayIcon_NumWebViewScreen" xml:space="preserve">
+    <value>Tela a ser usada para exibição do WebView</value>
+  </data>
   <data name="Main_CheckForUpdateFailed_MessageBox1" xml:space="preserve">
     <value>Falha na verificação da atualização!</value>
   </data>
@@ -3472,6 +3478,9 @@ A cor de destaque principal é o valor do sensor; cores de destaque adicionais e
   </data>
   <data name="ServiceMqtt_CbUseWebSocket" xml:space="preserve">
     <value>Utilizar &amp;WebSocket</value>
+  </data>
+  <data name="HassDomain_Fan" xml:space="preserve">
+    <value>Fã</value>
   </data>
   <data name="CommandsManager_WinformsSleepCommandDescription" xml:space="preserve">
     <value>Coloca a máquina em modo de espera utilizando a API do WinForms.

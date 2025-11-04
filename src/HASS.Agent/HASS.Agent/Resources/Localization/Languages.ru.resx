@@ -2118,7 +2118,10 @@ Home Assistant version: {0}</value>
     <value>Показывает текущую загрузку первого графического процессора в процентах.</value>
   </data>
   <data name="SensorsManager_GpuTemperatureSensorDescription" xml:space="preserve">
-    <value>Показывает текущую температуру первого графического процессора.</value>
+    <value>ПРИМЕЧАНИЕ: Это неработающий датчик.
+
+Из-за проблем безопасности, связанных с Libre Hardware Monitor (библиотекой, позволяющей HASS.Agent получать доступ к данным о температуре графического процессора), этот датчик оставлен в целях обратной совместимости и всегда будет возвращать 0.
+Альтернативные варианты см. в документации.</value>
   </data>
   <data name="SensorsManager_LastActiveSensorDescription" xml:space="preserve">
     <value>Предоставляет значение даты и времени, содержащее время последнего ввода данных пользователем.
@@ -3478,6 +3481,9 @@ Home Assistant.
   <data name="Notification_Dismiss" xml:space="preserve">
     <value>Увольнять</value>
   </data>
+  <data name="ConfigTrayIcon_NumWebViewScreen" xml:space="preserve">
+    <value>Экран, который будет использоваться для отображения WebView</value>
+  </data>
   <data name="Main_CheckForUpdateFailed_MessageBox1" xml:space="preserve">
     <value>Не удалось проверить обновление!</value>
   </data>
@@ -3496,6 +3502,9 @@ Home Assistant.
   </data>
   <data name="ServiceMqtt_CbUseWebSocket" xml:space="preserve">
     <value>Использовать &amp;WebSocket</value>
+  </data>
+  <data name="HassDomain_Fan" xml:space="preserve">
+    <value>Вентилятор</value>
   </data>
   <data name="CommandsManager_WinformsSleepCommandDescription" xml:space="preserve">
     <value>Переводит устройство в спящий режим с помощью API WinForms.

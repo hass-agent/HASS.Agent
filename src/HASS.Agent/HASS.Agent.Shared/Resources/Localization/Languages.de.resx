@@ -2174,7 +2174,10 @@ Nimmt derzeit die Lautstärke deines Standardgeräts.</value>
     <value>Liefert die aktuelle Auslastung der ersten GPU in Prozent.</value>
   </data>
   <data name="SensorsManager_GpuTemperatureSensorDescription" xml:space="preserve">
-    <value>Liefert die aktuelle Temperatur der ersten GPU.</value>
+    <value>HINWEIS: Dieser Sensor funktioniert nicht.
+
+Aufgrund von Sicherheitsbedenken bezüglich Libre Hardware Monitor (Bibliothek, die HASS.Agent Zugriff auf GPU-Temperaturdaten ermöglicht) wurde dieser Sensor aus Gründen der Abwärtskompatibilität beibehalten und gibt immer 0 zurück.
+Weitere Optionen finden Sie in der Dokumentation.</value>
   </data>
   <data name="SensorsManager_LastActiveSensorDescription" xml:space="preserve">
     <value>Stellt einen datetime-Wert bereit, der den letzten Moment enthält, in dem der Benutzer eine Eingabe gemacht hat.</value>
@@ -3384,6 +3387,9 @@ Willst Du den Runtime Installer herunterladen?</value>
   </data>
   <data name="SensorType_AccentColorSensor" xml:space="preserve">
     <value>Akzentfarbe</value>
+  </data>
+  <data name="HassDomain_Fan" xml:space="preserve">
+    <value>Lüfter</value>
   </data>
   <data name="CommandsManager_WinformsSleepCommandDescription" xml:space="preserve">
     <value>Versetzt den Rechner mithilfe der WinForms-API in den Ruhezustand.

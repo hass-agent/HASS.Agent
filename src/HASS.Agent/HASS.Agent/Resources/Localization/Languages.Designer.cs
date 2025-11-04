@@ -3204,6 +3204,15 @@ namespace HASS.Agent.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Screen to use for WebView to show.
+        /// </summary>
+        internal static string ConfigTrayIcon_NumWebViewScreen {
+            get {
+                return ResourceManager.GetString("ConfigTrayIcon_NumWebViewScreen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Notify me of &amp;beta releases.
         /// </summary>
         internal static string ConfigUpdates_CbBetaUpdates {
@@ -3855,6 +3864,15 @@ namespace HASS.Agent.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Fan.
+        /// </summary>
+        internal static string HassDomain_Fan {
+            get {
+                return ResourceManager.GetString("HassDomain_Fan", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to HASS.Agent Commands.
         /// </summary>
         internal static string HassDomain_HASSAgentCommands {
@@ -3869,6 +3887,15 @@ namespace HASS.Agent.Resources.Localization {
         internal static string HassDomain_InputBoolean {
             get {
                 return ResourceManager.GetString("HassDomain_InputBoolean", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to InputButton.
+        /// </summary>
+        internal static string HassDomain_InputButton {
+            get {
+                return ResourceManager.GetString("HassDomain_InputButton", resourceCulture);
             }
         }
         
@@ -6089,7 +6116,10 @@ namespace HASS.Agent.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Provides the current temperature of the first GPU..
+        ///   Looks up a localized string similar to NOTE: This is a non-functioning sensor.
+        ///
+        ///Due to the security concerns regarding Libre Hardware Monitor (library allowing HASS.Agent to access GPU temperature data) this sensor is left for backward compatibility reasons and will always return 0.
+        ///Please see documentation for alternative options..
         /// </summary>
         internal static string SensorsManager_GpuTemperatureSensorDescription {
             get {

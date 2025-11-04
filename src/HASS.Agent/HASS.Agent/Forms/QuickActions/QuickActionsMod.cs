@@ -396,6 +396,22 @@ namespace HASS.Agent.Forms.QuickActions
                         CbEntity.Items.Add(item);
                     }
                     break;
+
+                case HassDomain.InputButton:
+                    foreach (var item in HassApiManager.InputButtonList)
+                    {
+                        CbEntity.AutoCompleteCustomSource.Add(item);
+                        CbEntity.Items.Add(item);
+                    }
+                    break;
+
+                case HassDomain.Fan:
+                    foreach (var item in HassApiManager.FanList)
+                    {
+                        CbEntity.AutoCompleteCustomSource.Add(item);
+                        CbEntity.Items.Add(item);
+                    }
+                    break;
             }
         }
 

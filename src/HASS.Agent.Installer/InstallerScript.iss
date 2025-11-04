@@ -9,7 +9,7 @@
 
 ; Standard installation constants
 #define MyAppName "HASS.Agent"
-#define MyAppVersion "2.1.1"
+#define MyAppVersion "2.2.0-beta3"
 #define MyAppPublisher "HASS.Agent Team"
 #define MyAppURL "https://hass-agent.io"
 #define MyAppExeName "HASS.Agent.exe"
@@ -65,6 +65,11 @@ Source: ".\bin\HASS.Agent.Service.Installer.exe"; DestDir: "{tmp}"; Flags: ignor
 [Icons]
 Name: "{autoprograms}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"
 Name: "{autodesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Tasks: desktopicon
+
+; Ensure LibreHardwareMonitor/WinRing0 files are removed
+[InstallDelete]
+Type: files; Name: "{app}\LibreHardwareMonitorLib.dll"
+Type: files; Name: "{app}\HASS.Agent.sys"
 
 [Run]
 Filename: "{app}\{#MyAppExeName}"; Parameters: "compat_migrate"; Description: "Try to migrate configuration - use only once (administrative permissions required)"; Flags: postinstall runascurrentuser unchecked

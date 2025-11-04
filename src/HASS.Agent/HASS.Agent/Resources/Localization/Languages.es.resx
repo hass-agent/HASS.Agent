@@ -2063,7 +2063,10 @@ Actualmente toma el volumen de su dispositivo predeterminado.</value>
     <value>Proporciona la carga actual de la primera GPU como porcentaje.</value>
   </data>
   <data name="SensorsManager_GpuTemperatureSensorDescription" xml:space="preserve">
-    <value>Proporciona la temperatura actual de la primera GPU.</value>
+    <value>NOTA: Este sensor no funciona.
+
+Debido a problemas de seguridad relacionados con Libre Hardware Monitor (biblioteca que permite a HASS.Agent acceder a los datos de temperatura de la GPU), este sensor se mantiene por compatibilidad con versiones anteriores y siempre devolverá 0.
+Consulte la documentación para ver opciones alternativas.</value>
   </data>
   <data name="SensorsManager_LastActiveSensorDescription" xml:space="preserve">
     <value>Proporciona un valor de fecha y hora que contiene la última vez que el usuario realizó una entrada.
@@ -3408,6 +3411,9 @@ Requiere que se configure en "Configuración -&gt; Icono de la bandeja"</value>
   <data name="Notification_Dismiss" xml:space="preserve">
     <value>Despedir</value>
   </data>
+  <data name="ConfigTrayIcon_NumWebViewScreen" xml:space="preserve">
+    <value>Pantalla a utilizar para mostrar WebView</value>
+  </data>
   <data name="Main_CheckForUpdateFailed_MessageBox1" xml:space="preserve">
     <value>Error al comprobar la actualización.</value>
   </data>
@@ -3426,6 +3432,9 @@ El color de acento principal es el valor del sensor; hay colores de acento adici
   </data>
   <data name="ServiceMqtt_CbUseWebSocket" xml:space="preserve">
     <value>Utilice &amp;WebSocket</value>
+  </data>
+  <data name="HassDomain_Fan" xml:space="preserve">
+    <value>Admirador</value>
   </data>
   <data name="CommandsManager_WinformsSleepCommandDescription" xml:space="preserve">
     <value>Pone la máquina en suspensión mediante la API de WinForms.

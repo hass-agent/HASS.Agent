@@ -1169,7 +1169,10 @@ Currently takes the volume of your default device.</value>
     <value>Provides the current load of the first GPU as a percentage.</value>
   </data>
   <data name="SensorsManager_GpuTemperatureSensorDescription" xml:space="preserve">
-    <value>Provides the current temperature of the first GPU.</value>
+    <value>NOTE: This is a non-functioning sensor.
+
+Due to the security concerns regarding Libre Hardware Monitor (library allowing HASS.Agent to access GPU temperature data) this sensor is left for backward compatibility reasons and will always return 0.
+Please see documentation for alternative options.</value>
   </data>
   <data name="SensorsManager_LastActiveSensorDescription" xml:space="preserve">
     <value>Provides a datetime value containing the last moment the user provided input.
@@ -3430,6 +3433,9 @@ Requires it to be configured in "Configuration -&gt; Tray Icon"</value>
   <data name="Notification_Dismiss" xml:space="preserve">
     <value>Dismiss</value>
   </data>
+  <data name="ConfigTrayIcon_NumWebViewScreen" xml:space="preserve">
+	  <value>Screen to use for WebView to show</value>
+  </data>
   <data name="Main_CheckForUpdateFailed_MessageBox1" xml:space="preserve">
     <value>Failed checking for update!</value>
   </data>
@@ -3448,6 +3454,12 @@ Main accent color is the sensor value, additional accent colors are available as
   </data>
   <data name="ServiceMqtt_CbUseWebSocket" xml:space="preserve">
     <value>Use </value>
+  </data>
+  <data name="HassDomain_InputButton" xml:space="preserve">
+    <value>InputButton</value>
+  </data>
+  <data name="HassDomain_Fan" xml:space="preserve">
+    <value>Fan</value>
   </data>
   <data name="CommandsManager_WinformsSleepCommandDescription" xml:space="preserve">
     <value>Puts the machine to sleep using WinForms API.

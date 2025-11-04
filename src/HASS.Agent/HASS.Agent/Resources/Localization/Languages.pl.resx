@@ -2167,7 +2167,10 @@ Obecnie zwraca głośność domyślnego urządzenia.</value>
     <value>Zwraca obciążenie pierwszego GPU w procentach.</value>
   </data>
   <data name="SensorsManager_GpuTemperatureSensorDescription" xml:space="preserve">
-    <value>Zwraca temperaturę pierwszego GPU.</value>
+    <value>UWAGA: Ten czujnik nie działa.
+
+Ze względu na obawy dotyczące bezpieczeństwa Libre Hardware Monitor (biblioteki umożliwiającej HASS.Agent dostęp do danych o temperaturze GPU), ten czujnik został pozostawiony ze względu na kompatybilność wsteczną i zawsze będzie zwracał wartość 0.
+Informacje o alternatywnych opcjach znajdują się w dokumentacji.</value>
   </data>
   <data name="SensorsManager_LastActiveSensorDescription" xml:space="preserve">
     <value>Zwraca datę/godzinę, która zawiera czas ostatniej aktywności użytkownika. (klawiatura/myszka)
@@ -3518,6 +3521,9 @@ Wymaga konfiguracji w „Configuration -&gt; Tray Icon”</value>
   <data name="Notification_Dismiss" xml:space="preserve">
     <value>Odrzuć</value>
   </data>
+  <data name="ConfigTrayIcon_NumWebViewScreen" xml:space="preserve">
+    <value>Ekran używany do wyświetlania WebView</value>
+  </data>
   <data name="Main_CheckForUpdateFailed_MessageBox1" xml:space="preserve">
     <value>Sprawdzanie aktualizacji nie powiodło się!</value>
   </data>
@@ -3536,6 +3542,9 @@ Główny kolor akcentowy to wartość czujnika, dodatkowe kolory akcentowe są d
   </data>
   <data name="ServiceMqtt_CbUseWebSocket" xml:space="preserve">
     <value>Użyj &amp;WebSocket</value>
+  </data>
+  <data name="HassDomain_Fan" xml:space="preserve">
+    <value>Wiatrak</value>
   </data>
   <data name="CommandsManager_WinformsSleepCommandDescription" xml:space="preserve">
     <value>Uśpij maszynę za pomocą interfejsu API WinForms.
