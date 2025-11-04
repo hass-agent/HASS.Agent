@@ -3546,4 +3546,12 @@ Główny kolor akcentowy to wartość czujnika, dodatkowe kolory akcentowe są d
   <data name="HassDomain_Fan" xml:space="preserve">
     <value>Wiatrak</value>
   </data>
+  <data name="CommandsManager_WinformsSleepCommandDescription" xml:space="preserve">
+    <value>Uśpij maszynę za pomocą interfejsu API WinForms.
+
+Uwaga: ze względu na „Modern Sleep” polecenia uśpienia mogą zachowywać się inaczej w zależności od producenta OEM urządzenia i konfiguracji systemu operacyjnego.</value>
+  </data>
+  <data name="CommandType_WinformsSleepCommand" xml:space="preserve">
+    <value>WinformsSleep</value>
+  </data>
 </root>

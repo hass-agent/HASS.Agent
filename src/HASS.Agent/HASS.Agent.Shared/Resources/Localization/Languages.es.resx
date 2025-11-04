@@ -3267,4 +3267,12 @@ Oculta, Maximizada, Minimizada, Normal y Desconocida.</value>
   <data name="HassDomain_Fan" xml:space="preserve">
     <value>Admirador</value>
   </data>
+  <data name="CommandsManager_WinformsSleepCommandDescription" xml:space="preserve">
+    <value>Pone la máquina en suspensión mediante la API de WinForms.
+
+Nota: Debido al modo de suspensión moderno, los comandos de suspensión pueden comportarse de forma diferente según el fabricante del dispositivo y la configuración del sistema operativo.</value>
+  </data>
+  <data name="CommandType_WinformsSleepCommand" xml:space="preserve">
+    <value>WinformsSleep</value>
+  </data>
 </root>

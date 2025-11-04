@@ -3560,4 +3560,12 @@ Die Hauptakzentfarbe ist der Sensorwert. Zusätzliche Akzentfarben sind als Attr
   <data name="HassDomain_Fan" xml:space="preserve">
     <value>Lüfter</value>
   </data>
+  <data name="CommandsManager_WinformsSleepCommandDescription" xml:space="preserve">
+    <value>Versetzt den Rechner mithilfe der WinForms-API in den Ruhezustand.
+
+Hinweis: Aufgrund des „Modern Sleep“-Modus können sich die Ruhezustandsbefehle je nach Geräte-OEM und Betriebssystemkonfiguration unterschiedlich verhalten.</value>
+  </data>
+  <data name="CommandType_WinformsSleepCommand" xml:space="preserve">
+    <value>WinformsSleep</value>
+  </data>
 </root>

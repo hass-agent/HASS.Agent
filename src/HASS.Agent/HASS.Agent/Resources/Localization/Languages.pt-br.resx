@@ -3482,4 +3482,12 @@ A cor de destaque principal é o valor do sensor; cores de destaque adicionais e
   <data name="HassDomain_Fan" xml:space="preserve">
     <value>Fã</value>
   </data>
+  <data name="CommandsManager_WinformsSleepCommandDescription" xml:space="preserve">
+    <value>Coloca a máquina em modo de espera utilizando a API do WinForms.
+
+Nota: devido ao "Modern Sleep", os comandos de espera podem comportar-se de forma diferente, dependendo do fabricante do dispositivo e da configuração do sistema operativo.</value>
+  </data>
+  <data name="CommandType_WinformsSleepCommand" xml:space="preserve">
+    <value>WinformsSleep</value>
+  </data>
 </root>

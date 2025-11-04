@@ -3416,4 +3416,12 @@ Ali želite prenesti runtime installer?</value>
   <data name="HassDomain_Fan" xml:space="preserve">
     <value>Ventilator</value>
   </data>
+  <data name="CommandsManager_WinformsSleepCommandDescription" xml:space="preserve">
+    <value>Preklopi računalnik v stanje mirovanja z uporabo WinForms API-ja.
+
+Opomba: Zaradi »modernega mirovanja« se lahko ukazi za mirovanje obnašajo drugače, odvisno od proizvajalca originalne opreme naprave in konfiguracije operacijskega sistema.</value>
+  </data>
+  <data name="CommandType_WinformsSleepCommand" xml:space="preserve">
+    <value>WinformsSleep</value>
+  </data>
 </root>

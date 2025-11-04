@@ -742,6 +742,17 @@ namespace HASS.Agent.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Puts the machine to sleep using WinForms API.
+        ///
+        ///Note: due to &quot;Modern Sleep&quot; the sleep commands might behave differently depending on the device OEM and OS configuration..
+        /// </summary>
+        internal static string CommandsManager_WinformsSleepCommandDescription {
+            get {
+                return ResourceManager.GetString("CommandsManager_WinformsSleepCommandDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Configure Command &amp;Parameters.
         /// </summary>
         internal static string CommandsMod_BtnConfigureCommand {
@@ -1515,6 +1526,15 @@ namespace HASS.Agent.Resources.Localization {
         internal static string CommandType_WebViewCommand {
             get {
                 return ResourceManager.GetString("CommandType_WebViewCommand", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to WinformsSleep.
+        /// </summary>
+        internal static string CommandType_WinformsSleepCommand {
+            get {
+                return ResourceManager.GetString("CommandType_WinformsSleepCommand", resourceCulture);
             }
         }
         

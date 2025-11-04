@@ -3457,4 +3457,12 @@ De belangrijkste accentkleur is de sensorwaarde. Aanvullende accentkleuren zijn 
   <data name="HassDomain_Fan" xml:space="preserve">
     <value>Fan</value>
   </data>
+  <data name="CommandsManager_WinformsSleepCommandDescription" xml:space="preserve">
+    <value>Zet de machine in slaapstand met behulp van de WinForms API.
+
+Opmerking: vanwege "Modern Sleep" kunnen de slaapopdrachten zich anders gedragen, afhankelijk van de OEM van het apparaat en de configuratie van het besturingssysteem.</value>
+  </data>
+  <data name="CommandType_WinformsSleepCommand" xml:space="preserve">
+    <value>WinformsSleep</value>
+  </data>
 </root>

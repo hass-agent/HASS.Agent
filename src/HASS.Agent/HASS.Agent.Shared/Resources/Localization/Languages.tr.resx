@@ -2874,4 +2874,12 @@ Alternatif seçenekler için lütfen belgelere bakın.</value>
   <data name="HassDomain_Fan" xml:space="preserve">
     <value>Fan</value>
   </data>
+  <data name="CommandsManager_WinformsSleepCommandDescription" xml:space="preserve">
+    <value>WinForms API'sini kullanarak makineyi uyku moduna geçirir.
+
+Not: "Modern Uyku" nedeniyle uyku komutları, cihazın OEM ve işletim sistemi yapılandırmasına bağlı olarak farklı davranabilir.</value>
+  </data>
+  <data name="CommandType_WinformsSleepCommand" xml:space="preserve">
+    <value>WinformsSleep</value>
+  </data>
 </root>
