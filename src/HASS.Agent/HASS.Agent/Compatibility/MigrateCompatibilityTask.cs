@@ -259,7 +259,7 @@ namespace HASS.Agent.Compatibility
         private void CreateForkConfigBackup()
         {
             var backupFolderName = $"migrationBackup_{DateTime.Now.ToString("ddMMyy_HHmmss")}";
-            Log.Information("[COMPATTASK] Creating backup of existing configuration into {bf}", backupFolderName);
+            Log.Information("[COMPATTASK] Creating backup of existing forked version configuration (client) into {bf}", backupFolderName);
 
             var destination = Path.Combine(Variables.ConfigPath, backupFolderName);
             Directory.CreateDirectory(destination);
@@ -271,7 +271,7 @@ namespace HASS.Agent.Compatibility
                 file.CopyTo(Path.Combine(destination, file.Name), true);
             }
 
-            Log.Information("[COMPATTASK] Creating backup of existing service configuration into {bf}", backupFolderName);
+            Log.Information("[COMPATTASK] Creating backup of existing forked version configuration (service) into {bf}", backupFolderName);
 
             var serviceConfigPath = Path.Combine(ServiceManager.GetInstallPath(), "config");
             destination = Path.Combine(serviceConfigPath, backupFolderName);
@@ -283,6 +283,8 @@ namespace HASS.Agent.Compatibility
                 Log.Information("[COMPATTASK] Backing up {fn}", file.FullName);
                 file.CopyTo(Path.Combine(destination, file.Name), true);
             }
+
+            Log.Information("[COMPATTASK] Creating backup of existing forked version configuration completed");
         }
 
         public async Task<(bool, string)> Perform()
