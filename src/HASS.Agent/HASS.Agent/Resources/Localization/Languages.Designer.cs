@@ -5120,6 +5120,24 @@ namespace HASS.Agent.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Unable to connect..
+        /// </summary>
+        internal static string OnboardingMqtt_BtnTest_MessageError {
+            get {
+                return ResourceManager.GetString("OnboardingMqtt_BtnTest_MessageError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Connection OK!.
+        /// </summary>
+        internal static string OnboardingMqtt_BtnTest_MessageOk {
+            get {
+                return ResourceManager.GetString("OnboardingMqtt_BtnTest_MessageOk", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Enable MQTT.
         /// </summary>
         internal static string OnboardingMqtt_CbEnableMqtt {

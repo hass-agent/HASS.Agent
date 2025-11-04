@@ -1,4 +1,10 @@
-﻿using Serilog;
+﻿using System.Windows.Forms;
+using HASS.Agent.HomeAssistant;
+using HASS.Agent.MQTT;
+using HASS.Agent.Resources.Localization;
+using HASS.Agent.Shared.Functions;
+using Serilog;
+using Syncfusion.Windows.Forms;
 
 namespace HASS.Agent.Controls.Onboarding
 {
@@ -27,7 +33,7 @@ namespace HASS.Agent.Controls.Onboarding
                     Log.Error("[MQTT] Unable to parse URI {uri}: {msg}", Variables.AppSettings.HassUri, ex.Message);
                 }
             }
-            
+
             // if the above process failed somewhere, just enter the entire address (if any)
             if (string.IsNullOrEmpty(TbMqttAddress.Text)) TbMqttAddress.Text = Variables.AppSettings.MqttAddress;
 
@@ -65,5 +71,49 @@ namespace HASS.Agent.Controls.Onboarding
         }
 
         private void PbShow_Click(object sender, EventArgs e) => TbMqttPassword.UseSystemPasswordChar = !TbMqttPassword.UseSystemPasswordChar;
+
+        private async void BtnTest_Click(object sender, EventArgs e)
+        {
+            var address = TbMqttAddress.Text.Trim();
+            var port = (int)NumMqttPort.Value;
+            var username = TbMqttUsername.Text.Trim();
+            var password = TbMqttPassword.Text.Trim();
+            var useTls = CbMqttTls.Checked;
+            var useWebSocket = CbUseWebSocket.Checked;
+
+            //TODO(Amadeo): data validation?
+
+            CbEnableMqtt.Enabled = false;
+            CbUseWebSocket.Enabled = false;
+            CbMqttTls.Enabled = false;
+            TbMqttAddress.Enabled = false;
+            NumMqttPort.Enabled = false;
+            TbMqttUsername.Enabled = false;
+            TbMqttPassword.Enabled = false;
+            TbMqttDiscoveryPrefix.Enabled = false;
+            BtnTest.Enabled = false;
+            BtnTest.Text = Languages.OnboardingApi_BtnTest_Testing;
+
+            var result = await MqttManager.TestConnection(address, port, useTls, useWebSocket, username, password);
+            if (!result)
+            {
+                MessageBoxAdv.Show(this, Languages.OnboardingMqtt_BtnTest_MessageError, Variables.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                MessageBoxAdv.Show(this, Languages.OnboardingMqtt_BtnTest_MessageOk, Variables.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+
+            CbEnableMqtt.Enabled = true;
+            CbUseWebSocket.Enabled = true;
+            CbMqttTls.Enabled = true;
+            TbMqttAddress.Enabled = true;
+            NumMqttPort.Enabled = true;
+            TbMqttUsername.Enabled = true;
+            TbMqttPassword.Enabled = true;
+            TbMqttDiscoveryPrefix.Enabled = true;
+            BtnTest.Enabled = true;
+            BtnTest.Text = Languages.OnboardingApi_BtnTest;
+        }
     }
 }
