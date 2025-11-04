@@ -35,10 +35,16 @@ namespace HASS.Agent.Controls.Onboarding
             }
 
             // if the above process failed somewhere, just enter the entire address (if any)
-            if (string.IsNullOrEmpty(TbMqttAddress.Text)) TbMqttAddress.Text = Variables.AppSettings.MqttAddress;
+            if (string.IsNullOrEmpty(TbMqttAddress.Text))
+            {
+                TbMqttAddress.Text = Variables.AppSettings.MqttAddress;
+            }
 
             // optionally set default port
-            if (Variables.AppSettings.MqttPort < 1) Variables.AppSettings.MqttPort = 1883;
+            if (Variables.AppSettings.MqttPort < 1)
+            {
+                Variables.AppSettings.MqttPort = 1883;
+            }
             NumMqttPort.Value = Variables.AppSettings.MqttPort;
 
             CbMqttTls.Checked = Variables.AppSettings.MqttUseTls;
@@ -61,12 +67,17 @@ namespace HASS.Agent.Controls.Onboarding
             Variables.AppSettings.MqttPassword = TbMqttPassword.Text;
             Variables.AppSettings.MqttDiscoveryPrefix = TbMqttDiscoveryPrefix.Text;
             Variables.AppSettings.MqttEnabled = CbEnableMqtt.CheckState == CheckState.Checked;
+
             return true;
         }
 
         private void CbMqttTls_CheckedChanged(object sender, EventArgs e)
         {
-            if (_initializing) return;
+            if (_initializing)
+            {
+                return;
+            }
+
             NumMqttPort.Value = CbMqttTls.Checked ? 8883 : 1883;
         }
 
@@ -80,8 +91,6 @@ namespace HASS.Agent.Controls.Onboarding
             var password = TbMqttPassword.Text.Trim();
             var useTls = CbMqttTls.Checked;
             var useWebSocket = CbUseWebSocket.Checked;
-
-            //TODO(Amadeo): data validation?
 
             CbEnableMqtt.Enabled = false;
             CbUseWebSocket.Enabled = false;
