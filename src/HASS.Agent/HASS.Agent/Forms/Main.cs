@@ -25,7 +25,6 @@ using Serilog;
 using Syncfusion.Windows.Forms;
 using WindowsDesktop;
 using WK.Libraries.HotkeyListenerNS;
-using static Vanara.PInvoke.Kernel32;
 using NativeMethods = HASS.Agent.Functions.NativeMethods;
 using QuickActionsConfig = HASS.Agent.Forms.QuickActions.QuickActionsConfig;
 using Task = System.Threading.Tasks.Task;
@@ -169,8 +168,6 @@ namespace HASS.Agent.Forms
 
         private void OnProcessExit(object sender, EventArgs e)
         {
-            //NOTE(Amadeo): logger is not available at this stage
-
             AudioManager.Shutdown();
             NotificationManager.Exit();
         }
