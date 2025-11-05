@@ -3,6 +3,7 @@ using System.Text.Json;
 using System.Text.RegularExpressions;
 using HASS.Agent.Satellite.Service.Commands;
 using HASS.Agent.Satellite.Service.Sensors;
+using HASS.Agent.Shared.Managers.Audio;
 using Serilog;
 
 namespace HASS.Agent.Satellite.Service.Functions
@@ -58,6 +59,9 @@ namespace HASS.Agent.Satellite.Service.Functions
 
                 // log our demise
                 Log.Information("[SYSTEM] Service shutting down");
+
+                //stop audio manager
+                AudioManager.Shutdown();
 
                 // stop mqtt
                 await Variables.MqttManager.AnnounceAvailabilityAsync(true);

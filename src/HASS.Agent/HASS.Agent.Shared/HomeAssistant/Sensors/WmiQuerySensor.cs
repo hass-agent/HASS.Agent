@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Globalization;
 using System.Management;
+using System.Runtime.InteropServices;
 using HASS.Agent.Shared.Models.HomeAssistant;
 using HASS.Agent.Shared.Models.Internal;
 using Newtonsoft.Json;
+using Serilog;
+using static System.Formats.Asn1.AsnWriter;
 
 namespace HASS.Agent.Shared.HomeAssistant.Sensors
 {
@@ -20,7 +23,7 @@ namespace HASS.Agent.Shared.HomeAssistant.Sensors
         public int? Round { get; private set; }
 
         protected readonly ObjectQuery ObjectQuery;
-        protected readonly ManagementObjectSearcher Searcher;
+        protected ManagementObjectSearcher Searcher;
 
         public WmiQuerySensor(string query, string scope = "", bool applyRounding = false, int? round = null, int? updateInterval = null, string entityName = DefaultName, string name = DefaultName, string id = default, string advancedSettings = default) : base(entityName ?? DefaultName, name ?? null, updateInterval ?? 10, id, false, advancedSettings)
         {
@@ -29,16 +32,19 @@ namespace HASS.Agent.Shared.HomeAssistant.Sensors
             ApplyRounding = applyRounding;
             Round = round;
 
-            // prepare query
             ObjectQuery = new ObjectQuery(Query);
+            Searcher = CreateSearcher();
+        }
 
-            // use either default or provided scope
-            var managementscope = !string.IsNullOrWhiteSpace(scope)
-                ? new ManagementScope(scope)
+        private ManagementObjectSearcher CreateSearcher()
+        {
+            Searcher?.Dispose();
+
+            var managementScope = !string.IsNullOrWhiteSpace(Scope)
+                ? new ManagementScope(Scope)
                 : new ManagementScope(@"\\localhost\");
 
-            // prepare searcher
-            Searcher = new ManagementObjectSearcher(managementscope, ObjectQuery);
+            return new ManagementObjectSearcher(managementScope, ObjectQuery);
         }
 
         public void Dispose() => Searcher?.Dispose();
@@ -52,7 +58,7 @@ namespace HASS.Agent.Shared.HomeAssistant.Sensors
             if (deviceConfig == null)
                 return null;
 
-            return AutoDiscoveryConfigModel ?? SetAutoDiscoveryConfigModel(new SensorDiscoveryConfigModel()
+            return AutoDiscoveryConfigModel ?? SetAutoDiscoveryConfigModel(new SensorDiscoveryConfigModel(Domain)
             {
                 EntityName = EntityName,
                 Name = Name,
@@ -65,37 +71,46 @@ namespace HASS.Agent.Shared.HomeAssistant.Sensors
 
         public override string GetState()
         {
-            using var collection = Searcher.Get();
-            var retValue = string.Empty;
-
-            foreach (var managementBaseObject in collection)
+            try
             {
-                try
-                {
-                    if (!string.IsNullOrEmpty(retValue))
-                        continue;
+                using var collection = Searcher.Get();
+                var retValue = string.Empty;
 
-                    using var managementObject = (ManagementObject)managementBaseObject;
-                    foreach (var property in managementObject.Properties)
+                foreach (var managementBaseObject in collection)
+                {
+                    try
                     {
-                        retValue = property?.Value?.ToString() ?? string.Empty;
-                        break;
+                        if (!string.IsNullOrEmpty(retValue))
+                            continue;
+
+                        using var managementObject = (ManagementObject)managementBaseObject;
+                        foreach (var property in managementObject.Properties)
+                        {
+                            retValue = property?.Value?.ToString() ?? string.Empty;
+                            break;
+                        }
+                    }
+                    finally
+                    {
+                        managementBaseObject?.Dispose();
                     }
                 }
-                finally
+
+                // optionally apply rounding
+                if (ApplyRounding && Round != null && double.TryParse(retValue, out var dblValue))
                 {
-                    managementBaseObject?.Dispose();
+                    retValue = Math.Round(dblValue, (int)Round).ToString(CultureInfo.CurrentCulture);
                 }
-            }
 
-            // optionally apply rounding
-            if (ApplyRounding && Round != null && double.TryParse(retValue, out var dblValue))
+                // done
+                return retValue;
+            }
+            catch (COMException)
             {
-                retValue = Math.Round(dblValue, (int)Round).ToString(CultureInfo.CurrentCulture);
+                Log.Warning("[WMIQUERY] [{name}] Searcher is no longer valid, recreating", Name);
+                Searcher = CreateSearcher();
+                return null;
             }
-
-            // done
-            return retValue;
         }
 
         public override string GetAttributes() => string.Empty;

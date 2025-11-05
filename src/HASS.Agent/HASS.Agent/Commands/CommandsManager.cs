@@ -103,7 +103,10 @@ namespace HASS.Agent.Commands
                     await Task.Delay(firstRun ? TimeSpan.FromSeconds(1) : TimeSpan.FromMilliseconds(750));
 
                     if (_pause || Variables.MqttManager.GetStatus() != MqttStatus.Connected || !CommandsPresent())
+                    {
+                        _discoveryPublished = false;
                         continue;
+                    }
 
                     firstRun = false;
 
@@ -520,6 +523,14 @@ namespace HASS.Agent.Commands
             commandInfoCard = new CommandInfoCard(CommandType.SleepCommand,
                 Languages.CommandsManager_SleepCommandDescription,
                 true, true, false);
+
+            CommandInfoCards.Add(commandInfoCard.CommandType, commandInfoCard);
+
+            // =================================
+
+            commandInfoCard = new CommandInfoCard(CommandType.WinformsSleepCommand,
+                Languages.CommandsManager_WinformsSleepCommandDescription,
+                true, false, false);
 
             CommandInfoCards.Add(commandInfoCard.CommandType, commandInfoCard);
 

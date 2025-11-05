@@ -237,12 +237,13 @@ Seu comando é fornecido como um argumento 'as is', então você deve fornecer s
     <value>Coloca a máquina em hibernação.</value>
   </data>
   <data name="CommandsManager_KeyCommandDescription" xml:space="preserve">
-    <value>Simula um único pressionamento de tecla.
+    <value>Simula um único toque de tecla.
+Tornar este comando do tipo "interruptor" fará com que o botão seja premido enquanto o interruptor estiver ligado.
 
-Clique na caixa de texto 'keycode' e pressione a tecla que deseja simular. O código-chave correspondente será inserido para você.
-Para a tecla TAB, use LCTRL+TAB.
+Clique na caixa de texto "código da tecla" e pressione a tecla que pretende simular. O código da tecla correspondente será introduzido.
+Para a tecla TAB, utilize LCTRL+TAB.
 
-Se precisar de mais teclas e/ou modificadores como CTRL, use o comando MultipleKeys.</value>
+Se necessitar de mais teclas e/ou modificadores como CTRL, utilize o comando MultipleKeys.</value>
     <comment>Fuzzy</comment>
   </data>
   <data name="CommandsManager_LaunchUrlCommandDescription" xml:space="preserve">
@@ -2217,7 +2218,10 @@ Dependendo da sua versão do Windows, isso pode ser encontrado no novo painel de
     <value>Fornece a carga atual da GPU como uma porcentagem.</value>
   </data>
   <data name="SensorsManager_GpuTemperatureSensorDescription" xml:space="preserve">
-    <value>Fornece a temperatura atual da GPU.</value>
+    <value>NOTA: Este sensor não está a funcionar.
+
+Devido a questões de segurança relacionadas com o Libre Hardware Monitor (biblioteca que permite ao HASS.Agent aceder aos dados de temperatura da GPU), este sensor foi mantido por motivos de compatibilidade com versões anteriores e irá sempre retornar 0.
+Consulte a documentação para obter opções alternativas.</value>
   </data>
   <data name="SensorsManager_LastActiveSensorDescription" xml:space="preserve">
     <value>Fornece um valor de data e hora que contém a última vez que o usuário fez uma entrada.
@@ -3452,5 +3456,44 @@ Requer que seja configurado em "Configuration -&gt; Tray Icon"</value>
   </data>
   <data name="Notification_Dismiss" xml:space="preserve">
     <value>Dispensar</value>
+  </data>
+  <data name="ConfigTrayIcon_NumWebViewScreen" xml:space="preserve">
+    <value>Tela a ser usada para exibição do WebView</value>
+  </data>
+  <data name="Main_CheckForUpdateFailed_MessageBox1" xml:space="preserve">
+    <value>Falha na verificação da atualização!</value>
+  </data>
+  <data name="SensorType_NamedActiveWindowSensor" xml:space="preserve">
+    <value>JanelaAtiva Nomeada</value>
+  </data>
+  <data name="SensorsManager_NamedActiveWindowSensorDescription" xml:space="preserve">
+    <value>Fornece um valor ON/OFF com base na presença ou não de uma string configurada no nome da janela em foco.</value>
+  </data>
+  <data name="SensorsManager_AccentColorSensorDescription" xml:space="preserve">
+    <value>Fornece valores de cor #RRGGBB para as cores de destaque do sistema.
+A cor de destaque principal é o valor do sensor; cores de destaque adicionais estão disponíveis como atributos.</value>
+  </data>
+  <data name="ConfigMqtt_CbUseWebSocket" xml:space="preserve">
+    <value>Utilizar &amp;WebSocket</value>
+  </data>
+  <data name="ServiceMqtt_CbUseWebSocket" xml:space="preserve">
+    <value>Utilizar &amp;WebSocket</value>
+  </data>
+  <data name="HassDomain_Fan" xml:space="preserve">
+    <value>Fã</value>
+  </data>
+  <data name="CommandsManager_WinformsSleepCommandDescription" xml:space="preserve">
+    <value>Coloca a máquina em modo de espera utilizando a API do WinForms.
+
+Nota: devido ao "Modern Sleep", os comandos de espera podem comportar-se de forma diferente, dependendo do fabricante do dispositivo e da configuração do sistema operativo.</value>
+  </data>
+  <data name="CommandType_WinformsSleepCommand" xml:space="preserve">
+    <value>WinformsSleep</value>
+  </data>
+  <data name="OnboardingMqtt_BtnTest_MessageError" xml:space="preserve">
+    <value>Não foi possível ligar.</value>
+  </data>
+  <data name="OnboardingMqtt_BtnTest_MessageOk" xml:space="preserve">
+    <value>igação OK!</value>
   </data>
 </root>

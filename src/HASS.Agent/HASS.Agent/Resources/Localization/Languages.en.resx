@@ -526,7 +526,7 @@ The certificate of the downloaded file will get checked before running,you will 
     <value>HASS.Agent GitHub page</value>
   </data>
   <data name="OnboardingDone_LblInfo3" xml:space="preserve">
-	  <value>There's a lot more to tinker with, so make sure you take a look at the Configuration Wwindow!
+	  <value>There's a lot more to tinker with, so make sure you take a look at the Configuration Window!
 
 
 Thank you for using HASS.Agent, hopefully it'll be useful for you :-)
@@ -1248,6 +1248,7 @@ Your command is provided as an argument 'as is', so you have to supply your own 
   </data>
   <data name="CommandsManager_KeyCommandDescription" xml:space="preserve">
 	  <value>Simulates a single keypress.
+Making this command a "switch" type will make the button pressed as long as the switch is turned on.
 
 Click on the 'keycode' textbox and press the key you want simulated. The corresponding keycode will be entered for you.
 For TAB key please use LCTRL+TAB.
@@ -2058,7 +2059,10 @@ Currently takes the volume of your default device.</value>
     <value>Provides the current load of the first GPU as a percentage.</value>
   </data>
   <data name="SensorsManager_GpuTemperatureSensorDescription" xml:space="preserve">
-    <value>Provides the current temperature of the first GPU.</value>
+    <value>NOTE: This is a non-functioning sensor.
+
+Due to the security concerns regarding Libre Hardware Monitor (library allowing HASS.Agent to access GPU temperature data) this sensor is left for backward compatibility reasons and will always return 0.
+Please see documentation for alternative options.</value>
   </data>
   <data name="SensorsManager_LastActiveSensorDescription" xml:space="preserve">
     <value>Provides a datetime value containing the last moment the user provided input.
@@ -3435,6 +3439,45 @@ Requires it to be configured in "Configuration -&gt; Tray Icon"</value>
   </data>
   <data name="Notification_Dismiss" xml:space="preserve">
     <value>Dismiss</value>
+  </data>
+  <data name="Main_CheckForUpdateFailed_MessageBox1" xml:space="preserve">
+    <value>Failed checking for update!</value>
+  </data>
+  <data name="SensorType_NamedActiveWindowSensor" xml:space="preserve">
+    <value>NamedActiveWindow</value>
+  </data>
+  <data name="SensorsManager_NamedActiveWindowSensorDescription" xml:space="preserve">
+    <value>Provides an ON/OFF value based on whether the focused window name contains configured string.</value>
+  </data>
+  <data name="SensorsManager_AccentColorSensorDescription" xml:space="preserve">
+    <value>Provides #RRGGBB color values for system accent colors.
+Main accent color is the sensor value, additional accent colors are available as attributes.</value>
+  </data>
+  <data name="ConfigMqtt_CbUseWebSocket" xml:space="preserve">
+    <value>Use &amp;WebSocket</value>
+  </data>
+  <data name="ServiceMqtt_CbUseWebSocket" xml:space="preserve">
+    <value>Use &amp;WebSocket</value>
+  </data>
+  <data name="HassDomain_InputButton" xml:space="preserve">
+    <value>InputButton</value>
+  </data>
+  <data name="HassDomain_Fan" xml:space="preserve">
+    <value>Fan</value>
+  </data>
+  <data name="CommandsManager_WinformsSleepCommandDescription" xml:space="preserve">
+    <value>Puts the machine to sleep using WinForms API.
+
+Note: due to "Modern Sleep" the sleep commands might behave differently depending on the device OEM and OS configuration.</value>
+  </data>
+  <data name="CommandType_WinformsSleepCommand" xml:space="preserve">
+    <value>WinformsSleep</value>
+  </data>
+  <data name="OnboardingMqtt_BtnTest_MessageOk" xml:space="preserve">
+    <value>Connection OK!</value>
+  </data>
+  <data name="OnboardingMqtt_BtnTest_MessageError" xml:space="preserve">
+    <value>Unable to connect.</value>
   </data>
   <data name="CommandType_MonitorSleepPowerPlanCommand" xml:space="preserve">
     <value>MonitorSleepPowerPlan</value>

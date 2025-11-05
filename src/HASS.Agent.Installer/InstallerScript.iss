@@ -9,10 +9,13 @@
 
 ; Standard installation constants
 #define MyAppName "HASS.Agent"
-#define MyAppVersion "2.1.1-beta2"
+#define MyAppVersion "2.2.0-beta3"
 #define MyAppPublisher "HASS.Agent Team"
 #define MyAppURL "https://hass-agent.io"
 #define MyAppExeName "HASS.Agent.exe"
+
+#define MigrationNotice "MigrationNotice.rtf"
+#define DotNet8Notice "DotNet8Notice.rtf"
 
 [Setup]
 ArchitecturesInstallIn64BitMode=x64
@@ -54,6 +57,8 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 [Files]
 ; Client files
 Source: "..\HASS.Agent\HASS.Agent\bin\Publish-x64\Release\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "{#MigrationNotice}"; Flags: dontcopy
+Source: "{#DotNet8Notice}"; Flags: dontcopy
 ; Service installer
 Source: ".\bin\HASS.Agent.Service.Installer.exe"; DestDir: "{tmp}"; Flags: ignoreversion
 
@@ -61,16 +66,48 @@ Source: ".\bin\HASS.Agent.Service.Installer.exe"; DestDir: "{tmp}"; Flags: ignor
 Name: "{autoprograms}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"
 Name: "{autodesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Tasks: desktopicon
 
+; Ensure LibreHardwareMonitor/WinRing0 files are removed
+[InstallDelete]
+Type: files; Name: "{app}\LibreHardwareMonitorLib.dll"
+Type: files; Name: "{app}\HASS.Agent.sys"
+
 [Run]
-Filename: "{app}\{#MyAppExeName}"; Parameters: "compat_migrate"; Description: "Try to migrate configuration - use only once (administrative permissions required)"; Flags: postinstall skipifsilent runascurrentuser unchecked
-Filename: "{tmp}\HASS.Agent.Service.Installer.exe"; Description: "Install Satellite Service (administrative permissions required)"; Flags: postinstall runascurrentuser 
+Filename: "{app}\{#MyAppExeName}"; Parameters: "compat_migrate"; Description: "Try to migrate configuration - use only once (administrative permissions required)"; Flags: postinstall runascurrentuser unchecked
+Filename: "{tmp}\HASS.Agent.Service.Installer.exe"; Parameters: "{code:GetCmdLineParams}"; Description: "Install Satellite Service (administrative permissions required)"; Flags: postinstall runascurrentuser 
 Filename: "{app}\{#MyAppExeName}"; Description: "{cm:LaunchProgram,{#StringChange(MyAppName, '&', '&&')}}"; Flags: postinstall skipifsilent nowait
 
 [Code]
+var
+  OriginalCmdLine: String;
+
+function GetCmdLineParams(Param: String): String;
+begin
+  Result := OriginalCmdLine;
+end;
+
+procedure InitializeWizard;
+var
+  AfterID: Integer;
+  MigrationNotice: AnsiString;
+  DotNet8Notice: AnsiString;
+begin
+  OriginalCmdLine := GetCmdTail;
+
+  AfterID := wpSelectTasks;
+
+  ExtractTemporaryFile('{#MigrationNotice}');
+  LoadStringFromFile(ExpandConstant('{tmp}\{#MigrationNotice}'), MigrationNotice);
+  AfterID := CreateOutputMsgMemoPage(AfterID, 'Configuration migration', 'Please read carefully before proceeding.', 'Ignoring below message might cause you to loose your configuration.' , MigrationNotice).ID  
+
+  ExtractTemporaryFile('{#DotNet8Notice}');
+  LoadStringFromFile(ExpandConstant('{tmp}\{#DotNet8Notice}'), DotNet8Notice);
+  AfterID := CreateOutputMsgMemoPage(AfterID, '.NET 8', 'New .NET version required with this HASS.Agent version.', '' , DotNet8Notice).ID   
+end;
+
 function InitializeSetup: Boolean;
 begin
   Dependency_ForceX86 := False;
-  Dependency_AddDotNet60Desktop;
+  Dependency_AddDotNet80Desktop;
   Result := True;
 end;
 

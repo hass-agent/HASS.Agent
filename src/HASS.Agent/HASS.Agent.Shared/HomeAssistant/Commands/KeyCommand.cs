@@ -19,7 +19,7 @@ namespace HASS.Agent.Shared.HomeAssistant.Commands
         private const string DefaultName = "key";
 
         public string State { get; protected set; }
-        
+
         public VirtualKeyShort KeyCode { get; set; }
 
         public KeyCommand(VirtualKeyShort keyCode, string entityName = DefaultName, string name = DefaultName, CommandEntityType entityType = CommandEntityType.Switch, string id = default) : base(entityName ?? DefaultName, name ?? null, entityType, id)
@@ -35,7 +35,7 @@ namespace HASS.Agent.Shared.HomeAssistant.Commands
             var deviceConfig = Variables.MqttManager.GetDeviceConfigModel();
             if (deviceConfig == null) return null;
 
-            return new CommandDiscoveryConfigModel
+            return new CommandDiscoveryConfigModel(Domain)
             {
                 EntityName = EntityName,
                 Name = Name,
@@ -52,29 +52,57 @@ namespace HASS.Agent.Shared.HomeAssistant.Commands
 
         public override void TurnOff()
         {
-            //
+            var inputs = new INPUT[1];
+            inputs[0].type = InputType.INPUT_KEYBOARD;
+            inputs[0].U.ki.wVk = KeyCode;
+            inputs[0].U.ki.dwFlags = KEYEVENTF.KEYUP;
+
+            var ret = SendInput((uint)inputs.Length, inputs, INPUT.Size);
+            if (ret != inputs.Length)
+            {
+                var error = Marshal.GetLastWin32Error();
+                Log.Error($"[{DefaultName}] Error lifting key {KeyCode}: {error}");
+            }
+
+            State = "OFF";
         }
 
         public override void TurnOn()
         {
             State = "ON";
 
-            var inputs = new INPUT[2];
-            inputs[0].type = InputType.INPUT_KEYBOARD;
-            inputs[0].U.ki.wVk = KeyCode;
-
-            inputs[1].type = InputType.INPUT_KEYBOARD;
-            inputs[1].U.ki.wVk = KeyCode;
-            inputs[1].U.ki.dwFlags = KEYEVENTF.KEYUP;
-
-            var ret = SendInput((uint)inputs.Length, inputs, INPUT.Size);
-            if (ret != inputs.Length)
+            if (EntityType == CommandEntityType.Switch)
             {
-                var error = Marshal.GetLastWin32Error();
-                Log.Error($"[{DefaultName}] Error simulating key press for {KeyCode}: {error}");
-            }
+                var inputs = new INPUT[1];
+                inputs[0].type = InputType.INPUT_KEYBOARD;
+                inputs[0].U.ki.wVk = KeyCode;
 
-            State = "OFF";
+                var ret = SendInput((uint)inputs.Length, inputs, INPUT.Size);
+                if (ret != inputs.Length)
+                {
+                    var error = Marshal.GetLastWin32Error();
+                    Log.Error($"[{DefaultName}] Error pressing down key {KeyCode}: {error}");
+                }
+            }
+            else
+            {
+                var inputs = new INPUT[2];
+                inputs[0].type = InputType.INPUT_KEYBOARD;
+                inputs[0].U.ki.wVk = KeyCode;
+
+                inputs[1].type = InputType.INPUT_KEYBOARD;
+                inputs[1].U.ki.wVk = KeyCode;
+                inputs[1].U.ki.dwFlags = KEYEVENTF.KEYUP;
+
+                var ret = SendInput((uint)inputs.Length, inputs, INPUT.Size);
+                if (ret != inputs.Length)
+                {
+                    var error = Marshal.GetLastWin32Error();
+                    Log.Error($"[{DefaultName}] Error simulating key press for {KeyCode}: {error}");
+                }
+
+                State = "OFF";
+            }
         }
 
         public override void TurnOnWithAction(string action)

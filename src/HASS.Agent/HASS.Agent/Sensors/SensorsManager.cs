@@ -95,7 +95,7 @@ namespace HASS.Agent.Sensors
                     // is mqtt available?
                     if (Variables.MqttManager.GetStatus() != MqttStatus.Connected)
                     {
-                        // nothing to do
+                        _discoveryPublished = false;
                         continue;
                     }
 
@@ -390,6 +390,14 @@ namespace HASS.Agent.Sensors
 
             // =================================
 
+            sensorInfoCard = new SensorInfoCard(SensorType.AccentColorSensor,
+                Languages.SensorsManager_AccentColorSensorDescription,
+                120, false, true, false);
+
+            SensorInfoCards.Add(sensorInfoCard.SensorType, sensorInfoCard);
+
+            // =================================
+
             sensorInfoCard = new SensorInfoCard(SensorType.AudioSensors,
                 Languages.SensorsManager_AudioSensorsDescription,
                 20, true, true, true);
@@ -560,6 +568,14 @@ namespace HASS.Agent.Sensors
 
             sensorInfoCard = new SensorInfoCard(SensorType.NamedWindowSensor,
                 Languages.SensorsManager_NamedWindowSensorDescription,
+                30, false, true, false);
+
+            SensorInfoCards.Add(sensorInfoCard.SensorType, sensorInfoCard);
+
+            // =================================
+
+            sensorInfoCard = new SensorInfoCard(SensorType.NamedActiveWindowSensor,
+                Languages.SensorsManager_NamedActiveWindowSensorDescription,
                 30, false, true, false);
 
             SensorInfoCards.Add(sensorInfoCard.SensorType, sensorInfoCard);

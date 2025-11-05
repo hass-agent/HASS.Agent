@@ -1248,11 +1248,12 @@ Su comando se proporciona como un argumento 'tal cual', por lo que debe proporci
   </data>
   <data name="CommandsManager_KeyCommandDescription" xml:space="preserve">
     <value>Simula una sola pulsación de tecla.
+Al configurar este comando como "interruptor", el botón se mantendrá pulsado mientras el interruptor esté activado.
 
-Haga clic en el cuadro de texto 'keycode' y presione la tecla que desea simular. El código clave correspondiente se ingresará por usted.
-Para la tecla TAB, utilice LCTRL+TAB.
+Haga clic en el cuadro de texto "código de tecla" y pulse la tecla que desee simular. Se introducirá automáticamente el código de tecla correspondiente.
+Para la tecla TAB, utilice Ctrl L+TAB.
 
-Si necesita más teclas y/o modificadores como CTRL, use el comando MultipleKeys.</value>
+Si necesita más teclas o modificadores como Ctrl, utilice el comando "Múltiples teclas".</value>
   </data>
   <data name="CommandsManager_LaunchUrlCommandDescription" xml:space="preserve">
     <value>Lanza la URL proporcionada, por defecto en su navegador predeterminado.
@@ -2062,7 +2063,10 @@ Actualmente toma el volumen de su dispositivo predeterminado.</value>
     <value>Proporciona la carga actual de la primera GPU como porcentaje.</value>
   </data>
   <data name="SensorsManager_GpuTemperatureSensorDescription" xml:space="preserve">
-    <value>Proporciona la temperatura actual de la primera GPU.</value>
+    <value>NOTA: Este sensor no funciona.
+
+Debido a problemas de seguridad relacionados con Libre Hardware Monitor (biblioteca que permite a HASS.Agent acceder a los datos de temperatura de la GPU), este sensor se mantiene por compatibilidad con versiones anteriores y siempre devolverá 0.
+Consulte la documentación para ver opciones alternativas.</value>
   </data>
   <data name="SensorsManager_LastActiveSensorDescription" xml:space="preserve">
     <value>Proporciona un valor de fecha y hora que contiene la última vez que el usuario realizó una entrada.
@@ -3406,5 +3410,44 @@ Requiere que se configure en "Configuración -&gt; Icono de la bandeja"</value>
   </data>
   <data name="Notification_Dismiss" xml:space="preserve">
     <value>Despedir</value>
+  </data>
+  <data name="ConfigTrayIcon_NumWebViewScreen" xml:space="preserve">
+    <value>Pantalla a utilizar para mostrar WebView</value>
+  </data>
+  <data name="Main_CheckForUpdateFailed_MessageBox1" xml:space="preserve">
+    <value>Error al comprobar la actualización.</value>
+  </data>
+  <data name="SensorType_NamedActiveWindowSensor" xml:space="preserve">
+    <value>Ventana activa con nombre</value>
+  </data>
+  <data name="SensorsManager_NamedActiveWindowSensorDescription" xml:space="preserve">
+    <value>Proporciona un valor de ENCENDIDO/APAGADO según si el nombre de la ventana enfocada contiene una cadena configurada.</value>
+  </data>
+  <data name="SensorsManager_AccentColorSensorDescription" xml:space="preserve">
+    <value>Proporciona valores de color #RRGGBB para los colores de acento del sistema.
+El color de acento principal es el valor del sensor; hay colores de acento adicionales disponibles como atributos.</value>
+  </data>
+  <data name="ConfigMqtt_CbUseWebSocket" xml:space="preserve">
+    <value>Utilice &amp;WebSocket</value>
+  </data>
+  <data name="ServiceMqtt_CbUseWebSocket" xml:space="preserve">
+    <value>Utilice &amp;WebSocket</value>
+  </data>
+  <data name="HassDomain_Fan" xml:space="preserve">
+    <value>Admirador</value>
+  </data>
+  <data name="CommandsManager_WinformsSleepCommandDescription" xml:space="preserve">
+    <value>Pone la máquina en suspensión mediante la API de WinForms.
+
+Nota: Debido al modo de suspensión moderno, los comandos de suspensión pueden comportarse de forma diferente según el fabricante del dispositivo y la configuración del sistema operativo.</value>
+  </data>
+  <data name="CommandType_WinformsSleepCommand" xml:space="preserve">
+    <value>WinformsSleep</value>
+  </data>
+  <data name="OnboardingMqtt_BtnTest_MessageError" xml:space="preserve">
+    <value>No se puede conectar.</value>
+  </data>
+  <data name="OnboardingMqtt_BtnTest_MessageOk" xml:space="preserve">
+    <value>¡Conexión correcta!</value>
   </data>
 </root>

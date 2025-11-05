@@ -108,6 +108,10 @@ namespace HASS.Agent.Forms.QuickActions
             if (rows > 1)
                 Height += 5 * (rows - 1);
 
+            var scalingFactor = HelperFunctions.GetScalingFactors();
+            Width = (int)(Width * scalingFactor.dpiScalingFactor);
+            Height = (int)(Height * scalingFactor.dpiScalingFactor);
+
             // add the quickactions as controls
             var currentColumn = 0;
             var currentRow = 0;
