@@ -13,7 +13,6 @@ namespace HASS.Agent.Models.Config
 
         public OnboardingStatus OnboardingStatus { get; set; } = OnboardingStatus.NeverDone;
 
-
         public string DeviceName { get; set; } = SharedHelperFunctions.GetSafeDeviceName();
         public bool SanitizeName { get; set; } = true;
         public string InterfaceLanguage { get; set; } = string.Empty;
