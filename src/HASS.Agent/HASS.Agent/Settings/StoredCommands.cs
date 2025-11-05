@@ -169,6 +169,9 @@ namespace HASS.Agent.Settings
                 case CommandType.MonitorSleepCommand:
                     abstractCommand = new MonitorSleepCommand(command.EntityName, command.Name, command.EntityType, command.Id.ToString());
                     break;
+                case CommandType.MonitorSleepPowerPlanCommand:
+                    abstractCommand = new MonitorSleepPowerPlanCommand(command.EntityName, command.Name, command.EntityType, command.Id.ToString());
+                    break;
                 case CommandType.MonitorWakeCommand:
                     abstractCommand = new MonitorWakeCommand(command.EntityName, command.Name, command.EntityType, command.Id.ToString());
                     break;

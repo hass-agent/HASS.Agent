@@ -3496,4 +3496,11 @@ Nota: devido ao "Modern Sleep", os comandos de espera podem comportar-se de form
   <data name="OnboardingMqtt_BtnTest_MessageOk" xml:space="preserve">
     <value>igação OK!</value>
   </data>
+  <data name="CommandsManager_MonitorSleepPowerPlanCommandDescription" xml:space="preserve">
+    <value>Coloca todos os monitores em modo de suspensão (baixo consumo de energia) utilizando uma abordagem alternativa de modificação do plano de energia.
+Deve proporcionar uma melhor experiência com novos sistemas com "suspensão S0ix moderna" e não colocar o sistema em modo de suspensão.</value>
+  </data>
+  <data name="CommandType_MonitorSleepPowerPlanCommand" xml:space="preserve">
+    <value>MonitorSleepPowerPlan</value>
+  </data>
 </root>

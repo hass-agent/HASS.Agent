@@ -3482,4 +3482,11 @@ Remarque : en raison de la fonction « Modern Sleep », les commandes de mise
   <data name="OnboardingMqtt_BtnTest_MessageOk" xml:space="preserve">
     <value>Connexion OK !</value>
   </data>
+  <data name="CommandsManager_MonitorSleepPowerPlanCommandDescription" xml:space="preserve">
+    <value>Met tous les moniteurs en mode veille (basse consommation) en utilisant une approche alternative de modification du plan d'alimentation.
+Cela devrait offrir une meilleure expérience avec les nouveaux systèmes dotés du mode veille moderne « S0ix » et éviter de mettre le système en veille complète.</value>
+  </data>
+  <data name="CommandType_MonitorSleepPowerPlanCommand" xml:space="preserve">
+    <value>Surveillance du mode veille/alimentation</value>
+  </data>
 </root>

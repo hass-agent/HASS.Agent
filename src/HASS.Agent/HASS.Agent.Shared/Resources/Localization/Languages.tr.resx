@@ -2882,4 +2882,11 @@ Not: "Modern Uyku" nedeniyle uyku komutları, cihazın OEM ve işletim sistemi y
   <data name="CommandType_WinformsSleepCommand" xml:space="preserve">
     <value>WinformsSleep</value>
   </data>
+  <data name="CommandsManager_MonitorSleepPowerPlanCommandDescription" xml:space="preserve">
+    <value>Güç planı değişikliği gibi alternatif bir yaklaşım kullanarak tüm monitörleri uyku moduna (düşük güç) alır.
+"Modern S0ix uyku" özelliğine sahip yeni sistemlerde daha iyi bir deneyim sağlamalı ve sistemi uyku moduna almamalıdır.</value>
+  </data>
+  <data name="CommandType_MonitorSleepPowerPlanCommand" xml:space="preserve">
+    <value>MonitörUykuGüçPlanı</value>
+  </data>
 </root>

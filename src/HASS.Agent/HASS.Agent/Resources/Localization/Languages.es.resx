@@ -3450,4 +3450,11 @@ Nota: Debido al modo de suspensión moderno, los comandos de suspensión pueden 
   <data name="OnboardingMqtt_BtnTest_MessageOk" xml:space="preserve">
     <value>¡Conexión correcta!</value>
   </data>
+  <data name="CommandsManager_MonitorSleepPowerPlanCommandDescription" xml:space="preserve">
+    <value>Pone todos los monitores en modo de suspensión (bajo consumo de energía) utilizando un método alternativo de modificación del plan de energía.
+Esto debería proporcionar una mejor experiencia con los nuevos sistemas con "suspensión moderna S0ix" y evitar que el sistema entre en modo de suspensión completa.</value>
+  </data>
+  <data name="CommandType_MonitorSleepPowerPlanCommand" xml:space="preserve">
+    <value>Plan de energía para el sueño del monitor</value>
+  </data>
 </root>

@@ -3479,4 +3479,11 @@ Note: due to "Modern Sleep" the sleep commands might behave differently dependin
   <data name="OnboardingMqtt_BtnTest_MessageError" xml:space="preserve">
     <value>Unable to connect.</value>
   </data>
+  <data name="CommandType_MonitorSleepPowerPlanCommand" xml:space="preserve">
+    <value>MonitorSleepPowerPlan</value>
+  </data>
+  <data name="CommandsManager_MonitorSleepPowerPlanCommandDescription" xml:space="preserve">
+    <value>Puts all monitors in sleep (low power) mode using alternative approach of power plan modification.
+Should provide better experience with new systems with "modern S0ix sleep" and not put the system to sleep.</value>
+  </data>
 </root>
