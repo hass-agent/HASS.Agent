@@ -2,14 +2,9 @@
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
-using System.Threading;
-using System.Windows.Forms;
-using System.Windows.Input;
 using HASS.Agent.Shared.Enums;
 using HASS.Agent.Shared.Functions;
 using Serilog;
-using Vanara.PInvoke;
-using static Vanara.PInvoke.PowrProf;
 
 namespace HASS.Agent.Shared.HomeAssistant.Commands.InternalCommands
 {
