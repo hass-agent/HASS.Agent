@@ -456,6 +456,14 @@ namespace HASS.Agent.Commands
 
             // =================================
 
+            commandInfoCard = new CommandInfoCard(CommandType.RadioCommand,
+                Languages.CommandsManager_RadioCommandDescription,
+                true, false, true);
+
+            CommandInfoCards.Add(commandInfoCard.CommandType, commandInfoCard);
+
+            // =================================
+
             commandInfoCard = new CommandInfoCard(CommandType.RestartCommand,
                 Languages.CommandsManager_RestartCommandDescription,
                 true, true, false);
@@ -528,6 +536,14 @@ namespace HASS.Agent.Commands
 
             // =================================
 
+            commandInfoCard = new CommandInfoCard(CommandType.TrayWebViewCommand,
+                Languages.CommandsManager_TrayWebViewCommandDescription,
+                true, false, false);
+
+            CommandInfoCards.Add(commandInfoCard.CommandType, commandInfoCard);
+
+            // =================================
+
             commandInfoCard = new CommandInfoCard(CommandType.WinformsSleepCommand,
                 Languages.CommandsManager_WinformsSleepCommandDescription,
                 true, false, false);
@@ -538,22 +554,6 @@ namespace HASS.Agent.Commands
 
             commandInfoCard = new CommandInfoCard(CommandType.WebViewCommand,
                 Languages.CommandsManager_WebViewCommandDescription,
-                true, false, true);
-
-            CommandInfoCards.Add(commandInfoCard.CommandType, commandInfoCard);
-
-            // =================================
-
-            commandInfoCard = new CommandInfoCard(CommandType.TrayWebViewCommand,
-                Languages.CommandsManager_TrayWebViewCommandDescription,
-                true, false, false);
-
-            CommandInfoCards.Add(commandInfoCard.CommandType, commandInfoCard);
-
-            // =================================
-
-            commandInfoCard = new CommandInfoCard(CommandType.RadioCommand,
-                Languages.CommandsManager_RadioCommandDescription,
                 true, false, true);
 
             CommandInfoCards.Add(commandInfoCard.CommandType, commandInfoCard);
