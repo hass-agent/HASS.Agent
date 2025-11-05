@@ -3385,4 +3385,11 @@ Uwaga: ze względu na „Modern Sleep” polecenia uśpienia mogą zachowywać s
   <data name="CommandType_WinformsSleepCommand" xml:space="preserve">
     <value>WinformsSleep</value>
   </data>
+  <data name="CommandsManager_MonitorSleepPowerPlanCommandDescription" xml:space="preserve">
+    <value>Przełącza wszystkie monitory w tryb uśpienia (niskiego poboru mocy) za pomocą alternatywnej metody modyfikacji planu zasilania.
+Powinno to zapewnić lepsze działanie w przypadku nowych systemów z „nowoczesnym trybem uśpienia S0ix” i zapobiec przejściu systemu w stan uśpienia.</value>
+  </data>
+  <data name="CommandType_MonitorSleepPowerPlanCommand" xml:space="preserve">
+    <value>MonitorSleepPowerPlan</value>
+  </data>
 </root>

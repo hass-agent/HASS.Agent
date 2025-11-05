@@ -3297,4 +3297,11 @@ Opmerking: vanwege "Modern Sleep" kunnen de slaapopdrachten zich anders gedragen
   <data name="CommandType_WinformsSleepCommand" xml:space="preserve">
     <value>WinformsSleep</value>
   </data>
+  <data name="CommandsManager_MonitorSleepPowerPlanCommandDescription" xml:space="preserve">
+    <value>Zet alle monitoren in de slaapstand (laag energieverbruik) met behulp van een alternatieve aanpak voor het aanpassen van het energiebeheerschema.
+Zou een betere ervaring moeten bieden met nieuwe systemen met een "moderne S0ix-slaapstand" en het systeem niet in de slaapstand zetten.</value>
+  </data>
+  <data name="CommandType_MonitorSleepPowerPlanCommand" xml:space="preserve">
+    <value>MonitorSleepPowerPlan</value>
+  </data>
 </root>

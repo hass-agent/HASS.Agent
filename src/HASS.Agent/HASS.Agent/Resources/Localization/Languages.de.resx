@@ -3574,4 +3574,11 @@ Hinweis: Aufgrund des „Modern Sleep“-Modus können sich die Ruhezustandsbefe
   <data name="OnboardingMqtt_BtnTest_MessageOk" xml:space="preserve">
     <value>Verbindung OK!</value>
   </data>
+  <data name="CommandsManager_MonitorSleepPowerPlanCommandDescription" xml:space="preserve">
+    <value>Versetzt alle Monitore in den Energiesparmodus (niedriger Stromverbrauch) mithilfe einer alternativen Methode zur Änderung des Energiesparplans.
+Sollte bei neuen Systemen mit „modernem S0ix-Schlafmodus“ eine bessere Benutzererfahrung bieten und das System nicht in den Ruhezustand versetzen.</value>
+  </data>
+  <data name="CommandType_MonitorSleepPowerPlanCommand" xml:space="preserve">
+    <value>MonitorSleepPowerPlan</value>
+  </data>
 </root>

@@ -3520,4 +3520,11 @@ Home Assistant.
   <data name="OnboardingMqtt_BtnTest_MessageOk" xml:space="preserve">
     <value>Соединение в порядке!</value>
   </data>
+  <data name="CommandsManager_MonitorSleepPowerPlanCommandDescription" xml:space="preserve">
+    <value>Переводит все мониторы в спящий режим (режим пониженного энергопотребления), используя альтернативный подход к изменению схемы управления питанием.
+Это должно обеспечить лучшую работу на новых системах с «современным спящим режимом S0ix» и предотвратить переход системы в спящий режим.</value>
+  </data>
+  <data name="CommandType_MonitorSleepPowerPlanCommand" xml:space="preserve">
+    <value>MonitorSleepPowerPlan</value>
+  </data>
 </root>

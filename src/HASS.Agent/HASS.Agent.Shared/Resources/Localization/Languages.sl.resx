@@ -3424,4 +3424,11 @@ Opomba: Zaradi »modernega mirovanja« se lahko ukazi za mirovanje obnašajo dru
   <data name="CommandType_WinformsSleepCommand" xml:space="preserve">
     <value>WinformsSleep</value>
   </data>
+  <data name="CommandsManager_MonitorSleepPowerPlanCommandDescription" xml:space="preserve">
+    <value>Preklopi vse monitorje v način mirovanja (nizka poraba energije) z uporabo alternativnega pristopa k spreminjanju načrta porabe energije.
+Omogoča boljšo izkušnjo z novimi sistemi s »sodobnim načinom mirovanja S0ix« in ne preklopi sistema v stanje mirovanja.</value>
+  </data>
+  <data name="CommandType_MonitorSleepPowerPlanCommand" xml:space="preserve">
+    <value>MonitorSleepPowerPlan</value>
+  </data>
 </root>

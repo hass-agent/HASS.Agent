@@ -3560,4 +3560,11 @@ Uwaga: ze względu na „Modern Sleep” polecenia uśpienia mogą zachowywać s
   <data name="OnboardingMqtt_BtnTest_MessageOk" xml:space="preserve">
     <value>Połączenie OK!</value>
   </data>
+  <data name="CommandsManager_MonitorSleepPowerPlanCommandDescription" xml:space="preserve">
+    <value>Przełącza wszystkie monitory w tryb uśpienia (niskiego poboru mocy) za pomocą alternatywnej metody modyfikacji planu zasilania.
+Powinno to zapewnić lepsze działanie w przypadku nowych systemów z „nowoczesnym trybem uśpienia S0ix” i zapobiec przejściu systemu w stan uśpienia.</value>
+  </data>
+  <data name="CommandType_MonitorSleepPowerPlanCommand" xml:space="preserve">
+    <value>MonitorSleepPowerPlan</value>
+  </data>
 </root>
