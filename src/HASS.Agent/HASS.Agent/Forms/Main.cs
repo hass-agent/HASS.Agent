@@ -36,8 +36,8 @@ namespace HASS.Agent.Forms
     [SuppressMessage("ReSharper", "MemberCanBeMadeStatic.Local")]
     public partial class Main : MetroForm
     {
-        private static readonly REASON_CONTEXT s_reasonContext = new("HASS.Agent sleep prevention context");
-        private static readonly SafePowerRequestObject s_reasonHandle = PowerCreateRequest(s_reasonContext);
+/*        private static readonly REASON_CONTEXT s_reasonContext = new("HASS.Agent sleep prevention context");
+        private static readonly SafePowerRequestObject s_reasonHandle = PowerCreateRequest(s_reasonContext);*/
 
         private bool _isClosing = false;
 
@@ -70,7 +70,7 @@ namespace HASS.Agent.Forms
                     AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
                 }
 
-                if (Variables.AppSettings.PreventDeviceSleep)
+/*                if (Variables.AppSettings.PreventDeviceSleep)
                 {
                     Log.Information("[MAIN] Trying to set power request to prevent device sleep");
                     var result = PowerSetRequest(s_reasonHandle, POWER_REQUEST_TYPE.PowerRequestSystemRequired);
@@ -78,7 +78,7 @@ namespace HASS.Agent.Forms
                         Log.Debug("[MAIN] Power request has been set");
                     else
                         Log.Error("[MAIN] Could not set the power request");
-                }
+                }*/
 
                 // catch all key presses
                 KeyPreview = true;
@@ -187,7 +187,7 @@ namespace HASS.Agent.Forms
             AudioManager.Shutdown();
             NotificationManager.Exit();
 
-            if (Variables.AppSettings.PreventDeviceSleep)
+/*            if (Variables.AppSettings.PreventDeviceSleep)
             {
                 Log.Information("[MAIN] Trying to clear power request to prevent device sleep");
                 var result = PowerClearRequest(s_reasonHandle, POWER_REQUEST_TYPE.PowerRequestSystemRequired);
@@ -195,7 +195,7 @@ namespace HASS.Agent.Forms
                     Log.Debug("[MAIN] Power request has been cleared");
                 else
                     Log.Error("[MAIN] Could not clear the power request");
-            }
+            }*/
         }
 
         /// <summary>
