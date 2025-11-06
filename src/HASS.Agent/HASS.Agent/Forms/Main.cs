@@ -66,6 +66,11 @@ namespace HASS.Agent.Forms
                     AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
                 }
 
+                if (SharedHelperFunctions.RunningElevated())
+                {
+                    Log.Warning("[MAIN] Running with elevated privileges, this might cause issues for example with notifications!");
+                }
+
                 // catch all key presses
                 KeyPreview = true;
 
