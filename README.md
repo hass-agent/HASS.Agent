@@ -167,11 +167,15 @@ Liam Alexander Colman from [Home Assistant Guide](https://home-assistant-guide.c
 
 ### What it's not
 
-A Linux/macOS client! 
+A Linux/macOS client (at least yet)! 
 
-This question comes up a lot, understandably. However it's currently focussed on being a Windows-based client. Even though .NET 8 allows for Linux/macOS development, it's not as easy as pressing a button. The interface would have to be redesigned from the ground up, sensors and commands would need multiple codebases for each OS, testing would take way more time, every OS handles notifications differently, etc.
+Without getting into much of the details, it's not as easy as you think.
 
-You can use the [official companion app](https://apps.apple.com/us/app/home-assistant/id1099568401) for macOS, or [IoPC](https://github.com/maksimkurb/IoPC) which runs on Linux. Note: We haven't tested either.
+With HASS.Agent "2.X" version it's basically impossible. We are thinking about cross-platform support for the "v3 rewrite" but as of now it's only a hopeful wish.
+
+You can try the [official companion app](https://apps.apple.com/us/app/home-assistant/id1099568401) for macOS, or [IoPC](https://github.com/maksimkurb/IoPC) which runs on Linux.
+
+#### Note: We haven't tested either and we do not track the development efforts.
 
 ----
 
