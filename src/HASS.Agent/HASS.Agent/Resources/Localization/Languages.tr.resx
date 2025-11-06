@@ -2742,7 +2742,8 @@ Alternatif seçenekler için lütfen belgelere bakın.</value>
     <value>Sağladığınız URI geçerli görünmüyor, geçerli bir URI aşağıdakilerden biri gibi görünebilir: - http://homeassistant.local:8123 - http://192.168.0.1:8123 Kullanmak istediğinizden emin misiniz? yine de bu URI?</value>
   </data>
   <data name="OnboardingDone_LblInfo6" xml:space="preserve">
-    <value>Bu aracı (ve onu çevreleyen her şeyi) geliştirmek ve sürdürmek çok zaman alır. Çoğu geliştirici gibi, ben de kafein kullanıyorum - bu yüzden eğer onu ayırabilirseniz, bir fincan kahve her zaman çok değerlidir!</value>
+    <value>Şu anda (çatalın bakımını üstlenen HASS.Agent Ekibi) hiçbir şekilde bağış kabul etmiyoruz :)
+Ancak lütfen HASS.Agent'ın orijinal yazarı Sam'e bağış yapmaktan çekinmeyin! Şu anda nerede olurlarsa olsunlar, bir fincan kahve günlerini güzelleştirebilir.</value>
   </data>
   <data name="OnboardingDone_LblTip2" xml:space="preserve">
     <value>İpucu: Hakkında Penceresinde başka bağış yöntemleri de mevcuttur.</value>

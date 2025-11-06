@@ -3087,7 +3087,8 @@ Tip: if you're using the HA addon, you can probably use the preset address - jus
     <value>Enable &amp;Notifications</value>
   </data>
   <data name="OnboardingDone_LblInfo6" xml:space="preserve">
-    <value>Developing and maintaining this tool (and everything that surrounds it) takes up a lot of time. Like most developers, I run on caffeïne - so if you can spare it, a cup of coffee is always very much appreciated!</value>
+    <value>Currently, we (HASS.Agent Team maintaining the fork) do not accept donations in any form :)
+Please however feel free to donate to the original author of HASS.Agent - Sam! Wherever they currenly are, cup of coffee might brighten their day.</value>
   </data>
   <data name="OnboardingDone_LblInfo3" xml:space="preserve">
     <value>There's a lot more to tinker with, so make sure you take a look at the Configuration Window!

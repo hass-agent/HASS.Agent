@@ -3114,7 +3114,8 @@ Weet je zeker dat je 'm zo wilt gebruiken?</value>
 Weet je zeker dat je 'm zo wilt gebruiken?</value>
   </data>
   <data name="OnboardingDone_LblInfo6" xml:space="preserve">
-    <value>Het ontwikkelen en onderhouden van deze tool (en alles wat erbij komt kijken, zoals support, deze vertaling en de documentatie) neemt een hoop tijd in beslag. Zoals de meeste ontwikkelaars draai ik op caffeïne - dus als je 't kunt missen, wordt een kop koffie altijd erg gewaardeerd!</value>
+    <value>Momenteel accepteren wij (het HASS.Agent-team dat de fork beheert) geen donaties in welke vorm dan ook :)
+Voel je echter vrij om te doneren aan de oorspronkelijke auteur van HASS.Agent - Sam! Waar ze zich ook bevinden, een kopje koffie kan hun dag misschien opvrolijken.</value>
   </data>
   <data name="OnboardingDone_LblTip2" xml:space="preserve">
     <value>Tip: andere donatie methodes zijn beschikbaar in het Over scherm.</value>

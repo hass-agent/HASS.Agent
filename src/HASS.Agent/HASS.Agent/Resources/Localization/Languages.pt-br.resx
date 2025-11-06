@@ -1733,7 +1733,8 @@ Se você encontrar algum problema, crie um ticket na página do GitHub.</value>
     <comment>Fuzzy</comment>
   </data>
   <data name="OnboardingDone_LblInfo6" xml:space="preserve">
-    <value>Desenvolver e manter essa ferramenta (e tudo o que a envolve, como suporte e documentação) leva muito tempo. Como a maioria dos desenvolvedores, eu amo café - então se você puder me doar um cafezinho serei muito agradecido!</value>
+    <value>Atualmente, nós (a equipa do HASS.Agent que mantém o fork) não aceitamos donativos de qualquer forma :)
+No entanto, sinta-se à vontade para doar ao autor original do HASS.Agent - Sam! Onde quer que ele esteja, uma chávena de café pode alegrar o seu dia.</value>
   </data>
   <data name="OnboardingDone_LblTip2" xml:space="preserve">
     <value>Dica: outros tipos de doação estão disponíveis na janela Sobre.</value>
