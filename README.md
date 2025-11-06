@@ -89,8 +89,8 @@ Notification examples:
 
 
 ![image](https://user-images.githubusercontent.com/81011038/199956334-642def7d-4cb4-46f3-a73b-25c76e5bd02c.png)
-![Text-based toast notification](https://raw.githubusercontent.com/LAB02-Research/HASS.Agent/main/images/hass_agent_toast_text.png)
 ![261428315-fa66e0cf-bd41-49d6-956c-864eec4bcc70](https://github.com/amadeo-alex/HASS.Agent/assets/68441479/c7e35fb1-59ea-4077-983e-916735dd3901)
+![Text-based toast notification](https://raw.githubusercontent.com/LAB02-Research/HASS.Agent/main/images/hass_agent_toast_text.png)
 
 
 WebView example, showing a dashboard when right-clicking the tray icon:
