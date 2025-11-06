@@ -7,7 +7,8 @@
 [![Discord](https://img.shields.io/badge/dynamic/json?color=blue&label=Discord&logo=discord&logoColor=white&query=presence_count&suffix=%20Online&url=https://discord.com/api/guilds/1173033284519862392/widget.json)](https://discord.com/invite/JfZj98xqJr)
 
 <a href="https://github.com/hass-agent/HASS.Agent/">
-    <img src="https://raw.githubusercontent.com/LAB02-Research/HASS.Agent/main/images/logo_128.png" alt="HASS.Agent logo" title="HASS.Agent" align="right" height="128" /></a>
+    <img src="https://raw.githubusercontent.com/LAB02-Research/HASS.Agent/main/images/logo_128.png" alt="HASS.Agent logo" title="HASS.Agent" align="right" height="128" />
+</a>
 
 # HASS.Agent
 
@@ -72,7 +73,7 @@ Summary of the core functions:
 
 * **WebView**: quickly show any website, anywhere - no browser required, for instance a HA dashboard.
 
-* **Satellite Service**: use the service to collect sensordata and execute commands, even when you're not logged in (**not all commands/sensors are available for Satellite Service**)
+* **Satellite Service**: use the service to collect sensor data and execute commands, even when you're not logged in (**not all commands/sensors are available for Satellite Service**)
 
 * All entities are dynamically acquired from your Home Assistant instance.
 
@@ -128,7 +129,7 @@ Installing HASS.Agent is easy; just [download the latest installer](https://gith
 
 After installing, the onboarding process will help you get everything configured, step by step. If you want an introduction into HASS.Agent, be sure to read the [introduction docs](https://www.hass-agent.io/latest/getting-started/).
 
-Original HASS.Agent documentation is available [here](https://hassagent.readthedocs.io/en/latest/introduction/) - please bear in mind however that it may not represent state of things present in this version.
+Original HASS.Agent documentation is available [here](https://www.hass-agent.io/latest/getting-started/#introduction) - please bear in mind however that it may not represent state of things present in this version.
 
 [Click here to download the latest installer](https://github.com/hass-agent/HASS.Agent/releases/latest/download/HASS.Agent.Installer.exe)
 
