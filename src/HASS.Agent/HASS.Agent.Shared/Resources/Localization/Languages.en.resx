@@ -3092,7 +3092,8 @@ Are you sure you want to use this key anyway?</value>
 Are you sure you want to use this URI anyway?</value>
   </data>
   <data name="OnboardingDone_LblInfo6" xml:space="preserve">
-    <value>Developing and maintaining this tool (and everything that surrounds it) takes up a lot of time. Like most developers, I run on caffeïne - so if you can spare it, a cup of coffee is always very much appreciated!</value>
+    <value>Currently, we (HASS.Agent Team maintaining the fork) do not accept donations in any form :)
+Please however feel free to donate to the original author of HASS.Agent - Sam! Wherever they currently are, cup of coffee might brighten their day.</value>
   </data>
   <data name="OnboardingDone_LblTip2" xml:space="preserve">
     <value>Tip: Other donation methods are available on the About Window.</value>

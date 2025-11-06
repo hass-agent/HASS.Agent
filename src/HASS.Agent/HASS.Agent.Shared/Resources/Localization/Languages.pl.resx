@@ -3202,7 +3202,8 @@ Czy jesteś pewien, że chcesz użyć tego klucza?</value>
 Czy jesteś pewien, że chcesz użyć tego linku URL?</value>
   </data>
   <data name="OnboardingDone_LblInfo6" xml:space="preserve">
-    <value>Tworzenie i utrzymanie aplikacji (i wszystko dookoła, jak wsparcie i dokumentacja) zajmuje sporo czasu. Jak większość deweloperów moim paliwem jest kofeina, więc jeżeli możesz postawić mi kubek kawy będę bardzo wdzięczny!</value>
+    <value>Obecnie my (zespół HASS.Agent, odpowiedzialny za utrzymywanie tej wersji) nie przyjmujemy żadnych darowizn :)
+Prosimy jednak o wsparcie finansowe oryginalnego autora HASS.Agent – ​​Sama! Gdziekolwiek się teraz znajduje, filiżanka kawy z pewnością umili mu dzień.</value>
   </data>
   <data name="OnboardingDone_LblTip2" xml:space="preserve">
     <value>Wskazówka: Inne sposoby wsparcia dostępne są w zakładce O.</value>

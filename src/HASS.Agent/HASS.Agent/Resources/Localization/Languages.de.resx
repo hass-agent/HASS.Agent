@@ -3221,7 +3221,8 @@ Sind Sie sicher, dass Sie diesen Schlüssel trotzdem verwenden möchten?</value>
 Bist Du sicher, dass Du es so verwenden möchtest?</value>
   </data>
   <data name="OnboardingDone_LblInfo6" xml:space="preserve">
-    <value>Die Entwicklung und Wartung dieses Tools (und alles, was es umgibt) nimmt viel Zeit in Anspruch. Wie die meisten Entwickler verwende ich Koffein – wenn Du es also entbehren kannst, ist eine Tasse Kaffee immer sehr willkommen!</value>
+    <value>Derzeit nehmen wir (das HASS.Agent-Team, das die Abspaltung betreut) keinerlei Spenden an. :)
+Sie können aber gerne dem ursprünglichen Autor von HASS.Agent – ​​Sam – eine Spende zukommen lassen! Wo auch immer er sich gerade befindet, eine Tasse Kaffee könnte ihm den Tag verschönern.</value>
   </data>
   <data name="OnboardingDone_LblTip2" xml:space="preserve">
     <value>Tipp: Andere Spendenmethoden sind im Über-Fenster verfügbar.</value>

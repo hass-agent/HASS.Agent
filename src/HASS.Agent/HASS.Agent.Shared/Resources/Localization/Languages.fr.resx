@@ -3125,7 +3125,8 @@ Etes-vous sûr de vouloir l'utiliser comme ça ?</value>
 Etes-vous sûr de vouloir l'utiliser ainsi ?</value>
   </data>
   <data name="OnboardingDone_LblInfo6" xml:space="preserve">
-    <value>Développer et maintenir cet outil (et tout ce qui l'entoure) prend beaucoup de temps. Comme la plupart des développeurs, je fonctionne à la caféine - donc si vous pouvez vous le permettre, une tasse de café est toujours très appréciée !</value>
+    <value>Actuellement, nous (l'équipe HASS.Agent qui maintient cette version dérivée) n'acceptons aucune donation, sous quelque forme que ce soit.
+N'hésitez cependant pas à faire un don à l'auteur original de HASS.Agent, Sam ! Où qu'il soit actuellement, une tasse de café pourrait lui faire plaisir.</value>
   </data>
   <data name="OnboardingDone_LblTip2" xml:space="preserve">
     <value>Astuce : d'autres méthodes de dons sont disponibles dans la fenêtre À propos.</value>

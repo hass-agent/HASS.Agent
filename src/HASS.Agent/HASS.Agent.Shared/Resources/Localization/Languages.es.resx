@@ -3092,7 +3092,8 @@ Debería contener tres secciones (separadas por dos puntos).
 ¿Está seguro de que quiere usarlo así?</value>
   </data>
   <data name="OnboardingDone_LblInfo6" xml:space="preserve">
-    <value>Desarrollar y mantener esta herramienta (y todo lo que la rodea) requiere mucho tiempo. Al igual que la mayoría de los desarrolladores, funciono a base de cafeína, así que, si puede dedicarle un poco de tiempo, ¡una taza de café es siempre muy apreciada!</value>
+    <value>Actualmente, nosotros (el equipo de HASS.Agent que mantiene esta versión) no aceptamos donaciones de ningún tipo :)
+Sin embargo, no duden en donar al autor original de HASS.Agent, ¡Sam! Esté donde esté, una taza de café podría alegrarle el día.</value>
   </data>
   <data name="OnboardingDone_LblTip2" xml:space="preserve">
     <value>Sugerencia: hay otros métodos de donación disponibles en la ventana Acerca de.</value>
