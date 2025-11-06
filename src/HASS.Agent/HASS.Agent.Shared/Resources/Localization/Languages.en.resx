@@ -3093,7 +3093,7 @@ Are you sure you want to use this URI anyway?</value>
   </data>
   <data name="OnboardingDone_LblInfo6" xml:space="preserve">
     <value>Currently, we (HASS.Agent Team maintaining the fork) do not accept donations in any form :)
-Please however feel free to donate to the original author of HASS.Agent - Sam! Wherever they currenly are, cup of coffee might brighten their day.</value>
+Please however feel free to donate to the original author of HASS.Agent - Sam! Wherever they currently are, cup of coffee might brighten their day.</value>
   </data>
   <data name="OnboardingDone_LblTip2" xml:space="preserve">
     <value>Tip: Other donation methods are available on the About Window.</value>

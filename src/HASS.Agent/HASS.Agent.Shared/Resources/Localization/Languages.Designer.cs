@@ -4481,7 +4481,7 @@ namespace HASS.Agent.Shared.Resources.Localization {
         
         /// <summary>
         ///   Looks up a localized string similar to Currently, we (HASS.Agent Team maintaining the fork) do not accept donations in any form :)
-        ///Please however feel free to donate to the original author of HASS.Agent - Sam! Wherever they currenly are, cup of coffee might brighten their day..
+        ///Please however feel free to donate to the original author of HASS.Agent - Sam! Wherever they currently are, cup of coffee might brighten their day..
         /// </summary>
         internal static string OnboardingDone_LblInfo6 {
             get {
