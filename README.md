@@ -53,6 +53,14 @@ The original HASS.Agent has been created by [Sam](https://github.com/LAB02-Admin
 
 Unfortunately due to some time constraints, they're not able to provide the constant support and feature updates. That's where we step in - trying to keep HASS.Agent bug free (dreams need to be big right?) and to introduce new features here and there!
 
+#### Note on the organization and project name
+*"Why this project is named the same as original HASS.Agent, it's confusing"*
+
+Yes, I agree, you're right. The initial idea after Sam's disappearance was to continue the work and offer it to Sam once they're back.
+Well, now that's more than unlikely since it's been quite a long time we last spoke with Sam.
+
+Knowing what we do now, we've probably made a different decision but doing it now it'll only create more confusion. We have a full rewrite project going and it has been already decided the name is going to be altered.
+
 ----
 
 ### Functionality
