@@ -1,13 +1,15 @@
-using HASS.Agent.Shared;
+using System.Diagnostics;
+using System.Security.Principal;
 using HASS.Agent.Satellite.Service.Commands;
 using HASS.Agent.Satellite.Service.Functions;
 using HASS.Agent.Satellite.Service.Managers;
 using HASS.Agent.Satellite.Service.RPC;
 using HASS.Agent.Satellite.Service.Sensors;
 using HASS.Agent.Satellite.Service.Settings;
-using Serilog;
+using HASS.Agent.Shared;
 using HASS.Agent.Shared.Managers;
 using HASS.Agent.Shared.Managers.Audio;
+using Serilog;
 
 namespace HASS.Agent.Satellite.Service
 {
@@ -40,6 +42,12 @@ namespace HASS.Agent.Satellite.Service
             try
             {
                 _log.LogInformation("[WORKER] Startup completed, commencing execution ..");
+
+                var runningUser = WindowsIdentity.GetCurrent();
+                if(runningUser.User?.Value != "S-1-5-18")
+                {
+                    _log.LogWarning("[WORKER] Service is not running as 'System' user but rather '{user}', this may cause permission issues!", runningUser.Name);
+                }
 
                 // load stored settings (if any)
                 var launched = await SettingsManager.LoadAsync();
