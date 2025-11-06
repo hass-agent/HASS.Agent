@@ -159,7 +159,7 @@ If you want to help with the development of HASS.Agent, check out the [Helping O
 
 ### Articles
 
-### Original HASS.Agent
+### Original HASS.Agent by Sam/LAB02 Research
 
 Liam Alexander Colman from [Home Assistant Guide](https://home-assistant-guide.com) was kind enough to write an article about HASS.Agent: [Integrate Home Assistant with Windows using HASS.Agent](https://home-assistant-guide.com/2022/04/20/integrate-home-assistant-with-windows-using-hass-agent/). The website's full of useful articles, worth having a look :)
 
