@@ -1378,6 +1378,15 @@ namespace HASS.Agent.Shared.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to VoicemeeterCommand.
+        /// </summary>
+        internal static string CommandType_VoicemeeterCommand {
+            get {
+                return ResourceManager.GetString("CommandType_VoicemeeterCommand", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to WebView.
         /// </summary>
         internal static string CommandType_WebViewCommand {
@@ -6910,6 +6919,15 @@ namespace HASS.Agent.Shared.Resources.Localization {
         internal static string SensorType_UserNotificationStateSensor {
             get {
                 return ResourceManager.GetString("SensorType_UserNotificationStateSensor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to VoicemeeterSensor.
+        /// </summary>
+        internal static string SensorType_VoicemeeterSensor {
+            get {
+                return ResourceManager.GetString("SensorType_VoicemeeterSensor", resourceCulture);
             }
         }
         

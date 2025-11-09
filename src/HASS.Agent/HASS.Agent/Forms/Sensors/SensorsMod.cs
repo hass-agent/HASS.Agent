@@ -235,6 +235,12 @@ namespace HASS.Agent.Forms.Sensors
                 case SensorType.ScreenshotSensor:
                     TbSetting1.Text = Sensor.Query;
                     break;
+
+                case SensorType.VoicemeeterSensor:
+                    TbSetting1.Text = Sensor.Query;
+                    CbApplyRounding.Checked = Sensor.ApplyRounding;
+                    NumRound.Text = Sensor.Round?.ToString() ?? "2";
+                    break;
             }
         }
 
@@ -339,6 +345,10 @@ namespace HASS.Agent.Forms.Sensors
                     SetScreenshotGui();
                     break;
 
+                case SensorType.VoicemeeterSensor:
+                    SetVoicemeeterGui();
+                    break;
+
                 default:
                     SetEmptyGui();
                     break;
@@ -409,6 +419,32 @@ namespace HASS.Agent.Forms.Sensors
                 TbSetting1.Visible = true;
 
                 BtnTest.Text = Languages.SensorsMod_SensorsMod_BtnTest_Powershell;
+                BtnTest.Visible = true;
+
+                CbApplyRounding.Visible = true;
+                if (CbApplyRounding.Checked)
+                {
+                    NumRound.Visible = true;
+                    LblDigits.Visible = true;
+                }
+            }));
+        }
+
+        /// <summary>
+        /// Change the UI to a 'voicemeeter command' type
+        /// </summary>
+        [SuppressMessage("ReSharper", "InvertIf")]
+        private void SetVoicemeeterGui()
+        {
+            Invoke(new MethodInvoker(delegate
+            {
+                SetEmptyGui();
+
+                LblSetting1.Text = Languages.SensorsMod_LblSetting1_Voicemeeter;
+                LblSetting1.Visible = true;
+                TbSetting1.Visible = true;
+
+                BtnTest.Text = Languages.SensorsMod_SensorsMod_BtnTest_Voicemeeter;
                 BtnTest.Visible = true;
 
                 CbApplyRounding.Visible = true;
@@ -838,6 +874,10 @@ namespace HASS.Agent.Forms.Sensors
                     }
                     Sensor.Query = screenIndex;
                     break;
+
+                case SensorType.VoicemeeterSensor:
+                    Sensor.Query = TbSetting1.Text.Trim();
+                    break;
             }
 
             // set values
@@ -973,6 +1013,10 @@ namespace HASS.Agent.Forms.Sensors
                 case SensorType.PowershellSensor:
                     TestPowershell();
                     break;
+
+                case SensorType.VoicemeeterSensor:
+                    TestVoicemeeter();
+                    break;
             }
         }
 
@@ -1088,6 +1132,34 @@ namespace HASS.Agent.Forms.Sensors
 
             // failed
             var q = MessageBoxAdv.Show(this, string.Format(Languages.SensorsMod_TestPowershell_MessageBox3, result.ErrorReason), Variables.MessageBoxTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Error);
+            if (q != DialogResult.Yes) return;
+
+            // open logs
+            HelperFunctions.OpenLocalFolder(Variables.LogPath);
+        }
+
+        private async void TestVoicemeeter()
+        {
+            // prepare values
+            var command = TbSetting1.Text.Trim();
+            var applyRounding = CbApplyRounding.Checked;
+            var round = (int)NumRound.Value;
+
+            BtnTest.Enabled = false;
+
+            // execute the test
+            var result = await Task.Run((() => SensorTester.TestVoicemeeter(command, applyRounding, round)));
+
+            BtnTest.Enabled = true;
+
+            if (result.Succesful)
+            {
+                MessageBoxAdv.Show(this, string.Format(Languages.SensorsMod_TestVoicemeeter_MessageBox2, result.ReturnValue), Variables.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            // failed
+            var q = MessageBoxAdv.Show(this, string.Format(Languages.SensorsMod_TestVoicemeeter_MessageBox3, result.ErrorReason), Variables.MessageBoxTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Error);
             if (q != DialogResult.Yes) return;
 
             // open logs

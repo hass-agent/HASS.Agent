@@ -737,6 +737,25 @@ namespace HASS.Agent.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Sends a Voicemeeter command to the running application.
+        ///
+        ///Supports any remote api script or parameter, more information here: https://github.com/vburel2018/Voicemeeter-SDK/blob/main/VoicemeeterRemoteAPI.pdf
+        ///
+        ///Examples:
+        ///Strip[0].Gain=0
+        ///Strip[0].A1 = 0
+        ///Strip[1].EQ.on=1
+        ///Command.Eject=1
+        ///
+        ///Supports &apos;,&apos; &apos;;&apos; or &apos;\n&apos; to separate commands.
+        /// </summary>
+        internal static string CommandsManager_VoicemeeterCommandDescription {
+            get {
+                return ResourceManager.GetString("CommandsManager_VoicemeeterCommandDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Shows a window with the provided URL.
         ///
         ///This differs from the &apos;LaunchUrl&apos; command in that it doesn&apos;t load a full-fledged browser, just the provided URL in its own window.
@@ -1204,6 +1223,15 @@ namespace HASS.Agent.Resources.Localization {
         internal static string CommandsMod_LblSetting_Url {
             get {
                 return ResourceManager.GetString("CommandsMod_LblSetting_Url", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Voicemeeter remote api script.
+        /// </summary>
+        internal static string CommandsMod_LblSetting_VoicemeeterCommand {
+            get {
+                return ResourceManager.GetString("CommandsMod_LblSetting_VoicemeeterCommand", resourceCulture);
             }
         }
         
@@ -6407,6 +6435,22 @@ namespace HASS.Agent.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Monitors a Voicemeeter parameter from the running application.
+        ///
+        ///Supports any remote api parameter, more information here: https://github.com/vburel2018/Voicemeeter-SDK/blob/main/VoicemeeterRemoteAPI.pdf
+        ///
+        ///Examples:
+        ///Strip[0].Gain
+        ///Strip[0].A1
+        ///Strip[1].EQ.on.
+        /// </summary>
+        internal static string SensorsManager_VoicemeeterSensorDescription {
+            get {
+                return ResourceManager.GetString("SensorsManager_VoicemeeterSensorDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Provides a bool value based on whether the webcam is currently being used.
         ///
         ///Note: if used in the satellite service, it won&apos;t detect userspace applications..
@@ -6813,6 +6857,15 @@ namespace HASS.Agent.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Voicemeeter remote api parameter.
+        /// </summary>
+        internal static string SensorsMod_LblSetting1_Voicemeeter {
+            get {
+                return ResourceManager.GetString("SensorsMod_LblSetting1_Voicemeeter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Window Name.
         /// </summary>
         internal static string SensorsMod_LblSetting1_WindowName {
@@ -6934,6 +6987,15 @@ namespace HASS.Agent.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Test Remote API.
+        /// </summary>
+        internal static string SensorsMod_SensorsMod_BtnTest_Voicemeeter {
+            get {
+                return ResourceManager.GetString("SensorsMod_SensorsMod_BtnTest_Voicemeeter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0} only!.
         /// </summary>
         internal static string SensorsMod_SpecificClient {
@@ -7005,6 +7067,30 @@ namespace HASS.Agent.Resources.Localization {
         internal static string SensorsMod_TestPowershell_MessageBox3 {
             get {
                 return ResourceManager.GetString("SensorsMod_TestPowershell_MessageBox3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Test succesfully executed, result value:
+        ///
+        ///{0}.
+        /// </summary>
+        internal static string SensorsMod_TestVoicemeeter_MessageBox2 {
+            get {
+                return ResourceManager.GetString("SensorsMod_TestVoicemeeter_MessageBox2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The test failed to execute:
+        ///
+        ///{0}
+        ///
+        ///Do you want to open the logs folder?.
+        /// </summary>
+        internal static string SensorsMod_TestVoicemeeter_MessageBox3 {
+            get {
+                return ResourceManager.GetString("SensorsMod_TestVoicemeeter_MessageBox3", resourceCulture);
             }
         }
         

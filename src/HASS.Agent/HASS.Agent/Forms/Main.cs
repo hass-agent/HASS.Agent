@@ -21,6 +21,7 @@ using HASS.Agent.Shared.Extensions;
 using HASS.Agent.Shared.Functions;
 using HASS.Agent.Shared.Managers;
 using HASS.Agent.Shared.Managers.Audio;
+using HASS.Agent.Shared.Managers.VoiceMeeterAudio;
 using Serilog;
 using Syncfusion.Windows.Forms;
 using WindowsDesktop;
@@ -174,6 +175,7 @@ namespace HASS.Agent.Forms
         private void OnProcessExit(object sender, EventArgs e)
         {
             AudioManager.Shutdown();
+            VoiceMeeterAudioManager.Shutdown();
             NotificationManager.Exit();
         }
 

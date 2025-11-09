@@ -4,6 +4,7 @@ using System.Text.RegularExpressions;
 using HASS.Agent.Satellite.Service.Commands;
 using HASS.Agent.Satellite.Service.Sensors;
 using HASS.Agent.Shared.Managers.Audio;
+using HASS.Agent.Shared.Managers.VoiceMeeterAudio;
 using Serilog;
 
 namespace HASS.Agent.Satellite.Service.Functions
@@ -62,6 +63,9 @@ namespace HASS.Agent.Satellite.Service.Functions
 
                 //stop audio manager
                 AudioManager.Shutdown();
+
+                //stop voicemeeter audio manager
+                VoiceMeeterAudioManager.Shutdown();
 
                 // stop mqtt
                 await Variables.MqttManager.AnnounceAvailabilityAsync(true);

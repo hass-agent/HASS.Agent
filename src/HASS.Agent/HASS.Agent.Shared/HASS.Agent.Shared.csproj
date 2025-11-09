@@ -23,6 +23,7 @@
     <DebugType>full</DebugType>
     <SupportedOSPlatformVersion>10.0.17763.0</SupportedOSPlatformVersion>
 	<IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
+	<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
 
   <ItemGroup>

@@ -3283,4 +3283,10 @@ Esto debería proporcionar una mejor experiencia con los nuevos sistemas con "su
   <data name="CommandType_MonitorSleepPowerPlanCommand" xml:space="preserve">
     <value>Plan de energía para el sueño del monitor</value>
   </data>
+  <data name="CommandType_VoicemeeterCommand" xml:space="preserve">
+    <value>VoicemeeterCommand</value>
+  </data>
+  <data name="SensorType_VoicemeeterSensor" xml:space="preserve">
+    <value>VoicemeeterSensor</value>
+  </data>
 </root>

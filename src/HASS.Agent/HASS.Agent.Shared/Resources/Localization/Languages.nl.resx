@@ -3305,4 +3305,10 @@ Zou een betere ervaring moeten bieden met nieuwe systemen met een "moderne S0ix-
   <data name="CommandType_MonitorSleepPowerPlanCommand" xml:space="preserve">
     <value>MonitorSleepPowerPlan</value>
   </data>
+  <data name="CommandType_VoicemeeterCommand" xml:space="preserve">
+    <value>VoicemeeterCommand</value>
+  </data>
+  <data name="SensorType_VoicemeeterSensor" xml:space="preserve">
+    <value>VoicemeeterSensor</value>
+  </data>
 </root>

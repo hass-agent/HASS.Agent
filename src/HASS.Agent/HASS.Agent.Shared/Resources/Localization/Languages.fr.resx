@@ -3316,4 +3316,10 @@ Cela devrait offrir une meilleure expérience avec les nouveaux systèmes dotés
   <data name="CommandType_MonitorSleepPowerPlanCommand" xml:space="preserve">
     <value>Surveillance du mode veille/alimentation</value>
   </data>
+  <data name="CommandType_VoicemeeterCommand" xml:space="preserve">
+    <value>VoicemeeterCommand</value>
+  </data>
+  <data name="SensorType_VoicemeeterSensor" xml:space="preserve">
+    <value>VoicemeeterSensor</value>
+  </data>
 </root>
