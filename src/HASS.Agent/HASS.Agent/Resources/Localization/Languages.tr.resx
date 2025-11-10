@@ -3074,4 +3074,42 @@ Not: "Modern Uyku" nedeniyle uyku komutları, cihazın OEM ve işletim sistemi y
   <data name="CommandType_MonitorSleepPowerPlanCommand" xml:space="preserve">
     <value>MonitörUykuGüçPlanı</value>
   </data>
+  <data name="CommandsManager_VoicemeeterCommandDescription" xml:space="preserve">
+    <value>Çalışan uygulamaya bir Voicemeeter komutu gönderir.
+
+Herhangi bir uzak API komut dosyasını veya parametresini destekler; daha fazla bilgiyi burada bulabilirsiniz: https://github.com/vburel2018/Voicemeeter-SDK/blob/main/VoicemeeterRemoteAPI.pdf
+
+Örnekler:
+Strip[0].Gain=0
+Strip[0].A1 = 0
+Strip[1].EQ.on=1
+Command.Eject=1
+
+',' ';' destekler veya komutları ayırmak için '\n'</value>
+  </data>
+  <data name="CommandsMod_LblSetting_VoicemeeterCommand" xml:space="preserve">
+    <value>Voicemeeter uzaktan API komut dosyası</value>
+  </data>
+  <data name="SensorsMod_SensorsMod_BtnTest_Voicemeeter" xml:space="preserve">
+    <value>Remote API'yi Test Edin</value>
+  </data>
+  <data name="SensorsMod_LblSetting1_Voicemeeter" xml:space="preserve">
+    <value>Voicemeeter uzaktan API parametresi</value>
+  </data>
+  <data name="SensorsMod_TestVoicemeeter_MessageBox3" xml:space="preserve">
+    <value>Test yürütülemedi: {0} Günlükler klasörünü açmak istiyor musunuz?</value>
+  </data>
+  <data name="SensorsMod_TestVoicemeeter_MessageBox2" xml:space="preserve">
+    <value>Test başarıyla yürütüldü, sonuç değeri: {0}</value>
+  </data>
+  <data name="SensorsManager_VoicemeeterSensorDescription" xml:space="preserve">
+    <value>Çalışan uygulamadan bir Voicemeeter parametresini izler.
+
+Herhangi bir uzak API parametresini destekler, daha fazla bilgiyi burada bulabilirsiniz: https://github.com/vburel2018/Voicemeeter-SDK/blob/main/VoicemeeterRemoteAPI.pdf
+
+Örnekler:
+Strip[0].Gain
+Strip[0].A1
+Strip[1].EQ.on</value>
+  </data>
 </root>

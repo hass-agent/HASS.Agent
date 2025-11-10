@@ -3528,4 +3528,48 @@ Home Assistant.
   <data name="CommandType_MonitorSleepPowerPlanCommand" xml:space="preserve">
     <value>MonitorSleepPowerPlan</value>
   </data>
+  <data name="CommandsManager_VoicemeeterCommandDescription" xml:space="preserve">
+    <value>Отправляет команду Voicemeeter работающему приложению.
+
+Поддерживает любой сценарий или параметр удаленного API. Дополнительную информацию можно найти здесь: https://github.com/vburel2018/Voicemeeter-SDK/blob/main/VoicemeeterRemoteAPI.pdf.
+
+Примеры:
+Strip[0].Gain=0
+Strip[0].A1 = 0
+Strip[1].EQ.on=1
+Command.Eject=1
+
+Поддерживает ',' ';' или '\n' для разделения команд</value>
+  </data>
+  <data name="CommandsMod_LblSetting_VoicemeeterCommand" xml:space="preserve">
+    <value>Скрипт удаленного API Voicemeeter</value>
+  </data>
+  <data name="SensorsMod_SensorsMod_BtnTest_Voicemeeter" xml:space="preserve">
+    <value>Тестирование удаленного API</value>
+  </data>
+  <data name="SensorsMod_LblSetting1_Voicemeeter" xml:space="preserve">
+    <value>Параметр удаленного API Voicemeeter</value>
+  </data>
+  <data name="SensorsMod_TestVoicemeeter_MessageBox3" xml:space="preserve">
+    <value>Тест не удалось выполнить:
+
+{0}
+
+Вы хотите открыть папку журналов?</value>
+  </data>
+  <data name="SensorsMod_TestVoicemeeter_MessageBox2" xml:space="preserve">
+    <value>Тест успешно выполнен, значение результата:
+
+{0}</value>
+  </data>
+  <data name="SensorsManager_VoicemeeterSensorDescription" xml:space="preserve">
+    <value>Отслеживает параметр Voicemeeter из работающего приложения.
+
+Поддерживает любые параметры удаленного API. Дополнительную информацию можно найти здесь: https://github.com/vburel2018/Voicemeeter-SDK/blob/main/VoicemeeterRemoteAPI.pdf.
+
+Примеры:
+Strip[0].Gain
+Strip[0].A1
+Strip[1].EQ.on</value>
+  </data>
 </root>

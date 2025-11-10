@@ -3504,4 +3504,48 @@ Deve proporcionar uma melhor experiência com novos sistemas com "suspensão S0i
   <data name="CommandType_MonitorSleepPowerPlanCommand" xml:space="preserve">
     <value>MonitorSleepPowerPlan</value>
   </data>
+  <data name="CommandsManager_VoicemeeterCommandDescription" xml:space="preserve">
+    <value>Envia um comando do Voicemeeter para o aplicativo em execução.
+
+Suporta qualquer script ou parâmetro de API remota, mais informações aqui: https://github.com/vburel2018/Voicemeeter-SDK/blob/main/VoicemeeterRemoteAPI.pdf
+
+Exemplos:
+Strip[0].Gain=0
+Strip[0].A1 = 0
+Strip[1].EQ.on=1
+Command.Eject=1
+
+Suporta ',' ';' ou '\n' para separar comandos</value>
+  </data>
+  <data name="CommandsMod_LblSetting_VoicemeeterCommand" xml:space="preserve">
+    <value>Script de API remota do Voicemeeter</value>
+  </data>
+  <data name="SensorsMod_SensorsMod_BtnTest_Voicemeeter" xml:space="preserve">
+    <value>Testar API Remota</value>
+  </data>
+  <data name="SensorsMod_LblSetting1_Voicemeeter" xml:space="preserve">
+    <value>Parâmetro da API remota do Voicemeeter</value>
+  </data>
+  <data name="SensorsMod_TestVoicemeeter_MessageBox3" xml:space="preserve">
+    <value>O teste falhou ao executar:
+
+{0}
+
+Deseja abrir a pasta de logs?</value>
+  </data>
+  <data name="SensorsMod_TestVoicemeeter_MessageBox2" xml:space="preserve">
+    <value>Teste executado com sucesso, valor do resultado:
+
+{0}</value>
+  </data>
+  <data name="SensorsManager_VoicemeeterSensorDescription" xml:space="preserve">
+    <value>Monitora um parâmetro do Voicemeeter do aplicativo em execução.
+
+Suporta qualquer parâmetro de API remota, mais informações aqui: https://github.com/vburel2018/Voicemeeter-SDK/blob/main/VoicemeeterRemoteAPI.pdf
+
+Exemplos:
+Strip[0].Gain
+Strip[0].A1
+Strip[1].EQ.on</value>
+  </data>
 </root>

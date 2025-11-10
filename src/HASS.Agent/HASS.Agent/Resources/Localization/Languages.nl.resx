@@ -3479,4 +3479,48 @@ Zou een betere ervaring moeten bieden met nieuwe systemen met een "moderne S0ix-
   <data name="CommandType_MonitorSleepPowerPlanCommand" xml:space="preserve">
     <value>MonitorSleepPowerPlan</value>
   </data>
+  <data name="SensorsMod_SensorsMod_BtnTest_Voicemeeter" xml:space="preserve">
+    <value>Externe API testen</value>
+  </data>
+  <data name="CommandsMod_LblSetting_VoicemeeterCommand" xml:space="preserve">
+    <value>Voicemeeter extern API-script</value>
+  </data>
+  <data name="CommandsManager_VoicemeeterCommandDescription" xml:space="preserve">
+    <value>Stuurt een Voicemeeter-opdracht naar de actieve applicatie.
+
+Ondersteunt elk extern API-script of parameter, meer informatie hier: https://github.com/vburel2018/Voicemeeter-SDK/blob/main/VoicemeeterRemoteAPI.pdf
+
+Voorbeelden:
+Strip[0].Gain=0
+Strip[0].A1 = 0
+Strip[1].EQ.on=1
+Command.Eject=1
+
+Ondersteunt ',' ';' of '\n' om opdrachten te scheiden</value>
+  </data>
+  <data name="SensorsMod_LblSetting1_Voicemeeter" xml:space="preserve">
+    <value>Voicemeeter externe API-parameter</value>
+  </data>
+  <data name="SensorsMod_TestVoicemeeter_MessageBox3" xml:space="preserve">
+    <value>Niet gelukt om test uit te voeren:
+
+{0}
+
+Wil je de logs folder openen?</value>
+  </data>
+  <data name="SensorsMod_TestVoicemeeter_MessageBox2" xml:space="preserve">
+    <value>Test succesvol uitgevoerd, resultaat:
+
+{0}</value>
+  </data>
+  <data name="SensorsManager_VoicemeeterSensorDescription" xml:space="preserve">
+    <value>Bewaakt een Voicemeeter-parameter van de actieve applicatie.
+
+Ondersteunt elke externe API-parameter, meer informatie hier: https://github.com/vburel2018/Voicemeeter-SDK/blob/main/VoicemeeterRemoteAPI.pdf
+
+Voorbeelden:
+Strip[0].Gain
+Strip[0].A1
+Strip[1].EQ.on</value>
+  </data>
 </root>

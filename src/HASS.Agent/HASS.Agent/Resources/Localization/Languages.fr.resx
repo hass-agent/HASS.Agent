@@ -3490,4 +3490,48 @@ Cela devrait offrir une meilleure expérience avec les nouveaux systèmes dotés
   <data name="CommandType_MonitorSleepPowerPlanCommand" xml:space="preserve">
     <value>Surveillance du mode veille/alimentation</value>
   </data>
+  <data name="CommandsManager_VoicemeeterCommandDescription" xml:space="preserve">
+    <value>Envoie une commande Voicemeter à l’application en cours d’exécution.
+
+Prend en charge n'importe quel script ou paramètre d'API distante, plus d'informations ici : https://github.com/vburel2018/Voicemeeter-SDK/blob/main/VoicemeeterRemoteAPI.pdf
+
+Exemples :
+Strip[0].Gain=0
+Strip[0].A1 = 0
+Strip[1].EQ.on=1
+Command.Eject=1
+
+Prend en charge ',' ';' ou '\n' pour séparer les commandes</value>
+  </data>
+  <data name="CommandsMod_LblSetting_VoicemeeterCommand" xml:space="preserve">
+    <value>Script API distant de Voicemeter</value>
+  </data>
+  <data name="SensorsMod_SensorsMod_BtnTest_Voicemeeter" xml:space="preserve">
+    <value>Tester l'API distante</value>
+  </data>
+  <data name="SensorsMod_LblSetting1_Voicemeeter" xml:space="preserve">
+    <value>Paramètre de l'API distante Voicemeter</value>
+  </data>
+  <data name="SensorsMod_TestVoicemeeter_MessageBox3" xml:space="preserve">
+    <value>Le test n'a pas réussi a s'exécuter :
+
+{0}
+
+Voulez-vous ouvrir le dossier des journaux ?</value>
+  </data>
+  <data name="SensorsMod_TestVoicemeeter_MessageBox2" xml:space="preserve">
+    <value>Test exécuté avec succès, valeur du résultat :
+
+{0}</value>
+  </data>
+  <data name="SensorsManager_VoicemeeterSensorDescription" xml:space="preserve">
+    <value>Surveille un paramètre Voicemeter de l’application en cours d’exécution.
+
+Prend en charge n'importe quel paramètre d'API distante, plus d'informations ici : https://github.com/vburel2018/Voicemeeter-SDK/blob/main/VoicemeeterRemoteAPI.pdf
+
+Exemples :
+Strip[0].Gain
+Strip[0].A1
+Strip[1].EQ.on</value>
+  </data>
 </root>

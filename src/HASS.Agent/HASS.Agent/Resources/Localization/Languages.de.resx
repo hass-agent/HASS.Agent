@@ -3582,4 +3582,48 @@ Sollte bei neuen Systemen mit „modernem S0ix-Schlafmodus“ eine bessere Benut
   <data name="CommandType_MonitorSleepPowerPlanCommand" xml:space="preserve">
     <value>MonitorSleepPowerPlan</value>
   </data>
+  <data name="CommandsManager_VoicemeeterCommandDescription" xml:space="preserve">
+    <value>Sendet einen Voicemeeter-Befehl an die laufende Anwendung.
+
+Unterstützt jedes Remote-API-Skript oder jeden Parameter. Weitere Informationen finden Sie hier: https://github.com/vburel2018/Voicemeeter-SDK/blob/main/VoicemeeterRemoteAPI.pdf
+
+Beispiele:
+Strip[0].Gain=0
+Strip[0].A1 = 0
+Strip[1].EQ.on=1
+Command.Eject=1
+
+Unterstützt ',' ';' oder „\n“, um Befehle zu trennen</value>
+  </data>
+  <data name="CommandsMod_LblSetting_VoicemeeterCommand" xml:space="preserve">
+    <value>Voicemeeter-Remote-API-Skript</value>
+  </data>
+  <data name="SensorsMod_SensorsMod_BtnTest_Voicemeeter" xml:space="preserve">
+    <value>Testen Sie die Remote-API</value>
+  </data>
+  <data name="SensorsMod_LblSetting1_Voicemeeter" xml:space="preserve">
+    <value>Voicemeeter-Remote-API-Parameter</value>
+  </data>
+  <data name="SensorsMod_TestVoicemeeter_MessageBox3" xml:space="preserve">
+    <value>Der Test konnte nicht ausgeführt werden:
+
+{0}
+
+Möchtest du den Ordner mit den Protokollen öffnen?</value>
+  </data>
+  <data name="SensorsMod_TestVoicemeeter_MessageBox2" xml:space="preserve">
+    <value>Test erfolgreich durchgeführt, Ergebniswert:
+
+{0}</value>
+  </data>
+  <data name="SensorsManager_VoicemeeterSensorDescription" xml:space="preserve">
+    <value>Überwacht einen Voicemeeter-Parameter der laufenden Anwendung.
+
+Unterstützt alle Remote-API-Parameter, weitere Informationen hier: https://github.com/vburel2018/Voicemeeter-SDK/blob/main/VoicemeeterRemoteAPI.pdf
+
+Beispiele:
+Strip[0].Gain
+Strip[0].A1
+Strip[1].EQ.on</value>
+  </data>
 </root>
