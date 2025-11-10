@@ -1,18 +1,6 @@
-﻿using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using NAudio.CoreAudioApi;
-using HASS.Agent.Shared.Managers.Audio.Exceptions;
-using HASS.Agent.Shared.Managers.Audio.Internal;
+﻿using HASS.Agent.Shared.Managers.VoiceMeeterAudio.Native;
 using Serilog;
-using NAudio.CoreAudioApi.Interfaces;
-using Microsoft.VisualBasic.ApplicationServices;
-using HASS.Agent.Shared.Managers.VoiceMeeterAudio.Native;
-using WinRT;
+using System;
 
 namespace HASS.Agent.Shared.Managers.VoiceMeeterAudio;
 public static class VoiceMeeterAudioManager

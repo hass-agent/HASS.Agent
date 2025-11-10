@@ -1,10 +1,6 @@
-﻿using System;
-using System.Globalization;
-using System.Management;
-using HASS.Agent.Shared.Managers;
-using HASS.Agent.Shared.Managers.VoiceMeeterAudio;
+﻿using HASS.Agent.Shared.Managers.VoiceMeeterAudio;
 using HASS.Agent.Shared.Models.HomeAssistant;
-using Serilog;
+using System;
 
 namespace HASS.Agent.Shared.HomeAssistant.Sensors;
 

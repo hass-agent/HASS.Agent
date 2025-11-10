@@ -1,9 +1,8 @@
-﻿using System.Diagnostics;
-using HASS.Agent.Shared.Enums;
-using HASS.Agent.Shared.Managers;
+﻿using HASS.Agent.Shared.Enums;
 using HASS.Agent.Shared.Managers.VoiceMeeterAudio;
 using HASS.Agent.Shared.Models.HomeAssistant;
 using Serilog;
+using System.Diagnostics;
 
 namespace HASS.Agent.Shared.HomeAssistant.Commands
 {
