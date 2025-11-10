@@ -712,7 +712,7 @@ namespace HASS.Agent.Sensors
 
             sensorInfoCard = new SensorInfoCard(SensorType.VoicemeeterSensor,
                 Languages.SensorsManager_VoicemeeterSensorDescription,
-                10, false, true, true);
+                10, false, true, false);
 
             SensorInfoCards.Add(sensorInfoCard.SensorType, sensorInfoCard);
 

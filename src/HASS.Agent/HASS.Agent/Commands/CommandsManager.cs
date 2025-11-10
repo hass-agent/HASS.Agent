@@ -562,7 +562,7 @@ namespace HASS.Agent.Commands
 
             commandInfoCard = new CommandInfoCard(CommandType.VoicemeeterCommand,
                 Languages.CommandsManager_VoicemeeterCommandDescription,
-                true, true, true);
+                true, false, true);
 
             CommandInfoCards.Add(commandInfoCard.CommandType, commandInfoCard);
         }
