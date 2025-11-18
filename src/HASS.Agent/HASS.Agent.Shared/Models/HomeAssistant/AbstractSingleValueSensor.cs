@@ -160,11 +160,11 @@ public abstract class AbstractSingleValueSensor : AbstractDiscoverable
         await Variables.MqttManager.AnnounceAutoDiscoveryConfigAsync(this, Domain);
     }
 
-    public async Task UnPublishAutoDiscoveryConfigAsync()
+    public async Task UnPublishAutoDiscoveryConfigAsync(bool migration = false)
     {
         if (Variables.MqttManager == null)
             return;
 
-        await Variables.MqttManager.AnnounceAutoDiscoveryConfigAsync(this, Domain, true);
+        await Variables.MqttManager.AnnounceAutoDiscoveryConfigAsync(this, Domain, true, migration);
     }
 }

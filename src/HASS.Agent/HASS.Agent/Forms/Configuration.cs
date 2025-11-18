@@ -172,8 +172,8 @@ namespace HASS.Agent.Forms
                 await Task.Delay(250);
 
                 // unpublish all entities
-                await SensorsManager.UnpublishAllSensors();
-                await CommandsManager.UnpublishAllCommands();
+                await SensorsManager.UnpublishAllSensors(migration: true);
+                await CommandsManager.UnpublishAllCommands(migration: true);
 
                 // unpublish the current device
                 await Variables.MqttManager.ClearDeviceConfigAsync();
