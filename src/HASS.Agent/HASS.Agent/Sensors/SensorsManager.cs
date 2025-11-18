@@ -82,6 +82,30 @@ namespace HASS.Agent.Sensors
                     await sensor.UnPublishAutoDiscoveryConfigAsync(migration);
                 }
             }
+
+            _discoveryPublished = false;
+        }
+
+        /// <summary>
+        /// Publishes all single- and multivalue sensors
+        /// </summary>
+        /// <returns></returns>
+        internal static async Task ForcePublishAllSensors()
+        {
+            if (SingleValueSensorsPresent())
+            {
+                foreach (var sensor in Variables.SingleValueSensors)
+                {
+                    await sensor.PublishAutoDiscoveryConfigAsync();
+                }
+            }
+            if (MultiValueSensorsPresent())
+            {
+                foreach (var sensor in Variables.MultiValueSensors)
+                {
+                    await sensor.PublishAutoDiscoveryConfigAsync();
+                }
+            }
         }
 
         /// <summary>

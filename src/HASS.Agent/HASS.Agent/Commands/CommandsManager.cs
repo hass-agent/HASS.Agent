@@ -73,6 +73,23 @@ namespace HASS.Agent.Commands
         }
 
         /// <summary>
+        /// Publishes all commands
+        /// </summary>
+        /// <returns></returns>
+        internal static async Task ForcePublishAllCommands()
+        {
+            if (!CommandsPresent())
+                return;
+
+            foreach (var command in Variables.Commands)
+            {
+                await command.PublishAutoDiscoveryConfigAsync();
+            }
+
+            _discoveryPublished = false;
+        }
+
+        /// <summary>
         /// Generates new ID's for all commands
         /// </summary>
         internal static void ResetCommandIds()
