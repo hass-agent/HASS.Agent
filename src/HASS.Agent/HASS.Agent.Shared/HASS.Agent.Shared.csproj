@@ -12,7 +12,7 @@
     <RepositoryUrl>https://github.com/hass-agent/HASS.Agent</RepositoryUrl>
     <AssemblyVersion>2.2.0</AssemblyVersion>
     <FileVersion>2.2.0</FileVersion>
-    <Version>2.2.0-beta3</Version>
+    <Version>2.2.0-beta4</Version>
     <PackageIcon>logo_128.png</PackageIcon>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <ApplicationIcon>hassagent.ico</ApplicationIcon>
