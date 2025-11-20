@@ -50,7 +50,7 @@ namespace HASS.Agent.Satellite.Service.Commands
         /// Unpublishes all commands
         /// </summary>
         /// <returns></returns>
-        internal static async Task UnpublishAllCommands()
+        internal static async Task UnpublishAllCommands(bool migration = false)
         {
             try
             {
@@ -60,7 +60,7 @@ namespace HASS.Agent.Satellite.Service.Commands
                 var count = 0;
                 foreach (var command in Variables.Commands)
                 {
-                    await command.UnPublishAutoDiscoveryConfigAsync();
+                    await command.UnPublishAutoDiscoveryConfigAsync(migration);
                     await Variables.MqttManager.UnsubscribeAsync(command);
                     command.ClearAutoDiscoveryConfig();
                     count++;
@@ -76,6 +76,25 @@ namespace HASS.Agent.Satellite.Service.Commands
             {
                 Log.Fatal(ex, "[COMMANDSMANAGER] Error while unpublishing: {err}", ex.Message);
             }
+
+            _discoveryPublished = false;
+        }
+
+        /// <summary>
+        /// Publishes all commands
+        /// </summary>
+        /// <returns></returns>
+        internal static async Task ForcePublishAllCommands()
+        {
+            if (!CommandsPresent())
+                return;
+
+            foreach (var command in Variables.Commands)
+            {
+                await command.PublishAutoDiscoveryConfigAsync();
+            }
+
+            _discoveryPublished = false;
         }
 
         /// <summary>

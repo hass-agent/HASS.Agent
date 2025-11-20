@@ -49,7 +49,7 @@ namespace HASS.Agent.Satellite.Service.Sensors
         /// Unpublishes all single- and multivalue sensors
         /// </summary>
         /// <returns></returns>
-        internal static async Task UnpublishAllSensors()
+        internal static async Task UnpublishAllSensors(bool migration = false)
         {
             try
             {
@@ -61,7 +61,7 @@ namespace HASS.Agent.Satellite.Service.Sensors
                 {
                     foreach (var sensor in Variables.SingleValueSensors)
                     {
-                        await sensor.UnPublishAutoDiscoveryConfigAsync();
+                        await sensor.UnPublishAutoDiscoveryConfigAsync(migration);
                         sensor.ClearAutoDiscoveryConfig();
                         singleCount++;
                     }
@@ -71,7 +71,7 @@ namespace HASS.Agent.Satellite.Service.Sensors
                 {
                     foreach (var sensor in Variables.MultiValueSensors)
                     {
-                        await sensor.UnPublishAutoDiscoveryConfigAsync();
+                        await sensor.UnPublishAutoDiscoveryConfigAsync(migration);
                         sensor.ClearAutoDiscoveryConfig();
                         multiCount++;
                     }
@@ -87,6 +87,32 @@ namespace HASS.Agent.Satellite.Service.Sensors
             {
                 Log.Fatal(ex, "[SENSORSMANAGER] Error while unpublishing: {err}", ex.Message);
             }
+
+            _discoveryPublished = false;
+        }
+
+        /// <summary>
+        /// Publishes all single- and multivalue sensors
+        /// </summary>
+        /// <returns></returns>
+        internal static async Task ForcePublishAllSensors()
+        {
+            if (SingleValueSensorsPresent())
+            {
+                foreach (var sensor in Variables.SingleValueSensors)
+                {
+                    await sensor.PublishAutoDiscoveryConfigAsync();
+                }
+            }
+            if (MultiValueSensorsPresent())
+            {
+                foreach (var sensor in Variables.MultiValueSensors)
+                {
+                    await sensor.PublishAutoDiscoveryConfigAsync();
+                }
+            }
+
+            _discoveryPublished = true;
         }
 
         /// <summary>
