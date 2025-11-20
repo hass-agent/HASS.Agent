@@ -94,7 +94,7 @@ namespace HASS.Agent.Satellite.Service.Commands
                 await command.PublishAutoDiscoveryConfigAsync();
             }
 
-            _discoveryPublished = false;
+            _discoveryPublished = true;
         }
 
         /// <summary>
