@@ -424,7 +424,7 @@ namespace HASS.Agent.MQTT
         /// <param name="domain"></param>
         /// <param name="clearConfig"></param>
         /// <returns></returns>
-        public async Task AnnounceAutoDiscoveryConfigAsync(AbstractDiscoverable discoverable, string domain, bool clearConfig = false)
+        public async Task AnnounceAutoDiscoveryConfigAsync(AbstractDiscoverable discoverable, string domain, bool clearConfig = false, bool migration = false)
         {
             if (!Variables.AppSettings.MqttEnabled || !IsConnected())
                 return;
@@ -442,7 +442,8 @@ namespace HASS.Agent.MQTT
 
                 if (clearConfig)
                 {
-                    messageBuilder.WithPayload(Array.Empty<byte>());
+                    var payload = migration ? Encoding.UTF8.GetBytes("{\"migrate_discovery\": true }") : Array.Empty<byte>();
+                    messageBuilder.WithPayload(payload);
                 }
                 else
                 {

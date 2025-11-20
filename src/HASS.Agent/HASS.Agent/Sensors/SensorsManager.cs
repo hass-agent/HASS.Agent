@@ -66,11 +66,46 @@ namespace HASS.Agent.Sensors
         /// Unpublishes all single- and multivalue sensors
         /// </summary>
         /// <returns></returns>
-        internal static async Task UnpublishAllSensors()
+        internal static async Task UnpublishAllSensors(bool migration = false)
         {
-            // unpublish the autodisco's
-            if (SingleValueSensorsPresent()) foreach (var sensor in Variables.SingleValueSensors) await sensor.UnPublishAutoDiscoveryConfigAsync();
-            if (MultiValueSensorsPresent()) foreach (var sensor in Variables.MultiValueSensors) await sensor.UnPublishAutoDiscoveryConfigAsync();
+            if (SingleValueSensorsPresent())
+            {
+                foreach (var sensor in Variables.SingleValueSensors)
+                {
+                    await sensor.UnPublishAutoDiscoveryConfigAsync(migration);
+                }
+            }
+            if (MultiValueSensorsPresent())
+            {
+                foreach (var sensor in Variables.MultiValueSensors)
+                {
+                    await sensor.UnPublishAutoDiscoveryConfigAsync(migration);
+                }
+            }
+
+            _discoveryPublished = false;
+        }
+
+        /// <summary>
+        /// Publishes all single- and multivalue sensors
+        /// </summary>
+        /// <returns></returns>
+        internal static async Task ForcePublishAllSensors()
+        {
+            if (SingleValueSensorsPresent())
+            {
+                foreach (var sensor in Variables.SingleValueSensors)
+                {
+                    await sensor.PublishAutoDiscoveryConfigAsync();
+                }
+            }
+            if (MultiValueSensorsPresent())
+            {
+                foreach (var sensor in Variables.MultiValueSensors)
+                {
+                    await sensor.PublishAutoDiscoveryConfigAsync();
+                }
+            }
         }
 
         /// <summary>

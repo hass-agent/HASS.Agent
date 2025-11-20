@@ -58,15 +58,32 @@ namespace HASS.Agent.Commands
         /// Unpublishes all commands
         /// </summary>
         /// <returns></returns>
-        internal static async Task UnpublishAllCommands()
+        internal static async Task UnpublishAllCommands(bool migration = false)
         {
             if (!CommandsPresent())
                 return;
 
             foreach (var command in Variables.Commands)
             {
-                await command.UnPublishAutoDiscoveryConfigAsync();
+                await command.UnPublishAutoDiscoveryConfigAsync(migration);
                 await Variables.MqttManager.UnsubscribeAsync(command);
+            }
+
+            _discoveryPublished = false;
+        }
+
+        /// <summary>
+        /// Publishes all commands
+        /// </summary>
+        /// <returns></returns>
+        internal static async Task ForcePublishAllCommands()
+        {
+            if (!CommandsPresent())
+                return;
+
+            foreach (var command in Variables.Commands)
+            {
+                await command.PublishAutoDiscoveryConfigAsync();
             }
 
             _discoveryPublished = false;

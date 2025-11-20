@@ -11,6 +11,7 @@ using HASS.Agent.Shared.Functions;
 using WK.Libraries.HotkeyListenerNS;
 using Task = System.Threading.Tasks.Task;
 using ConfigSatelliteService = HASS.Agent.Controls.Configuration.ConfigService;
+using HASS.Agent.MQTT;
 
 namespace HASS.Agent.Forms
 {
@@ -171,7 +172,21 @@ namespace HASS.Agent.Forms
                 // give the managers some time to stop
                 await Task.Delay(250);
 
-                // unpublish all entities
+                // signal migration to HA MQTT integration
+                await SensorsManager.UnpublishAllSensors(migration: true);
+                await CommandsManager.UnpublishAllCommands(migration: true);
+
+                await Task.Delay(250);
+
+                // mock new device name and publish new discovery messages
+                Variables.DeviceConfig.Name = Variables.AppSettings.DeviceName;
+                await SensorsManager.ForcePublishAllSensors();
+                await CommandsManager.ForcePublishAllCommands();
+
+                await Task.Delay(250);
+
+                // restore previous device name and clear migration messages
+                Variables.DeviceConfig.Name = _previousDeviceName;
                 await SensorsManager.UnpublishAllSensors();
                 await CommandsManager.UnpublishAllCommands();
 
