@@ -150,6 +150,9 @@ namespace HASS.Agent.Satellite.Service.Settings
                 case CommandType.SetVolumeCommand:
                     abstractCommand = new SetVolumeCommand(command.EntityName, command.Name, command.Command, command.EntityType, command.Id.ToString());
                     break;
+                case CommandType.VoicemeeterCommand:
+                    abstractCommand = new VoicemeeterCommand(command.Command, command.EntityName, command.Name, command.EntityType, command.Id.ToString());
+                    break;
                 default:
                     Log.Error("[SETTINGS_COMMANDS] [{name}] Unknown configured command type: {type}", command.EntityName, command.Type.ToString());
                     break;
@@ -235,6 +238,20 @@ namespace HASS.Agent.Satellite.Service.Settings
                             Keys = multipleKeysCommand.Keys ?? new List<string>(),
                             Type = type,
                             EntityType = multipleKeysCommand.EntityType,
+                        };
+                    }
+
+                case VoicemeeterCommand voicemeeterCommand:
+                    {
+                        _ = Enum.TryParse<CommandType>(voicemeeterCommand.GetType().Name, out var type);
+                        return new ConfiguredCommand()
+                        {
+                            Id = Guid.Parse(voicemeeterCommand.Id),
+                            EntityName = voicemeeterCommand.EntityName,
+                            Name = voicemeeterCommand.Name,
+                            Type = type,
+                            EntityType = voicemeeterCommand.EntityType,
+                            Command = voicemeeterCommand.Command
                         };
                     }
             }

@@ -3607,4 +3607,48 @@ Omogoča boljšo izkušnjo z novimi sistemi s »sodobnim načinom mirovanja S0ix
   <data name="CommandType_MonitorSleepPowerPlanCommand" xml:space="preserve">
     <value>MonitorSleepPowerPlan</value>
   </data>
+  <data name="CommandsManager_VoicemeeterCommandDescription" xml:space="preserve">
+    <value>Pošlje ukaz Voicemeeter delujoči aplikaciji.
+
+Podpira kateri koli skript ali parameter oddaljenega API-ja, več informacij tukaj: https://github.com/vburel2018/Voicemeeter-SDK/blob/main/VoicemeeterRemoteAPI.pdf
+
+Primeri:
+Strip[0].Gain=0
+Strip[0].A1 = 0
+Strip[1].EQ.on=1
+Command.Eject=1
+
+Podpira ',' ';' ali '\n' za ločevanje ukazov</value>
+  </data>
+  <data name="CommandsMod_LblSetting_VoicemeeterCommand" xml:space="preserve">
+    <value>Voicemeeter oddaljeni api skript</value>
+  </data>
+  <data name="SensorsMod_SensorsMod_BtnTest_Voicemeeter" xml:space="preserve">
+    <value>Preizkusite oddaljeni API</value>
+  </data>
+  <data name="SensorsMod_LblSetting1_Voicemeeter" xml:space="preserve">
+    <value>Parameter oddaljenega API-ja Voicemeeterja</value>
+  </data>
+  <data name="SensorsMod_TestVoicemeeter_MessageBox3" xml:space="preserve">
+    <value>Testa ni bilo mogoče izvesti:
+
+{0}
+
+Ali želite odpreti mapo dnevnikov?</value>
+  </data>
+  <data name="SensorsMod_TestVoicemeeter_MessageBox2" xml:space="preserve">
+    <value>Test je bil uspešno izveden, vrednost rezultata:
+
+{0}</value>
+  </data>
+  <data name="SensorsManager_VoicemeeterSensorDescription" xml:space="preserve">
+    <value>Spremlja parameter Voicemeeter iz delujoče aplikacije.
+
+Podpira vse oddaljene parametre API, več informacij tukaj: https://github.com/vburel2018/Voicemeeter-SDK/blob/main/VoicemeeterRemoteAPI.pdf
+
+Primeri:
+Strip[0].Gain
+Strip[0].A1
+Strip[1].EQ.on</value>
+  </data>
 </root>

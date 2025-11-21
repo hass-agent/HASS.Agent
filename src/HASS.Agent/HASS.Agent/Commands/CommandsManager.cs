@@ -574,6 +574,14 @@ namespace HASS.Agent.Commands
                 true, false, true);
 
             CommandInfoCards.Add(commandInfoCard.CommandType, commandInfoCard);
+
+            // =================================
+
+            commandInfoCard = new CommandInfoCard(CommandType.VoicemeeterCommand,
+                Languages.CommandsManager_VoicemeeterCommandDescription,
+                true, false, true);
+
+            CommandInfoCards.Add(commandInfoCard.CommandType, commandInfoCard);
         }
     }
 }

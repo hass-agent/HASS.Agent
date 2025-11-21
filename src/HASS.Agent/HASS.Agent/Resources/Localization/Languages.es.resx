@@ -3458,4 +3458,48 @@ Esto debería proporcionar una mejor experiencia con los nuevos sistemas con "su
   <data name="CommandType_MonitorSleepPowerPlanCommand" xml:space="preserve">
     <value>Plan de energía para el sueño del monitor</value>
   </data>
+  <data name="CommandsManager_VoicemeeterCommandDescription" xml:space="preserve">
+    <value>Envía un comando de Voicemeeter a la aplicación en ejecución.
+
+Admite cualquier script o parámetro de API remota, más información aquí: https://github.com/vburel2018/Voicemeeter-SDK/blob/main/VoicemeeterRemoteAPI.pdf
+
+Ejemplos:
+Strip[0].Gain=0
+Strip[0].A1 = 0
+Strip[1].EQ.on=1
+Command.Eject=1
+
+Soporta ',' ';' o '\n' para separar comandos</value>
+  </data>
+  <data name="CommandsMod_LblSetting_VoicemeeterCommand" xml:space="preserve">
+    <value>Script de API remota de Voicemeeter</value>
+  </data>
+  <data name="SensorsMod_SensorsMod_BtnTest_Voicemeeter" xml:space="preserve">
+    <value>Probar API remota</value>
+  </data>
+  <data name="SensorsMod_LblSetting1_Voicemeeter" xml:space="preserve">
+    <value>Parámetro de API remota de Voicemeeter</value>
+  </data>
+  <data name="SensorsMod_TestVoicemeeter_MessageBox3" xml:space="preserve">
+    <value>La prueba no se ejecutó:
+
+{0}
+
+¿Desea abrir la carpeta de registros?</value>
+  </data>
+  <data name="SensorsMod_TestVoicemeeter_MessageBox2" xml:space="preserve">
+    <value>Prueba ejecutada con éxito, valor del resultado:
+
+{0}</value>
+  </data>
+  <data name="SensorsManager_VoicemeeterSensorDescription" xml:space="preserve">
+    <value>Supervisa un parámetro de Voicemeeter desde la aplicación en ejecución.
+
+Admite cualquier parámetro de API remota, más información aquí: https://github.com/vburel2018/Voicemeeter-SDK/blob/main/VoicemeeterRemoteAPI.pdf
+
+Ejemplos:
+Strip[0].Gain
+Strip[0].A1
+Strip[1].EQ.on</value>
+  </data>
 </root>

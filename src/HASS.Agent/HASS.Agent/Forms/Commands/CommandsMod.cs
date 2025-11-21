@@ -209,6 +209,10 @@ namespace HASS.Agent.Forms.Commands
                 case CommandType.SetAudioInputCommand:
                     TbSetting.Text = Command.Command;
                     break;
+
+                case CommandType.VoicemeeterCommand:
+                    TbSetting.Text = Command.Command;
+                    break;
             }
 
 			CbRunAsLowIntegrity.CheckState = Command.RunAsLowIntegrity ? CheckState.Checked : CheckState.Unchecked;
@@ -527,7 +531,11 @@ namespace HASS.Agent.Forms.Commands
                         return;
                     }
                     break;
-			}
+
+                case CommandType.VoicemeeterCommand:
+                    Command.Command = TbSetting.Text.Trim();
+                    break;
+            }
 
 			Command.RunAsLowIntegrity = CbRunAsLowIntegrity.CheckState == CheckState.Checked;
 
@@ -648,12 +656,16 @@ namespace HASS.Agent.Forms.Commands
                     SetAudioOutputUi();
                     break;
 
-				case CommandType.RadioCommand:
-					CbConfigDropdown.DataSource = new BindingSource(_radioDevices, null);
-					SetRadioUi();
-					break;
+                case CommandType.RadioCommand:
+                    CbConfigDropdown.DataSource = new BindingSource(_radioDevices, null);
+                    SetRadioUi();
+                    break;
 
-				default:
+                case CommandType.VoicemeeterCommand:
+                    SetVoiceMeeterGui();
+                    break;
+
+                default:
 					SetEmptyGui();
 					break;
 			}
@@ -901,10 +913,27 @@ namespace HASS.Agent.Forms.Commands
 			}));
 		}
 
-		/// <summary>
-		/// Change the UI to a general type
-		/// </summary>
-		private void SetEmptyGui()
+        /// <summary>
+        /// Change the UI to a 'voicemeeter' type
+        /// </summary>
+        private void SetVoiceMeeterGui()
+        {
+            Invoke(new MethodInvoker(delegate
+            {
+                SetEmptyGui();
+
+                LblSetting.Text = Languages.CommandsMod_LblSetting_VoicemeeterCommand;
+                LblSetting.Visible = true;
+
+                TbSetting.Text = string.Empty;
+                TbSetting.Visible = true;
+            }));
+        }
+
+        /// <summary>
+        /// Change the UI to a general type
+        /// </summary>
+        private void SetEmptyGui()
 		{
 			Invoke(new MethodInvoker(delegate
 			{

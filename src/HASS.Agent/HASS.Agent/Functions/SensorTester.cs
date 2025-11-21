@@ -102,5 +102,32 @@ namespace HASS.Agent.Functions
                 return new TestResult().SetFailed(ex.Message);
             }
         }
+
+        /// <summary>
+        /// Creates a Voicemeeter sensor with the provided command and gets the result of its execution
+        /// </summary>
+        /// <param name="command"></param>
+        /// <param name="applyRounding"></param>
+        /// <param name="round"></param>
+        /// <returns></returns>
+        internal static TestResult TestVoicemeeter(string command, bool applyRounding = false, int? round = null)
+        {
+            try
+            {
+                // create a new sensor
+                var voicemeeterSensor = new VoicemeeterSensor(command, applyRounding, round);
+
+                // get the state
+                var value = voicemeeterSensor.GetState();
+
+                // done
+                return new TestResult().SetSuccesful(value);
+            }
+            catch (Exception ex)
+            {
+                Log.Fatal(ex, "[SENSORTESTER] Error while testing Voicemeeter\r\nCommand: {command}\r\nError: {err}", command, ex.Message);
+                return new TestResult().SetFailed(ex.Message);
+            }
+        }
     }
 }

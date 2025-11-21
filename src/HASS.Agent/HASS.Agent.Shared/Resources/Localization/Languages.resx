@@ -3269,4 +3269,10 @@ Note: due to "Modern Sleep" the sleep commands might behave differently dependin
     <value>Puts all monitors in sleep (low power) mode using alternative approach of power plan modification.
 Should provide better experience with new systems with "modern S0ix sleep" and not put the system to sleep.</value>
   </data>
+  <data name="CommandType_VoicemeeterCommand" xml:space="preserve">
+    <value>VoicemeeterCommand</value>
+  </data>
+  <data name="SensorType_VoicemeeterSensor" xml:space="preserve">
+    <value>VoicemeeterSensor</value>
+  </data>
 </root>

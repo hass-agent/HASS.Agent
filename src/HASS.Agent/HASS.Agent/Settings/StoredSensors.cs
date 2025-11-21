@@ -207,6 +207,9 @@ namespace HASS.Agent.Settings
                 case SensorType.ScreenshotSensor:
                     abstractSensor = new ScreenshotSensor(sensor.Query, sensor.UpdateInterval, sensor.EntityName, sensor.Name, sensor.Id.ToString(), sensor.AdvancedSettings);
                     break;
+                case SensorType.VoicemeeterSensor:
+                    abstractSensor = new VoicemeeterSensor(sensor.Query, sensor.ApplyRounding, sensor.Round, sensor.UpdateInterval, sensor.EntityName, sensor.Name, sensor.Id.ToString(), sensor.AdvancedSettings);
+                    break;
                 default:
                     Log.Error("[SETTINGS_SENSORS] [{name}] Unknown configured single-value sensor type: {type}", sensor.EntityName, sensor.Type.ToString());
                     break;
@@ -452,6 +455,24 @@ namespace HASS.Agent.Settings
                             IgnoreAvailability = screenshotSensor.IgnoreAvailability,
                             Query = screenshotSensor.ScreenIndex.ToString(),
                             AdvancedSettings = screenshotSensor.AdvancedSettings
+                        };
+                    }
+
+                case VoicemeeterSensor voicemeeterSensor:
+                    {
+                        _ = Enum.TryParse<SensorType>(voicemeeterSensor.GetType().Name, out var type);
+                        return new ConfiguredSensor
+                        {
+                            Id = Guid.Parse(voicemeeterSensor.Id),
+                            EntityName = voicemeeterSensor.EntityName,
+                            Name = voicemeeterSensor.Name,
+                            Type = type,
+                            UpdateInterval = voicemeeterSensor.UpdateIntervalSeconds,
+                            IgnoreAvailability = voicemeeterSensor.IgnoreAvailability,
+                            Query = voicemeeterSensor.Command,
+                            ApplyRounding = voicemeeterSensor.ApplyRounding,
+                            Round = voicemeeterSensor.Round,
+                            AdvancedSettings = voicemeeterSensor.AdvancedSettings
                         };
                     }
 

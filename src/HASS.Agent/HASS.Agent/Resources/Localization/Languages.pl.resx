@@ -3568,4 +3568,48 @@ Powinno to zapewnić lepsze działanie w przypadku nowych systemów z „nowocze
   <data name="CommandType_MonitorSleepPowerPlanCommand" xml:space="preserve">
     <value>MonitorSleepPowerPlan</value>
   </data>
+  <data name="CommandsManager_VoicemeeterCommandDescription" xml:space="preserve">
+    <value>Wysyła polecenie Voicemeeter do działającej aplikacji.
+
+Obsługuje dowolny zdalny skrypt lub parametr API, więcej informacji tutaj: https://github.com/vburel2018/Voicemeeter-SDK/blob/main/VoicemeeterRemoteAPI.pdf
+
+Przykłady:
+Strip[0].Gain=0
+Strip[0].A1 = 0
+Strip[1].EQ.on=1
+Command.Eject=1
+
+Obsługuje „,” „;” lub „\n”, aby oddzielić polecenia</value>
+  </data>
+  <data name="CommandsMod_LblSetting_VoicemeeterCommand" xml:space="preserve">
+    <value>Zdalny skrypt API Voicemeeter</value>
+  </data>
+  <data name="SensorsMod_SensorsMod_BtnTest_Voicemeeter" xml:space="preserve">
+    <value>Przetestuj zdalne API</value>
+  </data>
+  <data name="SensorsMod_LblSetting1_Voicemeeter" xml:space="preserve">
+    <value>Parametr zdalnego API Voicemeetera</value>
+  </data>
+  <data name="SensorsMod_TestVoicemeeter_MessageBox3" xml:space="preserve">
+    <value>Test zakończony niepowodzeniem: 
+
+{0}
+
+Czy chcesz otworzyć plik log?</value>
+  </data>
+  <data name="SensorsMod_TestVoicemeeter_MessageBox2" xml:space="preserve">
+    <value>Test zakończony pomyślnie, wartość:
+
+{0}</value>
+  </data>
+  <data name="SensorsManager_VoicemeeterSensorDescription" xml:space="preserve">
+    <value>Monitoruje parametr Voicemeeter z uruchomionej aplikacji.
+
+Obsługuje dowolny zdalny parametr API, więcej informacji tutaj: https://github.com/vburel2018/Voicemeeter-SDK/blob/main/VoicemeeterRemoteAPI.pdf
+
+Przykłady:
+Strip[0].Gain
+Strip[0].A1
+Strip[1].EQ.on</value>
+  </data>
 </root>
