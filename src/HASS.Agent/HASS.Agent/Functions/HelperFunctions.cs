@@ -171,7 +171,7 @@ namespace HASS.Agent.Functions
                     Variables.MainForm?.HideTrayIcon();
 
                     // stop hotkey
-                    Variables.MainForm?.Invoke(new MethodInvoker(delegate
+                    Variables.MainForm?.Invoke(new System.Windows.Forms.MethodInvoker(delegate
                     {
                         Variables.HotKeyListener?.RemoveAll();
                         Variables.HotKeyListener?.Dispose();
@@ -412,7 +412,7 @@ namespace HASS.Agent.Functions
             if (!string.IsNullOrEmpty(url)) webViewInfo.Url = url;
 
             // show it from within the UI thread
-            Variables.MainForm.Invoke(new MethodInvoker(delegate
+            Variables.MainForm.Invoke(new System.Windows.Forms.MethodInvoker(delegate
             {
                 var webView = new WebView(webViewInfo);
                 webView.Opacity = 0;
@@ -446,7 +446,7 @@ namespace HASS.Agent.Functions
             webViewInfo.IsTrayIconWebView = true;
 
             // prepare the webview
-            Variables.MainForm.Invoke(new MethodInvoker(delegate
+            Variables.MainForm.Invoke(new System.Windows.Forms.MethodInvoker(delegate
             {
                 // optionally close an existing one
                 Variables.TrayIconWebView?.ForceClose();
@@ -506,7 +506,7 @@ namespace HASS.Agent.Functions
 
         private static void LaunchTrayIconBackgroundLoadedWebView()
         {
-            Variables.MainForm.Invoke(new MethodInvoker(delegate
+            Variables.MainForm.Invoke(new System.Windows.Forms.MethodInvoker(delegate
             {
                 // make sure it's ready
                 if (Variables.TrayIconWebView == null || Variables.TrayIconWebView.IsDisposed)
@@ -519,7 +519,7 @@ namespace HASS.Agent.Functions
 
         private static void LaunchTrayIconCustomWebView(WebViewInfo webViewInfo)
         {
-            Variables.MainForm.Invoke(new MethodInvoker(delegate
+            Variables.MainForm.Invoke(new System.Windows.Forms.MethodInvoker(delegate
             {
                 var x = Screen.PrimaryScreen.WorkingArea.Width - webViewInfo.Width;
                 var y = Screen.PrimaryScreen.WorkingArea.Height - webViewInfo.Height;

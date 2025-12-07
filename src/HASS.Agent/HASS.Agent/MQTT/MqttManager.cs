@@ -720,21 +720,23 @@ namespace HASS.Agent.MQTT
             if (!string.IsNullOrEmpty(Variables.AppSettings.MqttUsername))
                 clientOptionsBuilder.WithCredentials(Variables.AppSettings.MqttUsername, Variables.AppSettings.MqttPassword);
 
-            var certificates = new List<X509Certificate>();
+            // Load CA cert for server validation
+            X509Certificate2? caCert = null;
             if (!string.IsNullOrEmpty(Variables.AppSettings.MqttRootCertificate))
             {
                 if (!File.Exists(Variables.AppSettings.MqttRootCertificate))
                     Log.Error("[MQTT] Provided root certificate not found: {cert}", Variables.AppSettings.MqttRootCertificate);
                 else
-                    certificates.Add(new X509Certificate2(Variables.AppSettings.MqttRootCertificate));
+                    caCert = new X509Certificate2(Variables.AppSettings.MqttRootCertificate);
             }
 
+            var certificates = new List<X509Certificate>();
             if (!string.IsNullOrEmpty(Variables.AppSettings.MqttClientCertificate))
             {
                 if (!File.Exists(Variables.AppSettings.MqttClientCertificate))
                     Log.Error("[MQTT] Provided client certificate not found: {cert}", Variables.AppSettings.MqttClientCertificate);
                 else
-                    certificates.Add(new X509Certificate2(Variables.AppSettings.MqttClientCertificate));
+                    certificates.Add(new X509Certificate2(Variables.AppSettings.MqttClientCertificate, "")); // P12, empty password
             }
 
             var clientTlsOptions = new MqttClientTlsOptions()
@@ -745,25 +747,50 @@ namespace HASS.Agent.MQTT
             };
 
             //TODO(Amadeo): add more granular control to the UI
-            if (Variables.AppSettings.MqttAllowUntrustedCertificates)
+            if (caCert != null)
             {
-                clientTlsOptions.IgnoreCertificateChainErrors = Variables.AppSettings.MqttAllowUntrustedCertificates;
-                clientTlsOptions.IgnoreCertificateRevocationErrors = Variables.AppSettings.MqttAllowUntrustedCertificates;
-                clientTlsOptions.CertificateValidationHandler = delegate (MqttClientCertificateValidationEventArgs _)
+                clientTlsOptions.CertificateValidationHandler = ctx =>
                 {
+                    var chain = new X509Chain();
+                    chain.ChainPolicy.RevocationMode = X509RevocationMode.NoCheck;
+
+                    chain.ChainPolicy.TrustMode = X509ChainTrustMode.System;
+                    chain.ChainPolicy.ExtraStore.Add(caCert);
+
+                    chain.ChainPolicy.VerificationFlags = X509VerificationFlags.NoFlag;
+
+                    var serverCert = new X509Certificate2(ctx.Certificate);
+                    var valid = chain.Build(serverCert);
+
+                    if (!valid)
+                    {
+                        Log.Error("[MQTT] Server certificate validation failed. Chain errors: {errors}",
+                            string.Join(", ", chain.ChainStatus
+                                .Where(s => s.Status != X509ChainStatusFlags.NoError)
+                                .Select(s => $"{s.Status}: {s.StatusInformation}")));
+                        return false;
+                    }
                     return true;
                 };
+            }
+            else if (Variables.AppSettings.MqttAllowUntrustedCertificates)
+            {
+                clientTlsOptions.CertificateValidationHandler = ctx => true;
+            }
+            else
+            {
+                clientTlsOptions.CertificateValidationHandler = MqttClientDefaultCertificateValidationHandler.Handle;
             }
 
             if (certificates.Count > 0)
                 clientTlsOptions.ClientCertificatesProvider = new DefaultMqttCertificatesProvider(certificates);
 
             clientOptionsBuilder.WithTlsOptions(clientTlsOptions);
-            clientOptionsBuilder.Build();
 
             return new ManagedMqttClientOptionsBuilder()
                 .WithAutoReconnectDelay(TimeSpan.FromSeconds(5))
-                .WithClientOptions(clientOptionsBuilder).Build();
+                .WithClientOptions(clientOptionsBuilder.Build())
+                .Build();
         }
 
         /// <summary>
