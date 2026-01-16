@@ -193,6 +193,21 @@ The best way to help out is to test as much as you can (or even join the beta pr
 
 Same goes for sharing ideas for new (or improved) functionality! If you want, you can [join on Discord](https://discord.com/invite/JfZj98xqJr) to discuss your ideas.
 
+#### Feature PR Submissions
+
+While all feature PR submissions are welcome, please note that their merging is at ***sole discretion*** of the main developers.
+
+When designing the new feature please take into account:
+- **how they fit with the codebase/codestyle** (yes, we are aware the codebase has it's flaws - hence the rewrite efforts)
+- **is the feature agnostic enough and will benefit all users**
+- **the smaller the PR the better the chance of it being merged**
+
+#### AI Usage
+
+Fully "vibe-coded" submissions will most likely be rejected.
+
+While personal opinions on AI usage and it's impact can vary person-to-person, we'd rather put the effort writing code than reviewing fully AI generated and copy-pasted code.
+
 ----
 
 ### Credits and Licensing
