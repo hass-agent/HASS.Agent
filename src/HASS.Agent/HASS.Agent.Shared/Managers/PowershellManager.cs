@@ -36,14 +36,14 @@ public static class PowershellManager
         if (isScript)
         {
             return string.IsNullOrWhiteSpace(parameters)
-                ? $"-File \"{command}\""
-                : $"-File \"{command}\" {parameters}";
+                ? $"-NoProfile -File \"{command}\""
+                : $"-NoProfile -File \"{command}\" {parameters}";
         }
         else
         {
             //return $@"& {{{command}}}"; //NOTE: place to fix any potential future issues with "command part of the command"
             var encodedCommand = Convert.ToBase64String(Encoding.Unicode.GetBytes(command));
-            return $"-EncodedCommand {encodedCommand}";
+            return $"-NoProfile -EncodedCommand {encodedCommand}";
         }
     }
 
@@ -265,10 +265,10 @@ public static class PowershellManager
                 WorkingDirectory = workingDir,
                 StandardOutputEncoding = encoding,
                 StandardErrorEncoding = encoding,
-                // set the right type of arguments
+                // set the right type of arguments, -NoProfile prevents custom profile scripts from interfering
                 Arguments = isScript
-                    ? $@"& '{command}'"
-                    : $@"& {{{command}}}"
+                    ? $@"-NoProfile & '{command}'"
+                    : $@"-NoProfile & {{{command}}}"
             };
 
             using var process = new Process();
