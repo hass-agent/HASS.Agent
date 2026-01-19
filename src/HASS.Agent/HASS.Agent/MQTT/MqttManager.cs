@@ -424,7 +424,7 @@ namespace HASS.Agent.MQTT
         /// <param name="domain"></param>
         /// <param name="clearConfig"></param>
         /// <returns></returns>
-        public async Task AnnounceAutoDiscoveryConfigAsync(AbstractDiscoverable discoverable, string domain, bool clearConfig = false)
+        public async Task AnnounceAutoDiscoveryConfigAsync(AbstractDiscoverable discoverable, string domain, bool clearConfig = false, bool migration = false)
         {
             if (!Variables.AppSettings.MqttEnabled || !IsConnected())
                 return;
@@ -442,7 +442,8 @@ namespace HASS.Agent.MQTT
 
                 if (clearConfig)
                 {
-                    messageBuilder.WithPayload(Array.Empty<byte>());
+                    var payload = migration ? Encoding.UTF8.GetBytes("{\"migrate_discovery\": true }") : Array.Empty<byte>();
+                    messageBuilder.WithPayload(payload);
                 }
                 else
                 {
@@ -567,35 +568,35 @@ namespace HASS.Agent.MQTT
                     var messageBuilder = new MqttApplicationMessageBuilder()
                         .WithTopic($"{Variables.AppSettings.MqttDiscoveryPrefix}/sensor/{Variables.DeviceConfig.Name}/availability")
                         .WithPayload(Array.Empty<byte>())
-                        .WithRetainFlag(false);
+                        .WithRetainFlag(true);
 
                     await _mqttClient.InternalClient.PublishAsync(messageBuilder.Build());
 
                     messageBuilder = new MqttApplicationMessageBuilder()
                         .WithTopic($"hass.agent/devices/{Variables.DeviceConfig.Name}")
                         .WithPayload(Array.Empty<byte>())
-                        .WithRetainFlag(false);
+                        .WithRetainFlag(true);
 
                     await _mqttClient.InternalClient.PublishAsync(messageBuilder.Build());
 
                     messageBuilder = new MqttApplicationMessageBuilder()
                         .WithTopic($"hass.agent/media_player/{Variables.DeviceConfig.Name}")
                         .WithPayload(Array.Empty<byte>())
-                        .WithRetainFlag(false);
+                        .WithRetainFlag(true);
 
                     await _mqttClient.InternalClient.PublishAsync(messageBuilder.Build());
 
                     messageBuilder = new MqttApplicationMessageBuilder()
                         .WithTopic($"hass.agent/media_player/{Variables.DeviceConfig.Name}/thumbnail")
                         .WithPayload(Array.Empty<byte>())
-                        .WithRetainFlag(false);
+                        .WithRetainFlag(true);
 
                     await _mqttClient.InternalClient.PublishAsync(messageBuilder.Build());
 
                     messageBuilder = new MqttApplicationMessageBuilder()
                         .WithTopic($"hass.agent/media_player/{Variables.DeviceConfig.Name}/state")
                         .WithPayload(Array.Empty<byte>())
-                        .WithRetainFlag(false);
+                        .WithRetainFlag(true);
 
                     await _mqttClient.InternalClient.PublishAsync(messageBuilder.Build());
                 }
@@ -710,12 +711,21 @@ namespace HASS.Agent.MQTT
 
             var clientOptionsBuilder = new MqttClientOptionsBuilder()
                 .WithClientId(Variables.AppSettings.MqttClientId)
-                .WithTcpServer(Variables.AppSettings.MqttAddress, Variables.AppSettings.MqttPort)
                 .WithCleanSession()
                 .WithWillTopic($"{Variables.AppSettings.MqttDiscoveryPrefix}/sensor/{Variables.DeviceConfig.Name}/availability")
                 .WithWillPayload("offline")
                 .WithWillRetain(Variables.AppSettings.MqttUseRetainFlag)
                 .WithKeepAlivePeriod(TimeSpan.FromSeconds(15));
+
+            if (Variables.AppSettings.MqttUseWebSocket)
+            {
+                clientOptionsBuilder.WithWebSocketServer(o => o.WithUri($"{Variables.AppSettings.MqttAddress}:{Variables.AppSettings.MqttPort}"));
+                Log.Information("[MQTT] Using WebSocket for the connection");
+            }
+            else
+            {
+                clientOptionsBuilder.WithTcpServer(Variables.AppSettings.MqttAddress, Variables.AppSettings.MqttPort);
+            }
 
             if (!string.IsNullOrEmpty(Variables.AppSettings.MqttUsername))
                 clientOptionsBuilder.WithCredentials(Variables.AppSettings.MqttUsername, Variables.AppSettings.MqttPassword);
@@ -884,6 +894,67 @@ namespace HASS.Agent.MQTT
                 return;
 
             command.TurnOnWithAction(payload);
+        }
+
+        //Note(Amadeo): ideally this should use logic of the manager but yeah, we live with what we've got I guess
+        internal static async Task<bool> TestConnection(string address, int port, bool useTls, bool useWebSocket, string username, string password)
+        {
+            var mqttFactory = new MqttFactory();
+
+            using (var mqttClient = mqttFactory.CreateMqttClient())
+            {
+                var clientOptionsBuilder = new MqttClientOptionsBuilder()
+                    .WithClientId("hassAgentConnectionTest")
+                    .WithCleanSession()
+                    .WithKeepAlivePeriod(TimeSpan.FromSeconds(1));
+
+                if (useWebSocket)
+                {
+                    clientOptionsBuilder.WithWebSocketServer(o => o.WithUri($"{address}:{port}"));
+                }
+                else
+                {
+                    clientOptionsBuilder.WithTcpServer(address, port);
+                }
+
+                if (!string.IsNullOrEmpty(Variables.AppSettings.MqttUsername))
+                {
+                    clientOptionsBuilder.WithCredentials(username, password);
+                }
+
+                var clientTlsOptions = new MqttClientTlsOptions()
+                {
+                    UseTls = useTls,
+                    AllowUntrustedCertificates = true,
+                    SslProtocol = useTls ? SslProtocols.Tls12 : SslProtocols.None,
+                    IgnoreCertificateChainErrors = true,
+                    IgnoreCertificateRevocationErrors = true,
+                    CertificateValidationHandler = delegate (MqttClientCertificateValidationEventArgs _)
+                    {
+                        return true;
+                    }
+                };
+
+                clientOptionsBuilder.WithTlsOptions(clientTlsOptions);
+                var options = clientOptionsBuilder.Build();
+
+                try
+                {
+                    using var timeoutToken = new CancellationTokenSource(TimeSpan.FromSeconds(10));
+                    await mqttClient.ConnectAsync(options, timeoutToken.Token);
+
+                    return mqttClient.IsConnected;
+                }
+                catch
+                {
+                    return false;
+                }
+                finally
+                {
+                    await mqttClient.DisconnectAsync();
+                    mqttClient.Dispose();
+                }
+            }
         }
     }
 }

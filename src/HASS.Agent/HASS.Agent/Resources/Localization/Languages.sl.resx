@@ -245,11 +245,12 @@ Vaš ukaz je podan kot argument 'tako kot je', zato morate po potrebi navesti sv
   </data>
   <data name="CommandsManager_KeyCommandDescription" xml:space="preserve">
     <value>Simulira en sam pritisk tipke.
+Če ta ukaz nastavite na »stikalo«, bo gumb pritisnjen, dokler je stikalo vklopljeno.
 
-Kliknite besedilno polje 'keycode' in pritisnite tipko, ki jo želite simulirati. Vnesena bo ustrezna koda tipke.
+Kliknite na besedilno polje »koda tipke« in pritisnite tipko, ki jo želite simulirati. Ustrezna koda tipke bo vnesena samodejno.
 Za tipko TAB uporabite LCTRL+TAB.
 
-Če potrebujete več tipk in/ali modifikatorjev, kot je CTRL, uporabite ukaz MultipleKeys.</value>
+Če potrebujete več tipk in/ali modifikatorjev, kot je CTRL, uporabite ukaz Več tipk.</value>
     <comment>Fuzzy</comment>
   </data>
   <data name="CommandsManager_LaunchUrlCommandDescription" xml:space="preserve">
@@ -1791,7 +1792,8 @@ Hvala, ker uporabljate HASS.Agent. Upam, da vam bo koristil :-)</value>
     <comment>Fuzzy</comment>
   </data>
   <data name="OnboardingDone_LblInfo6" xml:space="preserve">
-    <value>Razvoj in vzdrževanje tega dodatka (in vsega, kar spada zraven, kot je podpora, navodila) vzame veliko časa. Kot večina razvijalcev tudi jaz delam na kofein - zato bi bil zelo hvaležen kake skodelice kave, če jo lahko pogrešate!</value>
+    <value>Trenutno (ekipa HASS.Agent, ki vzdržuje forum) ne sprejema donacij v nobeni obliki :)
+Vendar pa lahko brez zadržkov donirate izvirnemu avtorju HASS.Agent - Samu! Kjerkoli že je, mu lahko skodelica kave polepša dan.</value>
   </data>
   <data name="OnboardingDone_LblTip2" xml:space="preserve">
     <value>Namig: ostale možnosti donacij so na voljo v zavihku "Vizitka".</value>
@@ -2295,7 +2297,10 @@ Glede na verzijo Windows-ov se to lahko nahaja v Nadzorna plošča --&gt; Sistem
     <value>Zagotavlja trenutno obremenitev prvega GPU-ja v odstotkih.</value>
   </data>
   <data name="SensorsManager_GpuTemperatureSensorDescription" xml:space="preserve">
-    <value>Zagotavlja trenutno temperaturo prvega GPU-ja.</value>
+    <value>OPOMBA: To je nedelujoč senzor.
+
+Zaradi varnostnih pomislekov glede Libre Hardware Monitor (knjižnica, ki omogoča HASS.Agent dostop do podatkov o temperaturi GPU) je ta senzor ostal zaradi združljivosti s prejšnjimi različicami in bo vedno vrnil vrednost 0.
+Za alternativne možnosti glejte dokumentacijo.</value>
   </data>
   <data name="SensorsManager_LastActiveSensorDescription" xml:space="preserve">
     <value>Zagotavlja vrednost datuma in časa, ki vsebuje čas zadnjega vnosa uporabnika.
@@ -3555,5 +3560,51 @@ Zahteva, da je konfiguriran v "Konfiguracija -&gt; Ikona pladnja"</value>
   </data>
   <data name="Notification_Dismiss" xml:space="preserve">
     <value>Odpusti</value>
+  </data>
+  <data name="ConfigTrayIcon_NumWebViewScreen" xml:space="preserve">
+    <value>Zaslon, ki se uporabi za prikaz WebView</value>
+  </data>
+  <data name="Main_CheckForUpdateFailed_MessageBox1" xml:space="preserve">
+    <value>Neuspešno preverjanje posodobitve!</value>
+  </data>
+  <data name="SensorType_NamedActiveWindowSensor" xml:space="preserve">
+    <value>PoimenovanoAktivnoOkno</value>
+  </data>
+  <data name="SensorsManager_NamedActiveWindowSensorDescription" xml:space="preserve">
+    <value>Zagotavlja vrednost VKLOP/IZKLOP glede na to, ali ime okna v fokusu vsebuje konfiguriran niz.</value>
+  </data>
+  <data name="SensorsManager_AccentColorSensorDescription" xml:space="preserve">
+    <value>Zagotavlja barvne vrednosti #RRGGBB za sistemske poudarjene barve.
+Glavna poudarjena barva je vrednost senzorja, dodatne poudarjene barve so na voljo kot atributi.</value>
+  </data>
+  <data name="ConfigMqtt_CbUseWebSocket" xml:space="preserve">
+    <value>Uporabi &amp;WebSocket</value>
+  </data>
+  <data name="ServiceMqtt_CbUseWebSocket" xml:space="preserve">
+    <value>Uporabi &amp;WebSocket</value>
+  </data>
+  <data name="HassDomain_Fan" xml:space="preserve">
+    <value>Ventilator</value>
+  </data>
+  <data name="CommandsManager_WinformsSleepCommandDescription" xml:space="preserve">
+    <value>Preklopi računalnik v stanje mirovanja z uporabo WinForms API-ja.
+
+Opomba: Zaradi »modernega mirovanja« se lahko ukazi za mirovanje obnašajo drugače, odvisno od proizvajalca originalne opreme naprave in konfiguracije operacijskega sistema.</value>
+  </data>
+  <data name="CommandType_WinformsSleepCommand" xml:space="preserve">
+    <value>WinformsSleep</value>
+  </data>
+  <data name="OnboardingMqtt_BtnTest_MessageError" xml:space="preserve">
+    <value>Povezave ni mogoče vzpostaviti.</value>
+  </data>
+  <data name="OnboardingMqtt_BtnTest_MessageOk" xml:space="preserve">
+    <value>Povezava v redu!</value>
+  </data>
+  <data name="CommandsManager_MonitorSleepPowerPlanCommandDescription" xml:space="preserve">
+    <value>Preklopi vse monitorje v način mirovanja (nizka poraba energije) z uporabo alternativnega pristopa k spreminjanju načrta porabe energije.
+Omogoča boljšo izkušnjo z novimi sistemi s »sodobnim načinom mirovanja S0ix« in ne preklopi sistema v stanje mirovanja.</value>
+  </data>
+  <data name="CommandType_MonitorSleepPowerPlanCommand" xml:space="preserve">
+    <value>MonitorSleepPowerPlan</value>
   </data>
 </root>

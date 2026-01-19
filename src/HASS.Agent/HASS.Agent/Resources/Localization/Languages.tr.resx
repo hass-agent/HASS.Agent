@@ -1182,12 +1182,13 @@ Ancak bu aracı beğendiyseniz orijinal (LAB02 Araştırması) geliştiricilere 
     <value>Makineyi hazırda bekletme moduna geçirir.</value>
   </data>
   <data name="CommandsManager_KeyCommandDescription" xml:space="preserve">
-    <value>Tek bir tuşa basmayı simüle eder.
+    <value>Tek bir tuş basımını simüle eder.
+Bu komutu "anahtar" türü yapmak, anahtar açık olduğu sürece düğmenin basılı kalmasını sağlar.
 
-'Keycode' metin kutusuna tıklayın ve simüle edilmesini istediğiniz tuşa basın. İlgili anahtar kodu sizin için girilecektir.
-TAB tuşu için lütfen LCTRL+TAB kullanın.
+'Tuş kodu' metin kutusuna tıklayın ve simüle edilmesini istediğiniz tuşa basın. İlgili tuş kodu sizin için girilecektir.
+TAB tuşu için lütfen LCTRL+TAB tuşlarını kullanın.
 
-Daha fazla tuşa ve/veya CTRL gibi değiştiricilere ihtiyacınız varsa, MultipleKeys komutunu kullanın.</value>
+CTRL gibi daha fazla tuşa ve/veya değiştiriciye ihtiyacınız varsa, MultipleKeys komutunu kullanın.</value>
   </data>
   <data name="CommandsManager_LaunchUrlCommandDescription" xml:space="preserve">
     <value>Varsayılan tarayıcınızda varsayılan olarak sağlanan URL'yi başlatır. 'Gizli' kullanmak için Yapılandırma -&gt; Harici Araçlar'da belirli bir tarayıcı sağlayın. Yalnızca belirli bir URL'ye sahip bir pencere istiyorsanız (tam bir tarayıcı değil), bir 'WebView' komutu kullanın.</value>
@@ -1854,7 +1855,10 @@ Daha fazla tuşa ve/veya CTRL gibi değiştiricilere ihtiyacınız varsa, Multip
     <value>Yüzde olarak ilk GPU'nun mevcut yükünü sağlar.</value>
   </data>
   <data name="SensorsManager_GpuTemperatureSensorDescription" xml:space="preserve">
-    <value>İlk GPU'nun mevcut sıcaklığını sağlar.</value>
+    <value>NOT: Bu, çalışmayan bir sensördür.
+
+Libre Donanım İzleyicisi (HASS.Agent'ın GPU sıcaklık verilerine erişmesine izin veren kütüphane) ile ilgili güvenlik endişeleri nedeniyle, bu sensör geriye dönük uyumluluk nedeniyle bırakılmıştır ve her zaman 0 döndürecektir.
+Alternatif seçenekler için lütfen belgelere bakın.</value>
   </data>
   <data name="SensorsManager_LastActiveSensorDescription" xml:space="preserve">
     <value>Kullanıcının en son ne zaman giriş yaptığını içeren bir tarih saat değeri sağlar.
@@ -2738,7 +2742,8 @@ Daha fazla tuşa ve/veya CTRL gibi değiştiricilere ihtiyacınız varsa, Multip
     <value>Sağladığınız URI geçerli görünmüyor, geçerli bir URI aşağıdakilerden biri gibi görünebilir: - http://homeassistant.local:8123 - http://192.168.0.1:8123 Kullanmak istediğinizden emin misiniz? yine de bu URI?</value>
   </data>
   <data name="OnboardingDone_LblInfo6" xml:space="preserve">
-    <value>Bu aracı (ve onu çevreleyen her şeyi) geliştirmek ve sürdürmek çok zaman alır. Çoğu geliştirici gibi, ben de kafein kullanıyorum - bu yüzden eğer onu ayırabilirseniz, bir fincan kahve her zaman çok değerlidir!</value>
+    <value>Şu anda (çatalın bakımını üstlenen HASS.Agent Ekibi) hiçbir şekilde bağış kabul etmiyoruz :)
+Ancak lütfen HASS.Agent'ın orijinal yazarı Sam'e bağış yapmaktan çekinmeyin! Şu anda nerede olurlarsa olsunlar, bir fincan kahve günlerini güzelleştirebilir.</value>
   </data>
   <data name="OnboardingDone_LblTip2" xml:space="preserve">
     <value>İpucu: Hakkında Penceresinde başka bağış yöntemleri de mevcuttur.</value>
@@ -3022,5 +3027,51 @@ Not: Uydu hizmetinde kullanılırsa kullanıcı alanı uygulamalarını algılam
   </data>
   <data name="Notification_Dismiss" xml:space="preserve">
     <value>Azletmek</value>
+  </data>
+  <data name="ConfigTrayIcon_NumWebViewScreen" xml:space="preserve">
+    <value>WebView'in göstermesi için kullanılacak ekran</value>
+  </data>
+  <data name="Main_CheckForUpdateFailed_MessageBox1" xml:space="preserve">
+    <value>Güncelleme kontrolü başarısız oldu!</value>
+  </data>
+  <data name="SensorType_NamedActiveWindowSensor" xml:space="preserve">
+    <value>AdlandırılmışAktifPencere</value>
+  </data>
+  <data name="SensorsManager_NamedActiveWindowSensorDescription" xml:space="preserve">
+    <value>Odaklanan pencere adının yapılandırılmış dizeyi içerip içermediğine bağlı olarak bir AÇIK/KAPALI değeri sağlar.</value>
+  </data>
+  <data name="SensorsManager_AccentColorSensorDescription" xml:space="preserve">
+    <value>Sistem vurgu renkleri için #RRGGBB renk değerleri sağlar.
+Ana vurgu rengi sensör değeridir, ek vurgu renkleri öznitelikler olarak mevcuttur.</value>
+  </data>
+  <data name="ConfigMqtt_CbUseWebSocket" xml:space="preserve">
+    <value>&amp;WebSocket'i kullanın</value>
+  </data>
+  <data name="ServiceMqtt_CbUseWebSocket" xml:space="preserve">
+    <value>&amp;WebSocket'i kullanın</value>
+  </data>
+  <data name="HassDomain_Fan" xml:space="preserve">
+    <value>Fan</value>
+  </data>
+  <data name="CommandsManager_WinformsSleepCommandDescription" xml:space="preserve">
+    <value>WinForms API'sini kullanarak makineyi uyku moduna geçirir.
+
+Not: "Modern Uyku" nedeniyle uyku komutları, cihazın OEM ve işletim sistemi yapılandırmasına bağlı olarak farklı davranabilir.</value>
+  </data>
+  <data name="CommandType_WinformsSleepCommand" xml:space="preserve">
+    <value>WinformsSleep</value>
+  </data>
+  <data name="OnboardingMqtt_BtnTest_MessageError" xml:space="preserve">
+    <value>Bağlantı kurulamıyor.</value>
+  </data>
+  <data name="OnboardingMqtt_BtnTest_MessageOk" xml:space="preserve">
+    <value>Bağlantı Tamam!</value>
+  </data>
+  <data name="CommandsManager_MonitorSleepPowerPlanCommandDescription" xml:space="preserve">
+    <value>Güç planı değişikliği gibi alternatif bir yaklaşım kullanarak tüm monitörleri uyku moduna (düşük güç) alır.
+"Modern S0ix uyku" özelliğine sahip yeni sistemlerde daha iyi bir deneyim sağlamalı ve sistemi uyku moduna almamalıdır.</value>
+  </data>
+  <data name="CommandType_MonitorSleepPowerPlanCommand" xml:space="preserve">
+    <value>MonitörUykuGüçPlanı</value>
   </data>
 </root>

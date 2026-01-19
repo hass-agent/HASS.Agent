@@ -18,9 +18,7 @@ namespace HASS.Agent.Shared.HomeAssistant.Sensors.PerfCounterSensors.SingleValue
             var deviceConfig = Variables.MqttManager.GetDeviceConfigModel();
             if (deviceConfig == null) return null;
 
-            var asd = ObjectId;
-
-            return AutoDiscoveryConfigModel ?? SetAutoDiscoveryConfigModel(new SensorDiscoveryConfigModel()
+            return AutoDiscoveryConfigModel ?? SetAutoDiscoveryConfigModel(new SensorDiscoveryConfigModel(Domain)
             {
                 EntityName = EntityName,
                 Name = Name,

@@ -58,15 +58,32 @@ namespace HASS.Agent.Commands
         /// Unpublishes all commands
         /// </summary>
         /// <returns></returns>
-        internal static async Task UnpublishAllCommands()
+        internal static async Task UnpublishAllCommands(bool migration = false)
         {
             if (!CommandsPresent())
                 return;
 
             foreach (var command in Variables.Commands)
             {
-                await command.UnPublishAutoDiscoveryConfigAsync();
+                await command.UnPublishAutoDiscoveryConfigAsync(migration);
                 await Variables.MqttManager.UnsubscribeAsync(command);
+            }
+
+            _discoveryPublished = false;
+        }
+
+        /// <summary>
+        /// Publishes all commands
+        /// </summary>
+        /// <returns></returns>
+        internal static async Task ForcePublishAllCommands()
+        {
+            if (!CommandsPresent())
+                return;
+
+            foreach (var command in Variables.Commands)
+            {
+                await command.PublishAutoDiscoveryConfigAsync();
             }
 
             _discoveryPublished = false;
@@ -416,6 +433,14 @@ namespace HASS.Agent.Commands
 
             // =================================
 
+            commandInfoCard = new CommandInfoCard(CommandType.MonitorSleepPowerPlanCommand,
+                Languages.CommandsManager_MonitorSleepPowerPlanCommandDescription,
+                true, false, false);
+
+            CommandInfoCards.Add(commandInfoCard.CommandType, commandInfoCard);
+
+            // =================================
+
             commandInfoCard = new CommandInfoCard(CommandType.MonitorWakeCommand,
                 Languages.CommandsManager_MonitorWakeCommandDescription,
                 true, false, false);
@@ -443,6 +468,14 @@ namespace HASS.Agent.Commands
             commandInfoCard = new CommandInfoCard(CommandType.PublishAllSensorsCommand,
                 Languages.CommandsManager_PublishAllSensorsCommandDescription,
                 true, true, false);
+
+            CommandInfoCards.Add(commandInfoCard.CommandType, commandInfoCard);
+
+            // =================================
+
+            commandInfoCard = new CommandInfoCard(CommandType.RadioCommand,
+                Languages.CommandsManager_RadioCommandDescription,
+                true, false, true);
 
             CommandInfoCards.Add(commandInfoCard.CommandType, commandInfoCard);
 
@@ -520,14 +553,6 @@ namespace HASS.Agent.Commands
 
             // =================================
 
-            commandInfoCard = new CommandInfoCard(CommandType.WebViewCommand,
-                Languages.CommandsManager_WebViewCommandDescription,
-                true, false, true);
-
-            CommandInfoCards.Add(commandInfoCard.CommandType, commandInfoCard);
-
-            // =================================
-
             commandInfoCard = new CommandInfoCard(CommandType.TrayWebViewCommand,
                 Languages.CommandsManager_TrayWebViewCommandDescription,
                 true, false, false);
@@ -536,8 +561,16 @@ namespace HASS.Agent.Commands
 
             // =================================
 
-            commandInfoCard = new CommandInfoCard(CommandType.RadioCommand,
-                Languages.CommandsManager_RadioCommandDescription,
+            commandInfoCard = new CommandInfoCard(CommandType.WinformsSleepCommand,
+                Languages.CommandsManager_WinformsSleepCommandDescription,
+                true, false, false);
+
+            CommandInfoCards.Add(commandInfoCard.CommandType, commandInfoCard);
+
+            // =================================
+
+            commandInfoCard = new CommandInfoCard(CommandType.WebViewCommand,
+                Languages.CommandsManager_WebViewCommandDescription,
                 true, false, true);
 
             CommandInfoCards.Add(commandInfoCard.CommandType, commandInfoCard);

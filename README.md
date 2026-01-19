@@ -1,17 +1,18 @@
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/hass-agent/HASS.Agent)](https://github.com/hass-agent/HASS.Agent/releases/)
 [![license](https://img.shields.io/badge/license-MIT-blue)](#license)
 [![OS - Windows](https://img.shields.io/badge/OS-Windows-blue?logo=windows&logoColor=white)](https://www.microsoft.com/ "Go to Microsoft homepage")
-[![dotnet](https://img.shields.io/badge/.NET-6.0-blue)](https://img.shields.io/badge/.NET-6.0-blue)
+[![dotnet](https://img.shields.io/badge/.NET-8.0-blue)](https://img.shields.io/badge/.NET-8.0-blue)
 ![GitHub all releases](https://img.shields.io/github/downloads/hass-agent/HASS.Agent/total?color=blue)
 ![GitHub latest](https://img.shields.io/github/downloads/hass-agent/HASS.Agent/latest/total?color=blue)
 [![Discord](https://img.shields.io/badge/dynamic/json?color=blue&label=Discord&logo=discord&logoColor=white&query=presence_count&suffix=%20Online&url=https://discord.com/api/guilds/1173033284519862392/widget.json)](https://discord.com/invite/JfZj98xqJr)
 
-<a href="https://github.com/LAB02-Research/HASS.Agent/">
-    <img src="https://raw.githubusercontent.com/LAB02-Research/HASS.Agent/main/images/logo_128.png" alt="HASS.Agent logo" title="HASS.Agent" align="right" height="128" /></a>
+<a href="https://github.com/hass-agent/HASS.Agent/">
+    <img src="https://raw.githubusercontent.com/LAB02-Research/HASS.Agent/main/images/logo_128.png" alt="HASS.Agent logo" title="HASS.Agent" align="right" height="128" />
+</a>
 
 # HASS.Agent
 
-HASS.Agent is a Windows-based client (*companion*) application for [Home Assistant](https://www.home-assistant.io), developed in .NET 6.
+HASS.Agent is a Windows-based client (*companion*) application for [Home Assistant](https://www.home-assistant.io), developed in .NET 8.
 
 Click [here](https://github.com/hass-agent/HASS.Agent/releases/latest/download/HASS.Agent.Installer.exe) to download the latest installer.
 
@@ -52,6 +53,14 @@ The original HASS.Agent has been created by [Sam](https://github.com/LAB02-Admin
 
 Unfortunately due to some time constraints, they're not able to provide the constant support and feature updates. That's where we step in - trying to keep HASS.Agent bug free (dreams need to be big right?) and to introduce new features here and there!
 
+#### Note on the organization and project name
+*"Why this project is named the same as original HASS.Agent, it's confusing"*
+
+Yes, I agree, you're right. The initial idea after Sam's disappearance was to continue the work and offer it to Sam once they're back.
+Well, now that's more than unlikely since it's been quite a long time we last spoke with Sam.
+
+Knowing what we do now, we've probably made a different decision but doing it now it'll only create more confusion. We have a full rewrite project going and it has been already decided the name is going to be altered.
+
 ----
 
 ### Functionality
@@ -72,7 +81,7 @@ Summary of the core functions:
 
 * **WebView**: quickly show any website, anywhere - no browser required, for instance a HA dashboard.
 
-* **Satellite Service**: use the service to collect sensordata and execute commands, even when you're not logged in (**not all commands/sensors are available for Satellite Service**)
+* **Satellite Service**: use the service to collect sensor data and execute commands, even when you're not logged in (**not all commands/sensors are available for Satellite Service**)
 
 * All entities are dynamically acquired from your Home Assistant instance.
 
@@ -88,8 +97,8 @@ Notification examples:
 
 
 ![image](https://user-images.githubusercontent.com/81011038/199956334-642def7d-4cb4-46f3-a73b-25c76e5bd02c.png)
-![Text-based toast notification](https://raw.githubusercontent.com/LAB02-Research/HASS.Agent/main/images/hass_agent_toast_text.png)
 ![261428315-fa66e0cf-bd41-49d6-956c-864eec4bcc70](https://github.com/amadeo-alex/HASS.Agent/assets/68441479/c7e35fb1-59ea-4077-983e-916735dd3901)
+![Text-based toast notification](https://raw.githubusercontent.com/LAB02-Research/HASS.Agent/main/images/hass_agent_toast_text.png)
 
 
 WebView example, showing a dashboard when right-clicking the tray icon:
@@ -124,11 +133,11 @@ You'll be guided through the configuration options during onboarding:
 
 ### Installation
 
-Installing HASS.Agent is easy; just [download the latest installer](https://github.com/hass-agent/HASS.Agent/releases/latest/download/HASS.Agent.Installer.exe), run it and you're done! The installer is signed by us and won't download or do weird stuff - it just places everything where it should, and launches with the right parameter. (optionally installing .NET6)
+Installing HASS.Agent is easy; just [download the latest installer](https://github.com/hass-agent/HASS.Agent/releases/latest/download/HASS.Agent.Installer.exe), run it and you're done! The installer is signed by us and won't download or do weird stuff - it just places everything where it should, and launches with the right parameter. (optionally installing .NET8)
 
 After installing, the onboarding process will help you get everything configured, step by step. If you want an introduction into HASS.Agent, be sure to read the [introduction docs](https://www.hass-agent.io/latest/getting-started/).
 
-Original HASS.Agent documentation is available [here](https://hassagent.readthedocs.io/en/latest/introduction/) - please bear in mind however that it may not represent state of things present in this version.
+Original HASS.Agent documentation is available [here](https://www.hass-agent.io/latest/getting-started/#introduction) - please bear in mind however that it may not represent state of things present in this version.
 
 [Click here to download the latest installer](https://github.com/hass-agent/HASS.Agent/releases/latest/download/HASS.Agent.Installer.exe)
 
@@ -158,7 +167,7 @@ If you want to help with the development of HASS.Agent, check out the [Helping O
 
 ### Articles
 
-### Original HASS.Agent
+### Original HASS.Agent by Sam/LAB02 Research
 
 Liam Alexander Colman from [Home Assistant Guide](https://home-assistant-guide.com) was kind enough to write an article about HASS.Agent: [Integrate Home Assistant with Windows using HASS.Agent](https://home-assistant-guide.com/2022/04/20/integrate-home-assistant-with-windows-using-hass-agent/). The website's full of useful articles, worth having a look :)
 
@@ -166,11 +175,15 @@ Liam Alexander Colman from [Home Assistant Guide](https://home-assistant-guide.c
 
 ### What it's not
 
-A Linux/macOS client! 
+A Linux/macOS client (at least yet)! 
 
-This question comes up a lot, understandably. However it's currently focussed on being a Windows-based client. Even though .NET 6 allows for Linux/macOS development, it's not as easy as pressing a button. The interface would have to be redesigned from the ground up, sensors and commands would need multiple codebases for each OS, testing would take way more time, every OS handles notifications differently, etc.
+Without getting into much of the details, it's not as easy as you think.
 
-You can use the [official companion app](https://apps.apple.com/us/app/home-assistant/id1099568401) for macOS, or [IoPC](https://github.com/maksimkurb/IoPC) which runs on Linux. Note: We haven't tested either.
+With HASS.Agent "2.X" version it's basically impossible. We are thinking about cross-platform support for the "v3 rewrite" but as of now it's only a hopeful wish.
+
+You can try the [official companion app](https://apps.apple.com/us/app/home-assistant/id1099568401) for macOS, or [IoPC](https://github.com/maksimkurb/IoPC) which runs on Linux.
+
+#### Note: We haven't tested either and we do not track the development efforts.
 
 ----
 
@@ -179,6 +192,21 @@ You can use the [official companion app](https://apps.apple.com/us/app/home-assi
 The best way to help out is to test as much as you can (or even join the beta program), and report any weird or failing behavior by [opening a ticket](https://github.com/hass-agent/HASS.Agent/issues). 
 
 Same goes for sharing ideas for new (or improved) functionality! If you want, you can [join on Discord](https://discord.com/invite/JfZj98xqJr) to discuss your ideas.
+
+#### Feature PR Submissions
+
+While all feature PR submissions are welcome, please note that their merging is at ***sole discretion*** of the main developers.
+
+When designing the new feature please take into account:
+- **how they fit with the codebase/codestyle** (yes, we are aware the codebase has it's flaws - hence the rewrite efforts)
+- **is the feature agnostic enough and will benefit all users**
+- **the smaller the PR the better the chance of it being merged**
+
+#### AI Usage
+
+Fully "vibe-coded" submissions will most likely be rejected.
+
+While personal opinions on AI usage and it's impact can vary person-to-person, we'd rather put the effort writing code than reviewing fully AI generated and copy-pasted code.
 
 ----
 
@@ -208,12 +236,14 @@ Everything on the HASS.Agent platform is released under the [MIT license](https:
 
 ### Legacy
 
-HASS.Agent is a .NET 6 application. If for some reason you can't install .NET 6, you can use the last .NET Framework 4.8 version:
+HASS.Agent is a .NET 8 application. If for some reason you can't install .NET 8, you can use the last .NET Framework 4.8 version also developed by Sam:
 
 [v2022.3.8](https://github.com/LAB02-Research/HASS.Agent/releases/tag/v2022.3.8)
 
-It's pretty feature complete if you just want commands, sensors, quickactions and notifications. 
+Per it's release time it was pretty feature complete if you just want commands, sensors, quickactions and notifications. 
 
 You'll need to have .NET Framework 4.8 installed on your PC, which you can [download here](https://dotnet.microsoft.com/en-us/download/dotnet-framework/thank-you/net48-web-installer).
 
-If you find any bugs, feel free to [create a ticket](https://github.com/LAB02-Research/HASS.Agent/issues) and I'll try to patch it.
+#### Please note
+- .NET Framework version is considered legacy and unsupported
+- All issues/requests regarding the .NET Framework version of HASS.Agent will be closed

@@ -42,7 +42,7 @@ public class ScreenshotSensor : AbstractSingleValueSensor
         if (deviceConfig == null)
             return null;
 
-        return AutoDiscoveryConfigModel ?? SetAutoDiscoveryConfigModel(new CameraSensorDiscoveryConfigModel()
+        return AutoDiscoveryConfigModel ?? SetAutoDiscoveryConfigModel(new CameraSensorDiscoveryConfigModel(Domain)
         {
             EntityName = EntityName,
             Name = Name,

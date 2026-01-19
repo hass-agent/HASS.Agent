@@ -11,6 +11,7 @@ using HASS.Agent.Shared.Functions;
 using WK.Libraries.HotkeyListenerNS;
 using Task = System.Threading.Tasks.Task;
 using ConfigSatelliteService = HASS.Agent.Controls.Configuration.ConfigService;
+using HASS.Agent.MQTT;
 
 namespace HASS.Agent.Forms
 {
@@ -171,7 +172,21 @@ namespace HASS.Agent.Forms
                 // give the managers some time to stop
                 await Task.Delay(250);
 
-                // unpublish all entities
+                // signal migration to HA MQTT integration
+                await SensorsManager.UnpublishAllSensors(migration: true);
+                await CommandsManager.UnpublishAllCommands(migration: true);
+
+                await Task.Delay(250);
+
+                // mock new device name and publish new discovery messages
+                Variables.DeviceConfig.Name = Variables.AppSettings.DeviceName;
+                await SensorsManager.ForcePublishAllSensors();
+                await CommandsManager.ForcePublishAllCommands();
+
+                await Task.Delay(250);
+
+                // restore previous device name and clear migration messages
+                Variables.DeviceConfig.Name = _previousDeviceName;
                 await SensorsManager.UnpublishAllSensors();
                 await CommandsManager.UnpublishAllCommands();
 
@@ -327,6 +342,7 @@ namespace HASS.Agent.Forms
             _mqtt.TbMqttClientCertificate.Text = Variables.AppSettings.MqttClientCertificate;
             _mqtt.CbAllowUntrustedCertificates.CheckState = Variables.AppSettings.MqttAllowUntrustedCertificates ? CheckState.Checked : CheckState.Unchecked;
             _mqtt.CbUseRetainFlag.CheckState = Variables.AppSettings.MqttUseRetainFlag ? CheckState.Checked : CheckState.Unchecked;
+            _mqtt.CbUseWebSocket.CheckState = Variables.AppSettings.MqttUseWebSocket ? CheckState.Checked : CheckState.Unchecked;
             _mqtt.CbIgnoreGracePeriod.CheckState = Variables.AppSettings.MqttIgnoreGracePeriod ? CheckState.Checked : CheckState.Unchecked;
 
             // updates
@@ -361,6 +377,7 @@ namespace HASS.Agent.Forms
             _trayIcon.CbShowWebView.CheckState = Variables.AppSettings.TrayIconShowWebView ? CheckState.Checked : CheckState.Unchecked;
             _trayIcon.NumWebViewWidth.Value = Variables.AppSettings.TrayIconWebViewWidth;
             _trayIcon.NumWebViewHeight.Value = Variables.AppSettings.TrayIconWebViewHeight;
+            _trayIcon.SelectedScreen = Variables.AppSettings.TrayIconWebViewScreen; 
             _trayIcon.TbWebViewUrl.Text = Variables.AppSettings.TrayIconWebViewUrl;
             _trayIcon.CbWebViewKeepLoaded.CheckState = Variables.AppSettings.TrayIconWebViewBackgroundLoading ? CheckState.Checked : CheckState.Unchecked;
             _trayIcon.CbWebViewShowMenuOnLeftClick.CheckState = Variables.AppSettings.TrayIconWebViewShowMenuOnLeftClick ? CheckState.Checked : CheckState.Unchecked;
@@ -433,6 +450,7 @@ namespace HASS.Agent.Forms
             Variables.AppSettings.MqttClientCertificate = _mqtt.TbMqttClientCertificate.Text;
             Variables.AppSettings.MqttAllowUntrustedCertificates = _mqtt.CbAllowUntrustedCertificates.CheckState == CheckState.Checked;
             Variables.AppSettings.MqttUseRetainFlag = _mqtt.CbUseRetainFlag.CheckState == CheckState.Checked;
+            Variables.AppSettings.MqttUseWebSocket = _mqtt.CbUseWebSocket.CheckState == CheckState.Checked;
             Variables.AppSettings.MqttIgnoreGracePeriod = _mqtt.CbIgnoreGracePeriod.CheckState == CheckState.Checked;
 
             // mqtt -> service
@@ -470,6 +488,7 @@ namespace HASS.Agent.Forms
             Variables.AppSettings.TrayIconShowWebView = _trayIcon.CbShowWebView.CheckState == CheckState.Checked;
             Variables.AppSettings.TrayIconWebViewWidth = (int)_trayIcon.NumWebViewWidth.Value;
             Variables.AppSettings.TrayIconWebViewHeight = (int)_trayIcon.NumWebViewHeight.Value;
+            Variables.AppSettings.TrayIconWebViewScreen = _trayIcon.NumWebViewScreen.SelectedIndex;
             Variables.AppSettings.TrayIconWebViewUrl = _trayIcon.TbWebViewUrl.Text;
             Variables.AppSettings.TrayIconWebViewBackgroundLoading = _trayIcon.CbWebViewKeepLoaded.CheckState == CheckState.Checked;
             Variables.AppSettings.TrayIconWebViewShowMenuOnLeftClick = _trayIcon.CbWebViewShowMenuOnLeftClick.CheckState == CheckState.Checked;

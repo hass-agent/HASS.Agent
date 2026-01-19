@@ -126,7 +126,7 @@ namespace HASS.Agent.Satellite.Service.MQTT
                     if (IsConnected())
                     {
                         _isReady = true;
-                        
+
                         return;
                     }
 
@@ -357,7 +357,7 @@ namespace HASS.Agent.Satellite.Service.MQTT
         /// <param name="domain"></param>
         /// <param name="clearConfig"></param>
         /// <returns></returns>
-        public async Task AnnounceAutoDiscoveryConfigAsync(AbstractDiscoverable discoverable, string domain, bool clearConfig = false)
+        public async Task AnnounceAutoDiscoveryConfigAsync(AbstractDiscoverable discoverable, string domain, bool clearConfig = false, bool migration = false)
         {
             if (!IsConnected())
                 return;
@@ -394,7 +394,8 @@ namespace HASS.Agent.Satellite.Service.MQTT
 
                 if (clearConfig)
                 {
-                    messageBuilder.WithPayload(Array.Empty<byte>());
+                    var payload = migration ? Encoding.UTF8.GetBytes("{\"migrate_discovery\": true }") : Array.Empty<byte>();
+                    messageBuilder.WithPayload(payload);
                 }
                 else
                 {
@@ -601,12 +602,21 @@ namespace HASS.Agent.Satellite.Service.MQTT
 
             var clientOptionsBuilder = new MqttClientOptionsBuilder()
                 .WithClientId(Variables.ServiceMqttSettings.MqttClientId)
-                .WithTcpServer(Variables.ServiceMqttSettings.MqttAddress, Variables.ServiceMqttSettings.MqttPort)
                 .WithCleanSession()
                 .WithWillTopic($"{Variables.ServiceMqttSettings.MqttDiscoveryPrefix}/sensor/{Variables.DeviceConfig.Name}/availability")
                 .WithWillPayload("offline")
                 .WithWillRetain(Variables.ServiceMqttSettings.MqttUseRetainFlag)
                 .WithKeepAlivePeriod(TimeSpan.FromSeconds(15));
+
+            if (Variables.ServiceMqttSettings.MqttUseWebSocket)
+            {
+                clientOptionsBuilder.WithWebSocketServer(o => o.WithUri($"{Variables.ServiceMqttSettings.MqttAddress}:{Variables.ServiceMqttSettings.MqttPort}"));
+                Log.Information("[MQTT] Using WebSocket for the connection");
+            }
+            else
+            {
+                clientOptionsBuilder.WithTcpServer(Variables.ServiceMqttSettings.MqttAddress, Variables.ServiceMqttSettings.MqttPort);
+            }
 
             if (!string.IsNullOrEmpty(Variables.ServiceMqttSettings.MqttUsername))
                 clientOptionsBuilder.WithCredentials(Variables.ServiceMqttSettings.MqttUsername, Variables.ServiceMqttSettings.MqttPassword);

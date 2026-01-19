@@ -2174,7 +2174,10 @@ Nimmt derzeit die Lautstärke deines Standardgeräts.</value>
     <value>Liefert die aktuelle Auslastung der ersten GPU in Prozent.</value>
   </data>
   <data name="SensorsManager_GpuTemperatureSensorDescription" xml:space="preserve">
-    <value>Liefert die aktuelle Temperatur der ersten GPU.</value>
+    <value>HINWEIS: Dieser Sensor funktioniert nicht.
+
+Aufgrund von Sicherheitsbedenken bezüglich Libre Hardware Monitor (Bibliothek, die HASS.Agent Zugriff auf GPU-Temperaturdaten ermöglicht) wurde dieser Sensor aus Gründen der Abwärtskompatibilität beibehalten und gibt immer 0 zurück.
+Weitere Optionen finden Sie in der Dokumentation.</value>
   </data>
   <data name="SensorsManager_LastActiveSensorDescription" xml:space="preserve">
     <value>Stellt einen datetime-Wert bereit, der den letzten Moment enthält, in dem der Benutzer eine Eingabe gemacht hat.</value>
@@ -3213,7 +3216,8 @@ Sind Sie sicher, dass Sie diesen Schlüssel trotzdem verwenden möchten?</value>
 Bist Du sicher, dass Du es so verwenden möchtest?</value>
   </data>
   <data name="OnboardingDone_LblInfo6" xml:space="preserve">
-    <value>Die Entwicklung und Wartung dieses Tools (und alles, was es umgibt) nimmt viel Zeit in Anspruch. Wie die meisten Entwickler verwende ich Koffein – wenn Du es also entbehren kannst, ist eine Tasse Kaffee immer sehr willkommen!</value>
+    <value>Derzeit nehmen wir (das HASS.Agent-Team, das die Abspaltung betreut) keinerlei Spenden an. :)
+Sie können aber gerne dem ursprünglichen Autor von HASS.Agent – ​​Sam – eine Spende zukommen lassen! Wo auch immer er sich gerade befindet, eine Tasse Kaffee könnte ihm den Tag verschönern.</value>
   </data>
   <data name="OnboardingDone_LblTip2" xml:space="preserve">
     <value>Tipp: Andere Spendenmethoden sind im Über-Fenster verfügbar.</value>
@@ -3375,5 +3379,32 @@ Willst Du den Runtime Installer herunterladen?</value>
   </data>
   <data name="HassAction_Press" xml:space="preserve">
     <value>Presse</value>
+  </data>
+  <data name="SensorsManager_NamedActiveWindowSensorDescription" xml:space="preserve">
+    <value>Stellt einen EIN/AUS-Wert bereit, basierend darauf, ob der fokussierte Fenstername eine konfigurierte Zeichenfolge enthält.</value>
+  </data>
+  <data name="SensorType_NamedActiveWindowSensor" xml:space="preserve">
+    <value>BenanntesAktivesFenster</value>
+  </data>
+  <data name="SensorType_AccentColorSensor" xml:space="preserve">
+    <value>Akzentfarbe</value>
+  </data>
+  <data name="HassDomain_Fan" xml:space="preserve">
+    <value>Lüfter</value>
+  </data>
+  <data name="CommandsManager_WinformsSleepCommandDescription" xml:space="preserve">
+    <value>Versetzt den Rechner mithilfe der WinForms-API in den Ruhezustand.
+
+Hinweis: Aufgrund des „Modern Sleep“-Modus können sich die Ruhezustandsbefehle je nach Geräte-OEM und Betriebssystemkonfiguration unterschiedlich verhalten.</value>
+  </data>
+  <data name="CommandType_WinformsSleepCommand" xml:space="preserve">
+    <value>WinformsSleep</value>
+  </data>
+  <data name="CommandsManager_MonitorSleepPowerPlanCommandDescription" xml:space="preserve">
+    <value>Versetzt alle Monitore in den Energiesparmodus (niedriger Stromverbrauch) mithilfe einer alternativen Methode zur Änderung des Energiesparplans.
+Sollte bei neuen Systemen mit „modernem S0ix-Schlafmodus“ eine bessere Benutzererfahrung bieten und das System nicht in den Ruhezustand versetzen.</value>
+  </data>
+  <data name="CommandType_MonitorSleepPowerPlanCommand" xml:space="preserve">
+    <value>MonitorSleepPowerPlan</value>
   </data>
 </root>

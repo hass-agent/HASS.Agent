@@ -2059,7 +2059,10 @@ Actualmente toma el volumen de su dispositivo predeterminado.</value>
     <value>Proporciona la carga actual de la primera GPU como porcentaje.</value>
   </data>
   <data name="SensorsManager_GpuTemperatureSensorDescription" xml:space="preserve">
-    <value>Proporciona la temperatura actual de la primera GPU.</value>
+    <value>NOTA: Este sensor no funciona.
+
+Debido a problemas de seguridad relacionados con Libre Hardware Monitor (biblioteca que permite a HASS.Agent acceder a los datos de temperatura de la GPU), este sensor se mantiene por compatibilidad con versiones anteriores y siempre devolverá 0.
+Consulte la documentación para ver opciones alternativas.</value>
   </data>
   <data name="SensorsManager_LastActiveSensorDescription" xml:space="preserve">
     <value>Proporciona un valor de fecha y hora que contiene el último momento en que el usuario proporcionó una entrada.</value>
@@ -3089,7 +3092,8 @@ Debería contener tres secciones (separadas por dos puntos).
 ¿Está seguro de que quiere usarlo así?</value>
   </data>
   <data name="OnboardingDone_LblInfo6" xml:space="preserve">
-    <value>Desarrollar y mantener esta herramienta (y todo lo que la rodea) requiere mucho tiempo. Al igual que la mayoría de los desarrolladores, funciono a base de cafeína, así que, si puede dedicarle un poco de tiempo, ¡una taza de café es siempre muy apreciada!</value>
+    <value>Actualmente, nosotros (el equipo de HASS.Agent que mantiene esta versión) no aceptamos donaciones de ningún tipo :)
+Sin embargo, no duden en donar al autor original de HASS.Agent, ¡Sam! Esté donde esté, una taza de café podría alegrarle el día.</value>
   </data>
   <data name="OnboardingDone_LblTip2" xml:space="preserve">
     <value>Sugerencia: hay otros métodos de donación disponibles en la ventana Acerca de.</value>
@@ -3251,5 +3255,32 @@ Oculta, Maximizada, Minimizada, Normal y Desconocida.</value>
   </data>
   <data name="HassAction_Press" xml:space="preserve">
     <value>Prensa</value>
+  </data>
+  <data name="SensorsManager_NamedActiveWindowSensorDescription" xml:space="preserve">
+    <value>Proporciona un valor de ENCENDIDO/APAGADO según si el nombre de la ventana enfocada contiene una cadena configurada.</value>
+  </data>
+  <data name="SensorType_NamedActiveWindowSensor" xml:space="preserve">
+    <value>Ventana activa con nombre</value>
+  </data>
+  <data name="SensorType_AccentColorSensor" xml:space="preserve">
+    <value>Color de acento</value>
+  </data>
+  <data name="HassDomain_Fan" xml:space="preserve">
+    <value>Admirador</value>
+  </data>
+  <data name="CommandsManager_WinformsSleepCommandDescription" xml:space="preserve">
+    <value>Pone la máquina en suspensión mediante la API de WinForms.
+
+Nota: Debido al modo de suspensión moderno, los comandos de suspensión pueden comportarse de forma diferente según el fabricante del dispositivo y la configuración del sistema operativo.</value>
+  </data>
+  <data name="CommandType_WinformsSleepCommand" xml:space="preserve">
+    <value>WinformsSleep</value>
+  </data>
+  <data name="CommandsManager_MonitorSleepPowerPlanCommandDescription" xml:space="preserve">
+    <value>Pone todos los monitores en modo de suspensión (bajo consumo de energía) utilizando un método alternativo de modificación del plan de energía.
+Esto debería proporcionar una mejor experiencia con los nuevos sistemas con "suspensión moderna S0ix" y evitar que el sistema entre en modo de suspensión completa.</value>
+  </data>
+  <data name="CommandType_MonitorSleepPowerPlanCommand" xml:space="preserve">
+    <value>Plan de energía para el sueño del monitor</value>
   </data>
 </root>

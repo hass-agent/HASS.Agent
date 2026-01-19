@@ -47,6 +47,7 @@
             TbMqttClientCertificate.Text = string.Empty;
             CbAllowUntrustedCertificates.CheckState = CheckState.Checked;
             CbUseRetainFlag.CheckState = CheckState.Checked;
+            CbUseWebSocket.CheckState = CheckState.Unchecked;
         }
 
         private void ConfigMqtt_Load(object sender, EventArgs e)

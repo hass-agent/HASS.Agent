@@ -44,7 +44,7 @@ namespace HASS.Agent.Shared.HomeAssistant.Commands
             var deviceConfig = Variables.MqttManager.GetDeviceConfigModel();
             if (deviceConfig == null) return null;
 
-            return new CommandDiscoveryConfigModel()
+            return new CommandDiscoveryConfigModel(Domain)
             {
                 EntityName = EntityName,
                 Name = Name,

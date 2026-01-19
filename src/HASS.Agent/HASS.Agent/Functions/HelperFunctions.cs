@@ -1,13 +1,8 @@
-﻿using System.ComponentModel;
-using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
-using System.Globalization;
+﻿using System.Diagnostics;
 using System.IO;
-using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
-using System.Text;
 using System.Text.Json;
 using System.Text.RegularExpressions;
 using HASS.Agent.API;
@@ -27,11 +22,15 @@ using MediaManager = HASS.Agent.Media.MediaManager;
 using HASS.Agent.Shared.Managers;
 using Newtonsoft.Json.Serialization;
 using System.Windows;
+using System.Security.Policy;
 
 namespace HASS.Agent.Functions
 {
-    internal static class HelperFunctions
+    internal static partial class HelperFunctions
     {
+        [GeneratedRegex("^https?://")]
+        private static partial Regex AbsoluteURLRegex();
+
         private static bool _shutdownCalled = false;
 
         /// <summary>
@@ -365,6 +364,8 @@ namespace HASS.Agent.Functions
 
         internal static Form GetForm(string formName) => System.Windows.Forms.Application.OpenForms.Cast<Form>().FirstOrDefault(x => x.Name == formName);
 
+        internal static bool IsAbsoluteUrl(string url) => AbsoluteURLRegex().IsMatch(url);
+
         /// <summary>
         /// Launches the url with the user's custom browser if provided, or the system's default
         /// </summary>
@@ -372,11 +373,13 @@ namespace HASS.Agent.Functions
         /// <param name="incognito"></param>
         internal static void LaunchUrl(string url, bool incognito = false)
         {
+            var targetUrl = StorageManager.GetElementUrl(url);
+
             // did the user provide a browser?
             if (string.IsNullOrEmpty(Variables.AppSettings.BrowserBinary))
             {
                 // nope
-                using (_ = Process.Start(new ProcessStartInfo(url) { UseShellExecute = true })) { }
+                using (_ = Process.Start(new ProcessStartInfo(targetUrl) { UseShellExecute = true })) { }
                 return;
             }
 
@@ -385,7 +388,7 @@ namespace HASS.Agent.Functions
                 // yep, but not found
                 Log.Warning("[BROWSER] User provided browser not found, using default: {bin}", Variables.AppSettings.BrowserBinary);
 
-                using (_ = Process.Start(new ProcessStartInfo(url) { UseShellExecute = true })) { }
+                using (_ = Process.Start(new ProcessStartInfo(targetUrl) { UseShellExecute = true })) { }
                 return;
             }
 
@@ -394,8 +397,8 @@ namespace HASS.Agent.Functions
             var startupArgs = new ProcessStartInfo { FileName = Variables.AppSettings.BrowserBinary };
 
             // if incgonito flag is set, use the incog. args (if set) - otherwise, just the url
-            if (incognito) startupArgs.Arguments = !string.IsNullOrEmpty(Variables.AppSettings.BrowserIncognitoArg) ? $"{Variables.AppSettings.BrowserIncognitoArg} {url}" : url;
-            else startupArgs.Arguments = url;
+            if (incognito) startupArgs.Arguments = !string.IsNullOrEmpty(Variables.AppSettings.BrowserIncognitoArg) ? $"{Variables.AppSettings.BrowserIncognitoArg} {targetUrl}" : targetUrl;
+            else startupArgs.Arguments = targetUrl;
 
             userBrowser.StartInfo = startupArgs;
             userBrowser.Start();
@@ -423,7 +426,7 @@ namespace HASS.Agent.Functions
         /// <summary>
         /// Prepares and loads the tray icon's webview
         /// </summary>
-        internal static void PrepareTrayIconWebView()
+        internal static void PrepareTrayIconWebView(int screenIndex = 0)
         {
             // prepare the webview info
             var webViewInfo = new WebViewInfo
@@ -434,8 +437,8 @@ namespace HASS.Agent.Functions
                 IsTrayIconWebView = true
             };
 
-            var x = Screen.PrimaryScreen.WorkingArea.Width - webViewInfo.Width;
-            var y = Screen.PrimaryScreen.WorkingArea.Height - webViewInfo.Height;
+            var x = Screen.AllScreens[screenIndex].Bounds.Right - webViewInfo.Width;
+            var y = Screen.AllScreens[screenIndex].Bounds.Bottom - webViewInfo.Height;
 
             webViewInfo.X = x;
             webViewInfo.Y = y;
@@ -471,20 +474,20 @@ namespace HASS.Agent.Functions
                 Width = Variables.AppSettings.TrayIconWebViewWidth,
             };
 
-            LaunchTrayIconWebView(webView);
+            LaunchTrayIconWebView(webView, Variables.AppSettings.TrayIconWebViewScreen);
         }
 
         /// <summary>
         /// Shows a new webview form near the tray icon
         /// </summary>
         /// <param name="webViewInfo"></param>
-        internal static void LaunchTrayIconWebView(WebViewInfo webViewInfo)
+        internal static void LaunchTrayIconWebView(WebViewInfo webViewInfo, int screenIndex = 0)
         {
             // are we previewing?
             if (webViewInfo.IsTrayIconPreview)
             {
                 // yep, show as configured
-                LaunchTrayIconCustomWebView(webViewInfo);
+                LaunchTrayIconCustomWebView(webViewInfo, screenIndex);
 
                 // done
                 return;
@@ -494,17 +497,17 @@ namespace HASS.Agent.Functions
             if (Variables.AppSettings.TrayIconWebViewBackgroundLoading)
             {
                 // yep
-                LaunchTrayIconBackgroundLoadedWebView();
+                LaunchTrayIconBackgroundLoadedWebView(screenIndex);
 
                 // done
                 return;
             }
 
             // show a new webview from within the UI thread
-            LaunchTrayIconCustomWebView(webViewInfo);
+            LaunchTrayIconCustomWebView(webViewInfo, screenIndex);
         }
 
-        private static void LaunchTrayIconBackgroundLoadedWebView()
+        private static void LaunchTrayIconBackgroundLoadedWebView(int screenIndex)
         {
             Variables.MainForm.Invoke(new MethodInvoker(delegate
             {
@@ -517,12 +520,27 @@ namespace HASS.Agent.Functions
             }));
         }
 
-        private static void LaunchTrayIconCustomWebView(WebViewInfo webViewInfo)
+        private static void LaunchTrayIconCustomWebView(WebViewInfo webViewInfo, int screenIndex = 0)
         {
+            if (screenIndex == -1)
+            {
+                InitMultiScreenConfig();
+                screenIndex = Variables.AppSettings.TrayIconWebViewScreen;
+            }
+
             Variables.MainForm.Invoke(new MethodInvoker(delegate
             {
-                var x = Screen.PrimaryScreen.WorkingArea.Width - webViewInfo.Width;
-                var y = Screen.PrimaryScreen.WorkingArea.Height - webViewInfo.Height;
+                var totalX = 0;
+
+                foreach (var widthscreen in Screen.AllScreens)
+                {
+                    totalX += widthscreen.Bounds.X;
+                }
+
+                Screen targetScreen = Screen.AllScreens[screenIndex];
+
+                var x = targetScreen.Bounds.X + webViewInfo.Width;
+                var y = targetScreen.WorkingArea.Height - webViewInfo.Height;
 
                 webViewInfo.X = x;
                 webViewInfo.Y = y;
@@ -533,10 +551,41 @@ namespace HASS.Agent.Functions
 
                 var webView = new WebView(webViewInfo);
                 webView.Opacity = 0;
+                webView.AutoScaleMode = AutoScaleMode.Font;
+                webView.Show();
+
+                webView.Left = targetScreen.WorkingArea.Right - webView.Width;
+                webView.Top = targetScreen.WorkingArea.Bottom - webView.Height;
 
                 Variables.TrayIconWebView = webView;
-                webView.Show();
+
             }));
+        }
+
+        public static void InitMultiScreenConfig()
+        {
+            var primaryScreenIndex = 0;
+            var displays = Screen.AllScreens;
+
+            if (Screen.AllScreens.Length == 1)
+            {
+                Variables.AppSettings.TrayIconWebViewScreen = 0;
+            }
+            else
+            {
+                for (var i = 0; i < displays.Length; i++)
+                {
+                    var display = displays[i];
+
+                    if (display.Primary)
+                    {
+                        primaryScreenIndex = i;
+                        break;
+                    }
+                }
+            }
+
+            Variables.AppSettings.TrayIconWebViewScreen = primaryScreenIndex;
         }
 
         private static readonly Dictionary<IntPtr, string> KnownOkInputLanguage = new()

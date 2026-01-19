@@ -28,6 +28,7 @@ using WK.Libraries.HotkeyListenerNS;
 using NativeMethods = HASS.Agent.Functions.NativeMethods;
 using QuickActionsConfig = HASS.Agent.Forms.QuickActions.QuickActionsConfig;
 using Task = System.Threading.Tasks.Task;
+using Microsoft.Win32;
 
 namespace HASS.Agent.Forms
 {
@@ -65,6 +66,11 @@ namespace HASS.Agent.Forms
                     AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
                 }
 
+                if (SharedHelperFunctions.RunningElevated())
+                {
+                    Log.Warning("[MAIN] Running with elevated privileges, this might cause issues for example with notifications!");
+                }
+
                 // catch all key presses
                 KeyPreview = true;
 
@@ -90,7 +96,6 @@ namespace HASS.Agent.Forms
                 // core components initialization - required for loading the entities
                 await RadioManager.Initialize();
                 await InternalDeviceSensorsManager.Initialize();
-                InitializeHardwareManager();
                 InitializeVirtualDesktopManager();
                 await Task.Run(InitializeAudioManager);
 
@@ -117,7 +122,10 @@ namespace HASS.Agent.Forms
                 if (Variables.ShuttingDown)
                     return;
 
+                // prepare the tray icon config
+                SystemEvents.DisplaySettingsChanged += (s, a) => RefreshTrayIcon();
                 ProcessTrayIcon();
+
                 InitializeHotkeys();
 
                 var initTask = Task.Run(async () =>
@@ -166,7 +174,6 @@ namespace HASS.Agent.Forms
         private void OnProcessExit(object sender, EventArgs e)
         {
             AudioManager.Shutdown();
-            HardwareManager.Shutdown();
             NotificationManager.Exit();
         }
 
@@ -250,13 +257,8 @@ namespace HASS.Agent.Forms
 
         private void ProcessTrayIcon()
         {
-            if (Variables.AppSettings.TrayIconUseModern)
-            {
-                var icon = (Icon)new System.Resources.ResourceManager(typeof(Main)).GetObject("ModernNotifyIcon");
-                if (icon != null)
-                    NotifyIcon.Icon = icon;
-            }
-
+            RefreshTrayIcon();
+            
             // are we set to show the webview and keep it loaded?
             if (!Variables.AppSettings.TrayIconShowWebView)
                 return;
@@ -330,14 +332,6 @@ namespace HASS.Agent.Forms
         }
 
         /// <summary>
-        /// Initialized the Hardware Manager
-        /// </summary>
-        private void InitializeHardwareManager()
-        {
-            HardwareManager.Initialize();
-        }
-
-        /// <summary>
         /// Initialized the Audio Manager
         /// </summary>
         private void InitializeAudioManager()
@@ -398,6 +392,21 @@ namespace HASS.Agent.Forms
             {
                 NotifyIcon.Visible = false;
             }));
+        }
+
+        internal void RefreshTrayIcon()
+        {
+            var iconResourceName = Variables.AppSettings.TrayIconUseModern ? "ModernNotifyIcon" : "NotifyIcon.Icon";
+            var icon = (Icon)new System.Resources.ResourceManager(typeof(Main)).GetObject(iconResourceName);
+            if (icon != null)
+            {
+                Invoke(new MethodInvoker(delegate
+                {
+                    NotifyIcon.Visible = false;
+                    NotifyIcon.Icon = icon;
+                    NotifyIcon.Visible = true;
+                }));
+            }
         }
 
         /// <summary>
@@ -833,11 +842,15 @@ namespace HASS.Agent.Forms
                 BtnCheckForUpdate.Text = Languages.Main_Checking;
 
                 var (isAvailable, version) = await UpdateManager.CheckIsUpdateAvailableAsync();
-                if (!isAvailable)
+                if (!isAvailable && version != null)
                 {
                     var beta = Variables.Beta ? " [BETA]" : string.Empty;
                     MessageBoxAdv.Show(this, string.Format(Languages.Main_CheckForUpdate_MessageBox1, Variables.Version, beta), Variables.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
-
+                    return;
+                }
+                else if(!isAvailable)
+                {
+                    MessageBoxAdv.Show(this, Languages.Main_CheckForUpdateFailed_MessageBox1, Variables.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 

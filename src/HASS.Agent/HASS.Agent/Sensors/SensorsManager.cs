@@ -66,11 +66,46 @@ namespace HASS.Agent.Sensors
         /// Unpublishes all single- and multivalue sensors
         /// </summary>
         /// <returns></returns>
-        internal static async Task UnpublishAllSensors()
+        internal static async Task UnpublishAllSensors(bool migration = false)
         {
-            // unpublish the autodisco's
-            if (SingleValueSensorsPresent()) foreach (var sensor in Variables.SingleValueSensors) await sensor.UnPublishAutoDiscoveryConfigAsync();
-            if (MultiValueSensorsPresent()) foreach (var sensor in Variables.MultiValueSensors) await sensor.UnPublishAutoDiscoveryConfigAsync();
+            if (SingleValueSensorsPresent())
+            {
+                foreach (var sensor in Variables.SingleValueSensors)
+                {
+                    await sensor.UnPublishAutoDiscoveryConfigAsync(migration);
+                }
+            }
+            if (MultiValueSensorsPresent())
+            {
+                foreach (var sensor in Variables.MultiValueSensors)
+                {
+                    await sensor.UnPublishAutoDiscoveryConfigAsync(migration);
+                }
+            }
+
+            _discoveryPublished = false;
+        }
+
+        /// <summary>
+        /// Publishes all single- and multivalue sensors
+        /// </summary>
+        /// <returns></returns>
+        internal static async Task ForcePublishAllSensors()
+        {
+            if (SingleValueSensorsPresent())
+            {
+                foreach (var sensor in Variables.SingleValueSensors)
+                {
+                    await sensor.PublishAutoDiscoveryConfigAsync();
+                }
+            }
+            if (MultiValueSensorsPresent())
+            {
+                foreach (var sensor in Variables.MultiValueSensors)
+                {
+                    await sensor.PublishAutoDiscoveryConfigAsync();
+                }
+            }
         }
 
         /// <summary>
@@ -390,6 +425,14 @@ namespace HASS.Agent.Sensors
 
             // =================================
 
+            sensorInfoCard = new SensorInfoCard(SensorType.AccentColorSensor,
+                Languages.SensorsManager_AccentColorSensorDescription,
+                120, false, true, false);
+
+            SensorInfoCards.Add(sensorInfoCard.SensorType, sensorInfoCard);
+
+            // =================================
+
             sensorInfoCard = new SensorInfoCard(SensorType.AudioSensors,
                 Languages.SensorsManager_AudioSensorsDescription,
                 20, true, true, true);
@@ -486,6 +529,14 @@ namespace HASS.Agent.Sensors
 
             // =================================
 
+            sensorInfoCard = new SensorInfoCard(SensorType.InternalDeviceSensor,
+            Languages.SensorsManager_InternalDeviceSensorDescription,
+            10, false, true, false);
+
+            SensorInfoCards.Add(sensorInfoCard.SensorType, sensorInfoCard);
+
+            // =================================
+
             sensorInfoCard = new SensorInfoCard(SensorType.LastActiveSensor,
                 Languages.SensorsManager_LastActiveSensorDescription,
                 10, false, true, false);
@@ -566,6 +617,14 @@ namespace HASS.Agent.Sensors
 
             // =================================
 
+            sensorInfoCard = new SensorInfoCard(SensorType.NamedActiveWindowSensor,
+                Languages.SensorsManager_NamedActiveWindowSensorDescription,
+                30, false, true, false);
+
+            SensorInfoCards.Add(sensorInfoCard.SensorType, sensorInfoCard);
+
+            // =================================
+
             sensorInfoCard = new SensorInfoCard(SensorType.NetworkSensors,
                 Languages.SensorsManager_NetworkSensorsDescription,
                 30, true, true, true);
@@ -601,6 +660,14 @@ namespace HASS.Agent.Sensors
             sensorInfoCard = new SensorInfoCard(SensorType.ProcessActiveSensor,
                 Languages.SensorsManager_ProcessActiveSensorDescription,
                 10, false, true, true);
+
+            SensorInfoCards.Add(sensorInfoCard.SensorType, sensorInfoCard);
+
+            // =================================
+
+            sensorInfoCard = new SensorInfoCard(SensorType.ScreenshotSensor,
+            Languages.SensorsManager_ScreenshotSensorDescription,
+            10, false, true, false);
 
             SensorInfoCards.Add(sensorInfoCard.SensorType, sensorInfoCard);
 
@@ -673,22 +740,6 @@ namespace HASS.Agent.Sensors
             sensorInfoCard = new SensorInfoCard(SensorType.WmiQuerySensor,
                 Languages.SensorsManager_WmiQuerySensorDescription,
                 10, false, true, true);
-
-            SensorInfoCards.Add(sensorInfoCard.SensorType, sensorInfoCard);
-
-            // =================================
-
-            sensorInfoCard = new SensorInfoCard(SensorType.InternalDeviceSensor,
-            Languages.SensorsManager_InternalDeviceSensorDescription,
-            10, false, true, false);
-
-            SensorInfoCards.Add(sensorInfoCard.SensorType, sensorInfoCard);
-
-            // =================================
-
-            sensorInfoCard = new SensorInfoCard(SensorType.ScreenshotSensor,
-            Languages.SensorsManager_ScreenshotSensorDescription,
-            10, false, true, false);
 
             SensorInfoCards.Add(sensorInfoCard.SensorType, sensorInfoCard);
 

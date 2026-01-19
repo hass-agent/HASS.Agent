@@ -1249,11 +1249,12 @@ Je commando wordt onveranderd toegevoegd als argument, dus je moet je eigen haak
   </data>
   <data name="CommandsManager_KeyCommandDescription" xml:space="preserve">
     <value>Simuleert een enkele toetsaanslag.
+Door van dit commando een "switch"-type te maken, blijft de knop ingedrukt zolang de switch aan staat.
 
-Klik op het tekstvak 'sleutelcode' en druk op de sleutel die u wilt simuleren. De bijbehorende sleutelcode wordt voor u ingevoerd.
-Gebruik voor de TAB-sleutel LCTRL+TAB.
+Klik op het tekstvak 'keycode' en druk op de toets die u wilt simuleren. De bijbehorende toetscode wordt automatisch ingevoerd.
+Gebruik LCTRL+TAB voor de TAB-toets.
 
-Als u meer sleutels en/of modifiers zoals CTRL nodig heeft, gebruikt u de opdracht MultipleKeys.</value>
+Als u meer toetsen en/of modifiers zoals CTRL nodig hebt, gebruik dan het commando 'MultipleKeys'.</value>
     <comment>Fuzzy</comment>
   </data>
   <data name="CommandsManager_LaunchUrlCommandDescription" xml:space="preserve">
@@ -2073,7 +2074,10 @@ Pakt momenteel het volume van je standaardapparaat.</value>
     <value>Geeft de huidige belasting van de eerste GPU als een percentage.</value>
   </data>
   <data name="SensorsManager_GpuTemperatureSensorDescription" xml:space="preserve">
-    <value>Geeft de huidige temperatuur van de eerste GPU.</value>
+    <value>OPMERKING: Dit is een niet-functionerende sensor.
+
+Vanwege beveiligingsproblemen met Libre Hardware Monitor (bibliotheek die HASS.Agent toegang geeft tot GPU-temperatuurgegevens) wordt deze sensor om redenen van achterwaartse compatibiliteit niet gebruikt en retourneert altijd 0.
+Raadpleeg de documentatie voor alternatieve opties.</value>
   </data>
   <data name="SensorsManager_LastActiveSensorDescription" xml:space="preserve">
     <value>Biedt een datum/tijd-waarde die de laatste keer bevat dat de gebruiker iets heeft ingevoerd.
@@ -3116,7 +3120,8 @@ Weet je zeker dat je 'm zo wilt gebruiken?</value>
 Weet je zeker dat je 'm zo wilt gebruiken?</value>
   </data>
   <data name="OnboardingDone_LblInfo6" xml:space="preserve">
-    <value>Het ontwikkelen en onderhouden van deze tool (en alles wat erbij komt kijken, zoals support, deze vertaling en de documentatie) neemt een hoop tijd in beslag. Zoals de meeste ontwikkelaars draai ik op caffeïne - dus als je 't kunt missen, wordt een kop koffie altijd erg gewaardeerd!</value>
+    <value>Momenteel accepteren wij (het HASS.Agent-team dat de fork beheert) geen donaties in welke vorm dan ook :)
+Voel je echter vrij om te doneren aan de oorspronkelijke auteur van HASS.Agent - Sam! Waar ze zich ook bevinden, een kopje koffie kan hun dag misschien opvrolijken.</value>
   </data>
   <data name="OnboardingDone_LblTip2" xml:space="preserve">
     <value>Tip: andere donatie methodes zijn beschikbaar in het Over scherm.</value>
@@ -3427,5 +3432,51 @@ Vereist dat het geconfigureerd is in "Configuratie -&gt; Tray Icon"</value>
   </data>
   <data name="Notification_Dismiss" xml:space="preserve">
     <value>Afwijzen</value>
+  </data>
+  <data name="ConfigTrayIcon_NumWebViewScreen" xml:space="preserve">
+    <value>Scherm dat moet worden gebruikt om WebView weer te geven</value>
+  </data>
+  <data name="Main_CheckForUpdateFailed_MessageBox1" xml:space="preserve">
+    <value>Controle op update mislukt!</value>
+  </data>
+  <data name="SensorType_NamedActiveWindowSensor" xml:space="preserve">
+    <value>SchermActiefNaam</value>
+  </data>
+  <data name="SensorsManager_NamedActiveWindowSensorDescription" xml:space="preserve">
+    <value>Geeft een AAN/UIT-waarde op basis van het al dan niet bevatten van de focusvensternaam van een geconfigureerde tekenreeks.</value>
+  </data>
+  <data name="SensorsManager_AccentColorSensorDescription" xml:space="preserve">
+    <value>Biedt #RRGGBB-kleurwaarden voor systeemaccentkleuren.
+De belangrijkste accentkleur is de sensorwaarde. Aanvullende accentkleuren zijn beschikbaar als attributen.</value>
+  </data>
+  <data name="ConfigMqtt_CbUseWebSocket" xml:space="preserve">
+    <value>Gebruik &amp;WebSocket</value>
+  </data>
+  <data name="ServiceMqtt_CbUseWebSocket" xml:space="preserve">
+    <value>Gebruik &amp;WebSocket</value>
+  </data>
+  <data name="HassDomain_Fan" xml:space="preserve">
+    <value>Fan</value>
+  </data>
+  <data name="CommandsManager_WinformsSleepCommandDescription" xml:space="preserve">
+    <value>Zet de machine in slaapstand met behulp van de WinForms API.
+
+Opmerking: vanwege "Modern Sleep" kunnen de slaapopdrachten zich anders gedragen, afhankelijk van de OEM van het apparaat en de configuratie van het besturingssysteem.</value>
+  </data>
+  <data name="CommandType_WinformsSleepCommand" xml:space="preserve">
+    <value>WinformsSleep</value>
+  </data>
+  <data name="OnboardingMqtt_BtnTest_MessageError" xml:space="preserve">
+    <value>Kan geen verbinding maken.</value>
+  </data>
+  <data name="OnboardingMqtt_BtnTest_MessageOk" xml:space="preserve">
+    <value>Verbinding OK!</value>
+  </data>
+  <data name="CommandsManager_MonitorSleepPowerPlanCommandDescription" xml:space="preserve">
+    <value>Zet alle monitoren in de slaapstand (laag energieverbruik) met behulp van een alternatieve aanpak voor het aanpassen van het energiebeheerschema.
+Zou een betere ervaring moeten bieden met nieuwe systemen met een "moderne S0ix-slaapstand" en het systeem niet in de slaapstand zetten.</value>
+  </data>
+  <data name="CommandType_MonitorSleepPowerPlanCommand" xml:space="preserve">
+    <value>MonitorSleepPowerPlan</value>
   </data>
 </root>

@@ -2163,7 +2163,10 @@ Obecnie zwraca głośność domyślnego urządzenia.</value>
     <value>Zwraca obciążenie pierwszego GPU w procentach.</value>
   </data>
   <data name="SensorsManager_GpuTemperatureSensorDescription" xml:space="preserve">
-    <value>Zwraca temperaturę pierwszego GPU.</value>
+    <value>UWAGA: Ten czujnik nie działa.
+
+Ze względu na obawy dotyczące bezpieczeństwa Libre Hardware Monitor (biblioteki umożliwiającej HASS.Agent dostęp do danych o temperaturze GPU), ten czujnik został pozostawiony ze względu na kompatybilność wsteczną i zawsze będzie zwracał wartość 0.
+Informacje o alternatywnych opcjach znajdują się w dokumentacji.</value>
   </data>
   <data name="SensorsManager_LastActiveSensorDescription" xml:space="preserve">
     <value>Zwraca czas (datetime value) w którym użytkownik dokonał jakiejkolwiek czynności.</value>
@@ -3199,7 +3202,8 @@ Czy jesteś pewien, że chcesz użyć tego klucza?</value>
 Czy jesteś pewien, że chcesz użyć tego linku URL?</value>
   </data>
   <data name="OnboardingDone_LblInfo6" xml:space="preserve">
-    <value>Tworzenie i utrzymanie aplikacji (i wszystko dookoła, jak wsparcie i dokumentacja) zajmuje sporo czasu. Jak większość deweloperów moim paliwem jest kofeina, więc jeżeli możesz postawić mi kubek kawy będę bardzo wdzięczny!</value>
+    <value>Obecnie my (zespół HASS.Agent, odpowiedzialny za utrzymywanie tej wersji) nie przyjmujemy żadnych darowizn :)
+Prosimy jednak o wsparcie finansowe oryginalnego autora HASS.Agent – ​​Sama! Gdziekolwiek się teraz znajduje, filiżanka kawy z pewnością umili mu dzień.</value>
   </data>
   <data name="OnboardingDone_LblTip2" xml:space="preserve">
     <value>Wskazówka: Inne sposoby wsparcia dostępne są w zakładce O.</value>
@@ -3361,5 +3365,32 @@ Czy chcesz pobrać plik instalacyjny?</value>
   </data>
   <data name="HassAction_Press" xml:space="preserve">
     <value>Naciśnij</value>
+  </data>
+  <data name="SensorsManager_NamedActiveWindowSensorDescription" xml:space="preserve">
+    <value>Zapewnia wartość WŁ./WYŁ. w zależności od tego, czy nazwa wybranego okna zawiera skonfigurowany ciąg znaków.</value>
+  </data>
+  <data name="SensorType_NamedActiveWindowSensor" xml:space="preserve">
+    <value>NazwaAktywnegoOkna</value>
+  </data>
+  <data name="SensorType_AccentColorSensor" xml:space="preserve">
+    <value>Kolor akcentu</value>
+  </data>
+  <data name="HassDomain_Fan" xml:space="preserve">
+    <value>Wiatrak</value>
+  </data>
+  <data name="CommandsManager_WinformsSleepCommandDescription" xml:space="preserve">
+    <value>Uśpij maszynę za pomocą interfejsu API WinForms.
+
+Uwaga: ze względu na „Modern Sleep” polecenia uśpienia mogą zachowywać się inaczej w zależności od producenta OEM urządzenia i konfiguracji systemu operacyjnego.</value>
+  </data>
+  <data name="CommandType_WinformsSleepCommand" xml:space="preserve">
+    <value>WinformsSleep</value>
+  </data>
+  <data name="CommandsManager_MonitorSleepPowerPlanCommandDescription" xml:space="preserve">
+    <value>Przełącza wszystkie monitory w tryb uśpienia (niskiego poboru mocy) za pomocą alternatywnej metody modyfikacji planu zasilania.
+Powinno to zapewnić lepsze działanie w przypadku nowych systemów z „nowoczesnym trybem uśpienia S0ix” i zapobiec przejściu systemu w stan uśpienia.</value>
+  </data>
+  <data name="CommandType_MonitorSleepPowerPlanCommand" xml:space="preserve">
+    <value>MonitorSleepPowerPlan</value>
   </data>
 </root>

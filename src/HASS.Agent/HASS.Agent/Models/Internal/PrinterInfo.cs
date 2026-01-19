@@ -67,7 +67,7 @@ namespace HASS.Agent.Models.Internal
             //
         }
 
-        public string Nmae { get; set; } = string.Empty;
+        public string Name { get; set; } = string.Empty;
         public string Submitter { get; set; } = string.Empty;
         public string Status { get; set; } = "None";
         public int NumberOfPages { get; set; } = 0;

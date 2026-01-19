@@ -524,7 +524,7 @@ The certificate of the downloaded file will get checked before running,you will 
     <value>HASS.Agent GitHub page</value>
   </data>
   <data name="OnboardingDone_LblInfo3" xml:space="preserve">
-	  <value>There's a lot more to tinker with, so make sure you take a look at the Configuration Wwindow!
+	  <value>There's a lot more to tinker with, so make sure you take a look at the Configuration Window!
 
 
 Thank you for using HASS.Agent, hopefully it'll be useful for you :-)
@@ -2054,7 +2054,10 @@ Currently takes the volume of your default device.</value>
     <value>Provides the current load of the first GPU as a percentage.</value>
   </data>
   <data name="SensorsManager_GpuTemperatureSensorDescription" xml:space="preserve">
-    <value>Provides the current temperature of the first GPU.</value>
+    <value>NOTE: This is a non-functioning sensor.
+
+Due to the security concerns regarding Libre Hardware Monitor (library allowing HASS.Agent to access GPU temperature data) this sensor is left for backward compatibility reasons and will always return 0.
+Please see documentation for alternative options.</value>
   </data>
   <data name="SensorsManager_LastActiveSensorDescription" xml:space="preserve">
     <value>Provides a datetime value containing the last moment the user provided any input.</value>
@@ -3089,7 +3092,8 @@ Are you sure you want to use this key anyway?</value>
 Are you sure you want to use this URI anyway?</value>
   </data>
   <data name="OnboardingDone_LblInfo6" xml:space="preserve">
-    <value>Developing and maintaining this tool (and everything that surrounds it) takes up a lot of time. Like most developers, I run on caffeïne - so if you can spare it, a cup of coffee is always very much appreciated!</value>
+    <value>Currently, we (HASS.Agent Team maintaining the fork) do not accept donations in any form :)
+Please however feel free to donate to the original author of HASS.Agent - Sam! Wherever they currently are, cup of coffee might brighten their day.</value>
   </data>
   <data name="OnboardingDone_LblTip2" xml:space="preserve">
     <value>Tip: Other donation methods are available on the About Window.</value>
@@ -3251,5 +3255,35 @@ Do you want to download the runtime installer?</value>
   </data>
   <data name="HassDomain_Button" xml:space="preserve">
     <value>Button</value>
+  </data>
+  <data name="SensorType_NamedActiveWindowSensor" xml:space="preserve">
+    <value>NamedActiveWindow</value>
+  </data>
+  <data name="SensorsManager_NamedActiveWindowSensorDescription" xml:space="preserve">
+    <value>Provides an ON/OFF value based on whether the focused window name contains configured string.</value>
+  </data>
+  <data name="SensorType_AccentColorSensor" xml:space="preserve">
+    <value>AccentColor</value>
+  </data>
+  <data name="HassDomain_InputButton" xml:space="preserve">
+    <value>InputButton</value>
+  </data>
+  <data name="HassDomain_Fan" xml:space="preserve">
+    <value>Fan</value>
+  </data>
+  <data name="CommandsManager_WinformsSleepCommandDescription" xml:space="preserve">
+    <value>Puts the machine to sleep using WinForms API.
+
+Note: due to "Modern Sleep" the sleep commands might behave differently depending on the device OEM and OS configuration.</value>
+  </data>
+  <data name="CommandType_WinformsSleepCommand" xml:space="preserve">
+    <value>WinformsSleep</value>
+  </data>
+  <data name="CommandType_MonitorSleepPowerPlanCommand" xml:space="preserve">
+    <value>MonitorSleepPowerPlan</value>
+  </data>
+  <data name="CommandsManager_MonitorSleepPowerPlanCommandDescription" xml:space="preserve">
+    <value>Puts all monitors in sleep (low power) mode using alternative approach of power plan modification.
+Should provide better experience with new systems with "modern S0ix sleep" and not put the system to sleep.</value>
   </data>
 </root>

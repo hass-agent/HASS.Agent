@@ -34,7 +34,7 @@ namespace HASS.Agent.HomeAssistant.Sensors.GeneralSensors.SingleValue
             if (deviceConfig == null)
                 return null;
 
-            var sensorDiscoveryConfigModel = new SensorDiscoveryConfigModel()
+            var sensorDiscoveryConfigModel = new SensorDiscoveryConfigModel(Domain)
             {
                 EntityName = EntityName,
                 Name = Name,

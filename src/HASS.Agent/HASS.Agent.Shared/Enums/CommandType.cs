@@ -65,6 +65,10 @@ namespace HASS.Agent.Shared.Enums
         [EnumMember(Value = "MonitorSleepCommand")]
         MonitorSleepCommand,
 
+        [LocalizedDescription("CommandType_MonitorSleepPowerPlanCommand", typeof(Languages))]
+        [EnumMember(Value = "MonitorSleepPowerPlanCommand")]
+        MonitorSleepPowerPlanCommand,
+
         [LocalizedDescription("CommandType_MonitorWakeCommand", typeof(Languages))]
         [EnumMember(Value = "MonitorWakeCommand")]
         MonitorWakeCommand,
@@ -127,6 +131,10 @@ namespace HASS.Agent.Shared.Enums
 
         [LocalizedDescription("CommandType_RadioCommand", typeof(Languages))]
         [EnumMember(Value = "RadioCommand")]
-        RadioCommand
+        RadioCommand,
+
+        [LocalizedDescription("CommandType_WinformsSleepCommand", typeof(Languages))]
+        [EnumMember(Value = "WinformsSleepCommand")]
+        WinformsSleepCommand
     }
 }
