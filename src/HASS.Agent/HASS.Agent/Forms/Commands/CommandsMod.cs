@@ -28,7 +28,9 @@ namespace HASS.Agent.Forms.Commands
 		private bool _interfaceLockedWrongType;
 		private bool _loading = true;
 
-		private readonly Dictionary<int, string> _commandEntityTypes = new();
+        private bool _escapeLock = true;
+
+        private readonly Dictionary<int, string> _commandEntityTypes = new();
 		private readonly Dictionary<string, string> _radioDevices = new();
 
 		public CommandsMod(ConfiguredCommand command, bool serviceMode = false, string serviceDeviceName = "")
@@ -977,11 +979,21 @@ namespace HASS.Agent.Forms.Commands
 
 		private void CommandsMod_KeyUp(object sender, KeyEventArgs e)
 		{
-			if (e.KeyCode != Keys.Escape)
-				return;
+            if (e.KeyCode != Keys.Escape)
+            {
+                _escapeLock = true;
+                return;
+            }
 
-			Close();
-		}
+            if (_escapeLock)
+            {
+                _escapeLock = false;
+            }
+            else
+            {
+                Close();
+            }
+        }
 
 		private void CommandsMod_Layout(object sender, LayoutEventArgs e)
 		{
