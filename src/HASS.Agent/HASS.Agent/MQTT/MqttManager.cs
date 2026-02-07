@@ -917,7 +917,7 @@ namespace HASS.Agent.MQTT
                     clientOptionsBuilder.WithTcpServer(address, port);
                 }
 
-                if (!string.IsNullOrEmpty(Variables.AppSettings.MqttUsername))
+                if (!string.IsNullOrEmpty(username))
                 {
                     clientOptionsBuilder.WithCredentials(username, password);
                 }
