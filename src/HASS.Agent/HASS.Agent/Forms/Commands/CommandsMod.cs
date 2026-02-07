@@ -18,190 +18,192 @@ using static HASS.Agent.Shared.Functions.Inputs;
 
 namespace HASS.Agent.Forms.Commands
 {
-	public partial class CommandsMod : MetroForm
-	{
-		internal readonly ConfiguredCommand Command;
+    public partial class CommandsMod : MetroForm
+    {
+        internal readonly ConfiguredCommand Command;
 
-		private readonly bool _serviceMode;
-		private readonly string _serviceDeviceName;
+        private readonly bool _serviceMode;
+        private readonly string _serviceDeviceName;
 
-		private bool _interfaceLockedWrongType;
-		private bool _loading = true;
+        private bool _interfaceLockedWrongType;
+        private bool _loading = true;
 
-		private readonly Dictionary<int, string> _commandEntityTypes = new();
-		private readonly Dictionary<string, string> _radioDevices = new();
+        private bool _escapeLock = true;
 
-		public CommandsMod(ConfiguredCommand command, bool serviceMode = false, string serviceDeviceName = "")
-		{
-			Command = command;
+        private readonly Dictionary<int, string> _commandEntityTypes = new();
+        private readonly Dictionary<string, string> _radioDevices = new();
 
-			_serviceMode = serviceMode;
-			_serviceDeviceName = serviceDeviceName;
+        public CommandsMod(ConfiguredCommand command, bool serviceMode = false, string serviceDeviceName = "")
+        {
+            Command = command;
 
-			InitializeComponent();
+            _serviceMode = serviceMode;
+            _serviceDeviceName = serviceDeviceName;
 
-			BindListViewTheme();
+            InitializeComponent();
 
-			BindComboBoxTheme();
-		}
+            BindListViewTheme();
 
-		public CommandsMod(bool serviceMode = false, string serviceDeviceName = "")
-		{
-			Command = new ConfiguredCommand();
+            BindComboBoxTheme();
+        }
 
-			_serviceMode = serviceMode;
-			_serviceDeviceName = serviceDeviceName;
+        public CommandsMod(bool serviceMode = false, string serviceDeviceName = "")
+        {
+            Command = new ConfiguredCommand();
 
-			InitializeComponent();
+            _serviceMode = serviceMode;
+            _serviceDeviceName = serviceDeviceName;
 
-			BindListViewTheme();
+            InitializeComponent();
 
-			BindComboBoxTheme();
-		}
+            BindListViewTheme();
 
-		private void BindListViewTheme()
-		{
-			LvCommands.DrawItem += ListViewTheme.DrawItem;
-			LvCommands.DrawSubItem += ListViewTheme.DrawSubItem;
-			LvCommands.DrawColumnHeader += ListViewTheme.DrawColumnHeader;
-		}
+            BindComboBoxTheme();
+        }
 
-		private void BindComboBoxTheme()
-		{
-			CbEntityType.DrawItem += ComboBoxTheme.DrawDictionaryIntStringItem;
-			CbConfigDropdown.DrawItem += ComboBoxTheme.DrawDictionaryStringStringItem;
-		}
+        private void BindListViewTheme()
+        {
+            LvCommands.DrawItem += ListViewTheme.DrawItem;
+            LvCommands.DrawSubItem += ListViewTheme.DrawSubItem;
+            LvCommands.DrawColumnHeader += ListViewTheme.DrawColumnHeader;
+        }
 
-		private void CommandsMod_Load(object sender, EventArgs e)
-		{
-			// catch all key presses
-			KeyPreview = true;
+        private void BindComboBoxTheme()
+        {
+            CbEntityType.DrawItem += ComboBoxTheme.DrawDictionaryIntStringItem;
+            CbConfigDropdown.DrawItem += ComboBoxTheme.DrawDictionaryStringStringItem;
+        }
 
-			foreach (CommandEntityType entityType in Enum.GetValues(typeof(CommandEntityType)))
-			{
-				var (key, description) = entityType.GetLocalizedDescriptionAndKey();
-				_commandEntityTypes.Add(key, description);
-			}
+        private void CommandsMod_Load(object sender, EventArgs e)
+        {
+            // catch all key presses
+            KeyPreview = true;
 
-			_radioDevices.Add("none", Languages.SensorsMod_None);
-			foreach (var radioName in RadioManager.AvailableRadioNames)
-				_radioDevices[radioName] = radioName; //TODO: that's ugly
+            foreach (CommandEntityType entityType in Enum.GetValues(typeof(CommandEntityType)))
+            {
+                var (key, description) = entityType.GetLocalizedDescriptionAndKey();
+                _commandEntityTypes.Add(key, description);
+            }
 
-			CbEntityType.DataSource = new BindingSource(_commandEntityTypes, null);
+            _radioDevices.Add("none", Languages.SensorsMod_None);
+            foreach (var radioName in RadioManager.AvailableRadioNames)
+                _radioDevices[radioName] = radioName; //TODO: that's ugly
 
-			LvCommands.BeginUpdate();
-			foreach (var command in CommandsManager.CommandInfoCards.Select(x => x.Value))
-			{
-				var lvCommand = new ListViewItem(command.Key.ToString());
-				lvCommand.SubItems.Add(command.Name);
-				lvCommand.SubItems.Add(command.AgentCompatible ? "√" : string.Empty);
-				lvCommand.SubItems.Add(command.SatelliteCompatible ? "√" : string.Empty);
-				lvCommand.SubItems.Add(command.ActionCompatible ? "√" : string.Empty);
-				LvCommands.Items.Add(lvCommand);
-			}
-			LvCommands.EndUpdate();
+            CbEntityType.DataSource = new BindingSource(_commandEntityTypes, null);
 
-			if (Command.Id == Guid.Empty)
-			{
-				Command.Id = Guid.NewGuid();
-				Text = Languages.CommandsMod_Title_NewCommand;
-				CbEntityType.Text = CommandEntityType.Switch.ToString();
+            LvCommands.BeginUpdate();
+            foreach (var command in CommandsManager.CommandInfoCards.Select(x => x.Value))
+            {
+                var lvCommand = new ListViewItem(command.Key.ToString());
+                lvCommand.SubItems.Add(command.Name);
+                lvCommand.SubItems.Add(command.AgentCompatible ? "√" : string.Empty);
+                lvCommand.SubItems.Add(command.SatelliteCompatible ? "√" : string.Empty);
+                lvCommand.SubItems.Add(command.ActionCompatible ? "√" : string.Empty);
+                LvCommands.Items.Add(lvCommand);
+            }
+            LvCommands.EndUpdate();
 
-				_loading = false;
+            if (Command.Id == Guid.Empty)
+            {
+                Command.Id = Guid.NewGuid();
+                Text = Languages.CommandsMod_Title_NewCommand;
+                CbEntityType.Text = CommandEntityType.Switch.ToString();
 
-				return;
-			}
+                _loading = false;
 
-			// we're modding, load it
-			LoadCommand();
-			Text = Languages.CommandsMod_Title_ModCommand;
+                return;
+            }
 
-			// done
-			_loading = false;
-		}
+            // we're modding, load it
+            LoadCommand();
+            Text = Languages.CommandsMod_Title_ModCommand;
 
-		/// <summary>
-		/// Loads the to-be-modded command
-		/// </summary>
-		private void LoadCommand()
-		{
-			var commandCard = CommandsManager.CommandInfoCards[Command.Type];
+            // done
+            _loading = false;
+        }
 
-			foreach (ListViewItem lvi in LvCommands.Items)
-			{
-				if (lvi.Text != commandCard.Key.ToString())
-					continue;
+        /// <summary>
+        /// Loads the to-be-modded command
+        /// </summary>
+        private void LoadCommand()
+        {
+            var commandCard = CommandsManager.CommandInfoCards[Command.Type];
 
-				lvi.Selected = true;
-				LvCommands.SelectedItems[0].EnsureVisible();
-				break;
-			}
+            foreach (ListViewItem lvi in LvCommands.Items)
+            {
+                if (lvi.Text != commandCard.Key.ToString())
+                    continue;
 
-			var guiOk = SetType(false);
-			if (!guiOk)
-				return;
+                lvi.Selected = true;
+                LvCommands.SelectedItems[0].EnsureVisible();
+                break;
+            }
 
-			TbName.Text = Command.EntityName;
-			if (!string.IsNullOrWhiteSpace(TbName.Text))
-				TbName.SelectionStart = TbName.Text.Length;
+            var guiOk = SetType(false);
+            if (!guiOk)
+                return;
 
-			TbFriendlyName.Text = Command.Name;
+            TbName.Text = Command.EntityName;
+            if (!string.IsNullOrWhiteSpace(TbName.Text))
+                TbName.SelectionStart = TbName.Text.Length;
 
-			var entityId = (int)Command.EntityType;
-			CbEntityType.SelectedItem = new KeyValuePair<int, string>(entityId, _commandEntityTypes[entityId]);
+            TbFriendlyName.Text = Command.Name;
 
-			LblMqttTopic.Visible = commandCard.ActionCompatible;
+            var entityId = (int)Command.EntityType;
+            CbEntityType.SelectedItem = new KeyValuePair<int, string>(entityId, _commandEntityTypes[entityId]);
 
-			switch (commandCard.CommandType)
-			{
-				case CommandType.CustomCommand:
-					TbSetting.Text = Command.Command;
-					break;
+            LblMqttTopic.Visible = commandCard.ActionCompatible;
 
-				case CommandType.PowershellCommand:
-					TbSetting.Text = Command.Command;
-					break;
+            switch (commandCard.CommandType)
+            {
+                case CommandType.CustomCommand:
+                    TbSetting.Text = Command.Command;
+                    break;
 
-				case CommandType.KeyCommand:
-					TbKeyCode.Text = Command.KeyCode.ToString();
-					break;
+                case CommandType.PowershellCommand:
+                    TbSetting.Text = Command.Command;
+                    break;
 
-				case CommandType.MultipleKeysCommand:
-					var commands = new StringBuilder();
-					foreach (var command in Command.Keys)
-						commands.Append($"[{command}] ");
+                case CommandType.KeyCommand:
+                    TbKeyCode.Text = Command.KeyCode.ToString();
+                    break;
 
-					TbSetting.Text = commands.ToString().Trim();
-					break;
+                case CommandType.MultipleKeysCommand:
+                    var commands = new StringBuilder();
+                    foreach (var command in Command.Keys)
+                        commands.Append($"[{command}] ");
 
-				case CommandType.LaunchUrlCommand:
-					var urlInfo = Command.Command;
-					if (string.IsNullOrEmpty(urlInfo))
-						break;
+                    TbSetting.Text = commands.ToString().Trim();
+                    break;
 
-					var urlPackage = JsonConvert.DeserializeObject<UrlInfo>(urlInfo);
-					if (urlPackage == null)
-						break;
+                case CommandType.LaunchUrlCommand:
+                    var urlInfo = Command.Command;
+                    if (string.IsNullOrEmpty(urlInfo))
+                        break;
 
-					TbSetting.Text = urlPackage.Url;
-					CbCommandSpecific.Checked = urlPackage.Incognito;
-					break;
+                    var urlPackage = JsonConvert.DeserializeObject<UrlInfo>(urlInfo);
+                    if (urlPackage == null)
+                        break;
 
-				case CommandType.CustomExecutorCommand:
-					TbSetting.Text = Command.Command;
-					break;
+                    TbSetting.Text = urlPackage.Url;
+                    CbCommandSpecific.Checked = urlPackage.Incognito;
+                    break;
 
-				case CommandType.SendWindowToFrontCommand:
-					TbSetting.Text = Command.Command;
-					break;
+                case CommandType.CustomExecutorCommand:
+                    TbSetting.Text = Command.Command;
+                    break;
 
-				case CommandType.WebViewCommand:
-					TbSetting.Text = Command.Command;
-					break;
+                case CommandType.SendWindowToFrontCommand:
+                    TbSetting.Text = Command.Command;
+                    break;
 
-				case CommandType.RadioCommand:
-					CbConfigDropdown.SelectedItem = new KeyValuePair<string, string>(Command.Command, Command.Command);
-					break;
+                case CommandType.WebViewCommand:
+                    TbSetting.Text = Command.Command;
+                    break;
+
+                case CommandType.RadioCommand:
+                    CbConfigDropdown.SelectedItem = new KeyValuePair<string, string>(Command.Command, Command.Command);
+                    break;
 
                 case CommandType.SetVolumeCommand:
                 case CommandType.SetApplicationVolumeCommand:
@@ -211,119 +213,119 @@ namespace HASS.Agent.Forms.Commands
                     break;
             }
 
-			CbRunAsLowIntegrity.CheckState = Command.RunAsLowIntegrity ? CheckState.Checked : CheckState.Unchecked;
-		}
+            CbRunAsLowIntegrity.CheckState = Command.RunAsLowIntegrity ? CheckState.Checked : CheckState.Unchecked;
+        }
 
-		/// <summary>
-		/// Prepare the command for processing
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
-		private void BtnStore_Click(object sender, EventArgs e)
-		{
-			if (LvCommands.SelectedItems.Count == 0)
-			{
-				MessageBoxAdv.Show(this, Languages.CommandsMod_BtnStore_MessageBox1, Variables.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+        /// <summary>
+        /// Prepare the command for processing
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BtnStore_Click(object sender, EventArgs e)
+        {
+            if (LvCommands.SelectedItems.Count == 0)
+            {
+                MessageBoxAdv.Show(this, Languages.CommandsMod_BtnStore_MessageBox1, Variables.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-				return;
-			}
+                return;
+            }
 
-			var commandId = int.Parse(LvCommands.SelectedItems[0].Text);
-			var commandCard = CommandsManager.CommandInfoCards
-				.Where(card => card.Value.Key == commandId)
-				.Select(card => card.Value)
-				.FirstOrDefault();
+            var commandId = int.Parse(LvCommands.SelectedItems[0].Text);
+            var commandCard = CommandsManager.CommandInfoCards
+                .Where(card => card.Value.Key == commandId)
+                .Select(card => card.Value)
+                .FirstOrDefault();
 
-			if (commandCard == null)
-			{
-				MessageBoxAdv.Show(this, Languages.CommandsMod_BtnStore_MessageBox2, Variables.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            if (commandCard == null)
+            {
+                MessageBoxAdv.Show(this, Languages.CommandsMod_BtnStore_MessageBox2, Variables.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-				return;
-			}
+                return;
+            }
 
-			if (CbEntityType.SelectedItem == null)
-			{
-				MessageBoxAdv.Show(this, Languages.CommandsMod_MessageBox_EntityType, Variables.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            if (CbEntityType.SelectedItem == null)
+            {
+                MessageBoxAdv.Show(this, Languages.CommandsMod_MessageBox_EntityType, Variables.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-				return;
-			}
+                return;
+            }
 
-			var item = (KeyValuePair<int, string>)CbEntityType.SelectedItem;
-			var entityType = (CommandEntityType)item.Key;
+            var item = (KeyValuePair<int, string>)CbEntityType.SelectedItem;
+            var entityType = (CommandEntityType)item.Key;
 
             var name = TbName.Text.Trim();
             if (string.IsNullOrEmpty(name))
             {
                 MessageBoxAdv.Show(this, Languages.CommandsMod_MessageBox_Name, Variables.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 ActiveControl = TbName;
-                
-				return;
+
+                return;
             }
-            
-			if (CompatHelper.HassVersionEqualOrOver("2023.8") && name.Contains(SharedHelperFunctions.GetSafeConfiguredDeviceName()))
+
+            if (CompatHelper.HassVersionEqualOrOver("2023.8") && name.Contains(SharedHelperFunctions.GetSafeConfiguredDeviceName()))
             {
                 MessageBoxAdv.Show(this, Languages.CommandsMod_BtnStore_DeviceNameInSensorName, Variables.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
 
-			var friendlyName = string.IsNullOrEmpty(TbFriendlyName.Text.Trim()) ? name : TbFriendlyName.Text.Trim();
+            var friendlyName = string.IsNullOrEmpty(TbFriendlyName.Text.Trim()) ? name : TbFriendlyName.Text.Trim();
 
-			var sanitized = SharedHelperFunctions.GetSafeValue(name);
-			if (sanitized != name)
-			{
-				var confirmSanitize = MessageBoxAdv.Show(this, string.Format(Languages.CommandsMod_MessageBox_Sanitize, sanitized), Variables.MessageBoxTitle, MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
-				if (confirmSanitize != DialogResult.OK)
-				{
-					ActiveControl = TbName;
+            var sanitized = SharedHelperFunctions.GetSafeValue(name);
+            if (sanitized != name)
+            {
+                var confirmSanitize = MessageBoxAdv.Show(this, string.Format(Languages.CommandsMod_MessageBox_Sanitize, sanitized), Variables.MessageBoxTitle, MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                if (confirmSanitize != DialogResult.OK)
+                {
+                    ActiveControl = TbName;
 
-					return;
-				}
+                    return;
+                }
 
-				TbName.Text = sanitized;
-				name = sanitized;
-			}
+                TbName.Text = sanitized;
+                name = sanitized;
+            }
 
-			if (!_serviceMode && Variables.Commands.Any(x => string.Equals(x.EntityName, name, StringComparison.InvariantCultureIgnoreCase) && x.Id != Command.Id.ToString()))
-			{
-				var confirm = MessageBoxAdv.Show(this, Languages.CommandsMod_BtnStore_MessageBox3, Variables.MessageBoxTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-				if (confirm != DialogResult.Yes)
-				{
-					ActiveControl = TbName;
+            if (!_serviceMode && Variables.Commands.Any(x => string.Equals(x.EntityName, name, StringComparison.InvariantCultureIgnoreCase) && x.Id != Command.Id.ToString()))
+            {
+                var confirm = MessageBoxAdv.Show(this, Languages.CommandsMod_BtnStore_MessageBox3, Variables.MessageBoxTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (confirm != DialogResult.Yes)
+                {
+                    ActiveControl = TbName;
 
-					return;
-				}
-			}
+                    return;
+                }
+            }
 
-			switch (commandCard.CommandType)
-			{
-				case CommandType.CustomCommand:
-					var command = TbSetting.Text.Trim();
-					if (string.IsNullOrEmpty(command))
-					{
-						var q = MessageBoxAdv.Show(this, Languages.CommandsMod_BtnStore_MessageBox4, Variables.MessageBoxTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-						if (q != DialogResult.Yes)
-						{
-							ActiveControl = TbSetting;
+            switch (commandCard.CommandType)
+            {
+                case CommandType.CustomCommand:
+                    var command = TbSetting.Text.Trim();
+                    if (string.IsNullOrEmpty(command))
+                    {
+                        var q = MessageBoxAdv.Show(this, Languages.CommandsMod_BtnStore_MessageBox4, Variables.MessageBoxTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                        if (q != DialogResult.Yes)
+                        {
+                            ActiveControl = TbSetting;
 
-							return;
-						}
-					}
-					Command.Command = command;
-					break;
+                            return;
+                        }
+                    }
+                    Command.Command = command;
+                    break;
 
-				case CommandType.PowershellCommand:
-					var script = TbSetting.Text.Trim();
-					if (string.IsNullOrEmpty(script))
-					{
-						var q = MessageBoxAdv.Show(this, Languages.CommandsMod_MessageBox_Action, Variables.MessageBoxTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-						if (q != DialogResult.Yes)
-						{
-							ActiveControl = TbSetting;
+                case CommandType.PowershellCommand:
+                    var script = TbSetting.Text.Trim();
+                    if (string.IsNullOrEmpty(script))
+                    {
+                        var q = MessageBoxAdv.Show(this, Languages.CommandsMod_MessageBox_Action, Variables.MessageBoxTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                        if (q != DialogResult.Yes)
+                        {
+                            ActiveControl = TbSetting;
 
-							return;
-						}
-					}
-					Command.Command = script;
-					break;
+                            return;
+                        }
+                    }
+                    Command.Command = script;
+                    break;
 
                 case CommandType.KeyCommand:
                     var keycodeStr = TbKeyCode.Text.Trim();
@@ -344,15 +346,15 @@ namespace HASS.Agent.Forms.Commands
                     Command.KeyCode = enumKeycode;
                     break;
 
-				case CommandType.MultipleKeysCommand:
-					var keysParsed = HelperFunctions.ParseMultipleKeys(TbSetting.Text.Trim(), out var keys, out var errorMsg);
-					if (!keysParsed)
-					{
-						MessageBoxAdv.Show(this, string.Format(Languages.CommandsMod_BtnStore_MessageBox6, errorMsg), Variables.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-						ActiveControl = TbSetting;
+                case CommandType.MultipleKeysCommand:
+                    var keysParsed = HelperFunctions.ParseMultipleKeys(TbSetting.Text.Trim(), out var keys, out var errorMsg);
+                    if (!keysParsed)
+                    {
+                        MessageBoxAdv.Show(this, string.Format(Languages.CommandsMod_BtnStore_MessageBox6, errorMsg), Variables.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        ActiveControl = TbSetting;
 
-						return;
-					}
+                        return;
+                    }
 
                     if (keys.Count == 0)
                     {
@@ -366,96 +368,96 @@ namespace HASS.Agent.Forms.Commands
                     }
 
                     Command.Keys = keys;
-					break;
+                    break;
 
-				case CommandType.LaunchUrlCommand:
-					var url = TbSetting.Text.Trim();
-					if (string.IsNullOrEmpty(url))
-					{
-						var q = MessageBoxAdv.Show(this, Languages.CommandsMod_BtnStore_MessageBox7, Variables.MessageBoxTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-						if (q != DialogResult.Yes)
-						{
-							ActiveControl = TbSetting;
+                case CommandType.LaunchUrlCommand:
+                    var url = TbSetting.Text.Trim();
+                    if (string.IsNullOrEmpty(url))
+                    {
+                        var q = MessageBoxAdv.Show(this, Languages.CommandsMod_BtnStore_MessageBox7, Variables.MessageBoxTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                        if (q != DialogResult.Yes)
+                        {
+                            ActiveControl = TbSetting;
 
-							return;
-						}
+                            return;
+                        }
 
-						Command.Command = string.Empty;
-					}
-					else
-					{
-						var urlInfo = new UrlInfo
-						{
-							Url = url,
-							Incognito = CbCommandSpecific.Checked
-						};
+                        Command.Command = string.Empty;
+                    }
+                    else
+                    {
+                        var urlInfo = new UrlInfo
+                        {
+                            Url = url,
+                            Incognito = CbCommandSpecific.Checked
+                        };
 
-						Command.Command = JsonConvert.SerializeObject(urlInfo);
-					}
-					break;
+                        Command.Command = JsonConvert.SerializeObject(urlInfo);
+                    }
+                    break;
 
-				case CommandType.CustomExecutorCommand:
-					var executorCommand = TbSetting.Text.Trim();
-					if (string.IsNullOrEmpty(executorCommand))
-					{
-						var q = MessageBoxAdv.Show(this, Languages.CommandsMod_MessageBox_Action, Variables.MessageBoxTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-						if (q != DialogResult.Yes)
-						{
-							ActiveControl = TbSetting;
+                case CommandType.CustomExecutorCommand:
+                    var executorCommand = TbSetting.Text.Trim();
+                    if (string.IsNullOrEmpty(executorCommand))
+                    {
+                        var q = MessageBoxAdv.Show(this, Languages.CommandsMod_MessageBox_Action, Variables.MessageBoxTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                        if (q != DialogResult.Yes)
+                        {
+                            ActiveControl = TbSetting;
 
-							return;
-						}
-					}
-					Command.Command = executorCommand;
-					break;
+                            return;
+                        }
+                    }
+                    Command.Command = executorCommand;
+                    break;
 
-				case CommandType.SendWindowToFrontCommand:
-					var procName = TbSetting.Text.Trim();
-					if (string.IsNullOrEmpty(procName))
-					{
-						var q = MessageBoxAdv.Show(this, Languages.CommandsMod_MessageBox_Action, Variables.MessageBoxTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-						if (q != DialogResult.Yes)
-						{
-							ActiveControl = TbSetting;
+                case CommandType.SendWindowToFrontCommand:
+                    var procName = TbSetting.Text.Trim();
+                    if (string.IsNullOrEmpty(procName))
+                    {
+                        var q = MessageBoxAdv.Show(this, Languages.CommandsMod_MessageBox_Action, Variables.MessageBoxTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                        if (q != DialogResult.Yes)
+                        {
+                            ActiveControl = TbSetting;
 
-							return;
-						}
-					}
-					Command.Command = procName;
-					break;
+                            return;
+                        }
+                    }
+                    Command.Command = procName;
+                    break;
 
-				case CommandType.SetVolumeCommand:
-					var volume = TbSetting.Text.Trim();
-					if (string.IsNullOrEmpty(volume))
-					{
-						var q = MessageBoxAdv.Show(this, Languages.CommandsMod_MessageBox_Action2, Variables.MessageBoxTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-						if (q != DialogResult.Yes)
-						{
-							ActiveControl = TbSetting;
+                case CommandType.SetVolumeCommand:
+                    var volume = TbSetting.Text.Trim();
+                    if (string.IsNullOrEmpty(volume))
+                    {
+                        var q = MessageBoxAdv.Show(this, Languages.CommandsMod_MessageBox_Action2, Variables.MessageBoxTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                        if (q != DialogResult.Yes)
+                        {
+                            ActiveControl = TbSetting;
 
-							return;
-						}
-					}
-					else
-					{
-						var volParsed = int.TryParse(volume, out var vol);
-						if (!volParsed || (vol is < 0 or > 100))
-						{
-							MessageBoxAdv.Show(this, Languages.CommandsMod_BtnStore_MessageBox10, Variables.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
-							ActiveControl = TbSetting;
+                            return;
+                        }
+                    }
+                    else
+                    {
+                        var volParsed = int.TryParse(volume, out var vol);
+                        if (!volParsed || (vol is < 0 or > 100))
+                        {
+                            MessageBoxAdv.Show(this, Languages.CommandsMod_BtnStore_MessageBox10, Variables.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            ActiveControl = TbSetting;
 
-							return;
-						}
-						volume = vol.ToString();
-					}
-					Command.Command = volume;
-					break;
+                            return;
+                        }
+                        volume = vol.ToString();
+                    }
+                    Command.Command = volume;
+                    break;
 
                 case CommandType.SetApplicationVolumeCommand:
                     var jsonString = TbSetting.Text.Trim();
                     try
                     {
-                        if(string.IsNullOrWhiteSpace(jsonString))
+                        if (string.IsNullOrWhiteSpace(jsonString))
                             throw new ArgumentException("json string cannot be blank");
 
                         var jsonObject = JsonConvert.DeserializeObject(jsonString);
@@ -496,28 +498,28 @@ namespace HASS.Agent.Forms.Commands
                             return;
                         }
 
-						Command.Command = string.Empty;
-					}
-					else
-					{
-						Command.Command = webview;
-					}
-					break;
+                        Command.Command = string.Empty;
+                    }
+                    else
+                    {
+                        Command.Command = webview;
+                    }
+                    break;
 
-				case CommandType.RadioCommand:
-					if (CbConfigDropdown.SelectedItem != null)
-					{
-						var selectedItem = (KeyValuePair<string, string>)CbConfigDropdown.SelectedItem;
-						if (selectedItem.Value == Languages.SensorsMod_None)
-						{
-							MessageBoxAdv.Show(this, Languages.CommandsMod_BtnStore_MessageBox11, Variables.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
-							ActiveControl = CbConfigDropdown;
-							return;
-						}
+                case CommandType.RadioCommand:
+                    if (CbConfigDropdown.SelectedItem != null)
+                    {
+                        var selectedItem = (KeyValuePair<string, string>)CbConfigDropdown.SelectedItem;
+                        if (selectedItem.Value == Languages.SensorsMod_None)
+                        {
+                            MessageBoxAdv.Show(this, Languages.CommandsMod_BtnStore_MessageBox11, Variables.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            ActiveControl = CbConfigDropdown;
+                            return;
+                        }
 
-						Command.Command = selectedItem.Key;
-					}
-					break;
+                        Command.Command = selectedItem.Key;
+                    }
+                    break;
 
                 case CommandType.SwitchDesktopCommand:
                     if (!VirtualDesktopManager.Initialized)
@@ -527,69 +529,69 @@ namespace HASS.Agent.Forms.Commands
                         return;
                     }
                     break;
-			}
+            }
 
-			Command.RunAsLowIntegrity = CbRunAsLowIntegrity.CheckState == CheckState.Checked;
+            Command.RunAsLowIntegrity = CbRunAsLowIntegrity.CheckState == CheckState.Checked;
 
-			Command.Type = commandCard.CommandType;
-			Command.EntityType = entityType;
-			Command.EntityName = name;
-			Command.Name = friendlyName;
+            Command.Type = commandCard.CommandType;
+            Command.EntityType = entityType;
+            Command.EntityName = name;
+            Command.Name = friendlyName;
 
-			DialogResult = DialogResult.OK;
-		}
+            DialogResult = DialogResult.OK;
+        }
 
-		private void LvCommands_SelectedIndexChanged(object sender, EventArgs e)
-		{
-			if (_loading)
-				return;
+        private void LvCommands_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (_loading)
+                return;
 
-			SetType();
+            SetType();
 
-			ActiveControl = TbName;
-			if (!string.IsNullOrWhiteSpace(TbName.Text))
-				TbName.SelectionStart = TbName.Text.Length;
-		}
+            ActiveControl = TbName;
+            if (!string.IsNullOrWhiteSpace(TbName.Text))
+                TbName.SelectionStart = TbName.Text.Length;
+        }
 
-		/// <summary>
-		/// Change the UI depending on the selected type
-		/// </summary>
-		/// <param name="setDefaultValues"></param>
-		private bool SetType(bool setDefaultValues = true)
-		{
-			if (LvCommands.SelectedItems.Count == 0)
-			{
-				if (_interfaceLockedWrongType)
-					UnlockWrongClient();
+        /// <summary>
+        /// Change the UI depending on the selected type
+        /// </summary>
+        /// <param name="setDefaultValues"></param>
+        private bool SetType(bool setDefaultValues = true)
+        {
+            if (LvCommands.SelectedItems.Count == 0)
+            {
+                if (_interfaceLockedWrongType)
+                    UnlockWrongClient();
 
-				return false;
-			}
+                return false;
+            }
 
-			var commandId = int.Parse(LvCommands.SelectedItems[0].Text);
-			var commandCard = CommandsManager.CommandInfoCards
-				.Where(card => card.Value.Key == commandId)
-				.Select(card => card.Value)
-				.FirstOrDefault();
+            var commandId = int.Parse(LvCommands.SelectedItems[0].Text);
+            var commandCard = CommandsManager.CommandInfoCards
+                .Where(card => card.Value.Key == commandId)
+                .Select(card => card.Value)
+                .FirstOrDefault();
 
-			if (commandCard == null)
-				return false;
+            if (commandCard == null)
+                return false;
 
-			if (_serviceMode && !commandCard.SatelliteCompatible)
-			{
-				LockWrongClient();
+            if (_serviceMode && !commandCard.SatelliteCompatible)
+            {
+                LockWrongClient();
 
-				return false;
-			}
+                return false;
+            }
 
-			if (!_serviceMode && !commandCard.AgentCompatible)
-			{
-				LockWrongClient();
+            if (!_serviceMode && !commandCard.AgentCompatible)
+            {
+                LockWrongClient();
 
-				return false;
-			}
+                return false;
+            }
 
-			if (_interfaceLockedWrongType)
-				UnlockWrongClient();
+            if (_interfaceLockedWrongType)
+                UnlockWrongClient();
 
             if (setDefaultValues)
             {
@@ -598,245 +600,245 @@ namespace HASS.Agent.Forms.Commands
                 LblMqttTopic.Visible = commandCard.ActionCompatible;
             }
 
-			TbSelectedType.Text = commandCard.CommandType.ToString();
-			TbDescription.Text = CommandsManager.GetCommandDefaultInfo(commandCard.CommandType).Description;
+            TbSelectedType.Text = commandCard.CommandType.ToString();
+            TbDescription.Text = CommandsManager.GetCommandDefaultInfo(commandCard.CommandType).Description;
 
-			switch (commandCard.CommandType)
-			{
-				case CommandType.CustomCommand:
-					SetCommandGui();
-					break;
+            switch (commandCard.CommandType)
+            {
+                case CommandType.CustomCommand:
+                    SetCommandGui();
+                    break;
 
-				case CommandType.PowershellCommand:
-					SetPowershellGui();
-					break;
+                case CommandType.PowershellCommand:
+                    SetPowershellGui();
+                    break;
 
-				case CommandType.KeyCommand:
-					SetKeyGui();
-					break;
+                case CommandType.KeyCommand:
+                    SetKeyGui();
+                    break;
 
-				case CommandType.MultipleKeysCommand:
-					SetMultipleKeysGui();
-					break;
+                case CommandType.MultipleKeysCommand:
+                    SetMultipleKeysGui();
+                    break;
 
-				case CommandType.LaunchUrlCommand:
-					SetUrlGui();
-					break;
+                case CommandType.LaunchUrlCommand:
+                    SetUrlGui();
+                    break;
 
-				case CommandType.CustomExecutorCommand:
-					SetCustomExecutorUi();
-					break;
+                case CommandType.CustomExecutorCommand:
+                    SetCustomExecutorUi();
+                    break;
 
-				case CommandType.SendWindowToFrontCommand:
-					SetSendWindowToFrontUi();
-					break;
+                case CommandType.SendWindowToFrontCommand:
+                    SetSendWindowToFrontUi();
+                    break;
 
-				case CommandType.WebViewCommand:
-					SetWebViewUi();
-					break;
+                case CommandType.WebViewCommand:
+                    SetWebViewUi();
+                    break;
 
-				case CommandType.SetVolumeCommand:
-					SetVolumeUi();
-					break;
+                case CommandType.SetVolumeCommand:
+                    SetVolumeUi();
+                    break;
 
-				case CommandType.SetApplicationVolumeCommand:
-					SetApplicationVolumeUi();
-					break;
+                case CommandType.SetApplicationVolumeCommand:
+                    SetApplicationVolumeUi();
+                    break;
 
                 case CommandType.SetAudioOutputCommand:
                 case CommandType.SetAudioInputCommand:
                     SetAudioOutputUi();
                     break;
 
-				case CommandType.RadioCommand:
-					CbConfigDropdown.DataSource = new BindingSource(_radioDevices, null);
-					SetRadioUi();
-					break;
+                case CommandType.RadioCommand:
+                    CbConfigDropdown.DataSource = new BindingSource(_radioDevices, null);
+                    SetRadioUi();
+                    break;
 
-				default:
-					SetEmptyGui();
-					break;
-			}
+                default:
+                    SetEmptyGui();
+                    break;
+            }
 
-			return true;
-		}
+            return true;
+        }
 
-		/// <summary>
-		/// Change the UI to a 'command' type
-		/// </summary>
-		private void SetCommandGui()
-		{
-			Invoke(new MethodInvoker(delegate
-			{
-				SetEmptyGui();
+        /// <summary>
+        /// Change the UI to a 'command' type
+        /// </summary>
+        private void SetCommandGui()
+        {
+            Invoke(new MethodInvoker(delegate
+            {
+                SetEmptyGui();
 
-				LblSetting.Text = Languages.CommandsMod_LblSetting_Command;
-				LblSetting.Visible = true;
-
-				TbSetting.Text = string.Empty;
-				TbSetting.Visible = true;
-
-				CbRunAsLowIntegrity.Visible = true;
-				LblIntegrityInfo.Visible = true;
-			}));
-		}
-
-		/// <summary>
-		/// Change the UI to a 'powershell' type
-		/// </summary>
-		private void SetPowershellGui()
-		{
-			Invoke(new MethodInvoker(delegate
-			{
-				SetEmptyGui();
-
-				LblSetting.Text = Languages.CommandsMod_LblSetting_CommandScript;
-				LblSetting.Visible = true;
-
-				TbSetting.Text = string.Empty;
-				TbSetting.Visible = true;
-			}));
-		}
-
-		/// <summary>
-		/// Change the UI to a 'key' type
-		/// </summary>
-		private void SetKeyGui()
-		{
-			Invoke(new MethodInvoker(delegate
-			{
-				SetEmptyGui();
-
-				LblSetting.Text = Languages.CommandsMod_LblSetting_KeyCode;
-				LblSetting.Visible = true;
-
-				TbKeyCode.Text = string.Empty;
-				TbKeyCode.Visible = true;
-			}));
-		}
-
-		/// <summary>
-		/// Change the UI to a 'multiple keys' type
-		/// </summary>
-		private void SetMultipleKeysGui()
-		{
-			Invoke(new MethodInvoker(delegate
-			{
-				SetEmptyGui();
-
-				LblSetting.Text = Languages.CommandsMod_LblSetting_KeyCodes;
-				LblSetting.Visible = true;
-
-				TbSetting.Text = string.Empty;
-				TbSetting.Visible = true;
-			}));
-		}
-
-		/// <summary>
-		/// Change the UI to a 'url' type
-		/// </summary>
-		private void SetUrlGui()
-		{
-			Invoke(new MethodInvoker(delegate
-			{
-				SetEmptyGui();
-
-				LblSetting.Text = Languages.CommandsMod_LblSetting_Url;
-				LblSetting.Visible = true;
-
-				TbSetting.Text = string.Empty;
-				TbSetting.Visible = true;
-
-				CbCommandSpecific.CheckState = CheckState.Unchecked;
-				CbCommandSpecific.Text = Languages.CommandsMod_CbCommandSpecific_Incognito;
-
-				if (string.IsNullOrEmpty(Variables.AppSettings.BrowserBinary))
-				{
-					LblInfo.Text = Languages.CommandsMod_LblInfo_Browser;
-					LblInfo.Visible = true;
-
-					CbCommandSpecific.CheckState = CheckState.Unchecked;
-					CbCommandSpecific.Visible = false;
-				}
-				else
-				{
-					var browser = string.IsNullOrEmpty(Variables.AppSettings.BrowserName)
-						? Path.GetFileNameWithoutExtension(Variables.AppSettings.BrowserBinary)
-						: Variables.AppSettings.BrowserName;
-
-					LblInfo.Text = string.Format(Languages.CommandsMod_LblInfo_BrowserSpecific, browser);
-					LblInfo.Visible = true;
-
-					CbCommandSpecific.Visible = true;
-				}
-			}));
-		}
-
-		/// <summary>
-		/// Change the UI to a 'custom executor' type
-		/// </summary>
-		private void SetCustomExecutorUi()
-		{
-			Invoke(new MethodInvoker(delegate
-			{
-				SetEmptyGui();
-
-				LblSetting.Text = Languages.CommandsMod_LblSetting_CommandScript;
-				LblSetting.Visible = true;
-
-				TbSetting.Text = string.Empty;
-				TbSetting.Visible = true;
-
-				if (string.IsNullOrEmpty(Variables.AppSettings.CustomExecutorBinary))
-				{
-					LblInfo.Text = Languages.CommandsMod_LblInfo_Executor;
-				}
-				else
-				{
-					var executor = string.IsNullOrEmpty(Variables.AppSettings.CustomExecutorName)
-						? Path.GetFileNameWithoutExtension(Variables.AppSettings.CustomExecutorBinary)
-						: Variables.AppSettings.CustomExecutorName;
-
-					LblInfo.Text = string.Format(Languages.CommandsMod_LblInfo_ExecutorSpecific, executor);
-				}
-
-				LblInfo.Visible = true;
-			}));
-		}
-
-		/// <summary>
-		/// Change the UI to a 'sendwindowtofront' type
-		/// </summary>
-		private void SetSendWindowToFrontUi()
-		{
-			Invoke(new MethodInvoker(delegate
-			{
-				SetEmptyGui();
-
-				LblSetting.Text = "process";
-				LblSetting.Visible = true;
-
-				TbSetting.Text = string.Empty;
-				TbSetting.Visible = true;
-			}));
-		}
-
-		/// <summary>
-		/// Change the UI to a 'setvolume' type
-		/// </summary>
-		private void SetVolumeUi()
-		{
-			Invoke(new MethodInvoker(delegate
-			{
-				SetEmptyGui();
-
-				LblSetting.Text = Languages.CommandsMod_LblSetting_VolumeRange;
+                LblSetting.Text = Languages.CommandsMod_LblSetting_Command;
                 LblSetting.Visible = true;
 
                 TbSetting.Text = string.Empty;
-				TbSetting.Visible = true;
-			}));
-		}
+                TbSetting.Visible = true;
+
+                CbRunAsLowIntegrity.Visible = true;
+                LblIntegrityInfo.Visible = true;
+            }));
+        }
+
+        /// <summary>
+        /// Change the UI to a 'powershell' type
+        /// </summary>
+        private void SetPowershellGui()
+        {
+            Invoke(new MethodInvoker(delegate
+            {
+                SetEmptyGui();
+
+                LblSetting.Text = Languages.CommandsMod_LblSetting_CommandScript;
+                LblSetting.Visible = true;
+
+                TbSetting.Text = string.Empty;
+                TbSetting.Visible = true;
+            }));
+        }
+
+        /// <summary>
+        /// Change the UI to a 'key' type
+        /// </summary>
+        private void SetKeyGui()
+        {
+            Invoke(new MethodInvoker(delegate
+            {
+                SetEmptyGui();
+
+                LblSetting.Text = Languages.CommandsMod_LblSetting_KeyCode;
+                LblSetting.Visible = true;
+
+                TbKeyCode.Text = string.Empty;
+                TbKeyCode.Visible = true;
+            }));
+        }
+
+        /// <summary>
+        /// Change the UI to a 'multiple keys' type
+        /// </summary>
+        private void SetMultipleKeysGui()
+        {
+            Invoke(new MethodInvoker(delegate
+            {
+                SetEmptyGui();
+
+                LblSetting.Text = Languages.CommandsMod_LblSetting_KeyCodes;
+                LblSetting.Visible = true;
+
+                TbSetting.Text = string.Empty;
+                TbSetting.Visible = true;
+            }));
+        }
+
+        /// <summary>
+        /// Change the UI to a 'url' type
+        /// </summary>
+        private void SetUrlGui()
+        {
+            Invoke(new MethodInvoker(delegate
+            {
+                SetEmptyGui();
+
+                LblSetting.Text = Languages.CommandsMod_LblSetting_Url;
+                LblSetting.Visible = true;
+
+                TbSetting.Text = string.Empty;
+                TbSetting.Visible = true;
+
+                CbCommandSpecific.CheckState = CheckState.Unchecked;
+                CbCommandSpecific.Text = Languages.CommandsMod_CbCommandSpecific_Incognito;
+
+                if (string.IsNullOrEmpty(Variables.AppSettings.BrowserBinary))
+                {
+                    LblInfo.Text = Languages.CommandsMod_LblInfo_Browser;
+                    LblInfo.Visible = true;
+
+                    CbCommandSpecific.CheckState = CheckState.Unchecked;
+                    CbCommandSpecific.Visible = false;
+                }
+                else
+                {
+                    var browser = string.IsNullOrEmpty(Variables.AppSettings.BrowserName)
+                        ? Path.GetFileNameWithoutExtension(Variables.AppSettings.BrowserBinary)
+                        : Variables.AppSettings.BrowserName;
+
+                    LblInfo.Text = string.Format(Languages.CommandsMod_LblInfo_BrowserSpecific, browser);
+                    LblInfo.Visible = true;
+
+                    CbCommandSpecific.Visible = true;
+                }
+            }));
+        }
+
+        /// <summary>
+        /// Change the UI to a 'custom executor' type
+        /// </summary>
+        private void SetCustomExecutorUi()
+        {
+            Invoke(new MethodInvoker(delegate
+            {
+                SetEmptyGui();
+
+                LblSetting.Text = Languages.CommandsMod_LblSetting_CommandScript;
+                LblSetting.Visible = true;
+
+                TbSetting.Text = string.Empty;
+                TbSetting.Visible = true;
+
+                if (string.IsNullOrEmpty(Variables.AppSettings.CustomExecutorBinary))
+                {
+                    LblInfo.Text = Languages.CommandsMod_LblInfo_Executor;
+                }
+                else
+                {
+                    var executor = string.IsNullOrEmpty(Variables.AppSettings.CustomExecutorName)
+                        ? Path.GetFileNameWithoutExtension(Variables.AppSettings.CustomExecutorBinary)
+                        : Variables.AppSettings.CustomExecutorName;
+
+                    LblInfo.Text = string.Format(Languages.CommandsMod_LblInfo_ExecutorSpecific, executor);
+                }
+
+                LblInfo.Visible = true;
+            }));
+        }
+
+        /// <summary>
+        /// Change the UI to a 'sendwindowtofront' type
+        /// </summary>
+        private void SetSendWindowToFrontUi()
+        {
+            Invoke(new MethodInvoker(delegate
+            {
+                SetEmptyGui();
+
+                LblSetting.Text = "process";
+                LblSetting.Visible = true;
+
+                TbSetting.Text = string.Empty;
+                TbSetting.Visible = true;
+            }));
+        }
+
+        /// <summary>
+        /// Change the UI to a 'setvolume' type
+        /// </summary>
+        private void SetVolumeUi()
+        {
+            Invoke(new MethodInvoker(delegate
+            {
+                SetEmptyGui();
+
+                LblSetting.Text = Languages.CommandsMod_LblSetting_VolumeRange;
+                LblSetting.Visible = true;
+
+                TbSetting.Text = string.Empty;
+                TbSetting.Visible = true;
+            }));
+        }
 
         /// <summary>
         /// Change the UI to a 'setappvolume' type
@@ -881,236 +883,246 @@ namespace HASS.Agent.Forms.Commands
             {
                 SetEmptyGui();
 
-				BtnConfigureCommand.Visible = true;
-			}));
-		}
+                BtnConfigureCommand.Visible = true;
+            }));
+        }
 
-		/// <summary>
-		/// Change the UI to a 'radio' type
-		/// </summary>
-		private void SetRadioUi()
-		{
-			Invoke(new MethodInvoker(delegate
-			{
-				SetEmptyGui();
+        /// <summary>
+        /// Change the UI to a 'radio' type
+        /// </summary>
+        private void SetRadioUi()
+        {
+            Invoke(new MethodInvoker(delegate
+            {
+                SetEmptyGui();
 
-				LblSetting.Text = Languages.CommandsMod_LblSetting_Radio;
-				LblSetting.Visible = true;
+                LblSetting.Text = Languages.CommandsMod_LblSetting_Radio;
+                LblSetting.Visible = true;
 
-				CbConfigDropdown.Visible = true;
-			}));
-		}
+                CbConfigDropdown.Visible = true;
+            }));
+        }
 
-		/// <summary>
-		/// Change the UI to a general type
-		/// </summary>
-		private void SetEmptyGui()
-		{
-			Invoke(new MethodInvoker(delegate
-			{
-				LblSetting.Visible = false;
+        /// <summary>
+        /// Change the UI to a general type
+        /// </summary>
+        private void SetEmptyGui()
+        {
+            Invoke(new MethodInvoker(delegate
+            {
+                LblSetting.Visible = false;
 
-				TbSetting.Text = string.Empty;
-				TbSetting.Visible = false;
+                TbSetting.Text = string.Empty;
+                TbSetting.Visible = false;
 
-				TbKeyCode.Text = string.Empty;
-				TbKeyCode.Visible = false;
+                TbKeyCode.Text = string.Empty;
+                TbKeyCode.Visible = false;
 
-				CbRunAsLowIntegrity.CheckState = CheckState.Unchecked;
-				CbRunAsLowIntegrity.Visible = false;
-				LblIntegrityInfo.Visible = false;
+                CbRunAsLowIntegrity.CheckState = CheckState.Unchecked;
+                CbRunAsLowIntegrity.Visible = false;
+                LblIntegrityInfo.Visible = false;
 
-				CbConfigDropdown.Visible = false;
+                CbConfigDropdown.Visible = false;
 
-				CbCommandSpecific.CheckState = CheckState.Unchecked;
-				CbCommandSpecific.Visible = false;
+                CbCommandSpecific.CheckState = CheckState.Unchecked;
+                CbCommandSpecific.Visible = false;
 
-				LblInfo.Text = string.Empty;
-				LblInfo.Visible = false;
+                LblInfo.Text = string.Empty;
+                LblInfo.Visible = false;
 
-				BtnConfigureCommand.Visible = false;
-			}));
-		}
+                BtnConfigureCommand.Visible = false;
+            }));
+        }
 
-		private void TbDescription_LinkClicked(object sender, LinkClickedEventArgs e)
-		{
-			if (string.IsNullOrWhiteSpace(e.LinkText))
-				return;
+        private void TbDescription_LinkClicked(object sender, LinkClickedEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(e.LinkText))
+                return;
 
-			if (!e.LinkText.ToLower().StartsWith("http"))
-				return;
+            if (!e.LinkText.ToLower().StartsWith("http"))
+                return;
 
-			HelperFunctions.LaunchUrl(e.LinkText);
-		}
+            HelperFunctions.LaunchUrl(e.LinkText);
+        }
 
-		private void CommandsMod_ResizeEnd(object sender, EventArgs e)
-		{
-			if (Variables.ShuttingDown || !IsHandleCreated || IsDisposed)
-				return;
+        private void CommandsMod_ResizeEnd(object sender, EventArgs e)
+        {
+            if (Variables.ShuttingDown || !IsHandleCreated || IsDisposed)
+                return;
 
-			try
-			{
-				// hide the pesky horizontal scrollbar
-				ListViewTheme.ShowScrollBar(LvCommands.Handle, ListViewTheme.SB_HORZ, false);
+            try
+            {
+                // hide the pesky horizontal scrollbar
+                ListViewTheme.ShowScrollBar(LvCommands.Handle, ListViewTheme.SB_HORZ, false);
 
-				Refresh();
-			}
-			catch
-			{
-				// best effort
-			}
-		}
+                Refresh();
+            }
+            catch
+            {
+                // best effort
+            }
+        }
 
-		private void LblIntegrityInfo_Click(object sender, EventArgs e)
-		{
-			var infoMsg = new StringBuilder();
-			infoMsg.AppendLine(Languages.CommandsMod_LblIntegrityInfo_InfoMsg1);
-			infoMsg.AppendLine(string.Empty);
-			infoMsg.AppendLine(Languages.CommandsMod_LblIntegrityInfo_InfoMsg2);
-			infoMsg.AppendLine(Languages.CommandsMod_LblIntegrityInfo_InfoMsg3);
-			infoMsg.AppendLine(Languages.CommandsMod_LblIntegrityInfo_InfoMsg4);
-			infoMsg.AppendLine(string.Empty);
-			infoMsg.AppendLine(Languages.CommandsMod_LblIntegrityInfo_InfoMsg5);
+        private void LblIntegrityInfo_Click(object sender, EventArgs e)
+        {
+            var infoMsg = new StringBuilder();
+            infoMsg.AppendLine(Languages.CommandsMod_LblIntegrityInfo_InfoMsg1);
+            infoMsg.AppendLine(string.Empty);
+            infoMsg.AppendLine(Languages.CommandsMod_LblIntegrityInfo_InfoMsg2);
+            infoMsg.AppendLine(Languages.CommandsMod_LblIntegrityInfo_InfoMsg3);
+            infoMsg.AppendLine(Languages.CommandsMod_LblIntegrityInfo_InfoMsg4);
+            infoMsg.AppendLine(string.Empty);
+            infoMsg.AppendLine(Languages.CommandsMod_LblIntegrityInfo_InfoMsg5);
 
-			MessageBoxAdv.Show(this, infoMsg.ToString(), Variables.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
-		}
+            MessageBoxAdv.Show(this, infoMsg.ToString(), Variables.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
 
-		private void CommandsMod_KeyUp(object sender, KeyEventArgs e)
-		{
-			if (e.KeyCode != Keys.Escape)
-				return;
+        private void CommandsMod_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode != Keys.Escape)
+            {
+                _escapeLock = true;
+                return;
+            }
 
-			Close();
-		}
+            if (_escapeLock)
+            {
+                _escapeLock = false;
+            }
+            else
+            {
+                Close();
+            }
+        }
 
-		private void CommandsMod_Layout(object sender, LayoutEventArgs e)
-		{
-			// hide the pesky horizontal scrollbar
-			ListViewTheme.ShowScrollBar(LvCommands.Handle, ListViewTheme.SB_HORZ, false);
-		}
+        private void CommandsMod_Layout(object sender, LayoutEventArgs e)
+        {
+            // hide the pesky horizontal scrollbar
+            ListViewTheme.ShowScrollBar(LvCommands.Handle, ListViewTheme.SB_HORZ, false);
+        }
 
-		/// <summary>
-		/// Locks the interface if the selected entity can't be added to the current client
-		/// </summary>
-		private void LockWrongClient()
-		{
-			if (InvokeRequired)
-			{
-				Invoke(new MethodInvoker(LockWrongClient));
+        /// <summary>
+        /// Locks the interface if the selected entity can't be added to the current client
+        /// </summary>
+        private void LockWrongClient()
+        {
+            if (InvokeRequired)
+            {
+                Invoke(new MethodInvoker(LockWrongClient));
 
-				return;
-			}
+                return;
+            }
 
-			_interfaceLockedWrongType = true;
+            _interfaceLockedWrongType = true;
 
-			var requiredClient = _serviceMode ? "hass.agent" : "service";
-			LblSpecificClient.Text = string.Format(Languages.CommandsMod_SpecificClient, requiredClient);
+            var requiredClient = _serviceMode ? "hass.agent" : "service";
+            LblSpecificClient.Text = string.Format(Languages.CommandsMod_SpecificClient, requiredClient);
 
-			LblSpecificClient.Visible = true;
+            LblSpecificClient.Visible = true;
 
-			TbName.Enabled = false;
-			TbName.Text = string.Empty;
+            TbName.Enabled = false;
+            TbName.Text = string.Empty;
 
-			TbFriendlyName.Enabled = false;
-			TbFriendlyName.Text = string.Empty;
+            TbFriendlyName.Enabled = false;
+            TbFriendlyName.Text = string.Empty;
 
-			SetEmptyGui();
+            SetEmptyGui();
 
-			BtnStore.Enabled = false;
-		}
+            BtnStore.Enabled = false;
+        }
 
-		/// <summary>
-		/// Unlocks the interface if the selected entity can be added to the current client
-		/// </summary>
-		private void UnlockWrongClient()
-		{
-			if (InvokeRequired)
-			{
-				Invoke(new MethodInvoker(UnlockWrongClient));
+        /// <summary>
+        /// Unlocks the interface if the selected entity can be added to the current client
+        /// </summary>
+        private void UnlockWrongClient()
+        {
+            if (InvokeRequired)
+            {
+                Invoke(new MethodInvoker(UnlockWrongClient));
 
-				return;
-			}
+                return;
+            }
 
-			_interfaceLockedWrongType = false;
+            _interfaceLockedWrongType = false;
 
-			LblSpecificClient.Visible = false;
+            LblSpecificClient.Visible = false;
 
-			TbName.Enabled = true;
-			TbFriendlyName.Enabled = true;
-			BtnStore.Enabled = true;
-		}
+            TbName.Enabled = true;
+            TbFriendlyName.Enabled = true;
+            BtnStore.Enabled = true;
+        }
 
-		private void CbEntityType_SelectedIndexChanged(object sender, EventArgs e)
-		{
-			ActiveControl = TbName;
-			if (!string.IsNullOrWhiteSpace(TbName.Text))
-				TbName.SelectionStart = TbName.Text.Length;
-		}
+        private void CbEntityType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ActiveControl = TbName;
+            if (!string.IsNullOrWhiteSpace(TbName.Text))
+                TbName.SelectionStart = TbName.Text.Length;
+        }
 
-		private void LblMqttTopic_Click(object sender, EventArgs e)
-		{
-			if (CbEntityType.SelectedItem == null)
-			{
-				MessageBoxAdv.Show(this, Languages.CommandsMod_MessageBox_EntityType, Variables.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-				ActiveControl = CbEntityType;
+        private void LblMqttTopic_Click(object sender, EventArgs e)
+        {
+            if (CbEntityType.SelectedItem == null)
+            {
+                MessageBoxAdv.Show(this, Languages.CommandsMod_MessageBox_EntityType, Variables.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                ActiveControl = CbEntityType;
 
-				return;
-			}
+                return;
+            }
 
-			var item = (KeyValuePair<int, string>)CbEntityType.SelectedItem;
-			var entityType = (CommandEntityType)item.Key;
+            var item = (KeyValuePair<int, string>)CbEntityType.SelectedItem;
+            var entityType = (CommandEntityType)item.Key;
 
-			var deviceConfig = Variables.MqttManager?.GetDeviceConfigModel();
-			if (deviceConfig == null)
-			{
-				MessageBoxAdv.Show(this, Languages.CommandsMod_LblMqttTopic_MessageBox1, Variables.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            var deviceConfig = Variables.MqttManager?.GetDeviceConfigModel();
+            if (deviceConfig == null)
+            {
+                MessageBoxAdv.Show(this, Languages.CommandsMod_LblMqttTopic_MessageBox1, Variables.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 
-				return;
-			}
+                return;
+            }
 
-			var name = TbName.Text.Trim();
-			if (string.IsNullOrEmpty(name))
-			{
-				MessageBoxAdv.Show(this, Languages.CommandsMod_MessageBox_Name, Variables.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-				ActiveControl = TbName;
+            var name = TbName.Text.Trim();
+            if (string.IsNullOrEmpty(name))
+            {
+                MessageBoxAdv.Show(this, Languages.CommandsMod_MessageBox_Name, Variables.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                ActiveControl = TbName;
 
-				return;
-			}
+                return;
+            }
 
-			var topic = $"{Variables.MqttManager.MqttDiscoveryPrefix()}/{entityType.GetEnumMemberValue()}/{deviceConfig.Name}/{name}/action";
+            var topic = $"{Variables.MqttManager.MqttDiscoveryPrefix()}/{entityType.GetEnumMemberValue()}/{deviceConfig.Name}/{name}/action";
 
-			var form = new CommandMqttTopic(topic);
-			form.FormClosed += delegate { form.Dispose(); };
-			form.Show(this);
-		}
+            var form = new CommandMqttTopic(topic);
+            form.FormClosed += delegate { form.Dispose(); };
+            form.Show(this);
+        }
 
-		private void LblActionInfo_Click(object sender, EventArgs e) => HelperFunctions.LaunchUrl("https://www.hass-agent.io/latest/getting-started/commands/");
+        private void LblActionInfo_Click(object sender, EventArgs e) => HelperFunctions.LaunchUrl("https://www.hass-agent.io/latest/getting-started/commands/");
 
-		private void PbActionInfo_Click(object sender, EventArgs e) => HelperFunctions.LaunchUrl("https://www.hass-agent.io/latest/getting-started/commands/");
+        private void PbActionInfo_Click(object sender, EventArgs e) => HelperFunctions.LaunchUrl("https://www.hass-agent.io/latest/getting-started/commands/");
 
-		private void BtnConfigureCommand_Click(object sender, EventArgs e)
-		{
-			var commandId = int.Parse(LvCommands.SelectedItems[0].Text);
-			var commandCard = CommandsManager.CommandInfoCards.Where(card => card.Value.Key == commandId).Select(card => card.Value).FirstOrDefault();
-			if (commandCard == null)
-				return;
+        private void BtnConfigureCommand_Click(object sender, EventArgs e)
+        {
+            var commandId = int.Parse(LvCommands.SelectedItems[0].Text);
+            var commandCard = CommandsManager.CommandInfoCards.Where(card => card.Value.Key == commandId).Select(card => card.Value).FirstOrDefault();
+            if (commandCard == null)
+                return;
 
-			switch (commandCard.CommandType)
-			{
-				case CommandType.WebViewCommand:
-					using (var webviewConfig = new WebViewCommandConfig(TbSetting.Text))
-					{
-						webviewConfig.Opacity = 0;
+            switch (commandCard.CommandType)
+            {
+                case CommandType.WebViewCommand:
+                    using (var webviewConfig = new WebViewCommandConfig(TbSetting.Text))
+                    {
+                        webviewConfig.Opacity = 0;
 
-						var ret = webviewConfig.ShowDialog();
-						if (ret != DialogResult.OK)
-							return;
+                        var ret = webviewConfig.ShowDialog();
+                        if (ret != DialogResult.OK)
+                            return;
 
-						TbSetting.Text = JsonConvert.SerializeObject(webviewConfig.WebViewInfo);
-					}
-					break;
-			}
-		}
+                        TbSetting.Text = JsonConvert.SerializeObject(webviewConfig.WebViewInfo);
+                    }
+                    break;
+            }
+        }
 
         private void TbKeyCode_KeyDown(object sender, KeyEventArgs e)
         {
