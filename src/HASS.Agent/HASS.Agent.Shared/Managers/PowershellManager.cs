@@ -266,9 +266,7 @@ public static class PowershellManager
                 StandardOutputEncoding = encoding,
                 StandardErrorEncoding = encoding,
                 // set the right type of arguments, -NoProfile prevents custom profile scripts from interfering
-                Arguments = isScript
-                    ? $@"-NoProfile & '{command}'"
-                    : $@"-NoProfile & {{{command}}}"
+                Arguments = GetProcessArguments(command, "", isScript)
             };
 
             using var process = new Process();
