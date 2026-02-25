@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
+using System.Windows.Forms;
 using HASS.Agent.Shared.Enums;
 using HASS.Agent.Shared.Functions;
 using Serilog;
@@ -25,7 +26,8 @@ namespace HASS.Agent.Shared.HomeAssistant.Commands.InternalCommands
         {
             State = "ON";
 
-            NativeMethods.PostMessage(NativeMethods.HWND_BROADCAST, NativeMethods.WM_SYSCOMMAND, (IntPtr)NativeMethods.SC_MONITORPOWER, (IntPtr)2);
+            using var form = new Form();
+            NativeMethods.SendMessage(form.Handle, NativeMethods.WM_SYSCOMMAND, (IntPtr)NativeMethods.SC_MONITORPOWER, (IntPtr)2);
 
             State = "OFF";
         }
