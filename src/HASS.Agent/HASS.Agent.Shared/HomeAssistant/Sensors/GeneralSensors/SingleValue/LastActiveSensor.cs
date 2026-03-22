@@ -86,12 +86,12 @@ namespace HASS.Agent.Shared.HomeAssistant.Sensors.GeneralSensors.SingleValue
             lastInputInfo.cbSize = Marshal.SizeOf(lastInputInfo);
             lastInputInfo.dwTime = 0;
 
-            var envTicks = Environment.TickCount;
+            var envTicks = Environment.TickCount64;
 
             if (!GetLastInputInfo(ref lastInputInfo))
                 return DateTime.Now;
 
-            var lastInputTick = Convert.ToDouble(lastInputInfo.dwTime);
+            var lastInputTick = (long)lastInputInfo.dwTime;
 
             var idleTime = envTicks - lastInputTick;
             return idleTime > 0 ? DateTime.Now - TimeSpan.FromMilliseconds(idleTime) : DateTime.Now;
