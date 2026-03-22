@@ -1,4 +1,4 @@
-﻿using HASS.Agent.Shared.Enums;
+using HASS.Agent.Shared.Enums;
 using HASS.Agent.Shared.Models.Config;
 using HASS.Agent.Shared.HomeAssistant.Commands;
 using HASS.Agent.Shared.HomeAssistant.Commands.CustomCommands;
@@ -56,7 +56,10 @@ namespace HASS.Agent.Satellite.Service.Settings
                 // convert to abstract commands
                 await Task.Run(delegate
                 {
-                    foreach (var abstractCommand in configuredCommands.Select(ConvertConfiguredToAbstract)) Variables.Commands.Add(abstractCommand!);
+                    foreach (var abstractCommand in configuredCommands.Select(ConvertConfiguredToAbstract))
+                    {
+                        if (abstractCommand != null) Variables.Commands.Add(abstractCommand);
+                    }
                 });
 
                 // all good
