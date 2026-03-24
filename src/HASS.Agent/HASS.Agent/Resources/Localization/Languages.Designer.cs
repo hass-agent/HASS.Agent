@@ -582,7 +582,8 @@ namespace HASS.Agent.Resources.Localization {
         ///- Special keys go between { }, like {TAB} or {UP}
         ///
         ///- Put a + in front of a key to add SHIFT, ^ for CTRL and % for ALT. So, +C is SHIFT-C. Or, +(CD) is SHIFT-C and SHIFT-D, while +CD is SHIFT-C and D
-        ///        /// [rest of string was truncated]&quot;;.
+        ///
+        /// [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string CommandsManager_MultipleKeysCommandDescription {
             get {
@@ -2415,15 +2416,6 @@ namespace HASS.Agent.Resources.Localization {
         internal static string ConfigMqtt_CbEnableMqtt {
             get {
                 return ResourceManager.GetString("ConfigMqtt_CbEnableMqtt", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Ignore grace period after waking up from hibernation.
-        /// </summary>
-        internal static string ConfigMqtt_CbIgnoreGracePeriod {
-            get {
-                return ResourceManager.GetString("ConfigMqtt_CbIgnoreGracePeriod", resourceCulture);
             }
         }
         

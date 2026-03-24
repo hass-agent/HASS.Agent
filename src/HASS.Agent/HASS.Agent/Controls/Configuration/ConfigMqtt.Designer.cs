@@ -57,7 +57,6 @@ namespace HASS.Agent.Controls.Configuration
             this.LblClientId = new System.Windows.Forms.Label();
             this.NumMqttPort = new Syncfusion.Windows.Forms.Tools.NumericUpDownExt();
             this.PbShow = new System.Windows.Forms.PictureBox();
-            this.CbIgnoreGracePeriod = new System.Windows.Forms.CheckBox();
             this.CbEnableMqtt = new System.Windows.Forms.CheckBox();
             this.LblMqttDisabledWarning = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.NumMqttPort)).BeginInit();
@@ -476,23 +475,6 @@ namespace HASS.Agent.Controls.Configuration
             this.LblMqttDisabledWarning.Text = Languages.ConfigMqtt_LblMqttDisabledWarning;
             this.LblMqttDisabledWarning.Visible = false;
             // 
-            // CbIgnoreGracePeriod
-            // 
-            this.CbIgnoreGracePeriod.AccessibleDescription = "Ignore grace period after waking up from hibernation.";
-            this.CbIgnoreGracePeriod.AccessibleName = "Ignore grace period";
-            this.CbIgnoreGracePeriod.AccessibleRole = AccessibleRole.CheckButton;
-            this.CbIgnoreGracePeriod.AutoSize = true;
-            this.CbIgnoreGracePeriod.Checked = false;
-            this.CbIgnoreGracePeriod.CheckState = CheckState.Unchecked;
-            this.CbIgnoreGracePeriod.Font = new Font("Segoe UI", 10F);
-            this.CbIgnoreGracePeriod.Location = new Point(59, 612);
-            this.CbIgnoreGracePeriod.Name = "CbIgnoreGracePeriod";
-            this.CbIgnoreGracePeriod.Size = new Size(354, 23);
-            this.CbIgnoreGracePeriod.TabIndex = 103;
-            this.CbIgnoreGracePeriod.Text = Languages.ConfigMqtt_CbIgnoreGracePeriod;
-            this.CbIgnoreGracePeriod.UseVisualStyleBackColor = true;
-            this.CbIgnoreGracePeriod.CheckedChanged += new System.EventHandler(this.CbIgnoreGracePeriod_CheckedChanged);
-            // 
             // ConfigMqtt
             // 
             this.AccessibleDescription = "Panel containing the MQTT client configuration.";
@@ -501,7 +483,6 @@ namespace HASS.Agent.Controls.Configuration
             this.AutoScaleDimensions = new SizeF(96F, 96F);
             this.AutoScaleMode = AutoScaleMode.Dpi;
             this.BackColor = Color.FromArgb(45, 45, 48);
-            this.Controls.Add(CbIgnoreGracePeriod);
             this.Controls.Add(LblMqttDisabledWarning);
             this.Controls.Add(CbEnableMqtt);
             this.Controls.Add(PbShow);
@@ -571,6 +552,5 @@ namespace HASS.Agent.Controls.Configuration
         private PictureBox PbShow;
         internal CheckBox CbEnableMqtt;
         private Label LblMqttDisabledWarning;
-        internal CheckBox CbIgnoreGracePeriod;
     }
 }

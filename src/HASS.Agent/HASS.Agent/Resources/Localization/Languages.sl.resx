@@ -3521,9 +3521,6 @@ Zahteva ime zvočne naprave kot tovor.</value>
     <value>Nastavi privzeti zvočni vhod za sistem (vključno s privzeto komunikacijsko napravo).
 Ime zvočne naprave potrebujete kot obremenitev.</value>
   </data>
-  <data name="ConfigMqtt_CbIgnoreGracePeriod" xml:space="preserve">
-    <value>Po prebujanju iz mirovanja prezrite obdobje odloga</value>
-  </data>
   <data name="ConfigTrayIcon_CbUseModernIcon" xml:space="preserve">
     <value>Uporabi sodobno ikono pladnja</value>
   </data>
