@@ -172,8 +172,8 @@ namespace HASS.Agent.Functions
                     // stop hotkey
                     Variables.MainForm?.Invoke(new MethodInvoker(delegate
                     {
-                        Variables.HotKeyListener?.RemoveAll();
-                        Variables.HotKeyListener?.Dispose();
+                        Variables.InternalHotKeyManager?.ReloadQuickActionsHotKeys();
+                        //Variables.HotKeyListener?.Dispose();
                     }));
 
                     // stop bt listener

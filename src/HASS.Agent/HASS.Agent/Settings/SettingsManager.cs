@@ -14,7 +14,6 @@ using Microsoft.Win32;
 using Newtonsoft.Json;
 using Serilog;
 using Syncfusion.Windows.Forms;
-using WK.Libraries.HotkeyListenerNS;
 
 namespace HASS.Agent.Settings
 {
@@ -139,7 +138,7 @@ namespace HASS.Agent.Settings
                 AgentSharedBase.SetCustomExecutorBinary(Variables.AppSettings.CustomExecutorBinary);
 
                 // load the hotkey
-                Variables.QuickActionsHotKey = string.IsNullOrEmpty(Variables.AppSettings.QuickActionsHotKey) ? null : HotkeyListener.Convert(Variables.AppSettings.QuickActionsHotKey);
+                Variables.QuickActionsHotKey = string.IsNullOrWhiteSpace(Variables.AppSettings.QuickActionsHotKey) ? string.Empty : Variables.AppSettings.QuickActionsHotKey;
 
                 // done
                 Log.Information("[SETTINGS] Configuration loaded");
