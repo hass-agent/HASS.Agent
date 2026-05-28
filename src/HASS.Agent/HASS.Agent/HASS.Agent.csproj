@@ -68,6 +68,7 @@
     <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.3296.44">
       <Aliases></Aliases>
     </PackageReference>
+    <PackageReference Include="Microsoft.Windows.CsWinRT" Version="2.2.0" />
     <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.7.250606001" />
     <PackageReference Include="MQTTnet" Version="4.3.3.952" />
     <PackageReference Include="MQTTnet.Extensions.ManagedClient" Version="4.3.3.952" />
