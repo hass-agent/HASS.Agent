@@ -18,7 +18,7 @@ using Microsoft.Win32;
 using MQTTnet;
 using Serilog.Core;
 using Microsoft.Web.WebView2.Core;
-using WK.Libraries.HotkeyListenerNS;
+using NHotkey.WindowsForms;
 
 namespace HASS.Agent
 {
@@ -51,9 +51,9 @@ namespace HASS.Agent
         /// </summary>
         internal static Main MainForm { get; set; }
         internal static HttpClient HttpClient { get; set; } = new();
-        internal static Hotkey QuickActionsHotKey { get; set; } = new(Keys.Control | Keys.Alt, Keys.Q);
-        internal static HotKeyManager HotKeyManager { get; } = new();
-        internal static HotkeyListener HotKeyListener { get; set; }
+        internal static string QuickActionsHotKey { get; set; } = "Control, Alt + Q";
+        internal static InternalHotKeyManager InternalHotKeyManager { get; } = new();
+        internal static HotkeyManager HotKeyListener { get; set; }
         internal static Random Rnd { get; } = new();
         internal static Font DefaultFont { get; } = new("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
         internal static WebView TrayIconWebView { get; set; } = null;

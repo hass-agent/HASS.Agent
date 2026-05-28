@@ -24,11 +24,12 @@ using HASS.Agent.Shared.Managers.Audio;
 using Serilog;
 using Syncfusion.Windows.Forms;
 using WindowsDesktop;
-using WK.Libraries.HotkeyListenerNS;
 using NativeMethods = HASS.Agent.Functions.NativeMethods;
 using QuickActionsConfig = HASS.Agent.Forms.QuickActions.QuickActionsConfig;
 using Task = System.Threading.Tasks.Task;
 using Microsoft.Win32;
+using NHotkey;
+using NHotkey.WindowsForms;
 
 namespace HASS.Agent.Forms
 {
@@ -88,7 +89,7 @@ namespace HASS.Agent.Forms
                 SetMqttStatus(ComponentStatus.Loading);
 
                 // create a hotkey listener
-                Variables.HotKeyListener = new HotkeyListener();
+                Variables.HotKeyListener = HotkeyManager.Current;
 
                 // check for dpi scaling
                 CheckDpiScalingFactor();
@@ -304,10 +305,10 @@ namespace HASS.Agent.Forms
         private void InitializeHotkeys()
         {
             // prepare listener
-            Variables.HotKeyListener.HotkeyPressed += HotkeyListener_HotkeyPressed;
+            Variables.InternalHotKeyManager.HotkeyActivated += HotkeyListener_HotkeyPressed;
 
             // bind quick actions hotkey (if configured)
-            Variables.HotKeyManager.InitializeQuickActionsHotKeys();
+            Variables.InternalHotKeyManager.InitializeQuickActionsHotKeys();
         }
 
         /// <summary>
@@ -317,10 +318,10 @@ namespace HASS.Agent.Forms
         /// <param name="e"></param>
         private void HotkeyListener_HotkeyPressed(object sender, HotkeyEventArgs e)
         {
-            if (e.Hotkey == Variables.QuickActionsHotKey)
+            if (e.Name == Variables.QuickActionsHotKey)
                 ShowQuickActions();
             else
-                HotKeyManager.ProcessQuickActionHotKey(e.Hotkey.ToString());
+                InternalHotKeyManager.ProcessQuickActionHotKey(e.Name);
         }
 
         /// <summary>
