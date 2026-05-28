@@ -55,6 +55,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Amadeo.HADotNet.Core" Version="0.2.1" />
     <PackageReference Include="Grapevine" Version="5.0.2" />
     <PackageReference Include="Grpc.Tools" Version="2.72.0">
       <PrivateAssets>all</PrivateAssets>
@@ -88,12 +89,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\HASS.Agent.Shared\HASS.Agent.Shared.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Reference Include="HADotNet.Core">
-      <HintPath>Libraries\HADotNet.Core.dll</HintPath>
-    </Reference>
   </ItemGroup>
 
   <ItemGroup>
