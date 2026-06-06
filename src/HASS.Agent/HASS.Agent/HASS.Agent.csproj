@@ -17,7 +17,7 @@
     <PlatformTarget>anycpu</PlatformTarget>
     <Platforms>x64;x86;AnyCPU</Platforms>
     <DebugType>full</DebugType>
-    <Version>2.2.0</Version>
+    <Version>2.2.1</Version>
     <Company>HASS.Agent Team</Company>
     <Authors>HASS.Agent Team</Authors>
     <Description>Windows-based client for Home Assistant. Provides notifications, quick actions, commands, sensors and more. </Description>
@@ -27,8 +27,8 @@
     <RepositoryUrl>https://github.com/hass-agent/HASS.Agent</RepositoryUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <ApplicationManifest>app.manifest</ApplicationManifest>
-    <AssemblyVersion>2.2.0</AssemblyVersion>
-    <FileVersion>2.2.0</FileVersion>
+    <AssemblyVersion>2.2.1</AssemblyVersion>
+    <FileVersion>2.2.1</FileVersion>
     <RootNamespace>HASS.Agent</RootNamespace>
     <WindowsPackageType>None</WindowsPackageType>
     <EnableUnsafeBinaryFormatterSerialization>true</EnableUnsafeBinaryFormatterSerialization>
