@@ -172,8 +172,8 @@ namespace HASS.Agent.Functions
                     // stop hotkey
                     Variables.MainForm?.Invoke(new MethodInvoker(delegate
                     {
-                        Variables.HotKeyListener?.RemoveAll();
-                        Variables.HotKeyListener?.Dispose();
+                        Variables.InternalHotKeyManager?.ReloadQuickActionsHotKeys();
+                        //Variables.HotKeyListener?.Dispose();
                     }));
 
                     // stop bt listener
@@ -371,9 +371,9 @@ namespace HASS.Agent.Functions
         /// </summary>
         /// <param name="url"></param>
         /// <param name="incognito"></param>
-        internal static void LaunchUrl(string url, bool incognito = false)
+        internal static void LaunchUrl(string url, bool incognito = false, bool explicitUrl = false)
         {
-            var targetUrl = StorageManager.GetElementUrl(url);
+            var targetUrl = explicitUrl ? url : StorageManager.GetElementUrl(url);
 
             // did the user provide a browser?
             if (string.IsNullOrEmpty(Variables.AppSettings.BrowserBinary))

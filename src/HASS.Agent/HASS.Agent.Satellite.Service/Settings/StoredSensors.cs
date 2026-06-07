@@ -1,4 +1,4 @@
-﻿using HASS.Agent.Shared.Enums;
+using HASS.Agent.Shared.Enums;
 using HASS.Agent.Shared.Models.Config;
 using HASS.Agent.Satellite.Service.Extensions;
 using HASS.Agent.Shared.HomeAssistant.Sensors;
@@ -61,8 +61,16 @@ namespace HASS.Agent.Satellite.Service.Settings
                 {
                     foreach (var sensor in configuredSensors)
                     {
-                        if (sensor.IsSingleValue()) Variables.SingleValueSensors.Add(ConvertConfiguredToAbstractSingleValue(sensor)!);
-                        else Variables.MultiValueSensors.Add(ConvertConfiguredToAbstractMultiValue(sensor)!);
+                        if (sensor.IsSingleValue())
+                        {
+                            var abstractSensor = ConvertConfiguredToAbstractSingleValue(sensor);
+                            if (abstractSensor != null) Variables.SingleValueSensors.Add(abstractSensor);
+                        }
+                        else
+                        {
+                            var abstractSensor = ConvertConfiguredToAbstractMultiValue(sensor);
+                            if (abstractSensor != null) Variables.MultiValueSensors.Add(abstractSensor);
+                        }
                     }
                 });
 

@@ -8,7 +8,6 @@ using HASS.Agent.Sensors;
 using HASS.Agent.Settings;
 using HASS.Agent.Shared;
 using HASS.Agent.Shared.Functions;
-using WK.Libraries.HotkeyListenerNS;
 using Task = System.Threading.Tasks.Task;
 using ConfigSatelliteService = HASS.Agent.Controls.Configuration.ConfigService;
 using HASS.Agent.MQTT;
@@ -17,8 +16,7 @@ namespace HASS.Agent.Forms
 {
     public partial class Configuration : MetroForm
     {
-        private readonly HotkeySelector _hotkeySelector = new();
-        private readonly Hotkey _previousHotkey = Variables.QuickActionsHotKey;
+        private readonly string _previousHotkey = Variables.QuickActionsHotKey;
 
         private readonly string _previousDeviceName = Variables.AppSettings.DeviceName;
         private readonly int _previousLocalApiPort = Variables.AppSettings.LocalApiPort;
@@ -41,6 +39,9 @@ namespace HASS.Agent.Forms
 
         private bool _initializing = true;
 
+        private Keys _key = Keys.None;
+        private Keys _modifiers = Keys.None;
+        
         public Configuration()
         {
             InitializeComponent();
@@ -52,7 +53,7 @@ namespace HASS.Agent.Forms
             KeyPreview = true;
 
             // suspend global hotkeys
-            Variables.HotKeyListener.Suspend();
+            Variables.HotKeyListener.IsEnabled = false;
 
             // load controls
             TabGeneral.Controls.Add(_general);
@@ -79,18 +80,21 @@ namespace HASS.Agent.Forms
             LoadSettings();
 
             // config quick actions hotkey selector
-            if (Variables.QuickActionsHotKey != null) _hotkeySelector.Enable(_hotKey.TbQuickActionsHotkey, Variables.QuickActionsHotKey);
-            else _hotkeySelector.Enable(_hotKey.TbQuickActionsHotkey);
+            _hotKey.TbQuickActionsHotkey.ReadOnly = true;
+            _hotKey.TbQuickActionsHotkey.KeyDown += TbQuickActionsHotkey_KeyDown;
+            if (Variables.QuickActionsHotKey != null)
+            {
+                _hotKey.TbQuickActionsHotkey.Text = Variables.QuickActionsHotKey;
+            }
         }
 
         private void Configuration_FormClosing(object sender, FormClosingEventArgs e)
         {
             // resume global hotkeys
-            Variables.HotKeyListener.Resume();
+            Variables.HotKeyListener.IsEnabled = true;
 
-            // remove hotkey selector
-            _hotkeySelector?.Disable(_hotKey.TbQuickActionsHotkey);
-            _hotkeySelector?.Dispose();
+            // clean hotkey selector
+            _hotKey.TbQuickActionsHotkey.KeyDown -= TbQuickActionsHotkey_KeyDown;
 
             // dispose controls
             _general.Dispose();
@@ -110,14 +114,62 @@ namespace HASS.Agent.Forms
             _nfc.Dispose();
         }
 
+        private void TbQuickActionsHotkey_KeyDown(object sender, KeyEventArgs e)
+        {
+            e.SuppressKeyPress = true;
+
+            var key = e.KeyCode;
+
+            if (key is Keys.LControlKey or Keys.RControlKey
+                or Keys.LShiftKey or Keys.RShiftKey
+                or Keys.LWin or Keys.RWin
+                or Keys.Alt)
+            {
+                key = Keys.None;
+            }
+
+            if (key == Keys.Escape)
+            {
+                _key = Keys.None;
+                _modifiers = Keys.None;
+                _hotKey.TbQuickActionsHotkey.Text = string.Empty;
+
+                return;
+            }
+            
+            _key = key;
+            _hotKey.TbQuickActionsHotkey.Text = FormatHotkey(_key, e.Modifiers);
+        }
+        
+        private string FormatHotkey(Keys key, Keys modifiers)
+        {
+            var parts = new List<string>();
+            if ((modifiers & Keys.Shift) != 0)
+            {
+                parts.Add(nameof(Keys.Shift));
+            }
+
+            if ((modifiers & Keys.Control) != 0)
+            {
+                parts.Add(nameof(Keys.Control));
+            }
+
+            if ((modifiers & Keys.Alt) != 0)
+            {
+                parts.Add(nameof(Keys.Alt));
+            }
+
+            return parts.Count > 0 ? string.Join(", ", parts) + " + " + key : key.ToString();
+        }
+        
         private void BindEvents()
         {
             // hass
             _homeAssistantApi.CbHassAutoClientCertificate.CheckedChanged += CbHassAutoClientCertificate_CheckedChanged;
-            
+
             // mqtt
             _mqtt.CbMqttTls.CheckedChanged += CbMqttTls_CheckedChanged;
-            
+
             // hotkey
             _hotKey.BtnClearHotKey.Click += BtnClearHotKey_Click;
         }
@@ -148,7 +200,8 @@ namespace HASS.Agent.Forms
             BtnStore.Text = Languages.Configuration_BtnStore_Busy;
 
             // optionally sanitize device name
-            if (_general.CbEnableDeviceNameSanitation.Checked) _general.TbDeviceName.Text = SharedHelperFunctions.GetSafeValue(_general.TbDeviceName.Text);
+            if (_general.CbEnableDeviceNameSanitation.Checked)
+                _general.TbDeviceName.Text = SharedHelperFunctions.GetSafeValue(_general.TbDeviceName.Text);
 
             // store settings
             await StoreSettingsAsync();
@@ -198,28 +251,32 @@ namespace HASS.Agent.Forms
 
                 // disconnect mqtt so we don't get announced again
                 await Task.Run(Variables.MqttManager.Disconnect);
-                
+
                 forceRestart = true;
             }
 
             // reserve the new local api's port if it's changed
             if (Variables.AppSettings.LocalApiPort != _previousLocalApiPort)
             {
-                MessageBoxAdv.Show(this, Languages.Configuration_ProcessChanges_MessageBox2, Variables.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxAdv.Show(this, Languages.Configuration_ProcessChanges_MessageBox2, Variables.MessageBoxTitle,
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 // try to reserve elevated
                 if (!ApiManager.ExecuteElevatedPortReservation())
                 {
                     // failed, copy the command onto the clipboard
-                    Clipboard.SetText($"netsh http add urlacl url=http://+:{Variables.AppSettings.LocalApiPort}/ user=\"{SharedHelperFunctions.EveryoneLocalizedAccountName()}\"");
+                    Clipboard.SetText(
+                        $"netsh http add urlacl url=http://+:{Variables.AppSettings.LocalApiPort}/ user=\"{SharedHelperFunctions.EveryoneLocalizedAccountName()}\"");
 
                     // notify the user
-                    MessageBoxAdv.Show(this, Languages.Configuration_ProcessChanges_MessageBox3, Variables.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBoxAdv.Show(this, Languages.Configuration_ProcessChanges_MessageBox3,
+                        Variables.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 else
                 {
                     // notify the user
-                    MessageBoxAdv.Show(this, Languages.Configuration_ProcessChanges_MessageBox4, Variables.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBoxAdv.Show(this, Languages.Configuration_ProcessChanges_MessageBox4,
+                        Variables.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     // we need to restart, so go ahead, otherwise it's starting to look like popup-spam ..
                     forceRestart = true;
@@ -230,17 +287,22 @@ namespace HASS.Agent.Forms
             {
                 // prepare the restart without asking
                 var restartPrepared = HelperFunctions.Restart();
-                if (!restartPrepared) MessageBoxAdv.Show(this, Languages.Configuration_MessageBox_RestartManually, Variables.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                if (!restartPrepared)
+                    MessageBoxAdv.Show(this, Languages.Configuration_MessageBox_RestartManually,
+                        Variables.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else
             {
                 // ask the user if they want to restart
-                var question = MessageBoxAdv.Show(this, Languages.Configuration_ProcessChanges_MessageBox5, Variables.MessageBoxTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                var question = MessageBoxAdv.Show(this, Languages.Configuration_ProcessChanges_MessageBox5,
+                    Variables.MessageBoxTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (question == DialogResult.Yes)
                 {
                     // prepare the restart
                     var restartPrepared = HelperFunctions.Restart();
-                    if (!restartPrepared) MessageBoxAdv.Show(this, Languages.Configuration_MessageBox_RestartManually, Variables.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    if (!restartPrepared)
+                        MessageBoxAdv.Show(this, Languages.Configuration_MessageBox_RestartManually,
+                            Variables.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
 
@@ -260,7 +322,8 @@ namespace HASS.Agent.Forms
             {
                 if (!SharedHelperFunctions.CheckHomeAssistantApiToken(hassApi))
                 {
-                    var q = MessageBoxAdv.Show(this, Languages.Configuration_CheckValues_MessageBox1, Variables.MessageBoxTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
+                    var q = MessageBoxAdv.Show(this, Languages.Configuration_CheckValues_MessageBox1,
+                        Variables.MessageBoxTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
                     if (q != DialogResult.Yes) return false;
                 }
             }
@@ -271,7 +334,8 @@ namespace HASS.Agent.Forms
             {
                 if (!SharedHelperFunctions.CheckHomeAssistantUri(hassUri))
                 {
-                    var q = MessageBoxAdv.Show(this, Languages.Configuration_CheckValues_MessageBox2, Variables.MessageBoxTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
+                    var q = MessageBoxAdv.Show(this, Languages.Configuration_CheckValues_MessageBox2,
+                        Variables.MessageBoxTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
                     if (q != DialogResult.Yes) return false;
                 }
             }
@@ -282,7 +346,8 @@ namespace HASS.Agent.Forms
             {
                 if (!SharedHelperFunctions.CheckMqttBrokerUri(mqttUri))
                 {
-                    var q = MessageBoxAdv.Show(this, Languages.Configuration_CheckValues_MessageBox3, Variables.MessageBoxTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
+                    var q = MessageBoxAdv.Show(this, Languages.Configuration_CheckValues_MessageBox3,
+                        Variables.MessageBoxTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
                     if (q != DialogResult.Yes) return false;
                 }
             }
@@ -298,28 +363,42 @@ namespace HASS.Agent.Forms
         {
             // general
             _general.TbDeviceName.Text = Variables.AppSettings.DeviceName;
-            _general.CbEnableDeviceNameSanitation.CheckState = Variables.AppSettings.SanitizeName ? CheckState.Checked : CheckState.Unchecked;
+            _general.CbEnableDeviceNameSanitation.CheckState =
+                Variables.AppSettings.SanitizeName ? CheckState.Checked : CheckState.Unchecked;
             _general.NumDisconnectGrace.Value = Variables.AppSettings.DisconnectedGracePeriodSeconds;
-            _general.CbEnableStateNotifications.CheckState = Variables.AppSettings.EnableStateNotifications ? CheckState.Checked : CheckState.Unchecked;
+            _general.CbEnableStateNotifications.CheckState = Variables.AppSettings.EnableStateNotifications
+                ? CheckState.Checked
+                : CheckState.Unchecked;
 
             // startup settings
             Task.Run(_startup.DetermineStartOnLoginStatus);
 
             // local api
             _localApi.NumLocalApiPort.Value = Variables.AppSettings.LocalApiPort;
-            _localApi.CbLocalApiActive.CheckState = Variables.AppSettings.LocalApiEnabled ? CheckState.Checked : CheckState.Unchecked;
+            _localApi.CbLocalApiActive.CheckState =
+                Variables.AppSettings.LocalApiEnabled ? CheckState.Checked : CheckState.Unchecked;
 
             // notifications
-            _notifications.CbAcceptNotifications.CheckState = Variables.AppSettings.NotificationsEnabled ? CheckState.Checked : CheckState.Unchecked;
-            _notifications.CbNotificationsIgnoreImageCertErrors.CheckState = Variables.AppSettings.NotificationsIgnoreImageCertificateErrors ? CheckState.Checked : CheckState.Unchecked;
-            _notifications.CbNotificationsOpenActionUri.CheckState = Variables.AppSettings.NotificationsOpenActionUri ? CheckState.Checked : CheckState.Unchecked;
+            _notifications.CbAcceptNotifications.CheckState = Variables.AppSettings.NotificationsEnabled
+                ? CheckState.Checked
+                : CheckState.Unchecked;
+            _notifications.CbNotificationsIgnoreImageCertErrors.CheckState =
+                Variables.AppSettings.NotificationsIgnoreImageCertificateErrors
+                    ? CheckState.Checked
+                    : CheckState.Unchecked;
+            _notifications.CbNotificationsOpenActionUri.CheckState = Variables.AppSettings.NotificationsOpenActionUri
+                ? CheckState.Checked
+                : CheckState.Unchecked;
 
             // hass settings
             _homeAssistantApi.TbHassIp.Text = Variables.AppSettings.HassUri;
             _homeAssistantApi.TbHassApiToken.Text = Variables.AppSettings.HassToken;
             _homeAssistantApi.TbHassClientCertificate.Text = Variables.AppSettings.HassClientCertificate;
-            _homeAssistantApi.CbHassAutoClientCertificate.CheckState = Variables.AppSettings.HassAutoClientCertificate ? CheckState.Checked : CheckState.Unchecked;
-            _homeAssistantApi.CbHassAllowUntrustedCertificates.CheckState = Variables.AppSettings.HassAllowUntrustedCertificates ? CheckState.Checked : CheckState.Unchecked;
+            _homeAssistantApi.CbHassAutoClientCertificate.CheckState = Variables.AppSettings.HassAutoClientCertificate
+                ? CheckState.Checked
+                : CheckState.Unchecked;
+            _homeAssistantApi.CbHassAllowUntrustedCertificates.CheckState =
+                Variables.AppSettings.HassAllowUntrustedCertificates ? CheckState.Checked : CheckState.Unchecked;
             if (Variables.AppSettings.HassAutoClientCertificate)
             {
                 _homeAssistantApi.TbHassClientCertificate.Text = string.Empty;
@@ -327,10 +406,13 @@ namespace HASS.Agent.Forms
             }
 
             // hotkey
-            _hotKey.CbEnableQuickActionsHotkey.CheckState = Variables.AppSettings.QuickActionsHotKeyEnabled ? CheckState.Checked : CheckState.Unchecked;
+            _hotKey.CbEnableQuickActionsHotkey.CheckState = Variables.AppSettings.QuickActionsHotKeyEnabled
+                ? CheckState.Checked
+                : CheckState.Unchecked;
 
             // mqtt
-            _mqtt.CbEnableMqtt.CheckState = Variables.AppSettings.MqttEnabled ? CheckState.Checked : CheckState.Unchecked;
+            _mqtt.CbEnableMqtt.CheckState =
+                Variables.AppSettings.MqttEnabled ? CheckState.Checked : CheckState.Unchecked;
             _mqtt.TbMqttAddress.Text = Variables.AppSettings.MqttAddress;
             _mqtt.NumMqttPort.Value = Variables.AppSettings.MqttPort;
             _mqtt.CbMqttTls.CheckState = Variables.AppSettings.MqttUseTls ? CheckState.Checked : CheckState.Unchecked;
@@ -340,15 +422,25 @@ namespace HASS.Agent.Forms
             _mqtt.TbMqttClientId.Text = Variables.AppSettings.MqttClientId;
             _mqtt.TbMqttRootCertificate.Text = Variables.AppSettings.MqttRootCertificate;
             _mqtt.TbMqttClientCertificate.Text = Variables.AppSettings.MqttClientCertificate;
-            _mqtt.CbAllowUntrustedCertificates.CheckState = Variables.AppSettings.MqttAllowUntrustedCertificates ? CheckState.Checked : CheckState.Unchecked;
-            _mqtt.CbUseRetainFlag.CheckState = Variables.AppSettings.MqttUseRetainFlag ? CheckState.Checked : CheckState.Unchecked;
-            _mqtt.CbUseWebSocket.CheckState = Variables.AppSettings.MqttUseWebSocket ? CheckState.Checked : CheckState.Unchecked;
-            _mqtt.CbIgnoreGracePeriod.CheckState = Variables.AppSettings.MqttIgnoreGracePeriod ? CheckState.Checked : CheckState.Unchecked;
+            _mqtt.CbAllowUntrustedCertificates.CheckState = Variables.AppSettings.MqttAllowUntrustedCertificates
+                ? CheckState.Checked
+                : CheckState.Unchecked;
+            _mqtt.CbUseRetainFlag.CheckState =
+                Variables.AppSettings.MqttUseRetainFlag ? CheckState.Checked : CheckState.Unchecked;
+            _mqtt.CbUseWebSocket.CheckState =
+                Variables.AppSettings.MqttUseWebSocket ? CheckState.Checked : CheckState.Unchecked;
+            _mqtt.CbIgnoreGracePeriod.CheckState = Variables.AppSettings.MqttIgnoreGracePeriod
+                ? CheckState.Checked
+                : CheckState.Unchecked;
 
             // updates
-            _updates.CbUpdates.CheckState = Variables.AppSettings.CheckForUpdates ? CheckState.Checked : CheckState.Unchecked;
-            _updates.CbBetaUpdates.CheckState = Variables.AppSettings.ShowBetaUpdates ? CheckState.Checked : CheckState.Unchecked;
-            _updates.CbExecuteUpdater.CheckState = Variables.AppSettings.EnableExecuteUpdateInstaller ? CheckState.Checked : CheckState.Unchecked;
+            _updates.CbUpdates.CheckState =
+                Variables.AppSettings.CheckForUpdates ? CheckState.Checked : CheckState.Unchecked;
+            _updates.CbBetaUpdates.CheckState =
+                Variables.AppSettings.ShowBetaUpdates ? CheckState.Checked : CheckState.Unchecked;
+            _updates.CbExecuteUpdater.CheckState = Variables.AppSettings.EnableExecuteUpdateInstaller
+                ? CheckState.Checked
+                : CheckState.Unchecked;
 
             // cache
             _localStorage.TbImageCacheLocation.Text = Variables.ImageCachePath;
@@ -359,7 +451,9 @@ namespace HASS.Agent.Forms
             _localStorage.NumWebViewRetention.Value = Variables.AppSettings.WebViewCacheRetentionDays;
 
             // logging
-            _logging.CbExtendedLogging.CheckState = SettingsManager.GetExtendedLoggingSetting() ? CheckState.Checked : CheckState.Unchecked;
+            _logging.CbExtendedLogging.CheckState = SettingsManager.GetExtendedLoggingSetting()
+                ? CheckState.Checked
+                : CheckState.Unchecked;
 
             // external tools
             _externalTools.TbExternalBrowserName.Text = Variables.AppSettings.BrowserName;
@@ -369,20 +463,31 @@ namespace HASS.Agent.Forms
             _externalTools.TbExternalExecutorBinary.Text = Variables.AppSettings.CustomExecutorBinary;
 
             // mediaplayer
-            _mediaPlayer.CbEnableMediaPlayer.CheckState = Variables.AppSettings.MediaPlayerEnabled ? CheckState.Checked : CheckState.Unchecked;
+            _mediaPlayer.CbEnableMediaPlayer.CheckState = Variables.AppSettings.MediaPlayerEnabled
+                ? CheckState.Checked
+                : CheckState.Unchecked;
 
             // tray icon
-            _trayIcon.CbUseModernIcon.CheckState = Variables.AppSettings.TrayIconUseModern ? CheckState.Checked : CheckState.Unchecked;
-            _trayIcon.CbDefaultMenu.CheckState = Variables.AppSettings.TrayIconShowDefaultMenu ? CheckState.Checked : CheckState.Unchecked;
-            _trayIcon.CbShowWebView.CheckState = Variables.AppSettings.TrayIconShowWebView ? CheckState.Checked : CheckState.Unchecked;
+            _trayIcon.CbUseModernIcon.CheckState =
+                Variables.AppSettings.TrayIconUseModern ? CheckState.Checked : CheckState.Unchecked;
+            _trayIcon.CbDefaultMenu.CheckState = Variables.AppSettings.TrayIconShowDefaultMenu
+                ? CheckState.Checked
+                : CheckState.Unchecked;
+            _trayIcon.CbShowWebView.CheckState =
+                Variables.AppSettings.TrayIconShowWebView ? CheckState.Checked : CheckState.Unchecked;
             _trayIcon.NumWebViewWidth.Value = Variables.AppSettings.TrayIconWebViewWidth;
             _trayIcon.NumWebViewHeight.Value = Variables.AppSettings.TrayIconWebViewHeight;
-            _trayIcon.SelectedScreen = Variables.AppSettings.TrayIconWebViewScreen; 
+            _trayIcon.SelectedScreen = Variables.AppSettings.TrayIconWebViewScreen;
             _trayIcon.TbWebViewUrl.Text = Variables.AppSettings.TrayIconWebViewUrl;
-            _trayIcon.CbWebViewKeepLoaded.CheckState = Variables.AppSettings.TrayIconWebViewBackgroundLoading ? CheckState.Checked : CheckState.Unchecked;
-            _trayIcon.CbWebViewShowMenuOnLeftClick.CheckState = Variables.AppSettings.TrayIconWebViewShowMenuOnLeftClick ? CheckState.Checked : CheckState.Unchecked;
+            _trayIcon.CbWebViewKeepLoaded.CheckState = Variables.AppSettings.TrayIconWebViewBackgroundLoading
+                ? CheckState.Checked
+                : CheckState.Unchecked;
+            _trayIcon.CbWebViewShowMenuOnLeftClick.CheckState = Variables.AppSettings.TrayIconWebViewShowMenuOnLeftClick
+                ? CheckState.Checked
+                : CheckState.Unchecked;
 
-            _nfc.CbEnableNfc.CheckState = Variables.AppSettings.NfcScanningEnabled ? CheckState.Checked : CheckState.Unchecked;
+            _nfc.CbEnableNfc.CheckState =
+                Variables.AppSettings.NfcScanningEnabled ? CheckState.Checked : CheckState.Unchecked;
 
             // done
             _initializing = false;
@@ -394,10 +499,13 @@ namespace HASS.Agent.Forms
         private async Task StoreSettingsAsync()
         {
             // general
-            var deviceName = string.IsNullOrEmpty(_general.TbDeviceName.Text) ? SharedHelperFunctions.GetSafeDeviceName() : _general.TbDeviceName.Text;
+            var deviceName = string.IsNullOrEmpty(_general.TbDeviceName.Text)
+                ? SharedHelperFunctions.GetSafeDeviceName()
+                : _general.TbDeviceName.Text;
             Variables.AppSettings.DeviceName = deviceName;
             Variables.AppSettings.SanitizeName = _general.CbEnableDeviceNameSanitation.CheckState == CheckState.Checked;
-            Variables.AppSettings.EnableStateNotifications = _general.CbEnableStateNotifications.CheckState == CheckState.Checked;
+            Variables.AppSettings.EnableStateNotifications =
+                _general.CbEnableStateNotifications.CheckState == CheckState.Checked;
 
             var uiLanguage = Variables.SupportedUILanguages.Find(x => x.DisplayName == _general.CbLanguage.Text);
             Variables.AppSettings.InterfaceLanguage = uiLanguage?.Name ?? "en";
@@ -409,32 +517,38 @@ namespace HASS.Agent.Forms
             Variables.AppSettings.LocalApiEnabled = _localApi.CbLocalApiActive.CheckState == CheckState.Checked;
 
             // notifications
-            Variables.AppSettings.NotificationsEnabled = _notifications.CbAcceptNotifications.CheckState == CheckState.Checked;
-            Variables.AppSettings.NotificationsIgnoreImageCertificateErrors = _notifications.CbNotificationsIgnoreImageCertErrors.CheckState == CheckState.Checked;
-            Variables.AppSettings.NotificationsOpenActionUri = _notifications.CbNotificationsOpenActionUri.CheckState == CheckState.Checked;    
+            Variables.AppSettings.NotificationsEnabled =
+                _notifications.CbAcceptNotifications.CheckState == CheckState.Checked;
+            Variables.AppSettings.NotificationsIgnoreImageCertificateErrors =
+                _notifications.CbNotificationsIgnoreImageCertErrors.CheckState == CheckState.Checked;
+            Variables.AppSettings.NotificationsOpenActionUri =
+                _notifications.CbNotificationsOpenActionUri.CheckState == CheckState.Checked;
 
             // hass settings
             Variables.AppSettings.HassUri = _homeAssistantApi.TbHassIp.Text;
             Variables.AppSettings.HassToken = _homeAssistantApi.TbHassApiToken.Text;
             Variables.AppSettings.HassClientCertificate = _homeAssistantApi.TbHassClientCertificate.Text;
-            Variables.AppSettings.HassAutoClientCertificate = _homeAssistantApi.CbHassAutoClientCertificate.CheckState == CheckState.Checked;
-            Variables.AppSettings.HassAllowUntrustedCertificates = _homeAssistantApi.CbHassAllowUntrustedCertificates.CheckState == CheckState.Checked;
+            Variables.AppSettings.HassAutoClientCertificate =
+                _homeAssistantApi.CbHassAutoClientCertificate.CheckState == CheckState.Checked;
+            Variables.AppSettings.HassAllowUntrustedCertificates =
+                _homeAssistantApi.CbHassAllowUntrustedCertificates.CheckState == CheckState.Checked;
 
             // hotkey config
-            Variables.AppSettings.QuickActionsHotKeyEnabled = _hotKey.CbEnableQuickActionsHotkey.CheckState == CheckState.Checked;
+            Variables.AppSettings.QuickActionsHotKeyEnabled =
+                _hotKey.CbEnableQuickActionsHotkey.CheckState == CheckState.Checked;
             if (Variables.AppSettings.QuickActionsHotKeyEnabled)
             {
                 // hotkey enabled, store and activate
-                Variables.QuickActionsHotKey = new Hotkey(_hotKey.TbQuickActionsHotkey.Text);
+                Variables.QuickActionsHotKey = _hotKey.TbQuickActionsHotkey.Text;
                 Variables.AppSettings.QuickActionsHotKey = Variables.QuickActionsHotKey.ToString();
-                Variables.HotKeyManager.QuickActionsHotKeyChanged(_previousHotkey);
+                Variables.InternalHotKeyManager.QuickActionsHotKeyChanged(_previousHotkey);
             }
             else
             {
                 // hotkey disabled, remove and deactivate
                 Variables.QuickActionsHotKey = null;
                 Variables.AppSettings.QuickActionsHotKey = string.Empty;
-                Variables.HotKeyManager.QuickActionsHotKeyChanged(_previousHotkey, false);
+                Variables.InternalHotKeyManager.QuickActionsHotKeyChanged(_previousHotkey, false);
             }
 
             // mqtt
@@ -448,7 +562,8 @@ namespace HASS.Agent.Forms
             Variables.AppSettings.MqttClientId = _mqtt.TbMqttClientId.Text;
             Variables.AppSettings.MqttRootCertificate = _mqtt.TbMqttRootCertificate.Text;
             Variables.AppSettings.MqttClientCertificate = _mqtt.TbMqttClientCertificate.Text;
-            Variables.AppSettings.MqttAllowUntrustedCertificates = _mqtt.CbAllowUntrustedCertificates.CheckState == CheckState.Checked;
+            Variables.AppSettings.MqttAllowUntrustedCertificates =
+                _mqtt.CbAllowUntrustedCertificates.CheckState == CheckState.Checked;
             Variables.AppSettings.MqttUseRetainFlag = _mqtt.CbUseRetainFlag.CheckState == CheckState.Checked;
             Variables.AppSettings.MqttUseWebSocket = _mqtt.CbUseWebSocket.CheckState == CheckState.Checked;
             Variables.AppSettings.MqttIgnoreGracePeriod = _mqtt.CbIgnoreGracePeriod.CheckState == CheckState.Checked;
@@ -459,7 +574,8 @@ namespace HASS.Agent.Forms
             // updates
             Variables.AppSettings.CheckForUpdates = _updates.CbUpdates.CheckState == CheckState.Checked;
             Variables.AppSettings.ShowBetaUpdates = _updates.CbBetaUpdates.CheckState == CheckState.Checked;
-            Variables.AppSettings.EnableExecuteUpdateInstaller = _updates.CbExecuteUpdater.CheckState == CheckState.Checked;
+            Variables.AppSettings.EnableExecuteUpdateInstaller =
+                _updates.CbExecuteUpdater.CheckState == CheckState.Checked;
 
             // cache
             Variables.AppSettings.ImageCacheRetentionDays = (int)_localStorage.NumImageRetention.Value;
@@ -480,7 +596,8 @@ namespace HASS.Agent.Forms
             AgentSharedBase.SetCustomExecutorBinary(Variables.AppSettings.CustomExecutorBinary);
 
             // mediaplayer
-            Variables.AppSettings.MediaPlayerEnabled = _mediaPlayer.CbEnableMediaPlayer.CheckState == CheckState.Checked;
+            Variables.AppSettings.MediaPlayerEnabled =
+                _mediaPlayer.CbEnableMediaPlayer.CheckState == CheckState.Checked;
 
             // tray icon
             Variables.AppSettings.TrayIconUseModern = _trayIcon.CbUseModernIcon.CheckState == CheckState.Checked;
@@ -490,12 +607,16 @@ namespace HASS.Agent.Forms
             Variables.AppSettings.TrayIconWebViewHeight = (int)_trayIcon.NumWebViewHeight.Value;
             Variables.AppSettings.TrayIconWebViewScreen = _trayIcon.NumWebViewScreen.SelectedIndex;
             Variables.AppSettings.TrayIconWebViewUrl = _trayIcon.TbWebViewUrl.Text;
-            Variables.AppSettings.TrayIconWebViewBackgroundLoading = _trayIcon.CbWebViewKeepLoaded.CheckState == CheckState.Checked;
-            Variables.AppSettings.TrayIconWebViewShowMenuOnLeftClick = _trayIcon.CbWebViewShowMenuOnLeftClick.CheckState == CheckState.Checked;
+            Variables.AppSettings.TrayIconWebViewBackgroundLoading =
+                _trayIcon.CbWebViewKeepLoaded.CheckState == CheckState.Checked;
+            Variables.AppSettings.TrayIconWebViewShowMenuOnLeftClick =
+                _trayIcon.CbWebViewShowMenuOnLeftClick.CheckState == CheckState.Checked;
 
             // nfc
             Variables.AppSettings.NfcScanningEnabled = _nfc.CbEnableNfc.CheckState == CheckState.Checked;
-            Variables.AppSettings.NfcSelectedScanner = _nfc.CbNfcScanner.SelectedItem == null ? string.Empty : _nfc.CbNfcScanner.SelectedItem.ToString();
+            Variables.AppSettings.NfcSelectedScanner = _nfc.CbNfcScanner.SelectedItem == null
+                ? string.Empty
+                : _nfc.CbNfcScanner.SelectedItem.ToString();
 
             // save to file
             SettingsManager.StoreAppSettings();
@@ -532,7 +653,7 @@ namespace HASS.Agent.Forms
 
         private void BtnClearHotKey_Click(object sender, EventArgs e)
         {
-            _hotKey.TbQuickActionsHotkey.Text = _hotkeySelector.EmptyHotkeyText;
+            _hotKey.TbQuickActionsHotkey.Text = string.Empty;
         }
 
         private void Configuration_ResizeEnd(object sender, EventArgs e)

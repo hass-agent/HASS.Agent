@@ -163,7 +163,7 @@ namespace HASS.Agent.Forms.QuickActions
             StoredQuickActions.Store();
 
             // reload hotkey bindings
-            Variables.HotKeyManager.ReloadQuickActionsHotKeys();
+            Variables.InternalHotKeyManager.ReloadQuickActionsHotKeys();
 
             // done
             Close();

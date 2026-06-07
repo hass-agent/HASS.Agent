@@ -6,17 +6,18 @@ using HASS.Agent.Resources.Localization;
 using HASS.Agent.Shared.Enums;
 using HASS.Agent.Shared.Functions;
 using Syncfusion.Windows.Forms;
-using WK.Libraries.HotkeyListenerNS;
 
 namespace HASS.Agent.Forms.QuickActions
 {
     public partial class QuickActionsMod : MetroForm
     {
-        private readonly HotkeySelector _hotkeySelector = new();
         internal readonly QuickAction QuickAction;
 
         private readonly Dictionary<int, string> _hassDomainEntityTypes = new();
         private readonly Dictionary<int, string> _hassActionEntityTypes = new();
+        
+        private Keys _key = Keys.None;
+        private Keys _modifiers = Keys.None;
 
         public QuickActionsMod(QuickAction quickAction)
         {
@@ -90,15 +91,17 @@ namespace HASS.Agent.Forms.QuickActions
             }
             LvDomain.EndUpdate();
 
+            TbHotkey.ReadOnly = true;
+            TbHotkey.KeyDown += TbQuickActionsHotkey_KeyDown;
+            
             // load or new quickaction?
             if (QuickAction.Id == Guid.Empty)
             {
                 // new quickaction
                 Text = Languages.QuickActionsMod_Title_New;
                 QuickAction.Id = Guid.NewGuid();
-
-                _hotkeySelector.Enable(TbHotkey);
-                TbHotkey.Text = _hotkeySelector.EmptyHotkeyText;
+                
+                TbHotkey.Text = string.Empty;
 
                 LvDomain.Items[0].Selected = true;
                 if (CbEntity.Items.Count > 0) CbEntity.SelectedIndex = 0;
@@ -211,12 +214,7 @@ namespace HASS.Agent.Forms.QuickActions
             if (!string.IsNullOrWhiteSpace(TbDescription.Text)) TbDescription.SelectionStart = TbDescription.Text.Length;
 
             // load the hotkey
-            if (!string.IsNullOrEmpty(QuickAction.HotKey)) _hotkeySelector.Enable(TbHotkey, new Hotkey(QuickAction.HotKey));
-            else
-            {
-                _hotkeySelector.Enable(TbHotkey);
-                TbHotkey.Text = _hotkeySelector.EmptyHotkeyText;
-            }
+            TbHotkey.Text = !string.IsNullOrEmpty(QuickAction.HotKey) ? QuickAction.HotKey : string.Empty;
         }
 
         /// <summary>
@@ -426,16 +424,13 @@ namespace HASS.Agent.Forms.QuickActions
 
         private void QuickActionsMod_FormClosing(object sender, FormClosingEventArgs e)
         {
-            // stop and dispose selector
-            _hotkeySelector?.Disable(TbHotkey);
-            _hotkeySelector?.Dispose();
+            // clean selector
+            TbHotkey.KeyDown -= TbQuickActionsHotkey_KeyDown;
         }
 
         private void TbHotkey_TextChanged(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(TbHotkey.Text)
-                || TbHotkey.Text == _hotkeySelector?.EmptyHotkeyText
-                || TbHotkey.Text == _hotkeySelector?.InvalidHotkeyText)
+            if (string.IsNullOrWhiteSpace(TbHotkey.Text))
             {
                 CbEnableHotkey.CheckState = CheckState.Unchecked;
                 return;
@@ -480,6 +475,54 @@ namespace HASS.Agent.Forms.QuickActions
         {
             // hide the pesky horizontal scrollbar
             ListViewTheme.ShowScrollBar(LvDomain.Handle, ListViewTheme.SB_HORZ, false);
+        }
+        
+        private void TbQuickActionsHotkey_KeyDown(object sender, KeyEventArgs e)
+        {
+            e.SuppressKeyPress = true;
+
+            var key = e.KeyCode;
+
+            if (key is Keys.LControlKey or Keys.RControlKey
+                or Keys.LShiftKey or Keys.RShiftKey
+                or Keys.LWin or Keys.RWin
+                or Keys.Alt)
+            {
+                key = Keys.None;
+            }
+
+            if (key == Keys.Escape)
+            {
+                _key = Keys.None;
+                _modifiers = Keys.None;
+                TbHotkey.Text = string.Empty;
+
+                return;
+            }
+            
+            _key = key;
+            TbHotkey.Text = FormatHotkey(_key, e.Modifiers);
+        }
+        
+        private string FormatHotkey(Keys key, Keys modifiers)
+        {
+            var parts = new List<string>();
+            if ((modifiers & Keys.Shift) != 0)
+            {
+                parts.Add(nameof(Keys.Shift));
+            }
+
+            if ((modifiers & Keys.Control) != 0)
+            {
+                parts.Add(nameof(Keys.Control));
+            }
+
+            if ((modifiers & Keys.Alt) != 0)
+            {
+                parts.Add(nameof(Keys.Alt));
+            }
+
+            return parts.Count > 0 ? string.Join(", ", parts) + " + " + key : key.ToString();
         }
     }
 }

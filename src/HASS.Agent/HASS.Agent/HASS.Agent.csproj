@@ -17,7 +17,7 @@
     <PlatformTarget>anycpu</PlatformTarget>
     <Platforms>x64;x86;AnyCPU</Platforms>
     <DebugType>full</DebugType>
-    <Version>2.2.0</Version>
+    <Version>2.2.1</Version>
     <Company>HASS.Agent Team</Company>
     <Authors>HASS.Agent Team</Authors>
     <Description>Windows-based client for Home Assistant. Provides notifications, quick actions, commands, sensors and more. </Description>
@@ -27,8 +27,8 @@
     <RepositoryUrl>https://github.com/hass-agent/HASS.Agent</RepositoryUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <ApplicationManifest>app.manifest</ApplicationManifest>
-    <AssemblyVersion>2.2.0</AssemblyVersion>
-    <FileVersion>2.2.0</FileVersion>
+    <AssemblyVersion>2.2.1</AssemblyVersion>
+    <FileVersion>2.2.1</FileVersion>
     <RootNamespace>HASS.Agent</RootNamespace>
     <WindowsPackageType>None</WindowsPackageType>
     <EnableUnsafeBinaryFormatterSerialization>true</EnableUnsafeBinaryFormatterSerialization>
@@ -55,6 +55,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Amadeo.HADotNet.Core" Version="0.2.1" />
     <PackageReference Include="Grapevine" Version="5.0.2" />
     <PackageReference Include="Grpc.Tools" Version="2.72.0">
       <PrivateAssets>all</PrivateAssets>
@@ -67,11 +68,13 @@
     <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.3296.44">
       <Aliases></Aliases>
     </PackageReference>
+    <PackageReference Include="Microsoft.Windows.CsWinRT" Version="2.2.0" />
     <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.7.250606001" />
     <PackageReference Include="MQTTnet" Version="4.3.3.952" />
     <PackageReference Include="MQTTnet.Extensions.ManagedClient" Version="4.3.3.952" />
     <PackageReference Include="NdefLibrary" Version="4.1.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="NHotkey.WindowsForms" Version="4.0.0" />
     <PackageReference Include="Octokit" Version="14.0.0" />
     <PackageReference Include="Serilog" Version="4.3.0" />
     <PackageReference Include="Serilog.Extensions.Logging" Version="9.0.2" />
@@ -87,15 +90,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\HASS.Agent.Shared\HASS.Agent.Shared.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Reference Include="HADotNet.Core">
-      <HintPath>Libraries\HADotNet.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="HotkeyListener">
-      <HintPath>Libraries\HotkeyListener.dll</HintPath>
-    </Reference>
   </ItemGroup>
 
   <ItemGroup>
