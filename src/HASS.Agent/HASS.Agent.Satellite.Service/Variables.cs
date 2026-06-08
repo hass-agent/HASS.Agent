@@ -1,4 +1,4 @@
-﻿using System.Reflection;
+using System.Reflection;
 using GrpcDotNetNamedPipes;
 using HASS.Agent.Shared.Models.Config.Service;
 using HASS.Agent.Shared.Models.HomeAssistant;
@@ -45,7 +45,9 @@ namespace HASS.Agent.Satellite.Service
         internal static string ServiceSettingsFile { get; } = Path.Combine(ConfigPath, "servicesettings.json");
         internal static string ServiceMqttSettingsFile { get; } = Path.Combine(ConfigPath, "servicemqttsettings.json");
         internal static string CommandsFile { get; } = Path.Combine(ConfigPath, "commands.json");
+        internal static string ServiceCommandsFile { get; } = Path.Combine(ConfigPath, "servicecommands.json");
         internal static string SensorsFile { get; } = Path.Combine(ConfigPath, "sensors.json");
+        internal static string ServiceSensorsFile { get; } = Path.Combine(ConfigPath, "servicesensors.json");
 
         /// <summary>
         /// Internal state
@@ -67,7 +69,9 @@ namespace HASS.Agent.Satellite.Service
         internal static ServiceSettings? ServiceSettings { get; set; } = new();
         internal static ServiceMqttSettings? ServiceMqttSettings { get; set; } = new();
         internal static List<AbstractCommand> Commands { get; set; } = new();
+        internal static string LoadedCommandsFile { get; set; } = string.Empty;
         internal static List<AbstractSingleValueSensor> SingleValueSensors { get; set; } = new();
         internal static List<AbstractMultiValueSensor> MultiValueSensors { get; set; } = new();
+        internal static string LoadedSensorsFile { get; set; } = string.Empty;
     }
 }

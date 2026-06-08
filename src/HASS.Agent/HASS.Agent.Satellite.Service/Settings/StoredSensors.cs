@@ -31,7 +31,11 @@ namespace HASS.Agent.Satellite.Service.Settings
                 Variables.MultiValueSensors = new List<AbstractMultiValueSensor>();
 
                 // check for existing file
-                if (!File.Exists(Variables.SensorsFile))
+                Variables.LoadedSensorsFile = File.Exists(Variables.ServiceSensorsFile)
+                    ? Variables.ServiceSensorsFile
+                    : Variables.SensorsFile;
+
+                if (!File.Exists(Variables.LoadedSensorsFile))
                 {
                     // none yet
                     Log.Information("[SETTINGS_SENSORS] Config not found, no entities loaded");
@@ -39,7 +43,7 @@ namespace HASS.Agent.Satellite.Service.Settings
                 }
 
                 // read the content
-                var sensorsRaw = await File.ReadAllTextAsync(Variables.SensorsFile);
+                var sensorsRaw = await File.ReadAllTextAsync(Variables.LoadedSensorsFile);
                 if (string.IsNullOrWhiteSpace(sensorsRaw))
                 {
                     Log.Information("[SETTINGS_SENSORS] Config is empty, no entities loaded");
@@ -504,7 +508,7 @@ namespace HASS.Agent.Satellite.Service.Settings
 
                 // serialize to file
                 var sensors = JsonConvert.SerializeObject(configuredSensors, Formatting.Indented);
-                File.WriteAllText(Variables.SensorsFile, sensors);
+                File.WriteAllText(Variables.LoadedSensorsFile ?? Variables.SensorsFile, sensors);
 
                 // done
                 Log.Information("[SETTINGS_SENSORS] Stored {count} entities", (Variables.SingleValueSensors.Count + Variables.MultiValueSensors.Count));

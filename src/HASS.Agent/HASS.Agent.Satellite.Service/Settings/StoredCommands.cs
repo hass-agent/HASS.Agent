@@ -28,7 +28,11 @@ namespace HASS.Agent.Satellite.Service.Settings
                 Variables.Commands = new List<AbstractCommand>();
 
                 // check for existing file
-                if (!File.Exists(Variables.CommandsFile))
+                Variables.LoadedCommandsFile = File.Exists(Variables.ServiceCommandsFile)
+                    ? Variables.ServiceCommandsFile
+                    : Variables.CommandsFile;
+
+                if (!File.Exists(Variables.LoadedCommandsFile))
                 {
                     // none yet
                     Log.Information("[SETTINGS_COMMANDS] Config not found, no entities loaded");
@@ -36,7 +40,7 @@ namespace HASS.Agent.Satellite.Service.Settings
                 }
 
                 // read the content
-                var commandsRaw = await File.ReadAllTextAsync(Variables.CommandsFile);
+                var commandsRaw = await File.ReadAllTextAsync(Variables.LoadedCommandsFile);
                 if (string.IsNullOrWhiteSpace(commandsRaw))
                 {
                     Log.Information("[SETTINGS_COMMANDS] Config is empty, no entities loaded");
@@ -265,7 +269,7 @@ namespace HASS.Agent.Satellite.Service.Settings
 
                 // serialize to file
                 var commands = JsonConvert.SerializeObject(configuredCommands, Formatting.Indented);
-                File.WriteAllText(Variables.CommandsFile, commands);
+                File.WriteAllText(Variables.LoadedCommandsFile ?? Variables.CommandsFile, commands);
 
                 // done
                 Log.Information("[SETTINGS_COMMANDS] Stored {count} entities", Variables.Commands.Count);
