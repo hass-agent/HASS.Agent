@@ -22,9 +22,9 @@ public class GpuLoadSensorTests
         Assert.That(sensor.GpuId, Is.EqualTo("*"));
     }
 
-    [TestCase("0")]
-    [TestCase("1")]
-    [TestCase("12")]
+    [TestCase("0x00000000_0x0000c8f10")]
+    [TestCase("0x00000000_0x000183dd")]
+    [TestCase("0x00000000_0x0000c5f2")]
     public void Constructor_SpecificGpuId_IsPreserved(string gpuId)
     {
         var sensor = new GpuLoadSensor(gpuId);
@@ -44,7 +44,7 @@ public class GpuLoadSensorTests
     public void SelectGpuUsage_AllGpusSelected_AveragesInsteadOfSumming()
     {
         // this is the actual bug being fixed: two gpus at 20% and 80% load should report 50%, not 100%
-        var perGpuUsage = new Dictionary<string, float> { ["0"] = 20f, ["1"] = 80f };
+        var perGpuUsage = new Dictionary<string, float> { ["0x00000000_0x0000c8f10"] = 20f, ["0x00000000_0x000183dd"] = 80f };
 
         var result = GpuLoadSensor.SelectGpuUsage(perGpuUsage, "*", useSpecificGpu: false);
 
