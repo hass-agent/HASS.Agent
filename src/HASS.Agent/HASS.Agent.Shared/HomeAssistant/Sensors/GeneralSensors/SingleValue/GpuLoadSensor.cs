@@ -15,7 +15,14 @@ namespace HASS.Agent.Shared.HomeAssistant.Sensors.GeneralSensors.SingleValue;
 /// </summary>
 public class GpuLoadSensor : AbstractSingleValueSensor
 {
+    /// <summary>
+    /// The default entity name and friendly name for this sensor
+    /// </summary>
     private const string DefaultName = "gpuload";
+
+    /// <summary>
+    /// The special value for <see cref="GpuId"/> that indicates the sensor should average across all detected GPUs, rather than reporting on a specific adapter
+    /// </summary>
     private const string AllGpus = "*";
 
     /// <summary>
@@ -23,19 +30,37 @@ public class GpuLoadSensor : AbstractSingleValueSensor
     /// </summary>
     private static readonly Regex AdapterLuidRegex = new(@"luid_(0x[0-9A-Fa-f]+_0x[0-9A-Fa-f]+)", RegexOptions.Compiled);
 
+    /// <summary>
+    /// The adapter luid (eg. '0x00000000_0x00016e08') to report on, or '*' to average across every detected gpu
+    /// </summary>
     public string GpuId { get; protected set; }
+
+    /// <summary>
+    /// Indicates whether the sensor is reporting on a specific adapter (true) or averaging across all detected adapters (false)
+    /// </summary>
     private readonly bool _useSpecificGpu;
+
     /// <summary>
     /// The cached 'GPU Engine' counters.
     /// </summary>
     private readonly Dictionary<string, PerformanceCounter> _engineCounterCache = new();
 
+    /// <summary>
+    /// Creates a new gpu load sensor
+    /// </summary>
+    /// <param name="gpuId">The adapter luid (eg. '0x00000000_0x00016e08') to report on, or '*' to average across every detected gpu</param>
+    /// <param name="updateInterval">How often, in seconds, the sensor's value is refreshed</param>
+    /// <param name="entityName">The entity's unique name, used in its mqtt topic</param>
+    /// <param name="name">The entity's friendly (display) name</param>
+    /// <param name="id">The entity's unique id</param>
+    /// <param name="advancedSettings">Serialized advanced settings (device class, unit of measurement, state class) overriding the auto discovery config</param>
     public GpuLoadSensor(string gpuId = AllGpus, int? updateInterval = null, string entityName = DefaultName, string name = DefaultName, string id = default, string advancedSettings = default) : base(entityName ?? DefaultName, name ?? null, updateInterval ?? 30, id, advancedSettings: advancedSettings)
     {
         GpuId = string.IsNullOrEmpty(gpuId) ? AllGpus : gpuId;
         _useSpecificGpu = GpuId != AllGpus;
     }
 
+    ///<inheritdoc/>
     public override DiscoveryConfigModel GetAutoDiscoveryConfig()
     {
         if (Variables.MqttManager == null)
@@ -58,13 +83,19 @@ public class GpuLoadSensor : AbstractSingleValueSensor
         });
     }
 
+    ///<inheritdoc/>
     public override string GetState()
     {
         return GetGPUUsage().ToString("0.##", CultureInfo.InvariantCulture);
     }
 
+    ///<inheritdoc/>
     public override string GetAttributes() => string.Empty;
 
+    /// <summary>
+    /// Returns the current GPU usage, either for a specific adapter (if <see cref="GpuId"/> is set to a luid) or averaged across all detected adapters (if <see cref="GpuId"/> is set to '*')
+    /// </summary>
+    /// <returns>The current GPU usage as a float value</returns>
     public float GetGPUUsage()
     {
         try
