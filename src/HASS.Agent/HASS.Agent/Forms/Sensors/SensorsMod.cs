@@ -82,7 +82,7 @@ namespace HASS.Agent.Forms.Sensors
             LvSensors.DrawColumnHeader += ListViewTheme.DrawColumnHeader;
         }
 
-        private void BindComboBoxTheme() => CbNetworkCard.DrawItem += ComboBoxTheme.DrawDictionaryStringStringItem;
+        private void BindComboBoxTheme() => CbSetting1.DrawItem += ComboBoxTheme.DrawDictionaryStringStringItem;
 
         private void SensorMod_Load(object sender, EventArgs e)
         {
@@ -120,7 +120,7 @@ namespace HASS.Agent.Forms.Sensors
             CbIgnoreAvailability.CheckedChanged += CbIgnoreAvailability_CheckedChanged;
 
             // load in gui
-            CbNetworkCard.DataSource = new BindingSource(_networkCards, null);
+            CbSetting1.DataSource = new BindingSource(_networkCards, null);
 
             // load or set sensor
             if (Sensor.Id == Guid.Empty)
@@ -220,17 +220,17 @@ namespace HASS.Agent.Forms.Sensors
 
                 case SensorType.NetworkSensors:
                     if (_networkCards.ContainsKey(Sensor.Query))
-                        CbNetworkCard.SelectedItem = new KeyValuePair<string, string>(Sensor.Query, _networkCards[Sensor.Query]);
+                        CbSetting1.SelectedItem = new KeyValuePair<string, string>(Sensor.Query, _networkCards[Sensor.Query]);
                     break;
 
                 case SensorType.GpuLoadSensor:
                     if (_gpuDevices.ContainsKey(Sensor.Query))
-                        CbNetworkCard.SelectedItem = new KeyValuePair<string, string>(Sensor.Query, _gpuDevices[Sensor.Query]);
+                        CbSetting1.SelectedItem = new KeyValuePair<string, string>(Sensor.Query, _gpuDevices[Sensor.Query]);
                     break;
 
                 case SensorType.InternalDeviceSensor:
                     if (_internalSensors.ContainsKey(Sensor.Query))
-                        CbNetworkCard.SelectedItem = new KeyValuePair<string, string>(Sensor.Query, _internalSensors[Sensor.Query]);
+                        CbSetting1.SelectedItem = new KeyValuePair<string, string>(Sensor.Query, _internalSensors[Sensor.Query]);
                     break;
 
                 case SensorType.WindowStateSensor:
@@ -324,17 +324,17 @@ namespace HASS.Agent.Forms.Sensors
                     break;
 
                 case SensorType.NetworkSensors:
-                    CbNetworkCard.DataSource = new BindingSource(_networkCards, null);
+                    CbSetting1.DataSource = new BindingSource(_networkCards, null);
                     SetNetworkGui();
                     break;
 
                 case SensorType.GpuLoadSensor:
-                    CbNetworkCard.DataSource = new BindingSource(_gpuDevices, null);
+                    CbSetting1.DataSource = new BindingSource(_gpuDevices, null);
                     SetGpuGui();
                     break;
 
                 case SensorType.InternalDeviceSensor:
-                    CbNetworkCard.DataSource = new BindingSource(_internalSensors, null);
+                    CbSetting1.DataSource = new BindingSource(_internalSensors, null);
                     SetInternalSensorGui();
                     break;
 
@@ -514,7 +514,7 @@ namespace HASS.Agent.Forms.Sensors
                 LblSetting1.Text = Languages.SensorsMod_LblSetting1_Network;
                 LblSetting1.Visible = true;
 
-                CbNetworkCard.Visible = true;
+                CbSetting1.Visible = true;
             }));
         }
 
@@ -530,7 +530,7 @@ namespace HASS.Agent.Forms.Sensors
                 LblSetting1.Text = Languages.SensorsMod_LblSetting1_Gpu;
                 LblSetting1.Visible = true;
 
-                CbNetworkCard.Visible = true;
+                CbSetting1.Visible = true;
             }));
         }
 
@@ -546,7 +546,7 @@ namespace HASS.Agent.Forms.Sensors
                 LblSetting1.Text = Languages.SensorsMod_LblSetting1_InternalSensor;
                 LblSetting1.Visible = true;
 
-                CbNetworkCard.Visible = true;
+                CbSetting1.Visible = true;
             }));
         }
 
@@ -594,7 +594,7 @@ namespace HASS.Agent.Forms.Sensors
             {
                 LblSetting1.Visible = false;
 
-                CbNetworkCard.Visible = false;
+                CbSetting1.Visible = false;
 
                 TbSetting1.Text = string.Empty;
                 TbSetting1.Visible = false;
@@ -813,30 +813,30 @@ namespace HASS.Agent.Forms.Sensors
 
                 case SensorType.NetworkSensors:
                     Sensor.Query = "*";
-                    if (CbNetworkCard.SelectedItem != null)
+                    if (CbSetting1.SelectedItem != null)
                     {
-                        var item = (KeyValuePair<string, string>)CbNetworkCard.SelectedItem;
+                        var item = (KeyValuePair<string, string>)CbSetting1.SelectedItem;
                         Sensor.Query = item.Key;
                     }
                     break;
 
                 case SensorType.GpuLoadSensor:
                     Sensor.Query = "*";
-                    if (CbNetworkCard.SelectedItem != null)
+                    if (CbSetting1.SelectedItem != null)
                     {
-                        var item = (KeyValuePair<string, string>)CbNetworkCard.SelectedItem;
+                        var item = (KeyValuePair<string, string>)CbSetting1.SelectedItem;
                         Sensor.Query = item.Key;
                     }
                     break;
 
                 case SensorType.InternalDeviceSensor:
-                    if (CbNetworkCard.SelectedItem != null)
+                    if (CbSetting1.SelectedItem != null)
                     {
-                        var item = (KeyValuePair<string, string>)CbNetworkCard.SelectedItem;
+                        var item = (KeyValuePair<string, string>)CbSetting1.SelectedItem;
                         if (item.Value == Languages.SensorsMod_None)
                         {
                             MessageBoxAdv.Show(this, Languages.SensorsMod_BtnStore_MessageBox1, Variables.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            ActiveControl = CbNetworkCard;
+                            ActiveControl = CbSetting1;
                             return;
                         }
 
