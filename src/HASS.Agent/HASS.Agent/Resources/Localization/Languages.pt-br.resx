@@ -2216,7 +2216,7 @@ Certifique-se de que os serviços de localização do Windows estejam ativados!
 Dependendo da sua versão do Windows, isso pode ser encontrado no novo painel de controle -&gt; 'privacidade e segurança' -&gt; 'localização'.</value>
   </data>
   <data name="SensorsManager_GpuLoadSensorDescription" xml:space="preserve">
-    <value>Fornece a carga atual da GPU como uma porcentagem.</value>
+    <value>Fornece a carga atual da GPU selecionada como uma porcentagem, ou a carga média de todas as GPUs.</value>
   </data>
   <data name="SensorsManager_GpuTemperatureSensorDescription" xml:space="preserve">
     <value>NOTA: Este sensor não está a funcionar.
@@ -2412,6 +2412,9 @@ Essa é uma solicitação cara, portanto, o intervalo recomendado é de 15 minut
   </data>
   <data name="SensorsMod_LblSetting1_Category" xml:space="preserve">
     <value>categoria</value>
+  </data>
+  <data name="SensorsMod_LblSetting1_Gpu" xml:space="preserve">
+    <value>Placa de vídeo</value>
   </data>
   <data name="SensorsMod_LblSetting1_Network" xml:space="preserve">
     <value>placa de rede</value>

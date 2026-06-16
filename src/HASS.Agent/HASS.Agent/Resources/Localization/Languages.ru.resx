@@ -1844,6 +1844,9 @@ Home Assistant version: {0}</value>
   <data name="SensorsMod_LblSetting1_Category" xml:space="preserve">
     <value>категория</value>
   </data>
+  <data name="SensorsMod_LblSetting1_Gpu" xml:space="preserve">
+    <value>Видеокарта</value>
+  </data>
   <data name="SensorsMod_LblSetting2_Counter" xml:space="preserve">
     <value>счетчик</value>
   </data>
@@ -2115,7 +2118,7 @@ Home Assistant version: {0}</value>
     <value>Фиктивный датчик для целей тестирования отправляет случайное целое значение в диапазоне от 0 до 100.</value>
   </data>
   <data name="SensorsManager_GpuLoadSensorDescription" xml:space="preserve">
-    <value>Показывает текущую загрузку первого графического процессора в процентах.</value>
+    <value>Показывает текущую загрузку выбранного графического процессора в процентах или среднюю загрузку всех графических процессоров.</value>
   </data>
   <data name="SensorsManager_GpuTemperatureSensorDescription" xml:space="preserve">
     <value>ПРИМЕЧАНИЕ: Это неработающий датчик.
