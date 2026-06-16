@@ -63,20 +63,27 @@ public class GpuLoadSensor : AbstractSingleValueSensor
     {
         try
         {
-            var perGpuUsage = GetPerGpuUsage();
-            if (perGpuUsage.Count == 0)
-                return 0;
-
-            if (_useSpecificGpu)
-                return perGpuUsage.TryGetValue(GpuId, out var usage) ? usage : 0;
-
-            // 'all' selected: average across every detected gpu, instead of summing them together
-            return perGpuUsage.Values.Average();
+            return SelectGpuUsage(GetPerGpuUsage(), GpuId, _useSpecificGpu);
         }
         catch
         {
             return 0;
         }
+    }
+
+    /// <summary>
+    /// Pure selection logic: picks a single GPU's usage, or averages across all of them when none is specified
+    /// </summary>
+    internal static float SelectGpuUsage(IReadOnlyDictionary<string, float> perGpuUsage, string gpuId, bool useSpecificGpu)
+    {
+        if (perGpuUsage.Count == 0)
+            return 0;
+
+        if (useSpecificGpu)
+            return perGpuUsage.TryGetValue(gpuId, out var usage) ? usage : 0;
+
+        // 'all' selected: average across every detected gpu, instead of summing them together
+        return perGpuUsage.Values.Average();
     }
 
     /// <summary>
@@ -102,7 +109,7 @@ public class GpuLoadSensor : AbstractSingleValueSensor
     /// <summary>
     /// Extracts the physical adapter index (the 'n' in 'phys_n') from a GPU Engine counter instance name
     /// </summary>
-    private static string GetPhysicalGpuIndex(string instanceName)
+    internal static string GetPhysicalGpuIndex(string instanceName)
     {
         var match = PhysicalGpuIndexRegex.Match(instanceName);
         return match.Success ? match.Groups[1].Value : "0";
@@ -113,8 +120,6 @@ public class GpuLoadSensor : AbstractSingleValueSensor
     /// </summary>
     public static Dictionary<string, string> GetAvailableGpus()
     {
-        var gpus = new Dictionary<string, string>();
-
         try
         {
             var category = new PerformanceCounterCategory("GPU Engine");
@@ -124,18 +129,27 @@ public class GpuLoadSensor : AbstractSingleValueSensor
                 .Distinct()
                 .OrderBy(x => int.TryParse(x, out var parsed) ? parsed : int.MaxValue);
 
-            var gpuNames = GetGpuNamesByIndex();
-
-            foreach (var physicalIndex in physicalIndexes)
-            {
-                gpus[physicalIndex] = gpuNames.TryGetValue(physicalIndex, out var gpuName) && !string.IsNullOrWhiteSpace(gpuName)
-                    ? gpuName
-                    : $"GPU {physicalIndex}";
-            }
+            return BuildGpuLabels(physicalIndexes, GetGpuNamesByIndex());
         }
         catch
         {
             // best effort, no gpu's found
+            return new Dictionary<string, string>();
+        }
+    }
+
+    /// <summary>
+    /// Pure labeling logic: pairs each physical GPU index with a friendly name, falling back to a generic label when none is known
+    /// </summary>
+    internal static Dictionary<string, string> BuildGpuLabels(IEnumerable<string> physicalIndexes, IReadOnlyDictionary<string, string> gpuNames)
+    {
+        var gpus = new Dictionary<string, string>();
+
+        foreach (var physicalIndex in physicalIndexes)
+        {
+            gpus[physicalIndex] = gpuNames.TryGetValue(physicalIndex, out var gpuName) && !string.IsNullOrWhiteSpace(gpuName)
+                ? gpuName
+                : $"GPU {physicalIndex}";
         }
 
         return gpus;
