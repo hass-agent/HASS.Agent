@@ -6757,7 +6757,16 @@ namespace HASS.Agent.Resources.Localization {
                 return ResourceManager.GetString("SensorsMod_LblSetting1_Category", resourceCulture);
             }
         }
-        
+
+        /// <summary>
+        ///   Looks up a localized string similar to GPU Device.
+        /// </summary>
+        internal static string SensorsMod_LblSetting1_Gpu {
+            get {
+                return ResourceManager.GetString("SensorsMod_LblSetting1_Gpu", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   Looks up a localized string similar to Internal Sensor.
         /// </summary>

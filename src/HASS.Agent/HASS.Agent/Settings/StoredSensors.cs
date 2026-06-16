@@ -154,7 +154,7 @@ namespace HASS.Agent.Settings
                     abstractSensor = new CurrentVolumeSensor(sensor.UpdateInterval, sensor.EntityName, sensor.Name, sensor.Id.ToString(), sensor.AdvancedSettings);
                     break;
                 case SensorType.GpuLoadSensor:
-                    abstractSensor = new GpuLoadSensor(sensor.UpdateInterval, sensor.EntityName, sensor.Name, sensor.Id.ToString(), sensor.AdvancedSettings);
+                    abstractSensor = new GpuLoadSensor(sensor.Query, sensor.UpdateInterval, sensor.EntityName, sensor.Name, sensor.Id.ToString(), sensor.AdvancedSettings);
                     break;
                 case SensorType.GpuTemperatureSensor:
                     abstractSensor = new GpuTemperatureSensor(sensor.UpdateInterval, sensor.EntityName, sensor.Name, sensor.Id.ToString(), sensor.AdvancedSettings);

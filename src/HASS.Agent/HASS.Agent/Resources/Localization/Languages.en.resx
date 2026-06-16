@@ -1791,6 +1791,9 @@ Please configure an executor or your command will not run.</value>
   <data name="SensorsMod_LblSetting1_Category" xml:space="preserve">
     <value>Category</value>
   </data>
+  <data name="SensorsMod_LblSetting1_Gpu" xml:space="preserve">
+    <value>GPU Device</value>
+  </data>
   <data name="SensorsMod_LblSetting2_Counter" xml:space="preserve">
     <value>Counter</value>
   </data>
@@ -2056,7 +2059,7 @@ Currently takes the volume of your default device.</value>
     <value>Dummy sensor for testing purposes, sends a random integer value between 0 and 100.</value>
   </data>
   <data name="SensorsManager_GpuLoadSensorDescription" xml:space="preserve">
-    <value>Provides the current load of the first GPU as a percentage.</value>
+    <value>Provides the current load of the selected GPU as a percentage, or the average load of all GPUs.</value>
   </data>
   <data name="SensorsManager_GpuTemperatureSensorDescription" xml:space="preserve">
     <value>NOTE: This is a non-functioning sensor.

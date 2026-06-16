@@ -30,6 +30,7 @@ namespace HASS.Agent.Forms.Sensors
 
         private readonly Dictionary<string, string> _networkCards = new();
         private readonly Dictionary<string, string> _internalSensors = new();
+        private readonly Dictionary<string, string> _gpuDevices = new();
 
         private SensorType _selectedSensorType = SensorType.ActiveWindowSensor;
 
@@ -111,6 +112,10 @@ namespace HASS.Agent.Forms.Sensors
                 var internalSensorType = internalSensor.Type.ToString();
                 _internalSensors.Add(internalSensorType, internalSensorType);
             }
+
+            _gpuDevices.Add("*", Languages.SensorsMod_All);
+            foreach (var gpu in GpuLoadSensor.GetAvailableGpus())
+                _gpuDevices.Add(gpu.Key, gpu.Value);
 
             CbIgnoreAvailability.CheckedChanged += CbIgnoreAvailability_CheckedChanged;
 
@@ -218,6 +223,11 @@ namespace HASS.Agent.Forms.Sensors
                         CbNetworkCard.SelectedItem = new KeyValuePair<string, string>(Sensor.Query, _networkCards[Sensor.Query]);
                     break;
 
+                case SensorType.GpuLoadSensor:
+                    if (_gpuDevices.ContainsKey(Sensor.Query))
+                        CbNetworkCard.SelectedItem = new KeyValuePair<string, string>(Sensor.Query, _gpuDevices[Sensor.Query]);
+                    break;
+
                 case SensorType.InternalDeviceSensor:
                     if (_internalSensors.ContainsKey(Sensor.Query))
                         CbNetworkCard.SelectedItem = new KeyValuePair<string, string>(Sensor.Query, _internalSensors[Sensor.Query]);
@@ -316,6 +326,11 @@ namespace HASS.Agent.Forms.Sensors
                 case SensorType.NetworkSensors:
                     CbNetworkCard.DataSource = new BindingSource(_networkCards, null);
                     SetNetworkGui();
+                    break;
+
+                case SensorType.GpuLoadSensor:
+                    CbNetworkCard.DataSource = new BindingSource(_gpuDevices, null);
+                    SetGpuGui();
                     break;
 
                 case SensorType.InternalDeviceSensor:
@@ -497,6 +512,22 @@ namespace HASS.Agent.Forms.Sensors
                 SetEmptyGui();
 
                 LblSetting1.Text = Languages.SensorsMod_LblSetting1_Network;
+                LblSetting1.Visible = true;
+
+                CbNetworkCard.Visible = true;
+            }));
+        }
+
+        /// <summary>
+        /// Change the UI to a 'gpu load' type
+        /// </summary>
+        private void SetGpuGui()
+        {
+            Invoke(new MethodInvoker(delegate
+            {
+                SetEmptyGui();
+
+                LblSetting1.Text = Languages.SensorsMod_LblSetting1_Gpu;
                 LblSetting1.Visible = true;
 
                 CbNetworkCard.Visible = true;
@@ -781,6 +812,15 @@ namespace HASS.Agent.Forms.Sensors
                     break;
 
                 case SensorType.NetworkSensors:
+                    Sensor.Query = "*";
+                    if (CbNetworkCard.SelectedItem != null)
+                    {
+                        var item = (KeyValuePair<string, string>)CbNetworkCard.SelectedItem;
+                        Sensor.Query = item.Key;
+                    }
+                    break;
+
+                case SensorType.GpuLoadSensor:
                     Sensor.Query = "*";
                     if (CbNetworkCard.SelectedItem != null)
                     {
