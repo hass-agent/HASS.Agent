@@ -153,4 +153,38 @@ public class GpuLoadSensorTests
         Assert.DoesNotThrow(() => result = GpuLoadSensor.GetAvailableGpus());
         Assert.That(result, Is.Not.Null);
     }
+
+    [Test]
+    [Category("Hardware")]
+    public void GetAvailableGpus_OnThisMachine_EachGpuReportsAPlausibleLoad()
+    {
+        // exercises the real 'GPU Engine' performance counters on whatever machine runs this test,
+        // rather than synthetic data - skips instead of failing on a machine with no gpu counters
+        var gpus = GpuLoadSensor.GetAvailableGpus();
+        if (gpus.Count == 0)
+        {
+            Assert.Ignore("No 'GPU Engine' performance counters were detected on this machine.");
+            return;
+        }
+
+        TestContext.Out.WriteLine($"Detected {gpus.Count} GPU(s):");
+
+        foreach (var (gpuId, gpuName) in gpus)
+        {
+            var sensor = new GpuLoadSensor(gpuId);
+            var usage = sensor.GetGPUUsage();
+            var state = sensor.GetState();
+
+            TestContext.Out.WriteLine($"  [{gpuId}] {gpuName}: {state}% (raw value: {usage})");
+
+            Assert.That(usage, Is.GreaterThanOrEqualTo(0).And.LessThanOrEqualTo(100),
+                $"GPU '{gpuName}' (id {gpuId}) reported an out-of-range load: {usage}");
+        }
+
+        var allGpus = new GpuLoadSensor();
+        var averageUsage = allGpus.GetGPUUsage();
+        TestContext.Out.WriteLine($"  [*] All GPUs (average): {allGpus.GetState()}% (raw value: {averageUsage})");
+
+        Assert.That(averageUsage, Is.GreaterThanOrEqualTo(0).And.LessThanOrEqualTo(100));
+    }
 }
