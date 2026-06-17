@@ -153,6 +153,14 @@ public class GpuLoadSensorTests
     }
 
     [Test]
+    public void FilterToKnownAdapters_EmptyInstanceNames_ReturnsEmpty()
+    {
+        var result = GpuLoadSensor.FilterToKnownAdapters(Enumerable.Empty<string>(), new[] { "0x00000000_0x00016e08" });
+
+        Assert.That(result, Is.Empty);
+    }
+
+    [Test]
     public void AggregateUsageByAdapter_GroupsByLuidNotPhysIndex()
     {
         // two different processes on the SAME adapter (same luid, both 'phys_0') must be summed together,
@@ -194,6 +202,24 @@ public class GpuLoadSensorTests
         var result = GpuLoadSensor.AggregateUsageByAdapter(Enumerable.Empty<(string, float)>());
 
         Assert.That(result, Is.Empty);
+    }
+
+    [Test]
+    public void AggregateUsageByAdapter_MixedLuidCasing_TreatsAsOneAdapter()
+    {
+        // same real-world scenario as GetAdapterLuid_DifferentCasingForSameAdapter: windows can emit counter
+        // instances for the same physical adapter with different hex capitalisation across processes - they must
+        // be summed into one adapter entry, not split into two separate adapter keys
+        var samples = new[]
+        {
+            ("pid_1_luid_0x00000000_0x00016E08_phys_0_eng_0_engtype_3D", 30f), // uppercase hex
+            ("pid_2_luid_0x00000000_0x00016e08_phys_0_eng_0_engtype_3D", 20f), // lowercase hex
+        };
+
+        var result = GpuLoadSensor.AggregateUsageByAdapter(samples);
+
+        Assert.That(result.Count, Is.EqualTo(1));
+        Assert.That(result.Values.Single(), Is.EqualTo(50f));
     }
 
     [Test]
