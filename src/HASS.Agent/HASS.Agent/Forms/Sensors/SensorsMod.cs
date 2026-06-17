@@ -530,7 +530,7 @@ namespace HASS.Agent.Forms.Sensors
                 LblSetting1.Text = Languages.SensorsMod_LblSetting1_Gpu;
                 LblSetting1.Visible = true;
 
-                if (_gpuDevices.Count == 2) // exactly 1 real GPU (plus the "*" all-GPUs entry)
+                if (_gpuDevices.Count(x => x.Key != SensorConstants.DropdownAll) == 1) // exactly 1 real GPU (plus the "*" all-GPUs entry)
                 {
                     var singleGpu = _gpuDevices.First(x => x.Key != SensorConstants.DropdownAll);
                     TbSetting1.Text = singleGpu.Value;
