@@ -1,4 +1,4 @@
-using System.Diagnostics.CodeAnalysis;
+﻿using System.Diagnostics.CodeAnalysis;
 using System.Net.NetworkInformation;
 using Syncfusion.Windows.Forms;
 using HASS.Agent.Functions;
@@ -14,6 +14,7 @@ using HASS.Agent.Managers.DeviceSensors;
 using HASS.Agent.Managers;
 using HASS.Agent.Forms.Commands.CommandConfig;
 using Newtonsoft.Json;
+using HASS.Agent.Shared.Constants;
 
 namespace HASS.Agent.Forms.Sensors
 {
@@ -101,18 +102,18 @@ namespace HASS.Agent.Forms.Sensors
             }
             LvSensors.EndUpdate();
 
-            _networkCards.Add("*", Languages.SensorsMod_All);
+            _networkCards.Add(SensorConstants.DropdownAll, Languages.SensorsMod_All);
             foreach (var nic in NetworkInterface.GetAllNetworkInterfaces())
                 _networkCards.Add(nic.Id, nic.Name);
 
-            _internalSensors.Add("none", Languages.SensorsMod_None);
+            _internalSensors.Add(SensorConstants.DropdownNone, Languages.SensorsMod_None);
             foreach (var internalSensor in InternalDeviceSensorsManager.AvailableSensors)
             {
                 var internalSensorType = internalSensor.Type.ToString();
                 _internalSensors.Add(internalSensorType, internalSensorType);
             }
 
-            _gpuDevices.Add("*", Languages.SensorsMod_All);
+            _gpuDevices.Add(SensorConstants.DropdownAll, Languages.SensorsMod_All);
             foreach (var gpu in GpuLoadSensor.GetAvailableGpus())
                 _gpuDevices.Add(gpu.Key, gpu.Value);
 
@@ -531,7 +532,7 @@ namespace HASS.Agent.Forms.Sensors
 
                 if (_gpuDevices.Count == 2) // exactly 1 real GPU (plus the "*" all-GPUs entry)
                 {
-                    var singleGpu = _gpuDevices.First(x => x.Key != "*");
+                    var singleGpu = _gpuDevices.First(x => x.Key != SensorConstants.DropdownAll);
                     TbSetting1.Text = singleGpu.Value;
                     TbSetting1.ReadOnly = true;
                     TbSetting1.Visible = true;
@@ -826,7 +827,7 @@ namespace HASS.Agent.Forms.Sensors
                     break;
 
                 case SensorType.NetworkSensors:
-                    Sensor.Query = "*";
+                    Sensor.Query = SensorConstants.DropdownAll;
                     if (CbSetting1.SelectedItem != null)
                     {
                         var item = (KeyValuePair<string, string>)CbSetting1.SelectedItem;
@@ -835,7 +836,7 @@ namespace HASS.Agent.Forms.Sensors
                     break;
 
                 case SensorType.GpuLoadSensor:
-                    Sensor.Query = "*";
+                    Sensor.Query = SensorConstants.DropdownAll;
                     if (CbSetting1.SelectedItem != null)
                     {
                         var item = (KeyValuePair<string, string>)CbSetting1.SelectedItem;

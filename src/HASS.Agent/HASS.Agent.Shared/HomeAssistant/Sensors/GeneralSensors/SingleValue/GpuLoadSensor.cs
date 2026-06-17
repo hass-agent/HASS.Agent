@@ -1,10 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using HASS.Agent.Shared.Constants;
+using HASS.Agent.Shared.Models.HomeAssistant;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
-using HASS.Agent.Shared.Models.HomeAssistant;
 using Vanara.PInvoke;
 using static Vanara.PInvoke.DXGI;
 
@@ -23,12 +24,12 @@ public class GpuLoadSensor : AbstractSingleValueSensor
     /// <summary>
     /// The special value for <see cref="GpuId"/> that indicates the sensor should average across all detected GPUs, rather than reporting on a specific adapter
     /// </summary>
-    private const string AllGpus = "*";
+    private const string AllGpus = SensorConstants.DropdownAll;
 
     /// <summary>
     /// The regex used to extract the adapter luid from a GPU Engine counter instance name (eg. 'luid_0x00000000_0x00016e08_engtype_3D').
     /// </summary>
-    private static readonly Regex AdapterLuidRegex = new(@"luid_(0x[0-9A-Fa-f]+_0x[0-9A-Fa-f]+)", RegexOptions.Compiled);
+    private static readonly Regex AdapterLuidRegex = SensorConstants.LuidRegex;
 
     /// <summary>
     /// The adapter luid (eg. '0x00000000_0x00016e08') to report on, or '*' to average across every detected gpu

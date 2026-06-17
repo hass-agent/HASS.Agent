@@ -1,13 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Net.NetworkInformation;
-using ByteSizeLib;
+﻿using ByteSizeLib;
+using HASS.Agent.Shared.Constants;
 using HASS.Agent.Shared.Functions;
 using HASS.Agent.Shared.HomeAssistant.Sensors.GeneralSensors.MultiValue.DataTypes;
 using HASS.Agent.Shared.Models.HomeAssistant;
 using HASS.Agent.Shared.Models.Internal;
 using Newtonsoft.Json;
 using Serilog;
+using System;
+using System.Collections.Generic;
+using System.Net.NetworkInformation;
 
 namespace HASS.Agent.Shared.HomeAssistant.Sensors.GeneralSensors.MultiValue;
 
@@ -17,6 +18,7 @@ namespace HASS.Agent.Shared.HomeAssistant.Sensors.GeneralSensors.MultiValue;
 public class NetworkSensors : AbstractMultiValueSensor
 {
     private const string DefaultName = "network";
+    private const string AllNetworkCards = SensorConstants.DropdownAll;
     private readonly int _updateInterval;
 
     public string NetworkCard { get; protected set; }
@@ -24,12 +26,12 @@ public class NetworkSensors : AbstractMultiValueSensor
 
     public override sealed Dictionary<string, AbstractSingleValueSensor> Sensors { get; protected set; } = new Dictionary<string, AbstractSingleValueSensor>();
 
-    public NetworkSensors(int? updateInterval = null, string entityName = DefaultName, string name = DefaultName, string networkCard = "*", string id = default) : base(entityName ?? DefaultName, name ?? null, updateInterval ?? 30, id)
+    public NetworkSensors(int? updateInterval = null, string entityName = DefaultName, string name = DefaultName, string networkCard = AllNetworkCards, string id = default) : base(entityName ?? DefaultName, name ?? null, updateInterval ?? 30, id)
     {
         _updateInterval = updateInterval ?? 30;
 
         NetworkCard = networkCard;
-        _useSpecificCard = networkCard != "*" && !string.IsNullOrEmpty(networkCard);
+        _useSpecificCard = networkCard != AllNetworkCards && !string.IsNullOrEmpty(networkCard);
 
         UpdateSensorValues();
     }
