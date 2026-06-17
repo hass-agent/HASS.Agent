@@ -1799,7 +1799,7 @@ configure un ejecutor o su comando no se ejecutará</value>
     <value>Tarjeta gráfica</value>
   </data>
   <data name="SensorsMod_LblSetting2_SingleGpu" xml:space="preserve">
-    <value>Only 1 GPU detected</value>
+    <value>Solo 1 GPU detectada</value>
   </data>
   <data name="SensorsMod_LblSetting2_Counter" xml:space="preserve">
     <value>mostrador</value>

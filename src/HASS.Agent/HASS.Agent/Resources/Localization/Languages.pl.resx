@@ -1893,7 +1893,7 @@ skonfiguruj środowisko wykonania, inaczej twoje polecenie się nie uruchomi</va
     <value>Karta graficzna</value>
   </data>
   <data name="SensorsMod_LblSetting2_SingleGpu" xml:space="preserve">
-    <value>Only 1 GPU detected</value>
+    <value>Wykryto tylko 1 GPU</value>
   </data>
   <data name="SensorsMod_LblSetting2_Counter" xml:space="preserve">
     <value>licznik</value>

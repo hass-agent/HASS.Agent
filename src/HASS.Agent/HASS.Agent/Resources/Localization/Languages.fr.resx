@@ -1815,7 +1815,7 @@ veuillez configurer un interpréteur de commandes ou votre commande ne fonctionn
     <value>Carte graphique</value>
   </data>
   <data name="SensorsMod_LblSetting2_SingleGpu" xml:space="preserve">
-    <value>Only 1 GPU detected</value>
+    <value>Seulement 1 GPU détecté</value>
   </data>
   <data name="SensorsMod_LblSetting2_Counter" xml:space="preserve">
     <value>Compteur</value>

@@ -1804,7 +1804,7 @@ configureer een executor, anders kan het commando niet uitvoeren</value>
     <value>Videokaart</value>
   </data>
   <data name="SensorsMod_LblSetting2_SingleGpu" xml:space="preserve">
-    <value>Only 1 GPU detected</value>
+    <value>Slechts 1 GPU gedetecteerd</value>
   </data>
   <data name="SensorsMod_LblSetting2_Counter" xml:space="preserve">
     <value>teller</value>

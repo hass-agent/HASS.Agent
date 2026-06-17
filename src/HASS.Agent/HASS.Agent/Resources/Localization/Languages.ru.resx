@@ -1848,7 +1848,7 @@ Home Assistant version: {0}</value>
     <value>Видеокарта</value>
   </data>
   <data name="SensorsMod_LblSetting2_SingleGpu" xml:space="preserve">
-    <value>Only 1 GPU detected</value>
+    <value>Обнаружен только 1 GPU</value>
   </data>
   <data name="SensorsMod_LblSetting2_Counter" xml:space="preserve">
     <value>счетчик</value>

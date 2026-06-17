@@ -1906,7 +1906,7 @@ konfiguriere bitte einen Exekutor oder dein Befehl wird nicht ausgeführt</value
     <value>Grafikkarte</value>
   </data>
   <data name="SensorsMod_LblSetting2_SingleGpu" xml:space="preserve">
-    <value>Only 1 GPU detected</value>
+    <value>Nur 1 GPU erkannt</value>
   </data>
   <data name="SensorsMod_LblSetting2_Counter" xml:space="preserve">
     <value>Zähler</value>

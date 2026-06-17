@@ -1632,7 +1632,7 @@ CTRL gibi daha fazla tuşa ve/veya değiştiriciye ihtiyacınız varsa, Multiple
     <value>Grafik kartı</value>
   </data>
   <data name="SensorsMod_LblSetting2_SingleGpu" xml:space="preserve">
-    <value>Only 1 GPU detected</value>
+    <value>Yalnızca 1 GPU algılandı</value>
   </data>
   <data name="SensorsMod_LblSetting2_Counter" xml:space="preserve">
     <value>Tezgah</value>
