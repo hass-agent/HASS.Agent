@@ -1,8 +1,7 @@
-﻿using System.Diagnostics.CodeAnalysis;
+using System.Diagnostics.CodeAnalysis;
 using System.Net.NetworkInformation;
 using Syncfusion.Windows.Forms;
 using HASS.Agent.Functions;
-using HASS.Agent.Models.Internal;
 using HASS.Agent.Resources.Localization;
 using HASS.Agent.Sensors;
 using HASS.Agent.Shared.Enums;
@@ -530,7 +529,19 @@ namespace HASS.Agent.Forms.Sensors
                 LblSetting1.Text = Languages.SensorsMod_LblSetting1_Gpu;
                 LblSetting1.Visible = true;
 
-                CbSetting1.Visible = true;
+                if (_gpuDevices.Count == 2) // exactly 1 real GPU (plus the "*" all-GPUs entry)
+                {
+                    var singleGpu = _gpuDevices.First(x => x.Key != "*");
+                    TbSetting1.Text = singleGpu.Value;
+                    TbSetting1.ReadOnly = true;
+                    TbSetting1.Visible = true;
+                    LblSetting2.Text = Languages.SensorsMod_LblSetting2_SingleGpu;
+                    LblSetting2.Visible = true;
+                }
+                else
+                {
+                    CbSetting1.Visible = true;
+                }
             }));
         }
 
@@ -597,14 +608,17 @@ namespace HASS.Agent.Forms.Sensors
                 CbSetting1.Visible = false;
 
                 TbSetting1.Text = string.Empty;
+                TbSetting1.ReadOnly = false;
                 TbSetting1.Visible = false;
 
                 LblSetting2.Visible = false;
                 TbSetting2.Text = string.Empty;
+                TbSetting2.ReadOnly = false;
                 TbSetting2.Visible = false;
 
                 LblSetting3.Visible = false;
                 TbSetting3.Text = string.Empty;
+                TbSetting3.ReadOnly = false;
                 TbSetting3.Visible = false;
 
                 CbApplyRounding.Text = Languages.SensorsMod_CbApplyRounding;

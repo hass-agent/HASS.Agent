@@ -2497,6 +2497,9 @@ To je draga zahteva, zato je priporočeni interval 15 minut (900 sekund). Vendar
   <data name="SensorsMod_LblSetting1_Gpu" xml:space="preserve">
     <value>Grafična kartica</value>
   </data>
+  <data name="SensorsMod_LblSetting2_SingleGpu" xml:space="preserve">
+    <value>Only 1 GPU detected</value>
+  </data>
   <data name="SensorsMod_LblSetting1_Network" xml:space="preserve">
     <value>omrežno kartico</value>
   </data>

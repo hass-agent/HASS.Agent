@@ -1794,6 +1794,9 @@ Please configure an executor or your command will not run.</value>
   <data name="SensorsMod_LblSetting1_Gpu" xml:space="preserve">
     <value>GPU Device</value>
   </data>
+  <data name="SensorsMod_LblSetting2_SingleGpu" xml:space="preserve">
+    <value>Only 1 GPU detected</value>
+  </data>
   <data name="SensorsMod_LblSetting2_Counter" xml:space="preserve">
     <value>Counter</value>
   </data>

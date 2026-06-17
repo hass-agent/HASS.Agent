@@ -2416,6 +2416,9 @@ Essa é uma solicitação cara, portanto, o intervalo recomendado é de 15 minut
   <data name="SensorsMod_LblSetting1_Gpu" xml:space="preserve">
     <value>Placa de vídeo</value>
   </data>
+  <data name="SensorsMod_LblSetting2_SingleGpu" xml:space="preserve">
+    <value>Only 1 GPU detected</value>
+  </data>
   <data name="SensorsMod_LblSetting1_Network" xml:space="preserve">
     <value>placa de rede</value>
   </data>

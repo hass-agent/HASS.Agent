@@ -6865,7 +6865,16 @@ namespace HASS.Agent.Resources.Localization {
                 return ResourceManager.GetString("SensorsMod_LblSetting2_Wmi", resourceCulture);
             }
         }
-        
+
+        /// <summary>
+        ///   Looks up a localized string similar to Only 1 GPU detected.
+        /// </summary>
+        internal static string SensorsMod_LblSetting2_SingleGpu {
+            get {
+                return ResourceManager.GetString("SensorsMod_LblSetting2_SingleGpu", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   Looks up a localized string similar to Setting 3.
         /// </summary>
