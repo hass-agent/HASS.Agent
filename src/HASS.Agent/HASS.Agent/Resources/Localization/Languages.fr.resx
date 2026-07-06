@@ -1811,6 +1811,12 @@ veuillez configurer un interpréteur de commandes ou votre commande ne fonctionn
   <data name="SensorsMod_LblSetting1_Category" xml:space="preserve">
     <value>Catégorie</value>
   </data>
+  <data name="SensorsMod_LblSetting1_Gpu" xml:space="preserve">
+    <value>Carte graphique</value>
+  </data>
+  <data name="SensorsMod_LblSetting2_SingleGpu" xml:space="preserve">
+    <value>Seulement 1 GPU détecté</value>
+  </data>
   <data name="SensorsMod_LblSetting2_Counter" xml:space="preserve">
     <value>Compteur</value>
   </data>
@@ -2081,7 +2087,7 @@ Indique le volume de votre appareil par défaut.</value>
     <value>Capteur factice à des fins de test, envoie une valeur entière aléatoire entre 0 et 100.</value>
   </data>
   <data name="SensorsManager_GpuLoadSensorDescription" xml:space="preserve">
-    <value>Fournit la charge actuelle du premier GPU sous forme de pourcentage.</value>
+    <value>Fournit la charge actuelle du GPU sélectionné sous forme de pourcentage, ou la charge moyenne de tous les GPU.</value>
   </data>
   <data name="SensorsManager_GpuTemperatureSensorDescription" xml:space="preserve">
     <value>REMARQUE : Ce capteur est non fonctionnel.

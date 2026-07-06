@@ -67,7 +67,7 @@ namespace HASS.Agent.Forms.Sensors
 			LblSpecificClient = new Label();
 			BtnTest = new Syncfusion.WinForms.Controls.SfButton();
             BtnAdvSettings = new Syncfusion.WinForms.Controls.SfButton();
-            CbNetworkCard = new ComboBox();
+            CbSetting1 = new ComboBox();
 			NumRound = new Syncfusion.Windows.Forms.Tools.NumericUpDownExt();
 			LblDigits = new Label();
 			CbApplyRounding = new CheckBox();
@@ -547,24 +547,24 @@ namespace HASS.Agent.Forms.Sensors
             BtnAdvSettings.Visible = false;
             BtnAdvSettings.Click += BtnAdvSettings_Click;
             // 
-            // CbNetworkCard
-            // 
-            CbNetworkCard.AccessibleDescription = "List of available network cards.";
-			CbNetworkCard.AccessibleName = "Network cards";
-			CbNetworkCard.AccessibleRole = AccessibleRole.DropList;
-			CbNetworkCard.BackColor = Color.FromArgb(63, 63, 70);
-			CbNetworkCard.DrawMode = DrawMode.OwnerDrawFixed;
-			CbNetworkCard.DropDownHeight = 300;
-			CbNetworkCard.DropDownStyle = ComboBoxStyle.DropDownList;
-			CbNetworkCard.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-			CbNetworkCard.ForeColor = Color.FromArgb(241, 241, 241);
-			CbNetworkCard.FormattingEnabled = true;
-			CbNetworkCard.IntegralHeight = false;
-			CbNetworkCard.Location = new Point(566, 338);
-			CbNetworkCard.Name = "CbNetworkCard";
-			CbNetworkCard.Size = new Size(328, 26);
-			CbNetworkCard.TabIndex = 4;
-			CbNetworkCard.Visible = false;
+            // CbSetting1
+            //
+            CbSetting1.AccessibleDescription = "List of available options for the selected setting.";
+			CbSetting1.AccessibleName = "Setting options";
+			CbSetting1.AccessibleRole = AccessibleRole.DropList;
+			CbSetting1.BackColor = Color.FromArgb(63, 63, 70);
+			CbSetting1.DrawMode = DrawMode.OwnerDrawFixed;
+			CbSetting1.DropDownHeight = 300;
+			CbSetting1.DropDownStyle = ComboBoxStyle.DropDownList;
+			CbSetting1.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+			CbSetting1.ForeColor = Color.FromArgb(241, 241, 241);
+			CbSetting1.FormattingEnabled = true;
+			CbSetting1.IntegralHeight = false;
+			CbSetting1.Location = new Point(566, 338);
+			CbSetting1.Name = "CbSetting1";
+			CbSetting1.Size = new Size(328, 26);
+			CbSetting1.TabIndex = 4;
+			CbSetting1.Visible = false;
 			// 
 			// NumRound
 			// 
@@ -693,7 +693,7 @@ namespace HASS.Agent.Forms.Sensors
 			Controls.Add(TbFriendlyName);
 			Controls.Add(LblDigits);
 			Controls.Add(NumRound);
-			Controls.Add(CbNetworkCard);
+			Controls.Add(CbSetting1);
 			Controls.Add(BtnTest);
 			Controls.Add(LblSpecificClient);
 			Controls.Add(LblService);
@@ -782,7 +782,7 @@ namespace HASS.Agent.Forms.Sensors
 		private ColumnHeader ClmId;
 		private Syncfusion.WinForms.Controls.SfButton BtnTest;
         private Syncfusion.WinForms.Controls.SfButton BtnAdvSettings;
-        private ComboBox CbNetworkCard;
+        private ComboBox CbSetting1;
 		private Syncfusion.Windows.Forms.Tools.NumericUpDownExt NumRound;
 		private Label LblDigits;
 		internal CheckBox CbApplyRounding;

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.1.32319.34
+# Visual Studio Version 18
+VisualStudioVersion = 18.4.11605.240
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HASS.Agent", "HASS.Agent\HASS.Agent\HASS.Agent.csproj", "{6CB1FA4F-4798-4939-B8DF-7E908FD23242}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -68,7 +68,7 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {C17243F4-9756-47EF-9AA8-86C64B7582A6}
 		VisualSVNWorkingCopyRoot = .
+		SolutionGuid = {C17243F4-9756-47EF-9AA8-86C64B7582A6}
 	EndGlobalSection
 EndGlobal

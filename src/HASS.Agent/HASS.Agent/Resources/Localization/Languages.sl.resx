@@ -2294,7 +2294,7 @@ Prepričajte se, da so lokacijske storitve w Windows omogočene!
 Glede na verzijo Windows-ov se to lahko nahaja v Nadzorna plošča --&gt; Sistem in varnost --&gt; lokacija</value>
   </data>
   <data name="SensorsManager_GpuLoadSensorDescription" xml:space="preserve">
-    <value>Zagotavlja trenutno obremenitev prvega GPU-ja v odstotkih.</value>
+    <value>Zagotavlja trenutno obremenitev izbranega GPU-ja v odstotkih ali povprečno obremenitev vseh GPU-jev.</value>
   </data>
   <data name="SensorsManager_GpuTemperatureSensorDescription" xml:space="preserve">
     <value>OPOMBA: To je nedelujoč senzor.
@@ -2493,6 +2493,12 @@ To je draga zahteva, zato je priporočeni interval 15 minut (900 sekund). Vendar
   </data>
   <data name="SensorsMod_LblSetting1_Category" xml:space="preserve">
     <value>kategorija</value>
+  </data>
+  <data name="SensorsMod_LblSetting1_Gpu" xml:space="preserve">
+    <value>Grafična kartica</value>
+  </data>
+  <data name="SensorsMod_LblSetting2_SingleGpu" xml:space="preserve">
+    <value>Zaznan samo 1 GPU</value>
   </data>
   <data name="SensorsMod_LblSetting1_Network" xml:space="preserve">
     <value>omrežno kartico</value>

@@ -1800,6 +1800,12 @@ configureer een executor, anders kan het commando niet uitvoeren</value>
   <data name="SensorsMod_LblSetting1_Category" xml:space="preserve">
     <value>categorie</value>
   </data>
+  <data name="SensorsMod_LblSetting1_Gpu" xml:space="preserve">
+    <value>Videokaart</value>
+  </data>
+  <data name="SensorsMod_LblSetting2_SingleGpu" xml:space="preserve">
+    <value>Slechts 1 GPU gedetecteerd</value>
+  </data>
   <data name="SensorsMod_LblSetting2_Counter" xml:space="preserve">
     <value>teller</value>
   </data>
@@ -2071,7 +2077,7 @@ Pakt momenteel het volume van je standaardapparaat.</value>
     <value>Dummy sensor om te testen, stuurt een willekeurig getal tussen 0 en 100.</value>
   </data>
   <data name="SensorsManager_GpuLoadSensorDescription" xml:space="preserve">
-    <value>Geeft de huidige belasting van de eerste GPU als een percentage.</value>
+    <value>Geeft de huidige belasting van de geselecteerde GPU als percentage, of de gemiddelde belasting van alle GPU's.</value>
   </data>
   <data name="SensorsManager_GpuTemperatureSensorDescription" xml:space="preserve">
     <value>OPMERKING: Dit is een niet-functionerende sensor.

@@ -1889,6 +1889,12 @@ skonfiguruj środowisko wykonania, inaczej twoje polecenie się nie uruchomi</va
   <data name="SensorsMod_LblSetting1_Category" xml:space="preserve">
     <value>kategoria</value>
   </data>
+  <data name="SensorsMod_LblSetting1_Gpu" xml:space="preserve">
+    <value>Karta graficzna</value>
+  </data>
+  <data name="SensorsMod_LblSetting2_SingleGpu" xml:space="preserve">
+    <value>Wykryto tylko 1 GPU</value>
+  </data>
   <data name="SensorsMod_LblSetting2_Counter" xml:space="preserve">
     <value>licznik</value>
   </data>
@@ -2164,7 +2170,7 @@ Obecnie zwraca głośność domyślnego urządzenia.</value>
     <value>Czujnik atrapa dla testów, wysyła losowe wartości całkowite (int) w przedziale od 0 do 100.</value>
   </data>
   <data name="SensorsManager_GpuLoadSensorDescription" xml:space="preserve">
-    <value>Zwraca obciążenie pierwszego GPU w procentach.</value>
+    <value>Zwraca obciążenie wybranego GPU w procentach lub średnie obciążenie wszystkich GPU.</value>
   </data>
   <data name="SensorsManager_GpuTemperatureSensorDescription" xml:space="preserve">
     <value>UWAGA: Ten czujnik nie działa.

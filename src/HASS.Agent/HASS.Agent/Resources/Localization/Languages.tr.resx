@@ -1628,6 +1628,12 @@ CTRL gibi daha fazla tuşa ve/veya değiştiriciye ihtiyacınız varsa, Multiple
   <data name="SensorsMod_LblSetting1_Category" xml:space="preserve">
     <value>Kategori</value>
   </data>
+  <data name="SensorsMod_LblSetting1_Gpu" xml:space="preserve">
+    <value>Grafik kartı</value>
+  </data>
+  <data name="SensorsMod_LblSetting2_SingleGpu" xml:space="preserve">
+    <value>Yalnızca 1 GPU algılandı</value>
+  </data>
   <data name="SensorsMod_LblSetting2_Counter" xml:space="preserve">
     <value>Tezgah</value>
   </data>
@@ -1852,7 +1858,7 @@ CTRL gibi daha fazla tuşa ve/veya değiştiriciye ihtiyacınız varsa, Multiple
     <value>Test amaçlı kukla sensör, 0 ile 100 arasında rastgele bir tamsayı değeri gönderir.</value>
   </data>
   <data name="SensorsManager_GpuLoadSensorDescription" xml:space="preserve">
-    <value>Yüzde olarak ilk GPU'nun mevcut yükünü sağlar.</value>
+    <value>Seçilen GPU'nun mevcut yükünü yüzde olarak veya tüm GPU'ların ortalama yükünü sağlar.</value>
   </data>
   <data name="SensorsManager_GpuTemperatureSensorDescription" xml:space="preserve">
     <value>NOT: Bu, çalışmayan bir sensördür.
