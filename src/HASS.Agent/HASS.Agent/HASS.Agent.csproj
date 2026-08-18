@@ -86,6 +86,8 @@
     <PackageReference Include="Syncfusion.Shared.Base" Version="20.3.0.50" />
     <PackageReference Include="Syncfusion.Tools.Windows" Version="20.3.0.50" />
     <PackageReference Include="System.Text.Encoding.CodePages" Version="9.0.6" />
+    <PackageReference Include="Vanara.PInvoke.Ole" Version="5.0.7" />
+    <PackageReference Include="Vanara.PInvoke.User32" Version="5.0.7" />
   </ItemGroup>
 
   <ItemGroup>

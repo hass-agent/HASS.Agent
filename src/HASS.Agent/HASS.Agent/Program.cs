@@ -17,6 +17,7 @@ using HASS.Agent.Shared.Managers;
 using Microsoft.Windows.AppLifecycle;
 using Serilog;
 using Serilog.Events;
+using Vanara.PInvoke;
 
 namespace HASS.Agent
 {
@@ -39,11 +40,18 @@ namespace HASS.Agent
         [STAThread]
         private static void Main(string[] args)
         {
+            WinRT.ComWrappersSupport.InitializeComWrappers();
+            var redirectRequired = CheckRedirection();
+
+            if (redirectRequired)
+            {
+                return;
+            }
+
             using var appMutex = new Mutex(false, "HASS.Agent.App.Mutex");
 
             try
             {
-
                 Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense(Variables.SyncfusionLicense);
 
                 LoggingManager.PrepareLogging(args);
@@ -85,7 +93,7 @@ namespace HASS.Agent
                 }
 
                 LocalizationManager.Initialize();
-                                                                                               
+
                 Application.SetDefaultFont(Variables.DefaultFont);
 
                 Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
@@ -119,12 +127,51 @@ namespace HASS.Agent
             }
         }
 
+        private static bool CheckRedirection()
+        {
+            var redirectRequired = false;
+            var args = AppInstance.GetCurrent().GetActivatedEventArgs();
+            var keyInstance = AppInstance.FindOrRegisterForKey("HASS.Agent.App.Instance.Key");
+
+            if (keyInstance.IsCurrent)
+            {
+                keyInstance.Activated += OnActivated;
+            }
+            else
+            {
+                redirectRequired = true;
+                RedirectActivationTo(args, keyInstance);
+            }
+
+            return redirectRequired;
+        }
+
+        private static void RedirectActivationTo(AppActivationArguments args, AppInstance keyInstance)
+        {
+            using var redirectEventHandle = Kernel32.CreateEvent(null, true);
+            Task.Run(() =>
+            {
+                keyInstance.RedirectActivationToAsync(args).AsTask().Wait();
+                Kernel32.SetEvent(redirectEventHandle);
+            });
+
+            _ = Ole32.CoWaitForMultipleObjects(Ole32.CWMO_FLAGS.CWMO_DEFAULT, 0xFFFFFFFF, [redirectEventHandle.DangerousGetHandle()], out _);
+
+            var process = Process.GetProcessById((int)keyInstance.ProcessId);
+            User32.SetForegroundWindow(process.MainWindowHandle);
+        }
+
+        private static void OnActivated(object sender, AppActivationArguments args)
+        {
+            Variables.MainForm.Invoke(new MethodInvoker(Variables.MainForm.Show)); //NOTE(Amadeo): potential place to handle any advanced or third-party activation
+        }
+
         /// <summary>
         /// Checks whether we're asked to launch as a child application
         /// </summary>
         /// <param name="args"></param>
         /// <returns></returns>
-        internal static bool LaunchAsChildApplication(string[] args)
+        private static bool LaunchAsChildApplication(string[] args)
         {
             return args.Any(x => x == LaunchParamUpdate)
                    || args.Any(x => x == LaunchPortReservation)
