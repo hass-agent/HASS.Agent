@@ -64,13 +64,13 @@ namespace HASS.Agent.Shared.HomeAssistant.Sensors
             var nextVal = Counter.NextValue();
 
             // optionally apply rounding
-            if (ApplyRounding && Round != null && double.TryParse(nextVal.ToString(CultureInfo.CurrentCulture), out var dblValue))
+            if (ApplyRounding && Round != null && double.TryParse(nextVal.ToString(CultureInfo.InvariantCulture), out var dblValue))
             {
-                return Math.Round(dblValue, (int)Round).ToString(CultureInfo.CurrentCulture);
+                return Math.Round(dblValue, (int)Round).ToString(CultureInfo.InvariantCulture);
             }
 
             // done
-            return Math.Round(nextVal).ToString(CultureInfo.CurrentCulture);
+            return Math.Round(nextVal).ToString(CultureInfo.InvariantCulture);
         }
 
         public override string GetAttributes() => string.Empty;

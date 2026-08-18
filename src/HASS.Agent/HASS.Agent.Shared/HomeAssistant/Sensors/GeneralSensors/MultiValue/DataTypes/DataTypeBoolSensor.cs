@@ -66,7 +66,7 @@ namespace HASS.Agent.Shared.HomeAssistant.Sensors.GeneralSensors.MultiValue.Data
         public void SetState(bool value) => _value = value;
         public void SetAttributes(string value) => _attributes = string.IsNullOrWhiteSpace(value) ? "{}" : value;
 
-        public override string GetState() => _value.ToString(CultureInfo.CurrentCulture);
+        public override string GetState() => _value.ToString(CultureInfo.InvariantCulture);
         public override string GetAttributes() => _attributes;
     }
 }
