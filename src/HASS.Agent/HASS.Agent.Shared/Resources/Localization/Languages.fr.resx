@@ -1140,7 +1140,7 @@ Il existe plusieurs canaux par lesquels vous pouvez nous joindre :</value>
     <value>Aide</value>
   </data>
   <data name="Main_TsShow" xml:space="preserve">
-    <value>afficher hass.agent</value>
+    <value>Afficher hass.agent</value>
   </data>
   <data name="Main_TsShowQuickActions" xml:space="preserve">
     <value>Afficher les actions rapides</value>
@@ -1155,16 +1155,16 @@ Il existe plusieurs canaux par lesquels vous pouvez nous joindre :</value>
     <value>Gérer les capteurs</value>
   </data>
   <data name="Main_TsCommands" xml:space="preserve">
-    <value>gérer les commandes</value>
+    <value>Gérer les commandes</value>
   </data>
   <data name="Main_CheckForUpdates" xml:space="preserve">
-    <value>vérifier les mises à jour</value>
+    <value>Vérifier les mises à jour</value>
   </data>
   <data name="Main_TsDonate" xml:space="preserve">
-    <value>doner</value>
+    <value>Donner</value>
   </data>
   <data name="Main_TsHelp" xml:space="preserve">
-    <value>aide et contact</value>
+    <value>Aide et contact</value>
   </data>
   <data name="Main_TsAbout" xml:space="preserve">
     <value>À propos</value>
