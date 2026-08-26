@@ -1,6 +1,5 @@
-﻿using System.Linq;
+using HASS.Agent.Shared.HomeAssistant.Sensors.MediaActivity;
 using HASS.Agent.Shared.Models.HomeAssistant;
-using Microsoft.Win32;
 
 namespace HASS.Agent.Shared.HomeAssistant.Sensors.GeneralSensors.SingleValue
 {
@@ -10,16 +9,21 @@ namespace HASS.Agent.Shared.HomeAssistant.Sensors.GeneralSensors.SingleValue
     public class WebcamActiveSensor : AbstractSingleValueSensor
     {
         private const string DefaultName = "webcamactive";
+        private readonly IMediaActivityProvider _mediaActivityProvider;
 
-        public WebcamActiveSensor(int? updateInterval = null, string entityName = DefaultName, string name = DefaultName, string id = default, string advancedSettings = default) : base(entityName ?? DefaultName, name ?? null, updateInterval ?? 10, id, advancedSettings: advancedSettings)
+        public WebcamActiveSensor(int? updateInterval = null, string entityName = DefaultName, string name = DefaultName, string id = default, string advancedSettings = default)
+            : this(MediaActivityProvider.Instance, updateInterval, entityName, name, id, advancedSettings)
         {
+        }
+
+        internal WebcamActiveSensor(IMediaActivityProvider mediaActivityProvider, int? updateInterval = null, string entityName = DefaultName, string name = DefaultName, string id = default, string advancedSettings = default)
+            : base(entityName ?? DefaultName, name ?? null, updateInterval ?? 10, id, advancedSettings: advancedSettings)
+        {
+            _mediaActivityProvider = mediaActivityProvider;
             Domain = "binary_sensor";
         }
 
-        public override string GetState()
-        {
-            return IsWebcamInUse() ? "ON" : "OFF";
-        }
+        public override string GetState() => _mediaActivityProvider.GetActivity(MediaActivityKind.Webcam).IsActive ? "ON" : "OFF";
 
         public override string GetAttributes() => string.Empty;
 
@@ -42,67 +46,5 @@ namespace HASS.Agent.Shared.HomeAssistant.Sensors.GeneralSensors.SingleValue
             });
         }
         
-        private static bool IsWebcamInUse()
-        {
-            const string regKey = @"SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\webcam";
-            bool inUse;
-
-            // first local machine
-            using (var key = Registry.LocalMachine.OpenSubKey(regKey))
-            {
-                inUse = CheckRegForWebcamInUse(key);
-                if (inUse) return true;
-            }
-
-            // then current user
-            using (var key = Registry.CurrentUser.OpenSubKey(regKey))
-            {
-                inUse = CheckRegForWebcamInUse(key);
-                if (inUse) return true;
-            }
-
-            // nope
-            return false;
-        }
-
-        private static bool CheckRegForWebcamInUse(RegistryKey key)
-        {
-            if (key == null) return false;
-
-            foreach (var subKeyName in key.GetSubKeyNames())
-            {
-                // NonPackaged has multiple subkeys
-                if (subKeyName == "NonPackaged")
-                {
-                    using var nonpackagedkey = key.OpenSubKey(subKeyName);
-                    if (nonpackagedkey == null) continue;
-
-                    foreach (var nonpackagedSubKeyName in nonpackagedkey.GetSubKeyNames())
-                    {
-                        using var subKey = nonpackagedkey.OpenSubKey(nonpackagedSubKeyName);
-                        if (subKey == null || !subKey.GetValueNames().Contains("LastUsedTimeStop")) continue;
-
-                        var endTime = subKey.GetValue("LastUsedTimeStop") is long
-                            ? (long)(subKey.GetValue("LastUsedTimeStop") ?? -1)
-                            : -1;
-
-                        if (endTime <= 0) return true;
-                    }
-                }
-                else
-                {
-                    using var subKey = key.OpenSubKey(subKeyName);
-                    if (subKey == null || !subKey.GetValueNames().Contains("LastUsedTimeStop")) continue;
-
-                    var endTime = subKey.GetValue("LastUsedTimeStop") is long
-                        ? (long)(subKey.GetValue("LastUsedTimeStop") ?? -1)
-                        : -1;
-
-                    if (endTime <= 0) return true;
-                }
-            }
-
-            return false;
-        }
     }
 }
