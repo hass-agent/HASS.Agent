@@ -66,5 +66,10 @@
         {
 
         }
+        
+        private void CbDisableDefaultEntityId_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

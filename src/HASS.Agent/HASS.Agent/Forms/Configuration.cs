@@ -432,6 +432,9 @@ namespace HASS.Agent.Forms
             _mqtt.CbIgnoreGracePeriod.CheckState = Variables.AppSettings.MqttIgnoreGracePeriod
                 ? CheckState.Checked
                 : CheckState.Unchecked;
+            _mqtt.CbDisableDefaultEntityId.CheckState = Variables.AppSettings.MqttDisableDefaultEntityId
+                ? CheckState.Checked
+                : CheckState.Unchecked;
 
             // updates
             _updates.CbUpdates.CheckState =
@@ -567,7 +570,8 @@ namespace HASS.Agent.Forms
             Variables.AppSettings.MqttUseRetainFlag = _mqtt.CbUseRetainFlag.CheckState == CheckState.Checked;
             Variables.AppSettings.MqttUseWebSocket = _mqtt.CbUseWebSocket.CheckState == CheckState.Checked;
             Variables.AppSettings.MqttIgnoreGracePeriod = _mqtt.CbIgnoreGracePeriod.CheckState == CheckState.Checked;
-
+            Variables.AppSettings.MqttDisableDefaultEntityId = _mqtt.CbDisableDefaultEntityId.CheckState == CheckState.Checked;
+            
             // mqtt -> service
             await SettingsManager.SendMqttSettingsToServiceAsync();
 
