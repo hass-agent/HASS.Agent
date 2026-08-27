@@ -3479,4 +3479,7 @@ Zou een betere ervaring moeten bieden met nieuwe systemen met een "moderne S0ix-
   <data name="CommandType_MonitorSleepPowerPlanCommand" xml:space="preserve">
     <value>MonitorSleepPowerPlan</value>
   </data>
+  <data name="ConfigMqtt_CbDisableDefaultEntityId" xml:space="preserve">
+    <value>Schakel het genereren van standaard entiteits-ID's uit (de standaardinstellingen van Home Assistant zijn van toepassing).</value>
+  </data>
 </root>

@@ -3458,4 +3458,7 @@ Esto debería proporcionar una mejor experiencia con los nuevos sistemas con "su
   <data name="CommandType_MonitorSleepPowerPlanCommand" xml:space="preserve">
     <value>Plan de energía para el sueño del monitor</value>
   </data>
+  <data name="ConfigMqtt_CbDisableDefaultEntityId" xml:space="preserve">
+    <value>Deshabilitar la generación de ID de entidad predeterminada (se aplican los valores predeterminados de Home Assistant).</value>
+  </data>
 </root>

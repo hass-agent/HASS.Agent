@@ -3490,4 +3490,7 @@ Cela devrait offrir une meilleure expérience avec les nouveaux systèmes dotés
   <data name="CommandType_MonitorSleepPowerPlanCommand" xml:space="preserve">
     <value>Surveillance du mode veille/alimentation</value>
   </data>
+  <data name="ConfigMqtt_CbDisableDefaultEntityId" xml:space="preserve">
+    <value>Désactiver la génération d'identifiants d'entité par défaut (les paramètres par défaut de Home Assistant s'appliquent)</value>
+  </data>
 </root>

@@ -3393,4 +3393,7 @@ Powinno to zapewnić lepsze działanie w przypadku nowych systemów z „nowocze
   <data name="CommandType_MonitorSleepPowerPlanCommand" xml:space="preserve">
     <value>MonitorSleepPowerPlan</value>
   </data>
+  <data name="ConfigMqtt_CbDisableDefaultEntityId" xml:space="preserve">
+    <value>Wyłącz generowanie domyślnego identyfikatora jednostki (obowiązują domyślne ustawienia Home Assistant)</value>
+  </data>
 </root>
