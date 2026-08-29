@@ -70,6 +70,14 @@ public class LibreHardwareMonitorSensors : AbstractMultiValueSensor
 
     private static readonly SensorTypeMapping UnknownTypeMapping = new(string.Empty, "mdi:chip");
 
+    /// <summary>
+    /// Connection speed is reported as a throughput sensor, but its value is a bit rate rather
+    /// than a byte rate, and its displayed unit scales through bps, Kbps, Mbps and Gbps.
+    /// </summary>
+    private const string ThroughputSensorType = "Throughput";
+    private const string ConnectionSpeedSensorName = "Connection Speed";
+    private static readonly SensorTypeMapping ConnectionSpeedMapping = new("data_rate", "mdi:ethernet", "bit/s");
+
     // matches a number followed by an optional unit, eg. '45.0 C', '1679 RPM' or '40.500'
     private static readonly Regex ValuePattern = new(@"^\s*(-?[0-9.,]+)\s*(.*?)\s*$", RegexOptions.Compiled);
 
@@ -136,10 +144,9 @@ public class LibreHardwareMonitorSensors : AbstractMultiValueSensor
                 continue;
             }
 
-            var mapping = GetTypeMapping(reading.Type);
             var entityName = $"{parentSensorSafeName}_{safeSensorId}";
 
-            var sensor = new DataTypeDoubleSensor(_updateInterval, entityName, reading.Name, sensorId, mapping.DeviceClass, mapping.StateClass, mapping.Icon, reading.Unit, EntityName);
+            var sensor = new DataTypeDoubleSensor(_updateInterval, entityName, reading.Name, sensorId, reading.Mapping.DeviceClass, reading.Mapping.StateClass, reading.Mapping.Icon, reading.Unit, EntityName);
             sensor.SetState(reading.Value);
 
             AddUpdateSensor(sensorId, sensor);
@@ -188,7 +195,8 @@ public class LibreHardwareMonitorSensors : AbstractMultiValueSensor
         if (_typeFilter.Count > 0 && !_typeFilter.Contains(sensorType))
             return null;
 
-        var mapping = GetTypeMapping(sensorType);
+        var text = node.Value<string>("Text") ?? string.Empty;
+        var mapping = GetTypeMapping(sensorType, text);
 
         // skips the sensors reporting 'NaN' or '-', which have no value to publish
         if (!TryReadValue(node, mapping, out var value, out var unit))
@@ -198,8 +206,9 @@ public class LibreHardwareMonitorSensors : AbstractMultiValueSensor
         {
             SensorId = sensorId,
             Hardware = ancestors.Count >= 2 ? ancestors[ancestors.Count - 2] : string.Empty,
-            Text = node.Value<string>("Text") ?? string.Empty,
+            Text = text,
             Type = sensorType,
+            Mapping = mapping,
             Value = value,
             Unit = unit
         };
@@ -338,7 +347,15 @@ public class LibreHardwareMonitorSensors : AbstractMultiValueSensor
         return typeFilter;
     }
 
-    private static SensorTypeMapping GetTypeMapping(string sensorType) => TypeMappings.TryGetValue(sensorType, out var mapping) ? mapping : UnknownTypeMapping;
+    private static SensorTypeMapping GetTypeMapping(string sensorType, string text)
+    {
+        if (string.Equals(sensorType, ThroughputSensorType, StringComparison.OrdinalIgnoreCase)
+            && string.Equals(text, ConnectionSpeedSensorName, StringComparison.OrdinalIgnoreCase))
+            return ConnectionSpeedMapping;
+
+        return TypeMappings.TryGetValue(sensorType, out var mapping) ? mapping : UnknownTypeMapping;
+    }
+
 
 
     /// <summary>
@@ -397,6 +414,7 @@ public class LibreHardwareMonitorSensors : AbstractMultiValueSensor
         internal string Hardware { get; init; }
         internal string Text { get; init; }
         internal string Type { get; init; }
+        internal SensorTypeMapping Mapping { get; init; }
         internal double Value { get; init; }
         internal string Unit { get; init; }
         internal string Name { get; set; }
