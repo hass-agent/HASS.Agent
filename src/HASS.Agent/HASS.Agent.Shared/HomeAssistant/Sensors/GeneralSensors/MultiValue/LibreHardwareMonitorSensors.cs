@@ -27,29 +27,43 @@ public class LibreHardwareMonitorSensors : AbstractMultiValueSensor
     /// </summary>
     public const string StatusEntitySuffix = "_status";
 
-    private const string StateClass = "measurement";
+    private const string StateClassMeasurement = "measurement";
+    private const string StateClassTotalIncreasing = "total_increasing";
     private const string StatusOk = "ok";
     private const string StatusUnreachable = "unreachable";
 
     /// <summary>
-    /// Maps a LibreHardwareMonitor sensor type onto its Home Assistant device class and icon.
-    /// A type whose displayed unit isn't stable carries a fixed unit here and reads its number
-    /// from 'RawValue', which is always in base units.
+    /// Maps every LibreHardwareMonitor sensor type onto its Home Assistant device class, icon
+    /// and state class.
     /// </summary>
+    /// <remarks>
+    /// A type whose displayed unit isn't stable, or which is published without one, carries a
+    /// fixed unit here and reads its number from 'RawValue', which is always in base units.
+    /// A device class is only assigned where the unit LibreHardwareMonitor reports is a valid
+    /// one for it: energy is published in mWh and conductivity in µS/cm, neither of which Home
+    /// Assistant accepts for its matching device class, so those are left without one.
+    /// </remarks>
     private static readonly Dictionary<string, SensorTypeMapping> TypeMappings = new(StringComparer.OrdinalIgnoreCase)
     {
         { "Clock", new SensorTypeMapping("frequency", "mdi:speedometer") },
+        { "Conductivity", new SensorTypeMapping(string.Empty, "mdi:water-opacity") },
         { "Control", new SensorTypeMapping(string.Empty, "mdi:fan") },
         { "Current", new SensorTypeMapping("current", "mdi:current-dc") },
         { "Data", new SensorTypeMapping("data_size", "mdi:harddisk") },
+        { "Energy", new SensorTypeMapping(string.Empty, "mdi:lightning-bolt", stateClass: StateClassTotalIncreasing) },
         { "Factor", new SensorTypeMapping(string.Empty, "mdi:numeric") },
         { "Fan", new SensorTypeMapping(string.Empty, "mdi:fan") },
-        { "Level", new SensorTypeMapping(string.Empty, "mdi:water-percent") },
+        { "Flow", new SensorTypeMapping("volume_flow_rate", "mdi:water-pump") },
+        { "Frequency", new SensorTypeMapping("frequency", "mdi:pulse") },
+        { "Humidity", new SensorTypeMapping("humidity", "mdi:water-percent") },
+        { "Level", new SensorTypeMapping(string.Empty, "mdi:gauge-low") },
         { "Load", new SensorTypeMapping(string.Empty, "mdi:gauge") },
+        { "Noise", new SensorTypeMapping("sound_pressure", "mdi:volume-high") },
         { "Power", new SensorTypeMapping("power", "mdi:flash") },
         { "SmallData", new SensorTypeMapping("data_size", "mdi:memory") },
         { "Temperature", new SensorTypeMapping("temperature", "mdi:thermometer") },
         { "Throughput", new SensorTypeMapping("data_rate", "mdi:swap-vertical", "B/s") },
+        { "TimeSpan", new SensorTypeMapping("duration", "mdi:timer-sand", "s") },
         { "Timing", new SensorTypeMapping(string.Empty, "mdi:timer-outline") },
         { "Voltage", new SensorTypeMapping("voltage", "mdi:sine-wave") }
     };
@@ -125,7 +139,7 @@ public class LibreHardwareMonitorSensors : AbstractMultiValueSensor
             var mapping = GetTypeMapping(reading.Type);
             var entityName = $"{parentSensorSafeName}_{safeSensorId}";
 
-            var sensor = new DataTypeDoubleSensor(_updateInterval, entityName, reading.Name, sensorId, mapping.DeviceClass, StateClass, mapping.Icon, reading.Unit, EntityName);
+            var sensor = new DataTypeDoubleSensor(_updateInterval, entityName, reading.Name, sensorId, mapping.DeviceClass, mapping.StateClass, mapping.Icon, reading.Unit, EntityName);
             sensor.SetState(reading.Value);
 
             AddUpdateSensor(sensorId, sensor);
@@ -365,11 +379,14 @@ public class LibreHardwareMonitorSensors : AbstractMultiValueSensor
         /// </summary>
         internal string Unit { get; }
 
-        internal SensorTypeMapping(string deviceClass, string icon, string unit = "")
+        internal string StateClass { get; }
+
+        internal SensorTypeMapping(string deviceClass, string icon, string unit = "", string stateClass = StateClassMeasurement)
         {
             DeviceClass = deviceClass;
             Icon = icon;
             Unit = unit;
+            StateClass = stateClass;
         }
     }
 
