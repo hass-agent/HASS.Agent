@@ -33,8 +33,8 @@ public class LibreHardwareMonitorSensors : AbstractMultiValueSensor
 
     /// <summary>
     /// Maps a LibreHardwareMonitor sensor type onto its Home Assistant device class and icon.
-    /// Throughput takes its value from 'RawValue' because 'Value' switches between KB/s and MB/s
-    /// as the rate changes, while an entity's unit is fixed when it's announced to Home Assistant.
+    /// A type whose displayed unit isn't stable carries a fixed unit here and reads its number
+    /// from 'RawValue', which is always in base units.
     /// </summary>
     private static readonly Dictionary<string, SensorTypeMapping> TypeMappings = new(StringComparer.OrdinalIgnoreCase)
     {
@@ -49,7 +49,7 @@ public class LibreHardwareMonitorSensors : AbstractMultiValueSensor
         { "Power", new SensorTypeMapping("power", "mdi:flash") },
         { "SmallData", new SensorTypeMapping("data_size", "mdi:memory") },
         { "Temperature", new SensorTypeMapping("temperature", "mdi:thermometer") },
-        { "Throughput", new SensorTypeMapping("data_rate", "mdi:swap-vertical", true) },
+        { "Throughput", new SensorTypeMapping("data_rate", "mdi:swap-vertical", "B/s") },
         { "Timing", new SensorTypeMapping(string.Empty, "mdi:timer-outline") },
         { "Voltage", new SensorTypeMapping("voltage", "mdi:sine-wave") }
     };
@@ -175,10 +175,9 @@ public class LibreHardwareMonitorSensors : AbstractMultiValueSensor
             return null;
 
         var mapping = GetTypeMapping(sensorType);
-        var rawValue = node.Value<string>(mapping.UseRawValue ? "RawValue" : "Value");
 
         // skips the sensors reporting 'NaN' or '-', which have no value to publish
-        if (!TryParseValue(rawValue, out var value, out var unit))
+        if (!TryReadValue(node, mapping, out var value, out var unit))
             return null;
 
         return new Reading
@@ -190,6 +189,47 @@ public class LibreHardwareMonitorSensors : AbstractMultiValueSensor
             Value = value,
             Unit = unit
         };
+    }
+
+    /// <summary>
+    /// Reads a sensor's value and unit.
+    /// </summary>
+    /// <remarks>
+    /// 'Value' is a formatted string in every LibreHardwareMonitor version, so it's the reliable
+    /// source for the unit, and the only source that reflects a display preference such as
+    /// Fahrenheit. A type whose displayed unit isn't stable instead takes its number from
+    /// 'RawValue' and its unit from the mapping: 'RawValue' is a formatted string in older
+    /// versions and a bare number in newer ones, so it's read as a number where possible.
+    /// </remarks>
+    /// <param name="node"></param>
+    /// <param name="mapping"></param>
+    /// <param name="value"></param>
+    /// <param name="unit"></param>
+    /// <returns></returns>
+    private static bool TryReadValue(JToken node, SensorTypeMapping mapping, out double value, out string unit)
+    {
+        if (string.IsNullOrEmpty(mapping.Unit))
+            return TryParseValue(node.Value<string>("Value"), out value, out unit);
+
+        unit = mapping.Unit;
+        return TryReadNumber(node["RawValue"], out value);
+    }
+
+    private static bool TryReadNumber(JToken token, out double value)
+    {
+        value = 0d;
+
+        if (token == null)
+            return false;
+
+        // newer versions publish a bare number, which is read directly so no culture is involved
+        if (token.Type is JTokenType.Float or JTokenType.Integer)
+        {
+            value = token.Value<double>();
+            return double.IsFinite(value);
+        }
+
+        return TryParseValue(token.Value<string>(), out value, out _);
     }
 
     private static bool TryParseValue(string rawValue, out double value, out string unit)
@@ -318,15 +358,21 @@ public class LibreHardwareMonitorSensors : AbstractMultiValueSensor
     {
         internal string DeviceClass { get; }
         internal string Icon { get; }
-        internal bool UseRawValue { get; }
 
-        internal SensorTypeMapping(string deviceClass, string icon, bool useRawValue = false)
+        /// <summary>
+        /// Fixed unit for a type whose displayed unit varies with its value. Empty means the unit
+        /// is taken from the sensor's own formatted value.
+        /// </summary>
+        internal string Unit { get; }
+
+        internal SensorTypeMapping(string deviceClass, string icon, string unit = "")
         {
             DeviceClass = deviceClass;
             Icon = icon;
-            UseRawValue = useRawValue;
+            Unit = unit;
         }
     }
+
 
     private sealed class Reading
     {
