@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using HASS.Agent.Shared.Functions;
 using HASS.Agent.Shared.HomeAssistant.Sensors.GeneralSensors.MultiValue.DataTypes;
 using HASS.Agent.Shared.Managers;
@@ -61,6 +62,8 @@ public class LibreHardwareMonitorSensors : AbstractMultiValueSensor
     private readonly int _updateInterval;
     private readonly HashSet<string> _typeFilter;
 
+    private bool _initialAnnouncementDone;
+
     public string EndpointUrl { get; protected set; }
     public string SensorTypes { get; protected set; }
 
@@ -75,6 +78,8 @@ public class LibreHardwareMonitorSensors : AbstractMultiValueSensor
         _typeFilter = ParseTypeFilter(SensorTypes);
 
         UpdateSensorValues();
+
+        _initialAnnouncementDone = true;
     }
 
     private void AddUpdateSensor(string sensorId, AbstractSingleValueSensor sensor)
@@ -97,6 +102,8 @@ public class LibreHardwareMonitorSensors : AbstractMultiValueSensor
             SetStatusSensor(parentSensorSafeName, StatusUnreachable);
             return;
         }
+
+        var newSensors = new List<AbstractSingleValueSensor>();
 
         var readings = new List<Reading>();
         CollectReadings(document, new List<string>(), readings);
@@ -122,9 +129,15 @@ public class LibreHardwareMonitorSensors : AbstractMultiValueSensor
             sensor.SetState(reading.Value);
 
             AddUpdateSensor(sensorId, sensor);
+
+            if (_initialAnnouncementDone)
+                newSensors.Add(sensor);
         }
 
         SetStatusSensor(parentSensorSafeName, StatusOk);
+
+        if (newSensors.Count > 0)
+            AnnounceSensors(newSensors);
     }
 
     /// <summary>
@@ -272,6 +285,32 @@ public class LibreHardwareMonitorSensors : AbstractMultiValueSensor
     }
 
     private static SensorTypeMapping GetTypeMapping(string sensorType) => TypeMappings.TryGetValue(sensorType, out var mapping) ? mapping : UnknownTypeMapping;
+
+
+    /// <summary>
+    /// Announces sensors that appeared after the initial autodiscovery round, which would
+    /// otherwise publish their state without Home Assistant having a configuration for them
+    /// </summary>
+    /// <param name="sensors"></param>
+    private void AnnounceSensors(IReadOnlyList<AbstractSingleValueSensor> sensors)
+    {
+        _ = Task.Run(async () =>
+        {
+            foreach (var sensor in sensors)
+            {
+                try
+                {
+                    await sensor.PublishAutoDiscoveryConfigAsync();
+                }
+                catch (Exception ex)
+                {
+                    Log.Error(ex, "[LIBREHARDWAREMONITOR] [{name}] Error announcing sensor {sensor}: {err}", EntityName, sensor.EntityName, ex.Message);
+                }
+            }
+
+            Log.Information("[LIBREHARDWAREMONITOR] [{name}] Announced {count} newly discovered sensor(s)", EntityName, sensors.Count);
+        });
+    }
 
     public override DiscoveryConfigModel GetAutoDiscoveryConfig() => null;
 
