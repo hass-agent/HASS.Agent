@@ -27,6 +27,12 @@ public class LibreHardwareMonitorSensors : AbstractMultiValueSensor
     /// </summary>
     public const string StatusEntitySuffix = "_status";
 
+    /// <summary>
+    /// Decimals kept from a value read as a bare number, matching the most precise format
+    /// LibreHardwareMonitor displays
+    /// </summary>
+    private const int RawValueDecimals = 3;
+
     private const string StateClassMeasurement = "measurement";
     private const string StateClassTotalIncreasing = "total_increasing";
     private const string StatusOk = "ok";
@@ -249,7 +255,14 @@ public class LibreHardwareMonitorSensors : AbstractMultiValueSensor
         if (token.Type is JTokenType.Float or JTokenType.Integer)
         {
             value = token.Value<double>();
-            return double.IsFinite(value);
+
+            if (!double.IsFinite(value))
+                return false;
+
+            // a bare number carries the sensor's full precision, eg. 62.30000305175781 for a value
+            // LibreHardwareMonitor itself displays as 62.3
+            value = Math.Round(value, RawValueDecimals);
+            return true;
         }
 
         return TryParseValue(token.Value<string>(), out value, out _);
