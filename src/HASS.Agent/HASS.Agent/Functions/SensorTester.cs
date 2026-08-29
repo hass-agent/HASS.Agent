@@ -6,6 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using HASS.Agent.Models.Internal;
 using HASS.Agent.Shared.HomeAssistant.Sensors;
+using HASS.Agent.Shared.HomeAssistant.Sensors.GeneralSensors.MultiValue;
+using HASS.Agent.Shared.Managers;
 using Serilog;
 
 namespace HASS.Agent.Functions
@@ -99,6 +101,41 @@ namespace HASS.Agent.Functions
             catch (Exception ex)
             {
                 Log.Fatal(ex, "[SENSORTESTER] Error while testing Powershell\r\nCommand: {command}\r\nError: {err}", command, ex.Message);
+                return new TestResult().SetFailed(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Creates a LibreHardwareMonitor sensor with the provided values and reports on the sensors it found
+        /// </summary>
+        /// <param name="endpointUrl"></param>
+        /// <param name="sensorTypes"></param>
+        /// <returns></returns>
+        internal static TestResult TestLibreHardwareMonitor(string endpointUrl, string sensorTypes)
+        {
+            try
+            {
+                // check the endpoint separately, so an unreachable one is reported with its reason
+                if (!HttpJsonManager.TryFetch(endpointUrl, out _, out var error))
+                    return new TestResult().SetFailed(error);
+
+                // create a new sensor
+                var libreHardwareMonitorSensors = new LibreHardwareMonitorSensors(null, null, null, endpointUrl, sensorTypes);
+
+                // the status sensor is always present, so it's not one of the discovered sensors
+                var sensors = libreHardwareMonitorSensors.Sensors.Values
+                    .Where(sensor => !sensor.EntityName.EndsWith(LibreHardwareMonitorSensors.StatusEntitySuffix))
+                    .OrderBy(sensor => sensor.Name)
+                    .ToList();
+
+                var preview = string.Join(Environment.NewLine, sensors.Take(5).Select(sensor => $"- {sensor.Name}: {sensor.GetState()}"));
+
+                // done
+                return new TestResult().SetSuccesful($"{sensors.Count}{Environment.NewLine}{Environment.NewLine}{preview}");
+            }
+            catch (Exception ex)
+            {
+                Log.Fatal(ex, "[SENSORTESTER] Error while testing LibreHardwareMonitor endpoint\r\nUrl: {url}\r\nError: {err}", endpointUrl, ex.Message);
                 return new TestResult().SetFailed(ex.Message);
             }
         }

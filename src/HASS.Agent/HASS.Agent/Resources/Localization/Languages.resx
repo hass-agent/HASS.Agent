@@ -3515,4 +3515,19 @@ Optionally filter by sensor type (comma-separated) to limit how many entities ar
   <data name="SensorsMod_BtnTest_LibreHardwareMonitor" xml:space="preserve">
     <value>Test endpoint</value>
   </data>
+  <data name="SensorsMod_TestLibreHardwareMonitor_MessageBox1" xml:space="preserve">
+    <value>Enter an endpoint URL first.</value>
+  </data>
+  <data name="SensorsMod_TestLibreHardwareMonitor_MessageBox2" xml:space="preserve">
+    <value>Endpoint reached, sensors found: {0}</value>
+  </data>
+  <data name="SensorsMod_TestLibreHardwareMonitor_MessageBox3" xml:space="preserve">
+    <value>The endpoint could not be queried:
+
+{0}
+ you want to open the logs folder?</value>
+  </data>
+  <data name="SensorsMod_LibreHardwareMonitorUrlInvalid" xml:space="preserve">
+    <value>Please enter a valid http:// or https:// endpoint URL!</value>
+  </data>
 </root>

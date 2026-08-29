@@ -600,6 +600,14 @@ namespace HASS.Agent.Sensors
 
             // =================================
 
+            sensorInfoCard = new SensorInfoCard(SensorType.LibreHardwareMonitorSensors,
+                Languages.SensorsManager_LibreHardwareMonitorSensorsDescription,
+                30, true, true, true);
+
+            SensorInfoCards.Add(sensorInfoCard.SensorType, sensorInfoCard);
+
+            // =================================
+
             sensorInfoCard = new SensorInfoCard(SensorType.LoggedUserSensor,
                 Languages.SensorsManager_LoggedUserSensorDescription,
                 10, false, true, true);

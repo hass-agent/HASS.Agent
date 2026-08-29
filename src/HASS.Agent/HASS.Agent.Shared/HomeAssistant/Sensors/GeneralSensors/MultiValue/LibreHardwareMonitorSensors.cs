@@ -21,6 +21,11 @@ public class LibreHardwareMonitorSensors : AbstractMultiValueSensor
     private const string DefaultName = "librehardwaremonitor";
     private const string DefaultEndpointUrl = "http://localhost:8085/data.json";
 
+    /// <summary>
+    /// Suffix of the entity reporting whether the endpoint is reachable
+    /// </summary>
+    public const string StatusEntitySuffix = "_status";
+
     private const string StateClass = "measurement";
     private const string StatusOk = "ok";
     private const string StatusUnreachable = "unreachable";
@@ -238,7 +243,7 @@ public class LibreHardwareMonitorSensors : AbstractMultiValueSensor
 
     private void SetStatusSensor(string parentSensorSafeName, string status)
     {
-        var statusId = $"{Id}_status";
+        var statusId = $"{Id}{StatusEntitySuffix}";
 
         if (Sensors.TryGetValue(statusId, out var knownSensor) && knownSensor is DataTypeStringSensor knownStringSensor)
         {
@@ -246,7 +251,7 @@ public class LibreHardwareMonitorSensors : AbstractMultiValueSensor
             return;
         }
 
-        var statusEntityName = $"{parentSensorSafeName}_status";
+        var statusEntityName = $"{parentSensorSafeName}{StatusEntitySuffix}";
         var statusSensor = new DataTypeStringSensor(_updateInterval, statusEntityName, "LibreHardwareMonitor Status", statusId, string.Empty, "mdi:connection", string.Empty, EntityName);
         statusSensor.SetState(status);
 

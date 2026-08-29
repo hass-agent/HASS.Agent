@@ -6940,6 +6940,15 @@ namespace HASS.Agent.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please enter a valid http:// or https:// endpoint URL!.
+        /// </summary>
+        internal static string SensorsMod_LibreHardwareMonitorUrlInvalid {
+            get {
+                return ResourceManager.GetString("SensorsMod_LibreHardwareMonitorUrlInvalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to WMI Scope (optional).
         /// </summary>
         internal static string SensorsMod_LblSetting2_Wmi {
@@ -7105,6 +7114,37 @@ namespace HASS.Agent.Resources.Localization {
         internal static string SensorsMod_TestWmi_MessageBox1 {
             get {
                 return ResourceManager.GetString("SensorsMod_TestWmi_MessageBox1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter an endpoint URL first.
+        /// </summary>
+        internal static string SensorsMod_TestLibreHardwareMonitor_MessageBox1 {
+            get {
+                return ResourceManager.GetString("SensorsMod_TestLibreHardwareMonitor_MessageBox1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Endpoint reached, sensors found: {0}.
+        /// </summary>
+        internal static string SensorsMod_TestLibreHardwareMonitor_MessageBox2 {
+            get {
+                return ResourceManager.GetString("SensorsMod_TestLibreHardwareMonitor_MessageBox2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The endpoint could not be queried:
+        ///
+        ///{0}
+        ///
+        ///Do you want to open the logs folder?.
+        /// </summary>
+        internal static string SensorsMod_TestLibreHardwareMonitor_MessageBox3 {
+            get {
+                return ResourceManager.GetString("SensorsMod_TestLibreHardwareMonitor_MessageBox3", resourceCulture);
             }
         }
         
