@@ -48,6 +48,9 @@ public class LibreHardwareMonitorSensors : AbstractMultiValueSensor
     /// A device class is only assigned where the unit LibreHardwareMonitor reports is a valid
     /// one for it: energy is published in mWh and conductivity in µS/cm, neither of which Home
     /// Assistant accepts for its matching device class, so those are left without one.
+    /// Data and small data are binary multiples, 2^30 and 2^20 bytes, which LibreHardwareMonitor
+    /// labels GB and MB; they are published as GiB and MiB so Home Assistant reads them as the
+    /// binary units they are.
     /// </remarks>
     private static readonly Dictionary<string, SensorTypeMapping> TypeMappings = new(StringComparer.OrdinalIgnoreCase)
     {
@@ -55,7 +58,7 @@ public class LibreHardwareMonitorSensors : AbstractMultiValueSensor
         { "Conductivity", new SensorTypeMapping(string.Empty, "mdi:water-opacity") },
         { "Control", new SensorTypeMapping(string.Empty, "mdi:fan") },
         { "Current", new SensorTypeMapping("current", "mdi:current-dc") },
-        { "Data", new SensorTypeMapping("data_size", "mdi:harddisk") },
+        { "Data", new SensorTypeMapping("data_size", "mdi:harddisk", "GiB") },
         { "Energy", new SensorTypeMapping(string.Empty, "mdi:lightning-bolt", stateClass: StateClassTotalIncreasing) },
         { "Factor", new SensorTypeMapping(string.Empty, "mdi:numeric") },
         { "Fan", new SensorTypeMapping(string.Empty, "mdi:fan") },
@@ -66,7 +69,7 @@ public class LibreHardwareMonitorSensors : AbstractMultiValueSensor
         { "Load", new SensorTypeMapping(string.Empty, "mdi:gauge") },
         { "Noise", new SensorTypeMapping("sound_pressure", "mdi:volume-high") },
         { "Power", new SensorTypeMapping("power", "mdi:flash") },
-        { "SmallData", new SensorTypeMapping("data_size", "mdi:memory") },
+        { "SmallData", new SensorTypeMapping("data_size", "mdi:memory", "MiB") },
         { "Temperature", new SensorTypeMapping("temperature", "mdi:thermometer") },
         { "Throughput", new SensorTypeMapping("data_rate", "mdi:swap-vertical", "B/s") },
         { "TimeSpan", new SensorTypeMapping("duration", "mdi:timer-sand", "s") },
