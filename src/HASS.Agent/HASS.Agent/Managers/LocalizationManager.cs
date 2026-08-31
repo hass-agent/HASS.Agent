@@ -1,4 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using HASS.Agent.Models.Internal;
 using HASS.Agent.Shared;
@@ -145,7 +145,7 @@ namespace HASS.Agent.Managers
         /// </summary>
         private static void LoadSupportedUILanguages()
         {
-            var supportedCultureList = new List<string> { "en", "pt-BR", "sl", "es", "nl", "de", "ru", "fr", "pl", "tr" };
+            var supportedCultureList = new List<string> { "en", "pt-BR", "sl", "es", "nl", "de", "ru", "fr", "pl", "tr", "zh-CN" };
 
             foreach (var supportedUILanguage in supportedCultureList.Select(supportedCulture => new CultureInfo(supportedCulture)).Select(culture => new SupportedUILanguage(culture)))
             {
