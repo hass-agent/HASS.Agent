@@ -22,6 +22,7 @@ namespace HASS.Agent.Satellite.Service.Extensions
             if (newSettings.MqttUseRetainFlag != currentSettings.MqttUseRetainFlag) return true;
             if (newSettings.MqttRootCertificate != currentSettings.MqttRootCertificate) return true;
             if (newSettings.MqttClientCertificate != currentSettings.MqttClientCertificate) return true;
+            if (newSettings.MqttDisableDefaultEntityId != currentSettings.MqttDisableDefaultEntityId) return true;
 
             return false;
         }

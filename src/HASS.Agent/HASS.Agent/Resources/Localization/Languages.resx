@@ -3483,4 +3483,7 @@ Note: due to "Modern Sleep" the sleep commands might behave differently dependin
   <data name="OnboardingMqtt_BtnTest_MessageError" xml:space="preserve">
     <value>Unable to connect.</value>
   </data>
+  <data name="ConfigMqtt_CbDisableDefaultEntityId" xml:space="preserve">
+    <value>Let Home Assistant generate entity IDs</value>
+  </data>
 </root>

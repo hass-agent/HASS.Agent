@@ -3582,4 +3582,7 @@ Sollte bei neuen Systemen mit „modernem S0ix-Schlafmodus“ eine bessere Benut
   <data name="CommandType_MonitorSleepPowerPlanCommand" xml:space="preserve">
     <value>MonitorSleepPowerPlan</value>
   </data>
+  <data name="ConfigMqtt_CbDisableDefaultEntityId" xml:space="preserve">
+    <value>Lassen Sie Home Assistant Entitäts-IDs generieren</value>
+  </data>
 </root>

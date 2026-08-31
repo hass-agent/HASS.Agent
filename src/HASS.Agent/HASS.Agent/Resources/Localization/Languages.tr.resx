@@ -3074,4 +3074,7 @@ Not: "Modern Uyku" nedeniyle uyku komutları, cihazın OEM ve işletim sistemi y
   <data name="CommandType_MonitorSleepPowerPlanCommand" xml:space="preserve">
     <value>MonitörUykuGüçPlanı</value>
   </data>
+  <data name="ConfigMqtt_CbDisableDefaultEntityId" xml:space="preserve">
+    <value>Home Assistant'ın varlık kimliklerini oluşturmasına izin verin.</value>
+  </data>
 </root>

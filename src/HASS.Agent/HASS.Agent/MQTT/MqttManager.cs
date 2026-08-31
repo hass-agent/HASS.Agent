@@ -47,6 +47,7 @@ namespace HASS.Agent.MQTT
         public bool IsConnected() => _mqttClient is { IsConnected: true };
 
         private bool _isReady = false;
+
         /// <summary>
         /// Returns whether MqttManager is ready for operation
         /// </summary>
@@ -365,6 +366,7 @@ namespace HASS.Agent.MQTT
         /// Publishes the provided message
         /// </summary>
         private DateTime _lastPublishFailedLogged = DateTime.MinValue;
+
         public async Task<bool> PublishAsync(MqttApplicationMessage message)
         {
             if (!Variables.AppSettings.MqttEnabled)
@@ -449,10 +451,25 @@ namespace HASS.Agent.MQTT
                 {
                     var payload = discoverable.GetAutoDiscoveryConfig();
                     if (discoverable.IgnoreAvailability)
+                    {
                         payload.Availability_topic = null;
+                    }
+
+                    if (Variables.AppSettings.MqttDisableDefaultEntityId)
+                    {
+                        if (payload is SensorDiscoveryConfigModel sensorModel) //NOTE(Amadeo): this is ugly, very ugly, not worth effort investment now with rewrite going on though
+                        {
+                            sensorModel.Default_entity_id = null;
+                        }
+                        else if (payload is CommandDiscoveryConfigModel commandModel)
+                        {
+                            commandModel.Default_entity_id = null;
+                        }
+                    }
 
                     messageBuilder.WithPayload(JsonConvert.SerializeObject(payload, payload.GetType(), JsonSerializerSettings));
                 }
+
                 await PublishAsync(messageBuilder.Build());
             }
             catch (Exception ex)
@@ -471,6 +488,7 @@ namespace HASS.Agent.MQTT
         /// Announce our availability
         /// </summary>
         private DateTime _lastAvailableAnnouncement = DateTime.MinValue;
+
         private DateTime _lastAvailableAnnouncementFailedLogged = DateTime.MinValue;
 
         public static readonly JsonSerializerSettings JsonSerializerSettings = new()
@@ -759,7 +777,7 @@ namespace HASS.Agent.MQTT
             {
                 clientTlsOptions.IgnoreCertificateChainErrors = Variables.AppSettings.MqttAllowUntrustedCertificates;
                 clientTlsOptions.IgnoreCertificateRevocationErrors = Variables.AppSettings.MqttAllowUntrustedCertificates;
-                clientTlsOptions.CertificateValidationHandler = delegate (MqttClientCertificateValidationEventArgs _)
+                clientTlsOptions.CertificateValidationHandler = delegate(MqttClientCertificateValidationEventArgs _)
                 {
                     return true;
                 };
@@ -929,7 +947,7 @@ namespace HASS.Agent.MQTT
                     SslProtocol = useTls ? SslProtocols.Tls12 : SslProtocols.None,
                     IgnoreCertificateChainErrors = true,
                     IgnoreCertificateRevocationErrors = true,
-                    CertificateValidationHandler = delegate (MqttClientCertificateValidationEventArgs _)
+                    CertificateValidationHandler = delegate(MqttClientCertificateValidationEventArgs _)
                     {
                         return true;
                     }

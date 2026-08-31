@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
 using Newtonsoft.Json;
 
 namespace HASS.Agent.Shared.Models.HomeAssistant
@@ -126,6 +127,7 @@ namespace HASS.Agent.Shared.Models.HomeAssistant
         public string Unique_id { get; set; }
 
         private string _objectId = string.Empty;
+
         /// <summary>
         /// (Optional) An ID that will be used by Home Assistant to generate the entity ID.
         /// If not provided, will be generated based on the sensor name and the device name.
@@ -150,11 +152,17 @@ namespace HASS.Agent.Shared.Models.HomeAssistant
             set => _objectId = value;
         }
 
+        private string _defaultEntityId = string.Empty;
+
         //TODO(Amadeo): move Object_id logic here once it's fully deprecated in HA (or even better, finish v3 rewrite and abandon this monstrosity of a code...)
         /// <summary>
         /// Default object id parameter required starting with HA 2025.10
         /// </summary>
-        public string Default_entity_id => $"{Domain}.{Object_id}";
+        public string Default_entity_id
+        {
+            get => _defaultEntityId == string.Empty ? $"{Domain}.{Object_id}" : _defaultEntityId;
+            set => _defaultEntityId = value;
+        }
 
         /// <summary>
         /// (Optional) Defines the units of measurement of the sensor, if any.
@@ -168,7 +176,7 @@ namespace HASS.Agent.Shared.Models.HomeAssistant
         /// <value></value>
         public string Value_template { get; set; }
 
-        public SensorDiscoveryConfigModel(string domain) :base(domain) { }
+        public SensorDiscoveryConfigModel(string domain) : base(domain) { }
     }
 
     [SuppressMessage("ReSharper", "InconsistentNaming")]
@@ -263,6 +271,7 @@ namespace HASS.Agent.Shared.Models.HomeAssistant
         public string Unique_id { get; set; }
 
         private string _objectId = string.Empty;
+
         /// <summary>
         /// (Optional) An ID that will be used by Home Assistant to generate the entity ID.
         /// If not provided, will be generated based on the sensor name and the device name.
@@ -287,11 +296,17 @@ namespace HASS.Agent.Shared.Models.HomeAssistant
             set => _objectId = value;
         }
 
+        private string _defaultEntityId = string.Empty;
+        
         //TODO(Amadeo): move Object_id logic here once it's fully deprecated in HA (or even better, finish v3 rewrite and abandon this monstrosity of a code...)
         /// <summary>
         /// Default object id parameter required starting with HA 2025.10
         /// </summary>
-        public string Default_entity_id => $"{Domain}.{Object_id}";
+        public string Default_entity_id
+        {
+            get => _defaultEntityId == string.Empty ? $"{Domain}.{Object_id}" : _defaultEntityId;
+            set => _defaultEntityId = value;
+        }
 
         /// <summary>
         /// (Optional) Defines a template to extract the value.

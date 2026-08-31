@@ -401,7 +401,21 @@ namespace HASS.Agent.Satellite.Service.MQTT
                 {
                     var payload = discoverable.GetAutoDiscoveryConfig();
                     if (discoverable.IgnoreAvailability)
+                    {
                         payload.Availability_topic = null;
+                    }
+                    
+                    if (Variables.ServiceMqttSettings.MqttDisableDefaultEntityId)
+                    {
+                        if (payload is SensorDiscoveryConfigModel sensorModel) //NOTE(Amadeo): this is ugly, very ugly, not worth effort investment now with rewrite going on though
+                        {
+                            sensorModel.Default_entity_id = null;
+                        }
+                        else if (payload is CommandDiscoveryConfigModel commandModel)
+                        {
+                            commandModel.Default_entity_id = null;
+                        }
+                    }
 
                     messageBuilder.WithPayload(JsonSerializer.Serialize(payload, payload.GetType(), options));
                 }

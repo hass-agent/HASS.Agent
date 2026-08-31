@@ -3330,4 +3330,7 @@ Deve proporcionar uma melhor experiência com novos sistemas com "suspensão S0i
   <data name="CommandType_MonitorSleepPowerPlanCommand" xml:space="preserve">
     <value>MonitorSleepPowerPlan</value>
   </data>
+  <data name="ConfigMqtt_CbDisableDefaultEntityId" xml:space="preserve">
+    <value>Permita que o Home Assistant gere IDs de entidade.</value>
+  </data>
 </root>

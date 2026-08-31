@@ -19,5 +19,6 @@
         public bool MqttUseRetainFlag { get; set; } = true;
         public string MqttRootCertificate { get; set; } = string.Empty;
         public string MqttClientCertificate { get; set; } = string.Empty;
+        public bool MqttDisableDefaultEntityId { get; set; } = false;
     }
 }
