@@ -3433,6 +3433,6 @@ Omogoča boljšo izkušnjo z novimi sistemi s »sodobnim načinom mirovanja S0ix
     <value>MonitorSleepPowerPlan</value>
   </data>
   <data name="ConfigMqtt_CbDisableDefaultEntityId" xml:space="preserve">
-    <value>Onemogoči generiranje privzetega ID-ja entitete (veljajo privzete nastavitve za Home Assistant)</value>
+    <value>Naj Home Assistant ustvari ID-je entitet</value>
   </data>
 </root>

@@ -505,7 +505,7 @@ namespace HASS.Agent.Controls.Configuration
             this.CbDisableDefaultEntityId.Font = new Font("Segoe UI", 10F);
             this.CbDisableDefaultEntityId.Location = new Point(59, 650);
             this.CbDisableDefaultEntityId.Name = "CbDisableDefaultEntityId";
-            this.CbDisableDefaultEntityId.Size = this.CbIgnoreGracePeriod.Size = new Size(354, 23);
+            this.CbDisableDefaultEntityId.Size = new Size(354, 23);
             this.CbDisableDefaultEntityId.TabIndex = 104;
             this.CbDisableDefaultEntityId.Text = Languages.ConfigMqtt_CbDisableDefaultEntityId;
             this.CbDisableDefaultEntityId.UseVisualStyleBackColor = true;

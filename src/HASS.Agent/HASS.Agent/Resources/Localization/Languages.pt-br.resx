@@ -3505,6 +3505,6 @@ Deve proporcionar uma melhor experiência com novos sistemas com "suspensão S0i
     <value>MonitorSleepPowerPlan</value>
   </data>
   <data name="ConfigMqtt_CbDisableDefaultEntityId" xml:space="preserve">
-    <value>Desativar a geração de IDs de entidade padrão (aplicam-se as configurações padrão do Home Assistant)</value>
+    <value>Permita que o Home Assistant gere IDs de entidade.</value>
   </data>
 </root>

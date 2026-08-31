@@ -2210,7 +2210,7 @@ namespace HASS.Agent.Shared.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Disable default entity id generation (Home Assistant defaults apply).
+        ///   Looks up a localized string similar to Let Home Assistant generate entity IDs.
         /// </summary>
         internal static string ConfigMqtt_CbDisableDefaultEntityId {
             get {

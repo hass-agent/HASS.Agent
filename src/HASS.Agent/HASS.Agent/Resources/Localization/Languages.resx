@@ -3484,6 +3484,6 @@ Note: due to "Modern Sleep" the sleep commands might behave differently dependin
     <value>Unable to connect.</value>
   </data>
   <data name="ConfigMqtt_CbDisableDefaultEntityId" xml:space="preserve">
-    <value>Disable default entity id generation (Home Assistant defaults apply)</value>
+    <value>Let Home Assistant generate entity IDs</value>
   </data>
 </root>

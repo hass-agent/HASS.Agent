@@ -3583,6 +3583,6 @@ Sollte bei neuen Systemen mit „modernem S0ix-Schlafmodus“ eine bessere Benut
     <value>MonitorSleepPowerPlan</value>
   </data>
   <data name="ConfigMqtt_CbDisableDefaultEntityId" xml:space="preserve">
-    <value>Standardmäßige Entitäts-ID-Generierung deaktivieren (Standardeinstellungen von Home Assistant gelten)</value>
+    <value>Lassen Sie Home Assistant Entitäts-IDs generieren</value>
   </data>
 </root>

@@ -3529,6 +3529,6 @@ Home Assistant.
     <value>MonitorSleepPowerPlan</value>
   </data>
   <data name="ConfigMqtt_CbDisableDefaultEntityId" xml:space="preserve">
-    <value>Отключить генерацию идентификаторов сущностей по умолчанию (применяются настройки Home Assistant по умолчанию).</value>
+    <value>Пусть Home Assistant генерирует идентификаторы сущностей</value>
   </data>
 </root>
