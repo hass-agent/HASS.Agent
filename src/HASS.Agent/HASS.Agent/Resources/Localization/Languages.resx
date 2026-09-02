@@ -3490,7 +3490,8 @@ Note: due to "Modern Sleep" the sleep commands might behave differently dependin
     <value>PublishSensorCommand</value>
   </data>
   <data name="CommandsManager_PublishSensorCommandDescription" xml:space="preserve">
-    <value>Some desc</value>
+    <value>Forces specific sensor to be published right away, ignoring the interval.
+Use name configured in HASS.Agent.</value>
   </data>
   <data name="CommandsMod_LblSetting_SensorId" xml:space="preserve">
     <value>Sensor Name</value>

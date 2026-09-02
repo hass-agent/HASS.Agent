@@ -3494,7 +3494,8 @@ Should provide better experience with new systems with "modern S0ix sleep" and n
     <value>PublishSensorCommand</value>
   </data>
   <data name="CommandsManager_PublishSensorCommandDescription" xml:space="preserve">
-    <value>Some desc</value>
+    <value>Forces specific sensor to be published right away, ignoring the interval.
+Use name configured in HASS.Agent.</value>
   </data>
   <data name="CommandsMod_LblSetting_SensorId" xml:space="preserve">
     <value>Sensor Name</value>

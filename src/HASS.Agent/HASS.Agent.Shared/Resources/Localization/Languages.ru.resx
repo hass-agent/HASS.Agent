@@ -3354,4 +3354,14 @@ Home Assistant.
   <data name="ConfigMqtt_CbDisableDefaultEntityId" xml:space="preserve">
     <value>Пусть Home Assistant генерирует идентификаторы сущностей</value>
   </data>
+  <data name="CommandsMod_LblSetting_SensorId" xml:space="preserve">
+    <value>Название датчика</value>
+  </data>
+  <data name="CommandType_PublishSensorCommand" xml:space="preserve">
+    <value>PublishSensorCommand</value>
+  </data>
+  <data name="CommandsManager_PublishSensorCommandDescription" xml:space="preserve">
+    <value>Принудительно публикует данные с конкретного датчика немедленно, игнорируя интервал.
+Используйте имя, заданное в HASS.Agent.</value>
+  </data>
 </root>

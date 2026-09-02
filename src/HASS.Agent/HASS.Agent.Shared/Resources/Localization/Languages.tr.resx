@@ -2893,4 +2893,14 @@ Not: "Modern Uyku" nedeniyle uyku komutları, cihazın OEM ve işletim sistemi y
   <data name="ConfigMqtt_CbDisableDefaultEntityId" xml:space="preserve">
     <value>Home Assistant'ın varlık kimliklerini oluşturmasına izin verin.</value>
   </data>
+  <data name="CommandsMod_LblSetting_SensorId" xml:space="preserve">
+    <value>Sensör Adı</value>
+  </data>
+  <data name="CommandType_PublishSensorCommand" xml:space="preserve">
+    <value>PublishSensorCommand</value>
+  </data>
+  <data name="CommandsManager_PublishSensorCommandDescription" xml:space="preserve">
+    <value>Belirtilen sensörün aralığı dikkate almadan hemen yayınlanmasını sağlar.
+HASS.Agent'ta yapılandırılmış adı kullanın.</value>
+  </data>
 </root>

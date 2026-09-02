@@ -3319,4 +3319,15 @@ Cela devrait offrir une meilleure expérience avec les nouveaux systèmes dotés
   <data name="ConfigMqtt_CbDisableDefaultEntityId" xml:space="preserve">
     <value>Laissez Home Assistant générer les identifiants d'entité.</value>
   </data>
+  <data name="CommandsMod_LblSetting_SensorId" xml:space="preserve">
+    <value>Nom du capteur</value>
+  </data>
+  <data name="CommandType_PublishSensorCommand" xml:space="preserve">
+    <value>Publier la commande du capteur</value>
+  </data>
+  <data name="CommandsManager_PublishSensorCommandDescription" xml:space="preserve">
+    <value>Force la publication immédiate du capteur spécifique, sans tenir compte de l'intervalle.
+
+Utilisez le nom configuré dans HASS.Agent.</value>
+  </data>
 </root>

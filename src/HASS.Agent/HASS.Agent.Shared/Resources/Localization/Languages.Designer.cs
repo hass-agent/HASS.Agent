@@ -558,7 +558,8 @@ namespace HASS.Agent.Shared.Resources.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Some desc.
+        ///   Looks up a localized string similar to Forces specific sensor to be published right away, ignoring the interval.
+        ///Use name configured in HASS.Agent..
         /// </summary>
         internal static string CommandsManager_PublishSensorCommandDescription {
             get {

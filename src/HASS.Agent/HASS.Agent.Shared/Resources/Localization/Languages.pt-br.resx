@@ -3333,4 +3333,14 @@ Deve proporcionar uma melhor experiência com novos sistemas com "suspensão S0i
   <data name="ConfigMqtt_CbDisableDefaultEntityId" xml:space="preserve">
     <value>Permita que o Home Assistant gere IDs de entidade.</value>
   </data>
+  <data name="CommandsMod_LblSetting_SensorId" xml:space="preserve">
+    <value>Nome do sensor</value>
+  </data>
+  <data name="CommandType_PublishSensorCommand" xml:space="preserve">
+    <value>PublicarComandoSensor</value>
+  </data>
+  <data name="CommandsManager_PublishSensorCommandDescription" xml:space="preserve">
+    <value>Força a publicação imediata de um sensor específico, ignorando o intervalo.
+Use o nome configurado em HASS.Agent.</value>
+  </data>
 </root>
