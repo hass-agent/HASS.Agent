@@ -4,10 +4,12 @@ using System.Net.NetworkInformation;
 using ByteSizeLib;
 using HASS.Agent.Shared.Functions;
 using HASS.Agent.Shared.HomeAssistant.Sensors.GeneralSensors.MultiValue.DataTypes;
+using HASS.Agent.Shared.Managers;
 using HASS.Agent.Shared.Models.HomeAssistant;
 using HASS.Agent.Shared.Models.Internal;
 using Newtonsoft.Json;
 using Serilog;
+using Vanara.PInvoke.NetListMgr;
 
 namespace HASS.Agent.Shared.HomeAssistant.Sensors.GeneralSensors.MultiValue;
 
@@ -24,7 +26,8 @@ public class NetworkSensors : AbstractMultiValueSensor
 
     public override sealed Dictionary<string, AbstractSingleValueSensor> Sensors { get; protected set; } = new Dictionary<string, AbstractSingleValueSensor>();
 
-    public NetworkSensors(int? updateInterval = null, string entityName = DefaultName, string name = DefaultName, string networkCard = "*", string id = default) : base(entityName ?? DefaultName, name ?? null, updateInterval ?? 30, id)
+    public NetworkSensors(int? updateInterval = null, string entityName = DefaultName, string name = DefaultName, string networkCard = "*", string id = default) : base(
+        entityName ?? DefaultName, name ?? null, updateInterval ?? 30, id)
     {
         _updateInterval = updateInterval ?? 30;
 
@@ -36,13 +39,10 @@ public class NetworkSensors : AbstractMultiValueSensor
 
     private void AddUpdateSensor(string sensorId, AbstractSingleValueSensor sensor)
     {
-        if (!Sensors.ContainsKey(sensorId))
-            Sensors.Add(sensorId, sensor);
-        else
-            Sensors[sensorId] = sensor;
+        Sensors[sensorId] = sensor;
     }
 
-    public override sealed void UpdateSensorValues()
+    public sealed override void UpdateSensorValues()
     {
         var parentSensorSafeName = SharedHelperFunctions.GetSafeValue(EntityName);
 
@@ -80,6 +80,7 @@ public class NetworkSensors : AbstractMultiValueSensor
                 networkInfo.IncomingPacketsWithUnknownProtocol = interfaceStats.IncomingUnknownProtocolPackets;
                 networkInfo.OutgoingPacketsDiscarded = interfaceStats.OutgoingPacketsDiscarded;
                 networkInfo.OutgoingPacketsWithErrors = interfaceStats.OutgoingPacketsWithErrors;
+                networkInfo.AccessType = NetworkManager.GetNetworkAccessType(nic);
 
                 var nicProperties = nic.GetIPProperties();
 
@@ -123,7 +124,8 @@ public class NetworkSensors : AbstractMultiValueSensor
                 var info = JsonConvert.SerializeObject(networkInfo, Formatting.Indented);
                 var networkInfoEntityName = $"{parentSensorSafeName}_{id}";
                 var networkInfoId = $"{Id}_{id}";
-                var networkInfoSensor = new DataTypeStringSensor(_updateInterval, networkInfoEntityName, nic.Name, networkInfoId, string.Empty, "mdi:lan", string.Empty, EntityName, true);
+                var networkInfoSensor = new DataTypeStringSensor(_updateInterval, networkInfoEntityName, nic.Name, networkInfoId, string.Empty, "mdi:lan", string.Empty, EntityName,
+                    true);
 
                 networkInfoSensor.SetState(nic.OperationalStatus.ToString());
                 networkInfoSensor.SetAttributes(info);
@@ -139,7 +141,8 @@ public class NetworkSensors : AbstractMultiValueSensor
 
         var nicCountEntityName = $"{parentSensorSafeName}_total_network_card_count";
         var nicCountId = $"{Id}_total_network_card_count";
-        var nicCountSensor = new DataTypeIntSensor(_updateInterval, nicCountEntityName, "Network Card Count", nicCountId, string.Empty, "measurement", "mdi:lan", string.Empty, EntityName);
+        var nicCountSensor = new DataTypeIntSensor(_updateInterval, nicCountEntityName, "Network Card Count", nicCountId, string.Empty, "measurement", "mdi:lan", string.Empty,
+            EntityName);
         nicCountSensor.SetState(nicCount);
         AddUpdateSensor(nicCountId, nicCountSensor);
     }
