@@ -30,4 +30,20 @@ public class PublishSensorCommand : InternalCommand
 
         State = "OFF";
     }
+    
+    public override void TurnOnWithAction(string action)
+    {
+        State = "ON";
+
+        if (!string.IsNullOrWhiteSpace(action))
+        {
+            SensorsManager.ResetSensorCheck(action);
+        }
+        else
+        {
+            Log.Warning("[PUBLISHSENSOR] [{name}] Unable to launch command, it's configured as action-only", EntityName);
+        }
+
+        State = "OFF";
+    }
 }

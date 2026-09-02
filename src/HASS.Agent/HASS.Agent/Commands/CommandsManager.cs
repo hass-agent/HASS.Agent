@@ -475,7 +475,7 @@ namespace HASS.Agent.Commands
 
             commandInfoCard = new CommandInfoCard(CommandType.PublishSensorCommand,
                 Languages.CommandsManager_PublishSensorCommandDescription,
-                true, true, false);
+                true, true, true);
 
             CommandInfoCards.Add(commandInfoCard.CommandType, commandInfoCard);
 
