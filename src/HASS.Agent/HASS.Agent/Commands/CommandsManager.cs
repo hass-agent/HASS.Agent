@@ -470,6 +470,14 @@ namespace HASS.Agent.Commands
                 true, true, false);
 
             CommandInfoCards.Add(commandInfoCard.CommandType, commandInfoCard);
+            
+            // =================================
+
+            commandInfoCard = new CommandInfoCard(CommandType.PublishSensorCommand,
+                Languages.CommandsManager_PublishSensorCommandDescription,
+                true, true, false);
+
+            CommandInfoCards.Add(commandInfoCard.CommandType, commandInfoCard);
 
             // =================================
 

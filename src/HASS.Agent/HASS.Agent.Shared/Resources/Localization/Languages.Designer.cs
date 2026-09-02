@@ -558,6 +558,15 @@ namespace HASS.Agent.Shared.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Some desc.
+        /// </summary>
+        internal static string CommandsManager_PublishSensorCommandDescription {
+            get {
+                return ResourceManager.GetString("CommandsManager_PublishSensorCommandDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Restarts the machine after one minute.
         ///
         ///Tip: Accidentally triggered? Run &apos;shutdown /a&apos; to abort shutdown..
@@ -1000,6 +1009,15 @@ namespace HASS.Agent.Shared.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Sensor Name.
+        /// </summary>
+        internal static string CommandsMod_LblSetting_SensorId {
+            get {
+                return ResourceManager.GetString("CommandsMod_LblSetting_SensorId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to URL.
         /// </summary>
         internal static string CommandsMod_LblSetting_Url {
@@ -1274,6 +1292,15 @@ namespace HASS.Agent.Shared.Resources.Localization {
         internal static string CommandType_PublishAllSensorsCommand {
             get {
                 return ResourceManager.GetString("CommandType_PublishAllSensorsCommand", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to PublishSensorCommand.
+        /// </summary>
+        internal static string CommandType_PublishSensorCommand {
+            get {
+                return ResourceManager.GetString("CommandType_PublishSensorCommand", resourceCulture);
             }
         }
         
