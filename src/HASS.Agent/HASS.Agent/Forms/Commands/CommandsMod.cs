@@ -211,6 +211,10 @@ namespace HASS.Agent.Forms.Commands
                 case CommandType.SetAudioInputCommand:
                     TbSetting.Text = Command.Command;
                     break;
+                
+                case CommandType.PublishSensorCommand:
+                    TbSetting.Text = Command.Command;
+                    break;
             }
 
 			CbRunAsLowIntegrity.CheckState = Command.RunAsLowIntegrity ? CheckState.Checked : CheckState.Unchecked;
@@ -529,6 +533,21 @@ namespace HASS.Agent.Forms.Commands
                         return;
                     }
                     break;
+                
+                case CommandType.PublishSensorCommand:
+                    var sensorName = TbSetting.Text.Trim();
+                    if (string.IsNullOrEmpty(sensorName))
+                    {
+                        var q = MessageBoxAdv.Show(this, Languages.CommandsMod_MessageBox_Action, Variables.MessageBoxTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                        if (q != DialogResult.Yes)
+                        {
+                            ActiveControl = TbSetting;
+
+                            return;
+                        }
+                    }
+                    Command.Command = sensorName;
+                    break;
 			}
 
 			Command.RunAsLowIntegrity = CbRunAsLowIntegrity.CheckState == CheckState.Checked;
@@ -654,7 +673,11 @@ namespace HASS.Agent.Forms.Commands
 					CbConfigDropdown.DataSource = new BindingSource(_radioDevices, null);
 					SetRadioUi();
 					break;
-
+                
+                case CommandType.PublishSensorCommand:
+                    SetPublishSensorGui();
+                    break;
+                
 				default:
 					SetEmptyGui();
 					break;
@@ -699,6 +722,23 @@ namespace HASS.Agent.Forms.Commands
 				TbSetting.Visible = true;
 			}));
 		}
+        
+        /// <summary>
+        /// Change the UI to a 'powershell' type
+        /// </summary>
+        private void SetPublishSensorGui()
+        {
+            Invoke(new MethodInvoker(delegate
+            {
+                SetEmptyGui();
+
+                LblSetting.Text = Languages.CommandsMod_LblSetting_SensorId;
+                LblSetting.Visible = true;
+
+                TbSetting.Text = string.Empty;
+                TbSetting.Visible = true;
+            }));
+        }
 
 		/// <summary>
 		/// Change the UI to a 'key' type

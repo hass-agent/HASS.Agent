@@ -3308,4 +3308,15 @@ Zou een betere ervaring moeten bieden met nieuwe systemen met een "moderne S0ix-
   <data name="ConfigMqtt_CbDisableDefaultEntityId" xml:space="preserve">
     <value>Laat Home Assistant entiteits-ID's genereren.</value>
   </data>
+  <data name="CommandsMod_LblSetting_SensorId" xml:space="preserve">
+    <value>Sensornaam</value>
+  </data>
+  <data name="CommandType_PublishSensorCommand" xml:space="preserve">
+    <value>PublishSensorCommand</value>
+  </data>
+  <data name="CommandsManager_PublishSensorCommandDescription" xml:space="preserve">
+    <value>Dwingt de specifieke sensor om direct te publiceren, ongeacht het interval.
+
+Gebruik de naam die is geconfigureerd in HASS.Agent.</value>
+  </data>
 </root>

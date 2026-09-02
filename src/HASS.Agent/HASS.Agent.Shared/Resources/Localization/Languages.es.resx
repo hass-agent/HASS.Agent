@@ -3286,4 +3286,15 @@ Esto debería proporcionar una mejor experiencia con los nuevos sistemas con "su
   <data name="ConfigMqtt_CbDisableDefaultEntityId" xml:space="preserve">
     <value>Deja que Home Assistant genere identificadores de entidades.</value>
   </data>
+  <data name="CommandsMod_LblSetting_SensorId" xml:space="preserve">
+    <value>Nombre del sensor</value>
+  </data>
+  <data name="CommandType_PublishSensorCommand" xml:space="preserve">
+    <value>PublishSensorCommand</value>
+  </data>
+  <data name="CommandsManager_PublishSensorCommandDescription" xml:space="preserve">
+    <value>Fuerza la publicación inmediata de un sensor específico, ignorando el intervalo.
+
+Utiliza el nombre configurado en HASS.Agent.</value>
+  </data>
 </root>

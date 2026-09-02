@@ -132,6 +132,9 @@ namespace HASS.Agent.Satellite.Service.Settings
                 case CommandType.PublishAllSensorsCommand:
                     abstractCommand = new PublishAllSensorsCommand(command.EntityName, command.Name, command.EntityType, command.Id.ToString());
                     break;
+                case CommandType.PublishSensorCommand:
+                    abstractCommand = new PublishSensorCommand(command.EntityName, command.Name, command.Command, command.EntityType, command.Id.ToString());
+                    break;
                 case CommandType.CustomExecutorCommand:
                     abstractCommand = new CustomExecutorCommand(command.EntityName, command.Name, command.Command, command.EntityType, command.Id.ToString());
                     break;

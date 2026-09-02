@@ -3571,4 +3571,14 @@ Powinno to zapewnić lepsze działanie w przypadku nowych systemów z „nowocze
   <data name="ConfigMqtt_CbDisableDefaultEntityId" xml:space="preserve">
     <value>Pozwól Home Assistant generować identyfikatory jednostek</value>
   </data>
+  <data name="CommandsMod_LblSetting_SensorId" xml:space="preserve">
+    <value>Nazwa czujnika</value>
+  </data>
+  <data name="CommandType_PublishSensorCommand" xml:space="preserve">
+    <value>PublishSensorCommand</value>
+  </data>
+  <data name="CommandsManager_PublishSensorCommandDescription" xml:space="preserve">
+    <value>Wymusza natychmiastową publikację określonego czujnika, ignorując interwał.
+Użyj nazwy skonfigurowanej w HASS.Agent.</value>
+  </data>
 </root>

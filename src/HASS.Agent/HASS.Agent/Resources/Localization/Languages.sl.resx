@@ -3610,4 +3610,14 @@ Omogoča boljšo izkušnjo z novimi sistemi s »sodobnim načinom mirovanja S0ix
   <data name="ConfigMqtt_CbDisableDefaultEntityId" xml:space="preserve">
     <value>Naj Home Assistant ustvari ID-je entitet</value>
   </data>
+  <data name="CommandsMod_LblSetting_SensorId" xml:space="preserve">
+    <value>Ime senzorja</value>
+  </data>
+  <data name="CommandType_PublishSensorCommand" xml:space="preserve">
+    <value>PublishSensorCommand</value>
+  </data>
+  <data name="CommandsManager_PublishSensorCommandDescription" xml:space="preserve">
+    <value>Vsili takojšnjo objavo določenega senzorja, pri čemer se interval prezre.
+Uporabi ime, konfigurirano v HASS.Agent.</value>
+  </data>
 </root>

@@ -3585,4 +3585,14 @@ Sollte bei neuen Systemen mit „modernem S0ix-Schlafmodus“ eine bessere Benut
   <data name="ConfigMqtt_CbDisableDefaultEntityId" xml:space="preserve">
     <value>Lassen Sie Home Assistant Entitäts-IDs generieren</value>
   </data>
+  <data name="CommandsMod_LblSetting_SensorId" xml:space="preserve">
+    <value>Sensorname</value>
+  </data>
+  <data name="CommandType_PublishSensorCommand" xml:space="preserve">
+    <value>PublishSensorCommand</value>
+  </data>
+  <data name="CommandsManager_PublishSensorCommandDescription" xml:space="preserve">
+    <value>Erzwingt die sofortige Veröffentlichung eines bestimmten Sensors, unabhängig vom Intervall.
+Verwendet den in HASS.Agent konfigurierten Namen.</value>
+  </data>
 </root>
