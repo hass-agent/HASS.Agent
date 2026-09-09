@@ -41,11 +41,15 @@ namespace HASS.Agent
         private static void Main(string[] args)
         {
             WinRT.ComWrappersSupport.InitializeComWrappers();
-            var redirectRequired = CheckRedirection();
-
-            if (redirectRequired)
+            
+            if (args.Length == 0)
             {
-                return;
+                var redirectRequired = CheckRedirection();
+
+                if (redirectRequired)
+                {
+                    return;
+                }
             }
 
             using var appMutex = new Mutex(false, "HASS.Agent.App.Mutex");
