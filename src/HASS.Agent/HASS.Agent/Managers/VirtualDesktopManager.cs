@@ -13,20 +13,12 @@ namespace HASS.Agent.Managers;
 //Note(Amadeo): due to poor m$ decisions on availability of the Virtual Desktop management APIs, there is no good way to manage Virtual Desktops with publicly available ones.
 //We need to rely on on Community made ones which can stop working with new Windows version due to changes in the COM object name changes.
 //This means it's required to limit the functionality on systems not to expose users to runtime application errors.
-//Update(09.2026): what is more, looks like the library has a taskbar restart hook that causes HASS.Agent to crash when taskbar is recreated...
 internal static class VirtualDesktopManager
 {
     public static bool Initialized { get; private set; } = false;
 
-    internal static void Initialize()
+    internal static bool Initialize()
     {
-        if (Variables.AppSettings.DisableVirtualDesktopInitialization)
-        {
-            Initialized = false;
-            Log.Information("[VIRTDESKT] Virtual Desktop Manager initialization disabled");
-            return;
-        }
-        
         try
         {
             VirtualDesktop.Configure();
@@ -36,8 +28,10 @@ internal static class VirtualDesktopManager
         catch
         {
             Initialized = false;
-            Log.Error("[VIRTDESKT] Error initializing Virtual Desktop Manager, your Windows version may be unsupported, please disable initialization in HASS.Agent startup settings!"); //TODO(Amadeo): add link to documentation explaining the issue.
+            Log.Error("[VIRTDESKT] Error initializing Virtual Desktop Manager, your Windows version may be unsupported"); //TODO(Amadeo): add link to documentation explaining the issue.
         }
+
+        return Initialized;
     }
 
     internal static void ActivateDesktop(string virtualDesktopId)
@@ -45,10 +39,10 @@ internal static class VirtualDesktopManager
         if (!Initialized)
         {
             Log.Warning("[VIRTDESKT] Cannot activate virtual desktop, manager not initialized");
-            return;
         }
 
-        var parsed = Guid.TryParse(virtualDesktopId, out var targetDesktopGuid);
+        Guid targetDesktopGuid;
+        var parsed = Guid.TryParse(virtualDesktopId, out targetDesktopGuid);
         if (!parsed)
         {
             Log.Warning("[VIRTDESKT] Unable to parse virtual desktop id: {virtualDesktopId}", virtualDesktopId);
@@ -63,7 +57,6 @@ internal static class VirtualDesktopManager
         if (!Initialized)
         {
             Log.Warning("[VIRTDESKT] Cannot activate virtual desktop, manager not initialized");
-            return;
         }
 
         try
@@ -118,12 +111,6 @@ internal static class VirtualDesktopManager
     {
         var desktops = new Dictionary<string, string>();
 
-        if (!Initialized)
-        {
-            Log.Warning("[VIRTDESKT] Cannot get all virtual desktops, manager not initialized");
-            return desktops;
-        }
-        
         try
         {
             foreach (var desktop in VirtualDesktop.GetDesktops())

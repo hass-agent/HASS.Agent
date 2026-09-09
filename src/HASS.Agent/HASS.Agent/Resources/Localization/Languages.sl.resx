@@ -3620,10 +3620,4 @@ Omogoča boljšo izkušnjo z novimi sistemi s »sodobnim načinom mirovanja S0ix
     <value>Vsili takojšnjo objavo določenega senzorja, pri čemer se interval prezre.
 Uporabi ime, konfigurirano v HASS.Agent.</value>
   </data>
-  <data name="ConfigStartup_LblInfo2VirtualDesktop" xml:space="preserve">
-    <value>Knjižnica navideznega namizja bo povzročala težave na nepodprtih sistemih, omogočite to možnost, da preprečite sesutje HASS.Agent.</value>
-  </data>
-  <data name="ConfigStartup_LblInfo2VirtualDesktopCheckbox" xml:space="preserve">
-    <value>Onemogoči inicializacijo knjižnice Virtual Desktop</value>
-  </data>
 </root>

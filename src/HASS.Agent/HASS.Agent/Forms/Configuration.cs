@@ -489,15 +489,9 @@ namespace HASS.Agent.Forms
                 ? CheckState.Checked
                 : CheckState.Unchecked;
 
-            // nfc
             _nfc.CbEnableNfc.CheckState =
                 Variables.AppSettings.NfcScanningEnabled ? CheckState.Checked : CheckState.Unchecked;
 
-            // virtual desktop
-            _startup.CbDisableVirtualDesktopInitalization.CheckState = Variables.AppSettings.DisableVirtualDesktopInitialization
-                ? CheckState.Checked
-                : CheckState.Unchecked;
-            
             // done
             _initializing = false;
         }
@@ -628,9 +622,6 @@ namespace HASS.Agent.Forms
                 ? string.Empty
                 : _nfc.CbNfcScanner.SelectedItem.ToString();
 
-            // virtual desktop
-            Variables.AppSettings.DisableVirtualDesktopInitialization = _startup.CbDisableVirtualDesktopInitalization.CheckState == CheckState.Checked;
-            
             // save to file
             SettingsManager.StoreAppSettings();
         }

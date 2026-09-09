@@ -35,10 +35,6 @@ namespace HASS.Agent.Controls.Configuration
             this.BtnSetStartOnLogin = new Syncfusion.WinForms.Controls.SfButton();
             this.LblStartOnLoginStatus = new System.Windows.Forms.Label();
             this.LblStartOnLoginStatusInfo = new System.Windows.Forms.Label();
-            this.PbLine1 = new System.Windows.Forms.PictureBox();
-            this.LblInfo2 = new System.Windows.Forms.Label();
-            this.CbDisableVirtualDesktopInitalization = new System.Windows.Forms.CheckBox();
-            ((System.ComponentModel.ISupportInitialize)(this.PbLine1)).BeginInit();
             this.SuspendLayout();
             // 
             // LblInfo1
@@ -61,7 +57,7 @@ namespace HASS.Agent.Controls.Configuration
             this.BtnSetStartOnLogin.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(63)))), ((int)(((byte)(70)))));
             this.BtnSetStartOnLogin.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.BtnSetStartOnLogin.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
-            this.BtnSetStartOnLogin.Location = new System.Drawing.Point(222, 204);
+            this.BtnSetStartOnLogin.Location = new System.Drawing.Point(222, 294);
             this.BtnSetStartOnLogin.Name = "BtnSetStartOnLogin";
             this.BtnSetStartOnLogin.Size = new System.Drawing.Size(295, 31);
             this.BtnSetStartOnLogin.Style.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(63)))), ((int)(((byte)(70)))));
@@ -82,7 +78,7 @@ namespace HASS.Agent.Controls.Configuration
             this.LblStartOnLoginStatus.AccessibleName = "Status";
             this.LblStartOnLoginStatus.AccessibleRole = System.Windows.Forms.AccessibleRole.StaticText;
             this.LblStartOnLoginStatus.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.LblStartOnLoginStatus.Location = new System.Drawing.Point(398, 145);
+            this.LblStartOnLoginStatus.Location = new System.Drawing.Point(398, 205);
             this.LblStartOnLoginStatus.Name = "LblStartOnLoginStatus";
             this.LblStartOnLoginStatus.Size = new System.Drawing.Size(119, 19);
             this.LblStartOnLoginStatus.TabIndex = 13;
@@ -96,53 +92,12 @@ namespace HASS.Agent.Controls.Configuration
             this.LblStartOnLoginStatusInfo.AccessibleRole = System.Windows.Forms.AccessibleRole.StaticText;
             this.LblStartOnLoginStatusInfo.AutoSize = true;
             this.LblStartOnLoginStatusInfo.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.LblStartOnLoginStatusInfo.Location = new System.Drawing.Point(222, 145);
+            this.LblStartOnLoginStatusInfo.Location = new System.Drawing.Point(222, 205);
             this.LblStartOnLoginStatusInfo.Name = "LblStartOnLoginStatusInfo";
             this.LblStartOnLoginStatusInfo.Size = new System.Drawing.Size(139, 19);
             this.LblStartOnLoginStatusInfo.TabIndex = 12;
             this.LblStartOnLoginStatusInfo.Text = Languages.ConfigStartup_LblStartOnLoginStatusInfo;
             this.LblStartOnLoginStatusInfo.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // PbLine1
-            // 
-            this.PbLine1.AccessibleDescription = "Seperator line.";
-            this.PbLine1.AccessibleName = "Seperator";
-            this.PbLine1.AccessibleRole = System.Windows.Forms.AccessibleRole.Graphic;
-            this.PbLine1.Image = global::HASS.Agent.Properties.Resources.line;
-            this.PbLine1.Location = new System.Drawing.Point(73, 264);
-            this.PbLine1.Name = "PbLine1";
-            this.PbLine1.Size = new System.Drawing.Size(576, 1);
-            this.PbLine1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-            this.PbLine1.TabIndex = 16;
-            this.PbLine1.TabStop = false;
-            // 
-            // LblInfo2
-            // 
-            this.LblInfo2.AccessibleDescription = "Virtual Desktop library initialization options";
-            this.LblInfo2.AccessibleName = "Virtual Desktop";
-            this.LblInfo2.AccessibleRole = System.Windows.Forms.AccessibleRole.StaticText;
-            this.LblInfo2.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.LblInfo2.Location = new System.Drawing.Point(70, 294);
-            this.LblInfo2.Name = "LblInfo2";
-            this.LblInfo2.Size = new System.Drawing.Size(575, 60);
-            this.LblInfo2.TabIndex = 17;
-            this.LblInfo2.Text = Languages.ConfigStartup_LblInfo2VirtualDesktop;
-            // 
-            // CbDisableVirtualDesktopInitalization
-            // 
-            this.CbDisableVirtualDesktopInitalization.AccessibleDescription = "Disable Virtual Desktop library initialization.";
-            this.CbDisableVirtualDesktopInitalization.AccessibleName = "Disable initialization";
-            this.CbDisableVirtualDesktopInitalization.AccessibleRole = System.Windows.Forms.AccessibleRole.CheckButton;
-            this.CbDisableVirtualDesktopInitalization.AutoSize = true;
-            this.CbDisableVirtualDesktopInitalization.Checked = true;
-            this.CbDisableVirtualDesktopInitalization.CheckState = System.Windows.Forms.CheckState.Unchecked;
-            this.CbDisableVirtualDesktopInitalization.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.CbDisableVirtualDesktopInitalization.Location = new System.Drawing.Point(73, 364);
-            this.CbDisableVirtualDesktopInitalization.Name = "CbDisableVirtualDesktopInitalization";
-            this.CbDisableVirtualDesktopInitalization.Size = new System.Drawing.Size(212, 23);
-            this.CbDisableVirtualDesktopInitalization.TabIndex = 18;
-            this.CbDisableVirtualDesktopInitalization.Text = Languages.ConfigStartup_LblInfo2VirtualDesktopCheckbox;
-            this.CbDisableVirtualDesktopInitalization.UseVisualStyleBackColor = true;
             // 
             // ConfigStartup
             // 
@@ -156,9 +111,6 @@ namespace HASS.Agent.Controls.Configuration
             this.Controls.Add(this.BtnSetStartOnLogin);
             this.Controls.Add(this.LblStartOnLoginStatus);
             this.Controls.Add(this.LblStartOnLoginStatusInfo);
-            this.Controls.Add(this.PbLine1);
-            this.Controls.Add(this.LblInfo2);
-            this.Controls.Add(this.CbDisableVirtualDesktopInitalization);
             this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "ConfigStartup";
@@ -174,8 +126,5 @@ namespace HASS.Agent.Controls.Configuration
         private System.Windows.Forms.Label LblStartOnLoginStatusInfo;
         internal Syncfusion.WinForms.Controls.SfButton BtnSetStartOnLogin;
         internal System.Windows.Forms.Label LblStartOnLoginStatus;
-        private PictureBox PbLine1;
-        private System.Windows.Forms.Label LblInfo2;
-        internal CheckBox CbDisableVirtualDesktopInitalization;
     }
 }

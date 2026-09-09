@@ -3087,10 +3087,4 @@ Not: "Modern Uyku" nedeniyle uyku komutları, cihazın OEM ve işletim sistemi y
     <value>Belirtilen sensörün aralığı dikkate almadan hemen yayınlanmasını sağlar.
 HASS.Agent'ta yapılandırılmış adı kullanın.</value>
   </data>
-  <data name="ConfigStartup_LblInfo2VirtualDesktop" xml:space="preserve">
-    <value>Virtual Desktop Library, desteklenmeyen sistemlerde sorunlara yol açacaktır; HASS.Agent'ın çökmesini önlemek için bu seçeneği etkinleştirin.</value>
-  </data>
-  <data name="ConfigStartup_LblInfo2VirtualDesktopCheckbox" xml:space="preserve">
-    <value>Sanal Masaüstü kitaplığı başlatma işlemini devre dışı bırak</value>
-  </data>
 </root>
