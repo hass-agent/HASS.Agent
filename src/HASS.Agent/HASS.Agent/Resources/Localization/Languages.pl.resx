@@ -3581,4 +3581,10 @@ Powinno to zapewnić lepsze działanie w przypadku nowych systemów z „nowocze
     <value>Wymusza natychmiastową publikację określonego czujnika, ignorując interwał.
 Użyj nazwy skonfigurowanej w HASS.Agent.</value>
   </data>
+  <data name="ConfigStartup_LblInfo2VirtualDesktop" xml:space="preserve">
+    <value>Biblioteka Virtual Desktop będzie powodować problemy w nieobsługiwanych systemach; włącz tę opcję, aby zapobiec awarii programu HASS.Agent.</value>
+  </data>
+  <data name="ConfigStartup_LblInfo2VirtualDesktopCheckbox" xml:space="preserve">
+    <value>Wyłącz inicjalizację biblioteki wirtualnego pulpitu</value>
+  </data>
 </root>

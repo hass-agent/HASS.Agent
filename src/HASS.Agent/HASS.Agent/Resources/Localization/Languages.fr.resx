@@ -3504,4 +3504,10 @@ Cela devrait offrir une meilleure expérience avec les nouveaux systèmes dotés
 
 Utilisez le nom configuré dans HASS.Agent.</value>
   </data>
+  <data name="ConfigStartup_LblInfo2VirtualDesktop" xml:space="preserve">
+    <value>La bibliothèque Virtual Desktop causera des problèmes sur les systèmes non pris en charge ; activez cette option pour éviter que HASS.Agent ne plante.</value>
+  </data>
+  <data name="ConfigStartup_LblInfo2VirtualDesktopCheckbox" xml:space="preserve">
+    <value>Désactiver l'initialisation de la bibliothèque de bureaux virtuels</value>
+  </data>
 </root>

@@ -3493,4 +3493,10 @@ Zou een betere ervaring moeten bieden met nieuwe systemen met een "moderne S0ix-
 
 Gebruik de naam die is geconfigureerd in HASS.Agent.</value>
   </data>
+  <data name="ConfigStartup_LblInfo2VirtualDesktop" xml:space="preserve">
+    <value>De Virtual Desktop Library veroorzaakt problemen op niet-ondersteunde systemen; schakel deze optie in om te voorkomen dat HASS.Agent crasht.</value>
+  </data>
+  <data name="ConfigStartup_LblInfo2VirtualDesktopCheckbox" xml:space="preserve">
+    <value>Initialisatie van de Virtual Desktop-bibliotheek uitschakelen</value>
+  </data>
 </root>

@@ -3595,4 +3595,10 @@ Sollte bei neuen Systemen mit „modernem S0ix-Schlafmodus“ eine bessere Benut
     <value>Erzwingt die sofortige Veröffentlichung eines bestimmten Sensors, unabhängig vom Intervall.
 Verwendet den in HASS.Agent konfigurierten Namen.</value>
   </data>
+  <data name="ConfigStartup_LblInfo2VirtualDesktop" xml:space="preserve">
+    <value>Die Virtual Desktop Library verursacht Probleme auf nicht unterstützten Systemen; aktivieren Sie diese Option, um einen Absturz von HASS.Agent zu verhindern.</value>
+  </data>
+  <data name="ConfigStartup_LblInfo2VirtualDesktopCheckbox" xml:space="preserve">
+    <value>Initialisierung der Virtual-Desktop-Bibliothek deaktivieren</value>
+  </data>
 </root>

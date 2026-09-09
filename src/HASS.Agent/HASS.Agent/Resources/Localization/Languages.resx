@@ -3496,4 +3496,10 @@ Use name configured in HASS.Agent.</value>
   <data name="CommandsMod_LblSetting_SensorId" xml:space="preserve">
     <value>Sensor Name</value>
   </data>
+  <data name="ConfigStartup_LblInfo2VirtualDesktop" xml:space="preserve">
+    <value>Virtual Desktop Library will cause issues on unsupported systems, enable this option to prevent HASS.Agent from crashing.</value>
+  </data>
+  <data name="ConfigStartup_LblInfo2VirtualDesktopCheckbox" xml:space="preserve">
+    <value>Disable Virtual Desktop library initialization</value>
+  </data>
 </root>

@@ -86,5 +86,7 @@ namespace HASS.Agent.Models.Config
 
         public bool NfcScanningEnabled { get; set; } = false;
         public string NfcSelectedScanner { get; set; } = string.Empty;
+
+        public bool DisableVirtualDesktopInitialization { get; set; } = false;
     }
 }

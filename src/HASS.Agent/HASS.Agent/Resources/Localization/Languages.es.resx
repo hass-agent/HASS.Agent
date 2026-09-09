@@ -3472,4 +3472,10 @@ Esto debería proporcionar una mejor experiencia con los nuevos sistemas con "su
 
 Utiliza el nombre configurado en HASS.Agent.</value>
   </data>
+  <data name="ConfigStartup_LblInfo2VirtualDesktop" xml:space="preserve">
+    <value>Virtual Desktop Library causará problemas en sistemas no compatibles; habilita esta opción para evitar que HASS.Agent se bloquee.</value>
+  </data>
+  <data name="ConfigStartup_LblInfo2VirtualDesktopCheckbox" xml:space="preserve">
+    <value>Deshabilitar la inicialización de la biblioteca de escritorios virtuales</value>
+  </data>
 </root>
