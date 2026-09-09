@@ -45,6 +45,7 @@ internal static class VirtualDesktopManager
         if (!Initialized)
         {
             Log.Warning("[VIRTDESKT] Cannot activate virtual desktop, manager not initialized");
+            return;
         }
 
         var parsed = Guid.TryParse(virtualDesktopId, out var targetDesktopGuid);
@@ -62,6 +63,7 @@ internal static class VirtualDesktopManager
         if (!Initialized)
         {
             Log.Warning("[VIRTDESKT] Cannot activate virtual desktop, manager not initialized");
+            return;
         }
 
         try
@@ -116,6 +118,12 @@ internal static class VirtualDesktopManager
     {
         var desktops = new Dictionary<string, string>();
 
+        if (!Initialized)
+        {
+            Log.Warning("[VIRTDESKT] Cannot get all virtual desktops, manager not initialized");
+            return desktops;
+        }
+        
         try
         {
             foreach (var desktop in VirtualDesktop.GetDesktops())
