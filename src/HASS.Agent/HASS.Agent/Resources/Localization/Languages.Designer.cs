@@ -3160,6 +3160,24 @@ namespace HASS.Agent.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Virtual Desktop Library will cause issues on unsupported systems, enable this option to prevent HASS.Agent from crashing..
+        /// </summary>
+        internal static string ConfigStartup_LblInfo2VirtualDesktop {
+            get {
+                return ResourceManager.GetString("ConfigStartup_LblInfo2VirtualDesktop", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Disable Virtual Desktop library initialization.
+        /// </summary>
+        internal static string ConfigStartup_LblInfo2VirtualDesktopCheckbox {
+            get {
+                return ResourceManager.GetString("ConfigStartup_LblInfo2VirtualDesktopCheckbox", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Start-on-Login Status:.
         /// </summary>
         internal static string ConfigStartup_LblStartOnLoginStatusInfo {

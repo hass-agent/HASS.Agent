@@ -126,7 +126,7 @@ namespace HASS.Agent.Controls.Configuration
             this.LblInfo2.Name = "LblInfo2";
             this.LblInfo2.Size = new System.Drawing.Size(575, 60);
             this.LblInfo2.TabIndex = 17;
-            this.LblInfo2.Text = "Virtual Desktop Library will cause issues on unsupprted systems, enable this option to prevent HASS.Agent from crashing.";
+            this.LblInfo2.Text = Languages.ConfigStartup_LblInfo2VirtualDesktop;
             // 
             // CbDisableVirtualDesktopInitalization
             // 
@@ -141,7 +141,7 @@ namespace HASS.Agent.Controls.Configuration
             this.CbDisableVirtualDesktopInitalization.Name = "CbDisableVirtualDesktopInitalization";
             this.CbDisableVirtualDesktopInitalization.Size = new System.Drawing.Size(212, 23);
             this.CbDisableVirtualDesktopInitalization.TabIndex = 18;
-            this.CbDisableVirtualDesktopInitalization.Text = "Disable Virtual Desktop library initialization";
+            this.CbDisableVirtualDesktopInitalization.Text = Languages.ConfigStartup_LblInfo2VirtualDesktopCheckbox;
             this.CbDisableVirtualDesktopInitalization.UseVisualStyleBackColor = true;
             // 
             // ConfigStartup

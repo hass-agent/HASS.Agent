@@ -3541,4 +3541,10 @@ Home Assistant.
     <value>Принудительно публикует данные с конкретного датчика немедленно, игнорируя интервал.
 Используйте имя, заданное в HASS.Agent.</value>
   </data>
+  <data name="ConfigStartup_LblInfo2VirtualDesktop" xml:space="preserve">
+    <value>Библиотека Virtual Desktop Library может вызывать проблемы в неподдерживаемых системах; включите эту опцию, чтобы предотвратить аварийное завершение работы HASS.Agent.</value>
+  </data>
+  <data name="ConfigStartup_LblInfo2VirtualDesktopCheckbox" xml:space="preserve">
+    <value>Отключить инициализацию библиотеки виртуальных рабочих столов</value>
+  </data>
 </root>

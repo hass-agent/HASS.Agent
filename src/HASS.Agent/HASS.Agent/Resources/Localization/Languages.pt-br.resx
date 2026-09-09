@@ -3517,4 +3517,10 @@ Deve proporcionar uma melhor experiência com novos sistemas com "suspensão S0i
     <value>Força a publicação imediata de um sensor específico, ignorando o intervalo.
 Use o nome configurado em HASS.Agent.</value>
   </data>
+  <data name="ConfigStartup_LblInfo2VirtualDesktop" xml:space="preserve">
+    <value>A Virtual Desktop Library causará problemas em sistemas não suportados; habilite esta opção para evitar que o HASS.Agent trave.</value>
+  </data>
+  <data name="ConfigStartup_LblInfo2VirtualDesktopCheckbox" xml:space="preserve">
+    <value>Desabilitar a inicialização da biblioteca de Área de Trabalho Virtual</value>
+  </data>
 </root>
