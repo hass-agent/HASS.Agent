@@ -37,6 +37,7 @@ public class LibreHardwareMonitorSensors : AbstractMultiValueSensor
     private const string StateClassTotalIncreasing = "total_increasing";
     private const string StatusOk = "ok";
     private const string StatusUnreachable = "unreachable";
+    private const string StatusInvalid = "invalid";
 
     /// <summary>
     /// Maps every LibreHardwareMonitor sensor type onto its Home Assistant device class, icon
@@ -134,40 +135,50 @@ public class LibreHardwareMonitorSensors : AbstractMultiValueSensor
             return;
         }
 
-        var newSensors = new List<AbstractSingleValueSensor>();
-
-        var readings = new List<Reading>();
-        CollectReadings(document, new List<string>(), readings);
-
-        SetReadingNames(readings);
-
-        foreach (var reading in readings)
+        try
         {
-            var safeSensorId = SharedHelperFunctions.GetSafeValue(reading.SensorId.Trim('/').Replace('/', '_'));
-            var sensorId = $"{Id}_{safeSensorId}";
+            var newSensors = new List<AbstractSingleValueSensor>();
 
-            // reuse an existing sensor so its change-detection isn't reset on every update
-            if (Sensors.TryGetValue(sensorId, out var knownSensor) && knownSensor is DataTypeDoubleSensor knownDoubleSensor)
+            var readings = new List<Reading>();
+            CollectReadings(document, new List<string>(), readings);
+
+            SetReadingNames(readings);
+
+            foreach (var reading in readings)
             {
-                knownDoubleSensor.SetState(reading.Value);
-                continue;
+                var safeSensorId = SharedHelperFunctions.GetSafeValue(reading.SensorId.Trim('/').Replace('/', '_'));
+                var sensorId = $"{Id}_{safeSensorId}";
+
+                // reuse an existing sensor so its change-detection isn't reset on every update
+                if (Sensors.TryGetValue(sensorId, out var knownSensor) && knownSensor is DataTypeDoubleSensor knownDoubleSensor)
+                {
+                    knownDoubleSensor.SetState(reading.Value);
+                    continue;
+                }
+
+                var entityName = $"{parentSensorSafeName}_{safeSensorId}";
+
+                var sensor = new DataTypeDoubleSensor(_updateInterval, entityName, reading.Name, sensorId, reading.Mapping.DeviceClass, reading.Mapping.StateClass, reading.Mapping.Icon, reading.Unit, EntityName);
+                sensor.SetState(reading.Value);
+
+                AddUpdateSensor(sensorId, sensor);
+
+                if (_initialAnnouncementDone)
+                    newSensors.Add(sensor);
             }
 
-            var entityName = $"{parentSensorSafeName}_{safeSensorId}";
+            SetStatusSensor(parentSensorSafeName, StatusOk);
 
-            var sensor = new DataTypeDoubleSensor(_updateInterval, entityName, reading.Name, sensorId, reading.Mapping.DeviceClass, reading.Mapping.StateClass, reading.Mapping.Icon, reading.Unit, EntityName);
-            sensor.SetState(reading.Value);
-
-            AddUpdateSensor(sensorId, sensor);
-
-            if (_initialAnnouncementDone)
-                newSensors.Add(sensor);
+            if (newSensors.Count > 0)
+                AnnounceSensors(newSensors);
         }
+        catch (Exception ex)
+        {
+            // the endpoint answered with something we can't read, the existing sensors keep their last known values
+            Log.Error(ex, "[LIBREHARDWAREMONITOR] [{name}] Error reading the response from '{url}': {err}", EntityName, EndpointUrl, ex.Message);
 
-        SetStatusSensor(parentSensorSafeName, StatusOk);
-
-        if (newSensors.Count > 0)
-            AnnounceSensors(newSensors);
+            SetStatusSensor(parentSensorSafeName, StatusInvalid);
+        }
     }
 
     /// <summary>
