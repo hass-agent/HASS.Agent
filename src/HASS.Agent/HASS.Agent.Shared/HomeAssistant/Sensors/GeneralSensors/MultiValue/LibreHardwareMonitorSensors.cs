@@ -33,6 +33,12 @@ public class LibreHardwareMonitorSensors : AbstractMultiValueSensor
     /// </summary>
     private const int RawValueDecimals = 3;
 
+    /// <summary>
+    /// Maximum number of entities published from a single endpoint. Real hardware reports a few
+    /// hundred sensors, so this only bounds an endpoint that keeps inventing them
+    /// </summary>
+    private const int MaxEntities = 1000;
+
     private const string StateClassMeasurement = "measurement";
     private const string StateClassTotalIncreasing = "total_increasing";
     private const string StatusOk = "ok";
@@ -95,6 +101,7 @@ public class LibreHardwareMonitorSensors : AbstractMultiValueSensor
     private readonly HashSet<string> _typeFilter;
 
     private bool _initialAnnouncementDone;
+    private DateTime _lastEntityLimitLogged = DateTime.MinValue;
 
     public string EndpointUrl { get; protected set; }
     public string SensorTypes { get; protected set; }
@@ -144,6 +151,8 @@ public class LibreHardwareMonitorSensors : AbstractMultiValueSensor
 
             SetReadingNames(readings);
 
+            var ignored = 0;
+
             foreach (var reading in readings)
             {
                 var safeSensorId = SharedHelperFunctions.GetSafeValue(reading.SensorId.Trim('/').Replace('/', '_'));
@@ -153,6 +162,13 @@ public class LibreHardwareMonitorSensors : AbstractMultiValueSensor
                 if (Sensors.TryGetValue(sensorId, out var knownSensor) && knownSensor is DataTypeDoubleSensor knownDoubleSensor)
                 {
                     knownDoubleSensor.SetState(reading.Value);
+                    continue;
+                }
+
+                // an endpoint handing out new sensor ids would otherwise grow this without end
+                if (Sensors.Count >= MaxEntities)
+                {
+                    ignored++;
                     continue;
                 }
 
@@ -166,6 +182,9 @@ public class LibreHardwareMonitorSensors : AbstractMultiValueSensor
                 if (_initialAnnouncementDone)
                     newSensors.Add(sensor);
             }
+
+            if (ignored > 0)
+                LogEntityLimitReached(ignored);
 
             SetStatusSensor(parentSensorSafeName, StatusOk);
 
@@ -342,6 +361,21 @@ public class LibreHardwareMonitorSensors : AbstractMultiValueSensor
     {
         var parts = sensorId.Trim('/').Split('/');
         return parts.Length >= 3 ? parts[parts.Length - 3] : string.Empty;
+    }
+
+    /// <summary>
+    /// Reports that the entity limit was reached, once every five minutes at most so an endpoint
+    /// handing out new sensor ids can't flood the log
+    /// </summary>
+    /// <param name="ignored"></param>
+    private void LogEntityLimitReached(int ignored)
+    {
+        if ((DateTime.Now - _lastEntityLimitLogged).TotalMinutes < 5)
+            return;
+
+        _lastEntityLimitLogged = DateTime.Now;
+
+        Log.Warning("[LIBREHARDWAREMONITOR] [{name}] Entity limit of {max} reached, {count} sensor(s) ignored (won't report again for 5 minutes)", EntityName, MaxEntities, ignored);
     }
 
     private void SetStatusSensor(string parentSensorSafeName, string status)
