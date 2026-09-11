@@ -17,7 +17,13 @@ public static class HttpJsonManager
     private static readonly TimeSpan CacheDuration = TimeSpan.FromSeconds(2);
     private static readonly TimeSpan RequestTimeout = TimeSpan.FromSeconds(5);
 
-    private static readonly HttpClient HttpClient = new() { Timeout = RequestTimeout };
+    /// <summary>
+    /// Maximum size of a response we're willing to read, bounding what an endpoint can make us
+    /// hold in memory. A LibreHardwareMonitor document covering a few hundred sensors is ~100 KB
+    /// </summary>
+    private const long MaxResponseBytes = 16 * 1024 * 1024;
+
+    private static readonly HttpClient HttpClient = new() { Timeout = RequestTimeout, MaxResponseContentBufferSize = MaxResponseBytes };
     private static readonly ConcurrentDictionary<string, CachedDocument> Cache = new();
 
     private sealed class CachedDocument
