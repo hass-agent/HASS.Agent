@@ -31,6 +31,8 @@ namespace HASS.Agent.Shared.Functions
 
         public int RotatedDegrees => GetRotatedDegrees();
 
+        public int RefreshRate => _device.dmDisplayFrequency;
+
         private int GetRotatedDegrees()
         {
             switch (_device.dmDisplayOrientation)
