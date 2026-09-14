@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -3298,5 +3298,8 @@ Use name configured in HASS.Agent.</value>
   </data>
   <data name="CommandsMod_LblSetting_SensorId" xml:space="preserve">
     <value>Sensor Name</value>
+  </data>
+  <data name="SensorType_LibreHardwareMonitorSensors" xml:space="preserve">
+    <value>LibreHardwareMonitor</value>
   </data>
 </root>

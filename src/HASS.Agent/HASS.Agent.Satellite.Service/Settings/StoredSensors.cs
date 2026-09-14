@@ -1,4 +1,4 @@
-using HASS.Agent.Shared.Enums;
+﻿using HASS.Agent.Shared.Enums;
 using HASS.Agent.Shared.Models.Config;
 using HASS.Agent.Satellite.Service.Extensions;
 using HASS.Agent.Shared.HomeAssistant.Sensors;
@@ -217,6 +217,9 @@ namespace HASS.Agent.Satellite.Service.Settings
                 case SensorType.AudioSensors:
                     abstractSensor = new AudioSensors(sensor.UpdateInterval, sensor.EntityName, sensor.Name, sensor.Id.ToString());
                     break;
+                case SensorType.LibreHardwareMonitorSensors:
+                    abstractSensor = new LibreHardwareMonitorSensors(sensor.UpdateInterval, sensor.EntityName, sensor.Name, sensor.Query, sensor.Scope, sensor.Id.ToString());
+                    break;
                 default:
                     Log.Error("[SETTINGS_SENSORS] [{name}] Unknown configured multi-value sensor type: {type}", sensor.EntityName, sensor.Type.ToString());
                     break;
@@ -421,6 +424,21 @@ namespace HASS.Agent.Satellite.Service.Settings
                             Query = networkSensors.NetworkCard,
                             Type = type,
                             UpdateInterval = networkSensors.UpdateIntervalSeconds
+                        };
+                    }
+
+                case LibreHardwareMonitorSensors libreHardwareMonitorSensors:
+                    {
+                        _ = Enum.TryParse<SensorType>(libreHardwareMonitorSensors.GetType().Name, out var type);
+                        return new ConfiguredSensor
+                        {
+                            Id = Guid.Parse(sensor.Id),
+                            EntityName = libreHardwareMonitorSensors.EntityName,
+                            Name = libreHardwareMonitorSensors.Name,
+                            Query = libreHardwareMonitorSensors.EndpointUrl,
+                            Scope = libreHardwareMonitorSensors.SensorTypes,
+                            Type = type,
+                            UpdateInterval = libreHardwareMonitorSensors.UpdateIntervalSeconds
                         };
                     }
 

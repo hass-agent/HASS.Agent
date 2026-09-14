@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -3505,5 +3505,33 @@ Use name configured in HASS.Agent.</value>
   </data>
   <data name="ConfigStartup_LblInfo2VirtualDesktopCheckbox" xml:space="preserve">
     <value>Disable Virtual Desktop library initialization</value>
+  </data>
+  <data name="SensorsManager_LibreHardwareMonitorSensorsDescription" xml:space="preserve">
+    <value>Provides sensors read from a LibreHardwareMonitor web server endpoint, for example http://localhost:8085/data.json.
+Optionally filter by sensor type (comma-separated) to limit how many entities are created.</value>
+  </data>
+  <data name="SensorsMod_LblSetting1_LibreHardwareMonitorUrl" xml:space="preserve">
+    <value>Endpoint URL</value>
+  </data>
+  <data name="SensorsMod_LblSetting2_LibreHardwareMonitorTypes" xml:space="preserve">
+    <value>Sensor types (comma-separated, empty for all)</value>
+  </data>
+  <data name="SensorsMod_BtnTest_LibreHardwareMonitor" xml:space="preserve">
+    <value>Test endpoint</value>
+  </data>
+  <data name="SensorsMod_TestLibreHardwareMonitor_MessageBox1" xml:space="preserve">
+    <value>Enter an endpoint URL first.</value>
+  </data>
+  <data name="SensorsMod_TestLibreHardwareMonitor_MessageBox2" xml:space="preserve">
+    <value>Endpoint reached, sensors found: {0}</value>
+  </data>
+  <data name="SensorsMod_TestLibreHardwareMonitor_MessageBox3" xml:space="preserve">
+    <value>The endpoint could not be queried:
+
+{0}
+ you want to open the logs folder?</value>
+  </data>
+  <data name="SensorsMod_LibreHardwareMonitorUrlInvalid" xml:space="preserve">
+    <value>Please enter a valid http:// or https:// endpoint URL!</value>
   </data>
 </root>
