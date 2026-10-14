@@ -16,14 +16,22 @@ namespace HASS.Agent.Forms
     {
         private readonly WebViewInfo _webViewInfo;
         private bool _forceClose = false;
-        private bool _isTrayIcon = false;
+        private bool _closeQueued = false;
+        private bool _pageUnloaded = false;
+
+        // the tray icon's webview is hidden and reused instead of destroyed, destroying it
+        // can hang the ui thread in winforms' ui automation cleanup (ReleaseUiaProvider)
+        private readonly bool _isTrayIcon;
 
         public WebView(WebViewInfo webViewInfo)
         {
             _webViewInfo = webViewInfo;
+            _isTrayIcon = webViewInfo.IsTrayIconWebView && !webViewInfo.IsTrayIconPreview;
 
             InitializeComponent();
         }
+
+        internal WebViewInfo Info => _webViewInfo;
 
         private async void WebView_Load(object sender, EventArgs e)
         {
@@ -45,10 +53,8 @@ namespace HASS.Agent.Forms
                 }
 
                 // are we background loading for the tray icon, and not in preview mode?
-                if (_webViewInfo.IsTrayIconWebView && !_webViewInfo.IsTrayIconPreview && Variables.AppSettings.TrayIconWebViewBackgroundLoading)
+                if (_isTrayIcon && Variables.AppSettings.TrayIconWebViewBackgroundLoading)
                 {
-                    _isTrayIcon = true;
-
                     // done
                     return;
                 }
@@ -159,6 +165,13 @@ namespace HASS.Agent.Forms
                     Close();
                 };
 
+                // hidden before we got here, load it once shown
+                if (_isTrayIcon && !Visible && !Variables.AppSettings.TrayIconWebViewBackgroundLoading)
+                {
+                    _pageUnloaded = true;
+                    return;
+                }
+
                 // load the uri
                 WebViewControl.Source = new Uri(_webViewInfo.Url);
             }
@@ -194,18 +207,27 @@ namespace HASS.Agent.Forms
         /// <summary>
         /// Shows the form
         /// </summary>
-        internal void MakeVisible()
+        internal void MakeVisible(Point? location = null)
         {
             if (IsClosingOrClosed())
                 return;
 
             try
             {
+                // reload the page if it was unloaded while hidden
+                if (_pageUnloaded && WebViewControl.CoreWebView2 != null)
+                {
+                    _pageUnloaded = false;
+                    WebViewControl.CoreWebView2.Navigate(_webViewInfo.Url);
+                }
+
                 // show ourselves
                 Opacity = 100;
+                if (!Visible) Show();
+                Activate();
 
                 // check if we need to move
-                var desiredPosition = GetDesiredWebViewPosition();
+                var desiredPosition = location ?? GetDesiredWebViewPosition();
                 if (desiredPosition.X != _webViewInfo.X || desiredPosition.Y != _webViewInfo.Y)
                 {
                     // yep
@@ -308,6 +330,8 @@ namespace HASS.Agent.Forms
                 if (_isTrayIcon)
                 {
                     e.Cancel = true;
+                    Hide();
+                    UnloadPage();
                     return;
                 }
 
@@ -321,7 +345,39 @@ namespace HASS.Agent.Forms
             }
         }
 
-        private void WebView_Deactivate(object sender, EventArgs e) => Close();
+        /// <summary>
+        /// Navigates away from the page while hidden, unless the user wants it kept loaded in the background,
+        /// so it doesn't keep streaming (eg. cameras)
+        /// </summary>
+        private void UnloadPage()
+        {
+            if (Variables.AppSettings.TrayIconWebViewBackgroundLoading || WebViewControl.CoreWebView2 == null)
+                return;
+
+            _pageUnloaded = true;
+            WebViewControl.CoreWebView2.Navigate("about:blank");
+        }
+
+        private void WebView_Deactivate(object sender, EventArgs e) => QueueClose();
+
+        /// <summary>
+        /// Closes the form once the current (activation) message is handled, closing from within it can deadlock
+        /// </summary>
+        private void QueueClose()
+        {
+            if (_closeQueued || IsClosingOrClosed())
+                return;
+
+            _closeQueued = true;
+            BeginInvoke(() =>
+            {
+                _closeQueued = false;
+                if (IsClosingOrClosed() || !Visible)
+                    return;
+
+                Close();
+            });
+        }
 
         private bool IsClosingOrClosed()
         {
@@ -349,7 +405,7 @@ namespace HASS.Agent.Forms
             if (m.Msg == WM_ACTIVATEAPP)
             {
                 // 0 means deactivation
-                if (m.WParam.ToInt64() == 0) Close();
+                if (m.WParam.ToInt64() == 0) QueueClose();
             }
 
             base.WndProc(ref m);
