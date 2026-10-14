@@ -33,21 +33,18 @@ namespace HASS.Agent.HomeAssistant.Commands.InternalCommands
         {
             Variables.MainForm.Invoke(() =>
             {
-                if(Variables.TrayIconWebView == null)
+                if (Variables.TrayIconWebView == null || Variables.TrayIconWebView.IsDisposed)
                     return;
 
-                Variables.TrayIconWebView.Opacity = 0;
-
-                if (!Variables.AppSettings.TrayIconWebViewBackgroundLoading) { 
-                    Variables.TrayIconWebView.ForceClose();
-                    Variables.TrayIconWebView.Dispose();
-                }
+                // the tray icon's webview hides itself instead of closing
+                Variables.TrayIconWebView.Close();
             });
         }
 
         public override string GetState()
         {
-            return Variables.TrayIconWebView != null && Variables.TrayIconWebView.Opacity != 0 ? "ON" : "OFF";
+            var webView = Variables.TrayIconWebView;
+            return webView is { IsDisposed: false, Visible: true } && webView.Opacity != 0 ? "ON" : "OFF";
         }
 
         public override void TurnOnWithAction(string action)
