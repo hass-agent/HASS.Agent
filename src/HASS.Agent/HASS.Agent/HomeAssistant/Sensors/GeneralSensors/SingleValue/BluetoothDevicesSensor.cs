@@ -43,6 +43,10 @@ namespace HASS.Agent.HomeAssistant.Sensors.GeneralSensors.SingleValue
         public override string GetState()
         {
             var devices = BluetoothManager.GetDevicesAsync().GetAwaiter().GetResult();
+
+            // bluetooth stack didn't respond, skip this update
+            if (devices == null) return null;
+
             if (!devices.Any())
             {
                 _attributes = "{}";
