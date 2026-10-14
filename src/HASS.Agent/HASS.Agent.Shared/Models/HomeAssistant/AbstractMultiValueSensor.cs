@@ -70,7 +70,8 @@ namespace HASS.Agent.Shared.Models.HomeAssistant
 
         public async Task UnPublishAutoDiscoveryConfigAsync(bool migration = false)
         {
-            foreach (var sensor in Sensors) await sensor.Value.UnPublishAutoDiscoveryConfigAsync(migration);
+            // snapshot: the polling loop can add entities to the dictionary while this awaits
+            foreach (var sensor in Sensors.ToList()) await sensor.Value.UnPublishAutoDiscoveryConfigAsync(migration);
         }
     }
 }
