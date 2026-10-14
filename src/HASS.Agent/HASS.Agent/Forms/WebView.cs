@@ -17,6 +17,7 @@ namespace HASS.Agent.Forms
         private readonly WebViewInfo _webViewInfo;
         private bool _forceClose = false;
         private bool _closeQueued = false;
+        private bool _pageUnloaded = false;
 
         // the tray icon's webview is hidden and reused instead of destroyed, destroying it
         // can hang the ui thread in winforms' ui automation cleanup (ReleaseUiaProvider)
@@ -164,6 +165,13 @@ namespace HASS.Agent.Forms
                     Close();
                 };
 
+                // hidden before we got here, load it once shown
+                if (_isTrayIcon && !Visible && !Variables.AppSettings.TrayIconWebViewBackgroundLoading)
+                {
+                    _pageUnloaded = true;
+                    return;
+                }
+
                 // load the uri
                 WebViewControl.Source = new Uri(_webViewInfo.Url);
             }
@@ -206,6 +214,13 @@ namespace HASS.Agent.Forms
 
             try
             {
+                // reload the page if it was unloaded while hidden
+                if (_pageUnloaded && WebViewControl.CoreWebView2 != null)
+                {
+                    _pageUnloaded = false;
+                    WebViewControl.CoreWebView2.Navigate(_webViewInfo.Url);
+                }
+
                 // show ourselves
                 Opacity = 100;
                 if (!Visible) Show();
@@ -316,6 +331,7 @@ namespace HASS.Agent.Forms
                 {
                     e.Cancel = true;
                     Hide();
+                    UnloadPage();
                     return;
                 }
 
@@ -327,6 +343,19 @@ namespace HASS.Agent.Forms
             {
                 Log.Fatal(ex, ex.Message);
             }
+        }
+
+        /// <summary>
+        /// Navigates away from the page while hidden, unless the user wants it kept loaded in the background,
+        /// so it doesn't keep streaming (eg. cameras)
+        /// </summary>
+        private void UnloadPage()
+        {
+            if (Variables.AppSettings.TrayIconWebViewBackgroundLoading || WebViewControl.CoreWebView2 == null)
+                return;
+
+            _pageUnloaded = true;
+            WebViewControl.CoreWebView2.Navigate("about:blank");
         }
 
         private void WebView_Deactivate(object sender, EventArgs e) => QueueClose();
