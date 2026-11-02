@@ -104,7 +104,7 @@ public class DisplaySensors : AbstractMultiValueSensor
                 WorkingArea = $"{display.WorkingArea.Width}x{display.WorkingArea.Height}",
                 WorkingAreaWidth = display.WorkingArea.Width,
                 WorkingAreaHeight = display.WorkingArea.Height,
-                RotatedDegrees = rotated
+                RotatedDegrees = rotated,
                 RefreshRate = refreshRate,
             };
 
