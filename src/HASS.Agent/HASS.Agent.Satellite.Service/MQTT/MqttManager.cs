@@ -30,6 +30,7 @@ namespace HASS.Agent.Satellite.Service.MQTT
         private bool _connectingFailureNotified = false;
 
         private MqttStatus _status = MqttStatus.Connecting;
+        private readonly object _statusLock = new();
 
         /// <summary>
         /// Returns whether the client is connected
@@ -133,8 +134,19 @@ namespace HASS.Agent.Satellite.Service.MQTT
                     await Task.Delay(TimeSpan.FromSeconds(5));
                 }
 
-                // nope, call it
-                _status = MqttStatus.Disconnected;
+                // nope, call it - unless we reconnected after the last check: then OnMqttConnected
+                // has already set the status, and overwriting it would leave us 'disconnected' for good
+                lock (_statusLock)
+                {
+                    if (IsConnected())
+                    {
+                        _isReady = true;
+
+                        return;
+                    }
+
+                    _status = MqttStatus.Disconnected;
+                }
 
                 // log if we're not shutting down, but only once
                 if (Variables.ShuttingDown || _disconnectionNotified)
@@ -167,8 +179,14 @@ namespace HASS.Agent.Satellite.Service.MQTT
                     await Task.Delay(TimeSpan.FromSeconds(5));
                 }
 
-                // nope, call it
-                _status = MqttStatus.Error;
+                // nope, call it - unless we connected after the last check (see OnMqttDisconnected)
+                lock (_statusLock)
+                {
+                    if (IsConnected())
+                        return;
+
+                    _status = MqttStatus.Error;
+                }
 
                 // log only once
                 if (_connectingFailureNotified)
@@ -186,7 +204,9 @@ namespace HASS.Agent.Satellite.Service.MQTT
 
         private Task OnMqttConnected(MqttClientConnectedEventArgs arg)
         {
-            _status = MqttStatus.Connected;
+            lock (_statusLock)
+                _status = MqttStatus.Connected;
+
             Log.Information("[MQTT] Connected");
 
             // reset error notifications 
