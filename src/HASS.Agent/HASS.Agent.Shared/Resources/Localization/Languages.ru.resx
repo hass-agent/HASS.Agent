@@ -3364,4 +3364,7 @@ Home Assistant.
     <value>Принудительно публикует данные с конкретного датчика немедленно, игнорируя интервал.
 Используйте имя, заданное в HASS.Agent.</value>
   </data>
+  <data name="SensorType_SerialPortsSensor" xml:space="preserve">
+    <value>SerialPorts</value>
+  </data>
 </root>

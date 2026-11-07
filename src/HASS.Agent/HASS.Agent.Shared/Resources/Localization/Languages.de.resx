@@ -3617,4 +3617,7 @@ Sollte bei neuen Systemen mit „modernem S0ix-Schlafmodus“ eine bessere Benut
     <value>Erzwingt die sofortige Veröffentlichung eines bestimmten Sensors, unabhängig vom Intervall.
 Verwendet den in HASS.Agent konfigurierten Namen.</value>
   </data>
+  <data name="SensorType_SerialPortsSensor" xml:space="preserve">
+    <value>SerialPorts</value>
+  </data>
 </root>

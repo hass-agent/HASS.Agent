@@ -3297,4 +3297,7 @@ Esto debería proporcionar una mejor experiencia con los nuevos sistemas con "su
 
 Utiliza el nombre configurado en HASS.Agent.</value>
   </data>
+  <data name="SensorType_SerialPortsSensor" xml:space="preserve">
+    <value>SerialPorts</value>
+  </data>
 </root>

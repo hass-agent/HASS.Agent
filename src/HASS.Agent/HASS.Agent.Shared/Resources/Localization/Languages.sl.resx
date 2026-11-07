@@ -3445,4 +3445,7 @@ Omogoča boljšo izkušnjo z novimi sistemi s »sodobnim načinom mirovanja S0ix
     <value>Vsili takojšnjo objavo določenega senzorja, pri čemer se interval prezre.
 Uporabi ime, konfigurirano v HASS.Agent.</value>
   </data>
+  <data name="SensorType_SerialPortsSensor" xml:space="preserve">
+    <value>SerialPorts</value>
+  </data>
 </root>

@@ -6914,6 +6914,15 @@ namespace HASS.Agent.Shared.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to SerialPorts.
+        /// </summary>
+        internal static string SensorType_SerialPortsSensor {
+            get {
+                return ResourceManager.GetString("SensorType_SerialPortsSensor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ServiceState.
         /// </summary>
         internal static string SensorType_ServiceStateSensor {

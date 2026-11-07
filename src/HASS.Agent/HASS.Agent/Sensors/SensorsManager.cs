@@ -712,6 +712,14 @@ namespace HASS.Agent.Sensors
 
             // =================================
 
+            sensorInfoCard = new SensorInfoCard(SensorType.SerialPortsSensor,
+                Languages.SensorsManager_SerialPortsSensorDescription,
+                300, false, true, false);
+
+            SensorInfoCards.Add(sensorInfoCard.SensorType, sensorInfoCard);
+
+            // =================================
+
             sensorInfoCard = new SensorInfoCard(SensorType.ServiceStateSensor,
                 Languages.SensorsManager_ServiceStateSensorDescription,
                 10, false, true, true);
