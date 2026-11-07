@@ -2890,4 +2890,7 @@ Not: "Modern Uyku" nedeniyle uyku komutları, cihazın OEM ve işletim sistemi y
   <data name="CommandType_MonitorSleepPowerPlanCommand" xml:space="preserve">
     <value>MonitörUykuGüçPlanı</value>
   </data>
+  <data name="SensorType_SerialPortsSensor" xml:space="preserve">
+    <value>SerialPorts</value>
+  </data>
 </root>

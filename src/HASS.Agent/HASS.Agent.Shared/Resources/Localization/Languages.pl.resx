@@ -3393,4 +3393,7 @@ Powinno to zapewnić lepsze działanie w przypadku nowych systemów z „nowocze
   <data name="CommandType_MonitorSleepPowerPlanCommand" xml:space="preserve">
     <value>MonitorSleepPowerPlan</value>
   </data>
+  <data name="SensorType_SerialPortsSensor" xml:space="preserve">
+    <value>SerialPorts</value>
+  </data>
 </root>

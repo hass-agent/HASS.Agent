@@ -104,6 +104,9 @@
     <EmbeddedResource Update="Properties\Resources.tr.resx">
       <DependentUpon>Resources.resx</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Update="Properties\Resources.sv.resx">
+      <DependentUpon>Resources.resx</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Update="Resources\Localization\Languages.de.resx">
       <DependentUpon>Languages.resx</DependentUpon>
     </EmbeddedResource>
@@ -136,6 +139,9 @@
       <DependentUpon>Languages.resx</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Update="Resources\Localization\Languages.tr.resx">
+      <DependentUpon>Languages.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Localization\Languages.sv.resx">
       <DependentUpon>Languages.resx</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>

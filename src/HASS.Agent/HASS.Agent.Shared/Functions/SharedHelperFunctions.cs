@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
 using System.DirectoryServices.AccountManagement;
 using System.IO;
 using System.Linq;
@@ -43,6 +44,17 @@ namespace HASS.Agent.Shared.Functions
         {
             var val = Regex.Replace(value, @"[^a-zA-Z0-9_\-_\s]", "_");
             return val.Replace(" ", "");
+        }
+
+        /// <summary>
+        /// Returns the provided value with diacritics removed (eg. 'ö' becomes 'o')
+        /// </summary>
+        /// <returns></returns>
+        public static string RemoveDiacritics(string value)
+        {
+            var normalized = value.Normalize(NormalizationForm.FormD);
+            var stripped = normalized.Where(c => CharUnicodeInfo.GetUnicodeCategory(c) != UnicodeCategory.NonSpacingMark);
+            return new string(stripped.ToArray()).Normalize(NormalizationForm.FormC);
         }
 
         /// <summary>
