@@ -22,6 +22,9 @@ namespace HASS.Agent.Managers
 
         private static readonly Regex PortInNameRegex = new(@"\((COM\d+)\)", RegexOptions.IgnoreCase | RegexOptions.Compiled);
 
+        // fallback for drivers that don't populate the UsbVendorId/UsbProductId properties (eg. WCH CH341SER for CH340)
+        private static readonly Regex VidPidInIdRegex = new(@"VID_([0-9A-F]{4})&PID_([0-9A-F]{4})", RegexOptions.IgnoreCase | RegexOptions.Compiled);
+
         private static readonly ConcurrentDictionary<string, SerialPortInfo> WatchedPorts = new();
 
         private static DeviceWatcher _watcher;
@@ -184,12 +187,25 @@ namespace HASS.Agent.Managers
                     portName = match.Groups[1].Value.ToUpperInvariant();
             }
 
+            var vendorId = FormatUsbId(GetProperty(device, UsbVendorIdProperty));
+            var productId = FormatUsbId(GetProperty(device, UsbProductIdProperty));
+
+            if (string.IsNullOrEmpty(vendorId) || string.IsNullOrEmpty(productId))
+            {
+                var match = VidPidInIdRegex.Match(device.Id ?? string.Empty);
+                if (match.Success)
+                {
+                    if (string.IsNullOrEmpty(vendorId)) vendorId = match.Groups[1].Value.ToUpperInvariant();
+                    if (string.IsNullOrEmpty(productId)) productId = match.Groups[2].Value.ToUpperInvariant();
+                }
+            }
+
             return new SerialPortInfo
             {
                 Port = portName ?? string.Empty,
                 Name = device.Name ?? string.Empty,
-                VendorId = FormatUsbId(GetProperty(device, UsbVendorIdProperty)),
-                ProductId = FormatUsbId(GetProperty(device, UsbProductIdProperty)),
+                VendorId = vendorId,
+                ProductId = productId,
                 Id = device.Id
             };
         }
