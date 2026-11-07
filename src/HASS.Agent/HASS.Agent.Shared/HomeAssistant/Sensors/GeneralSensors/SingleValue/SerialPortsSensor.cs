@@ -1,13 +1,13 @@
-using HASS.Agent.Managers;
-using HASS.Agent.Models.Internal;
+using HASS.Agent.Shared.Managers;
 using HASS.Agent.Shared.Models.HomeAssistant;
+using HASS.Agent.Shared.Models.Internal;
 using Newtonsoft.Json;
 
-namespace HASS.Agent.HomeAssistant.Sensors.GeneralSensors.SingleValue
+namespace HASS.Agent.Shared.HomeAssistant.Sensors.GeneralSensors.SingleValue
 {
     /// <summary>
     /// Sensor containing the number of present serial (COM) ports, with the ports as attributes.
-    /// Gets published immediately when ports are added or removed.
+    /// Gets published immediately when ports are added or removed, provided the host subscribes to <see cref="SerialPortManager.PortsChanged"/>.
     /// </summary>
     public class SerialPortsSensor : AbstractSingleValueSensor
     {
