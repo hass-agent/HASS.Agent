@@ -349,3 +349,6 @@ healthchecksdb
 MigrationBackup/
 
 src/.svn/
+
+# Jetbrains
+.idea/
