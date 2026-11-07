@@ -1,4 +1,6 @@
-namespace HASS.Agent.Models.Internal
+using System.Collections.Generic;
+
+namespace HASS.Agent.Shared.Models.Internal
 {
     public class SerialPortInfoCollection
     {

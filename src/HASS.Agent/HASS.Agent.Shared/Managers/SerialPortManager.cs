@@ -1,18 +1,20 @@
+using System;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text.RegularExpressions;
-using HASS.Agent.HomeAssistant.Sensors.GeneralSensors.SingleValue;
-using HASS.Agent.Models.Internal;
+using HASS.Agent.Shared.Models.Internal;
 using Microsoft.Win32;
 using Serilog;
 using Windows.Devices.Enumeration;
 using Windows.Devices.SerialCommunication;
 
-namespace HASS.Agent.Managers
+namespace HASS.Agent.Shared.Managers
 {
     /// <summary>
-    /// Keeps track of the system's serial (COM) ports, and notifies the related sensors when ports are added or removed
+    /// Keeps track of the system's serial (COM) ports, and raises <see cref="PortsChanged"/> when ports are added or removed
     /// </summary>
-    internal static class SerialPortManager
+    public static class SerialPortManager
     {
         private const string PortNameProperty = "System.DeviceInterface.Serial.PortName";
         private const string UsbVendorIdProperty = "System.DeviceInterface.Serial.UsbVendorId";
@@ -30,9 +32,15 @@ namespace HASS.Agent.Managers
         private static DeviceWatcher _watcher;
 
         /// <summary>
+        /// Raised when serial ports are added or removed, and after the initial enumeration.
+        /// Hosts should use this to force their serial port sensors to publish (eg. through ResetChecks)
+        /// </summary>
+        public static event EventHandler PortsChanged;
+
+        /// <summary>
         /// Starts watching for serial port arrivals and removals
         /// </summary>
-        internal static void Initialize()
+        public static void Initialize()
         {
             try
             {
@@ -66,7 +74,7 @@ namespace HASS.Agent.Managers
         /// <summary>
         /// Stops watching
         /// </summary>
-        internal static void Stop()
+        public static void Stop()
         {
             try
             {
@@ -95,7 +103,7 @@ namespace HASS.Agent.Managers
         /// Combines the watcher's results with the SERIALCOMM registry key, which also contains
         /// ports that don't expose the COM port device interface (eg. some virtual or bluetooth ports)
         /// </summary>
-        internal static List<SerialPortInfo> GetPorts()
+        public static List<SerialPortInfo> GetPorts()
         {
             var ports = WatchedPorts.Values
                 .Where(x => !string.IsNullOrEmpty(x.Port))
@@ -226,24 +234,15 @@ namespace HASS.Agent.Managers
                 ? number
                 : int.MaxValue;
 
-        /// <summary>
-        /// Forces all serial port sensors to publish on the next sensor loop iteration
-        /// </summary>
         private static void NotifyChanged()
         {
             try
             {
-                var sensors = Variables.SingleValueSensors?.OfType<SerialPortsSensor>().ToList();
-                if (sensors == null)
-                    return;
-
-                foreach (var sensor in sensors)
-                    sensor.ResetChecks();
+                PortsChanged?.Invoke(null, EventArgs.Empty);
             }
             catch (Exception ex)
             {
-                // the sensor list can be modified while we're iterating, the sensor's interval will catch up
-                Log.Debug(ex, "[SERIALPORTS] Unable to notify sensors: {err}", ex.Message);
+                Log.Debug(ex, "[SERIALPORTS] Error notifying port change subscribers: {err}", ex.Message);
             }
         }
     }
