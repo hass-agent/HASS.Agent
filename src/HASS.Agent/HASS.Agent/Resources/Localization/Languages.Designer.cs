@@ -6361,6 +6361,17 @@ namespace HASS.Agent.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Provides a sensor with the number of serial (COM) ports present.
+        ///
+        ///The ports, including friendly name and USB vendor/product ID, are added as attributes. The sensor is updated immediately when a port is added or removed..
+        /// </summary>
+        internal static string SensorsManager_SerialPortsSensorDescription {
+            get {
+                return ResourceManager.GetString("SensorsManager_SerialPortsSensorDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Returns the state of the provided service: NotFound, Stopped, StartPending, StopPending, Running, ContinuePending, PausePending or Paused.
         ///
         ///Make sure to provide the &apos;Service name&apos;, not the &apos;Display name&apos;..

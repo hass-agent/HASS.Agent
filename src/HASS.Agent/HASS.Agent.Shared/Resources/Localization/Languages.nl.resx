@@ -3305,4 +3305,7 @@ Zou een betere ervaring moeten bieden met nieuwe systemen met een "moderne S0ix-
   <data name="CommandType_MonitorSleepPowerPlanCommand" xml:space="preserve">
     <value>MonitorSleepPowerPlan</value>
   </data>
+  <data name="SensorType_SerialPortsSensor" xml:space="preserve">
+    <value>SerialPorts</value>
+  </data>
 </root>
