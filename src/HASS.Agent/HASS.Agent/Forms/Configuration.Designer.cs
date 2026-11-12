@@ -65,7 +65,7 @@ namespace HASS.Agent.Forms
             this.ConfigTabs.ActiveTabColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
             this.ConfigTabs.Alignment = System.Windows.Forms.TabAlignment.Left;
             this.ConfigTabs.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
-            this.ConfigTabs.BeforeTouchSize = new System.Drawing.Size(884, 548);
+            this.ConfigTabs.BeforeTouchSize = new System.Drawing.Size(924, 548);
             this.ConfigTabs.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.ConfigTabs.Controls.Add(this.TabGeneral);
             this.ConfigTabs.Controls.Add(this.TabExternalTools);
@@ -90,7 +90,7 @@ namespace HASS.Agent.Forms
             this.ConfigTabs.Location = new System.Drawing.Point(0, 0);
             this.ConfigTabs.Name = "ConfigTabs";
             this.ConfigTabs.RotateTextWhenVertical = true;
-            this.ConfigTabs.Size = new System.Drawing.Size(884, 548);
+            this.ConfigTabs.Size = new System.Drawing.Size(924, 548);
             this.ConfigTabs.TabIndex = 0;
             this.ConfigTabs.TabPanelBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
             this.ConfigTabs.TabStyle = typeof(Syncfusion.Windows.Forms.Tools.TabRendererMetro);
@@ -110,7 +110,7 @@ namespace HASS.Agent.Forms
             this.TabGeneral.Location = new System.Drawing.Point(142, 2);
             this.TabGeneral.Name = "TabGeneral";
             this.TabGeneral.ShowCloseButton = false;
-            this.TabGeneral.Size = new System.Drawing.Size(740, 544);
+            this.TabGeneral.Size = new System.Drawing.Size(780, 544);
             this.TabGeneral.TabBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
             this.TabGeneral.TabForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
             this.TabGeneral.TabIndex = 9;
@@ -129,7 +129,7 @@ namespace HASS.Agent.Forms
             this.TabExternalTools.Location = new System.Drawing.Point(142, 2);
             this.TabExternalTools.Name = "TabExternalTools";
             this.TabExternalTools.ShowCloseButton = true;
-            this.TabExternalTools.Size = new System.Drawing.Size(740, 544);
+            this.TabExternalTools.Size = new System.Drawing.Size(780, 544);
             this.TabExternalTools.TabBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
             this.TabExternalTools.TabForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
             this.TabExternalTools.TabIndex = 10;
@@ -148,7 +148,7 @@ namespace HASS.Agent.Forms
             this.TabHassApi.Location = new System.Drawing.Point(142, 2);
             this.TabHassApi.Name = "TabHassApi";
             this.TabHassApi.ShowCloseButton = false;
-            this.TabHassApi.Size = new System.Drawing.Size(740, 544);
+            this.TabHassApi.Size = new System.Drawing.Size(780, 544);
             this.TabHassApi.TabBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
             this.TabHassApi.TabForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
             this.TabHassApi.TabIndex = 1;
@@ -167,7 +167,7 @@ namespace HASS.Agent.Forms
             this.TabHotKey.Location = new System.Drawing.Point(142, 2);
             this.TabHotKey.Name = "TabHotKey";
             this.TabHotKey.ShowCloseButton = true;
-            this.TabHotKey.Size = new System.Drawing.Size(740, 544);
+            this.TabHotKey.Size = new System.Drawing.Size(780, 544);
             this.TabHotKey.TabBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
             this.TabHotKey.TabForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
             this.TabHotKey.TabIndex = 5;
@@ -184,7 +184,7 @@ namespace HASS.Agent.Forms
             this.TablLocalApi.Location = new System.Drawing.Point(142, 2);
             this.TablLocalApi.Name = "TablLocalApi";
             this.TablLocalApi.ShowCloseButton = true;
-            this.TablLocalApi.Size = new System.Drawing.Size(740, 544);
+            this.TablLocalApi.Size = new System.Drawing.Size(780, 544);
             this.TablLocalApi.TabBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
             this.TablLocalApi.TabForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
             this.TablLocalApi.TabIndex = 13;
@@ -203,7 +203,7 @@ namespace HASS.Agent.Forms
             this.TabLocalStorage.Location = new System.Drawing.Point(142, 2);
             this.TabLocalStorage.Name = "TabLocalStorage";
             this.TabLocalStorage.ShowCloseButton = true;
-            this.TabLocalStorage.Size = new System.Drawing.Size(740, 544);
+            this.TabLocalStorage.Size = new System.Drawing.Size(780, 544);
             this.TabLocalStorage.TabBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
             this.TabLocalStorage.TabForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
             this.TabLocalStorage.TabIndex = 8;
@@ -222,7 +222,7 @@ namespace HASS.Agent.Forms
             this.TabLogging.Location = new System.Drawing.Point(142, 2);
             this.TabLogging.Name = "TabLogging";
             this.TabLogging.ShowCloseButton = true;
-            this.TabLogging.Size = new System.Drawing.Size(740, 544);
+            this.TabLogging.Size = new System.Drawing.Size(780, 544);
             this.TabLogging.TabBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
             this.TabLogging.TabForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
             this.TabLogging.TabIndex = 7;
@@ -239,7 +239,7 @@ namespace HASS.Agent.Forms
             this.TabMediaPlayer.Location = new System.Drawing.Point(142, 2);
             this.TabMediaPlayer.Name = "TabMediaPlayer";
             this.TabMediaPlayer.ShowCloseButton = true;
-            this.TabMediaPlayer.Size = new System.Drawing.Size(740, 544);
+            this.TabMediaPlayer.Size = new System.Drawing.Size(780, 544);
             this.TabMediaPlayer.TabBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
             this.TabMediaPlayer.TabForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
             this.TabMediaPlayer.TabIndex = 12;
@@ -258,7 +258,7 @@ namespace HASS.Agent.Forms
             this.TabMQTT.Location = new System.Drawing.Point(142, 2);
             this.TabMQTT.Name = "TabMQTT";
             this.TabMQTT.ShowCloseButton = true;
-            this.TabMQTT.Size = new System.Drawing.Size(740, 544);
+            this.TabMQTT.Size = new System.Drawing.Size(780, 544);
             this.TabMQTT.TabBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
             this.TabMQTT.TabForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
             this.TabMQTT.TabIndex = 3;
@@ -277,7 +277,7 @@ namespace HASS.Agent.Forms
             this.TabNotifications.Location = new System.Drawing.Point(142, 2);
             this.TabNotifications.Name = "TabNotifications";
             this.TabNotifications.ShowCloseButton = true;
-            this.TabNotifications.Size = new System.Drawing.Size(740, 544);
+            this.TabNotifications.Size = new System.Drawing.Size(780, 544);
             this.TabNotifications.TabBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
             this.TabNotifications.TabForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
             this.TabNotifications.TabIndex = 2;
@@ -295,7 +295,7 @@ namespace HASS.Agent.Forms
             this.TabService.Location = new System.Drawing.Point(142, 2);
             this.TabService.Name = "TabService";
             this.TabService.ShowCloseButton = true;
-            this.TabService.Size = new System.Drawing.Size(740, 544);
+            this.TabService.Size = new System.Drawing.Size(780, 544);
             this.TabService.TabBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
             this.TabService.TabForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
             this.TabService.TabIndex = 11;
@@ -314,7 +314,7 @@ namespace HASS.Agent.Forms
             this.TabStartup.Location = new System.Drawing.Point(142, 2);
             this.TabStartup.Name = "TabStartup";
             this.TabStartup.ShowCloseButton = true;
-            this.TabStartup.Size = new System.Drawing.Size(740, 544);
+            this.TabStartup.Size = new System.Drawing.Size(780, 544);
             this.TabStartup.TabBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
             this.TabStartup.TabForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
             this.TabStartup.TabIndex = 4;
@@ -331,7 +331,7 @@ namespace HASS.Agent.Forms
             this.TabTrayIcon.Location = new System.Drawing.Point(142, 2);
             this.TabTrayIcon.Name = "TabTrayIcon";
             this.TabTrayIcon.ShowCloseButton = true;
-            this.TabTrayIcon.Size = new System.Drawing.Size(740, 544);
+            this.TabTrayIcon.Size = new System.Drawing.Size(780, 544);
             this.TabTrayIcon.TabBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
             this.TabTrayIcon.TabForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
             this.TabTrayIcon.TabIndex = 14;
@@ -350,7 +350,7 @@ namespace HASS.Agent.Forms
             this.TabUpdates.Location = new System.Drawing.Point(142, 2);
             this.TabUpdates.Name = "TabUpdates";
             this.TabUpdates.ShowCloseButton = true;
-            this.TabUpdates.Size = new System.Drawing.Size(740, 544);
+            this.TabUpdates.Size = new System.Drawing.Size(780, 544);
             this.TabUpdates.TabBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
             this.TabUpdates.TabForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
             this.TabUpdates.TabIndex = 6;
@@ -367,7 +367,7 @@ namespace HASS.Agent.Forms
             this.TabNFC.Location = new System.Drawing.Point(142, 2);
             this.TabNFC.Name = "TabNFC";
             this.TabNFC.ShowCloseButton = true;
-            this.TabNFC.Size = new System.Drawing.Size(740, 544);
+            this.TabNFC.Size = new System.Drawing.Size(780, 544);
             this.TabNFC.TabBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
             this.TabNFC.TabForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
             this.TabNFC.TabIndex = 15;
@@ -431,7 +431,7 @@ namespace HASS.Agent.Forms
             this.BtnStore.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
             this.BtnStore.Location = new System.Drawing.Point(533, 563);
             this.BtnStore.Name = "BtnStore";
-            this.BtnStore.Size = new System.Drawing.Size(352, 31);
+            this.BtnStore.Size = new System.Drawing.Size(392, 31);
             this.BtnStore.Style.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(63)))), ((int)(((byte)(70)))));
             this.BtnStore.Style.DisabledForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(63)))), ((int)(((byte)(70)))));
             this.BtnStore.Style.FocusedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(63)))), ((int)(((byte)(70)))));
@@ -455,7 +455,7 @@ namespace HASS.Agent.Forms
             this.PnlTabs.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.PnlTabs.Location = new System.Drawing.Point(0, 7);
             this.PnlTabs.Name = "PnlTabs";
-            this.PnlTabs.Size = new System.Drawing.Size(886, 550);
+            this.PnlTabs.Size = new System.Drawing.Size(926, 550);
             this.PnlTabs.TabIndex = 11;
             // 
             // BtnClose
@@ -492,7 +492,7 @@ namespace HASS.Agent.Forms
             this.CaptionBarColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(63)))), ((int)(((byte)(70)))));
             this.CaptionFont = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.CaptionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
-            this.ClientSize = new System.Drawing.Size(886, 595);
+            this.ClientSize = new System.Drawing.Size(926, 595);
             this.Controls.Add(this.BtnClose);
             this.Controls.Add(this.PnlTabs);
             this.Controls.Add(this.BtnStore);
