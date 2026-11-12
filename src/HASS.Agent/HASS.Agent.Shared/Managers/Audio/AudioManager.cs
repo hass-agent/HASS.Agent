@@ -131,10 +131,18 @@ public static class AudioManager
         if (_applicationNameCache.TryGetValue(procId, out var cachedName))
             return cachedName;
 
-        using var process = Process.GetProcessById(procId);
-        _applicationNameCache[procId] = process.ProcessName;
+        try
+        {
+            using var process = Process.GetProcessById(procId);
+            _applicationNameCache[procId] = process.ProcessName;
 
-        return process.ProcessName;
+            return process.ProcessName;
+        }
+        catch (ArgumentException)
+        {
+            // Audio sessions can outlive their owning process.
+            return session.DisplayName;
+        }
     }
 
     private static List<AudioSession> GetDeviceSessions(MMDevice mmDevice)
