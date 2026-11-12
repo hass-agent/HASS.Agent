@@ -205,7 +205,9 @@ namespace HASS.Agent.Satellite.Service.MQTT
         private Task OnMqttConnected(MqttClientConnectedEventArgs arg)
         {
             lock (_statusLock)
+            {
                 _status = MqttStatus.Connected;
+            }
 
             Log.Information("[MQTT] Connected");
 
@@ -237,7 +239,10 @@ namespace HASS.Agent.Satellite.Service.MQTT
                 Variables.DeviceConfig = null;
 
                 // reset state
-                _status = MqttStatus.Connecting;
+                lock (_statusLock)
+                {
+                    _status = MqttStatus.Connecting;
+                }
                 _disconnectionNotified = false;
                 _connectingFailureNotified = false;
 
@@ -247,7 +252,10 @@ namespace HASS.Agent.Satellite.Service.MQTT
             catch (Exception ex)
             {
                 Log.Fatal(ex, "[MQTT] Error while reloading configuration: {err}", ex.Message);
-                _status = MqttStatus.Error;
+                lock (_statusLock)
+                {
+                    _status = MqttStatus.Error;
+                }
             }
         }
 
