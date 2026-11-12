@@ -50,11 +50,13 @@ namespace HASS.Agent.Managers
             }
             catch (TimeoutException)
             {
+                _devicesQuery = null;
                 Log.Warning("[BLUETOOTH] Retrieving devices took longer than {timeout} seconds, skipping", QueryTimeout.TotalSeconds);
                 return null;
             }
             catch (Exception ex)
             {
+                _devicesQuery = null;
                 Log.Fatal(ex, "[BLUETOOTH] Error getting devices: {err}", ex.Message);
                 return new List<BluetoothDevice>();
             }
@@ -132,8 +134,11 @@ namespace HASS.Agent.Managers
 
             try
             {
+                _leWatcher.Received -= ScanOnReceived;
+                _leWatcher.Stopped -= ScanOnStopped;
                 _isWatchingLeDevices = false;
                 _leWatcher.Stop();
+                _leWatcher = null;
             }
             catch (Exception ex)
             {
@@ -146,7 +151,7 @@ namespace HASS.Agent.Managers
         /// </summary>
         /// <param name="clearList"></param>
         /// <returns></returns>
-        internal static Task<List<BluetoothLeDevice>> GetDetectedLeDevicesAsync(bool clearList = true)
+        internal static async Task<List<BluetoothLeDevice>> GetDetectedLeDevicesAsync(bool clearList = true) //NOTE(Amadeo): async for consistency sake after #504 fixes
         {
             lock (LeDevicesLock)
             {
