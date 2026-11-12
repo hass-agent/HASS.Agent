@@ -145,6 +145,9 @@ namespace HASS.Agent.Settings
                 case CommandType.PublishAllSensorsCommand:
                     abstractCommand = new PublishAllSensorsCommand(command.EntityName, command.Name, command.EntityType, command.Id.ToString());
                     break;
+                case CommandType.PublishSensorCommand:
+                    abstractCommand = new PublishSensorCommand(command.EntityName, command.Name, command.Command, command.EntityType, command.Id.ToString());
+                    break;
                 case CommandType.LaunchUrlCommand:
                     abstractCommand = new LaunchUrlCommand(command.EntityName, command.Name, command.Command, command.EntityType, command.Id.ToString());
                     break;

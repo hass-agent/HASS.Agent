@@ -1,0 +1,3272 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+		Microsoft ResX Schema
+
+		Version 1.3
+
+		The primary goals of this format is to allow a simple XML format 
+		that is mostly human readable. The generation and parsing of the 
+		various data types are done through the TypeConverter classes 
+		associated with the data types.
+
+		Example:
+
+		... ado.net/XML headers & schema ...
+		<resheader name="resmimetype">text/microsoft-resx</resheader>
+		<resheader name="version">1.3</resheader>
+		<resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+		<resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+		<data name="Name1">this is my long string</data>
+		<data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+		<data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+			[base64 mime encoded serialized .NET Framework object]
+		</data>
+		<data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+			[base64 mime encoded string representing a byte array form of the .NET Framework object]
+		</data>
+
+		There are any number of "resheader" rows that contain simple 
+		name/value pairs.
+
+		Each data row contains a name, and value. The row also contains a 
+		type or mimetype. Type corresponds to a .NET class that support 
+		text/value conversion through the TypeConverter architecture. 
+		Classes that don't support this are serialized and stored with the 
+		mimetype set.
+
+		The mimetype is used for serialized objects, and tells the 
+		ResXResourceReader how to depersist the object. This is currently not 
+		extensible. For a given mimetype the value must be set accordingly:
+
+		Note - application/x-microsoft.net.object.binary.base64 is the format 
+		that the ResXResourceWriter will generate, however the reader can 
+		read any of the formats listed below.
+
+		mimetype: application/x-microsoft.net.object.binary.base64
+		value   : The object must be serialized with 
+			: System.Serialization.Formatters.Binary.BinaryFormatter
+			: and then encoded with base64 encoding.
+
+		mimetype: application/x-microsoft.net.object.soap.base64
+		value   : The object must be serialized with 
+			: System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+			: and then encoded with base64 encoding.
+
+		mimetype: application/x-microsoft.net.object.bytearray.base64
+		value   : The object must be serialized into a byte array 
+			: using a System.ComponentModel.TypeConverter
+			: and then encoded with base64 encoding.
+	-->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>1.3</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ConfigExternalTools_LblInfo1" xml:space="preserve">
+		<value>På den här sidan kan du konfigurera kopplingar till externa verktyg.</value>
+	</data>
+  <data name="ConfigLocalStorage_BtnClearImageCache" xml:space="preserve">
+		<value>Rensa bildcache</value>
+	</data>
+  <data name="ConfigLocalStorage_BtnOpenImageCache" xml:space="preserve">
+		<value>Öppna mapp</value>
+	</data>
+  <data name="ConfigLocalStorage_LblCacheLocations" xml:space="preserve">
+		<value>Plats för bildcache</value>
+	</data>
+  <data name="ConfigLocalStorage_LblCacheDays" xml:space="preserve">
+		<value>dagar</value>
+	</data>
+  <data name="ConfigNotifications_LblPort" xml:space="preserve">
+		<value>Port</value>
+	</data>
+  <data name="ConfigNotifications_BtnSendTestNotification" xml:space="preserve">
+		<value>Visa testavisering</value>
+	</data>
+  <data name="ConfigNotifications_BtnExecutePortReservation" xml:space="preserve">
+		<value>Utför portreservation</value>
+	</data>
+  <data name="OnboardingNotifications_LblTip1" xml:space="preserve">
+		<value>Obs: 5115 är standardporten, ändra den bara om du har ändrat den i Home Assistant.</value>
+	</data>
+  <data name="OnboardingNotifications_CbAcceptNotifications" xml:space="preserve">
+		<value>Ja, ta emot aviseringar på port</value>
+	</data>
+  <data name="OnboardingNotifications_LblInfo1" xml:space="preserve">
+		<value>HASS.Agent kan ta emot aviseringar från Home Assistant, med text och/eller bilder.
+
+Vill du aktivera den här funktionen?</value>
+	</data>
+  <data name="OnboardingIntegration_LblIntegration" xml:space="preserve">
+		<value>HASS.Agent-Notifier GitHub-sida</value>
+	</data>
+  <data name="OnboardingIntegration_LblInfo2" xml:space="preserve">
+		<value>Se till att du följer dessa steg:
+
+- Installera integrationen HASS.Agent-Notifier
+- Starta om Home Assistant
+- Konfigurera en notifier-entitet
+- Starta om Home Assistant</value>
+	</data>
+  <data name="OnboardingIntegration_LblInfo1" xml:space="preserve">
+		<value>För att använda aviseringar behöver du installera och konfigurera integrationen HASS.Agent-notifier i
+Home Assistant.
+
+Det är mycket enkelt med HACS, men den kan även installeras manuellt. Besök länken nedan för mer
+information.</value>
+	</data>
+  <data name="ServiceCommands_ClmName" xml:space="preserve">
+		<value>Namn</value>
+	</data>
+  <data name="ServiceCommands_ClmType" xml:space="preserve">
+		<value>Typ</value>
+	</data>
+  <data name="ServiceGeneral_Apply" xml:space="preserve">
+		<value>Verkställ</value>
+	</data>
+  <data name="ServiceGeneral_Stored" xml:space="preserve">
+		<value>Sparat!</value>
+	</data>
+  <data name="ServiceSensors_ClmName" xml:space="preserve">
+		<value>Namn</value>
+	</data>
+  <data name="ServiceSensors_ClmType" xml:space="preserve">
+		<value>Typ</value>
+	</data>
+  <data name="PortReservation_Title" xml:space="preserve">
+		<value>HASS.Agent portreservation</value>
+	</data>
+  <data name="PostUpdate_Title" xml:space="preserve">
+		<value>HASS.Agent efter uppdatering</value>
+	</data>
+  <data name="Restart_Title" xml:space="preserve">
+		<value>HASS.Agent omstart</value>
+	</data>
+  <data name="CommandsConfig_ClmName" xml:space="preserve">
+		<value>Namn</value>
+	</data>
+  <data name="CommandsConfig_ClmType" xml:space="preserve">
+		<value>Typ</value>
+	</data>
+  <data name="CommandsMod_ClmSensorName" xml:space="preserve">
+		<value>  Typ</value>
+	</data>
+  <data name="QuickActionsConfig_ClmDomain" xml:space="preserve">
+		<value>Domän</value>
+	</data>
+  <data name="QuickActionsConfig_ClmEntity" xml:space="preserve">
+		<value>Entitet</value>
+	</data>
+  <data name="QuickActionsConfig_ClmAction" xml:space="preserve">
+		<value>Åtgärd</value>
+	</data>
+  <data name="QuickActionsConfig_ClmHotKey" xml:space="preserve">
+		<value>Snabbtangent</value>
+	</data>
+  <data name="QuickActionsConfig_ClmDescription" xml:space="preserve">
+		<value>Beskrivning</value>
+	</data>
+  <data name="QuickActionsMod_LblDomain" xml:space="preserve">
+		<value>Domän</value>
+	</data>
+  <data name="QuickActionsMod_CbEnableHotkey" xml:space="preserve">
+		<value>aktivera snabbtangent</value>
+	</data>
+  <data name="SensorsConfig_ClmName" xml:space="preserve">
+		<value>Namn</value>
+	</data>
+  <data name="SensorsConfig_ClmType" xml:space="preserve">
+		<value>Typ</value>
+	</data>
+  <data name="SensorsConfig_Title" xml:space="preserve">
+		<value>Sensorkonfiguration</value>
+	</data>
+  <data name="SensorsMod_LblSetting1" xml:space="preserve">
+		<value>inställning 1</value>
+	</data>
+  <data name="SensorsMod_LblSetting2" xml:space="preserve">
+		<value>Inställning 2</value>
+	</data>
+  <data name="SensorsMod_LblSetting3" xml:space="preserve">
+		<value>Inställning 3</value>
+	</data>
+  <data name="SensorsMod_ClmSensorName" xml:space="preserve">
+		<value>  Typ</value>
+	</data>
+  <data name="ServiceConfig_TabGeneral" xml:space="preserve">
+		<value>     Allmänt     </value>
+	</data>
+  <data name="ServiceConfig_TabMqtt" xml:space="preserve">
+		<value>     MQTT     </value>
+	</data>
+  <data name="ServiceConfig_TabCommands" xml:space="preserve">
+		<value>     Kommandon     </value>
+	</data>
+  <data name="ServiceConfig_TabSensors" xml:space="preserve">
+		<value>     Sensorer     </value>
+	</data>
+  <data name="Configuration_TabGeneral" xml:space="preserve">
+		<value>Allmänt</value>
+	</data>
+  <data name="Configuration_TabExternalTools" xml:space="preserve">
+		<value>Externa verktyg</value>
+	</data>
+  <data name="Configuration_TabHassApi" xml:space="preserve">
+		<value>Home Assistant API</value>
+	</data>
+  <data name="Configuration_TabHotKey" xml:space="preserve">
+		<value>Snabbtangent</value>
+	</data>
+  <data name="Configuration_TabLocalStorage" xml:space="preserve">
+		<value>Lokal lagring</value>
+	</data>
+  <data name="Configuration_TabLogging" xml:space="preserve">
+		<value>Loggning</value>
+	</data>
+  <data name="Configuration_TabMQTT" xml:space="preserve">
+		<value>MQTT</value>
+	</data>
+  <data name="Configuration_TabNotifications" xml:space="preserve">
+		<value>Aviseringar</value>
+	</data>
+  <data name="Configuration_TabService" xml:space="preserve">
+		<value>Satellittjänst</value>
+	</data>
+  <data name="Configuration_TabStartup" xml:space="preserve">
+		<value>Uppstart</value>
+	</data>
+  <data name="Configuration_TabUpdates" xml:space="preserve">
+		<value>Uppdateringar</value>
+	</data>
+  <data name="Help_LblWikiInfo" xml:space="preserve">
+		<value>Bläddra i HASS.Agent-dokumentationen och användningsexempel.</value>
+	</data>
+  <data name="Main_TsShow" xml:space="preserve">
+		<value>Visa HASS.Agent</value>
+	</data>
+  <data name="Main_TsShowQuickActions" xml:space="preserve">
+		<value>Visa snabbåtgärder</value>
+	</data>
+  <data name="Main_TsConfig" xml:space="preserve">
+		<value>Konfiguration</value>
+	</data>
+  <data name="Main_TsQuickItemsConfig" xml:space="preserve">
+		<value>Hantera snabbåtgärder</value>
+	</data>
+  <data name="Main_TsLocalSensors" xml:space="preserve">
+		<value>Hantera lokala sensorer</value>
+	</data>
+  <data name="Main_TsCommands" xml:space="preserve">
+		<value>Hantera kommandon</value>
+	</data>
+  <data name="Main_CheckForUpdates" xml:space="preserve">
+		<value>Sök efter uppdateringar</value>
+	</data>
+  <data name="Main_TsDonate" xml:space="preserve">
+		<value>Donera</value>
+	</data>
+  <data name="Main_TsHelp" xml:space="preserve">
+		<value>Hjälp &amp;&amp; kontakt</value>
+	</data>
+  <data name="Main_TsAbout" xml:space="preserve">
+		<value>Om</value>
+	</data>
+  <data name="Main_TsExit" xml:space="preserve">
+		<value>Avsluta HASS.Agent</value>
+	</data>
+  <data name="Main_BtnCommandsManager" xml:space="preserve">
+		<value>Laddar..</value>
+	</data>
+  <data name="Main_BtnSensorsManager" xml:space="preserve">
+		<value>Laddar..</value>
+	</data>
+  <data name="Main_LblNotificationApi" xml:space="preserve">
+		<value>aviserings-api:</value>
+	</data>
+  <data name="Onboarding_Onboarding" xml:space="preserve">
+		<value>HASS.Agent introduktion</value>
+	</data>
+  <data name="UpdatePending_BtnDownload" xml:space="preserve">
+		<value>Hämtar information, vänta..</value>
+	</data>
+  <data name="CommandsManager_CustomCommandDescription" xml:space="preserve">
+		<value>Kör ett anpassat kommando.
+
+Dessa kommandon körs utan förhöjda behörigheter. För att köra med förhöjda behörigheter, skapa en schemalagd aktivitet och använd 'schtasks /Run /TN "TaskName"' som kommando för att köra aktiviteten.
+
+Eller aktivera 'kör med låg integritet' för ännu striktare körning.</value>
+	</data>
+  <data name="CommandsManager_CustomExecutorCommandDescription" xml:space="preserve">
+		<value>Kör kommandot via den konfigurerade anpassade exekveraren (i Konfiguration -&gt; Externa verktyg).
+
+Ditt kommando skickas som argument 'som det är', så du måste själv ange citattecken osv. vid behov.</value>
+	</data>
+  <data name="CommandsManager_HibernateCommandDescription" xml:space="preserve">
+		<value>Försätter datorn i viloläge (hibernate).</value>
+	</data>
+  <data name="CommandsManager_KeyCommandDescription" xml:space="preserve">
+		<value>Simulerar en enskild tangenttryckning.
+
+Klicka i textrutan 'tangentkod' och tryck på den tangent du vill simulera. Motsvarande tangentkod fylls i åt dig.
+
+Om du behöver fler tangenter och/eller modifierare som CTRL, använd kommandot MultipleKeys.</value>
+	</data>
+  <data name="CommandsManager_LaunchUrlCommandDescription" xml:space="preserve">
+		<value>Öppnar den angivna URL:en, som standard i din standardwebbläsare.
+
+För att använda 'inkognito', ange en specifik webbläsare i Konfiguration -&gt; Externa verktyg.
+
+Om du bara vill ha ett fönster med en specifik URL (inte en hel webbläsare), använd ett 'WebView'-kommando.</value>
+	</data>
+  <data name="CommandsManager_LockCommandDescription" xml:space="preserve">
+		<value>Låser den aktuella sessionen.</value>
+	</data>
+  <data name="CommandsManager_LogOffCommandDescription" xml:space="preserve">
+		<value>Loggar ut den aktuella sessionen.</value>
+	</data>
+  <data name="CommandsManager_MediaMuteCommandDescription" xml:space="preserve">
+		<value>Simulerar tangenten 'Ljud av'.</value>
+	</data>
+  <data name="CommandsManager_MediaNextCommandDescription" xml:space="preserve">
+		<value>Simulerar tangenten 'Media nästa'.</value>
+	</data>
+  <data name="CommandsManager_MediaPlayPauseCommandDescription" xml:space="preserve">
+		<value>Simulerar tangenten 'Media paus/spela'.</value>
+	</data>
+  <data name="CommandsManager_MediaPreviousCommandDescription" xml:space="preserve">
+		<value>Simulerar tangenten 'Media föregående'.</value>
+	</data>
+  <data name="CommandsManager_MediaVolumeDownCommandDescription" xml:space="preserve">
+		<value>Simulerar tangenten 'Volym ned'.</value>
+	</data>
+  <data name="CommandsManager_MediaVolumeUpCommandDescription" xml:space="preserve">
+		<value>Simulerar tangenten 'Volym upp'.</value>
+	</data>
+  <data name="CommandsManager_MultipleKeysCommandDescription" xml:space="preserve">
+		<value>Simulerar tryck på flera tangenter.
+
+Du måste sätta [ ] runt varje tangent, annars kan HASS.Agent inte skilja dem åt. Om du till exempel vill trycka X TAB Y SHIFT-Z blir det [X] [{TAB}] [Y] [+Z].
+
+Det finns några knep du kan använda:
+
+- Om du vill trycka på en hakparentes, escapea den, så [ blir [\[] och ] blir [\]]
+
+- Specialtangenter skrivs mellan { }, som {TAB} eller {UP}
+
+- Sätt ett + framför en tangent för att lägga till SHIFT, ^ för CTRL och % för ALT. Alltså är +C SHIFT-C. Eller, +(CD) är SHIFT-C och SHIFT-D, medan +CD är SHIFT-C och D
+
+- För flera tryckningar, använd {z 15}, vilket betyder att Z trycks 15 gånger.
+
+Mer info: https://docs.microsoft.com/en-us/dotnet/api/system.windows.forms.sendkeys</value>
+	</data>
+  <data name="CommandsManager_PowershellCommandDescription" xml:space="preserve">
+		<value>Kör ett Powershell-kommando eller -skript.
+
+Du kan antingen ange platsen för ett skript (*.ps1) eller ett kommando på en rad.
+
+Det körs utan förhöjda behörigheter.</value>
+	</data>
+  <data name="CommandsManager_PublishAllSensorsCommandDescription" xml:space="preserve">
+		<value>Återställer alla sensorkontroller, vilket tvingar alla sensorer att bearbeta och skicka sina värden.
+
+Användbart till exempel om du vill tvinga HASS.Agent att uppdatera alla dina sensorer efter en omstart av HA.</value>
+	</data>
+  <data name="CommandsManager_RestartCommandDescription" xml:space="preserve">
+		<value>Startar om datorn efter en minut.
+
+Tips: Utlöst av misstag? Kör 'shutdown /a' för att avbryta avstängningen.</value>
+	</data>
+  <data name="CommandsManager_ShutdownCommandDescription" xml:space="preserve">
+		<value>Stänger av datorn efter en minut.
+
+Tips: Utlöst av misstag? Kör 'shutdown /a' för att avbryta avstängningen.</value>
+	</data>
+  <data name="CommandsManager_SleepCommandDescription" xml:space="preserve">
+		<value>Försätter datorn i strömsparläge.
+
+Obs: på grund av en begränsning i Windows fungerar detta bara om viloläge (hibernate) är inaktiverat, annars går datorn bara i viloläge.
+
+Du kan använda något som NirCmd (http://www.nirsoft.net/utils/nircmd.html) för att komma runt detta.</value>
+	</data>
+  <data name="ConfigExternalTools_BtnExternalBrowserIncognitoTest_MessageBox1" xml:space="preserve">
+		<value>Ange platsen för din webbläsares programfil! (.exe-fil)</value>
+	</data>
+  <data name="ConfigExternalTools_ConfigExternalTools_BtnExternalBrowserIncognitoTest_MessageBox2" xml:space="preserve">
+		<value>Den angivna webbläsarens programfil kunde inte hittas, kontrollera att sökvägen är korrekt och försök igen.</value>
+	</data>
+  <data name="ConfigExternalTools_BtnExternalBrowserIncognitoTest_MessageBox3" xml:space="preserve">
+		<value>Inga inkognitoargument angavs, så webbläsaren startar troligen normalt.
+
+Vill du fortsätta?</value>
+	</data>
+  <data name="ConfigExternalTools_BtnExternalBrowserIncognitoTest_MessageBox4" xml:space="preserve">
+		<value>Något gick fel när webbläsaren skulle startas i inkognitoläge!
+
+Kontrollera loggarna för mer information.</value>
+	</data>
+  <data name="ConfigHomeAssistantApi_BtnTestApi_MessageBox1" xml:space="preserve">
+		<value>Ange en giltig API-nyckel!</value>
+	</data>
+  <data name="ConfigHomeAssistantApi_BtnTestApi_MessageBox2" xml:space="preserve">
+		<value>Ange ett värde för din Home Assistants URI.</value>
+	</data>
+  <data name="ConfigHomeAssistantApi_BtnTestApi_MessageBox3" xml:space="preserve">
+		<value>Kunde inte ansluta, följande fel returnerades:
+
+{0}</value>
+	</data>
+  <data name="ConfigHomeAssistantApi_BtnTestApi_MessageBox4" xml:space="preserve">
+		<value>Anslutningen OK!
+
+Home Assistant-version: {0}</value>
+	</data>
+  <data name="ConfigLocalStorage_BtnClearImageCache_MessageBox1" xml:space="preserve">
+		<value>Bildcachen har rensats!</value>
+	</data>
+  <data name="ConfigLocalStorage_BtnClearImageCache_InfoText1" xml:space="preserve">
+		<value>Rensar..</value>
+	</data>
+  <data name="ConfigNotifications_BtnSendTestNotification_MessageBox1" xml:space="preserve">
+		<value>Aviseringar är för närvarande inaktiverade, aktivera dem och starta om HASS.Agent, försök sedan igen.</value>
+	</data>
+  <data name="ConfigNotifications_BtnSendTestNotification_MessageBox2" xml:space="preserve">
+		<value>Testaviseringen borde ha visats. Om du inte fick den, kontrollera loggarna eller läs dokumentationen för felsökningstips.
+
+Obs: Detta testar bara lokalt om aviseringar kan visas!</value>
+	</data>
+  <data name="ConfigNotifications_TestNotification" xml:space="preserve">
+		<value>Det här är en testavisering!</value>
+	</data>
+  <data name="ConfigNotifications_BtnExecutePortReservation_Busy" xml:space="preserve">
+		<value>Utför, vänta..</value>
+	</data>
+  <data name="ConfigNotifications_BtnExecutePortReservation_MessageBox1" xml:space="preserve">
+		<value>Något gick fel när porten skulle reserveras!
+
+Manuell körning krävs och ett kommando har kopierats till urklipp. Öppna en terminal med förhöjda behörigheter och klistra in kommandot.
+
+Kom också ihåg att ändra porten i dina brandväggsregler!</value>
+	</data>
+  <data name="ConfigService_NotInstalled" xml:space="preserve">
+		<value>Inte installerad</value>
+	</data>
+  <data name="ConfigService_Disabled" xml:space="preserve">
+		<value>Inaktiverad</value>
+	</data>
+  <data name="ConfigService_Running" xml:space="preserve">
+		<value>Körs</value>
+	</data>
+  <data name="ConfigService_Stopped" xml:space="preserve">
+		<value>Stoppad</value>
+	</data>
+  <data name="ConfigService_Failed" xml:space="preserve">
+		<value>Misslyckades</value>
+	</data>
+  <data name="ConfigService_BtnStopService_MessageBox1" xml:space="preserve">
+		<value>Något gick fel när tjänsten skulle stoppas, godkände du UAC-frågan?
+
+Kontrollera loggarna för HASS.Agent (inte tjänsten) för mer information.</value>
+	</data>
+  <data name="ConfigService_BtnStartService_MessageBox1" xml:space="preserve">
+		<value>Tjänsten är inställd på 'inaktiverad', så den kan inte startas.
+
+Aktivera tjänsten först och försök igen.</value>
+	</data>
+  <data name="ConfigService_BtnStartService_MessageBox2" xml:space="preserve">
+		<value>Något gick fel när tjänsten skulle startas, godkände du UAC-frågan?
+
+Kontrollera loggarna för HASS.Agent (inte tjänsten) för mer information.</value>
+	</data>
+  <data name="ConfigService_BtnDisableService_MessageBox1" xml:space="preserve">
+		<value>Något gick fel när tjänsten skulle inaktiveras, godkände du UAC-frågan?
+
+Kontrollera loggarna för HASS.Agent (inte tjänsten) för mer information.</value>
+	</data>
+  <data name="ConfigService_BtnEnableService_MessageBox1" xml:space="preserve">
+		<value>Något gick fel när tjänsten skulle aktiveras, godkände du UAC-frågan?
+
+Kontrollera loggarna för HASS.Agent (inte tjänsten) för mer information.</value>
+	</data>
+  <data name="ConfigService_BtnShowLogs_MessageBox1" xml:space="preserve">
+		<value>Något gick fel när tjänsten skulle installeras om, godkände du UAC-frågan?
+
+Kontrollera loggarna för HASS.Agent (inte tjänsten) för mer information.</value>
+	</data>
+  <data name="ConfigStartup_BtnSetStartOnLogin_MessageBox1" xml:space="preserve">
+		<value>Något gick fel när Starta vid inloggning skulle inaktiveras, kontrollera loggarna för mer information.</value>
+	</data>
+  <data name="ConfigStartup_BtnSetStartOnLogin_MessageBox2" xml:space="preserve">
+		<value>Något gick fel när Starta vid inloggning skulle inaktiveras, kontrollera loggarna för mer information.</value>
+	</data>
+  <data name="ConfigStartup_Enabled" xml:space="preserve">
+		<value>Aktiverad</value>
+	</data>
+  <data name="ConfigStartup_Disable" xml:space="preserve">
+		<value>Inaktivera Starta vid inloggning</value>
+	</data>
+  <data name="ConfigStartup_Disabled" xml:space="preserve">
+		<value>Inaktiverad</value>
+	</data>
+  <data name="ConfigStartup_Enable" xml:space="preserve">
+		<value>Aktivera Starta vid inloggning</value>
+	</data>
+  <data name="OnboardingStartup_Activated" xml:space="preserve">
+		<value>Starta vid inloggning har aktiverats!</value>
+	</data>
+  <data name="OnboardingStartup_EnableNow" xml:space="preserve">
+		<value>Vill du aktivera Starta vid inloggning nu?</value>
+	</data>
+  <data name="OnboardingStartup_AlreadyActivated" xml:space="preserve">
+		<value>Starta vid inloggning är redan aktiverat, allt klart!</value>
+	</data>
+  <data name="OnboardingStartup_Activating" xml:space="preserve">
+		<value>Aktiverar Starta vid inloggning..</value>
+	</data>
+  <data name="OnboardingStartup_Failed" xml:space="preserve">
+		<value>Något gick fel. Du kan försöka igen, eller hoppa till nästa sida och försöka igen efter att HASS.Agent startats om.</value>
+	</data>
+  <data name="OnboardingStartup_BtnSetLaunchOnLogin_2" xml:space="preserve">
+		<value>Aktivera Starta vid inloggning</value>
+	</data>
+  <data name="OnboardingApi_BtnTest_MessageBox1" xml:space="preserve">
+		<value>Ange en giltig API-nyckel.</value>
+	</data>
+  <data name="OnboardingApi_BtnTest_MessageBox2" xml:space="preserve">
+		<value>Ange din Home Assistants URI.</value>
+	</data>
+  <data name="OnboardingApi_BtnTest_MessageBox3" xml:space="preserve">
+		<value>Kunde inte ansluta, följande fel returnerades:
+
+{0}</value>
+	</data>
+  <data name="OnboardingApi_BtnTest_MessageBox4" xml:space="preserve">
+		<value>Anslutningen OK!
+
+Home Assistant-version: {0}</value>
+	</data>
+  <data name="OnboardingApi_BtnTest_Testing" xml:space="preserve">
+		<value>Testar..</value>
+	</data>
+  <data name="ServiceCommands_BtnStore_MessageBox1" xml:space="preserve">
+		<value>Ett fel uppstod när dina kommandon skulle sparas, kontrollera loggarna för mer information.</value>
+	</data>
+  <data name="ServiceCommands_BtnStore_Storing" xml:space="preserve">
+		<value>Sparar och registrerar, vänta..</value>
+	</data>
+  <data name="ServiceConnect_Connecting" xml:space="preserve">
+		<value>Ansluter till satellittjänsten, vänta..</value>
+	</data>
+  <data name="ServiceConnect_Failed" xml:space="preserve">
+		<value>Anslutningen till tjänsten misslyckades!</value>
+	</data>
+  <data name="ServiceConnect_FailedMessage" xml:space="preserve">
+		<value>Tjänsten hittades inte! Du kan installera och hantera den från konfigurationspanelen.
+
+När den är igång kan du komma tillbaka hit och konfigurera kommandon och sensorer.</value>
+	</data>
+  <data name="ServiceConnect_CommunicationFailed" xml:space="preserve">
+		<value>Kommunikationen med tjänsten misslyckades!</value>
+	</data>
+  <data name="ServiceConnect_CommunicationFailedMessage" xml:space="preserve">
+		<value>Kunde inte kommunicera med tjänsten. Kontrollera loggarna för mer info.
+
+Du kan öppna loggarna och hantera tjänsten från konfigurationspanelen.</value>
+	</data>
+  <data name="ServiceConnect_Unauthorized" xml:space="preserve">
+		<value>Obehörig</value>
+	</data>
+  <data name="ServiceConnect_UnauthorizedMessage" xml:space="preserve">
+		<value>Du har inte behörighet att kontakta tjänsten.
+
+Om du har rätt autentiserings-ID kan du ange det nu och försöka igen.</value>
+	</data>
+  <data name="ServiceConnect_SettingsFailed" xml:space="preserve">
+		<value>Hämtning av inställningar misslyckades!</value>
+	</data>
+  <data name="ServiceConnect_SettingsFailedMessage" xml:space="preserve">
+		<value>Tjänsten returnerade ett fel vid begäran av sina inställningar. Kontrollera loggarna för mer info.
+
+Du kan öppna loggarna och hantera tjänsten från konfigurationspanelen.</value>
+	</data>
+  <data name="ServiceConnect_MqttFailed" xml:space="preserve">
+		<value>Hämtning av MQTT-inställningar misslyckades!</value>
+	</data>
+  <data name="ServiceConnect_MqttFailedMessage" xml:space="preserve">
+		<value>Tjänsten returnerade ett fel vid begäran av sina MQTT-inställningar. Kontrollera loggarna för mer info.
+
+Du kan öppna loggarna och hantera tjänsten från konfigurationspanelen.</value>
+	</data>
+  <data name="ServiceConnect_CommandsFailed" xml:space="preserve">
+		<value>Hämtning av konfigurerade kommandon misslyckades!</value>
+	</data>
+  <data name="ServiceConnect_CommandsFailedMessage" xml:space="preserve">
+		<value>Tjänsten returnerade ett fel vid begäran av sina konfigurerade kommandon. Kontrollera loggarna för mer info.
+
+Du kan öppna loggarna och hantera tjänsten från konfigurationspanelen.</value>
+	</data>
+  <data name="ServiceConnect_SensorsFailed" xml:space="preserve">
+		<value>Hämtning av konfigurerade sensorer misslyckades!</value>
+	</data>
+  <data name="ServiceConnect_SensorsFailedMessage" xml:space="preserve">
+		<value>Tjänsten returnerade ett fel vid begäran av sina konfigurerade sensorer. Kontrollera loggarna för mer info.
+
+Du kan öppna loggarna och hantera tjänsten från konfigurationspanelen.</value>
+	</data>
+  <data name="ServiceGeneral_TbAuthId_MessageBox1" xml:space="preserve">
+		<value>Om du sparar ett tomt autentiserings-ID får alla HASS.Agent-instanser åtkomst till tjänsten.
+
+Är du säker på att du vill det?</value>
+	</data>
+  <data name="ServiceGeneral_SavingFailedMessageBox" xml:space="preserve">
+		<value>Ett fel uppstod när inställningarna skulle sparas, kontrollera loggarna för mer information.</value>
+	</data>
+  <data name="ServiceGeneral_BtnStoreDeviceName_MessageBox1" xml:space="preserve">
+		<value>Ange ett enhetsnamn!</value>
+	</data>
+  <data name="ServiceGeneral_BtnStoreCustomExecutor_MessageBox1" xml:space="preserve">
+		<value>Välj en exekverare först. (Tips: Dubbelklicka för att bläddra)</value>
+	</data>
+  <data name="ServiceGeneral_BtnStoreCustomExecutor_MessageBox2" xml:space="preserve">
+		<value>Den valda exekveraren kunde inte hittas, kontrollera att den angivna sökvägen är korrekt och försök igen.</value>
+	</data>
+  <data name="ServiceGeneral_LblAuthIdInfo_MessageBox1" xml:space="preserve">
+		<value>Ange ett autentiserings-ID om du inte vill att alla HASS.Agent-instanser på den här datorn ska kunna ansluta till satellittjänsten.
+
+Endast instanser som har rätt ID kan ansluta.
+
+Lämna tomt för att låta alla ansluta.</value>
+	</data>
+  <data name="ServiceGeneral_LblDeviceNameInfo_MessageBox1" xml:space="preserve">
+		<value>Det här är namnet som satellittjänsten registrerar sig med i Home Assistant.
+
+Som standard är det din dators namn plus '-satellite'.</value>
+	</data>
+  <data name="ServiceGeneral_LblDisconGraceInfo_MessageBox1" xml:space="preserve">
+		<value>Den tid satellittjänsten väntar innan den rapporterar en förlorad anslutning till MQTT-brokern.</value>
+	</data>
+  <data name="ServiceMqtt_StatusError" xml:space="preserve">
+		<value>Fel vid hämtning av status, kontrollera loggarna för information.</value>
+	</data>
+  <data name="ServiceMqtt_BtnStore_MessageBox1" xml:space="preserve">
+		<value>Ett fel uppstod när konfigurationen skulle sparas, kontrollera loggarna för mer information.</value>
+	</data>
+  <data name="ServiceMqtt_BtnStore_Storing" xml:space="preserve">
+		<value>Sparar och registrerar, vänta..</value>
+	</data>
+  <data name="ServiceSensors_BtnStore_MessageBox1" xml:space="preserve">
+		<value>Ett fel uppstod när sensorerna skulle sparas, kontrollera loggarna för mer information.</value>
+	</data>
+  <data name="ServiceSensors_BtnStore_Storing" xml:space="preserve">
+		<value>Sparar och registrerar, vänta..</value>
+	</data>
+  <data name="PortReservation_ProcessPostUpdate_MessageBox1" xml:space="preserve">
+		<value>Alla steg slutfördes inte. Läs loggarna för mer information.</value>
+	</data>
+  <data name="PostUpdate_ProcessPostUpdate_MessageBox1" xml:space="preserve">
+		<value>Alla steg slutfördes inte. Läs loggarna för mer information.</value>
+	</data>
+  <data name="Restart_ProcessRestart_MessageBox1" xml:space="preserve">
+		<value>HASS.Agent är fortfarande aktiv efter {0} sekunder. Stäng alla instanser och starta om manuellt.
+
+Kontrollera loggarna för mer info, och informera gärna utvecklarna.</value>
+	</data>
+  <data name="ServiceReinstall_ProcessReinstall_MessageBox1" xml:space="preserve">
+		<value>Alla steg slutfördes inte, kontrollera loggarna för mer information.</value>
+	</data>
+  <data name="ServiceSetState_Enabled" xml:space="preserve">
+		<value>Aktivera satellittjänsten</value>
+	</data>
+  <data name="ServiceSetState_Disabled" xml:space="preserve">
+		<value>Inaktivera satellittjänsten</value>
+	</data>
+  <data name="ServiceSetState_Started" xml:space="preserve">
+		<value>Starta satellittjänsten</value>
+	</data>
+  <data name="ServiceSetState_Stopped" xml:space="preserve">
+		<value>Stoppa satellittjänsten</value>
+	</data>
+  <data name="ServiceSetState_ProcessState_MessageBox1" xml:space="preserve">
+		<value>Något gick fel vid bearbetning av önskat tjänsttillstånd.
+
+Läs loggarna för mer information.</value>
+	</data>
+  <data name="CommandMqttTopic_BtnCopyClipboard_Copied" xml:space="preserve">
+		<value>Ämnet har kopierats till urklipp!</value>
+	</data>
+  <data name="CommandsConfig_BtnStore_Storing" xml:space="preserve">
+		<value>Sparar och registrerar, vänta..</value>
+	</data>
+  <data name="CommandsConfig_BtnStore_MessageBox1" xml:space="preserve">
+		<value>Ett fel uppstod när kommandona skulle sparas, kontrollera loggarna för mer information.</value>
+	</data>
+  <data name="CommandsMod_Title_NewCommand" xml:space="preserve">
+		<value>Nytt kommando</value>
+	</data>
+  <data name="CommandsMod_Title_ModCommand" xml:space="preserve">
+		<value>Ändra kommando</value>
+	</data>
+  <data name="CommandsMod_BtnStore_MessageBox1" xml:space="preserve">
+		<value>Välj en kommandotyp!</value>
+	</data>
+  <data name="CommandsMod_BtnStore_MessageBox2" xml:space="preserve">
+		<value>Välj en giltig kommandotyp!</value>
+	</data>
+  <data name="CommandsMod_MessageBox_EntityType" xml:space="preserve">
+		<value>Välj en giltig entitetstyp först.</value>
+	</data>
+  <data name="CommandsMod_MessageBox_Name" xml:space="preserve">
+		<value>Ange ett namn!</value>
+	</data>
+  <data name="CommandsMod_BtnStore_MessageBox3" xml:space="preserve">
+		<value>Det finns redan ett kommando med det namnet, är du säker på att du vill fortsätta?</value>
+	</data>
+  <data name="CommandsMod_BtnStore_MessageBox4" xml:space="preserve">
+		<value>Om inget kommando anges kan du bara använda den här entiteten med ett 'action'-värde via Home Assistant. Att köra den som den är gör ingenting.
+
+Är du säker på att du vill fortsätta?</value>
+	</data>
+  <data name="CommandsMod_MessageBox_Action" xml:space="preserve">
+		<value>Om du inte anger ett kommando eller skript kan du bara använda den här entiteten med ett 'action'-värde via Home Assistant. Att köra den som den är gör ingenting.
+
+Är du säker på att du vill det?</value>
+	</data>
+  <data name="CommandsMod_BtnStore_MessageBox5" xml:space="preserve">
+		<value>Ange en tangentkod!</value>
+	</data>
+  <data name="CommandsMod_BtnStore_MessageBox6" xml:space="preserve">
+		<value>Kontroll av tangenter misslyckades: {0}</value>
+	</data>
+  <data name="CommandsMod_BtnStore_MessageBox7" xml:space="preserve">
+		<value>Om ingen URL anges kan du bara använda den här entiteten med ett 'action'-värde via Home Assistant. Att köra den som den är gör ingenting.
+
+Är du säker på att du vill fortsätta?</value>
+	</data>
+  <data name="CommandsMod_LblSetting_Command" xml:space="preserve">
+		<value>Kommando</value>
+	</data>
+  <data name="CommandsMod_LblSetting_CommandScript" xml:space="preserve">
+		<value>Kommando eller skript</value>
+	</data>
+  <data name="CommandsMod_LblSetting_KeyCode" xml:space="preserve">
+		<value>Tangentkod</value>
+	</data>
+  <data name="CommandsMod_LblSetting_KeyCodes" xml:space="preserve">
+		<value>Tangentkoder</value>
+	</data>
+  <data name="CommandsMod_CbCommandSpecific_Incognito" xml:space="preserve">
+		<value>Starta i inkognitoläge</value>
+	</data>
+  <data name="CommandsMod_LblInfo_Browser" xml:space="preserve">
+		<value>Webbläsare: Standard
+
+Konfigurera en anpassad webbläsare för att aktivera inkognitoläge.</value>
+	</data>
+  <data name="CommandsMod_LblSetting_Url" xml:space="preserve">
+		<value>URL</value>
+	</data>
+  <data name="CommandsMod_LblInfo_BrowserSpecific" xml:space="preserve">
+		<value>Webbläsare: {0}</value>
+	</data>
+  <data name="CommandsMod_LblInfo_Executor" xml:space="preserve">
+		<value>Exekverare: Ingen
+
+Konfigurera en exekverare, annars kommer ditt kommando inte att köras.</value>
+	</data>
+  <data name="CommandsMod_LblInfo_ExecutorSpecific" xml:space="preserve">
+		<value>Exekverare: {0}</value>
+	</data>
+  <data name="CommandsMod_LblIntegrityInfo_InfoMsg1" xml:space="preserve">
+		<value>Låg integritet innebär att ditt kommando körs med begränsade behörigheter.</value>
+	</data>
+  <data name="CommandsMod_LblIntegrityInfo_InfoMsg2" xml:space="preserve">
+		<value>Det innebär att det bara kan spara och ändra filer på vissa platser,</value>
+	</data>
+  <data name="CommandsMod_LblIntegrityInfo_InfoMsg3" xml:space="preserve">
+		<value>som mappen '%USERPROFILE%\AppData\LocalLow' eller</value>
+	</data>
+  <data name="CommandsMod_LblIntegrityInfo_InfoMsg4" xml:space="preserve">
+		<value>registernyckeln 'HKEY_CURRENT_USER\Software\AppDataLow'.</value>
+	</data>
+  <data name="CommandsMod_LblIntegrityInfo_InfoMsg5" xml:space="preserve">
+		<value>Du bör testa ditt kommando för att säkerställa att det inte påverkas av detta!</value>
+	</data>
+  <data name="CommandsMod_SpecificClient" xml:space="preserve">
+		<value>Endast {0}!</value>
+	</data>
+  <data name="CommandsMod_LblMqttTopic_MessageBox1" xml:space="preserve">
+		<value>MQTT-hanteraren har inte konfigurerats korrekt, eller har inte slutfört sin uppstart ännu.</value>
+	</data>
+  <data name="QuickActions_CheckHassManager_MessageBox1" xml:space="preserve">
+		<value>Kunde inte hämta dina entiteter på grund av saknad konfiguration, ange de nödvändiga värdena på konfigurationsskärmen.</value>
+	</data>
+  <data name="QuickActions_MessageBox_EntityFailed" xml:space="preserve">
+		<value>Ett fel uppstod vid hämtning av dina entiteter!</value>
+	</data>
+  <data name="QuickActionsMod_Title_New" xml:space="preserve">
+		<value>Ny snabbåtgärd</value>
+	</data>
+  <data name="QuickActionsMod_Title_Mod" xml:space="preserve">
+		<value>Ändra snabbåtgärd</value>
+	</data>
+  <data name="QuickActionsMod_CheckHassManager_MessageBox1" xml:space="preserve">
+		<value>Kunde inte hämta dina entiteter på grund av saknad konfiguration, ange de nödvändiga värdena på konfigurationsskärmen.</value>
+	</data>
+  <data name="QuickActionsMod_MessageBox_Entities" xml:space="preserve">
+		<value>Ett fel uppstod vid hämtning av dina entiteter.</value>
+	</data>
+  <data name="QuickActionsMod_BtnStore_MessageBox1" xml:space="preserve">
+		<value>Välj en entitet!</value>
+	</data>
+  <data name="QuickActionsMod_BtnStore_MessageBox3" xml:space="preserve">
+		<value>Okänd åtgärd, välj en giltig.</value>
+	</data>
+  <data name="SensorsConfig_BtnStore_Storing" xml:space="preserve">
+		<value>Sparar och registrerar, vänta..</value>
+	</data>
+  <data name="SensorsConfig_BtnStore_MessageBox1" xml:space="preserve">
+		<value>Ett fel uppstod när sensorerna skulle sparas, kontrollera loggarna för mer information.</value>
+	</data>
+  <data name="SensorsMod_Title_New" xml:space="preserve">
+		<value>Ny sensor</value>
+	</data>
+  <data name="SensorsMod_Title_Mod" xml:space="preserve">
+		<value>Ändra sensor</value>
+	</data>
+  <data name="SensorsMod_LblSetting1_WindowName" xml:space="preserve">
+		<value>Fönsternamn</value>
+	</data>
+  <data name="SensorsMod_LblSetting1_Wmi" xml:space="preserve">
+		<value>WMI-fråga</value>
+	</data>
+  <data name="SensorsMod_LblSetting2_Wmi" xml:space="preserve">
+		<value>WMI-omfång (valfritt)</value>
+	</data>
+  <data name="SensorsMod_LblSetting1_Category" xml:space="preserve">
+		<value>Kategori</value>
+	</data>
+  <data name="SensorsMod_LblSetting2_Counter" xml:space="preserve">
+		<value>Räknare</value>
+	</data>
+  <data name="SensorsMod_LblSetting3_Instance" xml:space="preserve">
+		<value>Instans (valfritt)</value>
+	</data>
+  <data name="SensorsMod_LblSetting1_Process" xml:space="preserve">
+		<value>Process</value>
+	</data>
+  <data name="SensorsMod_LblSetting1_Service" xml:space="preserve">
+		<value>Tjänst</value>
+	</data>
+  <data name="SensorsMod_BtnStore_MessageBox1" xml:space="preserve">
+		<value>Välj en sensortyp!</value>
+	</data>
+  <data name="SensorsMod_BtnStore_MessageBox2" xml:space="preserve">
+		<value>Välj en giltig sensortyp!</value>
+	</data>
+  <data name="SensorsMod_BtnStore_MessageBox3" xml:space="preserve">
+		<value>Ange ett namn!</value>
+	</data>
+  <data name="SensorsMod_BtnStore_MessageBox4" xml:space="preserve">
+		<value>Det finns redan en envärdessensor med det namnet, är du säker på att du vill fortsätta?</value>
+	</data>
+  <data name="SensorsMod_BtnStore_MessageBox5" xml:space="preserve">
+		<value>Det finns redan en flervärdessensor med det namnet, är du säker på att du vill fortsätta?</value>
+	</data>
+  <data name="SensorsMod_BtnStore_MessageBox6" xml:space="preserve">
+		<value>Ange ett intervall mellan 1 och 43200 (12 timmar)!</value>
+	</data>
+  <data name="SensorsMod_BtnStore_MessageBox7" xml:space="preserve">
+		<value>Ange ett fönsternamn!</value>
+	</data>
+  <data name="SensorsMod_BtnStore_MessageBox8" xml:space="preserve">
+		<value>Ange en fråga!</value>
+	</data>
+  <data name="SensorsMod_BtnStore_MessageBox9" xml:space="preserve">
+		<value>Ange en kategori och instans!</value>
+	</data>
+  <data name="SensorsMod_BtnStore_MessageBox10" xml:space="preserve">
+		<value>Ange namnet på en process!</value>
+	</data>
+  <data name="SensorsMod_BtnStore_MessageBox11" xml:space="preserve">
+		<value>Ange namnet på en tjänst!</value>
+	</data>
+  <data name="SensorsMod_SpecificClient" xml:space="preserve">
+		<value>Endast {0}!</value>
+	</data>
+  <data name="Configuration_ProcessChanges_MessageBox1" xml:space="preserve">
+		<value>Du har ändrat enhetens namn.
+
+Alla dina sensorer och kommandon kommer nu att avpubliceras, och HASS.Agent startar sedan om för att publicera dem igen.
+
+Oroa dig inte, de behåller sina nuvarande namn, så dina automationer och skript fortsätter att fungera.
+
+Obs: namnet kommer att 'saneras', vilket innebär att allt utom bokstäver, siffror och blanksteg ersätts med ett understreck. Detta krävs av HA.</value>
+	</data>
+  <data name="Configuration_ProcessChanges_MessageBox2" xml:space="preserve">
+		<value>Du har ändrat porten för det lokala API:et. Den nya porten behöver reserveras.
+
+Du får en UAC-förfrågan för att göra det, godkänn den.</value>
+	</data>
+  <data name="Configuration_ProcessChanges_MessageBox3" xml:space="preserve">
+		<value>Något gick fel!
+
+Kör det nödvändiga kommandot manuellt. Det har kopierats till urklipp, du behöver bara klistra in det i en kommandotolk med förhöjda behörigheter.
+
+Kom ihåg att även ändra porten i din brandväggsregel.</value>
+	</data>
+  <data name="Configuration_ProcessChanges_MessageBox4" xml:space="preserve">
+		<value>Porten har reserverats!
+
+HASS.Agent startar nu om för att aktivera den nya konfigurationen.</value>
+	</data>
+  <data name="Configuration_MessageBox_RestartManually" xml:space="preserve">
+		<value>Något gick fel vid förberedelse av omstart.
+Starta om manuellt.</value>
+	</data>
+  <data name="Configuration_ProcessChanges_MessageBox5" xml:space="preserve">
+		<value>Din konfiguration har sparats. De flesta ändringar kräver att HASS.Agent startas om innan de träder i kraft.
+
+Vill du starta om nu?</value>
+	</data>
+  <data name="Main_Load_MessageBox1" xml:space="preserve">
+		<value>Något gick fel när dina inställningar skulle laddas.
+
+Kontrollera appsettings.json i undermappen 'config', eller ta bort den för att börja om från början.</value>
+	</data>
+  <data name="Main_Load_MessageBox2" xml:space="preserve">
+		<value>Ett fel uppstod när HASS.Agent skulle startas.
+Kontrollera loggarna och skapa en felrapport på GitHub.</value>
+	</data>
+  <data name="Main_BtnSensorsManage_Ready" xml:space="preserve">
+		<value>&amp;Sensorer</value>
+	</data>
+  <data name="Main_BtnCommandsManager_Ready" xml:space="preserve">
+		<value>&amp;Kommandon</value>
+	</data>
+  <data name="Main_Checking" xml:space="preserve">
+		<value>Kontrollerar..</value>
+	</data>
+  <data name="Main_CheckForUpdate_MessageBox1" xml:space="preserve">
+		<value>Du kör den senaste versionen: {0}{1}</value>
+	</data>
+  <data name="UpdatePending_NewBetaRelease" xml:space="preserve">
+		<value>Det finns en ny BETA-version tillgänglig:</value>
+	</data>
+  <data name="UpdatePending_Title_Beta" xml:space="preserve">
+		<value>HASS.Agent BETA-uppdatering</value>
+	</data>
+  <data name="UpdatePending_LblUpdateQuestion_Download" xml:space="preserve">
+		<value>Vill du &amp;ladda ned och starta installationsprogrammet?</value>
+	</data>
+  <data name="UpdatePending_LblUpdateQuestion_Navigate" xml:space="preserve">
+		<value>Vill du &amp;gå till versionssidan?</value>
+	</data>
+  <data name="UpdatePending_InstallUpdate" xml:space="preserve">
+		<value>Installera uppdatering</value>
+	</data>
+  <data name="UpdatePending_InstallBetaRelease" xml:space="preserve">
+		<value>Installera betaversion</value>
+	</data>
+  <data name="UpdatePending_OpenReleasePage" xml:space="preserve">
+		<value>Öppna versionssidan</value>
+	</data>
+  <data name="UpdatePending_OpenBetaReleasePage" xml:space="preserve">
+		<value>Öppna betaversionssidan</value>
+	</data>
+  <data name="UpdatePending_LblUpdateQuestion_Processing" xml:space="preserve">
+		<value>Bearbetar begäran, vänta..</value>
+	</data>
+  <data name="UpdatePending_BtnDownload_Processing" xml:space="preserve">
+		<value>Bearbetar..</value>
+	</data>
+  <data name="OnboardingManager_OnboardingTitle_Start" xml:space="preserve">
+		<value>HASS.Agent introduktion: Start [{0}/{1}]</value>
+	</data>
+  <data name="OnboardingManager_OnboardingTitle_Startup" xml:space="preserve">
+		<value>HASS.Agent introduktion: Uppstart [{0}/{1}]</value>
+	</data>
+  <data name="OnboardingManager_OnboardingTitle_Notifications" xml:space="preserve">
+		<value>HASS.Agent introduktion: Aviseringar [{0}/{1}]</value>
+	</data>
+  <data name="OnboardingManager_OnboardingTitle_Integration" xml:space="preserve">
+		<value>HASS.Agent introduktion: Integration [{0}/{1}]</value>
+	</data>
+  <data name="OnboardingManager_OnboardingTitle_Api" xml:space="preserve">
+		<value>HASS.Agent introduktion: API [{0}/{1}]</value>
+	</data>
+  <data name="OnboardingManager_OnboardingTitle_Mqtt" xml:space="preserve">
+		<value>HASS.Agent introduktion: MQTT [{0}/{1}]</value>
+	</data>
+  <data name="OnboardingManager_OnboardingTitle_HotKey" xml:space="preserve">
+		<value>HASS.Agent introduktion: Snabbtangent [{0}/{1}]</value>
+	</data>
+  <data name="OnboardingManager_OnboardingTitle_Updates" xml:space="preserve">
+		<value>HASS.Agent introduktion: Uppdateringar [{0}/{1}]</value>
+	</data>
+  <data name="OnboardingManager_OnboardingTitle_Completed" xml:space="preserve">
+		<value>HASS.Agent introduktion: Klar [{0}/{1}]</value>
+	</data>
+  <data name="OnboardingManager_ConfirmBeforeClose_MessageBox1" xml:space="preserve">
+		<value>Är du säker på att du vill avbryta introduktionen?
+
+Dina framsteg sparas inte, och den visas inte igen vid nästa start.</value>
+	</data>
+  <data name="UpdateManager_GetLatestVersionInfo_Error" xml:space="preserve">
+		<value>Fel vid hämtning av information, kontrollera loggarna för mer information.</value>
+	</data>
+  <data name="UpdateManager_DownloadAndExecuteUpdate_MessageBox1" xml:space="preserve">
+		<value>Kunde inte förbereda nedladdningen av uppdateringen, kontrollera loggarna för mer info.
+
+Versionssidan öppnas i stället.</value>
+	</data>
+  <data name="UpdateManager_DownloadAndExecuteUpdate_MessageBox2" xml:space="preserve">
+		<value>Kunde inte ladda ned uppdateringen, kontrollera loggarna för mer info.
+
+Versionssidan öppnas i stället.</value>
+	</data>
+  <data name="UpdateManager_DownloadAndExecuteUpdate_MessageBox3" xml:space="preserve">
+		<value>Den nedladdade filen klarade INTE certifikatkontrollen.
+
+Det kan vara ett tekniskt fel, men också en manipulerad fil!
+
+Kontrollera loggarna och skapa ett ärende med det du hittat.</value>
+	</data>
+  <data name="UpdateManager_DownloadAndExecuteUpdate_MessageBox4" xml:space="preserve">
+		<value>Kunde inte starta installationsprogrammet (godkände du UAC-frågan?), kontrollera loggarna för mer info.
+
+Versionssidan öppnas i stället.</value>
+	</data>
+  <data name="HassApiManager_ToolTip_ConnectionSetupFailed" xml:space="preserve">
+		<value>HASS API: Anslutningskonfigurationen misslyckades.</value>
+	</data>
+  <data name="HassApiManager_ToolTip_InitialConnectionFailed" xml:space="preserve">
+		<value>HASS API: Den första anslutningen misslyckades.</value>
+	</data>
+  <data name="HassApiManager_ToolTip_ConnectionFailed" xml:space="preserve">
+		<value>HASS API: Anslutningen misslyckades.</value>
+	</data>
+  <data name="HassApiManager_CheckHassConfig_CertNotFound" xml:space="preserve">
+		<value>Klientcertifikatfilen hittades inte.</value>
+	</data>
+  <data name="HassApiManager_CheckHassConfig_UnableToConnect" xml:space="preserve">
+		<value>Kunde inte ansluta, kontrollera URI.</value>
+	</data>
+  <data name="HassApiManager_CheckHassConfig_ConfigFailed" xml:space="preserve">
+		<value>Kunde inte hämta konfigurationen, kontrollera API-nyckeln.</value>
+	</data>
+  <data name="HassApiManager_ConnectionFailed" xml:space="preserve">
+		<value>Kunde inte ansluta, kontrollera URI och konfiguration.</value>
+	</data>
+  <data name="HassApiManager_ToolTip_QuickActionFailed" xml:space="preserve">
+		<value>snabbåtgärd: åtgärden misslyckades, kontrollera loggarna för info</value>
+	</data>
+  <data name="HassApiManager_ToolTip_QuickActionFailedOnEntity" xml:space="preserve">
+		<value>snabbåtgärd: åtgärden misslyckades, entiteten hittades inte</value>
+	</data>
+  <data name="MqttManager_ToolTip_ConnectionError" xml:space="preserve">
+		<value>MQTT: Fel vid anslutning</value>
+	</data>
+  <data name="MqttManager_ToolTip_ConnectionFailed" xml:space="preserve">
+		<value>MQTT: Kunde inte ansluta</value>
+	</data>
+  <data name="MqttManager_ToolTip_Disconnected" xml:space="preserve">
+		<value>MQTT: Frånkopplad</value>
+	</data>
+  <data name="LocalApiManager_Initialize_MessageBox1" xml:space="preserve">
+		<value>Fel vid försök att binda API:et till port {0}.
+
+Se till att ingen annan instans av HASS.Agent körs och att porten är ledig och registrerad.</value>
+	</data>
+  <data name="SensorsManager_ActiveWindowSensorDescription" xml:space="preserve">
+		<value>Tillhandahåller titeln på det aktiva fönstret.</value>
+	</data>
+  <data name="SensorsManager_AudioSensorsDescription" xml:space="preserve">
+		<value>Tillhandahåller information om olika aspekter av enhetens ljud:
+
+Aktuell toppvolymnivå (kan användas som ett enkelt 'spelas något upp'-värde).
+
+Standardljudenhet: namn, tillstånd och volym.
+
+Sammanfattning av dina ljudsessioner: programnamn, ljud av-tillstånd, volym och aktuell toppvolym.</value>
+	</data>
+  <data name="SensorsManager_BatterySensorsDescription" xml:space="preserve">
+		<value>Tillhandahåller en sensor med aktuell laddningsstatus, uppskattat antal minuter på full laddning, återstående laddning i procent, återstående laddning i minuter och strömanslutningens status.</value>
+	</data>
+  <data name="SensorsManager_CpuLoadSensorDescription" xml:space="preserve">
+		<value>Tillhandahåller den aktuella belastningen på den första processorn i procent.</value>
+	</data>
+  <data name="SensorsManager_CurrentClockSpeedSensorDescription" xml:space="preserve">
+		<value>Tillhandahåller den aktuella klockfrekvensen för den första processorn.</value>
+	</data>
+  <data name="SensorsManager_CurrentVolumeSensorDescription" xml:space="preserve">
+		<value>Tillhandahåller den aktuella volymnivån i procent.
+
+Använder för närvarande volymen för din standardenhet.</value>
+	</data>
+  <data name="SensorsManager_DisplaySensorsDescription" xml:space="preserve">
+		<value>Tillhandahåller en sensor med antal skärmar, namnet på den primära skärmen, samt för varje skärm dess namn, upplösning och bitar per pixel.</value>
+	</data>
+  <data name="SensorsManager_DummySensorDescription" xml:space="preserve">
+		<value>Testsensor för testsyften, skickar ett slumpmässigt heltal mellan 0 och 100.</value>
+	</data>
+  <data name="SensorsManager_GpuLoadSensorDescription" xml:space="preserve">
+		<value>Tillhandahåller den aktuella belastningen på den första grafikprocessorn i procent.</value>
+	</data>
+  <data name="SensorsManager_GpuTemperatureSensorDescription" xml:space="preserve">
+		<value>OBS: Det här är en sensor som inte fungerar.
+
+På grund av säkerhetsproblem med Libre Hardware Monitor (biblioteket som gav HASS.Agent åtkomst till GPU-temperaturdata) finns den här sensorn kvar av bakåtkompatibilitetsskäl och returnerar alltid 0.
+Se dokumentationen för alternativ.</value>
+	</data>
+  <data name="SensorsManager_LastActiveSensorDescription" xml:space="preserve">
+		<value>Tillhandahåller ett datum/tid-värde med det senaste tillfället användaren gav någon indata.</value>
+	</data>
+  <data name="SensorsManager_LastBootSensorDescription" xml:space="preserve">
+		<value>Tillhandahåller ett datum/tid-värde med det senaste tillfället systemet startades (om).
+
+Viktigt: Windows snabbstart (FastBoot) kan ge felaktigt värde, eftersom det är en form av viloläge. Du kan inaktivera det via Energialternativ -&gt; 'Välj vad strömknapparna gör' -&gt; avmarkera 'Aktivera snabbstart'. Det gör ingen större skillnad på moderna datorer med SSD, men om du inaktiverar det får du ett rent tillstånd efter omstart.</value>
+	</data>
+  <data name="SensorsManager_LastSystemStateChangeSensorDescription" xml:space="preserve">
+		<value>Tillhandahåller den senaste ändringen av systemtillstånd:
+
+ApplicationStarted, Logoff, SystemShutdown, Resume, Suspend, ConsoleConnect, ConsoleDisconnect, RemoteConnect, RemoteDisconnect, SessionLock, SessionLogoff, SessionLogon, SessionRemoteControl och SessionUnlock.</value>
+	</data>
+  <data name="SensorsManager_LoggedUserSensorDescription" xml:space="preserve">
+		<value>Returnerar namnet på den för närvarande inloggade användaren.
+
+Visar bara aktiva användare och faller tillbaka på 'Empty' om det inte finns några. Om det finns flera används den första.</value>
+	</data>
+  <data name="SensorsManager_LoggedUsersSensorDescription" xml:space="preserve">
+		<value>Returnerar en json-formaterad lista över för närvarande inloggade användare.
+
+Den innehåller även användare som inte är aktiva. Om du bara vill ha den aktuella aktiva användaren, använd sensorn LoggedUser i stället.</value>
+	</data>
+  <data name="SensorsManager_MemoryUsageSensorDescription" xml:space="preserve">
+		<value>Tillhandahåller mängden använt minne i procent.</value>
+	</data>
+  <data name="SensorsManager_MicrophoneActiveSensorDescription" xml:space="preserve">
+		<value>Tillhandahåller ett booleskt värde baserat på om mikrofonen används för tillfället.
+
+Obs: om den används i satellittjänsten upptäcks inte program i användarläge.</value>
+	</data>
+  <data name="SensorsManager_NamedWindowSensorDescription" xml:space="preserve">
+		<value>Tillhandahåller ett ON/OFF-värde baserat på om fönstret är öppet för tillfället (behöver inte vara aktivt).</value>
+	</data>
+  <data name="SensorsManager_NetworkSensorsDescription" xml:space="preserve">
+		<value>Tillhandahåller kortinformation, konfiguration, överförings- och paketstatistik samt adresser (ip, mac, dhcp, dns) för de valda nätverkskorten.
+
+Det här är en flervärdessensor.</value>
+	</data>
+  <data name="SensorsManager_PerformanceCounterSensorDescription" xml:space="preserve">
+		<value>Tillhandahåller värdena från en prestandaräknare.
+
+Till exempel använder den inbyggda CPU-belastningssensorn dessa värden:
+
+Kategori: Processor
+Räknare: % Processor Time
+Instans: _Total
+
+Du kan utforska räknarna med Windows-verktyget 'perfmon.exe'.</value>
+	</data>
+  <data name="SensorsManager_ProcessActiveSensorDescription" xml:space="preserve">
+		<value>Tillhandahåller antalet aktiva instanser av processen.
+
+Obs: lägg inte till filändelsen (t.ex. notepad.exe blir notepad).</value>
+	</data>
+  <data name="SensorsManager_ServiceStateSensorDescription" xml:space="preserve">
+		<value>Returnerar tillståndet för den angivna tjänsten: NotFound, Stopped, StartPending, StopPending, Running, ContinuePending, PausePending eller Paused.
+
+Se till att ange 'Tjänstnamn', inte 'Visningsnamn'.</value>
+	</data>
+  <data name="SensorsManager_SessionStateSensorDescription" xml:space="preserve">
+		<value>Tillhandahåller det aktuella sessionstillståndet:
+
+Locked, Unlocked eller Unknown.
+
+Använd en LastSystemStateChangeSensor för att övervaka ändringar av sessionstillståndet.</value>
+	</data>
+  <data name="SensorsManager_StorageSensorsDescription" xml:space="preserve">
+		<value>Tillhandahåller etiketter, total storlek (MB), tillgängligt utrymme (MB), använt utrymme (MB) och filsystem för alla anslutna icke-flyttbara diskar.</value>
+	</data>
+  <data name="SensorsManager_UserNotificationStateSensorDescription" xml:space="preserve">
+		<value>Tillhandahåller det aktuella användartillståndet:
+
+NotPresent, Busy, RunningDirect3dFullScreen, PresentationMode, AcceptsNotifications, QuietTime eller RunningWindowsStoreApp.
+
+Kan till exempel användas för att avgöra om aviseringar eller TTS-meddelanden ska skickas.</value>
+	</data>
+  <data name="SensorsManager_WebcamActiveSensorDescription" xml:space="preserve">
+		<value>Tillhandahåller ett booleskt värde baserat på om webbkameran används för tillfället.
+
+Obs: om den används i satellittjänsten upptäcks inte program i användarläge.</value>
+	</data>
+  <data name="SensorsManager_WindowsUpdatesSensorsDescription" xml:space="preserve">
+		<value>Tillhandahåller en sensor med antalet väntande drivrutinsuppdateringar, en sensor med antalet väntande programuppdateringar, en sensor med information om alla väntande drivrutinsuppdateringar (titel, kb-artikel-id:n, dold, typ och kategorier) och en sensor med motsvarande för väntande programuppdateringar.
+
+Det här är en kostsam begäran, så det rekommenderade intervallet är 15 minuter (900 sekunder). Det är dock begränsat till 10 minuter; om du anger ett lägre värde får du den senast kända listan.</value>
+	</data>
+  <data name="SensorsManager_WmiQuerySensorDescription" xml:space="preserve">
+		<value>Tillhandahåller resultatet av WMI-frågan.</value>
+	</data>
+  <data name="SettingsManager_LoadAppSettings_MessageBox1" xml:space="preserve">
+		<value>Fel vid laddning av inställningar:
+
+{0}</value>
+	</data>
+  <data name="SettingsManager_StoreInitialSettings_MessageBox1" xml:space="preserve">
+		<value>Fel vid sparande av initiala inställningar:
+
+{0}</value>
+	</data>
+  <data name="SettingsManager_StoreAppSettings_MessageBox1" xml:space="preserve">
+		<value>Fel vid sparande av inställningar:
+
+{0}</value>
+	</data>
+  <data name="StoredCommands_Load_MessageBox1" xml:space="preserve">
+		<value>Fel vid laddning av kommandon:
+
+{0}</value>
+	</data>
+  <data name="StoredCommands_Store_MessageBox1" xml:space="preserve">
+		<value>Fel vid sparande av kommandon:
+
+{0}</value>
+	</data>
+  <data name="StoredQuickActions_Load_MessageBox1" xml:space="preserve">
+		<value>Fel vid laddning av snabbåtgärder:
+
+{0}</value>
+	</data>
+  <data name="StoredQuickActions_Store_MessageBox1" xml:space="preserve">
+		<value>Fel vid sparande av snabbåtgärder:
+
+{0}</value>
+	</data>
+  <data name="StoredSensors_Load_MessageBox1" xml:space="preserve">
+		<value>Fel vid laddning av sensorer:
+
+{0}</value>
+	</data>
+  <data name="StoredSensors_Store_MessageBox1" xml:space="preserve">
+		<value>Fel vid sparande av sensorer:
+
+{0}</value>
+	</data>
+  <data name="Help_LblWiki" xml:space="preserve">
+		<value>Wiki</value>
+	</data>
+  <data name="Configuration_BtnStore_Busy" xml:space="preserve">
+		<value>Upptagen, vänta..</value>
+	</data>
+  <data name="OnboardingManager_BtnNext_Finish" xml:space="preserve">
+		<value>Slutför</value>
+	</data>
+  <data name="ServiceMqtt_SetMqttStatus_Connected" xml:space="preserve">
+		<value>Ansluten</value>
+	</data>
+  <data name="ServiceMqtt_SetMqttStatus_Connecting" xml:space="preserve">
+		<value>Ansluter..</value>
+	</data>
+  <data name="ServiceMqtt_SetMqttStatus_ConfigError" xml:space="preserve">
+		<value>Konfiguration saknas</value>
+	</data>
+  <data name="ServiceMqtt_SetMqttStatus_Disconnected" xml:space="preserve">
+		<value>Frånkopplad</value>
+	</data>
+  <data name="ServiceMqtt_SetMqttStatus_Error" xml:space="preserve">
+		<value>Fel</value>
+	</data>
+  <data name="CommandType_CustomCommand" xml:space="preserve">
+		<value>Anpassat</value>
+	</data>
+  <data name="CommandType_CustomExecutorCommand" xml:space="preserve">
+		<value>AnpassadExekverare</value>
+	</data>
+  <data name="CommandType_HibernateCommand" xml:space="preserve">
+		<value>Viloläge</value>
+	</data>
+  <data name="CommandType_KeyCommand" xml:space="preserve">
+		<value>Tangent</value>
+	</data>
+  <data name="CommandType_LaunchUrlCommand" xml:space="preserve">
+		<value>ÖppnaUrl</value>
+	</data>
+  <data name="CommandType_LockCommand" xml:space="preserve">
+		<value>Lås</value>
+	</data>
+  <data name="CommandType_LogOffCommand" xml:space="preserve">
+		<value>LoggaUt</value>
+	</data>
+  <data name="CommandType_MediaMuteCommand" xml:space="preserve">
+		<value>MediaLjudAv</value>
+	</data>
+  <data name="CommandType_MediaNextCommand" xml:space="preserve">
+		<value>MediaNästa</value>
+	</data>
+  <data name="CommandType_MediaPlayPauseCommand" xml:space="preserve">
+		<value>MediaSpelaPaus</value>
+	</data>
+  <data name="CommandType_MediaPreviousCommand" xml:space="preserve">
+		<value>MediaFöregående</value>
+	</data>
+  <data name="CommandType_MediaVolumeDownCommand" xml:space="preserve">
+		<value>MediaVolymNed</value>
+	</data>
+  <data name="CommandType_MediaVolumeUpCommand" xml:space="preserve">
+		<value>MediaVolymUpp</value>
+	</data>
+  <data name="CommandType_MultipleKeysCommand" xml:space="preserve">
+		<value>FleraTangenter</value>
+	</data>
+  <data name="CommandType_PowershellCommand" xml:space="preserve">
+		<value>Powershell</value>
+	</data>
+  <data name="CommandType_PublishAllSensorsCommand" xml:space="preserve">
+		<value>PubliceraAllaSensorer</value>
+	</data>
+  <data name="CommandType_RestartCommand" xml:space="preserve">
+		<value>StartaOm</value>
+	</data>
+  <data name="CommandType_ShutdownCommand" xml:space="preserve">
+		<value>StängAv</value>
+	</data>
+  <data name="CommandType_SleepCommand" xml:space="preserve">
+		<value>Strömsparläge</value>
+	</data>
+  <data name="CommandEntityType_Button" xml:space="preserve">
+		<value>Knapp</value>
+	</data>
+  <data name="CommandEntityType_Light" xml:space="preserve">
+		<value>Lampa</value>
+	</data>
+  <data name="CommandEntityType_Lock" xml:space="preserve">
+		<value>Lås</value>
+	</data>
+  <data name="CommandEntityType_Siren" xml:space="preserve">
+		<value>Siren</value>
+	</data>
+  <data name="CommandEntityType_Switch" xml:space="preserve">
+		<value>Strömbrytare</value>
+	</data>
+  <data name="LockState_Locked" xml:space="preserve">
+		<value>Låst</value>
+	</data>
+  <data name="LockState_Unknown" xml:space="preserve">
+		<value>Okänd</value>
+	</data>
+  <data name="LockState_Unlocked" xml:space="preserve">
+		<value>Upplåst</value>
+	</data>
+  <data name="SensorType_ActiveWindowSensor" xml:space="preserve">
+		<value>AktivtFönster</value>
+	</data>
+  <data name="SensorType_AudioSensors" xml:space="preserve">
+		<value>Ljud</value>
+	</data>
+  <data name="SensorType_BatterySensors" xml:space="preserve">
+		<value>Batteri</value>
+	</data>
+  <data name="SensorType_CpuLoadSensor" xml:space="preserve">
+		<value>CpuBelastning</value>
+	</data>
+  <data name="SensorType_CurrentClockSpeedSensor" xml:space="preserve">
+		<value>AktuellKlockfrekvens</value>
+	</data>
+  <data name="SensorType_CurrentVolumeSensor" xml:space="preserve">
+		<value>AktuellVolym</value>
+	</data>
+  <data name="SensorType_DisplaySensors" xml:space="preserve">
+		<value>Skärm</value>
+	</data>
+  <data name="SensorType_DummySensor" xml:space="preserve">
+		<value>Test</value>
+	</data>
+  <data name="SensorType_GpuLoadSensor" xml:space="preserve">
+		<value>GpuBelastning</value>
+	</data>
+  <data name="SensorType_GpuTemperatureSensor" xml:space="preserve">
+		<value>GpuTemperatur</value>
+	</data>
+  <data name="SensorType_LastActiveSensor" xml:space="preserve">
+		<value>SenastAktiv</value>
+	</data>
+  <data name="SensorType_LastBootSensor" xml:space="preserve">
+		<value>SenasteStart</value>
+	</data>
+  <data name="SensorType_LastSystemStateChangeSensor" xml:space="preserve">
+		<value>SenasteSystemtillståndsändring</value>
+	</data>
+  <data name="SensorType_LoggedUserSensor" xml:space="preserve">
+		<value>InloggadAnvändare</value>
+	</data>
+  <data name="SensorType_LoggedUsersSensor" xml:space="preserve">
+		<value>InloggadeAnvändare</value>
+	</data>
+  <data name="SensorType_MemoryUsageSensor" xml:space="preserve">
+		<value>Minnesanvändning</value>
+	</data>
+  <data name="SensorType_MicrophoneActiveSensor" xml:space="preserve">
+		<value>MikrofonAktiv</value>
+	</data>
+  <data name="SensorType_NamedWindowSensor" xml:space="preserve">
+		<value>NamngivetFönster</value>
+	</data>
+  <data name="SensorType_NetworkSensors" xml:space="preserve">
+		<value>Nätverk</value>
+	</data>
+  <data name="SensorType_PerformanceCounterSensor" xml:space="preserve">
+		<value>Prestandaräknare</value>
+	</data>
+  <data name="SensorType_ProcessActiveSensor" xml:space="preserve">
+		<value>ProcessAktiv</value>
+	</data>
+  <data name="SensorType_ServiceStateSensor" xml:space="preserve">
+		<value>Tjänstetillstånd</value>
+	</data>
+  <data name="SensorType_SessionStateSensor" xml:space="preserve">
+		<value>Sessionstillstånd</value>
+	</data>
+  <data name="SensorType_StorageSensors" xml:space="preserve">
+		<value>Lagring</value>
+	</data>
+  <data name="SensorType_UserNotificationStateSensor" xml:space="preserve">
+		<value>Användaravisering</value>
+	</data>
+  <data name="SensorType_WebcamActiveSensor" xml:space="preserve">
+		<value>WebbkameraAktiv</value>
+	</data>
+  <data name="SensorType_WindowsUpdatesSensors" xml:space="preserve">
+		<value>WindowsUppdateringar</value>
+	</data>
+  <data name="SensorType_WmiQuerySensor" xml:space="preserve">
+		<value>WmiFråga</value>
+	</data>
+  <data name="SystemStateEvent_ApplicationStarted" xml:space="preserve">
+		<value>ProgramStartat</value>
+	</data>
+  <data name="SystemStateEvent_Logoff" xml:space="preserve">
+		<value>Utloggning</value>
+	</data>
+  <data name="SystemStateEvent_SystemShutdown" xml:space="preserve">
+		<value>Systemavstängning</value>
+	</data>
+  <data name="SystemStateEvent_Resume" xml:space="preserve">
+		<value>Återuppta</value>
+	</data>
+  <data name="SystemStateEvent_Suspend" xml:space="preserve">
+		<value>Pausa</value>
+	</data>
+  <data name="SystemStateEvent_ConsoleConnect" xml:space="preserve">
+		<value>KonsolAnslut</value>
+	</data>
+  <data name="SystemStateEvent_ConsoleDisconnect" xml:space="preserve">
+		<value>KonsolKopplaFrån</value>
+	</data>
+  <data name="SystemStateEvent_RemoteConnect" xml:space="preserve">
+		<value>FjärrAnslut</value>
+	</data>
+  <data name="SystemStateEvent_RemoteDisconnect" xml:space="preserve">
+		<value>FjärrKopplaFrån</value>
+	</data>
+  <data name="SystemStateEvent_SessionLock" xml:space="preserve">
+		<value>SessionLåst</value>
+	</data>
+  <data name="SystemStateEvent_SessionLogoff" xml:space="preserve">
+		<value>SessionUtloggning</value>
+	</data>
+  <data name="SystemStateEvent_SessionLogon" xml:space="preserve">
+		<value>SessionInloggning</value>
+	</data>
+  <data name="SystemStateEvent_SessionRemoteControl" xml:space="preserve">
+		<value>SessionFjärrstyrning</value>
+	</data>
+  <data name="SystemStateEvent_SessionUnlock" xml:space="preserve">
+		<value>SessionUpplåst</value>
+	</data>
+  <data name="UserNotificationState_NotPresent" xml:space="preserve">
+		<value>InteNärvarande</value>
+	</data>
+  <data name="UserNotificationState_Busy" xml:space="preserve">
+		<value>Upptagen</value>
+	</data>
+  <data name="UserNotificationState_RunningDirect3dFullScreen" xml:space="preserve">
+		<value>KörDirect3dHelskärm</value>
+	</data>
+  <data name="UserNotificationState_PresentationMode" xml:space="preserve">
+		<value>Presentationsläge</value>
+	</data>
+  <data name="UserNotificationState_AcceptsNotifications" xml:space="preserve">
+		<value>TarEmotAviseringar</value>
+	</data>
+  <data name="UserNotificationState_QuietTime" xml:space="preserve">
+		<value>TystTid</value>
+	</data>
+  <data name="UserNotificationState_RunningWindowsStoreApp" xml:space="preserve">
+		<value>KörWindowsStoreApp</value>
+	</data>
+  <data name="HassAction_On" xml:space="preserve">
+		<value>På</value>
+	</data>
+  <data name="HassAction_Off" xml:space="preserve">
+		<value>Av</value>
+	</data>
+  <data name="HassAction_Open" xml:space="preserve">
+		<value>Öppna</value>
+	</data>
+  <data name="HassAction_Close" xml:space="preserve">
+		<value>Stäng</value>
+	</data>
+  <data name="HassAction_Play" xml:space="preserve">
+		<value>Spela</value>
+	</data>
+  <data name="HassAction_Pause" xml:space="preserve">
+		<value>Paus</value>
+	</data>
+  <data name="HassAction_Stop" xml:space="preserve">
+		<value>Stopp</value>
+	</data>
+  <data name="HassAction_Toggle" xml:space="preserve">
+		<value>Växla</value>
+	</data>
+  <data name="HassDomain_Automation" xml:space="preserve">
+		<value>Automation</value>
+	</data>
+  <data name="HassDomain_Climate" xml:space="preserve">
+		<value>Klimat</value>
+	</data>
+  <data name="HassDomain_Cover" xml:space="preserve">
+		<value>Skydd</value>
+	</data>
+  <data name="HassDomain_InputBoolean" xml:space="preserve">
+		<value>InputBoolean</value>
+	</data>
+  <data name="HassDomain_Light" xml:space="preserve">
+		<value>Lampa</value>
+	</data>
+  <data name="HassDomain_MediaPlayer" xml:space="preserve">
+		<value>Mediaspelare</value>
+	</data>
+  <data name="HassDomain_Scene" xml:space="preserve">
+		<value>Scen</value>
+	</data>
+  <data name="HassDomain_Script" xml:space="preserve">
+		<value>Skript</value>
+	</data>
+  <data name="HassDomain_Switch" xml:space="preserve">
+		<value>Strömbrytare</value>
+	</data>
+  <data name="ComponentStatus_Connecting" xml:space="preserve">
+		<value>Ansluter..</value>
+	</data>
+  <data name="ComponentStatus_Failed" xml:space="preserve">
+		<value>Misslyckades</value>
+	</data>
+  <data name="ComponentStatus_Loading" xml:space="preserve">
+		<value>Laddar..</value>
+	</data>
+  <data name="ComponentStatus_Ok" xml:space="preserve">
+		<value>Körs</value>
+	</data>
+  <data name="ComponentStatus_Stopped" xml:space="preserve">
+		<value>Stoppad</value>
+	</data>
+  <data name="ComponentStatus_Disabled" xml:space="preserve">
+		<value>Inaktiverad</value>
+	</data>
+  <data name="SensorsMod_WmiTestFailed" xml:space="preserve">
+		<value>Det verkar som att ditt omfång är felformaterat, det bör troligen börja så här:
+
+\\.\ROOT\
+
+Omfånget du angav:
+
+{0}
+
+Tips: kontrollera att du inte har förväxlat fälten för omfång och fråga.
+
+Vill du ändå använda de aktuella värdena?</value>
+	</data>
+  <data name="SensorsMod_TestWmi_MessageBox1" xml:space="preserve">
+		<value>Ange en WMI-fråga först.</value>
+	</data>
+  <data name="SensorsMod_TestWmi_MessageBox2" xml:space="preserve">
+		<value>Frågan kördes, resultatvärde:
+
+{0}</value>
+	</data>
+  <data name="SensorsMod_TestWmi_MessageBox3" xml:space="preserve">
+		<value>Frågan kunde inte köras:
+
+{0}
+
+Vill du öppna loggmappen?</value>
+	</data>
+  <data name="SensorsMod_TestPerformanceCounter_MessageBox1" xml:space="preserve">
+		<value>Ange en kategori och räknare först.</value>
+	</data>
+  <data name="SensorsMod_TestPerformanceCounter_MessageBox2" xml:space="preserve">
+		<value>Testet kördes, resultatvärde:
+
+{0}</value>
+	</data>
+  <data name="SensorsMod_TestPerformanceCounter_MessageBox3" xml:space="preserve">
+		<value>Testet kunde inte köras:
+
+{0}
+
+Vill du öppna loggmappen?</value>
+	</data>
+  <data name="SensorsMod_BtnTest_Wmi" xml:space="preserve">
+		<value>Testa WMI-fråga</value>
+	</data>
+  <data name="SensorsMod_BtnTest_PerformanceCounter" xml:space="preserve">
+		<value>Testa prestandaräknare</value>
+	</data>
+  <data name="SensorType_GeoLocationSensor" xml:space="preserve">
+		<value>GeoPosition</value>
+	</data>
+  <data name="SensorsMod_All" xml:space="preserve">
+		<value>Alla</value>
+	</data>
+  <data name="SensorsMod_LblSetting1_Network" xml:space="preserve">
+		<value>Nätverkskort</value>
+	</data>
+  <data name="SensorsConfig_ClmValue" xml:space="preserve">
+		<value>Senast kända värde</value>
+	</data>
+  <data name="CommandType_SendWindowToFrontCommand" xml:space="preserve">
+		<value>FlyttaFönsterLängstFram</value>
+	</data>
+  <data name="ConfigLocalStorage_BtnClearAudioCache_InfoText1" xml:space="preserve">
+		<value>Rensar..</value>
+	</data>
+  <data name="ConfigLocalStorage_BtnClearAudioCache_MessageBox1" xml:space="preserve">
+		<value>Ljudcachen har rensats!</value>
+	</data>
+  <data name="ConfigLocalStorage_BtnClearWebViewCache_InfoText1" xml:space="preserve">
+		<value>Rensar..</value>
+	</data>
+  <data name="ConfigLocalStorage_BtnClearWebViewCache_MessageBox1" xml:space="preserve">
+		<value>WebView-cachen har rensats!</value>
+	</data>
+  <data name="CommandType_WebViewCommand" xml:space="preserve">
+		<value>WebView</value>
+	</data>
+  <data name="CommandsManager_CommandsManager_SendWindowToFrontCommandDescription" xml:space="preserve">
+		<value>Letar efter den angivna processen och försöker flytta dess huvudfönster längst fram.
+
+Om programmet är minimerat återställs det.
+
+Exempel: om du vill flytta VLC till förgrunden, använd 'vlc'.</value>
+	</data>
+  <data name="CommandsManager_WebViewCommandDescription" xml:space="preserve">
+		<value>Visar ett fönster med den angivna URL:en.
+
+Detta skiljer sig från kommandot 'LaunchUrl' genom att det inte laddar en fullständig webbläsare, bara den angivna URL:en i ett eget fönster.
+
+Du kan till exempel använda detta för att snabbt visa Home Assistants instrumentpanel.
+
+Som standard sparas cookies på obestämd tid så att du bara behöver logga in en gång.</value>
+	</data>
+  <data name="WebViewCommandConfig_SetStoredVariables_MessageBox1" xml:space="preserve">
+		<value>Kunde inte ladda de sparade kommandoinställningarna, återställer till standard.</value>
+	</data>
+  <data name="CommandsMod_BtnStore_MessageBox8" xml:space="preserve">
+		<value>Om du inte konfigurerar kommandot kan du bara använda den här entiteten med ett 'action'-värde via Home Assistant, och den visas med standardinställningarna. Att köra den som den är gör ingenting.
+
+Är du säker på att du vill göra detta?</value>
+	</data>
+  <data name="QuickActionsMod_BtnStore_MessageBox2" xml:space="preserve">
+		<value>Välj en domän!</value>
+	</data>
+  <data name="HassDomain_HASSAgentCommands" xml:space="preserve">
+		<value>HASS.Agent-kommandon</value>
+	</data>
+  <data name="Main_CheckDpiScalingFactor_MessageBox1" xml:space="preserve">
+		<value>Det verkar som att du använder en alternativ skalning. Det kan leda till att vissa delar av HASS.Agent inte ser ut som avsett.
+
+Rapportera gärna allt som är oanvändbart på GitHub. Tack!
+
+Obs: det här meddelandet visas bara en gång.</value>
+	</data>
+  <data name="OnboardingWelcome_Store_MessageBox1" xml:space="preserve">
+		<value>Ditt enhetsnamn innehöll tecken som inte tillåts av HA (endast bokstäver, siffror och blanksteg).
+
+Det slutliga namnet är: {0}
+
+Vill du använda den versionen?</value>
+	</data>
+  <data name="HelperFunctions_ParseMultipleKeys_ErrorMsg1" xml:space="preserve">
+		<value>Inga tangenter hittades</value>
+	</data>
+  <data name="HelperFunctions_ParseMultipleKeys_ErrorMsg2" xml:space="preserve">
+		<value>hakparenteser saknas, inled och avsluta alla tangenter med [ ]</value>
+	</data>
+  <data name="HelperFunctions_ParseMultipleKeys_ErrorMsg3" xml:space="preserve">
+		<value>Fel vid tolkning av tangenter, kontrollera loggarna för mer information.</value>
+	</data>
+  <data name="HelperFunctions_InputLanguageCheckDiffers_ErrorMsg1" xml:space="preserve">
+		<value>Ditt inmatningsspråk '{0}' är känt för att krocka med standardsnabbtangenten CTRL-ALT-Q. Ange en egen.</value>
+	</data>
+  <data name="HelperFunctions_InputLanguageCheckDiffers_ErrorMsg2" xml:space="preserve">
+		<value>Ditt inmatningsspråk '{0}' är okänt och kan krocka med standardsnabbtangenten CTRL-ALT-Q. Kontrollera för säkerhets skull. Om det krockar, överväg att skapa ett ärende på GitHub så att det kan läggas till i listan.</value>
+	</data>
+  <data name="HelperFunctions_ParseMultipleKeys_ErrorMsg4" xml:space="preserve">
+		<value>Antalet öppnande hakparenteser ('[') motsvarar inte antalet stängande hakparenteser. (']')! ({0} mot {1})</value>
+	</data>
+  <data name="Main_BtnHide" xml:space="preserve">
+		<value>&amp;Dölj</value>
+	</data>
+  <data name="ConfigExternalTools_LblBrowserName" xml:space="preserve">
+		<value>Webbläsarens namn</value>
+	</data>
+  <data name="ConfigExternalTools_LblBrowserBinary" xml:space="preserve">
+		<value>Webbläsarens programfil</value>
+	</data>
+  <data name="ConfigExternalTools_LblLaunchIncogArg" xml:space="preserve">
+		<value>Ytterligare startargument</value>
+	</data>
+  <data name="ConfigExternalTools_LblCustomExecutorBinary" xml:space="preserve">
+		<value>Programfil för anpassad exekverare</value>
+	</data>
+  <data name="ConfigExternalTools_LblTip1" xml:space="preserve">
+		<value>Tips: Dubbelklicka för att bläddra</value>
+	</data>
+  <data name="ConfigExternalTools_BtnExternalBrowserIncognitoTest" xml:space="preserve">
+		<value>&amp;Testa</value>
+	</data>
+  <data name="ConfigGeneral_LblDisconGraceSeconds" xml:space="preserve">
+		<value>Sekunder</value>
+	</data>
+  <data name="ConfigGeneral_LblDisconGracePeriod" xml:space="preserve">
+		<value>&amp;Respittid vid frånkoppling</value>
+	</data>
+  <data name="ConfigGeneral_LblInfo1" xml:space="preserve">
+		<value>Här finns allmänna konfigurationsinställningar, fler inställningar finns i flikarna till vänster.</value>
+	</data>
+  <data name="ConfigGeneral_LblDeviceName" xml:space="preserve">
+		<value>Enhets&amp;namn</value>
+	</data>
+  <data name="ConfigGeneral_LblInterfaceLangauge" xml:space="preserve">
+		<value>Gränssnitts&amp;språk</value>
+	</data>
+  <data name="ConfigHomeAssistantApi_LblTip1" xml:space="preserve">
+		<value>Tips: Dubbelklicka i det här fältet för att bläddra</value>
+	</data>
+  <data name="ConfigHomeAssistantApi_LblClientCertificate" xml:space="preserve">
+		<value>Klient&amp;certifikat</value>
+	</data>
+  <data name="ConfigHomeAssistantApi_CbHassAutoClientCertificate" xml:space="preserve">
+		<value>Använd &amp;automatiskt val av klientcertifikat</value>
+	</data>
+  <data name="ConfigHomeAssistantApi_BtnTestApi" xml:space="preserve">
+		<value>&amp;Testa anslutningen</value>
+	</data>
+  <data name="ConfigHomeAssistantApi_LblApiToken" xml:space="preserve">
+		<value>&amp;API-token</value>
+	</data>
+  <data name="ConfigHomeAssistantApi_LblServerUri" xml:space="preserve">
+		<value>Server-&amp;URI</value>
+	</data>
+  <data name="ConfigHotKey_BtnClearHotKey" xml:space="preserve">
+		<value>&amp;Rensa</value>
+	</data>
+  <data name="ConfigHotKey_LblInfo1" xml:space="preserve">
+		<value>Ett enkelt sätt att ta fram dina snabbåtgärder är att använda en global snabbtangent.
+
+På så sätt kan du alltid interagera med Home Assistant, vad du än gör på datorn.</value>
+	</data>
+  <data name="ConfigHotKey_CbEnableQuickActionsHotkey" xml:space="preserve">
+		<value>&amp;Aktivera snabbtangent för snabbåtgärder</value>
+	</data>
+  <data name="ConfigHotKey_LblHotkeyCombo" xml:space="preserve">
+		<value>&amp;Tangentkombination</value>
+	</data>
+  <data name="ConfigLocalApi_LblPort" xml:space="preserve">
+		<value>&amp;Port</value>
+	</data>
+  <data name="ConfigLocalApi_BtnExecutePortReservation" xml:space="preserve">
+		<value>Utför port&amp;reservation</value>
+	</data>
+  <data name="ConfigLocalApi_CbLocalApiActive" xml:space="preserve">
+		<value>&amp;Aktivera lokalt API</value>
+	</data>
+  <data name="ConfigLocalApi_LblInfo2" xml:space="preserve">
+		<value>För att kunna ta emot förfrågningar behöver HASS.Agent ha sin port reserverad och öppnad i brandväggen. Du kan använda den här knappen för att få det gjort åt dig.</value>
+	</data>
+  <data name="ConfigLocalStorage_LblImageCacheLocation" xml:space="preserve">
+		<value>Plats för bildcache</value>
+	</data>
+  <data name="ConfigLocalStorage_LblImageCacheDays" xml:space="preserve">
+		<value>dagar</value>
+	</data>
+  <data name="ConfigLocalStorage_LblInfo1" xml:space="preserve">
+		<value>Vissa objekt, som bilder i aviseringar, måste tillfälligt lagras lokalt. Du kan
+konfigurera hur många dagar de ska sparas innan HASS.Agent tar bort dem.
+
+Ange '0' för att spara dem permanent.</value>
+	</data>
+  <data name="ConfigLocalStorage_LblKeepImages" xml:space="preserve">
+		<value>Spara bilder i</value>
+	</data>
+  <data name="ConfigLocalStorage_LblKeepAudio" xml:space="preserve">
+		<value>Spara ljud i</value>
+	</data>
+  <data name="ConfigLocalStorage_BtnClearAudioCache" xml:space="preserve">
+		<value>Rensa ljudcache</value>
+	</data>
+  <data name="ConfigLocalStorage_LblAudioCacheLocation" xml:space="preserve">
+		<value>Plats för ljudcache</value>
+	</data>
+  <data name="ConfigLocalStorage_BtnClearWebViewCache" xml:space="preserve">
+		<value>Rensa WebView-cache</value>
+	</data>
+  <data name="ConfigLocalStorage_LblWebViewCacheLocation" xml:space="preserve">
+		<value>Plats för WebView-cache</value>
+	</data>
+  <data name="ConfigLocalStorage_LblKeepWebView" xml:space="preserve">
+		<value>Rensa cache var</value>
+	</data>
+  <data name="ConfigLogging_LblInfo1" xml:space="preserve">
+		<value>Utökad loggning ger mer detaljerad och djupgående loggning om standardloggningen inte
+räcker. Observera att loggfilerna kan bli stora om detta aktiveras, och det bör bara
+användas när du misstänker att något är fel med själva HASS.Agent eller när
+utvecklarna ber om det.</value>
+	</data>
+  <data name="ConfigLogging_CbExtendedLogging" xml:space="preserve">
+		<value>&amp;Aktivera utökad loggning</value>
+	</data>
+  <data name="ConfigLogging_BtnShowLogs" xml:space="preserve">
+		<value>&amp;Öppna loggmappen</value>
+	</data>
+  <data name="ConfigMediaPlayer_BtnMediaPlayerReadme" xml:space="preserve">
+		<value>Mediaspelar&amp;dokumentation</value>
+	</data>
+  <data name="ConfigMediaPlayer_CbEnableMediaPlayer" xml:space="preserve">
+		<value>&amp;Aktivera mediaspelarfunktionen</value>
+	</data>
+  <data name="ConfigMqtt_LblTip3" xml:space="preserve">
+		<value>Tips: Dubbelklicka i dessa fält för att bläddra</value>
+	</data>
+  <data name="ConfigMqtt_LblClientCert" xml:space="preserve">
+		<value>Klientcertifikat</value>
+	</data>
+  <data name="ConfigMqtt_LblRootCert" xml:space="preserve">
+		<value>Rotcertifikat</value>
+	</data>
+  <data name="ConfigMqtt_CbUseRetainFlag" xml:space="preserve">
+		<value>Använd &amp;retain-flagga</value>
+	</data>
+  <data name="ConfigMqtt_CbAllowUntrustedCertificates" xml:space="preserve">
+		<value>&amp;Tillåt ej betrodda certifikat</value>
+	</data>
+  <data name="ConfigMqtt_BtnMqttClearConfig" xml:space="preserve">
+		<value>&amp;Rensa konfigurationen</value>
+	</data>
+  <data name="ConfigMqtt_LblTip1" xml:space="preserve">
+		<value>(lämna standardvärdet om du är osäker)</value>
+	</data>
+  <data name="ConfigMqtt_LblDiscoPrefix" xml:space="preserve">
+		<value>Discovery-prefix</value>
+	</data>
+  <data name="ConfigMqtt_CbMqttTls" xml:space="preserve">
+		<value>&amp;TLS</value>
+	</data>
+  <data name="ConfigMqtt_LblBrokerPassword" xml:space="preserve">
+		<value>Lösenord</value>
+	</data>
+  <data name="ConfigMqtt_LblBrokerUsername" xml:space="preserve">
+		<value>Användarnamn</value>
+	</data>
+  <data name="ConfigMqtt_LblBrokerPort" xml:space="preserve">
+		<value>Port</value>
+	</data>
+  <data name="ConfigMqtt_LblBrokerIp" xml:space="preserve">
+		<value>Brokerns IP-adress eller värdnamn</value>
+	</data>
+  <data name="ConfigMqtt_LblTip2" xml:space="preserve">
+		<value>(lämna tomt för autogenerering)</value>
+	</data>
+  <data name="ConfigMqtt_LblClientId" xml:space="preserve">
+		<value>Klient-ID</value>
+	</data>
+  <data name="ConfigNotifications_BtnNotificationsReadme" xml:space="preserve">
+		<value>Aviserings&amp;dokumentation</value>
+	</data>
+  <data name="ConfigNotifications_CbAcceptNotifications" xml:space="preserve">
+		<value>&amp;Ta emot aviseringar</value>
+	</data>
+  <data name="ConfigNotifications_CbNotificationsIgnoreImageCertErrors" xml:space="preserve">
+		<value>&amp;Ignorera certifikatfel för bilder</value>
+	</data>
+  <data name="ConfigNotifications_LblLocalApiDisabled" xml:space="preserve">
+		<value>Det lokala API:et är inaktiverat, men mediaspelaren kräver det för att fungera.</value>
+	</data>
+  <data name="ConfigService_LblServiceStatusInfo" xml:space="preserve">
+		<value>Tjänstens status:</value>
+	</data>
+  <data name="ConfigService_BtnStartService" xml:space="preserve">
+		<value>S&amp;tarta tjänsten</value>
+	</data>
+  <data name="ConfigService_BtnDisableService" xml:space="preserve">
+		<value>&amp;Inaktivera tjänsten</value>
+	</data>
+  <data name="ConfigService_BtnStopService" xml:space="preserve">
+		<value>&amp;Stoppa tjänsten</value>
+	</data>
+  <data name="ConfigService_BtnEnableService" xml:space="preserve">
+		<value>&amp;Aktivera tjänsten</value>
+	</data>
+  <data name="ConfigService_BtnReinstallService" xml:space="preserve">
+		<value>&amp;Installera om tjänsten</value>
+	</data>
+  <data name="ConfigService_LblInfo2" xml:space="preserve">
+		<value>Om du inte konfigurerar tjänsten gör den ingenting. Du kan dock även välja att inaktivera den.
+Installationsprogrammet låter en inaktiverad tjänst vara (om du tar bort tjänsten installerar installationsprogrammet om den).</value>
+	</data>
+  <data name="ConfigService_LblInfo3" xml:space="preserve">
+		<value>Du kan försöka installera om tjänsten om den inte fungerar korrekt.
+Din konfiguration och dina entiteter tas inte bort.</value>
+	</data>
+  <data name="ConfigService_BtnShowLogs" xml:space="preserve">
+		<value>Öppna tjänstens &amp;loggmapp</value>
+	</data>
+  <data name="ConfigService_LblInfo4" xml:space="preserve">
+		<value>Om tjänsten fortfarande inte fungerar efter ominstallationen, skapa ett ärende och skicka innehållet i den senaste loggen.</value>
+	</data>
+  <data name="ConfigStartup_LblInfo1" xml:space="preserve">
+		<value>HASS.Agent kan starta när du loggar in genom att skapa en post i din användarprofils register.
+
+Eftersom HASS.Agent är användarbaserat, om du vill starta det för en annan användare, installera och konfigurera bara
+HASS.Agent där.</value>
+	</data>
+  <data name="ConfigStartup_BtnSetStartOnLogin" xml:space="preserve">
+		<value>&amp;Aktivera Starta vid inloggning</value>
+	</data>
+  <data name="ConfigStartup_LblStartOnLoginStatusInfo" xml:space="preserve">
+		<value>Status för Starta vid inloggning:</value>
+	</data>
+  <data name="ConfigTrayIcon_LblInfo1" xml:space="preserve">
+		<value>Styr hur ikonen i meddelandefältet beter sig när du högerklickar på den.</value>
+	</data>
+  <data name="ConfigTrayIcon_CbDefaultMenu" xml:space="preserve">
+		<value>Visa &amp;standardmeny</value>
+	</data>
+  <data name="ConfigTrayIcon_CbShowWebView" xml:space="preserve">
+		<value>Visa &amp;WebView</value>
+	</data>
+  <data name="ConfigTrayIcon_LblWebViewUrl" xml:space="preserve">
+		<value>&amp;WebView-URL (till exempel URL:en till din Home Assistant-instrumentpanel)</value>
+	</data>
+  <data name="ConfigTrayIcon_LblWebViewSize" xml:space="preserve">
+		<value>Storlek (px)</value>
+	</data>
+  <data name="ConfigTrayIcon_BtnShowWebViewPreview" xml:space="preserve">
+		<value>Visa &amp;förhandsvisning</value>
+	</data>
+  <data name="ConfigTrayIcon_CbWebViewKeepLoaded" xml:space="preserve">
+		<value>&amp;Håll sidan laddad i bakgrunden</value>
+	</data>
+  <data name="ConfigTrayIcon_LblInfo2" xml:space="preserve">
+		<value>(Det använder extra resurser, men minskar laddningstiden.)</value>
+	</data>
+  <data name="ConfigUpdates_CbBetaUpdates" xml:space="preserve">
+		<value>Meddela mig om &amp;betaversioner</value>
+	</data>
+  <data name="ConfigUpdates_LblInfo2" xml:space="preserve">
+		<value>När en ny uppdatering finns tillgänglig kan HASS.Agent ladda ned installationsprogrammet och starta det åt dig.
+
+Certifikatet för den nedladdade filen kontrolleras innan den körs, och du får fortfarande granska versionsinformationen och godkänna uppdateringen manuellt.</value>
+	</data>
+  <data name="ConfigUpdates_CbExecuteUpdater" xml:space="preserve">
+		<value>&amp;Ladda ned framtida uppdateringar automatiskt</value>
+	</data>
+  <data name="ConfigUpdates_LblInfo1" xml:space="preserve">
+		<value>HASS.Agent söker efter uppdateringar i bakgrunden om det är aktiverat.
+
+Du får en push-avisering om en ny uppdatering hittas, som talar om att en
+ny version är redo att installeras.</value>
+	</data>
+  <data name="ConfigUpdates_CbUpdates" xml:space="preserve">
+		<value>Meddela mig när en ny &amp;version finns tillgänglig</value>
+	</data>
+  <data name="OnboardingWelcome_LblInfo1" xml:space="preserve">
+		<value>Välkommen till HASS.Agent! Det verkar som att det här är första gången du startar agenten.
+
+För att hjälpa dig med den första konfigurationen kan du gå igenom konfigurationsstegen nedan,
+eller klicka på 'Stäng'.</value>
+	</data>
+  <data name="OnboardingWelcome_LblInfo2" xml:space="preserve">
+		<value>Enhetsnamnet används för att identifiera din dator i Home Assistant, och det används också som föreslaget prefix för dina kommandon och sensorer.</value>
+	</data>
+  <data name="OnboardingWelcome_LblDeviceName" xml:space="preserve">
+		<value>Enhets&amp;namn</value>
+	</data>
+  <data name="OnboardingWelcome_LblInterfaceLangauge" xml:space="preserve">
+		<value>Gränssnitts&amp;språk</value>
+	</data>
+  <data name="OnboardingStartup_BtnSetLaunchOnLogin" xml:space="preserve">
+		<value>Ja, &amp;starta HASS.Agent vid inloggning</value>
+	</data>
+  <data name="OnboardingStartup_LblInfo1" xml:space="preserve">
+		<value>HASS.Agent kan starta tillsammans med systemet, så att sensorer och dataöverföring mellan din enhet och Home Assistant kan börja så snart du loggar in.
+
+Den här inställningen kan ändras när som helst senare i HASS.Agents konfigurationsfönster.</value>
+	</data>
+  <data name="OnboardingStartup_LblCreateInfo" xml:space="preserve">
+		<value>Hämtar aktuellt tillstånd, vänta..</value>
+	</data>
+  <data name="OnboardingLocalApi_LblTip1" xml:space="preserve">
+		<value>Obs: 5115 är standardporten, ändra den bara om du har ändrat den i Home Assistant.</value>
+	</data>
+  <data name="OnboardingLocalApi_CbEnableLocalApi" xml:space="preserve">
+		<value>Ja, &amp;aktivera det lokala API:et på port</value>
+	</data>
+  <data name="OnboardingLocalApi_LblInfo1" xml:space="preserve">
+		<value>HASS.Agent har ett eget internt API, så att Home Assistant kan skicka förfrågningar (som aviseringar eller text-till-tal).
+
+Vill du aktivera det?</value>
+	</data>
+  <data name="OnboardingLocalApi_CbEnableNotifications" xml:space="preserve">
+		<value>Aktivera &amp;aviseringar</value>
+	</data>
+  <data name="OnboardingLocalApi_CbEnableMediaPlayer" xml:space="preserve">
+		<value>Aktivera &amp;mediaspelare och text-till-tal (TTS)</value>
+	</data>
+  <data name="OnboardingLocalApi_LblInfo2" xml:space="preserve">
+		<value>Du kan välja vilka moduler du vill aktivera. De kräver HA-integrationer, men oroa dig inte, nästa sida ger dig mer information om hur du konfigurerar dem.</value>
+	</data>
+  <data name="OnboardingIntegrations_LblInfo1" xml:space="preserve">
+		<value>För att använda aviseringar behöver du installera och konfigurera integrationen HASS.Agent-notifier i
+Home Assistant.
+
+Det är mycket enkelt med HACS, men du kan även installera manuellt. Besök länken nedan för mer
+information.</value>
+	</data>
+  <data name="OnboardingIntegrations_LblMediaPlayerIntegration" xml:space="preserve">
+		<value>HASS.Agent-MediaPlayer GitHub-sida</value>
+	</data>
+  <data name="OnboardingIntegrations_LblInfo3" xml:space="preserve">
+		<value>Detsamma gäller mediaspelaren. Den här integrationen låter dig styra din enhet som en media_player-entitet, se vad som spelas och skicka text-till-tal.</value>
+	</data>
+  <data name="OnboardingApi_LblApiToken" xml:space="preserve">
+		<value>API-&amp;token</value>
+	</data>
+  <data name="OnboardingApi_LblServerUri" xml:space="preserve">
+		<value>Server-&amp;URI (bör fungera så här)</value>
+	</data>
+  <data name="OnboardingApi_BtnTest" xml:space="preserve">
+		<value>Testa &amp;anslutningen</value>
+	</data>
+  <data name="OnboardingApi_LblTip1" xml:space="preserve">
+		<value>Tips: Specialinställningar finns i konfigurationsfönstret.</value>
+	</data>
+  <data name="OnboardingMqtt_CbMqttTls" xml:space="preserve">
+		<value>&amp;TLS</value>
+	</data>
+  <data name="OnboardingMqtt_LblDiscoveryPrefix" xml:space="preserve">
+		<value>Discovery-prefix</value>
+	</data>
+  <data name="OnboardingMqtt_LblTip1" xml:space="preserve">
+		<value>(lämna standardvärdet om du är osäker)</value>
+	</data>
+  <data name="OnboardingMqtt_LblTip2" xml:space="preserve">
+		<value>Tips: Specialinställningar finns i konfigurationsfönstret.</value>
+	</data>
+  <data name="OnboardingHotKey_LblHotkeyCombo" xml:space="preserve">
+		<value>&amp;Tangentkombination</value>
+	</data>
+  <data name="OnboardingHotKey_LblInfo1" xml:space="preserve">
+		<value>Ett enkelt sätt att ta fram dina snabbåtgärder är att använda en global snabbtangent.
+
+På så sätt kan du alltid interagera med Home Assistant, vad du än gör på datorn.
+</value>
+	</data>
+  <data name="OnboardingHotKey_BtnClear" xml:space="preserve">
+		<value>&amp;Rensa</value>
+	</data>
+  <data name="OnboardingUpdates_CbNofityOnUpdate" xml:space="preserve">
+		<value>Ja, meddela mig om nya &amp;uppdateringar</value>
+	</data>
+  <data name="OnboardingUpdates_CbExecuteUpdater" xml:space="preserve">
+		<value>Ja, &amp;ladda ned och starta installationsprogrammet åt mig</value>
+	</data>
+  <data name="OnboardingDone_LblGitHub" xml:space="preserve">
+		<value>HASS.Agent GitHub-sida</value>
+	</data>
+  <data name="ServiceCommands_LblLowIntegrity" xml:space="preserve">
+		<value>Låg integritet</value>
+	</data>
+  <data name="ServiceCommands_BtnRemove" xml:space="preserve">
+		<value>&amp;Ta bort</value>
+	</data>
+  <data name="ServiceCommands_BtnModify" xml:space="preserve">
+		<value>&amp;Ändra</value>
+	</data>
+  <data name="ServiceCommands_BtnAdd" xml:space="preserve">
+		<value>&amp;Lägg till ny</value>
+	</data>
+  <data name="ServiceCommands_BtnStore" xml:space="preserve">
+		<value>&amp;Skicka &amp;&amp; aktivera kommandon</value>
+	</data>
+  <data name="ServiceCommands_LblStored" xml:space="preserve">
+		<value>kommandon sparade!</value>
+	</data>
+  <data name="ServiceConnect_BtnRetryAuthId" xml:space="preserve">
+		<value>&amp;Verkställ</value>
+	</data>
+  <data name="ServiceConnect_LblRetryAuthId" xml:space="preserve">
+		<value>Autentiserings-&amp;ID</value>
+	</data>
+  <data name="ServiceConnect_LblAuthenticate" xml:space="preserve">
+		<value>Autentisera</value>
+	</data>
+  <data name="ServiceConnect_LblConnect" xml:space="preserve">
+		<value>Anslut till tjänsten</value>
+	</data>
+  <data name="ServiceConnect_LblLoading" xml:space="preserve">
+		<value>Ansluter till satellittjänsten, vänta..</value>
+	</data>
+  <data name="ServiceConnect_LblFetchConfig" xml:space="preserve">
+		<value>Hämta konfiguration</value>
+	</data>
+  <data name="ServiceMqtt_LblTip2" xml:space="preserve">
+		<value>(lämna tomt för autogenerering)</value>
+	</data>
+  <data name="ServiceMqtt_LblClientId" xml:space="preserve">
+		<value>Klient-ID</value>
+	</data>
+  <data name="ServiceMqtt_LblTip3" xml:space="preserve">
+		<value>Tips: Dubbelklicka i dessa fält för att bläddra</value>
+	</data>
+  <data name="ServiceMqtt_LblClientCert" xml:space="preserve">
+		<value>Klientcertifikat</value>
+	</data>
+  <data name="ServiceMqtt_LblRootCert" xml:space="preserve">
+		<value>Rotcertifikat</value>
+	</data>
+  <data name="ServiceMqtt_CbUseRetainFlag" xml:space="preserve">
+		<value>Använd &amp;retain-flagga</value>
+	</data>
+  <data name="ServiceMqtt_CbAllowUntrustedCertificates" xml:space="preserve">
+		<value>&amp;Tillåt ej betrodda certifikat</value>
+	</data>
+  <data name="ServiceMqtt_BtnMqttClearConfig" xml:space="preserve">
+		<value>&amp;Rensa konfigurationen</value>
+	</data>
+  <data name="ServiceMqtt_LblTip1" xml:space="preserve">
+		<value>(lämna standardvärdet om du är osäker)</value>
+	</data>
+  <data name="ServiceMqtt_LblInfo1" xml:space="preserve">
+		<value>Kommandon och sensorer skickas via MQTT. Ange inloggningsuppgifter för din server. Om du använder HA-tillägget
+kan du troligen använda den förinställda adressen.</value>
+	</data>
+  <data name="ServiceMqtt_LblDiscoPrefix" xml:space="preserve">
+		<value>Discovery-prefix</value>
+	</data>
+  <data name="ServiceMqtt_CbMqttTls" xml:space="preserve">
+		<value>&amp;TLS</value>
+	</data>
+  <data name="ServiceMqtt_LblBrokerPassword" xml:space="preserve">
+		<value>Lösenord</value>
+	</data>
+  <data name="ServiceMqtt_LblBrokerUsername" xml:space="preserve">
+		<value>Användarnamn</value>
+	</data>
+  <data name="ServiceMqtt_LblBrokerPort" xml:space="preserve">
+		<value>Port</value>
+	</data>
+  <data name="ServiceMqtt_LblBrokerIp" xml:space="preserve">
+		<value>Brokerns IP-adress eller värdnamn</value>
+	</data>
+  <data name="ServiceMqtt_BtnStore" xml:space="preserve">
+		<value>&amp;Skicka &amp;&amp; aktivera konfigurationen</value>
+	</data>
+  <data name="ServiceMqtt_BtnCopy" xml:space="preserve">
+		<value>Kopiera från &amp;HASS.Agent</value>
+	</data>
+  <data name="ServiceMqtt_LblStored" xml:space="preserve">
+		<value>Konfigurationen sparad!</value>
+	</data>
+  <data name="ServiceMqtt_LblStatusInfo" xml:space="preserve">
+		<value>Status</value>
+	</data>
+  <data name="ServiceMqtt_LblStatus" xml:space="preserve">
+		<value>Frågar..</value>
+	</data>
+  <data name="ServiceSensors_LblRefresh" xml:space="preserve">
+		<value>Uppdatera</value>
+	</data>
+  <data name="ServiceSensors_BtnRemove" xml:space="preserve">
+		<value>&amp;Ta bort</value>
+	</data>
+  <data name="ServiceSensors_BtnAdd" xml:space="preserve">
+		<value>&amp;Lägg till ny</value>
+	</data>
+  <data name="ServiceSensors_BtnModify" xml:space="preserve">
+		<value>&amp;Ändra</value>
+	</data>
+  <data name="ServiceSensors_BtnStore" xml:space="preserve">
+		<value>&amp;Skicka &amp;&amp; aktivera sensorer</value>
+	</data>
+  <data name="ServiceSensors_LblStored" xml:space="preserve">
+		<value>Sensorer sparade!</value>
+	</data>
+  <data name="PortReservation_LblInfo1" xml:space="preserve">
+		<value>Vänta en stund medan uppgiften utförs ..</value>
+	</data>
+  <data name="PortReservation_LblTask1" xml:space="preserve">
+		<value>Skapa portbindning för API</value>
+	</data>
+  <data name="PortReservation_LblTask2" xml:space="preserve">
+		<value>Ange brandväggsregel</value>
+	</data>
+  <data name="PostUpdate_LblInfo1" xml:space="preserve">
+		<value>Vänta en stund medan några uppgifter efter uppdateringen utförs ..</value>
+	</data>
+  <data name="PostUpdate_LblTask1" xml:space="preserve">
+		<value>Konfigurerar satellittjänsten</value>
+	</data>
+  <data name="PostUpdate_LblTask2" xml:space="preserve">
+		<value>Skapa portbindning för API</value>
+	</data>
+  <data name="Restart_LblInfo1" xml:space="preserve">
+		<value>Vänta medan HASS.Agent startar om..</value>
+	</data>
+  <data name="Restart_LblTask1" xml:space="preserve">
+		<value>Väntar på att föregående instans ska stängas..</value>
+	</data>
+  <data name="Restart_LblTask2" xml:space="preserve">
+		<value>Starta HASS.Agent igen</value>
+	</data>
+  <data name="ServiceReinstall_LblInfo1" xml:space="preserve">
+		<value>Vänta medan satellittjänsten installeras om..</value>
+	</data>
+  <data name="ServiceReinstall_LblTask1" xml:space="preserve">
+		<value>Ta bort satellittjänsten</value>
+	</data>
+  <data name="ServiceReinstall_LblTask2" xml:space="preserve">
+		<value>Installera satellittjänsten</value>
+	</data>
+  <data name="ServiceReinstall_Title" xml:space="preserve">
+		<value>HASS.Agent installera om satellittjänsten</value>
+	</data>
+  <data name="ServiceSetState_LblInfo1" xml:space="preserve">
+		<value>Vänta medan satellittjänsten konfigureras..</value>
+	</data>
+  <data name="ServiceSetState_LblTask1" xml:space="preserve">
+		<value>Aktivera satellittjänsten</value>
+	</data>
+  <data name="ServiceSetState_Title" xml:space="preserve">
+		<value>HASS.Agent konfigurera satellittjänsten</value>
+	</data>
+  <data name="CommandMqttTopic_BtnClose" xml:space="preserve">
+		<value>&amp;Stäng</value>
+	</data>
+  <data name="CommandMqttTopic_LblInfo1" xml:space="preserve">
+		<value>Det här är MQTT-ämnet där du kan publicera åtgärdskommandon:</value>
+	</data>
+  <data name="CommandMqttTopic_BtnCopyClipboard" xml:space="preserve">
+		<value>Kopiera &amp;till urklipp</value>
+	</data>
+  <data name="CommandMqttTopic_LblHelp" xml:space="preserve">
+		<value>hjälp och exempel</value>
+	</data>
+  <data name="CommandMqttTopic_Title" xml:space="preserve">
+		<value>MQTT-åtgärdsämne</value>
+	</data>
+  <data name="WebViewCommandConfig_BtnSave" xml:space="preserve">
+		<value>&amp;Spara</value>
+	</data>
+  <data name="WebViewCommandConfig_LblInfo1" xml:space="preserve">
+		<value>Dra och ändra storlek på det här fönstret för att ange storlek och placering för ditt webview-kommando.</value>
+	</data>
+  <data name="WebViewCommandConfig_LblUrl" xml:space="preserve">
+		<value>&amp;URL</value>
+	</data>
+  <data name="WebViewCommandConfig_LblSize" xml:space="preserve">
+		<value>Storlek</value>
+	</data>
+  <data name="WebViewCommandConfig_LblLocation" xml:space="preserve">
+		<value>Placering</value>
+	</data>
+  <data name="WebViewCommandConfig_CbShowTitleBar" xml:space="preserve">
+		<value>Visa fönstrets &amp;namnlist</value>
+	</data>
+  <data name="WebViewCommandConfig_CbCenterScreen" xml:space="preserve">
+		<value>&amp;Visa alltid centrerat på skärmen</value>
+	</data>
+  <data name="WebViewCommandConfig_CbTopMost" xml:space="preserve">
+		<value>Ställ in fönstret som 'Alltid &amp;överst'</value>
+	</data>
+  <data name="WebViewCommandConfig_LblTip1" xml:space="preserve">
+		<value>Tips: Tryck på ESCAPE för att stänga en WebView.</value>
+	</data>
+  <data name="WebViewCommandConfig_Title" xml:space="preserve">
+		<value>WebView-konfiguration</value>
+	</data>
+  <data name="CommandsConfig_BtnRemove" xml:space="preserve">
+		<value>&amp;Ta bort</value>
+	</data>
+  <data name="CommandsConfig_BtnModify" xml:space="preserve">
+		<value>&amp;Ändra</value>
+	</data>
+  <data name="CommandsConfig_BtnAdd" xml:space="preserve">
+		<value>&amp;Lägg till ny</value>
+	</data>
+  <data name="CommandsConfig_BtnStore" xml:space="preserve">
+		<value>&amp;Spara och aktivera kommandon</value>
+	</data>
+  <data name="CommandsConfig_LblLowIntegrity" xml:space="preserve">
+		<value>Låg integritet</value>
+	</data>
+  <data name="CommandsConfig_LblActionInfo" xml:space="preserve">
+		<value>Åtgärd</value>
+	</data>
+  <data name="CommandsConfig_Title" xml:space="preserve">
+		<value>Kommandokonfiguration</value>
+	</data>
+  <data name="CommandsMod_BtnStore" xml:space="preserve">
+		<value>&amp;Spara kommando</value>
+	</data>
+  <data name="CommandsMod_LblSetting" xml:space="preserve">
+		<value>&amp;Konfiguration</value>
+	</data>
+  <data name="CommandsMod_LblName" xml:space="preserve">
+		<value>&amp;Namn</value>
+	</data>
+  <data name="CommandsMod_LblDescription" xml:space="preserve">
+		<value>Beskrivning</value>
+	</data>
+  <data name="CommandsMod_CbRunAsLowIntegrity" xml:space="preserve">
+		<value>&amp;Kör med 'Låg integritet'</value>
+	</data>
+  <data name="CommandsMod_LblIntegrityInfo" xml:space="preserve">
+		<value>Vad är detta?</value>
+	</data>
+  <data name="CommandsMod_LblService" xml:space="preserve">
+		<value>Tjänst</value>
+	</data>
+  <data name="CommandsMod_LblAgent" xml:space="preserve">
+		<value>agent</value>
+	</data>
+  <data name="CommandsMod_BtnConfigureCommand" xml:space="preserve">
+		<value>Konfigurera kommando&amp;parametrar</value>
+	</data>
+  <data name="CommandsMod_Title" xml:space="preserve">
+		<value>Kommando</value>
+	</data>
+  <data name="QuickActions_LblLoading" xml:space="preserve">
+		<value>Hämtar entiteter, vänta..</value>
+	</data>
+  <data name="QuickActions_Title" xml:space="preserve">
+		<value>Snabbåtgärder</value>
+	</data>
+  <data name="QuickActionsConfig_BtnStore" xml:space="preserve">
+		<value>&amp;Spara snabbåtgärder</value>
+	</data>
+  <data name="QuickActionsConfig_BtnAdd" xml:space="preserve">
+		<value>&amp;Lägg till ny</value>
+	</data>
+  <data name="QuickActionsConfig_BtnModify" xml:space="preserve">
+		<value>&amp;Ändra</value>
+	</data>
+  <data name="QuickActionsConfig_BtnRemove" xml:space="preserve">
+		<value>&amp;Ta bort</value>
+	</data>
+  <data name="QuickActionsConfig_BtnPreview" xml:space="preserve">
+		<value>&amp;Förhandsvisa</value>
+	</data>
+  <data name="QuickActionsConfig_LblHotkey" xml:space="preserve">
+		<value>Snabbtangent aktiverad</value>
+	</data>
+  <data name="QuickActionsConfig_Title" xml:space="preserve">
+		<value>Konfiguration av snabbåtgärder</value>
+	</data>
+  <data name="QuickActionsMod_BtnStore" xml:space="preserve">
+		<value>&amp;Spara snabbåtgärd</value>
+	</data>
+  <data name="QuickActionsMod_LblEntityInfo" xml:space="preserve">
+		<value>&amp;Entitet</value>
+	</data>
+  <data name="QuickActionsMod_LblAction" xml:space="preserve">
+		<value>Önskad &amp;åtgärd</value>
+	</data>
+  <data name="QuickActionsMod_LblDescription" xml:space="preserve">
+		<value>&amp;Beskrivning</value>
+	</data>
+  <data name="QuickActionsMod_LblLoading" xml:space="preserve">
+		<value>Hämtar entiteter, vänta..</value>
+	</data>
+  <data name="QuickActionsMod_LblHotkey" xml:space="preserve">
+		<value>&amp;snabbtangentkombination</value>
+	</data>
+  <data name="QuickActionsMod_LblTip1" xml:space="preserve">
+		<value>(valfritt, används i stället för entitetens namn)</value>
+	</data>
+  <data name="QuickActionsMod_Title" xml:space="preserve">
+		<value>Snabbåtgärd</value>
+	</data>
+  <data name="SensorsConfig_BtnRemove" xml:space="preserve">
+		<value>&amp;Ta bort</value>
+	</data>
+  <data name="SensorsConfig_BtnModify" xml:space="preserve">
+		<value>&amp;Ändra</value>
+	</data>
+  <data name="SensorsConfig_BtnAdd" xml:space="preserve">
+		<value>&amp;Lägg till ny</value>
+	</data>
+  <data name="SensorsConfig_BtnStore" xml:space="preserve">
+		<value>&amp;Spara &amp;&amp; aktivera sensorer</value>
+	</data>
+  <data name="SensorsConfig_LblRefresh" xml:space="preserve">
+		<value>Uppdatera</value>
+	</data>
+  <data name="SensorsMod_BtnStore" xml:space="preserve">
+		<value>&amp;Spara sensor</value>
+	</data>
+  <data name="SensorsMod_LblType" xml:space="preserve">
+		<value>Vald typ</value>
+	</data>
+  <data name="SensorsMod_LblName" xml:space="preserve">
+		<value>&amp;Namn</value>
+	</data>
+  <data name="SensorsMod_LblUpdate" xml:space="preserve">
+		<value>&amp;Uppdatera var</value>
+	</data>
+  <data name="SensorsMod_LblSeconds" xml:space="preserve">
+		<value>sekunder</value>
+	</data>
+  <data name="SensorsMod_LblDescription" xml:space="preserve">
+		<value>Beskrivning</value>
+	</data>
+  <data name="SensorsMod_LblAgent" xml:space="preserve">
+		<value>Agent</value>
+	</data>
+  <data name="SensorsMod_LblService" xml:space="preserve">
+		<value>Tjänst</value>
+	</data>
+  <data name="SensorsMod_LblSpecificClient" xml:space="preserve">
+		<value>Endast HASS.Agent!</value>
+	</data>
+  <data name="SensorsMod_BtnTest" xml:space="preserve">
+		<value>&amp;Testa</value>
+	</data>
+  <data name="SensorsMod_Title" xml:space="preserve">
+		<value>Sensor</value>
+	</data>
+  <data name="ServiceConfig_Title" xml:space="preserve">
+		<value>Konfiguration av satellittjänsten</value>
+	</data>
+  <data name="About_BtnClose" xml:space="preserve">
+		<value>&amp;Stäng</value>
+	</data>
+  <data name="About_LblInfo1" xml:space="preserve">
+		<value>En Windows-baserad klient för Home Assistant-plattformen.</value>
+	</data>
+  <data name="About_LblInfo3" xml:space="preserve">
+		<value>Det här programmet är öppen källkod och helt gratis. Se projektsidorna för
+de använda komponenterna för deras respektive licenser:</value>
+	</data>
+  <data name="About_LblInfo4" xml:space="preserve">
+		<value>Ett stort 'tack' till utvecklarna av dessa projekt, som var vänliga nog att dela
+sitt hårda arbete med oss andra vanliga dödliga. </value>
+	</data>
+  <data name="About_LblInfo5" xml:space="preserve">
+		<value>Och naturligtvis: tack till Paulus Shoutsen och hela utvecklarteamet som
+skapade och underhåller Home Assistant :-)</value>
+	</data>
+  <data name="About_LblInfo2" xml:space="preserve">
+		<value>Skapad med kärlek av</value>
+	</data>
+  <data name="About_LblOr" xml:space="preserve">
+		<value>eller</value>
+	</data>
+  <data name="About_Title" xml:space="preserve">
+		<value>Om</value>
+	</data>
+  <data name="Configuration_TablLocalApi" xml:space="preserve">
+		<value>Lokalt API</value>
+	</data>
+  <data name="Configuration_TabMediaPlayer" xml:space="preserve">
+		<value>Mediaspelare</value>
+	</data>
+  <data name="Configuration_TabTrayIcon" xml:space="preserve">
+		<value>Aktivitetsfältsikon</value>
+	</data>
+  <data name="Configuration_BtnAbout" xml:space="preserve">
+		<value>&amp;Om</value>
+	</data>
+  <data name="Configuration_BtnHelp" xml:space="preserve">
+		<value>&amp;Hjälp &amp;&amp; kontakt</value>
+	</data>
+  <data name="Configuration_BtnStore" xml:space="preserve">
+		<value>&amp;Spara konfigurationen</value>
+	</data>
+  <data name="Configuration_BtnClose" xml:space="preserve">
+		<value>Stäng &amp;utan att spara</value>
+	</data>
+  <data name="Configuration_Title" xml:space="preserve">
+		<value>Konfiguration</value>
+	</data>
+  <data name="ExitDialog_LblInfo1" xml:space="preserve">
+		<value>Vad vill du göra?</value>
+	</data>
+  <data name="ExitDialog_BtnRestart" xml:space="preserve">
+		<value>Starta &amp;om</value>
+	</data>
+  <data name="ExitDialog_BtnHide" xml:space="preserve">
+		<value>&amp;Dölj</value>
+	</data>
+  <data name="ExitDialog_BtnExit" xml:space="preserve">
+		<value>&amp;Avsluta</value>
+	</data>
+  <data name="ExitDialog_Title" xml:space="preserve">
+		<value>Avsluta</value>
+	</data>
+  <data name="Help_BtnClose" xml:space="preserve">
+		<value>&amp;Stäng</value>
+	</data>
+  <data name="Help_LblInfo1" xml:space="preserve">
+		<value>Om du har problem med HASS.Agent och behöver hjälp
+med sensorer, kommandon, eller för allmän support och återkoppling,
+finns det några sätt att nå oss:</value>
+	</data>
+  <data name="Help_LblAbout" xml:space="preserve">
+		<value>Om</value>
+	</data>
+  <data name="Help_LblHAForum" xml:space="preserve">
+		<value>Home Assistant-forumet</value>
+	</data>
+  <data name="Help_LblGitHub" xml:space="preserve">
+		<value>GitHub-ärenden</value>
+	</data>
+  <data name="Help_LblHAInfo" xml:space="preserve">
+		<value>Lite av allt, med fördelen att andra
+HA-användare också kan hjälpa dig!</value>
+	</data>
+  <data name="Help_LblGitHubInfo" xml:space="preserve">
+		<value>Rapportera buggar, skicka önskemål om funktioner, se de senaste ändringarna m.m.</value>
+	</data>
+  <data name="Help_LblDiscordInfo" xml:space="preserve">
+		<value>Få hjälp med att konfigurera och använda HASS.Agent,
+rapportera buggar eller delta i allmänt småprat!</value>
+	</data>
+  <data name="Help_LblDocumentationInfo" xml:space="preserve">
+		<value>Dokumentation och användningsexempel</value>
+	</data>
+  <data name="Help_LblDocumentation" xml:space="preserve">
+		<value>Dokumentation</value>
+	</data>
+  <data name="Help_Title" xml:space="preserve">
+		<value>Hjälp</value>
+	</data>
+  <data name="Main_TsSatelliteService" xml:space="preserve">
+		<value>Hantera satellittjänsten</value>
+	</data>
+  <data name="Main_GpControls" xml:space="preserve">
+		<value>Kontroller</value>
+	</data>
+  <data name="Main_BtnServiceManager" xml:space="preserve">
+		<value>S&amp;atellittjänst</value>
+	</data>
+  <data name="Main_BtnAppSettings" xml:space="preserve">
+		<value>K&amp;onfiguration</value>
+	</data>
+  <data name="Main_BtnActionsManager" xml:space="preserve">
+		<value>&amp;Snabbåtgärder</value>
+	</data>
+  <data name="Main_GpStatus" xml:space="preserve">
+		<value>Systemstatus</value>
+	</data>
+  <data name="Main_LblService" xml:space="preserve">
+		<value>Satellittjänst:</value>
+	</data>
+  <data name="Main_LblMqtt" xml:space="preserve">
+		<value>MQTT:</value>
+	</data>
+  <data name="Main_LblCommands" xml:space="preserve">
+		<value>Kommandon:</value>
+	</data>
+  <data name="Main_LblSensors" xml:space="preserve">
+		<value>Sensorer:</value>
+	</data>
+  <data name="Main_LblQuickActions" xml:space="preserve">
+		<value>Snabbåtgärder:</value>
+	</data>
+  <data name="Main_LblHomeAssistantApi" xml:space="preserve">
+		<value>Home Assistant API:</value>
+	</data>
+  <data name="Main_LblLocalApi" xml:space="preserve">
+		<value>Lokalt API:</value>
+	</data>
+  <data name="Main_BtnCheckForUpdate" xml:space="preserve">
+		<value>Sök efter &amp;uppdateringar</value>
+	</data>
+  <data name="Onboarding_BtnNext" xml:space="preserve">
+		<value>&amp;Nästa</value>
+	</data>
+  <data name="Onboarding_BtnClose" xml:space="preserve">
+		<value>&amp;Stäng</value>
+	</data>
+  <data name="Onboarding_BtnPrevious" xml:space="preserve">
+		<value>&amp;Föregående</value>
+	</data>
+  <data name="Onboarding_Title" xml:space="preserve">
+		<value>HASS.Agent introduktion</value>
+	</data>
+  <data name="UpdatePending_LblNewReleaseInfo" xml:space="preserve">
+		<value>Det finns en ny version tillgänglig:</value>
+	</data>
+  <data name="UpdatePending_LblInfo1" xml:space="preserve">
+		<value>Versionsinformation</value>
+	</data>
+  <data name="UpdatePending_BtnIgnore" xml:space="preserve">
+		<value>&amp;Ignorera uppdateringen</value>
+	</data>
+  <data name="UpdatePending_LblRelease" xml:space="preserve">
+		<value>Versionssida</value>
+	</data>
+  <data name="UpdatePending_Title" xml:space="preserve">
+		<value>HASS.Agent-uppdatering</value>
+	</data>
+  <data name="WebView_Title" xml:space="preserve">
+		<value>WebView</value>
+	</data>
+  <data name="ConfigExternalTools_LblInfo2" xml:space="preserve">
+		<value>Som standard öppnar HASS.Agent URL:er i din standardwebbläsare. Du kan också konfigurera
+en specifik webbläsare som används i stället, tillsammans med startargument för att köra i privat läge.</value>
+	</data>
+  <data name="OnboardingIntegrations_LblInfo2" xml:space="preserve">
+		<value>Se till att du följer dessa steg:
+
+- Installera integrationen HASS.Agent-Notifier och/eller HASS.Agent-MediaPlayer
+- Starta om Home Assistant
+- Konfigurera en notifier- och/eller media_player-entitet
+- Starta om Home Assistant</value>
+	</data>
+  <data name="OnboardingApi_LblInfo1" xml:space="preserve">
+		<value>För att ta reda på vilka entiteter du har konfigurerat och för att skicka snabbåtgärder använder HASS.Agent
+Home Assistants API.
+
+Ange en långlivad åtkomsttoken och adressen till din Home Assistant-instans.
+Du kan skapa en token i Home Assistant genom att klicka på din profilbild längst ned till vänster
+och gå längst ned på sidan tills du ser knappen 'SKAPA TOKEN'.</value>
+	</data>
+  <data name="OnboardingUpdates_LblInfo2" xml:space="preserve">
+		<value>När en ny uppdatering finns tillgänglig kan HASS.Agent ladda ned installationsprogrammet och starta det åt dig.
+
+Certifikatet för den nedladdade filen kontrolleras innan den körs, och du får fortfarande granska versionsinformationen och godkänna uppdateringen manuellt.</value>
+	</data>
+  <data name="OnboardingUpdates_LblInfo1" xml:space="preserve">
+		<value>HASS.Agent söker efter uppdateringar i bakgrunden om det är aktiverat.
+
+Du får en push-avisering om en ny uppdatering hittas, som talar om att en
+ny version är redo att installeras.
+
+Vill du aktivera de automatiska uppdateringskontrollerna?</value>
+	</data>
+  <data name="ConfigExternalTools_LblInfo3" xml:space="preserve">
+		<value>Du kan konfigurera HASS.Agent att använda en specifik tolk, som Perl eller Python.
+Använd kommandot 'anpassad exekverare' för att starta den här exekveraren.</value>
+	</data>
+  <data name="ConfigExternalTools_LblCustomExecutorName" xml:space="preserve">
+		<value>Namn på anpassad exekverare</value>
+	</data>
+  <data name="ConfigGeneral_LblInfo4" xml:space="preserve">
+		<value>HASS.Agent väntar en respittid innan du meddelas om frånkopplingar från MQTT eller HA:s API.
+Du kan ange hur många sekunder som ska väntas under respittiden nedan.</value>
+	</data>
+  <data name="ConfigGeneral_LblInfo3" xml:space="preserve">
+		<value>VIKTIGT: om du ändrar det här värdet avpublicerar HASS.Agent alla dina sensorer och kommandon och tvingar fram en omstart av sig själv, så att de kan publiceras igen under det nya enhetsnamnet.
+Dina automationer och skript fortsätter att fungera.</value>
+	</data>
+  <data name="ConfigGeneral_LblInfo2" xml:space="preserve">
+		<value>Enhetsnamnet används för att identifiera din dator i Home Assistant.
+Det används också som prefix för namnen på dina kommandon/sensorer (detta kan ändras per entitet).</value>
+	</data>
+  <data name="ConfigMediaPlayer_LblLocalApiDisabled" xml:space="preserve">
+		<value>Det lokala API:et är inaktiverat, men mediaspelaren kräver det för att fungera.</value>
+	</data>
+  <data name="OnboardingMqtt_LblPassword" xml:space="preserve">
+		<value>Lösenord</value>
+	</data>
+  <data name="OnboardingMqtt_LblUsername" xml:space="preserve">
+		<value>Användarnamn</value>
+	</data>
+  <data name="OnboardingMqtt_LblPort" xml:space="preserve">
+		<value>Port</value>
+	</data>
+  <data name="OnboardingMqtt_LblIpAdress" xml:space="preserve">
+		<value>IP-adress eller värdnamn</value>
+	</data>
+  <data name="ServiceGeneral_LblInfo1" xml:space="preserve">
+		<value>Här finns allmänna konfigurationsinställningar. För MQTT-inställningar, kommandon och sensorer, bläddra bland flikarna ovan.</value>
+	</data>
+  <data name="ServiceGeneral_LblAuthId" xml:space="preserve">
+		<value>Autentiserings-&amp;ID</value>
+	</data>
+  <data name="ServiceGeneral_LblDeviceName" xml:space="preserve">
+		<value>Enhets&amp;namn</value>
+	</data>
+  <data name="ServiceGeneral_LblTip1" xml:space="preserve">
+		<value>Tips: Dubbelklicka i dessa fält för att bläddra</value>
+	</data>
+  <data name="ServiceGeneral_LblCustomExecBinary" xml:space="preserve">
+		<value>Programfil för anpassad &amp;exekverare</value>
+	</data>
+  <data name="ServiceGeneral_LblCustomExecName" xml:space="preserve">
+		<value>Namn på anpassad e&amp;xekverare</value>
+	</data>
+  <data name="ServiceGeneral_LblSeconds" xml:space="preserve">
+		<value>sekunder</value>
+	</data>
+  <data name="ServiceGeneral_LblDisconGrace" xml:space="preserve">
+		<value>&amp;Respittid vid frånkoppling</value>
+	</data>
+  <data name="ServiceGeneral_LblVersionInfo" xml:space="preserve">
+		<value>Version</value>
+	</data>
+  <data name="ServiceGeneral_LblTip2" xml:space="preserve">
+		<value>Tips: Dubbelklicka för att generera slumpmässigt</value>
+	</data>
+  <data name="ServiceGeneral_LblAuthStored" xml:space="preserve">
+		<value>sparat!</value>
+	</data>
+  <data name="ServiceGeneral_LblInfo2" xml:space="preserve">
+		<value>Du kan använda satellittjänsten för att köra sensorer och kommandon utan att vara inloggad. Alla typer är inte tillgängliga, till exempel kan kommandot 'LaunchUrl' bara läggas till som ett vanligt kommando.</value>
+	</data>
+  <data name="CommandsMod_BtnStore_MessageBox9" xml:space="preserve">
+		<value>Tangentkoden du har angett är inte ett giltigt tal!
+
+Se till att fältet för tangentkod har fokus och tryck på den tangent du vill simulera, så genereras tangentkoden åt dig.</value>
+	</data>
+  <data name="ConfigGeneral_LblInfo5" xml:space="preserve">
+		<value>HASS.Agent sanerar ditt enhetsnamn för att säkerställa att HA accepterar det. Du kan åsidosätta den här regeln nedan om du är säker på att namnet accepteras som det är.</value>
+	</data>
+  <data name="ConfigGeneral_CbEnableDeviceNameSanitation" xml:space="preserve">
+		<value>Aktivera &amp;sanering av enhetsnamn</value>
+	</data>
+  <data name="Configuration_ProcessChanges_MessageBox6" xml:space="preserve">
+		<value>Du har ändrat enhetens namn.
+
+Alla dina sensorer och kommandon kommer nu att avpubliceras och publiceras igen efter att HASS.Agent har startats om.
+
+Oroa dig inte! De behåller sina nuvarande namn, så dina automationer och skript fortsätter att fungera.
+
+Obs: Du har inaktiverat sanering, så se till att ditt enhetsnamn accepteras av Home Assistant.</value>
+	</data>
+  <data name="ConfigGeneral_CbEnableStateNotifications" xml:space="preserve">
+		<value>Aktivera tillståndsaviseringar</value>
+	</data>
+  <data name="ConfigGeneral_LblInfo6" xml:space="preserve">
+		<value>HASS.Agent skickar aviseringar när tillståndet för en modul ändras. Du kan välja nedan om du vill ta emot dessa aviseringar eller inte.</value>
+	</data>
+  <data name="NotifierManager_Initialize_MessageBox1" xml:space="preserve">
+		<value>Fel vid försök att binda API:et till port {0}.
+
+Se till att ingen annan instans av HASS.Agent körs och att porten är ledig och registrerad.</value>
+	</data>
+  <data name="SensorType_PrintersSensors" xml:space="preserve">
+		<value>Skrivare</value>
+	</data>
+  <data name="Main_NotifyIcon_MouseClick_MessageBox1" xml:space="preserve">
+		<value>Ingen URL har angetts! Konfigurera webview via Konfiguration -&gt; Aktivitetsfältsikon.</value>
+	</data>
+  <data name="CommandType_MonitorSleepCommand" xml:space="preserve">
+		<value>SkärmVila</value>
+	</data>
+  <data name="CommandType_MonitorWakeCommand" xml:space="preserve">
+		<value>SkärmVäck</value>
+	</data>
+  <data name="MonitorPowerEvent_PowerOn" xml:space="preserve">
+		<value>PåSlagen</value>
+	</data>
+  <data name="MonitorPowerEvent_PowerOff" xml:space="preserve">
+		<value>AvStängd</value>
+	</data>
+  <data name="MonitorPowerEvent_Dimmed" xml:space="preserve">
+		<value>Dimmad</value>
+	</data>
+  <data name="MonitorPowerEvent_Unknown" xml:space="preserve">
+		<value>Okänd</value>
+	</data>
+  <data name="SensorType_MonitorPowerStateSensor" xml:space="preserve">
+		<value>SkärmStrömtillstånd</value>
+	</data>
+  <data name="SensorType_PowershellSensor" xml:space="preserve">
+		<value>PowershellSensor</value>
+	</data>
+  <data name="SensorsMod_LblSetting1_Powershell" xml:space="preserve">
+		<value>powershell-kommando eller -skript</value>
+	</data>
+  <data name="SensorsMod_SensorsMod_BtnTest_Powershell" xml:space="preserve">
+		<value>Testa kommando/skript</value>
+	</data>
+  <data name="SensorsMod_TestPowershell_MessageBox2" xml:space="preserve">
+		<value>Testet kördes, resultatvärde:
+
+{0}</value>
+	</data>
+  <data name="SensorsMod_TestPowershell_MessageBox1" xml:space="preserve">
+		<value>Ange ett kommando eller skript!</value>
+	</data>
+  <data name="SensorsMod_TestPowershell_MessageBox3" xml:space="preserve">
+		<value>Testet kunde inte köras:
+
+{0}
+
+Vill du öppna loggmappen?</value>
+	</data>
+  <data name="CommandType_SetVolumeCommand" xml:space="preserve">
+		<value>AngeVolym</value>
+	</data>
+  <data name="CommandsMod_BtnStore_MessageBox10" xml:space="preserve">
+		<value>Ange ett värde mellan 0-100 som önskad volymnivå!</value>
+	</data>
+  <data name="CommandsMod_MessageBox_Action2" xml:space="preserve">
+		<value>Om du inte anger ett volymvärde kan du bara använda den här entiteten med ett 'action'-värde via Home Assistant. Att köra den som den är gör ingenting.
+
+Är du säker på att du vill det?</value>
+	</data>
+  <data name="WindowState_Maximized" xml:space="preserve">
+		<value>Maximerat</value>
+	</data>
+  <data name="WindowState_Minimized" xml:space="preserve">
+		<value>Minimerat</value>
+	</data>
+  <data name="WindowState_Normal" xml:space="preserve">
+		<value>Normalt</value>
+	</data>
+  <data name="WindowState_Unknown" xml:space="preserve">
+		<value>Okänd</value>
+	</data>
+  <data name="WindowState_Hidden" xml:space="preserve">
+		<value>Dolt</value>
+	</data>
+  <data name="SensorType_WindowStateSensor" xml:space="preserve">
+		<value>Fönstertillstånd</value>
+	</data>
+  <data name="CommandsManager_MonitorSleepCommandDescription" xml:space="preserve">
+		<value>Försätter alla skärmar i viloläge (lågt strömläge).</value>
+	</data>
+  <data name="CommandsManager_MonitorWakeCommandDescription" xml:space="preserve">
+		<value>Försöker väcka alla skärmar genom att simulera en tryckning på 'pil upp'.</value>
+	</data>
+  <data name="CommandsManager_SetVolumeCommandDescription" xml:space="preserve">
+		<value>Ställer in volymen för den aktuella standardljudenheten till den angivna nivån.</value>
+	</data>
+  <data name="SensorsManager_GeoLocationSensorDescription" xml:space="preserve">
+		<value>Returnerar din aktuella latitud, longitud och höjd som ett kommaseparerat värde.
+
+Se till att Windows platstjänster är aktiverade!
+
+Beroende på din Windows-version finns detta i den nya kontrollpanelen -&gt; 'sekretess och säkerhet' -&gt; 'plats'.</value>
+	</data>
+  <data name="SensorsManager_MonitorPowerStateSensorDescription" xml:space="preserve">
+		<value>Tillhandahåller den senaste ändringen av skärmens strömtillstånd:
+
+Dimmed, PowerOff, PowerOn och Unknown.</value>
+	</data>
+  <data name="SensorsManager_PowershellSensorDescription" xml:space="preserve">
+		<value>Returnerar resultatet av det angivna Powershell-kommandot eller -skriptet.
+
+Konverterar resultatet till text.</value>
+	</data>
+  <data name="SensorsManager_PrintersSensorsDescription" xml:space="preserve">
+		<value>Tillhandahåller information om alla installerade skrivare och deras köer.</value>
+	</data>
+  <data name="SensorsManager_WindowStateSensorDescription" xml:space="preserve">
+		<value>Tillhandahåller det aktuella tillståndet för processens fönster:
+
+Hidden, Maximized, Minimized, Normal och Unknown.</value>
+	</data>
+  <data name="ConfigHomeAssistantApi_BtnTestApi_Testing" xml:space="preserve">
+		<value>Testar..</value>
+	</data>
+  <data name="SensorType_WebcamProcessSensor" xml:space="preserve">
+		<value>WebbkameraProcess</value>
+	</data>
+  <data name="SensorType_MicrophoneProcessSensor" xml:space="preserve">
+		<value>MikrofonProcess</value>
+	</data>
+  <data name="SensorsManager_WebcamProcessSensorDescription" xml:space="preserve">
+		<value>Tillhandahåller namnet på den process som för närvarande använder webbkameran.
+
+Obs: om den används i satellittjänsten upptäcks inte program i användarläge.</value>
+	</data>
+  <data name="SensorsManager_MicrophoneProcessSensorDescription" xml:space="preserve">
+		<value>Tillhandahåller namnet på den process som för närvarande använder mikrofonen.
+
+Obs: om den används i satellittjänsten upptäcks inte program i användarläge.</value>
+	</data>
+  <data name="SensorType_BluetoothDevicesSensor" xml:space="preserve">
+		<value>BluetoothEnheter</value>
+	</data>
+  <data name="SensorType_BluetoothLeDevicesSensor" xml:space="preserve">
+		<value>BluetoothLeEnheter</value>
+	</data>
+  <data name="SensorsManager_BluetoothDevicesSensorDescription" xml:space="preserve">
+		<value>Tillhandahåller en sensor med antalet hittade bluetooth-enheter.
+
+Enheterna och deras anslutningsstatus läggs till som attribut.</value>
+	</data>
+  <data name="SensorsManager_BluetoothLeDevicesSensorDescription" xml:space="preserve">
+		<value>Tillhandahåller en sensor med antalet hittade bluetooth LE-enheter.
+
+Enheterna och deras anslutningsstatus läggs till som attribut.
+
+Visar bara enheter som har setts sedan den senaste rapporten, dvs. när sensorn publicerar töms listan.</value>
+	</data>
+  <data name="ConfigService_BtnManageService_MessageBox1" xml:space="preserve">
+		<value>Tjänsten är för närvarande stoppad och kan inte konfigureras.
+
+Starta tjänsten först för att kunna konfigurera den.</value>
+	</data>
+  <data name="SensorsMod_MessageBox_Sanitize" xml:space="preserve">
+		<value>Namnet du angav innehåller tecken som inte stöds och kommer inte att fungera. Den föreslagna versionen är:
+
+{0}
+
+Vill du använda den här versionen?</value>
+	</data>
+  <data name="CommandsMod_MessageBox_Sanitize" xml:space="preserve">
+		<value>Namnet du angav innehåller tecken som inte stöds och kommer inte att fungera. Den föreslagna versionen är:
+
+{0}
+
+Vill du använda den här versionen?</value>
+	</data>
+  <data name="ConfigHomeAssistantApi_LblInfo1" xml:space="preserve">
+		<value>För att ta reda på vilka entiteter du har konfigurerat och för att skicka snabbåtgärder använder HASS.Agent
+Home Assistants API.
+
+Ange en långlivad åtkomsttoken och adressen till din Home Assistant-instans.
+Du kan skapa en token i Home Assistant genom att klicka på din profilbild längst ned till vänster
+och gå längst ned på sidan tills du ser knappen 'SKAPA TOKEN'.</value>
+	</data>
+  <data name="ConfigLocalApi_LblInfo1" xml:space="preserve">
+		<value>HASS.Agent har ett eget lokalt API, så att Home Assistant kan skicka förfrågningar (till exempel för att skicka en avisering). Du kan konfigurera det globalt här, och därefter kan du konfigurera de beroende avsnitten (för närvarande aviseringar och mediaspelare).
+
+Obs: detta krävs inte för att den nya integrationen ska fungera. Aktivera och använd det bara om du inte använder MQTT.</value>
+	</data>
+  <data name="ConfigMediaPlayer_LblInfo2" xml:space="preserve">
+		<value>Om något inte fungerar, prova följande steg:
+
+- Installera integrationen HASS.Agent
+- Starta om Home Assistant
+- Se till att HASS.Agent är aktivt med MQTT aktiverat!
+- Din enhet bör upptäckas och läggas till som en entitet automatiskt
+- Valfritt: lägg till den manuellt med det lokala API:et</value>
+	</data>
+  <data name="ConfigMediaPlayer_LblInfo1" xml:space="preserve">
+		<value>HASS.Agent kan fungera som mediaspelare för Home Assistant, så att du kan se och styra all media som spelas och skicka text-till-tal. Om du har MQTT aktiverat läggs din enhet till automatiskt. Annars konfigurerar du integrationen manuellt för att använda det lokala API:et.</value>
+	</data>
+  <data name="ConfigMediaPlayer_LblConnectivityDisabled" xml:space="preserve">
+		<value>både det lokala API:et och MQTT är inaktiverade, men integrationen behöver minst ett av dem för att fungera</value>
+	</data>
+  <data name="ConfigMqtt_LblInfo1" xml:space="preserve">
+		<value>Kommandon och sensorer använder MQTT, liksom aviseringar och mediaspelarfunktioner när den nya integrationen används.
+
+Ange inloggningsuppgifter för din broker. Om du använder HA-tillägget Mosquitto kan du troligen använda den förinställda adressen.
+
+Obs: dessa inställningar (utom klient-ID) tillämpas även på satellittjänsten.</value>
+	</data>
+  <data name="ConfigMqtt_CbEnableMqtt" xml:space="preserve">
+		<value>Aktivera MQTT</value>
+	</data>
+  <data name="ConfigMqtt_LblMqttDisabledWarning" xml:space="preserve">
+		<value>Om MQTT inte är aktiverat fungerar inte kommandon och sensorer!</value>
+	</data>
+  <data name="ConfigNotifications_LblInfo2" xml:space="preserve">
+		<value>Om något inte fungerar, prova följande steg:
+
+- Installera integrationen HASS.Agent
+- Starta om Home Assistant
+- Se till att HASS.Agent är aktivt med MQTT aktiverat!
+- Din enhet bör upptäckas och läggas till som en entitet automatiskt
+- Valfritt: lägg till den manuellt med det lokala API:et</value>
+	</data>
+  <data name="ConfigNotifications_LblInfo1" xml:space="preserve">
+		<value>HASS.Agent kan ta emot aviseringar från Home Assistant, med text, bilder och åtgärder. Om du har MQTT aktiverat läggs din enhet till automatiskt. Annars konfigurerar du integrationen manuellt för att använda det lokala API:et.</value>
+	</data>
+  <data name="ConfigNotifications_LblConnectivityDisabled" xml:space="preserve">
+		<value>både det lokala API:et och MQTT är inaktiverade, men integrationen behöver minst ett av dem för att fungera</value>
+	</data>
+  <data name="ConfigService_LblInfo1" xml:space="preserve">
+		<value>Med satellittjänsten kan du köra sensorer och kommandon även när ingen användare är inloggad.
+Använd knappen 'satellittjänst' i huvudfönstret för att hantera den.</value>
+	</data>
+  <data name="ConfigService_LblInfo5" xml:space="preserve">
+		<value>Om du vill hantera tjänsten (lägga till kommandon och sensorer, ändra inställningar) kan du göra det här, eller med knappen 'satellittjänst' i huvudfönstret.</value>
+	</data>
+  <data name="ConfigService_BtnManageService" xml:space="preserve">
+		<value>&amp;Hantera tjänsten</value>
+	</data>
+  <data name="ConfigTrayIcon_CbWebViewShowMenuOnLeftClick" xml:space="preserve">
+		<value>Visa standardmenyn vid vänsterklick</value>
+	</data>
+  <data name="OnboardingMqtt_LblInfo1" xml:space="preserve">
+		<value>Kommandon och sensorer skickas via MQTT. Integrationerna för aviseringar och mediaspelare använder det också.
+
+Tips: om du använder HA-tillägget kan du troligen använda den förinställda adressen - ange bara inloggningsuppgifter.
+</value>
+	</data>
+  <data name="OnboardingMqtt_CbEnableMqtt" xml:space="preserve">
+		<value>Aktivera MQTT</value>
+	</data>
+  <data name="OnboardingIntegrations_LblNotifierIntegration" xml:space="preserve">
+		<value>HASS.Agent-Integration GitHub-sida</value>
+	</data>
+  <data name="OnboardingIntegrations_CbEnableMediaPlayer" xml:space="preserve">
+		<value>Aktivera &amp;mediaspelare (inklusive text-till-tal)</value>
+	</data>
+  <data name="OnboardingIntegrations_CbEnableNotifications" xml:space="preserve">
+		<value>Aktivera &amp;aviseringar</value>
+	</data>
+  <data name="OnboardingDone_LblInfo6" xml:space="preserve">
+		<value>För närvarande tar vi (HASS.Agent-teamet som underhåller forken) inte emot donationer i någon form :)
+Du är dock välkommen att donera till den ursprungliga upphovspersonen till HASS.Agent - Sam! Var de än befinner sig just nu kanske en kopp kaffe kan lysa upp deras dag.</value>
+	</data>
+  <data name="OnboardingDone_LblInfo3" xml:space="preserve">
+		<value>Det finns mycket mer att pilla med, så ta gärna en titt i konfigurationsfönstret!
+
+
+Tack för att du använder HASS.Agent, förhoppningsvis kommer du att ha nytta av det :-)
+</value>
+	</data>
+  <data name="OnboardingDone_LblInfo2" xml:space="preserve">
+		<value>HASS.Agent startar nu om för att tillämpa dina konfigurationsändringar.</value>
+	</data>
+  <data name="OnboardingDone_LblInfo1" xml:space="preserve">
+		<value>Hurra, klart!</value>
+	</data>
+  <data name="OnboardingDone_LblTip2" xml:space="preserve">
+		<value>Tips: Andra sätt att donera finns i Om-fönstret.</value>
+	</data>
+  <data name="PostUpdate_PostUpdate" xml:space="preserve">
+		<value>HASS.Agent efter uppdatering</value>
+	</data>
+  <data name="CommandsMod_CommandsMod" xml:space="preserve">
+		<value>Kommando</value>
+	</data>
+  <data name="About_LblInfo6" xml:space="preserve">
+		<value>Gillar du det här verktyget? Stöd oss (läs: håll oss vakna) genom att bjuda på en kopp kaffe:</value>
+	</data>
+  <data name="Donate_LblInfo" xml:space="preserve">
+		<value>HASS.Agent är helt gratis och kommer alltid att förbli det, utan begränsningar!
+
+Att utveckla och underhålla det här verktyget (och allt runt omkring, som support och dokumentation) tar dock mycket tid.
+
+Som de flesta utvecklare drivs jag av koffein - så om du har råd är en kopp kaffe alltid mycket uppskattad!</value>
+	</data>
+  <data name="Donate_BtnClose" xml:space="preserve">
+		<value>&amp;Stäng</value>
+	</data>
+  <data name="Donate_CbHideDonateButton" xml:space="preserve">
+		<value>Jag har redan donerat, dölj knappen i huvudfönstret.</value>
+	</data>
+  <data name="Donate_Title" xml:space="preserve">
+		<value>Donera</value>
+	</data>
+  <data name="Main_TsCheckForUpdates" xml:space="preserve">
+		<value>Sök efter uppdateringar</value>
+	</data>
+  <data name="ConfigHomeAssistantApi_BtnTestApi_MessageBox5" xml:space="preserve">
+		<value>API-token du har angett verkar inte vara giltig. Se till att du har markerat hela token (använd inte CTRL + A eller dubbelklick). En giltig API-nyckel består av tre delar, åtskilda av två punkter.
+
+Är du säker på att du vill använda den här nyckeln ändå?</value>
+	</data>
+  <data name="ConfigHomeAssistantApi_BtnTestApi_MessageBox6" xml:space="preserve">
+		<value>URI:n du har angett verkar inte vara giltig. En giltig URI kan se ut som något av följande:
+- http://homeassistant.local:8123
+- http://192.168.0.1:8123
+
+Är du säker på att du vill använda den här URI:n ändå?</value>
+	</data>
+  <data name="OnboardingApi_BtnTest_MessageBox5" xml:space="preserve">
+		<value>API-token du har angett verkar inte vara giltig. Se till att du har markerat hela token (använd inte CTRL + A eller dubbelklick). En giltig API-nyckel består av tre delar, åtskilda av två punkter.
+
+Är du säker på att du vill använda den här nyckeln ändå?</value>
+	</data>
+  <data name="OnboardingApi_BtnTest_MessageBox6" xml:space="preserve">
+		<value>URI:n du har angett verkar inte vara giltig. En giltig URI kan se ut som något av följande:
+- http://homeassistant.local:8123
+- http://192.168.0.1:8123
+
+Är du säker på att du vill använda den här URI:n ändå?</value>
+	</data>
+  <data name="Configuration_CheckValues_MessageBox1" xml:space="preserve">
+		<value>Din Home Assistant API-token ser inte riktig ut. Se till att du har markerat hela token (använd inte CTRL+A eller dubbelklick).
+Den ska bestå av tre delar (åtskilda av två punkter).
+
+Är du säker på att du vill använda den så här?</value>
+	</data>
+  <data name="Configuration_CheckValues_MessageBox2" xml:space="preserve">
+		<value>Din Home Assistant-URI ser inte riktig ut. Den ska se ut ungefär som 'http://homeassistant.local:8123' eller 'https://192.168.0.1:8123'.
+
+Är du säker på att du vill använda den så här?</value>
+	</data>
+  <data name="Configuration_CheckValues_MessageBox3" xml:space="preserve">
+		<value>URI:n till din MQTT-broker ser inte riktig ut. Den ska se ut ungefär som 'homeassistant.local' eller '192.168.0.1'.
+
+Är du säker på att du vill använda den så här?</value>
+	</data>
+  <data name="WebView_InitializeAsync_MessageBox1" xml:space="preserve">
+		<value>Microsofts WebView2-runtime hittades inte på din dator. Vanligtvis hanteras detta av installationsprogrammet, men du kan installera den manuellt.
+
+Vill du ladda ned installationsprogrammet för runtime?</value>
+	</data>
+  <data name="WebView_InitializeAsync_MessageBox2" xml:space="preserve">
+		<value>Något gick fel när WebView skulle initieras! Kontrollera loggarna och skapa ett ärende på GitHub för vidare hjälp.</value>
+	</data>
+  <data name="ServiceHelper_ChangeStartMode_Error1" xml:space="preserve">
+		<value>kunde inte öppna tjänsthanteraren</value>
+	</data>
+  <data name="ServiceHelper_ChangeStartMode_Error2" xml:space="preserve">
+		<value>kunde inte öppna tjänsten</value>
+	</data>
+  <data name="ServiceHelper_ChangeStartMode_Error3" xml:space="preserve">
+		<value>Fel vid konfiguration av startläge, kontrollera loggarna för mer information.</value>
+	</data>
+  <data name="ServiceHelper_ChangeStartMode_Error4" xml:space="preserve">
+		<value>Fel vid inställning av startläge, kontrollera loggarna för mer information.</value>
+	</data>
+  <data name="ServiceControllerManager_Error_Timeout" xml:space="preserve">
+		<value>Tidsgränsen överskreds</value>
+	</data>
+  <data name="ServiceControllerManager_Error_Fatal" xml:space="preserve">
+		<value>Allvarligt fel, kontrollera loggarna för information!</value>
+	</data>
+  <data name="ServiceControllerManager_Error_Unknown" xml:space="preserve">
+		<value>okänd orsak</value>
+	</data>
+  <data name="SystemStateEvent_HassAgentSatelliteServiceStarted" xml:space="preserve">
+		<value>HassAgentSatellittjänstStartad</value>
+	</data>
+  <data name="SystemStateEvent_HassAgentStarted" xml:space="preserve">
+		<value>HassAgentStartad</value>
+	</data>
+  <data name="CommandsMod_LblSelectedType" xml:space="preserve">
+		<value>Vald typ</value>
+	</data>
+  <data name="CommandsMod_LblSpecificClient" xml:space="preserve">
+		<value>Endast HASS.Agent!</value>
+	</data>
+  <data name="CommandsMod_LblEntityType" xml:space="preserve">
+		<value>&amp;Entitetstyp</value>
+	</data>
+  <data name="CommandsMod_LblMqttTopic" xml:space="preserve">
+		<value>Visa MQTT-åtgärdsämne</value>
+	</data>
+  <data name="CommandsMod_LblActionInfo" xml:space="preserve">
+		<value>Åtgärd</value>
+	</data>
+  <data name="SensorsMod_LblMultiValue" xml:space="preserve">
+		<value>Flervärdes</value>
+	</data>
+  <data name="QuickActionsMod_ClmDomain" xml:space="preserve">
+		<value>domän</value>
+	</data>
+  <data name="SensorType_InternalDeviceSensor" xml:space="preserve">
+    <value>InternEnhetssensor</value>
+  </data>
+  <data name="CommandType_SetApplicationVolumeCommand" xml:space="preserve">
+    <value>AngeProgramvolym</value>
+  </data>
+  <data name="CommandType_RadioCommand" xml:space="preserve">
+    <value>RadioKommando</value>
+  </data>
+  <data name="SensorType_ActiveDesktopSensor" xml:space="preserve">
+    <value>AktivtSkrivbord</value>
+  </data>
+  <data name="CommandType_SwitchDesktopCommand" xml:space="preserve">
+    <value>VäxlaSkrivbord</value>
+  </data>
+  <data name="CommandType_SetAudioOutputCommand" xml:space="preserve">
+    <value>AngeLjudutgång</value>
+  </data>
+  <data name="SensorType_ScreenshotSensor" xml:space="preserve">
+    <value>Skärmdump</value>
+  </data>
+  <data name="CommandType_SetAudioInputCommand" xml:space="preserve">
+    <value>AngeLjudingång</value>
+  </data>
+  <data name="CommandType_TrayWebViewCommand" xml:space="preserve">
+    <value>WebbvyMeddelandefält</value>
+  </data>
+  <data name="HassAction_Trigger" xml:space="preserve">
+    <value>Utlös</value>
+  </data>
+  <data name="HassAction_Press" xml:space="preserve">
+    <value>Tryck</value>
+  </data>
+  <data name="HassDomain_Button" xml:space="preserve">
+    <value>Knapp</value>
+  </data>
+  <data name="SensorType_NamedActiveWindowSensor" xml:space="preserve">
+    <value>NamngivetAktivtFönster</value>
+  </data>
+  <data name="SensorsManager_NamedActiveWindowSensorDescription" xml:space="preserve">
+    <value>Tillhandahåller ett ON/OFF-värde baserat på om namnet på det fokuserade fönstret innehåller den konfigurerade strängen.</value>
+  </data>
+  <data name="SensorType_AccentColorSensor" xml:space="preserve">
+    <value>Accentfärg</value>
+  </data>
+  <data name="HassDomain_InputButton" xml:space="preserve">
+    <value>InputButton</value>
+  </data>
+  <data name="HassDomain_Fan" xml:space="preserve">
+    <value>Fläkt</value>
+  </data>
+  <data name="CommandsManager_WinformsSleepCommandDescription" xml:space="preserve">
+    <value>Försätter datorn i strömsparläge med WinForms API.
+
+Obs: på grund av "Modern Sleep" kan strömsparkommandona bete sig olika beroende på enhetens tillverkare och OS-konfiguration.</value>
+  </data>
+  <data name="CommandType_WinformsSleepCommand" xml:space="preserve">
+    <value>WinformsStrömspar</value>
+  </data>
+  <data name="CommandType_MonitorSleepPowerPlanCommand" xml:space="preserve">
+    <value>SkärmVilaEnergischema</value>
+  </data>
+  <data name="CommandsManager_MonitorSleepPowerPlanCommandDescription" xml:space="preserve">
+    <value>Försätter alla skärmar i viloläge (lågt strömläge) med en alternativ metod som ändrar energischemat.
+Bör ge en bättre upplevelse på nya system med "modern S0ix-vila" och inte försätta systemet i strömsparläge.</value>
+  </data>
+</root>

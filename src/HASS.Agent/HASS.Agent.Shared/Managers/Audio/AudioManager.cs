@@ -13,6 +13,7 @@ using NAudio.CoreAudioApi.Interfaces;
 using Microsoft.VisualBasic.ApplicationServices;
 
 namespace HASS.Agent.Shared.Managers.Audio;
+
 public static class AudioManager
 {
     private static bool _initialized = false;
@@ -21,6 +22,7 @@ public static class AudioManager
     private static MMNotificationClient _notificationClient = null;
 
     private static readonly ConcurrentDictionary<string, string> _devices = new();
+    private static readonly ConcurrentDictionary<string, DeviceType> _devicesType = new();
 
     private static readonly Dictionary<int, string> _applicationNameCache = new();
 
@@ -32,7 +34,10 @@ public static class AudioManager
         _enumerator = new MMDeviceEnumerator();
 
         foreach (var device in _enumerator.EnumerateAudioEndPoints(DataFlow.All, DeviceState.Active))
+        {
             _devices[device.ID] = device.FriendlyName;
+            _devicesType[device.ID] = device.DataFlow == DataFlow.Capture ? DeviceType.Input : DeviceType.Output;
+        }
 
         _notificationClient = new MMNotificationClient();
         _notificationClient.DeviceAdded += DeviceAdded;
@@ -50,12 +55,14 @@ public static class AudioManager
 
         using var device = _enumerator.GetDevice(deviceId);
         _devices[deviceId] = device.FriendlyName;
+        _devicesType[device.ID] = device.DataFlow == DataFlow.Capture ? DeviceType.Input : DeviceType.Output;
         Log.Debug($"[AUDIOMGR] added device: {_devices[deviceId]}");
     }
 
     private static void RemoveDevice(string deviceId)
     {
         _devices.Remove(deviceId, out var removedDeviceName);
+        _devicesType.Remove(deviceId, out var _);
         if (!string.IsNullOrWhiteSpace(removedDeviceName))
             Log.Debug($"[AUDIOMGR] removed device: {removedDeviceName}");
     }
@@ -71,6 +78,7 @@ public static class AudioManager
             Log.Error($"[AUDIOMGR] failed to remove device: {e.DeviceId}");
         }
     }
+
     private static void DeviceAdded(object sender, DeviceNotificationEventArgs e)
     {
         try
@@ -207,6 +215,7 @@ public static class AudioManager
         _enumerator.Dispose();
 
         _devices.Clear();
+        _devicesType.Clear();
         Log.Debug("[AUDIOMGR] cleanup completed");
     }
 
@@ -247,7 +256,8 @@ public static class AudioManager
             {
                 Log.Information("[AUDIOMGR] no default output device detected");
                 _noDefaultOutputLogged = true;
-            }else if (defaultOutputDevice != null)
+            }
+            else if (defaultOutputDevice != null)
             {
                 _noDefaultOutputLogged = false;
             }
@@ -358,14 +368,17 @@ public static class AudioManager
         return mute;
     }
 
-    public static void ActivateDevice(string deviceName)
+    public static void ActivateDevice(string deviceName, DeviceType? deviceType = null)
     {
         if (!CheckInitialization())
             return;
 
         try
         {
-            var deviceId = _devices.FirstOrDefault(v => v.Value == deviceName).Key;
+            var deviceId = deviceType == null
+                ? _devices.FirstOrDefault(v => v.Value == deviceName).Key
+                : _devices.FirstOrDefault(v => v.Value == deviceName && _devicesType[v.Key] == deviceType).Key;
+            
             if (string.IsNullOrWhiteSpace(deviceId))
                 return;
 
@@ -489,7 +502,8 @@ public static class AudioManager
 
         var volumeScalar = Math.Clamp(volume / 100f, 0, 1);
         internalAudioSession.Volume.Volume = volumeScalar;
-        Log.Debug("[AUDIOMGR] volume for '{sessionName}' ({sessionId}) set to '{vol}'/'{volScal}'", displayName, internalAudioSession.Control.GetSessionInstanceIdentifier, volume, volumeScalar);
+        Log.Debug("[AUDIOMGR] volume for '{sessionName}' ({sessionId}) set to '{vol}'/'{volScal}'", displayName, internalAudioSession.Control.GetSessionInstanceIdentifier, volume,
+            volumeScalar);
     }
 
     public static void Shutdown()
@@ -503,6 +517,7 @@ public static class AudioManager
         {
             Log.Fatal(ex, "[AUDIOMGR] shutdown fatal error: {ex}", ex.Message);
         }
+
         Log.Debug("[AUDIOMGR] shutdown completed");
     }
 }

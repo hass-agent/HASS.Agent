@@ -4,10 +4,12 @@ using System.Net.NetworkInformation;
 using ByteSizeLib;
 using HASS.Agent.Shared.Functions;
 using HASS.Agent.Shared.HomeAssistant.Sensors.GeneralSensors.MultiValue.DataTypes;
+using HASS.Agent.Shared.Managers;
 using HASS.Agent.Shared.Models.HomeAssistant;
 using HASS.Agent.Shared.Models.Internal;
 using Newtonsoft.Json;
 using Serilog;
+using Vanara.PInvoke.NetListMgr;
 
 namespace HASS.Agent.Shared.HomeAssistant.Sensors.GeneralSensors.MultiValue;
 
@@ -22,9 +24,10 @@ public class NetworkSensors : AbstractMultiValueSensor
     public string NetworkCard { get; protected set; }
     private readonly bool _useSpecificCard = false;
 
-    public override sealed Dictionary<string, AbstractSingleValueSensor> Sensors { get; protected set; } = new Dictionary<string, AbstractSingleValueSensor>();
+    public sealed override Dictionary<string, AbstractSingleValueSensor> Sensors { get; protected set; } = new Dictionary<string, AbstractSingleValueSensor>();
 
-    public NetworkSensors(int? updateInterval = null, string entityName = DefaultName, string name = DefaultName, string networkCard = "*", string id = default) : base(entityName ?? DefaultName, name ?? null, updateInterval ?? 30, id)
+    public NetworkSensors(int? updateInterval = null, string entityName = DefaultName, string name = DefaultName, string networkCard = "*", string id = default) : base(entityName ?? DefaultName,
+        name ?? null, updateInterval ?? 30, id)
     {
         _updateInterval = updateInterval ?? 30;
 
@@ -36,13 +39,10 @@ public class NetworkSensors : AbstractMultiValueSensor
 
     private void AddUpdateSensor(string sensorId, AbstractSingleValueSensor sensor)
     {
-        if (!Sensors.ContainsKey(sensorId))
-            Sensors.Add(sensorId, sensor);
-        else
-            Sensors[sensorId] = sensor;
+        Sensors[sensorId] = sensor;
     }
 
-    public override sealed void UpdateSensorValues()
+    public sealed override void UpdateSensorValues()
     {
         var parentSensorSafeName = SharedHelperFunctions.GetSafeValue(EntityName);
 
@@ -80,6 +80,7 @@ public class NetworkSensors : AbstractMultiValueSensor
                 networkInfo.IncomingPacketsWithUnknownProtocol = interfaceStats.IncomingUnknownProtocolPackets;
                 networkInfo.OutgoingPacketsDiscarded = interfaceStats.OutgoingPacketsDiscarded;
                 networkInfo.OutgoingPacketsWithErrors = interfaceStats.OutgoingPacketsWithErrors;
+                networkInfo.AccessType = NetworkManager.GetNetworkAccessType(nic);
 
                 var nicProperties = nic.GetIPProperties();
 

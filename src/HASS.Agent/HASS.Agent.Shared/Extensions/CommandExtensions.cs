@@ -16,7 +16,7 @@ namespace HASS.Agent.Shared.Extensions
         public static string GetCommandName(this CommandType commandType)
         {
             var (_, name) = commandType.GetLocalizedDescriptionAndKey();
-            return name.ToLower();
+            return SharedHelperFunctions.RemoveDiacritics(name).ToLower();
         }
 
         //TODO: remove after tests

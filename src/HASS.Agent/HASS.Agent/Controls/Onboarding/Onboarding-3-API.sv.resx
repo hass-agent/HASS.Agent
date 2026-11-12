@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>1.3</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="LblInfo1.Text" xml:space="preserve">
+    <value>För att ta reda på vilka entiteter du har konfigurerat och för att skicka snabbåtgärder använder HASS.Agent
+Home Assistants API.
+
+Ange en långlivad åtkomsttoken och adressen till din Home Assistant-instans.
+Du kan skapa en token i Home Assistant genom att klicka på din profilbild längst ned till vänster,
+byta till fliken säkerhet högst upp och gå längst ned på sidan tills du
+ser knappen 'SKAPA TOKEN'.
+
+Observera att du behöver ange en token för ett administratörskonto för att aviseringar med åtgärder ska fungera.</value>
+  </data>
+</root>

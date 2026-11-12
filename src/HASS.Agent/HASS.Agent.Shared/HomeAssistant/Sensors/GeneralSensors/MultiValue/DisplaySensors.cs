@@ -78,14 +78,16 @@ public class DisplaySensors : AbstractMultiValueSensor
             var height = display.Bounds.Height;
             var virtualHeight = display.Bounds.Height;
             var rotated = 0;
+            var refreshRate = 0;
 
-            if (monitors.Any(x => x.Name == name))
+            var monitor = monitors.FirstOrDefault(x => x.Name == name);
+            if (monitor != null)
             {
-                var monitor = monitors.Find(x => x.Name == name);
                 resolution = $"{monitor.PhysicalBounds.Width}x{monitor.PhysicalBounds.Height}";
                 width = monitor.PhysicalBounds.Width;
                 height = monitor.PhysicalBounds.Height;
                 rotated = monitor.RotatedDegrees;
+                refreshRate = monitor.RefreshRate;
             }
 
             var displayInfo = new DisplayInfo
@@ -102,7 +104,8 @@ public class DisplaySensors : AbstractMultiValueSensor
                 WorkingArea = $"{display.WorkingArea.Width}x{display.WorkingArea.Height}",
                 WorkingAreaWidth = display.WorkingArea.Width,
                 WorkingAreaHeight = display.WorkingArea.Height,
-                RotatedDegrees = rotated
+                RotatedDegrees = rotated,
+                RefreshRate = refreshRate,
             };
 
             var info = JsonConvert.SerializeObject(displayInfo, Formatting.Indented);

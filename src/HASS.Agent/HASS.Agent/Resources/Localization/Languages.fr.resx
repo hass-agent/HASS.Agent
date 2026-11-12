@@ -1142,7 +1142,7 @@ Il existe plusieurs canaux par lesquels vous pouvez nous joindre :</value>
     <value>Aide</value>
   </data>
   <data name="Main_TsShow" xml:space="preserve">
-    <value>afficher hass.agent</value>
+    <value>Afficher hass.agent</value>
   </data>
   <data name="Main_TsShowQuickActions" xml:space="preserve">
     <value>Afficher les actions rapides</value>
@@ -1157,16 +1157,16 @@ Il existe plusieurs canaux par lesquels vous pouvez nous joindre :</value>
     <value>Gérer les capteurs</value>
   </data>
   <data name="Main_TsCommands" xml:space="preserve">
-    <value>gérer les commandes</value>
+    <value>Gérer les commandes</value>
   </data>
   <data name="Main_CheckForUpdates" xml:space="preserve">
-    <value>vérifier les mises à jour</value>
+    <value>Vérifier les mises à jour</value>
   </data>
   <data name="Main_TsDonate" xml:space="preserve">
-    <value>doner</value>
+    <value>Donner</value>
   </data>
   <data name="Main_TsHelp" xml:space="preserve">
-    <value>aide et contact</value>
+    <value>Aide et contact</value>
   </data>
   <data name="Main_TsAbout" xml:space="preserve">
     <value>À propos</value>
@@ -3489,5 +3489,25 @@ Cela devrait offrir une meilleure expérience avec les nouveaux systèmes dotés
   </data>
   <data name="CommandType_MonitorSleepPowerPlanCommand" xml:space="preserve">
     <value>Surveillance du mode veille/alimentation</value>
+  </data>
+  <data name="ConfigMqtt_CbDisableDefaultEntityId" xml:space="preserve">
+    <value>Laissez Home Assistant générer les identifiants d'entité.</value>
+  </data>
+  <data name="CommandsMod_LblSetting_SensorId" xml:space="preserve">
+    <value>Nom du capteur</value>
+  </data>
+  <data name="CommandType_PublishSensorCommand" xml:space="preserve">
+    <value>Publier la commande du capteur</value>
+  </data>
+  <data name="CommandsManager_PublishSensorCommandDescription" xml:space="preserve">
+    <value>Force la publication immédiate du capteur spécifique, sans tenir compte de l'intervalle.
+
+Utilisez le nom configuré dans HASS.Agent.</value>
+  </data>
+  <data name="ConfigStartup_LblInfo2VirtualDesktop" xml:space="preserve">
+    <value>La bibliothèque Virtual Desktop causera des problèmes sur les systèmes non pris en charge ; activez cette option pour éviter que HASS.Agent ne plante.</value>
+  </data>
+  <data name="ConfigStartup_LblInfo2VirtualDesktopCheckbox" xml:space="preserve">
+    <value>Désactiver l'initialisation de la bibliothèque de bureaux virtuels</value>
   </data>
 </root>

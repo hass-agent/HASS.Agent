@@ -3487,4 +3487,23 @@ Note: due to "Modern Sleep" the sleep commands might behave differently dependin
     <value>Puts all monitors in sleep (low power) mode using alternative approach of power plan modification.
 Should provide better experience with new systems with "modern S0ix sleep" and not put the system to sleep.</value>
   </data>
+  <data name="ConfigMqtt_CbDisableDefaultEntityId" xml:space="preserve">
+    <value>Let Home Assistant generate entity IDs</value>
+  </data>
+  <data name="CommandType_PublishSensorCommand" xml:space="preserve">
+    <value>PublishSensorCommand</value>
+  </data>
+  <data name="CommandsManager_PublishSensorCommandDescription" xml:space="preserve">
+    <value>Forces specific sensor to be published right away, ignoring the interval.
+Use name configured in HASS.Agent.</value>
+  </data>
+  <data name="CommandsMod_LblSetting_SensorId" xml:space="preserve">
+    <value>Sensor Name</value>
+  </data>
+  <data name="ConfigStartup_LblInfo2VirtualDesktop" xml:space="preserve">
+    <value>Virtual Desktop Library will cause issues on unsupported systems, enable this option to prevent HASS.Agent from crashing.</value>
+  </data>
+  <data name="ConfigStartup_LblInfo2VirtualDesktopCheckbox" xml:space="preserve">
+    <value>Disable Virtual Desktop library initialization</value>
+  </data>
 </root>

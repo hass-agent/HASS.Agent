@@ -244,6 +244,41 @@ namespace HASS.Agent.Satellite.Service.Sensors
         }
 
         /// <summary>
+        /// Resets sensor check for provided sensor (last sent and previous value), so it is published again
+        /// </summary>
+        internal static void ResetSensorCheck(string sensorName)
+        {
+            try
+            {
+                Pause();
+
+                var singleMatch = Variables.SingleValueSensors.FirstOrDefault(sensor => sensor.Name == sensorName);
+                if (singleMatch != null)
+                {
+                    singleMatch.ResetChecks();
+                    return;
+                }
+                
+                var multiMatch = Variables.MultiValueSensors.FirstOrDefault(sensor => sensor.Name == sensorName);
+                if (multiMatch != null)
+                {
+                    multiMatch.ResetChecks();
+                    return;
+                }
+                
+                Log.Warning("[SENSORS] Can't reset check for sensor '{err}' - not found.", sensorName);
+            }
+            catch (Exception ex)
+            {
+                Log.Fatal(ex, "[SENSORS] Error while resetting sensor check: {err}", ex.Message);
+            }
+            finally
+            {
+                Resume();
+            }
+        }
+        
+        /// <summary>
         /// Stores the provided sensors, and (re)publishes them
         /// </summary>
         /// <param name="sensors"></param>

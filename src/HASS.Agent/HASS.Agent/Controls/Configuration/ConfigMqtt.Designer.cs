@@ -58,6 +58,7 @@ namespace HASS.Agent.Controls.Configuration
             this.NumMqttPort = new Syncfusion.Windows.Forms.Tools.NumericUpDownExt();
             this.PbShow = new System.Windows.Forms.PictureBox();
             this.CbIgnoreGracePeriod = new System.Windows.Forms.CheckBox();
+            this.CbDisableDefaultEntityId = new System.Windows.Forms.CheckBox();
             this.CbEnableMqtt = new System.Windows.Forms.CheckBox();
             this.LblMqttDisabledWarning = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.NumMqttPort)).BeginInit();
@@ -493,6 +494,23 @@ namespace HASS.Agent.Controls.Configuration
             this.CbIgnoreGracePeriod.UseVisualStyleBackColor = true;
             this.CbIgnoreGracePeriod.CheckedChanged += new System.EventHandler(this.CbIgnoreGracePeriod_CheckedChanged);
             // 
+            // CbDisableDefaultEntityId
+            // 
+            this.CbDisableDefaultEntityId.AccessibleDescription = "Disable default id generation by HASS.Agent so Home Assistant defaults apply.";
+            this.CbDisableDefaultEntityId.AccessibleName = "Disable default id generation";
+            this.CbDisableDefaultEntityId.AccessibleRole = AccessibleRole.CheckButton;
+            this.CbDisableDefaultEntityId.AutoSize = true;
+            this.CbDisableDefaultEntityId.Checked = false;
+            this.CbDisableDefaultEntityId.CheckState = CheckState.Unchecked;
+            this.CbDisableDefaultEntityId.Font = new Font("Segoe UI", 10F);
+            this.CbDisableDefaultEntityId.Location = new Point(59, 650);
+            this.CbDisableDefaultEntityId.Name = "CbDisableDefaultEntityId";
+            this.CbDisableDefaultEntityId.Size = new Size(354, 23);
+            this.CbDisableDefaultEntityId.TabIndex = 104;
+            this.CbDisableDefaultEntityId.Text = Languages.ConfigMqtt_CbDisableDefaultEntityId;
+            this.CbDisableDefaultEntityId.UseVisualStyleBackColor = true;
+            this.CbDisableDefaultEntityId.CheckedChanged += new System.EventHandler(this.CbDisableDefaultEntityId_CheckedChanged);
+                // 
             // ConfigMqtt
             // 
             this.AccessibleDescription = "Panel containing the MQTT client configuration.";
@@ -502,6 +520,7 @@ namespace HASS.Agent.Controls.Configuration
             this.AutoScaleMode = AutoScaleMode.Dpi;
             this.BackColor = Color.FromArgb(45, 45, 48);
             this.Controls.Add(CbIgnoreGracePeriod);
+            this.Controls.Add(CbDisableDefaultEntityId);
             this.Controls.Add(LblMqttDisabledWarning);
             this.Controls.Add(CbEnableMqtt);
             this.Controls.Add(PbShow);
@@ -533,7 +552,7 @@ namespace HASS.Agent.Controls.Configuration
             this.ForeColor = Color.FromArgb(241, 241, 241);
             this.Margin = new Padding(4);
             this.Name = "ConfigMqtt";
-            this.Size = new Size(700, 658);
+            this.Size = new Size(700, 690);
             this.Load += ConfigMqtt_Load;
             ((System.ComponentModel.ISupportInitialize)NumMqttPort).EndInit();
             ((System.ComponentModel.ISupportInitialize)PbShow).EndInit();
@@ -572,5 +591,6 @@ namespace HASS.Agent.Controls.Configuration
         internal CheckBox CbEnableMqtt;
         private Label LblMqttDisabledWarning;
         internal CheckBox CbIgnoreGracePeriod;
+        internal CheckBox CbDisableDefaultEntityId;
     }
 }

@@ -135,6 +135,10 @@ namespace HASS.Agent.Shared.Enums
 
         [LocalizedDescription("CommandType_WinformsSleepCommand", typeof(Languages))]
         [EnumMember(Value = "WinformsSleepCommand")]
-        WinformsSleepCommand
+        WinformsSleepCommand,
+        
+        [LocalizedDescription("CommandType_PublishSensorCommand", typeof(Languages))]
+        [EnumMember(Value = "PublishSensorCommand")]
+        PublishSensorCommand,
     }
 }
