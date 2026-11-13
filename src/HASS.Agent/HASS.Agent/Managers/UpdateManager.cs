@@ -23,10 +23,14 @@ internal static class UpdateManager
         // wait a minute in case Windows is busy launching
         await Task.Delay(TimeSpan.FromMinutes(1));
 
+
         // initial check
-        var (isAvailable, version) = await CheckIsUpdateAvailableAsync();
-        if (isAvailable)
-            ProcessAvailableUpdate(version);
+        if (Variables.AppSettings.CheckForUpdates)
+        {
+            var (isAvailable, version) = await CheckIsUpdateAvailableAsync();
+            if (isAvailable)
+                ProcessAvailableUpdate(version);
+        }
 
         // start periodic check
         _ = Task.Run(PeriodicUpdateCheck);
@@ -92,7 +96,7 @@ internal static class UpdateManager
                 return (false, pendingUpdate);
 
             // we are interested only in releases created after 30.11.2023
-            if(latestRelease.CreatedAt.CompareTo(s_releaseCutoff) <= 0)
+            if (latestRelease.CreatedAt.CompareTo(s_releaseCutoff) <= 0)
                 return (false, pendingUpdate);
 
             var isNewer = UpdateIsNewer(Variables.Version, latestRelease.TagName);
@@ -107,7 +111,7 @@ internal static class UpdateManager
         catch (Exception ex)
         {
             Log.Fatal(ex, "[UPDATER] Error checking for updates: {err}", ex.Message);
-            return (false, pendingUpdate);
+            return (false, null);
         }
     }
 
@@ -156,7 +160,7 @@ internal static class UpdateManager
         catch (Exception ex)
         {
             Log.Fatal(ex, "[UPDATER] Error checking for beta updates: {err}", ex.Message);
-            return (false, pendingUpdate);
+            return (false, null);
         }
     }
 
@@ -170,9 +174,11 @@ internal static class UpdateManager
         {
             // get the installer
             var installerAssetUrl = string.Empty;
-            var installerAsset = pendingUpdate.GitHubRelease.Assets.Select(x => x).FirstOrDefault(y => y.BrowserDownloadUrl.ToLower().EndsWith("installer.exe"));
+            var installerVersionSuffix = IntPtr.Size == 8 ? "installer.exe" : "installer.x86.exe";
+
+            var installerAsset = pendingUpdate.GitHubRelease.Assets.Select(x => x).FirstOrDefault(y => y.BrowserDownloadUrl.ToLower().EndsWith(installerVersionSuffix));
             if (installerAsset == null)
-                Log.Error("[UPDATER] No .installer.exe asset found for release: {v}", pendingUpdate.GitHubRelease.TagName);
+                Log.Error("[UPDATER] No installer asset found for release: {v}", pendingUpdate.GitHubRelease.TagName);
             else
                 installerAssetUrl = installerAsset.BrowserDownloadUrl;
 

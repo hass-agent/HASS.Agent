@@ -1,5 +1,4 @@
-﻿extern alias WV2;
-using System.Diagnostics.CodeAnalysis;
+﻿using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.IO;
 using System.Net.Http;
@@ -7,23 +6,19 @@ using System.Reflection;
 using Windows.Media.Playback;
 using Grapevine;
 using HASS.Agent.Forms;
-using HASS.Agent.Functions;
 using HASS.Agent.Managers;
 using HASS.Agent.Models.Config;
 using HASS.Agent.Models.Internal;
 using HASS.Agent.MQTT;
 using HASS.Agent.Service;
 using HASS.Agent.Settings;
-using HASS.Agent.Shared.HomeAssistant;
-using HASS.Agent.Shared.HomeAssistant.Commands;
-using HASS.Agent.Shared.HomeAssistant.Sensors;
 using HASS.Agent.Shared.Models.HomeAssistant;
 using HASS.Agent.Shared.Mqtt;
-using WV2::Microsoft.Web.WebView2.Core;
 using Microsoft.Win32;
 using MQTTnet;
-using WK.Libraries.HotkeyListenerNS;
 using Serilog.Core;
+using Microsoft.Web.WebView2.Core;
+using NHotkey.WindowsForms;
 
 namespace HASS.Agent
 {
@@ -56,9 +51,9 @@ namespace HASS.Agent
         /// </summary>
         internal static Main MainForm { get; set; }
         internal static HttpClient HttpClient { get; set; } = new();
-        internal static Hotkey QuickActionsHotKey { get; set; } = new(Keys.Control | Keys.Alt, Keys.Q);
-        internal static HotKeyManager HotKeyManager { get; } = new();
-        internal static HotkeyListener HotKeyListener { get; set; }
+        internal static string QuickActionsHotKey { get; set; } = "Control, Alt + Q";
+        internal static InternalHotKeyManager InternalHotKeyManager { get; } = new();
+        internal static HotkeyManager HotKeyListener { get; set; }
         internal static Random Rnd { get; } = new();
         internal static Font DefaultFont { get; } = new("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
         internal static WebView TrayIconWebView { get; set; } = null;

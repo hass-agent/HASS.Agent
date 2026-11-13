@@ -28,7 +28,9 @@ namespace HASS.Agent.Forms.Commands
 		private bool _interfaceLockedWrongType;
 		private bool _loading = true;
 
-		private readonly Dictionary<int, string> _commandEntityTypes = new();
+        private bool _escapeLock = true;
+
+        private readonly Dictionary<int, string> _commandEntityTypes = new();
 		private readonly Dictionary<string, string> _radioDevices = new();
 
 		public CommandsMod(ConfiguredCommand command, bool serviceMode = false, string serviceDeviceName = "")
@@ -207,6 +209,10 @@ namespace HASS.Agent.Forms.Commands
                 case CommandType.SetApplicationVolumeCommand:
                 case CommandType.SetAudioOutputCommand:
                 case CommandType.SetAudioInputCommand:
+                    TbSetting.Text = Command.Command;
+                    break;
+                
+                case CommandType.PublishSensorCommand:
                     TbSetting.Text = Command.Command;
                     break;
             }
@@ -527,6 +533,21 @@ namespace HASS.Agent.Forms.Commands
                         return;
                     }
                     break;
+                
+                case CommandType.PublishSensorCommand:
+                    var sensorName = TbSetting.Text.Trim();
+                    if (string.IsNullOrEmpty(sensorName))
+                    {
+                        var q = MessageBoxAdv.Show(this, Languages.CommandsMod_MessageBox_Action, Variables.MessageBoxTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                        if (q != DialogResult.Yes)
+                        {
+                            ActiveControl = TbSetting;
+
+                            return;
+                        }
+                    }
+                    Command.Command = sensorName;
+                    break;
 			}
 
 			Command.RunAsLowIntegrity = CbRunAsLowIntegrity.CheckState == CheckState.Checked;
@@ -652,7 +673,11 @@ namespace HASS.Agent.Forms.Commands
 					CbConfigDropdown.DataSource = new BindingSource(_radioDevices, null);
 					SetRadioUi();
 					break;
-
+                
+                case CommandType.PublishSensorCommand:
+                    SetPublishSensorGui();
+                    break;
+                
 				default:
 					SetEmptyGui();
 					break;
@@ -697,6 +722,23 @@ namespace HASS.Agent.Forms.Commands
 				TbSetting.Visible = true;
 			}));
 		}
+        
+        /// <summary>
+        /// Change the UI to a 'powershell' type
+        /// </summary>
+        private void SetPublishSensorGui()
+        {
+            Invoke(new MethodInvoker(delegate
+            {
+                SetEmptyGui();
+
+                LblSetting.Text = Languages.CommandsMod_LblSetting_SensorId;
+                LblSetting.Visible = true;
+
+                TbSetting.Text = string.Empty;
+                TbSetting.Visible = true;
+            }));
+        }
 
 		/// <summary>
 		/// Change the UI to a 'key' type
@@ -977,11 +1019,21 @@ namespace HASS.Agent.Forms.Commands
 
 		private void CommandsMod_KeyUp(object sender, KeyEventArgs e)
 		{
-			if (e.KeyCode != Keys.Escape)
-				return;
+            if (e.KeyCode != Keys.Escape)
+            {
+                _escapeLock = true;
+                return;
+            }
 
-			Close();
-		}
+            if (_escapeLock)
+            {
+                _escapeLock = false;
+            }
+            else
+            {
+                Close();
+            }
+        }
 
 		private void CommandsMod_Layout(object sender, LayoutEventArgs e)
 		{

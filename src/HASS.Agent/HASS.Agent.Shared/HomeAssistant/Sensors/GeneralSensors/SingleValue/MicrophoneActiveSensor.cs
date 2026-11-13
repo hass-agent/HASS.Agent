@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using HASS.Agent.Shared.Managers.Audio;
 using HASS.Agent.Shared.Models.HomeAssistant;
 using Microsoft.Win32;
 
@@ -16,7 +17,17 @@ namespace HASS.Agent.Shared.HomeAssistant.Sensors.GeneralSensors.SingleValue
             Domain = "binary_sensor";
         }
 
-        public override string GetState() => IsMicrophoneInUse() ? "ON" : "OFF";
+        public override string GetState()
+        {
+            var apps = AudioManager.GetMicrophoneApplications();
+            if (apps != null)
+            {
+                return apps.Count > 0 ? "ON" : "OFF";
+            }
+            
+            //NOTE(Amadeo): old method in case newer one fails
+            return IsMicrophoneInUse() ? "ON" : "OFF";
+        }
 
         public override DiscoveryConfigModel GetAutoDiscoveryConfig()
         {
@@ -25,7 +36,7 @@ namespace HASS.Agent.Shared.HomeAssistant.Sensors.GeneralSensors.SingleValue
             var deviceConfig = Variables.MqttManager.GetDeviceConfigModel();
             if (deviceConfig == null) return null;
 
-            return AutoDiscoveryConfigModel ?? SetAutoDiscoveryConfigModel(new SensorDiscoveryConfigModel()
+            return AutoDiscoveryConfigModel ?? SetAutoDiscoveryConfigModel(new SensorDiscoveryConfigModel(Domain)
             {
                 EntityName = EntityName,
                 Name = Name,

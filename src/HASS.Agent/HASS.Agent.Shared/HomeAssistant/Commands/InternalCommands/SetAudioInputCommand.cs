@@ -42,7 +42,7 @@ public class SetAudioInputCommand : InternalCommand
 
         try
         {
-            AudioManager.ActivateDevice(action);
+            AudioManager.ActivateDevice(action, DeviceType.Input);
         }
         catch (Exception ex)
         {

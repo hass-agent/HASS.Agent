@@ -47,6 +47,8 @@
             TbMqttClientCertificate.Text = string.Empty;
             CbAllowUntrustedCertificates.CheckState = CheckState.Checked;
             CbUseRetainFlag.CheckState = CheckState.Checked;
+            CbUseWebSocket.CheckState = CheckState.Unchecked;
+            CbDisableDefaultEntityId.CheckState = CheckState.Unchecked;
         }
 
         private void ConfigMqtt_Load(object sender, EventArgs e)
@@ -62,6 +64,11 @@
         }
 
         private void CbIgnoreGracePeriod_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+        
+        private void CbDisableDefaultEntityId_CheckedChanged(object sender, EventArgs e)
         {
 
         }

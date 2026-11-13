@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
 using System.DirectoryServices.AccountManagement;
 using System.IO;
 using System.Linq;
@@ -12,6 +13,7 @@ using System.Security.Principal;
 using System.Text;
 using System.Text.RegularExpressions;
 using Serilog;
+using Vanara.PInvoke;
 
 namespace HASS.Agent.Shared.Functions
 {
@@ -43,6 +45,17 @@ namespace HASS.Agent.Shared.Functions
         {
             var val = Regex.Replace(value, @"[^a-zA-Z0-9_\-_\s]", "_");
             return val.Replace(" ", "");
+        }
+
+        /// <summary>
+        /// Returns the provided value with diacritics removed (eg. 'ö' becomes 'o')
+        /// </summary>
+        /// <returns></returns>
+        public static string RemoveDiacritics(string value)
+        {
+            var normalized = value.Normalize(NormalizationForm.FormD);
+            var stripped = normalized.Where(c => CharUnicodeInfo.GetUnicodeCategory(c) != UnicodeCategory.NonSpacingMark);
+            return new string(stripped.ToArray()).Normalize(NormalizationForm.FormC);
         }
 
         /// <summary>
@@ -276,5 +289,24 @@ namespace HASS.Agent.Shared.Functions
         }
 
         public static bool RunningElevated() => new WindowsPrincipal(WindowsIdentity.GetCurrent()).IsInRole(WindowsBuiltInRole.Administrator);
+
+        public static string GetConsentStoreAppName(int processId)
+        {
+            using (var processHandle = Kernel32.OpenProcess(ACCESS_MASK.FromEnum(Kernel32.ProcessAccess.PROCESS_QUERY_LIMITED_INFORMATION), false, (uint)processId))
+            {
+                if (!processHandle.IsInvalid && Kernel32.GetPackageFamilyName(processHandle, out var packageFamilyName).Succeeded)
+                    return ParseRegWebcamMicApplicationName(packageFamilyName);
+            }
+
+            try
+            {
+                using var process = Process.GetProcessById(processId);
+                return process.ProcessName;
+            }
+            catch (Exception ex) when (ex is ArgumentException or InvalidOperationException)
+            {
+                return string.Empty;
+            }
+        }
     }
 }

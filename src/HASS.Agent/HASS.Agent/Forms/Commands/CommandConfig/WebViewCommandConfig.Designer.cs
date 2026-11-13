@@ -243,11 +243,8 @@ namespace HASS.Agent.Forms.Commands.CommandConfig
             this.NumLocationX.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.NumLocationX.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
             this.NumLocationX.Location = new System.Drawing.Point(34, 160);
-            this.NumLocationX.Maximum = new decimal(new int[] {
-            65535,
-            0,
-            0,
-            0});
+            this.NumLocationX.Maximum = new decimal(Int32.MaxValue);
+            this.NumLocationX.Minimum = new decimal(Int32.MinValue);
             this.NumLocationX.MaxLength = 10;
             this.NumLocationX.MetroColor = System.Drawing.SystemColors.WindowFrame;
             this.NumLocationX.Name = "NumLocationX";
@@ -269,11 +266,8 @@ namespace HASS.Agent.Forms.Commands.CommandConfig
             this.NumLocationY.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.NumLocationY.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(241)))), ((int)(((byte)(241)))));
             this.NumLocationY.Location = new System.Drawing.Point(149, 160);
-            this.NumLocationY.Maximum = new decimal(new int[] {
-            65535,
-            0,
-            0,
-            0});
+            this.NumLocationY.Maximum = new decimal(Int32.MaxValue);
+            this.NumLocationY.Minimum = new decimal(Int32.MinValue);
             this.NumLocationY.MaxLength = 10;
             this.NumLocationY.MetroColor = System.Drawing.SystemColors.WindowFrame;
             this.NumLocationY.Name = "NumLocationY";

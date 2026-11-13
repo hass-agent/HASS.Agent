@@ -1,14 +1,26 @@
-﻿<root>
-	<resheader name="resmimetype">
-		<value>text/microsoft-resx</value>
-	</resheader>
-	<resheader name="version">
-		<value>1.3</value>
-	</resheader>
-	<resheader name="reader">
-		<value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-	</resheader>
-	<resheader name="writer">
-		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-	</resheader>
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>1.3</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="LblInfo1.Text" xml:space="preserve">
+    <value>Om te zien welke entiteiten je hebt geconfigureerd en om snelle acties te versturen, gebruikt HASS.Agent de API van
+Home Assistant.
+
+Geef een toegangstoken met een lange levensduur en het adres van je Home Assistant-instantie op.
+Je kunt een token in Home Assistant verkrijgen door linksonder op je profielfoto te klikken,
+naar het tabblad Beveiliging bovenaan te gaan en naar de onderkant van de pagina te navigeren totdat je
+de knop 'TOKEN AANMAKEN' ziet.
+
+Houd er rekening mee dat je voor actieve meldingen een beheerdersaccounttoken moet opgeven.</value>
+  </data>
 </root>

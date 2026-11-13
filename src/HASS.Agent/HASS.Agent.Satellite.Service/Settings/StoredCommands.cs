@@ -1,4 +1,4 @@
-﻿using HASS.Agent.Shared.Enums;
+using HASS.Agent.Shared.Enums;
 using HASS.Agent.Shared.Models.Config;
 using HASS.Agent.Shared.HomeAssistant.Commands;
 using HASS.Agent.Shared.HomeAssistant.Commands.CustomCommands;
@@ -56,7 +56,10 @@ namespace HASS.Agent.Satellite.Service.Settings
                 // convert to abstract commands
                 await Task.Run(delegate
                 {
-                    foreach (var abstractCommand in configuredCommands.Select(ConvertConfiguredToAbstract)) Variables.Commands.Add(abstractCommand!);
+                    foreach (var abstractCommand in configuredCommands.Select(ConvertConfiguredToAbstract))
+                    {
+                        if (abstractCommand != null) Variables.Commands.Add(abstractCommand);
+                    }
                 });
 
                 // all good
@@ -129,6 +132,9 @@ namespace HASS.Agent.Satellite.Service.Settings
                 case CommandType.PublishAllSensorsCommand:
                     abstractCommand = new PublishAllSensorsCommand(command.EntityName, command.Name, command.EntityType, command.Id.ToString());
                     break;
+                case CommandType.PublishSensorCommand:
+                    abstractCommand = new PublishSensorCommand(command.EntityName, command.Name, command.Command, command.EntityType, command.Id.ToString());
+                    break;
                 case CommandType.CustomExecutorCommand:
                     abstractCommand = new CustomExecutorCommand(command.EntityName, command.Name, command.Command, command.EntityType, command.Id.ToString());
                     break;
@@ -139,6 +145,9 @@ namespace HASS.Agent.Satellite.Service.Settings
                     abstractCommand = new SendWindowToFrontCommand(command.EntityName, command.Name, command.Command, command.EntityType, command.Id.ToString());
                     break;
                 case CommandType.MonitorSleepCommand:
+                    abstractCommand = new MonitorSleepCommand(command.EntityName, command.Name, command.EntityType, command.Id.ToString());
+                    break;
+                case CommandType.MonitorSleepPowerPlanCommand:
                     abstractCommand = new MonitorSleepCommand(command.EntityName, command.Name, command.EntityType, command.Id.ToString());
                     break;
                 case CommandType.MonitorWakeCommand:

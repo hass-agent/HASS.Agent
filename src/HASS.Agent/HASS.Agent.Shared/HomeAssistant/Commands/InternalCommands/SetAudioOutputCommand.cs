@@ -42,7 +42,7 @@ namespace HASS.Agent.Shared.HomeAssistant.Commands.InternalCommands
  
             try
             {
-                AudioManager.ActivateDevice(action);
+                AudioManager.ActivateDevice(action, DeviceType.Output);
             }
             catch (Exception ex)
             {

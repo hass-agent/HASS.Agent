@@ -19,10 +19,11 @@ namespace HASS.Agent.Shared.Models.Internal
         public int VirtualWidth { get; set; } = 0;
         public int VirtualHeight { get; set; } = 0;
         public int BitsPerPixel { get; set; } = 0;
-        public bool PrimaryDisplay { get; set; }
+        public bool PrimaryDisplay { get; set; } = false;
         public string WorkingArea { get; set; } = string.Empty;
         public int WorkingAreaWidth { get; set; } = 0;
         public int WorkingAreaHeight { get; set; } = 0;
         public int RotatedDegrees { get; set; } = 0;
+        public int RefreshRate { get; set; } = 0;
     }
 }

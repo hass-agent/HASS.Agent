@@ -10,8 +10,6 @@ using HASS.Agent.Shared;
 using HASS.Agent.Shared.Functions;
 using HASS.Agent.Shared.Models.Config;
 using HASS.Agent.Shared.Models.HomeAssistant;
-using HidSharp.Utility;
-using LibreHardwareMonitor.Hardware;
 using Octokit;
 using Serilog;
 using System;

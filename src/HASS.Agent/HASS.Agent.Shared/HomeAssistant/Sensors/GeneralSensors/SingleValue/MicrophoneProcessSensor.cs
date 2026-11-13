@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using HASS.Agent.Shared.Functions;
+using HASS.Agent.Shared.Managers.Audio;
 using HASS.Agent.Shared.Models.HomeAssistant;
 using Microsoft.Win32;
 using Newtonsoft.Json;
@@ -39,7 +40,7 @@ public class MicrophoneProcessSensor : AbstractSingleValueSensor
             return null;
         }
 
-        var model = new SensorDiscoveryConfigModel()
+        var model = new SensorDiscoveryConfigModel(Domain)
         {
             EntityName = EntityName,
             Name = Name,
@@ -59,18 +60,31 @@ public class MicrophoneProcessSensor : AbstractSingleValueSensor
     {
         _processes.Clear();
 
-        // first local machine
-        using (var key = Registry.LocalMachine.OpenSubKey(_regKey))
+        var apps = AudioManager.GetMicrophoneApplications();
+        if (apps != null)
         {
-            CheckRegForMicrophoneInUse(key);
+            foreach (var app in apps)
+            {
+                _processes[app] = "on";
+            }
         }
-
-        // then current user
-        using (var key = Registry.CurrentUser.OpenSubKey(_regKey))
+        else
         {
-            CheckRegForMicrophoneInUse(key);
-        }
+            //NOTE(Amadeo): old method in case newer one fails
+            
+            // first local machine
+            using (var key = Registry.LocalMachine.OpenSubKey(_regKey))
+            {
+                CheckRegForMicrophoneInUse(key);
+            }
 
+            // then current user
+            using (var key = Registry.CurrentUser.OpenSubKey(_regKey))
+            {
+                CheckRegForMicrophoneInUse(key);
+            }
+        }
+        
         // add processes as attributes
         _attributes = _processes.Count > 0 ? JsonConvert.SerializeObject(_processes, Formatting.Indented) : "{}";
 

@@ -5,15 +5,17 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using HASS.Agent.Shared.Functions;
 using NAudio.CoreAudioApi;
 using HASS.Agent.Shared.Managers.Audio.Exceptions;
 using HASS.Agent.Shared.Managers.Audio.Internal;
 using Serilog;
 using NAudio.CoreAudioApi.Interfaces;
-using HidSharp;
 using Microsoft.VisualBasic.ApplicationServices;
+using Vanara.PInvoke;
 
 namespace HASS.Agent.Shared.Managers.Audio;
+
 public static class AudioManager
 {
     private static bool _initialized = false;
@@ -22,15 +24,22 @@ public static class AudioManager
     private static MMNotificationClient _notificationClient = null;
 
     private static readonly ConcurrentDictionary<string, string> _devices = new();
+    private static readonly ConcurrentDictionary<string, DeviceType> _devicesType = new();
 
     private static readonly Dictionary<int, string> _applicationNameCache = new();
+
+    private static bool _noDefaultInputLogged = false;
+    private static bool _noDefaultOutputLogged = false;
 
     private static void InitializeDevices()
     {
         _enumerator = new MMDeviceEnumerator();
 
         foreach (var device in _enumerator.EnumerateAudioEndPoints(DataFlow.All, DeviceState.Active))
+        {
             _devices[device.ID] = device.FriendlyName;
+            _devicesType[device.ID] = device.DataFlow == DataFlow.Capture ? DeviceType.Input : DeviceType.Output;
+        }
 
         _notificationClient = new MMNotificationClient();
         _notificationClient.DeviceAdded += DeviceAdded;
@@ -48,12 +57,14 @@ public static class AudioManager
 
         using var device = _enumerator.GetDevice(deviceId);
         _devices[deviceId] = device.FriendlyName;
+        _devicesType[device.ID] = device.DataFlow == DataFlow.Capture ? DeviceType.Input : DeviceType.Output;
         Log.Debug($"[AUDIOMGR] added device: {_devices[deviceId]}");
     }
 
     private static void RemoveDevice(string deviceId)
     {
         _devices.Remove(deviceId, out var removedDeviceName);
+        _devicesType.Remove(deviceId, out var _);
         if (!string.IsNullOrWhiteSpace(removedDeviceName))
             Log.Debug($"[AUDIOMGR] removed device: {removedDeviceName}");
     }
@@ -69,6 +80,7 @@ public static class AudioManager
             Log.Error($"[AUDIOMGR] failed to remove device: {e.DeviceId}");
         }
     }
+
     private static void DeviceAdded(object sender, DeviceNotificationEventArgs e)
     {
         try
@@ -121,10 +133,18 @@ public static class AudioManager
         if (_applicationNameCache.TryGetValue(procId, out var cachedName))
             return cachedName;
 
-        using var process = Process.GetProcessById(procId);
-        _applicationNameCache[procId] = process.ProcessName;
+        try
+        {
+            using var process = Process.GetProcessById(procId);
+            _applicationNameCache[procId] = process.ProcessName;
 
-        return process.ProcessName;
+            return process.ProcessName;
+        }
+        catch (ArgumentException)
+        {
+            // Audio sessions can outlive their owning process.
+            return session.DisplayName;
+        }
     }
 
     private static List<AudioSession> GetDeviceSessions(MMDevice mmDevice)
@@ -151,6 +171,7 @@ public static class AudioManager
                 var audioSession = new AudioSession
                 {
                     Id = sessionId,
+                    ProcessId = session.ProcessId,
                     Application = displayName,
                     PlaybackDevice = deviceName,
                     Muted = session.Volume.Mute,
@@ -205,7 +226,20 @@ public static class AudioManager
         _enumerator.Dispose();
 
         _devices.Clear();
+        _devicesType.Clear();
         Log.Debug("[AUDIOMGR] cleanup completed");
+    }
+
+    private static MMDevice GetDefaultMultimediaDevice(DataFlow dataFlow)
+    {
+        MMDevice device = null;
+        try
+        {
+            device = _enumerator.GetDefaultAudioEndpoint(dataFlow, Role.Multimedia);
+        }
+        catch { }
+
+        return device;
     }
 
     public static List<AudioDevice> GetDevices()
@@ -217,11 +251,30 @@ public static class AudioManager
 
         try
         {
-            using var defaultInputDevice = _enumerator.GetDefaultAudioEndpoint(DataFlow.Capture, Role.Multimedia);
-            using var defaultOutputDevice = _enumerator.GetDefaultAudioEndpoint(DataFlow.Render, Role.Multimedia);
+            using var defaultInputDevice = GetDefaultMultimediaDevice(DataFlow.Capture);
+            if (defaultInputDevice == null && !_noDefaultInputLogged)
+            {
+                Log.Information("[AUDIOMGR] no default input device detected");
+                _noDefaultInputLogged = true;
+            }
+            else if (defaultInputDevice != null)
+            {
+                _noDefaultInputLogged = false;
+            }
 
-            var defaultInputDeviceId = defaultInputDevice.ID;
-            var defaultOutputDeviceId = defaultOutputDevice.ID;
+            using var defaultOutputDevice = GetDefaultMultimediaDevice(DataFlow.Render);
+            if (defaultOutputDevice == null && !_noDefaultOutputLogged)
+            {
+                Log.Information("[AUDIOMGR] no default output device detected");
+                _noDefaultOutputLogged = true;
+            }
+            else if (defaultOutputDevice != null)
+            {
+                _noDefaultOutputLogged = false;
+            }
+
+            var defaultInputDeviceId = defaultInputDevice != null ? defaultInputDevice.ID : string.Empty;
+            var defaultOutputDeviceId = defaultOutputDevice != null ? defaultOutputDevice.ID : string.Empty;
 
             foreach (var (deviceId, deviceName) in _devices)
             {
@@ -326,14 +379,17 @@ public static class AudioManager
         return mute;
     }
 
-    public static void ActivateDevice(string deviceName)
+    public static void ActivateDevice(string deviceName, DeviceType? deviceType = null)
     {
         if (!CheckInitialization())
             return;
 
         try
         {
-            var deviceId = _devices.FirstOrDefault(v => v.Value == deviceName).Key;
+            var deviceId = deviceType == null
+                ? _devices.FirstOrDefault(v => v.Value == deviceName).Key
+                : _devices.FirstOrDefault(v => v.Value == deviceName && _devicesType[v.Key] == deviceType).Key;
+            
             if (string.IsNullOrWhiteSpace(deviceId))
                 return;
 
@@ -457,9 +513,53 @@ public static class AudioManager
 
         var volumeScalar = Math.Clamp(volume / 100f, 0, 1);
         internalAudioSession.Volume.Volume = volumeScalar;
-        Log.Debug("[AUDIOMGR] volume for '{sessionName}' ({sessionId}) set to '{vol}'/'{volScal}'", displayName, internalAudioSession.Control.GetSessionInstanceIdentifier, volume, volumeScalar);
+        Log.Debug("[AUDIOMGR] volume for '{sessionName}' ({sessionId}) set to '{vol}'/'{volScal}'", displayName, internalAudioSession.Control.GetSessionInstanceIdentifier, volume,
+            volumeScalar);
     }
+    
+    public static List<string>? GetMicrophoneApplications()
+    {
+        var applications = new List<string>();
+        
+        if (!CheckInitialization())
+            return applications;
 
+        try
+        {
+            foreach (var (deviceId, deviceName) in _devices)
+            {
+                using var device = _enumerator.GetDevice(deviceId);
+                if (device.DataFlow != DataFlow.Capture)
+                {
+                    continue;
+                }
+
+                var sessions = GetDeviceSessions(device);
+                foreach (var audioSession in sessions)
+                {
+                    if (audioSession.Active)
+                    {
+                        var appName = SharedHelperFunctions.GetConsentStoreAppName(audioSession.ProcessId);
+                        if (string.IsNullOrWhiteSpace(appName))
+                        {
+                            continue;
+                        }
+                        
+                        applications.Add(appName);
+                    }
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Log.Error(ex, "[AUDIOMGR] failed to retrieve applications using microphone: {msg}", ex.Message);
+            return null;
+        }
+
+        return applications;
+    }
+    
+    
     public static void Shutdown()
     {
         Log.Debug("[AUDIOMGR] shutting down");
@@ -471,6 +571,7 @@ public static class AudioManager
         {
             Log.Fatal(ex, "[AUDIOMGR] shutdown fatal error: {ex}", ex.Message);
         }
+
         Log.Debug("[AUDIOMGR] shutdown completed");
     }
 }

@@ -1,4 +1,4 @@
-﻿using HASS.Agent.Shared.Enums;
+using HASS.Agent.Shared.Enums;
 using HASS.Agent.Shared.Models.Config;
 using HASS.Agent.Satellite.Service.Extensions;
 using HASS.Agent.Shared.HomeAssistant.Sensors;
@@ -9,7 +9,6 @@ using HASS.Agent.Shared.HomeAssistant.Sensors.WmiSensors.SingleValue;
 using HASS.Agent.Shared.Models.HomeAssistant;
 using Newtonsoft.Json;
 using Serilog;
-using LibreHardwareMonitor.Hardware;
 using SensorType = HASS.Agent.Shared.Enums.SensorType;
 
 namespace HASS.Agent.Satellite.Service.Settings
@@ -62,8 +61,16 @@ namespace HASS.Agent.Satellite.Service.Settings
                 {
                     foreach (var sensor in configuredSensors)
                     {
-                        if (sensor.IsSingleValue()) Variables.SingleValueSensors.Add(ConvertConfiguredToAbstractSingleValue(sensor)!);
-                        else Variables.MultiValueSensors.Add(ConvertConfiguredToAbstractMultiValue(sensor)!);
+                        if (sensor.IsSingleValue())
+                        {
+                            var abstractSensor = ConvertConfiguredToAbstractSingleValue(sensor);
+                            if (abstractSensor != null) Variables.SingleValueSensors.Add(abstractSensor);
+                        }
+                        else
+                        {
+                            var abstractSensor = ConvertConfiguredToAbstractMultiValue(sensor);
+                            if (abstractSensor != null) Variables.MultiValueSensors.Add(abstractSensor);
+                        }
                     }
                 });
 
@@ -109,6 +116,9 @@ namespace HASS.Agent.Satellite.Service.Settings
                     break;
                 case SensorType.NamedWindowSensor:
                     abstractSensor = new NamedWindowSensor(sensor.WindowName, sensor.EntityName, sensor.Name, sensor.UpdateInterval, sensor.Id.ToString(), sensor.AdvancedSettings);
+                    break;
+                case SensorType.NamedActiveWindowSensor:
+                    abstractSensor = new NamedActiveWindowSensor(sensor.WindowName, sensor.EntityName, sensor.Name, sensor.UpdateInterval, sensor.Id.ToString(), sensor.AdvancedSettings);
                     break;
                 case SensorType.LastActiveSensor:
                     abstractSensor = new LastActiveSensor(sensor.ApplyRounding, sensor.Round, sensor.UpdateInterval, sensor.EntityName, sensor.Name, sensor.Id.ToString(), sensor.AdvancedSettings);
@@ -256,6 +266,22 @@ namespace HASS.Agent.Satellite.Service.Settings
                             IgnoreAvailability = namedWindowSensor.IgnoreAvailability,
                             WindowName = namedWindowSensor.WindowName,
                             AdvancedSettings = namedWindowSensor.AdvancedSettings
+                        };
+                    }
+
+                case NamedActiveWindowSensor namedActiveWindowSensor:
+                    {
+                        _ = Enum.TryParse<SensorType>(namedActiveWindowSensor.GetType().Name, out var type);
+                        return new ConfiguredSensor
+                        {
+                            Id = Guid.Parse(namedActiveWindowSensor.Id),
+                            EntityName = namedActiveWindowSensor.EntityName,
+                            Name = namedActiveWindowSensor.Name,
+                            Type = type,
+                            UpdateInterval = namedActiveWindowSensor.UpdateIntervalSeconds,
+                            IgnoreAvailability = namedActiveWindowSensor.IgnoreAvailability,
+                            WindowName = namedActiveWindowSensor.WindowName,
+                            AdvancedSettings = namedActiveWindowSensor.AdvancedSettings
                         };
                     }
 

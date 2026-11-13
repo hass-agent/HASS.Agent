@@ -70,7 +70,7 @@ jobs:
         #configuration: [Debug, Release]
         configuration: [Release]
 
-    runs-on: windows-latest  # For a list of available runner types, refer to
+    runs-on: windows-2022  # For a list of available runner types, refer to
                              # https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idruns-on
 
     env:
@@ -87,9 +87,9 @@ jobs:
 
     # Install the .NET Core workload
     - name: Install .NET Core
-      uses: actions/setup-dotnet@v3
+      uses: actions/setup-dotnet@v4.2.0
       with:
-        dotnet-version: 6.0.x
+        dotnet-version: 8.0.x
 
     # Add  MSBuild to the PATH: https://github.com/microsoft/setup-msbuild
     #- name: Setup MSBuild.exe
@@ -112,24 +112,42 @@ jobs:
         dotnet restore "src\\HASS.Agent\\HASS.Agent\\HASS.Agent.csproj"
         dotnet restore "src\\HASS.Agent\\HASS.Agent.Satellite.Service\\HASS.Agent.Satellite.Service.csproj"
     
-    - name: Build & Publish HASS.Agent
+    - name: Build & Publish HASS.Agent x64
       working-directory: "D:\\a\\HASS.Agent\\HASS.Agent\\src\\HASS.Agent\\HASS.Agent"
-      run: "dotnet publish -c Release -f net6.0-windows10.0.19041.0 -o bin\\Publish-x64\\Release\\ --no-self-contained -r win-x64 -p:Platform=x64"
+      run: "dotnet publish -c Release -f net8.0-windows10.0.22621.0 -o bin\\Publish-x64\\Release\\ --no-self-contained -r win-x64 -p:Platform=x64"
    
-    - name: Build & Publish HASS.Agent.Satellite.Service
+    - name: Build & Publish HASS.Agent.Satellite.Service x64
       working-directory: "D:\\a\\HASS.Agent\\HASS.Agent\\src\\HASS.Agent\\HASS.Agent.Satellite.Service"
-      run: "dotnet publish -c Release -f net6.0-windows10.0.19041.0 -o bin\\Publish-x64\\Release\\ --no-self-contained -r win-x64 -p:Platform=x64"
+      run: "dotnet publish -c Release -f net8.0-windows10.0.22621.0 -o bin\\Publish-x64\\Release\\ --no-self-contained -r win-x64 -p:Platform=x64"
 
-    - name: Compile InnoSetup Installer - Satellite Service
+    - name: Compile InnoSetup Installer - Satellite Service x64
       working-directory: "D:\\a\\HASS.Agent\\HASS.Agent\\src\\HASS.Agent.Installer"
       run: |
         & "${Env:ProgramFiles(x86)}\\Inno Setup 6\\iscc.exe" InstallerScript-Service.iss
 
-    - name: Compile InnoSetup Installer - Client
+    - name: Compile InnoSetup Installer - Client x64
       working-directory: "D:\\a\\HASS.Agent\\HASS.Agent\\src\\HASS.Agent.Installer"
       run: |
         & "${Env:ProgramFiles(x86)}\\Inno Setup 6\\iscc.exe" InstallerScript.iss
+        
+    - name: Build & Publish HASS.Agent x86
+      working-directory: "D:\\a\\HASS.Agent\\HASS.Agent\\src\\HASS.Agent\\HASS.Agent"
+      run: "dotnet publish -c Release -f net8.0-windows10.0.22621.0 -o bin\\Publish-x86\\Release\\ --no-self-contained -r win-x86 -p:Platform=x86"
+   
+    - name: Build & Publish HASS.Agent.Satellite.Service x86
+      working-directory: "D:\\a\\HASS.Agent\\HASS.Agent\\src\\HASS.Agent\\HASS.Agent.Satellite.Service"
+      run: "dotnet publish -c Release -f net8.0-windows10.0.22621.0 -o bin\\Publish-x86\\Release\\ --no-self-contained -r win-x86 -p:Platform=x86"
 
+    - name: Compile InnoSetup Installer - Satellite Service x86
+      working-directory: "D:\\a\\HASS.Agent\\HASS.Agent\\src\\HASS.Agent.Installer"
+      run: |
+        & "${Env:ProgramFiles(x86)}\\Inno Setup 6\\iscc.exe" InstallerScript-Service-x86.iss
+
+    - name: Compile InnoSetup Installer - Client x86
+      working-directory: "D:\\a\\HASS.Agent\\HASS.Agent\\src\\HASS.Agent.Installer"
+      run: |
+        & "${Env:ProgramFiles(x86)}\\Inno Setup 6\\iscc.exe" InstallerScript-x86.iss    
+        
     - name: Decode the pfx
       working-directory: "D:\\a\\HASS.Agent\\HASS.Agent\\src\\HASS.Agent.Installer"
       run: |
@@ -137,42 +155,68 @@ jobs:
         $certificatePath = [IO.Path]::GetFullPath(".\\HASS.Agent.Installer.pfx")
         [IO.File]::WriteAllBytes($certificatePath, $pfxBytes)
 
-    - name: Sign the installer
+    - name: Sign the x64 installer
       working-directory: "D:\\a\\HASS.Agent\\HASS.Agent\\src\\HASS.Agent.Installer"
       run: |
         $certificatePassword = ConvertTo-SecureString "${{ secrets.BASE64_ENCODED_PFX_PASSWORD }}" -AsPlainText -Force
         $certificate = Get-PfxCertificate -FilePath ".\\HASS.Agent.Installer.pfx" -Password $certificatePassword
         Set-AuthenticodeSignature -FilePath ".\\bin\\HASS.Agent.Installer.exe" -Certificate $certificate -HashAlgorithm SHA256 -TimestampServer http://timestamp.digicert.com
+        
+    - name: Sign the x86 installer
+      working-directory: "D:\\a\\HASS.Agent\\HASS.Agent\\src\\HASS.Agent.Installer"
+      run: |
+        $certificatePassword = ConvertTo-SecureString "${{ secrets.BASE64_ENCODED_PFX_PASSWORD }}" -AsPlainText -Force
+        $certificate = Get-PfxCertificate -FilePath ".\\HASS.Agent.Installer.pfx" -Password $certificatePassword
+        Set-AuthenticodeSignature -FilePath ".\\bin\\HASS.Agent.Installer.x86.exe" -Certificate $certificate -HashAlgorithm SHA256 -TimestampServer http://timestamp.digicert.com
     
     - name: Remove the pfx
       working-directory: "D:\\a\\HASS.Agent\\HASS.Agent\\src\\HASS.Agent.Installer"
       run: Remove-Item -path ".\\HASS.Agent.Installer.pfx"
 
-    #Upload project artifacts: https://github.com/marketplace/actions/upload-a-build-artifact
-    - name: Upload build artifacts (HASS Agent)
+    # Upload x64 project artifacts: https://github.com/marketplace/actions/upload-a-build-artifact
+    - name: Upload build artifacts x64 (HASS Agent)
       uses: actions/upload-artifact@v4.6.0
       with:
         name: HASS.Agent
         path: "src\\HASS.Agent\\HASS.Agent\\bin\\Publish-x64\\Release"
 
-    - name: Upload build artifacts (HASS Agent Satellite Service)
+    - name: Upload build artifacts x64 (HASS Agent Satellite Service)
       uses: actions/upload-artifact@v4.6.0
       with:
         name: HASS.Agent.Satellite.Service
         path: "src\\HASS.Agent\\HASS.Agent.Satellite.Service\\bin\\Publish-x64\\Release"
 
-    - name: Upload build artifacts (HASS Agent Installer)
+    - name: Upload build artifacts x64 (HASS Agent Installer)
       uses: actions/upload-artifact@v4.6.0
       with:
         name: HASS.Agent.Installer
         path: "src\\HASS.Agent.Installer\\bin\\HASS.Agent.Installer.exe"
+        
+    # Upload x86 project artifacts
+    - name: Upload build artifacts x86 (HASS Agent)
+      uses: actions/upload-artifact@v4.6.0
+      with:
+        name: HASS.Agent.x86
+        path: "src\\HASS.Agent\\HASS.Agent\\bin\\Publish-x86\\Release"
+
+    - name: Upload build artifacts x86 (HASS Agent Satellite Service)
+      uses: actions/upload-artifact@v4.6.0
+      with:
+        name: HASS.Agent.Satellite.Service.x86
+        path: "src\\HASS.Agent\\HASS.Agent.Satellite.Service\\bin\\Publish-x86\\Release"
+
+    - name: Upload build artifacts x86 (HASS Agent Installer)
+      uses: actions/upload-artifact@v4.6.0
+      with:
+        name: HASS.Agent.Installer.x86
+        path: "src\\HASS.Agent.Installer\\bin\\HASS.Agent.Installer.x86.exe"
         
     #- name: Debugging artifact paths
     #  run: |
     #    Set-Location src\HASS.Agent
     #    Get-Childitem       
 
-  #draft a release, https://github.com/actions/create-release  
+  # Draft a release, https://github.com/actions/create-release  
   publish:
     runs-on: ubuntu-latest
     needs: [build]
@@ -184,43 +228,62 @@ jobs:
         mkdir HASS.Agent
         mkdir HASS.Agent.Satellite.Service
         mkdir HASS.Agent.Installer
+        mkdir HASS.Agent.x86
+        mkdir HASS.Agent.Satellite.Service.x86
+        mkdir HASS.Agent.Installer.x86
         ls -la
     
-    - name: Download Build Artifacts (HASS Agent)
+    # x64 download
+    - name: Download Build Artifacts x64 (HASS Agent)
       uses: actions/download-artifact@v4.1.8
       with:
         name: HASS.Agent
         path: HASS.Agent
 
-    - name: Download Build Artifacts (HASS Agent Satellite Service)
+    - name: Download Build Artifacts x64 (HASS Agent Satellite Service)
       uses: actions/download-artifact@v4.1.8
       with:
         name: HASS.Agent.Satellite.Service
         path: HASS.Agent.Satellite.Service
 
-    - name: Download Build Artifacts (HASS Agent Installer)
+    - name: Download Build Artifacts x64 (HASS Agent Installer)
       uses: actions/download-artifact@v4.1.8
       with:
         name: HASS.Agent.Installer
         path: HASS.Agent.Installer
+        
+    # x86 download
+    - name: Download Build Artifacts x86 (HASS Agent)
+      uses: actions/download-artifact@v4.1.8
+      with:
+        name: HASS.Agent.x86
+        path: HASS.Agent.x86
+
+    - name: Download Build Artifacts x86 (HASS Agent Satellite Service)
+      uses: actions/download-artifact@v4.1.8
+      with:
+        name: HASS.Agent.Satellite.Service.x86
+        path: HASS.Agent.Satellite.Service.x86
+
+    - name: Download Build Artifacts x86 (HASS Agent Installer)
+      uses: actions/download-artifact@v4.1.8
+      with:
+        name: HASS.Agent.Installer.x86
+        path: HASS.Agent.Installer.x86
 
 
     - name: Compress HASS Agent directories for manual install
       run: |
-        cd HASS.Agent
         ls -la
-        zip -r HASS.Agent.zip ./
-        cd ../
-        cd HASS.Agent.Satellite.Service
+        zip -r HASS.Agent.Standalone.zip HASS.Agent HASS.Agent.Satellite.Service HASS.Agent.x86 HASS.Agent.Satellite.Service.x86
         ls -la
-        zip -r HASS.Agent.Satellite.Service.zip ./
         
     - name: Create Draft Release and Upload Build Artifacts
-      uses: ncipollo/release-action@v1.10.0
+      uses: ncipollo/release-action@v1.15.0
       with:
         name: ${{ github.event.inputs.releasetitle }}
         draft: true
         prerelease: ${{ github.event.inputs.prerelease }}
         tag: ${{ github.event.inputs.releasetag }}
         artifacts:
-          HASS.Agent/HASS.Agent.zip,HASS.Agent.Satellite.Service/HASS.Agent.Satellite.Service.zip,HASS.Agent.Installer/HASS.Agent.Installer.exe
+          HASS.Agent.Installer/HASS.Agent.Installer.exe,HASS.Agent.Installer.x86/HASS.Agent.Installer.x86.exe,HASS.Agent.Standalone.zip

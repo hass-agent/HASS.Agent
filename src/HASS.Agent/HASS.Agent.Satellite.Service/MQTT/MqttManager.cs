@@ -30,6 +30,7 @@ namespace HASS.Agent.Satellite.Service.MQTT
         private bool _connectingFailureNotified = false;
 
         private MqttStatus _status = MqttStatus.Connecting;
+        private readonly object _statusLock = new();
 
         /// <summary>
         /// Returns whether the client is connected
@@ -126,15 +127,26 @@ namespace HASS.Agent.Satellite.Service.MQTT
                     if (IsConnected())
                     {
                         _isReady = true;
-                        
+
                         return;
                     }
 
                     await Task.Delay(TimeSpan.FromSeconds(5));
                 }
 
-                // nope, call it
-                _status = MqttStatus.Disconnected;
+                // nope, call it - unless we reconnected after the last check: then OnMqttConnected
+                // has already set the status, and overwriting it would leave us 'disconnected' for good
+                lock (_statusLock)
+                {
+                    if (IsConnected())
+                    {
+                        _isReady = true;
+
+                        return;
+                    }
+
+                    _status = MqttStatus.Disconnected;
+                }
 
                 // log if we're not shutting down, but only once
                 if (Variables.ShuttingDown || _disconnectionNotified)
@@ -167,8 +179,14 @@ namespace HASS.Agent.Satellite.Service.MQTT
                     await Task.Delay(TimeSpan.FromSeconds(5));
                 }
 
-                // nope, call it
-                _status = MqttStatus.Error;
+                // nope, call it - unless we connected after the last check (see OnMqttDisconnected)
+                lock (_statusLock)
+                {
+                    if (IsConnected())
+                        return;
+
+                    _status = MqttStatus.Error;
+                }
 
                 // log only once
                 if (_connectingFailureNotified)
@@ -186,7 +204,11 @@ namespace HASS.Agent.Satellite.Service.MQTT
 
         private Task OnMqttConnected(MqttClientConnectedEventArgs arg)
         {
-            _status = MqttStatus.Connected;
+            lock (_statusLock)
+            {
+                _status = MqttStatus.Connected;
+            }
+
             Log.Information("[MQTT] Connected");
 
             // reset error notifications 
@@ -217,7 +239,10 @@ namespace HASS.Agent.Satellite.Service.MQTT
                 Variables.DeviceConfig = null;
 
                 // reset state
-                _status = MqttStatus.Connecting;
+                lock (_statusLock)
+                {
+                    _status = MqttStatus.Connecting;
+                }
                 _disconnectionNotified = false;
                 _connectingFailureNotified = false;
 
@@ -227,7 +252,10 @@ namespace HASS.Agent.Satellite.Service.MQTT
             catch (Exception ex)
             {
                 Log.Fatal(ex, "[MQTT] Error while reloading configuration: {err}", ex.Message);
-                _status = MqttStatus.Error;
+                lock (_statusLock)
+                {
+                    _status = MqttStatus.Error;
+                }
             }
         }
 
@@ -357,7 +385,7 @@ namespace HASS.Agent.Satellite.Service.MQTT
         /// <param name="domain"></param>
         /// <param name="clearConfig"></param>
         /// <returns></returns>
-        public async Task AnnounceAutoDiscoveryConfigAsync(AbstractDiscoverable discoverable, string domain, bool clearConfig = false)
+        public async Task AnnounceAutoDiscoveryConfigAsync(AbstractDiscoverable discoverable, string domain, bool clearConfig = false, bool migration = false)
         {
             if (!IsConnected())
                 return;
@@ -394,13 +422,28 @@ namespace HASS.Agent.Satellite.Service.MQTT
 
                 if (clearConfig)
                 {
-                    messageBuilder.WithPayload(Array.Empty<byte>());
+                    var payload = migration ? Encoding.UTF8.GetBytes("{\"migrate_discovery\": true }") : Array.Empty<byte>();
+                    messageBuilder.WithPayload(payload);
                 }
                 else
                 {
                     var payload = discoverable.GetAutoDiscoveryConfig();
                     if (discoverable.IgnoreAvailability)
+                    {
                         payload.Availability_topic = null;
+                    }
+                    
+                    if (Variables.ServiceMqttSettings.MqttDisableDefaultEntityId)
+                    {
+                        if (payload is SensorDiscoveryConfigModel sensorModel) //NOTE(Amadeo): this is ugly, very ugly, not worth effort investment now with rewrite going on though
+                        {
+                            sensorModel.Default_entity_id = null;
+                        }
+                        else if (payload is CommandDiscoveryConfigModel commandModel)
+                        {
+                            commandModel.Default_entity_id = null;
+                        }
+                    }
 
                     messageBuilder.WithPayload(JsonSerializer.Serialize(payload, payload.GetType(), options));
                 }
@@ -601,12 +644,21 @@ namespace HASS.Agent.Satellite.Service.MQTT
 
             var clientOptionsBuilder = new MqttClientOptionsBuilder()
                 .WithClientId(Variables.ServiceMqttSettings.MqttClientId)
-                .WithTcpServer(Variables.ServiceMqttSettings.MqttAddress, Variables.ServiceMqttSettings.MqttPort)
                 .WithCleanSession()
                 .WithWillTopic($"{Variables.ServiceMqttSettings.MqttDiscoveryPrefix}/sensor/{Variables.DeviceConfig.Name}/availability")
                 .WithWillPayload("offline")
                 .WithWillRetain(Variables.ServiceMqttSettings.MqttUseRetainFlag)
                 .WithKeepAlivePeriod(TimeSpan.FromSeconds(15));
+
+            if (Variables.ServiceMqttSettings.MqttUseWebSocket)
+            {
+                clientOptionsBuilder.WithWebSocketServer(o => o.WithUri($"{Variables.ServiceMqttSettings.MqttAddress}:{Variables.ServiceMqttSettings.MqttPort}"));
+                Log.Information("[MQTT] Using WebSocket for the connection");
+            }
+            else
+            {
+                clientOptionsBuilder.WithTcpServer(Variables.ServiceMqttSettings.MqttAddress, Variables.ServiceMqttSettings.MqttPort);
+            }
 
             if (!string.IsNullOrEmpty(Variables.ServiceMqttSettings.MqttUsername))
                 clientOptionsBuilder.WithCredentials(Variables.ServiceMqttSettings.MqttUsername, Variables.ServiceMqttSettings.MqttPassword);

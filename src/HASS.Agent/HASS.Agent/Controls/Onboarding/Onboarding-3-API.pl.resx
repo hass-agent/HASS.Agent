@@ -1,14 +1,26 @@
-﻿<root>
-	<resheader name="resmimetype">
-		<value>text/microsoft-resx</value>
-	</resheader>
-	<resheader name="version">
-		<value>1.3</value>
-	</resheader>
-	<resheader name="reader">
-		<value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-	</resheader>
-	<resheader name="writer">
-		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-	</resheader>
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>1.3</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="LblInfo1.Text" xml:space="preserve">
+    <value>Aby dowiedzieć się, które jednostki zostały skonfigurowane i wysłać szybkie akcje, HASS.Agent korzysta z
+API Home Assistant.
+
+Podaj długoterminowy token dostępu i adres swojej instancji Home Assistant.
+Możesz uzyskać token w Home Assistant, klikając swoje zdjęcie profilowe w lewym dolnym rogu,
+przechodząc do zakładki bezpieczeństwa u góry i przechodząc na dół strony, aż zobaczysz
+przycisk „UTWÓRZ TOKEN”.
+
+Pamiętaj, że aby korzystać z funkcji powiadomień z możliwością wykonania akcji, musisz podać token konta administratora.</value>
+  </data>
 </root>

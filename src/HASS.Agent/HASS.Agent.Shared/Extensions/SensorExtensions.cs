@@ -16,7 +16,7 @@ namespace HASS.Agent.Shared.Extensions
         public static string GetSensorName(this SensorType sensorType)
         {
             var (_, name) = sensorType.GetLocalizedDescriptionAndKey();
-            return name.ToLower();
+            return SharedHelperFunctions.RemoveDiacritics(name).ToLower();
         }
 
         //TODO: remove after tests

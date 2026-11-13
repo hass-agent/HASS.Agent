@@ -101,7 +101,7 @@ namespace HASS.Agent.Satellite.Service.Settings
                 // set shared config
                 AgentSharedBase.SetDeviceName(Variables.ServiceSettings.DeviceName);
                 AgentSharedBase.SetCustomExecutorBinary(Variables.ServiceSettings.CustomExecutorBinary);
-                
+
                 // done
                 Log.Information("[SETTINGS] Configuration loaded");
                 return true;
@@ -192,7 +192,7 @@ namespace HASS.Agent.Satellite.Service.Settings
             try
             {
                 Log.Information("[SETTINGS] No MQTT config found, storing default settings");
-                
+
                 // default settings
                 Variables.ServiceMqttSettings = new ServiceMqttSettings();
 
@@ -225,7 +225,7 @@ namespace HASS.Agent.Satellite.Service.Settings
             // store app settings
             var ok = StoreServiceSettings();
             if (!ok) allGood = false;
-            
+
             // store commands
             ok = StoredCommands.Store();
             if (!ok) allGood = false;
@@ -289,10 +289,10 @@ namespace HASS.Agent.Satellite.Service.Settings
                         return true;
                     }
                 }
-                
+
                 // bind received settings
                 Variables.ServiceMqttSettings = serviceMqttSettings;
-                
+
                 // store
                 var stored = StoreServiceSettings();
                 if (stored) Log.Information("[SETTINGS] Received MQTT settings stored");
@@ -313,19 +313,19 @@ namespace HASS.Agent.Satellite.Service.Settings
         /// <summary>
         /// Changes the device's name internally and with HA
         /// </summary>
-        /// <param name="deviceName"></param>
+        /// <param name="newDeviceName"></param>
         [SuppressMessage("ReSharper", "CompareOfFloatsByEqualityOperator")]
-        internal static async void ProcessNameChange(string deviceName)
+        internal static async void ProcessNameChange(string newDeviceName)
         {
             Variables.ServiceSettings ??= new ServiceSettings();
 
-            if (deviceName == Variables.ServiceSettings.DeviceName)
+            if (newDeviceName == Variables.ServiceSettings.DeviceName)
             {
                 Log.Information("[SETTINGS] Name change requested, but name is same as before, ignoring");
                 return;
             }
 
-            Log.Information("[SETTINGS] Processing name change to: {name}", deviceName);
+            Log.Information("[SETTINGS] Processing name change to: {name}", newDeviceName);
             Log.Information("[SETTINGS] Previous name: {name}", Variables.ServiceSettings.DeviceName);
 
             // make sure the managers stop publishing
@@ -335,7 +335,27 @@ namespace HASS.Agent.Satellite.Service.Settings
             // give the managers some time to stop
             await Task.Delay(250);
 
-            // unpublish all entities
+            // signal migration to HA MQTT integration
+            await SensorsManager.UnpublishAllSensors(migration: true);
+            await CommandsManager.UnpublishAllCommands(migration: true);
+
+            await Task.Delay(250);
+
+            // mock new device name and publish new discovery messages
+            if (Variables.DeviceConfig != null) //Note(Amadeo): ugly, should be cleaned up but doesn't make sense due to full rewrite
+            {
+                Variables.DeviceConfig.Name = newDeviceName;
+            }
+            await SensorsManager.ForcePublishAllSensors();
+            await CommandsManager.ForcePublishAllCommands();
+
+            await Task.Delay(250);
+
+            // restore previous device name and clear migration messages
+            if (Variables.DeviceConfig != null) //Note(Amadeo): ugly, should be cleaned up but doesn't make sense due to full rewrite
+            {
+                Variables.DeviceConfig.Name = Variables.ServiceSettings.DeviceName;
+            }
             await SensorsManager.UnpublishAllSensors();
             await CommandsManager.UnpublishAllCommands();
 
@@ -346,7 +366,7 @@ namespace HASS.Agent.Satellite.Service.Settings
             await Task.Delay(250);
 
             // set the name
-            Variables.ServiceSettings.DeviceName = deviceName;
+            Variables.ServiceSettings.DeviceName = newDeviceName;
 
             // store
             var stored = StoreServiceSettings();
@@ -354,7 +374,7 @@ namespace HASS.Agent.Satellite.Service.Settings
             else Log.Error("[SETTINGS] Errors while storing new name");
 
             // config shared functions
-            AgentSharedBase.SetDeviceName(deviceName);
+            AgentSharedBase.SetDeviceName(newDeviceName);
 
             // restart mqtt
             Variables.MqttManager.ReloadConfiguration();

@@ -143,7 +143,7 @@ namespace HASS.Agent.HomeAssistant.Sensors.GeneralSensors.MultiValue
 
                                     var queueJob = new PrintJobInfo
                                     {
-                                        Nmae = job.Name,
+                                        Name = job.Name,
                                         Submitter = job.Submitter,
                                         Status = job.JobStatus.ToString(),
                                         NumberOfPages = job.NumberOfPages,

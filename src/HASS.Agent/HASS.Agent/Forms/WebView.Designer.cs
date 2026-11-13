@@ -1,6 +1,6 @@
-﻿extern alias WV2;
-using HASS.Agent.Resources.Localization;
-using WV2::Microsoft.Web.WebView2.WinForms;
+﻿using HASS.Agent.Resources.Localization;
+using Microsoft.Web.WebView2.WinForms;
+
 
 namespace HASS.Agent.Forms
 {

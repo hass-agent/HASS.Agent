@@ -38,7 +38,7 @@ namespace HASS.Agent.Shared.HomeAssistant.Sensors.GeneralSensors.SingleValue
             if (deviceConfig == null)
                 return null;
 
-            return AutoDiscoveryConfigModel ?? SetAutoDiscoveryConfigModel(new SensorDiscoveryConfigModel()
+            return AutoDiscoveryConfigModel ?? SetAutoDiscoveryConfigModel(new SensorDiscoveryConfigModel(Domain)
             {
                 EntityName = EntityName,
                 Name = Name,
@@ -86,15 +86,15 @@ namespace HASS.Agent.Shared.HomeAssistant.Sensors.GeneralSensors.SingleValue
             lastInputInfo.cbSize = Marshal.SizeOf(lastInputInfo);
             lastInputInfo.dwTime = 0;
 
-            var envTicks = Environment.TickCount;
-
             if (!GetLastInputInfo(ref lastInputInfo))
                 return DateTime.Now;
 
-            var lastInputTick = Convert.ToDouble(lastInputInfo.dwTime);
+            // dwTime is a 32-bit tick count that wraps every ~49.7 days, so subtract in uint
+            // to let the wrap cancel out. Read the tick after GetLastInputInfo so it's never behind dwTime.
+            var envTicks = (uint)Environment.TickCount64;
+            var idleTime = unchecked(envTicks - lastInputInfo.dwTime);
 
-            var idleTime = envTicks - lastInputTick;
-            return idleTime > 0 ? DateTime.Now - TimeSpan.FromMilliseconds(idleTime) : DateTime.Now;
+            return DateTime.Now - TimeSpan.FromMilliseconds(idleTime);
         }
 
         [DllImport("User32.dll")]

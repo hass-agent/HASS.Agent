@@ -1,14 +1,23 @@
-﻿<root>
-	<resheader name="resmimetype">
-		<value>text/microsoft-resx</value>
-	</resheader>
-	<resheader name="version">
-		<value>1.3</value>
-	</resheader>
-	<resheader name="reader">
-		<value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-	</resheader>
-	<resheader name="writer">
-		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-	</resheader>
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>1.3</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="LblInfo1.Text" xml:space="preserve">
+    <value>Um zu erfahren, welche Entitäten Sie konfiguriert haben, und um schnelle Aktionen zu senden, verwendet HASS.Agent die API von Home Assistant.
+
+Bitte geben Sie einen langlebigen Zugriffstoken und die Adresse Ihrer Home Assistant-Instanz an.
+Sie erhalten einen Token in Home Assistant, indem Sie unten links auf Ihr Profilbild klicken, oben auf den Sicherheits-Tab wechseln und zum unteren Seitenrand navigieren, bis die Schaltfläche „TOKEN ERSTELLEN“ angezeigt wird.
+
+Bitte beachten Sie, dass Sie für die Benachrichtigungsfunktion einen Administrator-Konto-Token angeben müssen.</value>
+  </data>
 </root>

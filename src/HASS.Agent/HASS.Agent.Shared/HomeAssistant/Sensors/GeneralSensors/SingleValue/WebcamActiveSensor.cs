@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using HASS.Agent.Shared.Managers;
 using HASS.Agent.Shared.Models.HomeAssistant;
 using Microsoft.Win32;
 
@@ -18,6 +19,13 @@ namespace HASS.Agent.Shared.HomeAssistant.Sensors.GeneralSensors.SingleValue
 
         public override string GetState()
         {
+            var apps = CameraManager.GetWebcamApps();
+            if (apps != null)
+            {
+                return apps.Count > 0 ? "ON" : "OFF";
+            }
+            
+            //NOTE(Amadeo): old method in case newer one fails
             return IsWebcamInUse() ? "ON" : "OFF";
         }
 
@@ -30,7 +38,7 @@ namespace HASS.Agent.Shared.HomeAssistant.Sensors.GeneralSensors.SingleValue
             var deviceConfig = Variables.MqttManager.GetDeviceConfigModel();
             if (deviceConfig == null) return null;
 
-            return AutoDiscoveryConfigModel ?? SetAutoDiscoveryConfigModel(new SensorDiscoveryConfigModel()
+            return AutoDiscoveryConfigModel ?? SetAutoDiscoveryConfigModel(new SensorDiscoveryConfigModel(Domain)
             {
                 EntityName = EntityName,
                 Name = Name,

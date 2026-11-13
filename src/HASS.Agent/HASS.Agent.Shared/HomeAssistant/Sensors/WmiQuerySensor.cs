@@ -58,7 +58,7 @@ namespace HASS.Agent.Shared.HomeAssistant.Sensors
             if (deviceConfig == null)
                 return null;
 
-            return AutoDiscoveryConfigModel ?? SetAutoDiscoveryConfigModel(new SensorDiscoveryConfigModel()
+            return AutoDiscoveryConfigModel ?? SetAutoDiscoveryConfigModel(new SensorDiscoveryConfigModel(Domain)
             {
                 EntityName = EntityName,
                 Name = Name,
@@ -99,7 +99,7 @@ namespace HASS.Agent.Shared.HomeAssistant.Sensors
                 // optionally apply rounding
                 if (ApplyRounding && Round != null && double.TryParse(retValue, out var dblValue))
                 {
-                    retValue = Math.Round(dblValue, (int)Round).ToString(CultureInfo.CurrentCulture);
+                    retValue = Math.Round(dblValue, (int)Round).ToString(CultureInfo.InvariantCulture);
                 }
 
                 // done

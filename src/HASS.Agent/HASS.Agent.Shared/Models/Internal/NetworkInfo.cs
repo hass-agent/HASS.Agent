@@ -33,5 +33,6 @@ namespace HASS.Agent.Shared.Models.Internal
         public bool DnsEnabled { get; set; }
         public string DnsSuffix { get; set; } = string.Empty;
         public List<string> DnsAddresses { get; set; } = new List<string>();
+        public NetworkAccessType AccessType { get; set; }
     }
 }

@@ -39,7 +39,7 @@ namespace HASS.Agent.HomeAssistant.Commands.InternalCommands
                 return;
             }
 
-            HelperFunctions.LaunchUrl(_url, _incognito);
+            HelperFunctions.LaunchUrl(_url, _incognito, true);
 
             State = "OFF";
         }
@@ -59,7 +59,7 @@ namespace HASS.Agent.HomeAssistant.Commands.InternalCommands
             // prepare command
             var command = string.IsNullOrWhiteSpace(_url) ? action : $"{_url} {action}";
 
-            HelperFunctions.LaunchUrl(command, _incognito);
+            HelperFunctions.LaunchUrl(command, _incognito, true);
 
             State = "OFF";
         }

@@ -1,7 +1,6 @@
 ﻿using HASS.Agent.Shared.Enums;
 using HASS.Agent.Shared.Managers;
 using HASS.Agent.Shared.Managers.Audio;
-using HidSharp;
 using Newtonsoft.Json;
 using Serilog;
 using System;

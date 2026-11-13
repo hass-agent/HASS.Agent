@@ -68,9 +68,9 @@ namespace HASS.Agent.Shared.Models.HomeAssistant
             foreach (var sensor in Sensors) await sensor.Value.PublishAutoDiscoveryConfigAsync();
         }
 
-        public async Task UnPublishAutoDiscoveryConfigAsync()
+        public async Task UnPublishAutoDiscoveryConfigAsync(bool migration = false)
         {
-            foreach (var sensor in Sensors) await sensor.Value.UnPublishAutoDiscoveryConfigAsync();
+            foreach (var sensor in Sensors) await sensor.Value.UnPublishAutoDiscoveryConfigAsync(migration);
         }
     }
 }

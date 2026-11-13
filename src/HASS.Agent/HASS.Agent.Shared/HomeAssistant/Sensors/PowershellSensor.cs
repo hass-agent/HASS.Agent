@@ -34,7 +34,7 @@ public class PowershellSensor : AbstractSingleValueSensor
         if (deviceConfig == null)
             return null;
 
-        return AutoDiscoveryConfigModel ?? SetAutoDiscoveryConfigModel(new SensorDiscoveryConfigModel()
+        return AutoDiscoveryConfigModel ?? SetAutoDiscoveryConfigModel(new SensorDiscoveryConfigModel(Domain)
         {
             EntityName = EntityName,
             Name = Name,
@@ -57,7 +57,7 @@ public class PowershellSensor : AbstractSingleValueSensor
             return errors.Trim();
 
         // optionally apply rounding
-        if (ApplyRounding && Round != null && double.TryParse(output, out var dblValue)) { output = Math.Round(dblValue, (int)Round).ToString(CultureInfo.CurrentCulture); }
+        if (ApplyRounding && Round != null && double.TryParse(output, out var dblValue)) { output = Math.Round(dblValue, (int)Round).ToString(CultureInfo.InvariantCulture); }
 
         // done
         return string.IsNullOrWhiteSpace(errors) ? output : $"{output} | {errors}";
