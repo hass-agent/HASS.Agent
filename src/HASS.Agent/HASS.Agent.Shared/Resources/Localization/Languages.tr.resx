@@ -2903,4 +2903,7 @@ Not: "Modern Uyku" nedeniyle uyku komutları, cihazın OEM ve işletim sistemi y
     <value>Belirtilen sensörün aralığı dikkate almadan hemen yayınlanmasını sağlar.
 HASS.Agent'ta yapılandırılmış adı kullanın.</value>
   </data>
+  <data name="SensorType_SerialPortsSensor" xml:space="preserve">
+    <value>SerialPorts</value>
+  </data>
 </root>

@@ -3483,4 +3483,9 @@ Obs: på grund av "Modern Sleep" kan strömsparkommandona bete sig olika beroend
   <data name="OnboardingMqtt_BtnTest_MessageError" xml:space="preserve">
     <value>Kunde inte ansluta.</value>
   </data>
+  <data name="SensorsManager_SerialPortsSensorDescription" xml:space="preserve">
+    <value>Tillhandahåller en sensor med antalet serieportar (COM).
+
+Portarna, inklusive namn och USB-leverantörs-/produkt-ID, läggs till som attribut. Sensorn uppdateras direkt när en port läggs till eller tas bort.</value>
+  </data>
 </root>

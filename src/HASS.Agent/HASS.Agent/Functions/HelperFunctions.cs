@@ -195,6 +195,10 @@ namespace HASS.Agent.Functions
                     // dismantle the systemstate manager
                     SystemStateManager.Stop();
 
+                    // stop watching serial ports
+                    SerialPortManager.PortsChanged -= SensorsManager.OnSerialPortsChanged;
+                    SerialPortManager.Stop();
+
                     // dismantle the shared library
                     AgentSharedBase.Dispose();
                 }

@@ -3343,4 +3343,7 @@ Deve proporcionar uma melhor experiência com novos sistemas com "suspensão S0i
     <value>Força a publicação imediata de um sensor específico, ignorando o intervalo.
 Use o nome configurado em HASS.Agent.</value>
   </data>
+  <data name="SensorType_SerialPortsSensor" xml:space="preserve">
+    <value>SerialPorts</value>
+  </data>
 </root>
