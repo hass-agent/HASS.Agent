@@ -39,6 +39,8 @@ public class LibreHardwareMonitorSensors : AbstractMultiValueSensor
     /// </summary>
     private const int MaxEntities = 1000;
 
+    private const double BytesPerGibibyte = 1024d * 1024d * 1024d;
+
     private const string StateClassMeasurement = "measurement";
     private const string StateClassTotalIncreasing = "total_increasing";
     private const string StatusOk = "ok";
@@ -57,7 +59,8 @@ public class LibreHardwareMonitorSensors : AbstractMultiValueSensor
     /// Assistant accepts for its matching device class, so those are left without one.
     /// Data and small data are binary multiples, 2^30 and 2^20 bytes, which LibreHardwareMonitor
     /// labels GB and MB; they are published as GiB and MiB so Home Assistant reads them as the
-    /// binary units they are.
+    /// binary units they are. Newer versions publish data's bare number in bytes, and report
+    /// small data as data, so data's bare number is scaled back to GiB.
     /// </remarks>
     private static readonly Dictionary<string, SensorTypeMapping> TypeMappings = new(StringComparer.OrdinalIgnoreCase)
     {
@@ -65,7 +68,7 @@ public class LibreHardwareMonitorSensors : AbstractMultiValueSensor
         { "Conductivity", new SensorTypeMapping(string.Empty, "mdi:water-opacity") },
         { "Control", new SensorTypeMapping(string.Empty, "mdi:fan") },
         { "Current", new SensorTypeMapping("current", "mdi:current-dc") },
-        { "Data", new SensorTypeMapping("data_size", "mdi:harddisk", "GiB") },
+        { "Data", new SensorTypeMapping("data_size", "mdi:harddisk", "GiB", rawNumberDivisor: BytesPerGibibyte) },
         { "Energy", new SensorTypeMapping(string.Empty, "mdi:lightning-bolt", stateClass: StateClassTotalIncreasing) },
         { "Factor", new SensorTypeMapping(string.Empty, "mdi:numeric") },
         { "Fan", new SensorTypeMapping(string.Empty, "mdi:fan") },
@@ -274,10 +277,10 @@ public class LibreHardwareMonitorSensors : AbstractMultiValueSensor
             return TryParseValue(node.Value<string>("Value"), out value, out unit);
 
         unit = mapping.Unit;
-        return TryReadNumber(node["RawValue"], out value);
+        return TryReadNumber(node["RawValue"], mapping.RawNumberDivisor, out value);
     }
 
-    private static bool TryReadNumber(JToken token, out double value)
+    private static bool TryReadNumber(JToken token, double divisor, out double value)
     {
         value = 0d;
 
@@ -287,7 +290,7 @@ public class LibreHardwareMonitorSensors : AbstractMultiValueSensor
         // newer versions publish a bare number, which is read directly so no culture is involved
         if (token.Type is JTokenType.Float or JTokenType.Integer)
         {
-            value = token.Value<double>();
+            value = token.Value<double>() / divisor;
 
             if (!double.IsFinite(value))
                 return false;
@@ -457,12 +460,19 @@ public class LibreHardwareMonitorSensors : AbstractMultiValueSensor
 
         internal string StateClass { get; }
 
-        internal SensorTypeMapping(string deviceClass, string icon, string unit = "", string stateClass = StateClassMeasurement)
+        /// <summary>
+        /// Divides a 'RawValue' published as a bare number down to the fixed unit, for a type whose
+        /// bare number is in a smaller unit than its formatted value.
+        /// </summary>
+        internal double RawNumberDivisor { get; }
+
+        internal SensorTypeMapping(string deviceClass, string icon, string unit = "", string stateClass = StateClassMeasurement, double rawNumberDivisor = 1d)
         {
             DeviceClass = deviceClass;
             Icon = icon;
             Unit = unit;
             StateClass = stateClass;
+            RawNumberDivisor = rawNumberDivisor;
         }
     }
 
