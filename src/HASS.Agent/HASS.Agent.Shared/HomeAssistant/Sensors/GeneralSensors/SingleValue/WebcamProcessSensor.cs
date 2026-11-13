@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using HASS.Agent.Shared.Functions;
+using HASS.Agent.Shared.Managers;
 using HASS.Agent.Shared.Models.HomeAssistant;
 using Microsoft.Win32;
 using Newtonsoft.Json;
@@ -14,7 +15,8 @@ namespace HASS.Agent.Shared.HomeAssistant.Sensors.GeneralSensors.SingleValue
     {
         private const string DefaultName = "webcamprocess";
 
-        public WebcamProcessSensor(int? updateInterval = null, string entityName = DefaultName, string name = DefaultName, string id = default, string advancedSettings = default) : base(entityName ?? DefaultName, name ?? null, updateInterval ?? 10, id, true, advancedSettings: advancedSettings)
+        public WebcamProcessSensor(int? updateInterval = null, string entityName = DefaultName, string name = DefaultName, string id = default, string advancedSettings = default) : base(
+            entityName ?? DefaultName, name ?? null, updateInterval ?? 10, id, true, advancedSettings: advancedSettings)
         {
             //
         }
@@ -60,16 +62,29 @@ namespace HASS.Agent.Shared.HomeAssistant.Sensors.GeneralSensors.SingleValue
 
             _processes.Clear();
 
-            // first local machine
-            using (var key = Registry.LocalMachine.OpenSubKey(regKey))
+            var apps = CameraManager.GetWebcamApps();
+            if (apps != null)
             {
-                CheckRegForWebcamInUse(key);
+                foreach (var app in apps)
+                {
+                    _processes[app] = "on";
+                }
             }
-
-            // then current user
-            using (var key = Registry.CurrentUser.OpenSubKey(regKey))
+            else
             {
-                CheckRegForWebcamInUse(key);
+                //NOTE(Amadeo): old method in case newer one fails
+                
+                // first local machine
+                using (var key = Registry.LocalMachine.OpenSubKey(regKey))
+                {
+                    CheckRegForWebcamInUse(key);
+                }
+
+                // then current user
+                using (var key = Registry.CurrentUser.OpenSubKey(regKey))
+                {
+                    CheckRegForWebcamInUse(key);
+                }
             }
 
             // add processes as attributes
@@ -102,7 +117,7 @@ namespace HASS.Agent.Shared.HomeAssistant.Sensors.GeneralSensors.SingleValue
 
                         if (endTime <= 0)
                         {
-                            _processes.Add(SharedHelperFunctions.ParseRegWebcamMicApplicationName(subKey.Name), "on");
+                            _processes[SharedHelperFunctions.ParseRegWebcamMicApplicationName(subKey.Name)] = "on";
                         }
                     }
                 }
@@ -114,7 +129,7 @@ namespace HASS.Agent.Shared.HomeAssistant.Sensors.GeneralSensors.SingleValue
                     var endTime = subKey.GetValue("LastUsedTimeStop") is long ? (long)(subKey.GetValue("LastUsedTimeStop") ?? -1) : -1;
                     if (endTime <= 0)
                     {
-                        _processes.Add(SharedHelperFunctions.ParseRegWebcamMicApplicationName(subKey.Name), "on");
+                        _processes[SharedHelperFunctions.ParseRegWebcamMicApplicationName(subKey.Name)] = "on";
                     }
                 }
             }

@@ -161,7 +161,7 @@ namespace HASS.Agent.Managers
                 // if requested, clear the current list
                 if (clearList) DetectedLeDevices.Clear();
 
-                return Task.FromResult(deviceList);
+                return deviceList;
             }
         }
 

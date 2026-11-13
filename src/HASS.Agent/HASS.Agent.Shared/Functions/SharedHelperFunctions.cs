@@ -13,6 +13,7 @@ using System.Security.Principal;
 using System.Text;
 using System.Text.RegularExpressions;
 using Serilog;
+using Vanara.PInvoke;
 
 namespace HASS.Agent.Shared.Functions
 {
@@ -288,5 +289,24 @@ namespace HASS.Agent.Shared.Functions
         }
 
         public static bool RunningElevated() => new WindowsPrincipal(WindowsIdentity.GetCurrent()).IsInRole(WindowsBuiltInRole.Administrator);
+
+        public static string GetConsentStoreAppName(int processId)
+        {
+            using (var processHandle = Kernel32.OpenProcess(ACCESS_MASK.FromEnum(Kernel32.ProcessAccess.PROCESS_QUERY_LIMITED_INFORMATION), false, (uint)processId))
+            {
+                if (!processHandle.IsInvalid && Kernel32.GetPackageFamilyName(processHandle, out var packageFamilyName).Succeeded)
+                    return ParseRegWebcamMicApplicationName(packageFamilyName);
+            }
+
+            try
+            {
+                using var process = Process.GetProcessById(processId);
+                return process.ProcessName;
+            }
+            catch (Exception ex) when (ex is ArgumentException or InvalidOperationException)
+            {
+                return string.Empty;
+            }
+        }
     }
 }

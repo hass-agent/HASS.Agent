@@ -5,12 +5,14 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using HASS.Agent.Shared.Functions;
 using NAudio.CoreAudioApi;
 using HASS.Agent.Shared.Managers.Audio.Exceptions;
 using HASS.Agent.Shared.Managers.Audio.Internal;
 using Serilog;
 using NAudio.CoreAudioApi.Interfaces;
 using Microsoft.VisualBasic.ApplicationServices;
+using Vanara.PInvoke;
 
 namespace HASS.Agent.Shared.Managers.Audio;
 
@@ -169,6 +171,7 @@ public static class AudioManager
                 var audioSession = new AudioSession
                 {
                     Id = sessionId,
+                    ProcessId = session.ProcessId,
                     Application = displayName,
                     PlaybackDevice = deviceName,
                     Muted = session.Volume.Mute,
@@ -513,7 +516,50 @@ public static class AudioManager
         Log.Debug("[AUDIOMGR] volume for '{sessionName}' ({sessionId}) set to '{vol}'/'{volScal}'", displayName, internalAudioSession.Control.GetSessionInstanceIdentifier, volume,
             volumeScalar);
     }
+    
+    public static List<string>? GetMicrophoneApplications()
+    {
+        var applications = new List<string>();
+        
+        if (!CheckInitialization())
+            return applications;
 
+        try
+        {
+            foreach (var (deviceId, deviceName) in _devices)
+            {
+                using var device = _enumerator.GetDevice(deviceId);
+                if (device.DataFlow != DataFlow.Capture)
+                {
+                    continue;
+                }
+
+                var sessions = GetDeviceSessions(device);
+                foreach (var audioSession in sessions)
+                {
+                    if (audioSession.Active)
+                    {
+                        var appName = SharedHelperFunctions.GetConsentStoreAppName(audioSession.ProcessId);
+                        if (string.IsNullOrWhiteSpace(appName))
+                        {
+                            continue;
+                        }
+                        
+                        applications.Add(appName);
+                    }
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Log.Error(ex, "[AUDIOMGR] failed to retrieve applications using microphone: {msg}", ex.Message);
+            return null;
+        }
+
+        return applications;
+    }
+    
+    
     public static void Shutdown()
     {
         Log.Debug("[AUDIOMGR] shutting down");
