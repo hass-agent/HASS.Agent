@@ -6263,6 +6263,16 @@ namespace HASS.Agent.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Provides sensors read from a LibreHardwareMonitor web server endpoint, for example http://localhost:8085/data.json.
+        ///Optionally filter by sensor type (comma-separated) to limit how many entities are created..
+        /// </summary>
+        internal static string SensorsManager_LibreHardwareMonitorSensorsDescription {
+            get {
+                return ResourceManager.GetString("SensorsManager_LibreHardwareMonitorSensorsDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Returns the name of the currently logged user.
         ///
         ///This will only show active users, and falls back to &apos;Empty&apos; if there are none. If there are multiple, the first will be used..
@@ -6667,6 +6677,15 @@ namespace HASS.Agent.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Test endpoint.
+        /// </summary>
+        internal static string SensorsMod_BtnTest_LibreHardwareMonitor {
+            get {
+                return ResourceManager.GetString("SensorsMod_BtnTest_LibreHardwareMonitor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Test Performance Counter.
         /// </summary>
         internal static string SensorsMod_BtnTest_PerformanceCounter {
@@ -6822,6 +6841,15 @@ namespace HASS.Agent.Resources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Endpoint URL.
+        /// </summary>
+        internal static string SensorsMod_LblSetting1_LibreHardwareMonitorUrl {
+            get {
+                return ResourceManager.GetString("SensorsMod_LblSetting1_LibreHardwareMonitorUrl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Network Card.
         /// </summary>
         internal static string SensorsMod_LblSetting1_Network {
@@ -6899,6 +6927,24 @@ namespace HASS.Agent.Resources.Localization {
         internal static string SensorsMod_LblSetting2_Counter {
             get {
                 return ResourceManager.GetString("SensorsMod_LblSetting2_Counter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sensor types (comma-separated, empty for all).
+        /// </summary>
+        internal static string SensorsMod_LblSetting2_LibreHardwareMonitorTypes {
+            get {
+                return ResourceManager.GetString("SensorsMod_LblSetting2_LibreHardwareMonitorTypes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please enter a valid http:// or https:// endpoint URL!.
+        /// </summary>
+        internal static string SensorsMod_LibreHardwareMonitorUrlInvalid {
+            get {
+                return ResourceManager.GetString("SensorsMod_LibreHardwareMonitorUrlInvalid", resourceCulture);
             }
         }
         
@@ -7068,6 +7114,37 @@ namespace HASS.Agent.Resources.Localization {
         internal static string SensorsMod_TestWmi_MessageBox1 {
             get {
                 return ResourceManager.GetString("SensorsMod_TestWmi_MessageBox1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter an endpoint URL first.
+        /// </summary>
+        internal static string SensorsMod_TestLibreHardwareMonitor_MessageBox1 {
+            get {
+                return ResourceManager.GetString("SensorsMod_TestLibreHardwareMonitor_MessageBox1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Endpoint reached, sensors found: {0}.
+        /// </summary>
+        internal static string SensorsMod_TestLibreHardwareMonitor_MessageBox2 {
+            get {
+                return ResourceManager.GetString("SensorsMod_TestLibreHardwareMonitor_MessageBox2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The endpoint could not be queried:
+        ///
+        ///{0}
+        ///
+        ///Do you want to open the logs folder?.
+        /// </summary>
+        internal static string SensorsMod_TestLibreHardwareMonitor_MessageBox3 {
+            get {
+                return ResourceManager.GetString("SensorsMod_TestLibreHardwareMonitor_MessageBox3", resourceCulture);
             }
         }
         

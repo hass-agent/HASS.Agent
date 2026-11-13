@@ -250,6 +250,9 @@ namespace HASS.Agent.Settings
                 case SensorType.PrintersSensors:
                     abstractSensor = new PrintersSensors(sensor.UpdateInterval, sensor.EntityName, sensor.Name, sensor.Id.ToString());
                     break;
+                case SensorType.LibreHardwareMonitorSensors:
+                    abstractSensor = new LibreHardwareMonitorSensors(sensor.UpdateInterval, sensor.EntityName, sensor.Name, sensor.Query, sensor.Scope, sensor.Id.ToString());
+                    break;
                 default:
                     Log.Error("[SETTINGS_SENSORS] [{name}] Unknown configured multi-value sensor type: {type}", sensor.EntityName, sensor.Type.ToString());
                     break;
@@ -507,6 +510,22 @@ namespace HASS.Agent.Settings
                             Type = type,
                             UpdateInterval = networkSensors.UpdateIntervalSeconds,
                             IgnoreAvailability = networkSensors.IgnoreAvailability
+                        };
+                    }
+
+                case LibreHardwareMonitorSensors libreHardwareMonitorSensors:
+                    {
+                        _ = Enum.TryParse<SensorType>(libreHardwareMonitorSensors.GetType().Name, out var type);
+                        return new ConfiguredSensor
+                        {
+                            Id = Guid.Parse(libreHardwareMonitorSensors.Id),
+                            EntityName = libreHardwareMonitorSensors.EntityName,
+                            Name = libreHardwareMonitorSensors.Name,
+                            Query = libreHardwareMonitorSensors.EndpointUrl,
+                            Scope = libreHardwareMonitorSensors.SensorTypes,
+                            Type = type,
+                            UpdateInterval = libreHardwareMonitorSensors.UpdateIntervalSeconds,
+                            IgnoreAvailability = libreHardwareMonitorSensors.IgnoreAvailability
                         };
                     }
 

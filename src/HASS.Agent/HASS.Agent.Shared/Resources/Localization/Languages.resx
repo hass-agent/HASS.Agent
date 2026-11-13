@@ -3282,4 +3282,7 @@ Use name configured in HASS.Agent.</value>
   <data name="CommandsMod_LblSetting_SensorId" xml:space="preserve">
 	  <value>Sensor Name</value>
   </data>
+  <data name="SensorType_LibreHardwareMonitorSensors" xml:space="preserve">
+    <value>LibreHardwareMonitor</value>
+  </data>
 </root>

@@ -28,7 +28,8 @@ namespace HASS.Agent.Satellite.Service.Extensions
                    && sensorType != SensorType.WindowsUpdatesSensors
                    && sensorType != SensorType.BatterySensors
                    && sensorType != SensorType.DisplaySensors
-                   && sensorType != SensorType.AudioSensors;
+                   && sensorType != SensorType.AudioSensors
+                   && sensorType != SensorType.LibreHardwareMonitorSensors;
         }
     }
 }
