@@ -389,7 +389,7 @@ public static class AudioManager
             var deviceId = deviceType == null
                 ? _devices.FirstOrDefault(v => v.Value == deviceName).Key
                 : _devices.FirstOrDefault(v => v.Value == deviceName && _devicesType[v.Key] == deviceType).Key;
-            
+
             if (string.IsNullOrWhiteSpace(deviceId))
                 return;
 
@@ -463,10 +463,8 @@ public static class AudioManager
         try
         {
             var deviceId = _devices.FirstOrDefault(v => v.Value == deviceName).Key;
-            if (string.IsNullOrWhiteSpace(deviceId))
-                return;
 
-            using var device = _enumerator.GetDevice(deviceId);
+            using var device = string.IsNullOrWhiteSpace(deviceId) ? GetDefaultMultimediaDevice(DataFlow.Render) : _enumerator.GetDevice(deviceId);
             using var sessionManager = new InternalAudioSessionManager(device.AudioSessionManager);
             var sessions = GetDeviceSessions(deviceName, sessionManager);
 
@@ -516,11 +514,11 @@ public static class AudioManager
         Log.Debug("[AUDIOMGR] volume for '{sessionName}' ({sessionId}) set to '{vol}'/'{volScal}'", displayName, internalAudioSession.Control.GetSessionInstanceIdentifier, volume,
             volumeScalar);
     }
-    
+
     public static List<string>? GetMicrophoneApplications()
     {
         var applications = new List<string>();
-        
+
         if (!CheckInitialization())
             return applications;
 
@@ -544,7 +542,7 @@ public static class AudioManager
                         {
                             continue;
                         }
-                        
+
                         applications.Add(appName);
                     }
                 }
@@ -558,8 +556,8 @@ public static class AudioManager
 
         return applications;
     }
-    
-    
+
+
     public static void Shutdown()
     {
         Log.Debug("[AUDIOMGR] shutting down");
