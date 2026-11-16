@@ -1,4 +1,5 @@
 ﻿using HASS.Agent.Functions;
+using HASS.Agent.Managers;
 using HASS.Agent.Models.Internal;
 using HASS.Agent.Shared.Enums;
 using HASS.Agent.Shared.HomeAssistant.Commands;
@@ -19,8 +20,12 @@ namespace HASS.Agent.HomeAssistant.Commands.InternalCommands
 
             if (string.IsNullOrEmpty(webViewInfo)) return;
             var webViewPackage = JsonConvert.DeserializeObject<WebViewInfo>(webViewInfo);
-            if (webViewPackage == null) return;
+            if (webViewPackage == null)
+            {
+                return;
+            }
 
+            webViewPackage.Id = entityName;
             _webViewInfo = webViewPackage;
         }
 
@@ -36,9 +41,7 @@ namespace HASS.Agent.HomeAssistant.Commands.InternalCommands
                 return;
             }
 
-            HelperFunctions.LaunchWebView(_webViewInfo);
-
-            State = "OFF";
+            WebViewManager.LaunchWebView(_webViewInfo);
         }
 
         public override void TurnOnWithAction(string action)
@@ -56,8 +59,17 @@ namespace HASS.Agent.HomeAssistant.Commands.InternalCommands
             // prepare url
             var url = string.IsNullOrWhiteSpace(_webViewInfo.Url) ? action : $"{_webViewInfo.Url} {action}";
 
-            HelperFunctions.LaunchWebView(_webViewInfo, url);
+            WebViewManager.LaunchWebView(_webViewInfo, url);
+        }
 
+        public override void TurnOff()
+        {
+            if (State == "OFF")
+            {
+                return;
+            }
+            
+            WebViewManager.CloseWebView(_webViewInfo);
             State = "OFF";
         }
     }

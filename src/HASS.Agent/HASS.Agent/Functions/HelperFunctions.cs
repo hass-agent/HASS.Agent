@@ -405,25 +405,6 @@ namespace HASS.Agent.Functions
         }
 
         /// <summary>
-        /// Shows a new webview form with the provided config
-        /// </summary>
-        /// <param name="webViewInfo"></param>
-        /// <param name="url"></param>
-        internal static void LaunchWebView(WebViewInfo webViewInfo, string url = "")
-        {
-            // optionally set an alternative url
-            if (!string.IsNullOrEmpty(url)) webViewInfo.Url = url;
-
-            // show it from within the UI thread
-            Variables.MainForm.Invoke(new MethodInvoker(delegate
-            {
-                var webView = new WebView(webViewInfo);
-                webView.Opacity = 0;
-                webView.Show();
-            }));
-        }
-
-        /// <summary>
         /// Prepares and loads the tray icon's webview
         /// </summary>
         internal static void PrepareTrayIconWebView(int screenIndex = 0)

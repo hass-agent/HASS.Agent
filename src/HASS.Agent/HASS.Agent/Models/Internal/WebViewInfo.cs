@@ -8,11 +8,7 @@ namespace HASS.Agent.Models.Internal
 {
     public class WebViewInfo
     {
-        public WebViewInfo()
-        {
-            //
-        }
-
+        public string Id { get; set; }
         public string Url { get; set; }
 
         public bool ShowTitleBar { get; set; } = true;
