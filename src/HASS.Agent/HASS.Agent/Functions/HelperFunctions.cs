@@ -472,6 +472,7 @@ namespace HASS.Agent.Functions
                 Url = Variables.AppSettings.TrayIconWebViewUrl,
                 Height = Variables.AppSettings.TrayIconWebViewHeight,
                 Width = Variables.AppSettings.TrayIconWebViewWidth,
+                IsTrayIconWebView = true
             };
 
             LaunchTrayIconWebView(webView, Variables.AppSettings.TrayIconWebViewScreen);
@@ -528,16 +529,29 @@ namespace HASS.Agent.Functions
                 screenIndex = Variables.AppSettings.TrayIconWebViewScreen;
             }
 
+            // the configured screen may have been disconnected
+            if (screenIndex < 0 || screenIndex >= Screen.AllScreens.Length)
+                screenIndex = 0;
+
             Variables.MainForm.Invoke(new MethodInvoker(delegate
             {
-                var totalX = 0;
-
-                foreach (var widthscreen in Screen.AllScreens)
-                {
-                    totalX += widthscreen.Bounds.X;
-                }
-
                 Screen targetScreen = Screen.AllScreens[screenIndex];
+
+                // reuse the tray icon's webview if it's still configured the same, so it's hidden and shown instead of recreated
+                if (!webViewInfo.IsTrayIconPreview)
+                {
+                    var existing = Variables.TrayIconWebView;
+                    if (existing is { IsDisposed: false } && existing.Info.Url == webViewInfo.Url
+                        && existing.Info.Width == webViewInfo.Width && existing.Info.Height == webViewInfo.Height)
+                    {
+                        existing.MakeVisible(new System.Drawing.Point(targetScreen.WorkingArea.Right - existing.Width, targetScreen.WorkingArea.Bottom - existing.Height));
+                        return;
+                    }
+
+                    // configuration changed, replace it
+                    if (existing is { IsDisposed: false })
+                        existing.ForceClose();
+                }
 
                 var x = targetScreen.Bounds.X + webViewInfo.Width;
                 var y = targetScreen.WorkingArea.Height - webViewInfo.Height;
@@ -557,8 +571,9 @@ namespace HASS.Agent.Functions
                 webView.Left = targetScreen.WorkingArea.Right - webView.Width;
                 webView.Top = targetScreen.WorkingArea.Bottom - webView.Height;
 
-                Variables.TrayIconWebView = webView;
-
+                // previews are closed normally and shouldn't replace the tray icon's webview
+                if (!webViewInfo.IsTrayIconPreview)
+                    Variables.TrayIconWebView = webView;
             }));
         }
 
