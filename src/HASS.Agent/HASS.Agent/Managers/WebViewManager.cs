@@ -1,5 +1,6 @@
 ﻿using HASS.Agent.Forms;
 using HASS.Agent.Models.Internal;
+using Serilog;
 
 namespace HASS.Agent.Managers;
 
@@ -172,6 +173,11 @@ public static class WebViewManager
         {
             InitMultiScreenConfig();
             screenIndex = Variables.AppSettings.TrayIconWebViewScreen;
+        }
+        else if (screenIndex > Screen.AllScreens.Length - 1)
+        {
+            Log.Warning("[WEBVIEWMANAGER] Tray icon web view screen index set to {x}, only {y} screens available", screenIndex, Screen.AllScreens.Length);
+            screenIndex = 0;
         }
 
         Variables.MainForm.Invoke(new MethodInvoker(delegate
