@@ -275,7 +275,7 @@ namespace HASS.Agent.Forms
             }
 
             // prepare the tray icon's webview
-            HelperFunctions.PrepareTrayIconWebView();
+            WebViewManager.PrepareTrayIconWebView();
         }
 
         /// <summary>
@@ -979,7 +979,7 @@ namespace HASS.Agent.Forms
                 return;
             }
 
-            HelperFunctions.LaunchTrayIconWebView();
+            WebViewManager.LaunchTrayIconWebView();
         }
 
         private async void PbDonate_Click(object sender, EventArgs e)

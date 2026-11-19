@@ -1,4 +1,5 @@
 ﻿using HASS.Agent.Functions;
+using HASS.Agent.Managers;
 using HASS.Agent.Models.Internal;
 using Syncfusion.Windows.Forms.Tools;
 
@@ -23,7 +24,7 @@ namespace HASS.Agent.Controls.Configuration
         {
             if (Variables.AppSettings.TrayIconWebViewScreen == -1)
             {
-                HelperFunctions.InitMultiScreenConfig();
+                WebViewManager.InitMultiScreenConfig();
             }
             
             if (Screen.AllScreens.Length == 1)
@@ -74,7 +75,8 @@ namespace HASS.Agent.Controls.Configuration
                 IsTrayIconWebView = true,
                 IsTrayIconPreview = true
             };
-            HelperFunctions.LaunchTrayIconWebView(webView, NumWebViewScreen.SelectedIndex);
+            
+            WebViewManager.LaunchTrayIconWebView(webView, NumWebViewScreen.SelectedIndex);
         }
 
         private void BtnWebViewReset_Click(object sender, EventArgs e)
