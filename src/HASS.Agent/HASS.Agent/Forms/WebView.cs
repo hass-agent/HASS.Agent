@@ -14,13 +14,14 @@ namespace HASS.Agent.Forms
 {
     public partial class WebView : MetroForm
     {
-        private readonly WebViewInfo _webViewInfo;
         private bool _forceClose = false;
         private bool _isTrayIcon = false;
-
+        
+        public readonly WebViewInfo WebViewInfo;
+        
         public WebView(WebViewInfo webViewInfo)
         {
-            _webViewInfo = webViewInfo;
+            WebViewInfo = webViewInfo;
 
             InitializeComponent();
         }
@@ -45,7 +46,7 @@ namespace HASS.Agent.Forms
                 }
 
                 // are we background loading for the tray icon, and not in preview mode?
-                if (_webViewInfo.IsTrayIconWebView && !_webViewInfo.IsTrayIconPreview && Variables.AppSettings.TrayIconWebViewBackgroundLoading)
+                if (WebViewInfo.IsTrayIconWebView && !WebViewInfo.IsTrayIconPreview && Variables.AppSettings.TrayIconWebViewBackgroundLoading)
                 {
                     _isTrayIcon = true;
 
@@ -57,7 +58,7 @@ namespace HASS.Agent.Forms
                 Opacity = 100;
 
                 // optionally force topmost
-                if (_webViewInfo.TopMost)
+                if (WebViewInfo.TopMost)
                 {
                     TopMost = true;
                     BringToFront();
@@ -155,12 +156,16 @@ namespace HASS.Agent.Forms
                 // bind keyup event
                 WebViewControl.KeyUp += delegate (object _, KeyEventArgs e)
                 {
-                    if (e.KeyCode != Keys.Escape) return;
+                    if (e.KeyCode != Keys.Escape)
+                    {
+                        return;
+                    }
+                    
                     Close();
                 };
 
                 // load the uri
-                WebViewControl.Source = new Uri(_webViewInfo.Url);
+                WebViewControl.Source = new Uri(WebViewInfo.Url);
             }
             catch (Exception ex)
             {
@@ -173,17 +178,17 @@ namespace HASS.Agent.Forms
             try
             {
                 // set topmost
-                TopMost = _webViewInfo.TopMost;
+                TopMost = WebViewInfo.TopMost;
 
                 // set the border style
-                if (!_webViewInfo.ShowTitleBar) FormBorderStyle = FormBorderStyle.None;
+                if (!WebViewInfo.ShowTitleBar) FormBorderStyle = FormBorderStyle.None;
 
                 // set the size
-                Height = _webViewInfo.Height;
-                Width = _webViewInfo.Width;
+                Height = WebViewInfo.Height;
+                Width = WebViewInfo.Width;
 
                 // optionally set the location
-                if (!_webViewInfo.CenterScreen) Location = new Point(_webViewInfo.X, _webViewInfo.Y);
+                if (!WebViewInfo.CenterScreen) Location = new Point(WebViewInfo.X, WebViewInfo.Y);
             }
             catch (Exception ex)
             {
@@ -206,16 +211,16 @@ namespace HASS.Agent.Forms
 
                 // check if we need to move
                 var desiredPosition = GetDesiredWebViewPosition();
-                if (desiredPosition.X != _webViewInfo.X || desiredPosition.Y != _webViewInfo.Y)
+                if (desiredPosition.X != WebViewInfo.X || desiredPosition.Y != WebViewInfo.Y)
                 {
                     // yep
-                    _webViewInfo.X = desiredPosition.X;
-                    _webViewInfo.Y = desiredPosition.Y;
-                    Location = new Point(_webViewInfo.X, _webViewInfo.Y);
+                    WebViewInfo.X = desiredPosition.X;
+                    WebViewInfo.Y = desiredPosition.Y;
+                    Location = new Point(WebViewInfo.X, WebViewInfo.Y);
                 }
 
                 // optionally force topmost
-                if (_isTrayIcon || _webViewInfo.TopMost)
+                if (_isTrayIcon || WebViewInfo.TopMost)
                 {
                     TopMost = true;
                     BringToFront();
@@ -270,7 +275,7 @@ namespace HASS.Agent.Forms
 
                 Refresh();
 
-                if (!_webViewInfo.IsTrayIconWebView) return;
+                if (!WebViewInfo.IsTrayIconWebView) return;
 
                 // we're running as a tray icon webview, store new size
                 Variables.AppSettings.TrayIconWebViewWidth = Width;
@@ -285,7 +290,11 @@ namespace HASS.Agent.Forms
 
         private void WebView_KeyUp(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode != Keys.Escape) return;
+            if (e.KeyCode != Keys.Escape)
+            {
+                return;
+            }
+            
             Close();
         }
 

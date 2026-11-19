@@ -3,6 +3,7 @@ using Syncfusion.Windows.Forms;
 using HASS.Agent.Commands;
 using HASS.Agent.Controls.Configuration;
 using HASS.Agent.Functions;
+using HASS.Agent.Managers;
 using HASS.Agent.Resources.Localization;
 using HASS.Agent.Sensors;
 using HASS.Agent.Settings;
@@ -207,7 +208,7 @@ namespace HASS.Agent.Forms
             await StoreSettingsAsync();
 
             // (re)load tray icon's webview if needed
-            if (Variables.AppSettings.TrayIconWebViewBackgroundLoading) HelperFunctions.PrepareTrayIconWebView();
+            if (Variables.AppSettings.TrayIconWebViewBackgroundLoading) WebViewManager.PrepareTrayIconWebView();
 
             // unpublish all entities if the device's name is changed
             if (_general.TbDeviceName.Text != _previousDeviceName)
