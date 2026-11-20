@@ -3,6 +3,7 @@ using System.Text.Json;
 using System.Text.RegularExpressions;
 using HASS.Agent.Satellite.Service.Commands;
 using HASS.Agent.Satellite.Service.Sensors;
+using HASS.Agent.Shared.Managers;
 using HASS.Agent.Shared.Managers.Audio;
 using Serilog;
 
@@ -73,6 +74,10 @@ namespace HASS.Agent.Satellite.Service.Functions
                 // stop entity managers
                 CommandsManager.Stop();
                 SensorsManager.Stop();
+
+                // stop watching serial ports
+                SerialPortManager.PortsChanged -= SensorsManager.OnSerialPortsChanged;
+                SerialPortManager.Stop();
 
                 // tidy up
                 Application.Exit();

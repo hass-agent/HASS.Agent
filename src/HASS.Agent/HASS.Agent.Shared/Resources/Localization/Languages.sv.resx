@@ -3269,4 +3269,7 @@ Obs: på grund av "Modern Sleep" kan strömsparkommandona bete sig olika beroend
     <value>Försätter alla skärmar i viloläge (lågt strömläge) med en alternativ metod som ändrar energischemat.
 Bör ge en bättre upplevelse på nya system med "modern S0ix-vila" och inte försätta systemet i strömsparläge.</value>
   </data>
+  <data name="SensorType_SerialPortsSensor" xml:space="preserve">
+    <value>Serieportar</value>
+  </data>
 </root>

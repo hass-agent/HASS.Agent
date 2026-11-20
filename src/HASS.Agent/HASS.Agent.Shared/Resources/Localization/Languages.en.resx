@@ -3299,4 +3299,7 @@ Use name configured in HASS.Agent.</value>
   <data name="CommandsMod_LblSetting_SensorId" xml:space="preserve">
     <value>Sensor Name</value>
   </data>
+  <data name="SensorType_SerialPortsSensor" xml:space="preserve">
+    <value>SerialPorts</value>
+  </data>
 </root>

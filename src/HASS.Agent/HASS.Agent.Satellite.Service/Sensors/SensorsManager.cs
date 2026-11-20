@@ -1,4 +1,5 @@
 ﻿using HASS.Agent.Shared.Enums;
+using HASS.Agent.Shared.HomeAssistant.Sensors.GeneralSensors.SingleValue;
 using HASS.Agent.Shared.Models.Config;
 using HASS.Agent.Satellite.Service.Extensions;
 using HASS.Agent.Satellite.Service.Settings;
@@ -44,6 +45,27 @@ namespace HASS.Agent.Satellite.Service.Sensors
         /// Resume processing sensor states
         /// </summary>
         internal static void Resume() => _pause = false;
+
+        /// <summary>
+        /// Forces all serial port sensors to publish on the next sensor loop iteration
+        /// </summary>
+        internal static void OnSerialPortsChanged(object? sender, EventArgs e)
+        {
+            try
+            {
+                var sensors = Variables.SingleValueSensors?.OfType<SerialPortsSensor>().ToList();
+                if (sensors == null)
+                    return;
+
+                foreach (var sensor in sensors)
+                    sensor.ResetChecks();
+            }
+            catch (Exception ex)
+            {
+                // the sensor list can be modified while we're iterating, the sensor's interval will catch up
+                Log.Debug(ex, "[SENSORSMANAGER] Unable to reset serial port sensors: {err}", ex.Message);
+            }
+        }
 
         /// <summary>
         /// Unpublishes all single- and multivalue sensors

@@ -97,6 +97,8 @@ namespace HASS.Agent.Forms
                 // core components initialization - required for loading the entities
                 await RadioManager.Initialize();
                 await InternalDeviceSensorsManager.Initialize();
+                SerialPortManager.PortsChanged += SensorsManager.OnSerialPortsChanged;
+                SerialPortManager.Initialize();
                 InitializeVirtualDesktopManager();
                 await Task.Run(InitializeAudioManager);
 

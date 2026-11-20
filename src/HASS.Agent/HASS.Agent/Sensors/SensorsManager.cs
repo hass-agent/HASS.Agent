@@ -5,6 +5,7 @@ using HASS.Agent.Resources.Localization;
 using HASS.Agent.Settings;
 using HASS.Agent.Shared.Enums;
 using HASS.Agent.Shared.Extensions;
+using HASS.Agent.Shared.HomeAssistant.Sensors.GeneralSensors.SingleValue;
 using HASS.Agent.Shared.Models.Config;
 using HASS.Agent.Shared.Models.HomeAssistant;
 using MQTTnet;
@@ -286,6 +287,27 @@ namespace HASS.Agent.Sensors
             finally
             {
                 Unpause();
+            }
+        }
+
+        /// <summary>
+        /// Forces all serial port sensors to publish on the next sensor loop iteration
+        /// </summary>
+        internal static void OnSerialPortsChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                var sensors = Variables.SingleValueSensors?.OfType<SerialPortsSensor>().ToList();
+                if (sensors == null)
+                    return;
+
+                foreach (var sensor in sensors)
+                    sensor.ResetChecks();
+            }
+            catch (Exception ex)
+            {
+                // the sensor list can be modified while we're iterating, the sensor's interval will catch up
+                Log.Debug(ex, "[SENSORSMANAGER] Unable to reset serial port sensors: {err}", ex.Message);
             }
         }
 
@@ -707,6 +729,14 @@ namespace HASS.Agent.Sensors
             sensorInfoCard = new SensorInfoCard(SensorType.ScreenshotSensor,
                 Languages.SensorsManager_ScreenshotSensorDescription,
                 10, false, true, false);
+
+            SensorInfoCards.Add(sensorInfoCard.SensorType, sensorInfoCard);
+
+            // =================================
+
+            sensorInfoCard = new SensorInfoCard(SensorType.SerialPortsSensor,
+                Languages.SensorsManager_SerialPortsSensorDescription,
+                300, false, true, true);
 
             SensorInfoCards.Add(sensorInfoCard.SensorType, sensorInfoCard);
 

@@ -72,6 +72,10 @@ namespace HASS.Agent.Satellite.Service
                 // initialize the mqtt manager
                 _ = Task.Run(Variables.MqttManager.Initialize, stoppingToken);
 
+                // start watching serial ports
+                SerialPortManager.PortsChanged += SensorsManager.OnSerialPortsChanged;
+                SerialPortManager.Initialize();
+
                 // initialize the sensors manager
                 _ = Task.Run(SensorsManager.Initialize, stoppingToken);
 
