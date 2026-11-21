@@ -3285,4 +3285,7 @@ Use name configured in HASS.Agent.</value>
   <data name="SensorType_SerialPortsSensor" xml:space="preserve">
     <value>SerialPorts</value>
   </data>
+  <data name="SensorType_LibreHardwareMonitorSensors" xml:space="preserve">
+    <value>LibreHardwareMonitor</value>
+  </data>
 </root>

@@ -1,4 +1,5 @@
 ﻿using HASS.Agent.Functions;
+using HASS.Agent.Managers;
 using HASS.Agent.Models.Internal;
 using HASS.Agent.Resources.Localization;
 using HASS.Agent.Shared.Enums;
@@ -26,23 +27,12 @@ namespace HASS.Agent.HomeAssistant.Commands.InternalCommands
                 return;
             }
 
-            HelperFunctions.LaunchTrayIconWebView();
+            WebViewManager.LaunchTrayIconWebView();
         }
 
         public override void TurnOff()
         {
-            Variables.MainForm.Invoke(() =>
-            {
-                if(Variables.TrayIconWebView == null)
-                    return;
-
-                Variables.TrayIconWebView.Opacity = 0;
-
-                if (!Variables.AppSettings.TrayIconWebViewBackgroundLoading) { 
-                    Variables.TrayIconWebView.ForceClose();
-                    Variables.TrayIconWebView.Dispose();
-                }
-            });
+            WebViewManager.CloseTrayIconWebView();
         }
 
         public override string GetState()

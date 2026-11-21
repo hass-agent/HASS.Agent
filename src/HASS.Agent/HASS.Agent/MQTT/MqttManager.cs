@@ -40,6 +40,7 @@ namespace HASS.Agent.MQTT
         private bool _connectingFailureNotified = false;
 
         private MqttStatus _status = MqttStatus.Connecting;
+        private readonly object _statusLock = new();
 
         /// <summary>
         /// Returns whether the client is connected
@@ -168,8 +169,20 @@ namespace HASS.Agent.MQTT
                 }
             }
 
-            // nope, call it
-            _status = MqttStatus.Disconnected;
+            // nope, call it - unless we reconnected after the last check: then OnMqttConnected
+            // has already set the status, and overwriting it would leave us 'disconnected' for good
+            lock (_statusLock)
+            {
+                if (IsConnected())
+                {
+                    _isReady = true;
+
+                    return;
+                }
+
+                _status = MqttStatus.Disconnected;
+            }
+            
             Variables.MainForm?.SetMqttStatus(ComponentStatus.Stopped);
 
             // log if we're not shutting down, but only once
@@ -221,8 +234,15 @@ namespace HASS.Agent.MQTT
                 }
             }
 
-            // nope, call it
-            _status = MqttStatus.Error;
+            // nope, call it - unless we connected after the last check (see OnMqttDisconnected)
+            lock (_statusLock)
+            {
+                if (IsConnected())
+                    return;
+
+                _status = MqttStatus.Error;
+            }
+            
             Variables.MainForm?.SetMqttStatus(ComponentStatus.Failed);
 
             // log only once
@@ -246,7 +266,11 @@ namespace HASS.Agent.MQTT
 
         private Task OnMqttConnected(MqttClientConnectedEventArgs arg)
         {
-            _status = MqttStatus.Connected;
+            lock (_statusLock)
+            {
+                _status = MqttStatus.Connected;
+            }
+            
             Variables.MainForm?.SetMqttStatus(ComponentStatus.Ok);
             Log.Information("[MQTT] Connected");
 
@@ -281,7 +305,11 @@ namespace HASS.Agent.MQTT
                 Variables.DeviceConfig = null;
 
                 // reset state
-                _status = MqttStatus.Connecting;
+                lock (_statusLock)
+                {
+                    _status = MqttStatus.Connecting;
+                }
+                
                 Variables.MainForm?.SetMqttStatus(ComponentStatus.Connecting);
                 _disconnectionNotified = false;
                 _connectingFailureNotified = false;
@@ -292,7 +320,10 @@ namespace HASS.Agent.MQTT
             catch (Exception ex)
             {
                 Log.Fatal(ex, "[MQTT] Error while reloading configuration: {err}", ex.Message);
-                _status = MqttStatus.Error;
+                lock (_statusLock)
+                {
+                    _status = MqttStatus.Error;
+                }
             }
         }
 
