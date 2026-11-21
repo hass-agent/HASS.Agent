@@ -24,6 +24,7 @@ namespace HASS.Agent.Sensors
 
         private static bool _active = true;
         private static bool _pause;
+        private static volatile bool _serialPortsChanged;
 
         private static bool _discoveryPublished = false;
 
@@ -192,6 +193,13 @@ namespace HASS.Agent.Sensors
                     // publish sensor states (they have their own time-based scheduling)
                     if (SingleValueSensorsPresent())
                     {
+                        // serial ports were added or removed, publish the serial port sensors right away
+                        if (_serialPortsChanged)
+                        {
+                            _serialPortsChanged = false;
+                            foreach (var sensor in Variables.SingleValueSensors.OfType<SerialPortsSensor>()) sensor.ResetChecks();
+                        }
+
                         foreach (var sensor in Variables.SingleValueSensors.TakeWhile(_ => !_pause).TakeWhile(_ => _active))
                         {
                             if (_pause || Variables.MqttManager.GetStatus() != MqttStatus.Connected) continue;
@@ -291,25 +299,10 @@ namespace HASS.Agent.Sensors
         }
 
         /// <summary>
-        /// Forces all serial port sensors to publish on the next sensor loop iteration
+        /// Flags the serial port sensors to be published on the next sensor loop iteration.
+        /// Raised from the serial port watcher's thread, so the sensor list itself is only touched by <see cref="Process"/>.
         /// </summary>
-        internal static void OnSerialPortsChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                var sensors = Variables.SingleValueSensors?.OfType<SerialPortsSensor>().ToList();
-                if (sensors == null)
-                    return;
-
-                foreach (var sensor in sensors)
-                    sensor.ResetChecks();
-            }
-            catch (Exception ex)
-            {
-                // the sensor list can be modified while we're iterating, the sensor's interval will catch up
-                Log.Debug(ex, "[SENSORSMANAGER] Unable to reset serial port sensors: {err}", ex.Message);
-            }
-        }
+        internal static void OnSerialPortsChanged(object sender, EventArgs e) => _serialPortsChanged = true;
 
         /// <summary>
         /// Stores the provided sensors, and (re)publishes them
