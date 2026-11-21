@@ -223,6 +223,11 @@ namespace HASS.Agent.Forms.Sensors
                         CbNetworkCard.SelectedItem = new KeyValuePair<string, string>(Sensor.Query, _internalSensors[Sensor.Query]);
                     break;
 
+                case SensorType.LibreHardwareMonitorSensors:
+                    TbSetting1.Text = Sensor.Query;
+                    TbSetting2.Text = Sensor.Scope;
+                    break;
+
                 case SensorType.WindowStateSensor:
                     TbSetting1.Text = Sensor.Query;
                     break;
@@ -323,6 +328,10 @@ namespace HASS.Agent.Forms.Sensors
                     SetInternalSensorGui();
                     break;
 
+                case SensorType.LibreHardwareMonitorSensors:
+                    SetLibreHardwareMonitorGui();
+                    break;
+
                 case SensorType.PowershellSensor:
                     SetPowershellGui();
                     break;
@@ -391,6 +400,28 @@ namespace HASS.Agent.Forms.Sensors
                     NumRound.Visible = true;
                     LblDigits.Visible = true;
                 }
+            }));
+        }
+
+        /// <summary>
+        /// Change the UI to a 'librehardwaremonitor' type
+        /// </summary>
+        private void SetLibreHardwareMonitorGui()
+        {
+            Invoke(new MethodInvoker(delegate
+            {
+                SetEmptyGui();
+
+                LblSetting1.Text = Languages.SensorsMod_LblSetting1_LibreHardwareMonitorUrl;
+                LblSetting1.Visible = true;
+                TbSetting1.Visible = true;
+
+                LblSetting2.Text = Languages.SensorsMod_LblSetting2_LibreHardwareMonitorTypes;
+                LblSetting2.Visible = true;
+                TbSetting2.Visible = true;
+
+                BtnTest.Text = Languages.SensorsMod_BtnTest_LibreHardwareMonitor;
+                BtnTest.Visible = true;
             }));
         }
 
@@ -789,6 +820,18 @@ namespace HASS.Agent.Forms.Sensors
                     }
                     break;
 
+                case SensorType.LibreHardwareMonitorSensors:
+                    var endpointUrl = TbSetting1.Text.Trim();
+                    if (!IsValidEndpointUrl(endpointUrl))
+                    {
+                        MessageBoxAdv.Show(this, Languages.SensorsMod_LibreHardwareMonitorUrlInvalid, Variables.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        ActiveControl = TbSetting1;
+                        return;
+                    }
+                    Sensor.Query = endpointUrl;
+                    Sensor.Scope = TbSetting2.Text.Trim();
+                    break;
+
                 case SensorType.InternalDeviceSensor:
                     if (CbNetworkCard.SelectedItem != null)
                     {
@@ -973,6 +1016,10 @@ namespace HASS.Agent.Forms.Sensors
                 case SensorType.PowershellSensor:
                     TestPowershell();
                     break;
+
+                case SensorType.LibreHardwareMonitorSensors:
+                    TestLibreHardwareMonitor();
+                    break;
             }
         }
 
@@ -1088,6 +1135,43 @@ namespace HASS.Agent.Forms.Sensors
 
             // failed
             var q = MessageBoxAdv.Show(this, string.Format(Languages.SensorsMod_TestPowershell_MessageBox3, result.ErrorReason), Variables.MessageBoxTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Error);
+            if (q != DialogResult.Yes) return;
+
+            // open logs
+            HelperFunctions.OpenLocalFolder(Variables.LogPath);
+        }
+
+        private static bool IsValidEndpointUrl(string endpointUrl) =>
+            Uri.TryCreate(endpointUrl, UriKind.Absolute, out var uri) && (uri.Scheme == Uri.UriSchemeHttp || uri.Scheme == Uri.UriSchemeHttps);
+
+        private async void TestLibreHardwareMonitor()
+        {
+            // prepare values
+            var endpointUrl = TbSetting1.Text.Trim();
+            var sensorTypes = TbSetting2.Text.Trim();
+
+            if (!IsValidEndpointUrl(endpointUrl))
+            {
+                MessageBoxAdv.Show(this, Languages.SensorsMod_TestLibreHardwareMonitor_MessageBox1, Variables.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                ActiveControl = TbSetting1;
+                return;
+            }
+
+            BtnTest.Enabled = false;
+
+            // execute the test
+            var result = await Task.Run(() => SensorTester.TestLibreHardwareMonitor(endpointUrl, sensorTypes));
+
+            BtnTest.Enabled = true;
+
+            if (result.Succesful)
+            {
+                MessageBoxAdv.Show(this, string.Format(Languages.SensorsMod_TestLibreHardwareMonitor_MessageBox2, result.ReturnValue), Variables.MessageBoxTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            // failed
+            var q = MessageBoxAdv.Show(this, string.Format(Languages.SensorsMod_TestLibreHardwareMonitor_MessageBox3, result.ErrorReason), Variables.MessageBoxTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Error);
             if (q != DialogResult.Yes) return;
 
             // open logs

@@ -48,6 +48,7 @@
     <PackageReference Include="System.Text.Encoding.CodePages" Version="9.0.6" />
     <PackageReference Include="Vanara.PInvoke.NetListMgr" Version="5.0.7" />
     <PackageReference Include="Vanara.PInvoke.PowrProf" Version="5.0.7" />
+    <PackageReference Include="Vanara.PInvoke.Kernel32" Version="5.0.7" />
   </ItemGroup>
 
   <ItemGroup>
