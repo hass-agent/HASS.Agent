@@ -33,7 +33,7 @@ namespace HASS.Agent.Shared.Managers
 
         /// <summary>
         /// Raised when serial ports are added or removed, and after the initial enumeration.
-        /// Hosts should use this to force their serial port sensors to publish (eg. through ResetChecks)
+        /// The serial ports sensor subscribes to this itself, to get published right away through <see cref="SensorChangeNotifier"/>
         /// </summary>
         public static event EventHandler PortsChanged;
 

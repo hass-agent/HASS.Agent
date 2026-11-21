@@ -76,7 +76,6 @@ namespace HASS.Agent.Satellite.Service.Functions
                 SensorsManager.Stop();
 
                 // stop watching serial ports
-                SerialPortManager.PortsChanged -= SensorsManager.OnSerialPortsChanged;
                 SerialPortManager.Stop();
 
                 // tidy up

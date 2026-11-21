@@ -7,12 +7,15 @@ namespace HASS.Agent.Shared.HomeAssistant.Sensors.GeneralSensors.SingleValue
 {
     /// <summary>
     /// Sensor containing the number of present serial (COM) ports, with the ports as attributes.
-    /// Gets published immediately when ports are added or removed, provided the host subscribes to <see cref="SerialPortManager.PortsChanged"/>.
+    /// Gets published immediately when ports are added or removed, through <see cref="SensorChangeNotifier"/>.
     /// </summary>
     public class SerialPortsSensor : AbstractSingleValueSensor
     {
         private const string DefaultName = "serialports";
         private string _attributes = "{}";
+
+        // static, so the subscription is made once and isn't leaked when sensors are recreated
+        static SerialPortsSensor() => SerialPortManager.PortsChanged += (_, _) => SensorChangeNotifier.NotifyChanged<SerialPortsSensor>();
 
         public SerialPortsSensor(int? updateInterval = 300, string entityName = DefaultName, string name = DefaultName, string id = default, string advancedSettings = default) : base(entityName ?? DefaultName, name ?? null, updateInterval ?? 300, id, advancedSettings: advancedSettings)
         {

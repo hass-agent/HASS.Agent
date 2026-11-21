@@ -1,4 +1,5 @@
 ﻿using HASS.Agent.Shared.Enums;
+using HASS.Agent.Shared.Managers;
 using HASS.Agent.Shared.HomeAssistant.Sensors.GeneralSensors.SingleValue;
 using HASS.Agent.Shared.Models.Config;
 using HASS.Agent.Satellite.Service.Extensions;
@@ -14,7 +15,6 @@ namespace HASS.Agent.Satellite.Service.Sensors
     {
         private static bool _active = true;
         private static bool _pause;
-        private static volatile bool _serialPortsChanged;
 
         private static bool _discoveryPublished = false;
 
@@ -46,12 +46,6 @@ namespace HASS.Agent.Satellite.Service.Sensors
         /// Resume processing sensor states
         /// </summary>
         internal static void Resume() => _pause = false;
-
-        /// <summary>
-        /// Flags the serial port sensors to be published on the next sensor loop iteration.
-        /// Raised from the serial port watcher's thread, so the sensor list itself is only touched by <see cref="Process"/>.
-        /// </summary>
-        internal static void OnSerialPortsChanged(object? sender, EventArgs e) => _serialPortsChanged = true;
 
         /// <summary>
         /// Unpublishes all single- and multivalue sensors
@@ -186,15 +180,11 @@ namespace HASS.Agent.Satellite.Service.Sensors
                     if (_pause) continue;
 
                     // publish sensor states (they have their own time-based scheduling)
+                    // sensors that reported a change (eg. serial ports added or removed) get published right away
+                    SensorChangeNotifier.ResetPending(Variables.SingleValueSensors, Variables.MultiValueSensors);
+
                     if (SingleValueSensorsPresent())
                     {
-                        // serial ports were added or removed, publish the serial port sensors right away
-                        if (_serialPortsChanged)
-                        {
-                            _serialPortsChanged = false;
-                            foreach (var sensor in Variables.SingleValueSensors.OfType<SerialPortsSensor>()) sensor.ResetChecks();
-                        }
-
                         foreach (var sensor in Variables.SingleValueSensors.TakeWhile(_ => !_pause).TakeWhile(_ => _active))
                         {
                             if (_pause || Variables.MqttManager.GetStatus() != MqttStatus.Connected) continue;

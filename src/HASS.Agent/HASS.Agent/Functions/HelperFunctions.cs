@@ -196,7 +196,6 @@ namespace HASS.Agent.Functions
                     SystemStateManager.Stop();
 
                     // stop watching serial ports
-                    SerialPortManager.PortsChanged -= SensorsManager.OnSerialPortsChanged;
                     SerialPortManager.Stop();
 
                     // dismantle the shared library
