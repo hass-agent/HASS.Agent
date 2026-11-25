@@ -5,6 +5,8 @@ using HASS.Agent.Resources.Localization;
 using HASS.Agent.Settings;
 using HASS.Agent.Shared.Enums;
 using HASS.Agent.Shared.Extensions;
+using HASS.Agent.Shared.Managers;
+using HASS.Agent.Shared.HomeAssistant.Sensors.GeneralSensors.SingleValue;
 using HASS.Agent.Shared.Models.Config;
 using HASS.Agent.Shared.Models.HomeAssistant;
 using MQTTnet;
@@ -189,6 +191,9 @@ namespace HASS.Agent.Sensors
                     if (_pause) continue;
 
                     // publish sensor states (they have their own time-based scheduling)
+                    // sensors that reported a change (eg. serial ports added or removed) get published right away
+                    SensorChangeNotifier.ResetPending(Variables.SingleValueSensors, Variables.MultiValueSensors);
+
                     if (SingleValueSensorsPresent())
                     {
                         foreach (var sensor in Variables.SingleValueSensors.TakeWhile(_ => !_pause).TakeWhile(_ => _active))
@@ -713,6 +718,14 @@ namespace HASS.Agent.Sensors
             sensorInfoCard = new SensorInfoCard(SensorType.ScreenshotSensor,
                 Languages.SensorsManager_ScreenshotSensorDescription,
                 10, false, true, false);
+
+            SensorInfoCards.Add(sensorInfoCard.SensorType, sensorInfoCard);
+
+            // =================================
+
+            sensorInfoCard = new SensorInfoCard(SensorType.SerialPortsSensor,
+                Languages.SensorsManager_SerialPortsSensorDescription,
+                300, false, true, true);
 
             SensorInfoCards.Add(sensorInfoCard.SensorType, sensorInfoCard);
 

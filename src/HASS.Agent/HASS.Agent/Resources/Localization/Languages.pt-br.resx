@@ -3523,4 +3523,9 @@ Use o nome configurado em HASS.Agent.</value>
   <data name="ConfigStartup_LblInfo2VirtualDesktopCheckbox" xml:space="preserve">
     <value>Desabilitar a inicialização da biblioteca de Área de Trabalho Virtual</value>
   </data>
+  <data name="SensorsManager_SerialPortsSensorDescription" xml:space="preserve">
+    <value>Provides a sensor with the number of serial (COM) ports present.
+
+The ports, including friendly name and USB vendor/product ID, are added as attributes. The sensor is updated immediately when a port is added or removed.</value>
+  </data>
 </root>

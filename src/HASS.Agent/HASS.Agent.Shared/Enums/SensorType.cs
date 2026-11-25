@@ -179,6 +179,10 @@ namespace HASS.Agent.Shared.Enums
         [EnumMember(Value = "ScreenshotSensor")]
         ScreenshotSensor,
 
+        [LocalizedDescription("SensorType_SerialPortsSensor", typeof(Languages))]
+        [EnumMember(Value = "SerialPortsSensor")]
+        SerialPortsSensor,
+
         [LocalizedDescription("SensorType_LibreHardwareMonitorSensors", typeof(Languages))]
         [EnumMember(Value = "LibreHardwareMonitorSensors")]
         LibreHardwareMonitorSensors

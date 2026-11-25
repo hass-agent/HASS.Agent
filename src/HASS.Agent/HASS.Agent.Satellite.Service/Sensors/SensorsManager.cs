@@ -1,4 +1,6 @@
 ﻿using HASS.Agent.Shared.Enums;
+using HASS.Agent.Shared.Managers;
+using HASS.Agent.Shared.HomeAssistant.Sensors.GeneralSensors.SingleValue;
 using HASS.Agent.Shared.Models.Config;
 using HASS.Agent.Satellite.Service.Extensions;
 using HASS.Agent.Satellite.Service.Settings;
@@ -178,6 +180,9 @@ namespace HASS.Agent.Satellite.Service.Sensors
                     if (_pause) continue;
 
                     // publish sensor states (they have their own time-based scheduling)
+                    // sensors that reported a change (eg. serial ports added or removed) get published right away
+                    SensorChangeNotifier.ResetPending(Variables.SingleValueSensors, Variables.MultiValueSensors);
+
                     if (SingleValueSensorsPresent())
                     {
                         foreach (var sensor in Variables.SingleValueSensors.TakeWhile(_ => !_pause).TakeWhile(_ => _active))

@@ -3319,4 +3319,7 @@ Zou een betere ervaring moeten bieden met nieuwe systemen met een "moderne S0ix-
 
 Gebruik de naam die is geconfigureerd in HASS.Agent.</value>
   </data>
+  <data name="SensorType_SerialPortsSensor" xml:space="preserve">
+    <value>SerialPorts</value>
+  </data>
 </root>

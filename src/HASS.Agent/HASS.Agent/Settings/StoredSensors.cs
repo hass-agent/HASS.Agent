@@ -198,6 +198,9 @@ namespace HASS.Agent.Settings
                 case SensorType.BluetoothDevicesSensor:
                     abstractSensor = new BluetoothDevicesSensor(sensor.UpdateInterval, sensor.EntityName, sensor.Name, sensor.Id.ToString(), sensor.AdvancedSettings);
                     break;
+                case SensorType.SerialPortsSensor:
+                    abstractSensor = new SerialPortsSensor(sensor.UpdateInterval, sensor.EntityName, sensor.Name, sensor.Id.ToString(), sensor.AdvancedSettings);
+                    break;
                 case SensorType.BluetoothLeDevicesSensor:
                     abstractSensor = new BluetoothLeDevicesSensor(sensor.UpdateInterval, sensor.EntityName, sensor.Name, sensor.Id.ToString(), sensor.AdvancedSettings);
                     break;

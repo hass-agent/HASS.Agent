@@ -177,6 +177,9 @@ namespace HASS.Agent.Satellite.Service.Settings
                 case SensorType.WebcamProcessSensor:
                     abstractSensor = new WebcamProcessSensor(sensor.UpdateInterval, sensor.EntityName, sensor.Name, sensor.Id.ToString(), sensor.AdvancedSettings);
                     break;
+                case SensorType.SerialPortsSensor:
+                    abstractSensor = new SerialPortsSensor(sensor.UpdateInterval, sensor.EntityName, sensor.Name, sensor.Id.ToString(), sensor.AdvancedSettings);
+                    break;
                 default:
                     Log.Error("[SETTINGS_SENSORS] [{name}] Unknown configured single-value sensor type: {type}", sensor.EntityName, sensor.Type.ToString());
                     break;

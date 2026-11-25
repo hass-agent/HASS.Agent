@@ -3406,4 +3406,7 @@ Powinno to zapewnić lepsze działanie w przypadku nowych systemów z „nowocze
     <value>Wymusza natychmiastową publikację określonego czujnika, ignorując interwał.
 Użyj nazwy skonfigurowanej w HASS.Agent.</value>
   </data>
+  <data name="SensorType_SerialPortsSensor" xml:space="preserve">
+    <value>SerialPorts</value>
+  </data>
 </root>
