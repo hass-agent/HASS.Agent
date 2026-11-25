@@ -27,6 +27,8 @@ public class ScreenshotSensor : AbstractSingleValueSensor
 
     public int ScreenIndex;
 
+    private bool _screenMissing;
+
     public ScreenshotSensor(string screenIndex = "0", int? updateInterval = null, string entityName = DefaultName, string name = DefaultName, string id = default, string advancedSettings = default) : base(entityName ?? DefaultName, name ?? null, updateInterval ?? 15, id, advancedSettings: advancedSettings)
     {
         ScreenIndex = int.TryParse(screenIndex, out var parsedScreenIndex) ? parsedScreenIndex : 0;
@@ -58,28 +60,41 @@ public class ScreenshotSensor : AbstractSingleValueSensor
 
     public override string GetState()
     {
-        if (ScreenIndex >= Screen.AllScreens.Length || ScreenIndex < 0)
+        // ScreenIndex is configuration (it's what gets stored), so never overwrite it here:
+        // a screen can be missing temporarily, e.g. while a display layout with fewer screens is active
+        var screens = Screen.AllScreens;
+        if (ScreenIndex >= screens.Length || ScreenIndex < 0)
         {
-            Log.Warning("[SCREENSHOT] Wrong index '{index}' - returning image for screen 0", ScreenIndex);
-            ScreenIndex = 0;
+            if (!_screenMissing)
+                Log.Warning("[SCREENSHOT] Screen with index '{index}' not found ({count} screen(s) present) - skipping updates until it's back", ScreenIndex, screens.Length);
+
+            _screenMissing = true;
+
+            return null;
         }
 
-        var screenImage = CaptureScreen(ScreenIndex);
+        if (_screenMissing)
+        {
+            Log.Information("[SCREENSHOT] Screen with index '{index}' is back - resuming updates", ScreenIndex);
+            _screenMissing = false;
+        }
 
-        return Convert.ToBase64String(screenImage);
+        var screenImage = CaptureScreen(screens[ScreenIndex]);
+
+        return screenImage == null ? null : Convert.ToBase64String(screenImage);
     }
 
-    private byte[] CaptureScreen(int screenIndex)
+    private byte[] CaptureScreen(Screen screen)
     {
         try
         {
-            return CapturePngFile(Screen.AllScreens[screenIndex]);
+            return CapturePngFile(screen);
         }
         catch (Exception ex)
         {
-            Log.Error(ex, "[SCREENSHOT] Internal Error capturing screen {index}, {ex}", ex.Message);
+            Log.Error(ex, "[SCREENSHOT] Internal Error capturing screen {index}: {err}", ScreenIndex, ex.Message);
 
-            return Array.Empty<byte>();
+            return null;
         }
     }
 
